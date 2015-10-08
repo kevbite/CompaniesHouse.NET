@@ -4,7 +4,7 @@ A simple .NET client wrapper for CompaniesHouse API
 
 [![install from nuget](http://img.shields.io/nuget/v/CompaniesHouse.svg?style=flat-square)](https://www.nuget.org/packages/CompaniesHouse)
 [![downloads](http://img.shields.io/nuget/dt/CompaniesHouse.svg?style=flat-square)](https://www.nuget.org/packages/CompaniesHouse)
-[![Build status](https://ci.appveyor.com/api/projects/status/hi8ncpjqjcrf9mih/branch/master?svg=true)](https://ci.appveyor.com/project/Liberis/companieshouse-net/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/0pgf5s626c0ybyrx/branch/master?svg=true)](https://ci.appveyor.com/project/Liberis/companieshouse-net/branch/master)
 
 ## Getting Started
 
