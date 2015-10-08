@@ -1,0 +1,84 @@
+-
+  branches:
+    only:
+      - master
+   
+  version: 0.0.{build}-alpha
+
+  assembly_info:
+    assembly_version: '{version}'
+    assembly_file_version: '{version}'
+    assembly_informational_version: '{version}'
+    file: AssemblyInfo.*
+    patch: true
+   
+  os: Visual Studio 2015
+ 
+  before_build:
+    - ps : .\build-before_build.ps1
+
+  build:
+    parallel: true
+    verbosity: normal
+    publish_nuget: true
+
+  configuration: Release
+   
+  cache:
+    - packages -> **\packages.config
+    - C:\downloads -> appveyor.yml
+   
+  test:
+    assemblies:
+      - '**\*.Tests.dll'
+      - '**\*.FunctionalTests.dll'
+      - '**\*..IntegrationTests.dll'
+               
+  artifacts:
+    - path: '*.nupkg'
+     
+  deploy:
+    - provider: Environment
+      name: Liberis NuGet
+
+    - provider: Environment
+      name: Liberis MyGet
+
+-
+  branches:
+    except:
+      - master
+
+  version: 0.0.0-{branch}{build}
+    
+  assembly_info:
+    assembly_version: '{version}'
+    assembly_file_version: '{version}'
+    assembly_informational_version: '{version}'
+    file: AssemblyInfo.*
+    patch: true
+
+  os: Visual Studio 2015
+
+  before_build:
+    - ps : .\build-before_build.ps1
+
+  build:
+    parallel: true
+    verbosity: normal
+    publish_nuget: true
+
+  configuration: Release
+   
+  cache:
+    - packages -> **\packages.config
+    - C:\downloads -> appveyor.yml
+   
+  test:
+    assemblies:
+      - '**\*.Tests.dll'
+      - '**\*.FunctionalTests.dll'
+      - '**\*..IntegrationTests.dll'
+
+  artifacts:
+    - path: '*.nupkg'
