@@ -1,29 +1,11 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using LiberisLabs.CompaniesHouse.DelegatingHandlers;
+using LiberisLabs.CompaniesHouse.Request;
 
 namespace LiberisLabs.CompaniesHouse
 {
-    public interface ICompaniesHouseSettings
-    {
-        Uri BaseUri { get; }
 
-        string ApiKey { get; }
-    }
-
-    public class CompaniesHouseSettings : ICompaniesHouseSettings
-    {
-        public CompaniesHouseSettings(Uri baseUri, string apiKey)
-        {
-            BaseUri = baseUri;
-            ApiKey = apiKey;
-        }   
-
-        public Uri BaseUri { get; }
-
-        public string ApiKey { get; }
-    }
 
     public class CompaniesHouseClient
     {
@@ -32,6 +14,14 @@ namespace LiberisLabs.CompaniesHouse
         public CompaniesHouseClient(ICompaniesHouseSettings settings)
         {
             _settings = settings;
+        }
+
+        public void SearchCompany(CompanySearchRequest request)
+        {
+            using (var httpClient = CreateHttpClient())
+            {
+ 
+            }
         }
 
         private HttpClient CreateHttpClient()
