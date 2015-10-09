@@ -16,7 +16,8 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanySearch
         public CompanyStatus CompanyStatus { get; set; }
 
         [JsonProperty(PropertyName = "company_type")]
-        public string CompanyType { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public CompanyType CompanyType { get; set; }
 
         [JsonProperty(PropertyName = "date_of_cessation")]
         public string DateOfCessation { get; set; }

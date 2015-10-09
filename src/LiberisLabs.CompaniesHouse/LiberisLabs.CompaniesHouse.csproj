@@ -64,6 +64,7 @@
     <Compile Include="Request\CompanySearchRequest.cs" />
     <Compile Include="Response\CompanySearch\Address.cs" />
     <Compile Include="Response\CompanySearch\CompanyStatus.cs" />
+    <Compile Include="Response\CompanySearch\CompanyType.cs" />
     <Compile Include="Response\CompanySearch\Matches.cs" />
     <Compile Include="Response\CompanySearch\Company.cs" />
     <Compile Include="Response\CompanySearch\CompanySearch.cs" />

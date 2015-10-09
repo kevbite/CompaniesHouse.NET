@@ -28,14 +28,14 @@ namespace LiberisLabs.CompaniesHouse.Tests
             _resourceDetails = fixture.Create<ResourceDetails>();
             _expectedCompanies = new List<CompanyDetails>
             {
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "active").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "dissolved").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "liquidation").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "receivership").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "administration").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "voluntary-arrangement").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "converted-closed").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "insolvency-proceedings").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "active").With(x => x.CompanyType, "private-unlimited").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "dissolved").With(x => x.CompanyType, "private-unlimited").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "liquidation").With(x => x.CompanyType, "private-unlimited").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "receivership").With(x => x.CompanyType, "private-unlimited").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "administration").With(x => x.CompanyType, "private-unlimited").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "voluntary-arrangement").With(x => x.CompanyType, "private-unlimited").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "converted-closed").With(x => x.CompanyType, "private-unlimited").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "insolvency-proceedings").With(x => x.CompanyType, "private-unlimited").Create(),
             };
 
             var uri = new Uri("https://wibble.com/search/companies");
@@ -90,7 +90,7 @@ namespace LiberisLabs.CompaniesHouse.Tests
                 Assert.That(actual.Address.Region, Is.EqualTo(companyDetails.Region));
 
                 Assert.That(actual.CompanyStatus, Is.EqualTo(ExpectedCompanyStatus[companyDetails.CompanyStatus]));
-                Assert.That(actual.CompanyType, Is.EqualTo(companyDetails.CompanyType));
+                Assert.That(actual.CompanyType, Is.EqualTo(ExpectedCompanyType[companyDetails.CompanyType]));
                 Assert.That(actual.DateOfCessation, Is.EqualTo(companyDetails.DateOfCessation));
                 Assert.That(actual.DateOfCreation, Is.EqualTo(companyDetails.DateOfCreation));
                 Assert.That(actual.Description, Is.EqualTo(companyDetails.Description));
@@ -113,6 +113,12 @@ namespace LiberisLabs.CompaniesHouse.Tests
             {"voluntary-arrangement", CompanyStatus.VoluntaryArrangement},
             {"converted-closed", CompanyStatus.ConvertedClosed},
             {"insolvency-proceedings", CompanyStatus.InsolvencyProceedings}
+        };
+
+        private static readonly IReadOnlyDictionary<string, CompanyType> ExpectedCompanyType = new Dictionary
+    <string, CompanyType>()
+        {
+            {"private-unlimited", CompanyType.PrivateUnlimited}
         };
     }
 }
