@@ -3,7 +3,7 @@ using LiberisLabs.CompaniesHouse.Request;
 
 namespace LiberisLabs.CompaniesHouse.UriBuilders
 {
-    public class CompanySearchUriBuilder
+    public class CompanySearchUriBuilder : ICompanySearchUriBuilder
     {
         public Uri Build(CompanySearchRequest request)
         {

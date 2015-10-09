@@ -38,6 +38,10 @@
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Ploeh.AutoFixture, Version=3.36.8.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoFixture.3.36.8\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -49,8 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompanyHouseSearchCompanyClientTests.cs" />
     <Compile Include="DelegatingHandlers\CompaniesHouseAuthorizationHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StubHttpMessageHandler.cs" />
     <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsBase+Thens.cs" />
     <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsBase.cs" />
     <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsBaseForQuery.cs" />

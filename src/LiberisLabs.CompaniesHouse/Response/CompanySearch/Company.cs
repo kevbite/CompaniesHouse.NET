@@ -1,0 +1,46 @@
+using Newtonsoft.Json;
+
+namespace LiberisLabs.CompaniesHouse.Response.CompanySearch
+{
+    public class Company
+    {
+        [JsonProperty(PropertyName = "address")]
+        public Address Address { get; set; }
+
+        [JsonProperty(PropertyName = "company_number")]
+        public string CompanyNumber { get; set; }
+
+        [JsonProperty(PropertyName = "company_status")]
+        public string CompanyStatus { get; set; }
+
+        [JsonProperty(PropertyName = "company_type")]
+        public string CompanyType { get; set; }
+
+        [JsonProperty(PropertyName = "date_of_cessation")]
+        public string DateOfCessation { get; set; }
+
+        [JsonProperty(PropertyName = "date_of_creation")]
+        public string DateOfCreation { get; set; }
+
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        [JsonProperty(PropertyName = "description_identifier")]
+        public object[] DescriptionIdentifier { get; set; }
+
+        [JsonProperty(PropertyName = "kind")]
+        public string Kind { get; set; }
+
+        [JsonProperty(PropertyName = "links")]
+        public Links Links { get; set; }
+
+        [JsonProperty(PropertyName = "matches")]
+        public Matches Matches { get; set; }
+
+        [JsonProperty(PropertyName = "snippet")]
+        public string Snippet { get; set; }
+
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
+    }
+}
