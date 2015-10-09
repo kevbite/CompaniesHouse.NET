@@ -11,18 +11,18 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanySearch
         public Company[] Companies { get; set; }
 
         [JsonProperty(PropertyName = "items_per_page")]
-        public string ItemsPerPage { get; set; }
+        public int ItemsPerPage { get; set; }
 
         [JsonProperty(PropertyName = "kind")]
         public string Kind { get; set; }
 
         [JsonProperty(PropertyName = "page_number")]
-        public string PageNumber { get; set; }
+        public int PageNumber { get; set; }
 
         [JsonProperty(PropertyName = "start_index")]
-        public string StartIndex { get; set; }
+        public int StartIndex { get; set; }
 
         [JsonProperty(PropertyName = "total_results")]
-        public string TotalResults { get; set; }
+        public int TotalResults { get; set; }
     }
 }
