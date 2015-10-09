@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using LiberisLabs.CompaniesHouse.Request;
@@ -14,18 +15,39 @@ namespace LiberisLabs.CompaniesHouse.Tests
     public class CompanyHouseSearchCompanyClientTests
     {
         private CompanyHouseSearchCompanyClient _client;
-        private CompanySearch _companySearch;
+
         private CompaniesHouseClientResponse<CompanySearch> _result;
+        private ResourceDetails _resourceDetails;
+        private List<CompanyDetails> _expectedCompanies;
+
 
         [TestFixtureSetUp]
         public void GivenACompanyHouseSearchCompanyClient_WhenSearchingForACompany()
         {
-            _companySearch = new Fixture().Create<CompanySearch>();
+            var fixture = new Fixture();
+            _resourceDetails = fixture.Create<ResourceDetails>();
+            _expectedCompanies = new List<CompanyDetails>
+            {
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "active").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "dissolved").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "liquidation").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "receivership").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "administration").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "voluntary-arrangement").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "converted-closed").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "insolvency-proceedings").Create(),
+            };
+
             var uri = new Uri("https://wibble.com/search/companies");
-            Func<HttpMessageHandler> handler = () => new StubHttpMessageHandler(uri, new CompanySearchResourceBuilder().CreateResource(_companySearch));
+
+            var resource = new CompanySearchResourceBuilder()
+                .AddCompanies(_expectedCompanies)
+                .CreateResource(_resourceDetails);
+
+            HttpMessageHandler handler = new StubHttpMessageHandler(uri, resource);
             var httpClientFactory = new Mock<IHttpClientFactory>();
             httpClientFactory.Setup(x => x.CreateHttpClient())
-                .Returns(new HttpClient(handler()));
+                .Returns(new HttpClient(handler));
 
             var uriBuilder = new Mock<ICompanySearchUriBuilder>();
             uriBuilder.Setup(x => x.Build(It.IsAny<CompanySearchRequest>()))
@@ -39,45 +61,58 @@ namespace LiberisLabs.CompaniesHouse.Tests
         [Test]
         public void ThenTheRootIsCorrect()
         {
-            Assert.That(_result.Data.ETag, Is.EqualTo(_companySearch.ETag));
-            Assert.That(_result.Data.ItemsPerPage, Is.EqualTo(_companySearch.ItemsPerPage));
-            Assert.That(_result.Data.Kind, Is.EqualTo(_companySearch.Kind));
-            Assert.That(_result.Data.PageNumber, Is.EqualTo(_companySearch.PageNumber));
-            Assert.That(_result.Data.StartIndex, Is.EqualTo(_companySearch.StartIndex));
-            Assert.That(_result.Data.TotalResults, Is.EqualTo(_companySearch.TotalResults));
+            Assert.That(_result.Data.ETag, Is.EqualTo(_resourceDetails.ETag));
+            Assert.That(_result.Data.ItemsPerPage, Is.EqualTo(_resourceDetails.ItemsPerPage));
+            Assert.That(_result.Data.Kind, Is.EqualTo(_resourceDetails.Kind));
+            Assert.That(_result.Data.PageNumber, Is.EqualTo(_resourceDetails.PageNumber));
+            Assert.That(_result.Data.StartIndex, Is.EqualTo(_resourceDetails.StartIndex));
+            Assert.That(_result.Data.TotalResults, Is.EqualTo(_resourceDetails.TotalResults));
         }
 
         [Test]
-        public void ThenTheCompanyResultsAreCorrect()
+        public void ThenTheCompaniesAreCorrect()
         {
-            Assert.That(_result.Data.Companies.Count(), Is.EqualTo(_companySearch.Companies.Count()));
+            Assert.That(_result.Data.Companies.Count(), Is.EqualTo(8));
 
-            foreach (var company in _result.Data.Companies)
+            foreach (var actual in _result.Data.Companies)
             {
-                var actualCompany = _companySearch.Companies.FirstOrDefault(x => x.CompanyNumber == company.CompanyNumber);
+                var companyDetails = _expectedCompanies.First(x => x.CompanyNumber == actual.CompanyNumber);
 
-                Assert.That(actualCompany.Address.AddressLine1, Is.EqualTo(actualCompany.Address.AddressLine1));
-                Assert.That(actualCompany.Address.AddressLine2, Is.EqualTo(actualCompany.Address.AddressLine2));
-                Assert.That(actualCompany.Address.CareOf, Is.EqualTo(actualCompany.Address.CareOf));
-                Assert.That(actualCompany.Address.Country, Is.EqualTo(actualCompany.Address.Country));
-                Assert.That(actualCompany.Address.Locality, Is.EqualTo(actualCompany.Address.Locality));
-                Assert.That(actualCompany.Address.PoBox, Is.EqualTo(actualCompany.Address.PoBox));
-                Assert.That(actualCompany.Address.PostalCode, Is.EqualTo(actualCompany.Address.PostalCode));
-                Assert.That(actualCompany.Address.Region, Is.EqualTo(actualCompany.Address.Region));
+                Assert.That(actual.CompanyNumber, Is.EqualTo(companyDetails.CompanyNumber));
 
-                Assert.That(actualCompany.CompanyStatus, Is.EqualTo(actualCompany.CompanyStatus));
-                Assert.That(actualCompany.CompanyType, Is.EqualTo(actualCompany.CompanyType));
-                Assert.That(actualCompany.DateOfCessation, Is.EqualTo(actualCompany.DateOfCessation));
-                Assert.That(actualCompany.DateOfCreation, Is.EqualTo(actualCompany.DateOfCreation));
-                Assert.That(actualCompany.Description, Is.EqualTo(actualCompany.Description));
-                Assert.That(actualCompany.DescriptionIdentifier, Is.EqualTo(actualCompany.DescriptionIdentifier));
-                Assert.That(actualCompany.Kind, Is.EqualTo(actualCompany.Kind));
-                Assert.That(actualCompany.Links.Self, Is.EqualTo(actualCompany.Links.Self));
-                Assert.That(actualCompany.Matches.Title, Is.EqualTo(actualCompany.Matches.Title));
-                Assert.That(actualCompany.Snippet, Is.EqualTo(actualCompany.Snippet));
-                Assert.That(actualCompany.Title, Is.EqualTo(actualCompany.Title));
+                Assert.That(actual.Address.AddressLine1, Is.EqualTo(companyDetails.AddressLine1));
+                Assert.That(actual.Address.AddressLine2, Is.EqualTo(companyDetails.AddressLine2));
+                Assert.That(actual.Address.CareOf, Is.EqualTo(companyDetails.CareOf));
+                Assert.That(actual.Address.Country, Is.EqualTo(companyDetails.Country));
+                Assert.That(actual.Address.Locality, Is.EqualTo(companyDetails.Locality));
+                Assert.That(actual.Address.PoBox, Is.EqualTo(companyDetails.PoBox));
+                Assert.That(actual.Address.PostalCode, Is.EqualTo(companyDetails.PostalCode));
+                Assert.That(actual.Address.Region, Is.EqualTo(companyDetails.Region));
 
+                Assert.That(actual.CompanyStatus, Is.EqualTo(ExpectedCompanyStatus[companyDetails.CompanyStatus]));
+                Assert.That(actual.CompanyType, Is.EqualTo(companyDetails.CompanyType));
+                Assert.That(actual.DateOfCessation, Is.EqualTo(companyDetails.DateOfCessation));
+                Assert.That(actual.DateOfCreation, Is.EqualTo(companyDetails.DateOfCreation));
+                Assert.That(actual.Description, Is.EqualTo(companyDetails.Description));
+                Assert.That(actual.Kind, Is.EqualTo(companyDetails.Kind));
+                Assert.That(actual.Links.Self, Is.EqualTo(companyDetails.LinksSelf));
+                Assert.That(actual.Matches.Title, Is.EqualTo(companyDetails.MatchesTitle));
+                Assert.That(actual.Snippet, Is.EqualTo(companyDetails.Snippet));
+                Assert.That(actual.Title, Is.EqualTo(companyDetails.Title));
             }
         }
+
+        private static readonly IReadOnlyDictionary<string, CompanyStatus> ExpectedCompanyStatus = new Dictionary
+            <string, CompanyStatus>()
+        {
+            {"active", CompanyStatus.Active},
+            {"dissolved", CompanyStatus.Dissolved},
+            {"liquidation", CompanyStatus.Liquidation},
+            {"receivership", CompanyStatus.Receivership},
+            {"administration", CompanyStatus.Administration},
+            {"voluntary-arrangement", CompanyStatus.VoluntaryArrangement},
+            {"converted-closed", CompanyStatus.ConvertedClosed},
+            {"insolvency-proceedings", CompanyStatus.InsolvencyProceedings}
+        };
     }
 }

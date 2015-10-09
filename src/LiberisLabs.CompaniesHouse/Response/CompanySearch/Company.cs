@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace LiberisLabs.CompaniesHouse.Response.CompanySearch
 {
@@ -11,7 +12,8 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanySearch
         public string CompanyNumber { get; set; }
 
         [JsonProperty(PropertyName = "company_status")]
-        public string CompanyStatus { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public CompanyStatus CompanyStatus { get; set; }
 
         [JsonProperty(PropertyName = "company_type")]
         public string CompanyType { get; set; }

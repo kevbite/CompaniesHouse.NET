@@ -1,21 +1,18 @@
 using System.Collections.Generic;
-using System.Linq;
-using LiberisLabs.CompaniesHouse.Response.CompanySearch;
 
 namespace LiberisLabs.CompaniesHouse.Tests
 {
     public class CompanySearchResourceBuilder
     {
-
-        public string CreateResource(CompanySearch companySearch)
+        private readonly List<string> _itemBlocks = new List<string>();
+        
+        public string CreateResource(ResourceDetails companySearch)
         {
-            var itemsBlock = CreateItemsBlock(companySearch.Companies);
-
             var resource =
                 $@"{{
    ""etag"": ""{companySearch.ETag}"",
    ""items"" : [
-      {string.Join(", ", itemsBlock)}
+      {string.Join(", ", _itemBlocks)}
    ],
    ""items_per_page"" : {companySearch.ItemsPerPage},
    ""kind"" : ""{companySearch.Kind}"",
@@ -26,43 +23,54 @@ namespace LiberisLabs.CompaniesHouse.Tests
             return resource;
         }
 
-        private static IEnumerable<string> CreateItemsBlock(IEnumerable<Company> companies)
+        public CompanySearchResourceBuilder AddCompanies(IEnumerable<CompanyDetails> companiesDetails)
         {
-            var itemsBlock = companies.Select(c =>
+            foreach (var companyDetails in companiesDetails)
+            {
+                AddCompany(companyDetails);
+            }
+
+            return this;
+        }
+
+        public CompanySearchResourceBuilder AddCompany(CompanyDetails companyDetails)
+        {
+            var itemBlock = 
                 $@" {{
          ""address"": {{
-            ""address_line_1"" : ""{c.Address.AddressLine1}"",
-            ""address_line_2"" : ""{c.Address.AddressLine2}"",
-            ""care_of"" : ""{c.Address.CareOf}"",
-            ""country"" : ""{c.Address.Country}"",
-            ""locality"" : ""{c.Address.Locality}"",
-            ""po_box"" : ""{c.Address.PoBox}"",
-            ""postal_code"" : ""{c.Address.PostalCode}"",
-            ""region"" : ""{c.Address.Region}""
+            ""address_line_1"" : ""{companyDetails.AddressLine1}"",
+            ""address_line_2"" : ""{companyDetails.AddressLine2}"",
+            ""care_of"" : ""{companyDetails.CareOf}"",
+            ""country"" : ""{companyDetails.Country}"",
+            ""locality"" : ""{companyDetails.Locality}"",
+            ""po_box"" : ""{companyDetails.PoBox}"",
+            ""postal_code"" : ""{companyDetails.PostalCode}"",
+            ""region"" : ""{companyDetails.Region}""
          }},
-         ""company_number"" : ""{c.CompanyNumber}"",
-         ""company_status"" : ""{c.CompanyStatus}"",
-         ""company_type"" : ""{c.CompanyType}"",
-         ""date_of_cessation"" : ""{c.DateOfCessation}"",
-         ""date_of_creation"" : ""{c.DateOfCreation}"",
-         ""description"" : ""{c.Description}"",
+         ""company_number"" : ""{companyDetails.CompanyNumber}"",
+         ""company_status"" : ""{companyDetails.CompanyStatus}"",
+         ""company_type"" : ""{companyDetails.CompanyType}"",
+         ""date_of_cessation"" : ""{companyDetails.DateOfCessation}"",
+         ""date_of_creation"" : ""{companyDetails.DateOfCreation}"",
+         ""description"" : ""{companyDetails.Description}"",
          ""description_identifier"" : [
             null
          ],
-         ""kind"" : ""{c.Kind}"",
+         ""kind"" : ""{companyDetails.Kind}"",
          ""links"" : {{
-            ""self"" : ""{c.Links.Self}""
+            ""self"" : ""{companyDetails.LinksSelf}""
          }},
          ""matches"" : {{
             ""title"" : [
-               null
+               {string.Join(", ",companyDetails.MatchesTitle)}
             ]
     }},
-         ""snippet"" : ""{c.Snippet}"",
-         ""title"" : ""{c.Title}""
-      }}");
-
-            return itemsBlock;
+         ""snippet"" : ""{companyDetails.Snippet}"",
+         ""title"" : ""{companyDetails.Title}""
+      }}";
+            _itemBlocks.Add(itemBlock);
+            
+            return this;
         }
     }
 }

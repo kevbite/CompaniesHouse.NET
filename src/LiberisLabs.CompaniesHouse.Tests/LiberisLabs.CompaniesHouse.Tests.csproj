@@ -53,10 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompanyDetails.cs" />
     <Compile Include="CompanyHouseSearchCompanyClientTests.cs" />
     <Compile Include="CompanySearchResourceBuilder.cs" />
     <Compile Include="DelegatingHandlers\CompaniesHouseAuthorizationHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceDetails.cs" />
     <Compile Include="StubHttpMessageHandler.cs" />
     <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsBase+Thens.cs" />
     <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsBase.cs" />

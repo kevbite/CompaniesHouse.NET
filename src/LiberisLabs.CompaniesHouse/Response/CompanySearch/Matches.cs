@@ -5,7 +5,7 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanySearch
     public class Matches
     {
         [JsonProperty(PropertyName = "title")]
-        public object[] Title { get; set; }
+        public int[] Title { get; set; }
     }
 
 }
