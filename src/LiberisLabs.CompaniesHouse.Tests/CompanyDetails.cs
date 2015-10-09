@@ -1,3 +1,5 @@
+using System;
+
 namespace LiberisLabs.CompaniesHouse.Tests
 {
     public class CompanyDetails
@@ -24,9 +26,9 @@ namespace LiberisLabs.CompaniesHouse.Tests
 
         public string CompanyType { get; set; }
 
-        public string DateOfCessation { get; set; }
+        public DateTime DateOfCessation { get; set; }
 
-        public string DateOfCreation { get; set; }
+        public DateTime DateOfCreation { get; set; }
 
         public string Description { get; set; }
 

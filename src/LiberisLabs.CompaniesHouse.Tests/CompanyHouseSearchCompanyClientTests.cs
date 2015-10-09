@@ -91,8 +91,8 @@ namespace LiberisLabs.CompaniesHouse.Tests
 
                 Assert.That(actual.CompanyStatus, Is.EqualTo(ExpectedCompanyStatus[companyDetails.CompanyStatus]));
                 Assert.That(actual.CompanyType, Is.EqualTo(ExpectedCompanyType[companyDetails.CompanyType]));
-                Assert.That(actual.DateOfCessation, Is.EqualTo(companyDetails.DateOfCessation));
-                Assert.That(actual.DateOfCreation, Is.EqualTo(companyDetails.DateOfCreation));
+                Assert.That(actual.DateOfCessation, Is.EqualTo(companyDetails.DateOfCessation.Date));
+                Assert.That(actual.DateOfCreation, Is.EqualTo(companyDetails.DateOfCreation.Date));
                 Assert.That(actual.Description, Is.EqualTo(companyDetails.Description));
                 Assert.That(actual.Kind, Is.EqualTo(companyDetails.Kind));
                 Assert.That(actual.Links.Self, Is.EqualTo(companyDetails.LinksSelf));

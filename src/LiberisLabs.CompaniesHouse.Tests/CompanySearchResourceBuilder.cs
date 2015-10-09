@@ -50,8 +50,8 @@ namespace LiberisLabs.CompaniesHouse.Tests
          ""company_number"" : ""{companyDetails.CompanyNumber}"",
          ""company_status"" : ""{companyDetails.CompanyStatus}"",
          ""company_type"" : ""{companyDetails.CompanyType}"",
-         ""date_of_cessation"" : ""{companyDetails.DateOfCessation}"",
-         ""date_of_creation"" : ""{companyDetails.DateOfCreation}"",
+         ""date_of_cessation"" : ""{companyDetails.DateOfCessation.ToString("yyyy-MM-dd")}"",
+         ""date_of_creation"" : ""{companyDetails.DateOfCreation.ToString("yyyy-MM-dd")}"",
          ""description"" : ""{companyDetails.Description}"",
          ""description_identifier"" : [
             null
