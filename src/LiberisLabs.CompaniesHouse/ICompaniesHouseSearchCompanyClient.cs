@@ -4,7 +4,7 @@ using LiberisLabs.CompaniesHouse.Response.CompanySearch;
 
 namespace LiberisLabs.CompaniesHouse
 {
-    public interface ICompanyHouseSearchCompanyClient
+    public interface ICompaniesHouseSearchCompanyClient
     {
         Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompany(CompanySearchRequest request);
     }

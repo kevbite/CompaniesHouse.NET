@@ -53,12 +53,12 @@
     <Compile Include="CompaniesHouseClientResponse.cs" />
     <Compile Include="CompaniesHouseSettings.cs" />
     <Compile Include="CompaniesHouseUris.cs" />
-    <Compile Include="CompanyHouseSearchCompanyClient.cs" />
+    <Compile Include="CompaniesHouseSearchCompanyClient.cs" />
     <Compile Include="DelegatingHandlers\CompaniesHouseAuthorizationHandler.cs" />
     <Compile Include="HttpClientFactory.cs" />
     <Compile Include="ICompaniesHouseClient.cs" />
     <Compile Include="ICompaniesHouseSettings.cs" />
-    <Compile Include="ICompanyHouseSearchCompanyClient.cs" />
+    <Compile Include="ICompaniesHouseSearchCompanyClient.cs" />
     <Compile Include="IHttpClientFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request\CompanySearchRequest.cs" />

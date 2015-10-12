@@ -6,12 +6,12 @@ using LiberisLabs.CompaniesHouse.UriBuilders;
 
 namespace LiberisLabs.CompaniesHouse
 {
-    public class CompanyHouseSearchCompanyClient : ICompanyHouseSearchCompanyClient
+    public class CompaniesHouseSearchCompanyClient : ICompaniesHouseSearchCompanyClient
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ICompanySearchUriBuilder _companySearchUriBuilder;
 
-        public CompanyHouseSearchCompanyClient(IHttpClientFactory httpClientFactory, ICompanySearchUriBuilder companySearchUriBuilder)
+        public CompaniesHouseSearchCompanyClient(IHttpClientFactory httpClientFactory, ICompanySearchUriBuilder companySearchUriBuilder)
         {
             _httpClientFactory = httpClientFactory;
             _companySearchUriBuilder = companySearchUriBuilder;

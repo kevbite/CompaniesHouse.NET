@@ -1,6 +1,6 @@
 ﻿namespace LiberisLabs.CompaniesHouse
 {
-    public interface ICompaniesHouseClient : ICompanyHouseSearchCompanyClient
+    public interface ICompaniesHouseClient : ICompaniesHouseSearchCompanyClient
     {
         
     }

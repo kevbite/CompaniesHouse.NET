@@ -15,7 +15,7 @@ namespace LiberisLabs.CompaniesHouse.Tests
     [TestFixture]
     public class CompanyHouseSearchCompanyClientTests
     {
-        private CompanyHouseSearchCompanyClient _client;
+        private CompaniesHouseSearchCompanyClient _client;
 
         private CompaniesHouseClientResponse<CompanySearch> _result;
         private ResourceDetails _resourceDetails;
@@ -54,7 +54,7 @@ namespace LiberisLabs.CompaniesHouse.Tests
             uriBuilder.Setup(x => x.Build(It.IsAny<CompanySearchRequest>()))
                 .Returns(uri);
 
-            _client = new CompanyHouseSearchCompanyClient(httpClientFactory.Object, uriBuilder.Object);
+            _client = new CompaniesHouseSearchCompanyClient(httpClientFactory.Object, uriBuilder.Object);
 
             _result = _client.SearchCompany(new CompanySearchRequest()).Result;
         }

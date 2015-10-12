@@ -7,18 +7,18 @@ namespace LiberisLabs.CompaniesHouse
 {
     public class CompaniesHouseClient : ICompaniesHouseClient
     {
-        private readonly ICompanyHouseSearchCompanyClient _companyHouseSearchCompanyClient;
+        private readonly ICompaniesHouseSearchCompanyClient _companiesHouseSearchCompanyClient;
 
         public CompaniesHouseClient(ICompaniesHouseSettings settings)
         {
             var httpClientFactory = new HttpClientFactory(settings);
 
-            _companyHouseSearchCompanyClient = new CompanyHouseSearchCompanyClient(httpClientFactory, new CompanySearchUriBuilder());
+            _companiesHouseSearchCompanyClient = new CompaniesHouseSearchCompanyClient(httpClientFactory, new CompanySearchUriBuilder());
         }
 
         public Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompany(CompanySearchRequest request)
         {
-            return _companyHouseSearchCompanyClient.SearchCompany(request);
+            return _companiesHouseSearchCompanyClient.SearchCompany(request);
         }
     }
 }
