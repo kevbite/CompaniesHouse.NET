@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using LiberisLabs.CompaniesHouse.Tests.ResourceBuilders;
 
 namespace LiberisLabs.CompaniesHouse.Tests
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace LiberisLabs.CompaniesHouse.Tests
+namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
 {
     public class CompanyDetails
     {
