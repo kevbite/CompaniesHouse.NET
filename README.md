@@ -1,6 +1,6 @@
 # CompaniesHouse.NET
 
-A simple .NET client wrapper for CompaniesHouse API
+A simple .NET client wrapper for CompaniesHouse API.
 
 [![install from nuget](http://img.shields.io/nuget/v/CompaniesHouse.svg?style=flat-square)](https://www.nuget.org/packages/CompaniesHouse)
 [![downloads](http://img.shields.io/nuget/dt/CompaniesHouse.svg?style=flat-square)](https://www.nuget.org/packages/CompaniesHouse)
@@ -14,13 +14,13 @@ CompaniesHouse.NET can be installed via the package manager console by executing
 PM> Install-Package CompaniesHouse
 ```
 
-Once we have the package installed we can then create a `CompaniesHouseSettings` with a ApiKey which can be create via the [CompaniesHouse API website](https://developer.companieshouse.gov.uk/developer/applications)
+Once we have the package installed, we can then create a `CompaniesHouseSettings` with a ApiKey which can be created via the [CompaniesHouse API website](https://developer.companieshouse.gov.uk/developer/applications)
 
 ```csharp
 var settings = new CompaniesHouseSettings(apiKey);
 ```
 
-We need to now create a `CompaniesHouseClient` passing in the settings that we've just created
+We need to now create a `CompaniesHouseClient` - passing in the settings that we've just created.
 
 ```csharp
 var client = new CompaniesHouseClient(settings);
@@ -32,7 +32,7 @@ This is the object we'll use going forward with any interaction to the Companies
 
 ### Searching for a company
 
-To search for a company we first need to create a `CompanySearchRequest` with details of the search we require.
+To search for a company, we first need to create a `CompanySearchRequest` with details of the search we require.
 
 ```csharp
 var request = new CompanySearchRequest()
