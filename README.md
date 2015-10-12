@@ -14,9 +14,41 @@ CompaniesHouse.NET can be installed via the package manager console by executing
 PM> Install-Package CompaniesHouse
 ```
 
+Once we have the package installed we can then create a `CompaniesHouseSettings` with a ApiKey which can be create via the [CompaniesHouse API website](https://developer.companieshouse.gov.uk/developer/applications)
+
+```csharp
+var settings = new CompaniesHouseSettings(apiKey);
+```
+
+We need to now create a `CompaniesHouseClient` passing in the settings that we've just created
+
+```csharp
+var client = new CompaniesHouseClient(settings);
+```
+
+This is the object we'll use going forward with any interaction to the CompaniesHouse API.
+
 ## Usage
 
-Coming soon...
+### Searching for a company
+
+To search for a company we first need to create a `CompanySearchRequest` with details of the search we require.
+
+```csharp
+var request = new CompanySearchRequest()
+{
+    Query = "Liberis",
+    StartIndex = 10,
+    ItemsPerPage = 10
+};
+```
+
+We can then pass the request object in to the `SearchCompany` method and await on the result.
+
+```chsarp
+var result = await _client.SearchCompanyAsync(request);
+```
+
 
 ## Contributing
 
