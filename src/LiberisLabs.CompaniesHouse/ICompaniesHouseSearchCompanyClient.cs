@@ -6,6 +6,6 @@ namespace LiberisLabs.CompaniesHouse
 {
     public interface ICompaniesHouseSearchCompanyClient
     {
-        Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompany(CompanySearchRequest request);
+        Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAsync(CompanySearchRequest request);
     }
 }

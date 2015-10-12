@@ -17,7 +17,7 @@ namespace LiberisLabs.CompaniesHouse
             _companySearchUriBuilder = companySearchUriBuilder;
         }
 
-        public async Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompany(CompanySearchRequest request)
+        public async Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAsync(CompanySearchRequest request)
         {
             using (var httpClient = _httpClientFactory.CreateHttpClient())
             {

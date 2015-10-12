@@ -56,7 +56,7 @@ namespace LiberisLabs.CompaniesHouse.Tests
 
             _client = new CompaniesHouseSearchCompanyClient(httpClientFactory.Object, uriBuilder.Object);
 
-            _result = _client.SearchCompany(new CompanySearchRequest()).Result;
+            _result = _client.SearchCompanyAsync(new CompanySearchRequest()).Result;
         }
 
         [Test]
