@@ -22,6 +22,10 @@
     verbosity: normal
     publish_nuget: true
 
+  environment:
+    CompaniesHouseApiKey:
+      secure: Fc+nnp3vXkqInQmAJ1l8OmuEKPgcBQG7cz5FPmiUZPUyh3apYnE8S+bDip7FNzq4
+
   configuration: Release
    
   cache:
@@ -67,6 +71,10 @@
     parallel: true
     verbosity: normal
     publish_nuget: true
+
+  environment:
+    CompaniesHouseApiKey:
+      secure: Fc+nnp3vXkqInQmAJ1l8OmuEKPgcBQG7cz5FPmiUZPUyh3apYnE8S+bDip7FNzq4
 
   configuration: Release
    
