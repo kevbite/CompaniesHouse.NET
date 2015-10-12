@@ -24,7 +24,7 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests
         [SetUp]
         public void WhenSearchingForACompany()
         {
-            _result = _client.SearchCompany(new CompanySearchRequest() {Query = "Liberis"}).Result;
+            _result = _client.SearchCompanyAsync(new CompanySearchRequest() {Query = "Liberis"}).Result;
         }
 
         [Test]
