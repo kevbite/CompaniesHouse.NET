@@ -1,4 +1,5 @@
 using System;
+using LiberisLabs.CompaniesHouse.JsonConverters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -21,6 +22,7 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanySearch
         public CompanyType CompanyType { get; set; }
 
         [JsonProperty(PropertyName = "date_of_cessation")]
+        [JsonConverter(typeof(DateOfCessationJsonConverter))]
         public DateTime? DateOfCessation { get; set; }
 
         [JsonProperty(PropertyName = "date_of_creation")]

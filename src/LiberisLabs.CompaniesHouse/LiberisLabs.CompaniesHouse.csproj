@@ -60,6 +60,7 @@
     <Compile Include="ICompaniesHouseSettings.cs" />
     <Compile Include="ICompaniesHouseSearchCompanyClient.cs" />
     <Compile Include="IHttpClientFactory.cs" />
+    <Compile Include="JsonConverters\DateOfCessationJsonConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request\CompanySearchRequest.cs" />
     <Compile Include="Response\CompanySearch\Address.cs" />
