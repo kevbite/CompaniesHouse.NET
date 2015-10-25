@@ -45,7 +45,7 @@ var request = new CompanySearchRequest()
 
 We can then pass the request object in to the `SearchCompany` method and await on the result.
 
-```chsarp
+```csharp
 var result = await _client.SearchCompanyAsync(request);
 ```
 
