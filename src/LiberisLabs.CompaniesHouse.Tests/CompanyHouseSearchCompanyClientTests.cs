@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Policy;
 using LiberisLabs.CompaniesHouse.Request;
 using LiberisLabs.CompaniesHouse.Response.CompanySearch;
 using LiberisLabs.CompaniesHouse.Tests.ResourceBuilders;
@@ -41,8 +42,10 @@ namespace LiberisLabs.CompaniesHouse.Tests
 
             var uri = new Uri("https://wibble.com/search/companies");
 
+            _companyWithUnknownDateOfCessation = fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "insolvency-proceedings").With(x => x.CompanyType, "private-unlimited").Create();
             var resource = new CompanySearchResourceBuilder()
                 .AddCompanies(_expectedCompanies)
+                .AddCompanyWithUnknownDateOfCessation(_companyWithUnknownDateOfCessation)
                 .CreateResource(_resourceDetails);
 
             HttpMessageHandler handler = new StubHttpMessageHandler(uri, resource);
@@ -71,13 +74,46 @@ namespace LiberisLabs.CompaniesHouse.Tests
         }
 
         [Test]
+        public void ThenTheCompanyWithUnknownDateOfCessationIsReturned()
+        {
+            var actual = _result.Data.Companies.First(x => x.CompanyNumber == _companyWithUnknownDateOfCessation.CompanyNumber);
+
+            Assert.That(actual.CompanyNumber, Is.EqualTo(_companyWithUnknownDateOfCessation.CompanyNumber));
+
+            Assert.That(actual.Address.AddressLine1, Is.EqualTo(_companyWithUnknownDateOfCessation.AddressLine1));
+            Assert.That(actual.Address.AddressLine2, Is.EqualTo(_companyWithUnknownDateOfCessation.AddressLine2));
+            Assert.That(actual.Address.CareOf, Is.EqualTo(_companyWithUnknownDateOfCessation.CareOf));
+            Assert.That(actual.Address.Country, Is.EqualTo(_companyWithUnknownDateOfCessation.Country));
+            Assert.That(actual.Address.Locality, Is.EqualTo(_companyWithUnknownDateOfCessation.Locality));
+            Assert.That(actual.Address.PoBox, Is.EqualTo(_companyWithUnknownDateOfCessation.PoBox));
+            Assert.That(actual.Address.PostalCode, Is.EqualTo(_companyWithUnknownDateOfCessation.PostalCode));
+            Assert.That(actual.Address.Region, Is.EqualTo(_companyWithUnknownDateOfCessation.Region));
+
+            Assert.That(actual.CompanyStatus, Is.EqualTo(ExpectedCompanyStatus[_companyWithUnknownDateOfCessation.CompanyStatus]));
+            Assert.That(actual.CompanyType, Is.EqualTo(ExpectedCompanyType[_companyWithUnknownDateOfCessation.CompanyType]));
+            Assert.That(actual.DateOfCessation, Is.Null);
+            Assert.That(actual.DateOfCreation, Is.EqualTo(_companyWithUnknownDateOfCessation.DateOfCreation.Date));
+            Assert.That(actual.Description, Is.EqualTo(_companyWithUnknownDateOfCessation.Description));
+            Assert.That(actual.Kind, Is.EqualTo(_companyWithUnknownDateOfCessation.Kind));
+            Assert.That(actual.Links.Self, Is.EqualTo(_companyWithUnknownDateOfCessation.LinksSelf));
+            Assert.That(actual.Matches.Title, Is.EqualTo(_companyWithUnknownDateOfCessation.MatchesTitle));
+            Assert.That(actual.Snippet, Is.EqualTo(_companyWithUnknownDateOfCessation.Snippet));
+            Assert.That(actual.Title, Is.EqualTo(_companyWithUnknownDateOfCessation.Title));
+        }
+
+        [Test]
+        public void ThenTheNumberOfReturnedCompaniesIsCorrect()
+        {
+            Assert.That(_result.Data.Companies.Count(), Is.EqualTo(9));
+
+        }
+
+        [Test]
         public void ThenTheCompaniesAreCorrect()
         {
-            Assert.That(_result.Data.Companies.Count(), Is.EqualTo(8));
-
-            foreach (var actual in _result.Data.Companies)
+            foreach (var companyDetails in _expectedCompanies)
             {
-                var companyDetails = _expectedCompanies.First(x => x.CompanyNumber == actual.CompanyNumber);
+                var actual = _result.Data.Companies.First(x => x.CompanyNumber == companyDetails.CompanyNumber);
 
                 Assert.That(actual.CompanyNumber, Is.EqualTo(companyDetails.CompanyNumber));
 
@@ -121,5 +157,7 @@ namespace LiberisLabs.CompaniesHouse.Tests
         {
             {"private-unlimited", CompanyType.PrivateUnlimited}
         };
+
+        private CompanyDetails _companyWithUnknownDateOfCessation;
     }
 }
