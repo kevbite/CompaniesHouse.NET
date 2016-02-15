@@ -57,7 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JsonConverters\DateOfCessationJsonConverterTests\DateOfCessationJsonConverterTestsForUnknownValue.cs" />
+    <Compile Include="JsonConverters\OptionalDateJsonConverterTests\OptionalDateJsonConverterTestsForUnknownValue.cs" />
     <Compile Include="ResourceBuilders\CompanyDetails.cs" />
     <Compile Include="CompanyHouseSearchCompanyClientTests.cs" />
     <Compile Include="ResourceBuilders\CompanySearchResourceBuilder.cs" />

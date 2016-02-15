@@ -28,7 +28,7 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests
         }
 
         [Test]
-        public void ThenComapniesAreReturned()
+        public void ThenCompaniesAreReturned()
         {
             Assert.That(_result.Data.Companies, Is.Not.Empty);
         }

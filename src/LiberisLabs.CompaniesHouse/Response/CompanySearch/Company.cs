@@ -22,7 +22,7 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanySearch
         public CompanyType CompanyType { get; set; }
 
         [JsonProperty(PropertyName = "date_of_cessation")]
-        [JsonConverter(typeof(DateOfCessationJsonConverter))]
+        [JsonConverter(typeof(OptionalDateJsonConverter))]
         public DateTime? DateOfCessation { get; set; }
 
         [JsonProperty(PropertyName = "date_of_creation")]

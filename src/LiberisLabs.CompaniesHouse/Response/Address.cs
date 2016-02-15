@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace LiberisLabs.CompaniesHouse.Response.CompanySearch
+namespace LiberisLabs.CompaniesHouse.Response
 {
     public class Address
     {
@@ -24,6 +24,9 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanySearch
 
         [JsonProperty(PropertyName = "postal_code")]
         public string PostalCode { get; set; }
+
+        [JsonProperty(PropertyName = "Premises")]
+        public string Premises { get; set; }
 
         [JsonProperty(PropertyName = "region")]
         public string Region { get; set; }
