@@ -51,12 +51,14 @@
   <ItemGroup>
     <Compile Include="CompaniesHouseClient.cs" />
     <Compile Include="CompaniesHouseClientResponse.cs" />
+    <Compile Include="CompaniesHouseCompanyProfileClient.cs" />
     <Compile Include="CompaniesHouseSettings.cs" />
     <Compile Include="CompaniesHouseUris.cs" />
     <Compile Include="CompaniesHouseSearchCompanyClient.cs" />
     <Compile Include="DelegatingHandlers\CompaniesHouseAuthorizationHandler.cs" />
     <Compile Include="HttpClientFactory.cs" />
     <Compile Include="ICompaniesHouseClient.cs" />
+    <Compile Include="ICompaniesHouseCompanyProfileClient.cs" />
     <Compile Include="ICompaniesHouseSettings.cs" />
     <Compile Include="ICompaniesHouseSearchCompanyClient.cs" />
     <Compile Include="IHttpClientFactory.cs" />
@@ -81,7 +83,9 @@
     <Compile Include="Response\CompanySearch\Company.cs" />
     <Compile Include="Response\CompanySearch\CompanySearch.cs" />
     <Compile Include="Response\CompanySearch\Links.cs" />
+    <Compile Include="UriBuilders\CompanyProfileUriBuilder.cs" />
     <Compile Include="UriBuilders\CompanySearchUriBuilder.cs" />
+    <Compile Include="UriBuilders\ICompanyProfileUriBuilder.cs" />
     <Compile Include="UriBuilders\ICompanySearchUriBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
