@@ -3,7 +3,7 @@
     only:
       - master
    
-  version: 1.2.0
+  version: 1.2.1
   
   install:
     - ps : .\environment-install.ps1
