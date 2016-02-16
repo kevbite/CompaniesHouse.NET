@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Security.Policy;
 using LiberisLabs.CompaniesHouse.Request;
 using LiberisLabs.CompaniesHouse.Response.CompanySearch;
 using LiberisLabs.CompaniesHouse.Tests.ResourceBuilders;
@@ -10,6 +9,7 @@ using LiberisLabs.CompaniesHouse.UriBuilders;
 using Moq;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
+using LiberisLabs.CompaniesHouse.Response;
 
 namespace LiberisLabs.CompaniesHouse.Tests
 {
