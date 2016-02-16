@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace LiberisLabs.CompaniesHouse.Response.CompanySearch
+namespace LiberisLabs.CompaniesHouse.Response
 {
     public enum CompanyStatus
     {

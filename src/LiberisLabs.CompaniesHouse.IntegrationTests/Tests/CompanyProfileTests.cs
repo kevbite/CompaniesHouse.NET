@@ -1,15 +1,17 @@
 ﻿using System;
-using LiberisLabs.CompaniesHouse.Request;
-using LiberisLabs.CompaniesHouse.Response.CompanySearch;
 using NUnit.Framework;
+using LiberisLabs.CompaniesHouse.Response.CompanyProfile;
 
 namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests
 {
     [TestFixture]
-    public class CompanySearchTests
+    public class CompanyProfileTests
     {
+        // Google UK company number, unlikely to go away soon
+        private const string companyNumber = "03977902";
+
         private CompaniesHouseClient _client;
-        private CompaniesHouseClientResponse<CompanySearch> _result;
+        private CompaniesHouseClientResponse<CompanyProfile> _result;
 
         [TestFixtureSetUp]
         public void GivenACompaniesHouseClient()
@@ -22,15 +24,15 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests
         }
 
         [SetUp]
-        public void WhenSearchingForACompany()
+        public void WhenRetrievingACompanyProfile()
         {
-            _result = _client.SearchCompanyAsync(new CompanySearchRequest() {Query = "Liberis"}).Result;
+            _result = _client.GetCompanyProfileAsync(companyNumber).Result;
         }
 
         [Test]
-        public void ThenCompaniesAreReturned()
+        public void ThenTheProfileIsReturned()
         {
-            Assert.That(_result.Data.Companies, Is.Not.Empty);
+            Assert.That(_result.Data.CompanyName, Is.Not.Empty);
         }
     }
 }

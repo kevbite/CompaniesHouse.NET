@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using LiberisLabs.CompaniesHouse.JsonConverters;
+﻿using LiberisLabs.CompaniesHouse.JsonConverters;
 using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
@@ -8,15 +6,15 @@ using NUnit.Framework;
 namespace LiberisLabs.CompaniesHouse.Tests.JsonConverters.DateOfCessationJsonConverterTests
 {
     [TestFixture]
-    public class DateOfCessationJsonConverterTestsForUnknownValue
+    public class OptionalDateJsonConverterTestsForUnknownValue
     {
-        private DateOfCessationJsonConverter _convertor;
+        private OptionalDateJsonConverter _convertor;
         private object _result;
 
         [TestFixtureSetUp]
         public void GivenADateOfCessationJsonConverter()
         {
-            _convertor = new DateOfCessationJsonConverter();
+            _convertor = new OptionalDateJsonConverter();
         }
 
         [SetUp]

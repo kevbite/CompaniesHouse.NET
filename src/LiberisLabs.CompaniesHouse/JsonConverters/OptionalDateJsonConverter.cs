@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace LiberisLabs.CompaniesHouse.JsonConverters
 {
-    public class DateOfCessationJsonConverter : JsonConverter
+    public class OptionalDateJsonConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
