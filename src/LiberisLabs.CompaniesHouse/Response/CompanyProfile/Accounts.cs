@@ -4,7 +4,7 @@ using System;
 
 namespace LiberisLabs.CompaniesHouse.Response.CompanyProfile
 {
-    public class Account
+    public class Accounts
     {
         [JsonProperty(PropertyName = "accounting_reference_date")]
         public AccountingReferenceDate ARD { get; set; }

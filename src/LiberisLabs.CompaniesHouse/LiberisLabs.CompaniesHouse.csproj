@@ -73,7 +73,7 @@
     <Compile Include="Response\CompanyProfile\LastAccountsType.cs" />
     <Compile Include="Response\CompanyProfile\LastAccounts.cs" />
     <Compile Include="Response\CompanyProfile\AccountingReferenceDate.cs" />
-    <Compile Include="Response\CompanyProfile\Account.cs" />
+    <Compile Include="Response\CompanyProfile\Accounts.cs" />
     <Compile Include="Response\CompanyProfile\CompanyProfile.cs" />
     <Compile Include="Response\Address.cs" />
     <Compile Include="Response\CompanyStatus.cs" />

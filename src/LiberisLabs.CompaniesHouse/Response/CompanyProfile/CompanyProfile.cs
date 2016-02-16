@@ -11,7 +11,7 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanyProfile
         public string ETag { get; set; }
 
         [JsonProperty(PropertyName = "accounts")]
-        public Account[] Accounts { get; set; }
+        public Accounts Accounts { get; set; }
 
         [JsonProperty(PropertyName = "annual_return")]
         public AnnualReturn AnnualReturn { get; set; }

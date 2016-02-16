@@ -1,30 +1,38 @@
 ﻿using System;
-using LiberisLabs.CompaniesHouse.Request;
 using NUnit.Framework;
+using LiberisLabs.CompaniesHouse.Response.CompanyProfile;
 
 namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests
 {
     [TestFixture]
     public class CompanyProfileTests
     {
-        private CompaniesHouseSettings _settings;
+        // Google UK company number, unlikely to go away soon
+        private const string companyNumber = "03977902";
+
+        private CompaniesHouseClient _client;
+        private CompaniesHouseClientResponse<CompanyProfile> _result;
 
         [TestFixtureSetUp]
-        public void Setup()
+        public void GivenACompaniesHouseClient()
         {
-            var apiKey = "QMA5Ll3K0YDHwObXHn6rSFDYAqBanaDU2WLU8Do4";//Environment.GetEnvironmentVariable("CompaniesHouseApiKey");
-            _settings = new CompaniesHouseSettings(apiKey);
+            var apiKey = Environment.GetEnvironmentVariable("CompaniesHouseApiKey");
+
+            var settings = new CompaniesHouseSettings(apiKey);
+
+            _client = new CompaniesHouseClient(settings);
+        }
+
+        [SetUp]
+        public void WhenRetrievingACompanyProfile()
+        {
+            _result = _client.GetCompanyProfileAsync(companyNumber).Result;
         }
 
         [Test]
-        public void CheckCompanyProfileIsReturned()
+        public void ThenTheProfileIsReturned()
         {
-            const string companyNumber = "03977902"; // Google UK company number, unlikely to go away soon
-            var client = new CompaniesHouseClient(_settings);
-
-            var result = client.GetCompanyProfileAsync(companyNumber).Result;
-
-            Assert.That(result.Data.CompanyName, Is.Not.Empty);
+            Assert.That(_result.Data.CompanyName, Is.Not.Empty);
         }
     }
 }
