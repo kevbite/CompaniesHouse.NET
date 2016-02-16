@@ -4,6 +4,9 @@
       - master
    
   version: 1.1.2
+  
+  install:
+    - ps : .\environment-install.ps1
 
   assembly_info:
     assembly_version: '{version}'
@@ -54,6 +57,9 @@
       - master
 
   version: 0.0.0-{branch}{build}
+
+  install:
+    - ps : .\environment-install.ps1
     
   assembly_info:
     assembly_version: '{version}'
