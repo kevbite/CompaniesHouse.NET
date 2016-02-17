@@ -25,9 +25,9 @@ namespace LiberisLabs.CompaniesHouse
 
                 var response = await httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-                response.EnsureSuccessStatusCode();
-
-                var result = await response.Content.ReadAsAsync<CompanyProfile>(cancellationToken).ConfigureAwait(false);
+                CompanyProfile result = response.IsSuccessStatusCode
+                    ? await response.Content.ReadAsAsync<CompanyProfile>(cancellationToken).ConfigureAwait(false)
+                    : null;
 
                 return new CompaniesHouseClientResponse<CompanyProfile>(result);
             }
