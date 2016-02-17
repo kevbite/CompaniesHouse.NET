@@ -25,6 +25,10 @@ namespace LiberisLabs.CompaniesHouse
 
                 var response = await httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
+                // Return a null profile on 404s, but raise exception for all other error codes
+                if (response.StatusCode != System.Net.HttpStatusCode.NotFound)
+                    response.EnsureSuccessStatusCode();
+
                 CompanyProfile result = response.IsSuccessStatusCode
                     ? await response.Content.ReadAsAsync<CompanyProfile>(cancellationToken).ConfigureAwait(false)
                     : null;
