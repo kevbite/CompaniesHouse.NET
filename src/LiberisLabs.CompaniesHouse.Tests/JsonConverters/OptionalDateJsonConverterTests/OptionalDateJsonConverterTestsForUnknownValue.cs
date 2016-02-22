@@ -3,7 +3,7 @@ using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
-namespace LiberisLabs.CompaniesHouse.Tests.JsonConverters.DateOfCessationJsonConverterTests
+namespace LiberisLabs.CompaniesHouse.Tests.JsonConverters.OptionalDateJsonConverterTests
 {
     [TestFixture]
     public class OptionalDateJsonConverterTestsForUnknownValue

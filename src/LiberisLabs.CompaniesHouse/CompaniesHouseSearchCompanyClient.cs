@@ -14,7 +14,7 @@ namespace LiberisLabs.CompaniesHouse
 
         public CompaniesHouseSearchCompanyClient(IHttpClientFactory httpClientFactory, ICompanySearchUriBuilder companySearchUriBuilder)
         {
-            _httpClientFactory = httpClientFactory;
+            _httpClientFactory = httpClientFactory; 
             _companySearchUriBuilder = companySearchUriBuilder;
         }
 

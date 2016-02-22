@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentAssertions, Version=4.2.2.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.2.2\lib\net45\FluentAssertions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentAssertions.Core, Version=4.2.2.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.2.2\lib\net45\FluentAssertions.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Moq, Version=4.2.1507.118, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
@@ -57,12 +65,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompaniesHouseCompanyProfileClientTests.cs" />
     <Compile Include="JsonConverters\OptionalDateJsonConverterTests\OptionalDateJsonConverterTestsForUnknownValue.cs" />
+    <Compile Include="ResourceBuilders\AccountingReferenceDate.cs" />
+    <Compile Include="ResourceBuilders\AnnualReturn.cs" />
     <Compile Include="ResourceBuilders\CompanyDetails.cs" />
     <Compile Include="CompanyHouseSearchCompanyClientTests.cs" />
+    <Compile Include="ResourceBuilders\CompanyProfileResourceBuilder.cs" />
     <Compile Include="ResourceBuilders\CompanySearchResourceBuilder.cs" />
     <Compile Include="DelegatingHandlers\CompaniesHouseAuthorizationHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceBuilders\LastAccounts.cs" />
     <Compile Include="ResourceBuilders\ResourceDetails.cs" />
     <Compile Include="StubHttpMessageHandler.cs" />
     <Compile Include="UriBuilders\CompanyProfileUriBuilderTests\CompanyProfileUriBuilderTests.cs" />
