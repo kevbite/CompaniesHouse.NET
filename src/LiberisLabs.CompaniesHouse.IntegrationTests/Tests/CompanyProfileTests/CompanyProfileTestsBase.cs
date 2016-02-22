@@ -1,8 +1,8 @@
 ﻿using System;
-using NUnit.Framework;
 using LiberisLabs.CompaniesHouse.Response.CompanyProfile;
+using NUnit.Framework;
 
-namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests
+namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.CompanyProfileTests
 {
     [TestFixture]
     public abstract class CompanyProfileTestsBase
