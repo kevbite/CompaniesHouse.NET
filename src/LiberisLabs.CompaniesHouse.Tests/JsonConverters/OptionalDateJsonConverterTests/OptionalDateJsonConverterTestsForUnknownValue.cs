@@ -11,7 +11,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.JsonConverters.OptionalDateJsonConver
         private OptionalDateJsonConverter _convertor;
         private object _result;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void GivenADateOfCessationJsonConverter()
         {
             _convertor = new OptionalDateJsonConverter();

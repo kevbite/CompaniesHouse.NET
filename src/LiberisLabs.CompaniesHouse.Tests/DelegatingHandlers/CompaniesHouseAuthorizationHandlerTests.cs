@@ -15,7 +15,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.DelegatingHandlers
         private string _apiKey;
         private HttpRequestMessage _actual;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void GivenACompaniesHouseAuthorizationHandler()
         {
             var innerHandler = new Mock<HttpMessageHandler>(MockBehavior.Strict);

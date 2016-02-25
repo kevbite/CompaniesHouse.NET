@@ -19,7 +19,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanySearchUriBuilderTe
 
         protected virtual int? StartIndex { get; } = null;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void GivenACompanySearchUriBuilder()
         {
             _uriBuilder = new CompanySearchUriBuilder();

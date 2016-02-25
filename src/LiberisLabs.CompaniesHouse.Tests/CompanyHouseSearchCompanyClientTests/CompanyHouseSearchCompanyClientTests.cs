@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using LiberisLabs.CompaniesHouse.Request;
+using LiberisLabs.CompaniesHouse.Response;
 using LiberisLabs.CompaniesHouse.Response.CompanySearch;
 using LiberisLabs.CompaniesHouse.Tests.ResourceBuilders;
 using LiberisLabs.CompaniesHouse.UriBuilders;
 using Moq;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
-using LiberisLabs.CompaniesHouse.Response;
 
-namespace LiberisLabs.CompaniesHouse.Tests
+namespace LiberisLabs.CompaniesHouse.Tests.CompanyHouseSearchCompanyClientTests
 {
     [TestFixture]
     public class CompanyHouseSearchCompanyClientTests
@@ -23,7 +23,7 @@ namespace LiberisLabs.CompaniesHouse.Tests
         private List<CompanyDetails> _expectedCompanies;
 
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void GivenACompanyHouseSearchCompanyClient_WhenSearchingForACompany()
         {
             var fixture = new Fixture();

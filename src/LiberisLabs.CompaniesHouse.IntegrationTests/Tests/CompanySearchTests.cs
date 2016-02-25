@@ -11,7 +11,7 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests
         private CompaniesHouseClient _client;
         private CompaniesHouseClientResponse<CompanySearch> _result;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void GivenACompaniesHouseClient()
         {
             var apiKey = Environment.GetEnvironmentVariable("CompaniesHouseApiKey");

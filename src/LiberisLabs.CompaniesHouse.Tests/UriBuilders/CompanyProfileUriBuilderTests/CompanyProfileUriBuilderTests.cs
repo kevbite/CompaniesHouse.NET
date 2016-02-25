@@ -12,7 +12,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanyProfileUriBuilderT
         private string _companyNumber;
         
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void GivenACompanyProfileUriBuilder()
         {
             _uriBuilder = new CompanyProfileUriBuilder();

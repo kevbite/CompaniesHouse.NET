@@ -7,6 +7,10 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanyProfile
 {
     public class CompanyProfile
     {
+        [JsonProperty(PropertyName = "type")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public CompanyType Type { get; set; }
+
         [JsonProperty(PropertyName = "etag")]
         public string ETag { get; set; }
 
@@ -30,7 +34,8 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanyProfile
         public CompanyStatus CompanyStatus { get; set; }
 
         [JsonProperty(PropertyName = "company_status_detail")]
-        public string CompanyStatusDetail { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public CompanyStatusDetail CompanyStatusDetail { get; set; }
 
         [JsonProperty(PropertyName = "date_of_creation")]
         public DateTime? DateOfCreation { get; set; }
@@ -70,9 +75,6 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanyProfile
 
         [JsonProperty(PropertyName = "sic_codes")]
         public string[] SicCodes { get; set; }
-
-        [JsonProperty(PropertyName = "type")]
-        public CompanyType Type { get; set; }
 
         [JsonProperty(PropertyName = "undeliverable_registered_office_address")]
         public bool? UndeliverableRegisteredOfficeAddress { get; set; }
