@@ -46,21 +46,61 @@ namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTes
 
         public static CompaniesHouseCompanyProfileClientTestCase[] TestCases()
         {
-            var a = from lastAccountsType in EnumerationMappings.PossibleLastAccountsTypes.Keys
-                from companyStatus in EnumerationMappings.PossibleCompanyStatuses.Keys
-                from companyStatusDetail in EnumerationMappings.PossibleCompanyStatusDetails.Keys
-                from jurisdiction in EnumerationMappings.PossibleJurisdictions.Keys
-                from type in EnumerationMappings.ExpectedCompanyTypesMap.Keys
-                    select new CompaniesHouseCompanyProfileClientTestCase
+            var allLastAccountsTypes = EnumerationMappings.PossibleLastAccountsTypes.Keys
+                .Select(x => new CompaniesHouseCompanyProfileClientTestCase
                 {
-                    LastAccountsType = lastAccountsType,
-                    CompanyStatus = companyStatus,
-                    CompanyStatusDetail = companyStatusDetail,
-                    Jurisdiction = jurisdiction,
-                    Type = type
-                };
+                    LastAccountsType = x,
+                    CompanyStatus = EnumerationMappings.PossibleCompanyStatuses.Keys.First(),
+                    CompanyStatusDetail = EnumerationMappings.PossibleCompanyStatusDetails.Keys.First(),
+                    Jurisdiction = EnumerationMappings.PossibleJurisdictions.Keys.First(),
+                    Type = EnumerationMappings.ExpectedCompanyTypesMap.Keys.First()
+                });
 
-            return a.Take(1).ToArray();
+            var allCompanyStatuses = EnumerationMappings.PossibleCompanyStatuses.Keys
+                .Select(x => new CompaniesHouseCompanyProfileClientTestCase
+                {
+                    LastAccountsType = EnumerationMappings.PossibleLastAccountsTypes.Keys.First(),
+                    CompanyStatus = x,
+                    CompanyStatusDetail = EnumerationMappings.PossibleCompanyStatusDetails.Keys.First(),
+                    Jurisdiction = EnumerationMappings.PossibleJurisdictions.Keys.First(),
+                    Type = EnumerationMappings.ExpectedCompanyTypesMap.Keys.First()
+                });
+
+            var allCompanyStatusDetails = EnumerationMappings.PossibleCompanyStatusDetails.Keys
+                .Select(x => new CompaniesHouseCompanyProfileClientTestCase
+                {
+                    LastAccountsType = EnumerationMappings.PossibleLastAccountsTypes.Keys.First(),
+                    CompanyStatus = EnumerationMappings.PossibleCompanyStatuses.Keys.First(),
+                    CompanyStatusDetail = x,
+                    Jurisdiction = EnumerationMappings.PossibleJurisdictions.Keys.First(),
+                    Type = EnumerationMappings.ExpectedCompanyTypesMap.Keys.First()
+                });
+
+            var allJurisdictions = EnumerationMappings.PossibleJurisdictions.Keys
+                .Select(x => new CompaniesHouseCompanyProfileClientTestCase
+                {
+                    LastAccountsType = EnumerationMappings.PossibleLastAccountsTypes.Keys.First(),
+                    CompanyStatus = EnumerationMappings.PossibleCompanyStatuses.Keys.First(),
+                    CompanyStatusDetail = EnumerationMappings.PossibleCompanyStatusDetails.Keys.First(),
+                    Jurisdiction = x,
+                    Type = EnumerationMappings.ExpectedCompanyTypesMap.Keys.First()
+                });
+
+            var allCompanyTypes = EnumerationMappings.ExpectedCompanyTypesMap.Keys
+                .Select(x => new CompaniesHouseCompanyProfileClientTestCase
+                {
+                    LastAccountsType = EnumerationMappings.PossibleLastAccountsTypes.Keys.First(),
+                    CompanyStatus = EnumerationMappings.PossibleCompanyStatuses.Keys.First(),
+                    CompanyStatusDetail = EnumerationMappings.PossibleCompanyStatusDetails.Keys.First(),
+                    Jurisdiction = EnumerationMappings.PossibleJurisdictions.Keys.First(),
+                    Type = x
+                });
+
+            return allLastAccountsTypes.Concat(allCompanyStatuses)
+                .Concat(allCompanyStatusDetails)
+                .Concat(allJurisdictions)
+                .Concat(allCompanyTypes)
+                .ToArray();
         }
 
     }
