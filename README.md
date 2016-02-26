@@ -43,12 +43,21 @@ var request = new CompanySearchRequest()
 };
 ```
 
-We can then pass the request object in to the `SearchCompany` method and await on the result.
+We can then pass the request object in to the `SearchCompany` method and await on the task.
 
 ```csharp
-var result = await _client.SearchCompanyAsync(request);
+var result = await client.SearchCompanyAsync(request);
 ```
 
+### Getting a company profile
+
+To get a company profile, we pass in a company number in to the `GetCompanyProfile` method and await on the task.
+
+```csharp
+var result = await client.GetCompanyProfileAsync("03977902");
+```
+
+If there was no match for that company number then `null` will be returned.
 
 ## Contributing
 
