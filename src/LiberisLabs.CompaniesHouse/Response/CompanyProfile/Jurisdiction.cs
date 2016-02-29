@@ -28,6 +28,6 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanyProfile
         England,
 
         [EnumMember(Value = "noneu")]
-        NonEU
+        NonEu
     }
 }

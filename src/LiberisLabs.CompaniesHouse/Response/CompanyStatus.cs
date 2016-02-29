@@ -4,6 +4,7 @@ namespace LiberisLabs.CompaniesHouse.Response
 {
     public enum CompanyStatus
     {
+        [EnumMember(Value = "")]
         None = 0,
 
         [EnumMember(Value = "active")]
@@ -32,3 +33,4 @@ namespace LiberisLabs.CompaniesHouse.Response
 
     }
 }
+ 

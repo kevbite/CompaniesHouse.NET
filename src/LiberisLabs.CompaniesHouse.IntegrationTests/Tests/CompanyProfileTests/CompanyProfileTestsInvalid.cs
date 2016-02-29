@@ -1,11 +1,11 @@
 ﻿using NUnit.Framework;
 
-namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests
+namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.CompanyProfileTests
 {
     [TestFixture]
     public class CompanyProfileTestsInvalid : CompanyProfileTestsBase
     {
-        private const string invalidCompanyNumber = "ABC00000";
+        private const string InvalidCompanyNumber = "ABC00000";
 
         [SetUp]
         protected override void When()
@@ -21,7 +21,7 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests
 
         private void WhenRetrievingAnInvalidCompanyProfile()
         {
-            _result = _client.GetCompanyProfileAsync(invalidCompanyNumber).Result;
+            _result = _client.GetCompanyProfileAsync(InvalidCompanyNumber).Result;
         }
     }
 }

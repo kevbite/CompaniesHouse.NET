@@ -1,12 +1,12 @@
 ﻿using NUnit.Framework;
 
-namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests
+namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.CompanyProfileTests
 {
     [TestFixture]
     public class CompanyProfileTestsValid : CompanyProfileTestsBase
     {
         // Google UK company number, unlikely to go away soon
-        private const string validCompanyNumber = "03977902";
+        private const string ValidCompanyNumber = "03977902";
 
         [SetUp]
         protected override void When()
@@ -22,7 +22,7 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests
 
         private void WhenRetrievingAValidCompanyProfile()
         {
-            _result = _client.GetCompanyProfileAsync(validCompanyNumber).Result;
+            _result = _client.GetCompanyProfileAsync(ValidCompanyNumber).Result;
         }
     }
 }

@@ -78,6 +78,7 @@
     <Compile Include="Response\Address.cs" />
     <Compile Include="Response\CompanyStatus.cs" />
     <Compile Include="Response\CompanyProfile\Jurisdiction.cs" />
+    <Compile Include="Response\CompanyStatusDetail.cs" />
     <Compile Include="Response\CompanyType.cs" />
     <Compile Include="Response\CompanySearch\Matches.cs" />
     <Compile Include="Response\CompanySearch\Company.cs" />

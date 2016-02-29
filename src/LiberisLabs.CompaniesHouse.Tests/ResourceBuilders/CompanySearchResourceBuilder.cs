@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using LiberisLabs.CompaniesHouse.Tests.ResourceBuilders;
 
-namespace LiberisLabs.CompaniesHouse.Tests
+namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
 {
     public class CompanySearchResourceBuilder
     {

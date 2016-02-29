@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace LiberisLabs.CompaniesHouse.Response
+namespace LiberisLabs.CompaniesHouse.Response.CompanyProfile
 {
     public enum LastAccountsType
     {
