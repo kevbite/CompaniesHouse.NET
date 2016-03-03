@@ -2,11 +2,11 @@
 
 namespace LiberisLabs.CompaniesHouse.Response.CompanyFiling
 {
-    public enum FilingSubcategory
+    public enum FilingHistoryStatus
     {
         None = 0,
 
-        [EnumMember(Value = "resolution")]
-        Resloution,
+        [EnumMember(Value = "filing-history-available")]
+        FilingHistoryAvailable,
     }
 }

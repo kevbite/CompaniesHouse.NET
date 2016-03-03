@@ -7,7 +7,7 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanyFiling
     {
         [JsonProperty(PropertyName = "filing_history_status")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public HistoryStatus HistoryStatus { get; set; }
+        public FilingHistoryStatus HistoryStatus { get; set; }
 
         [JsonProperty(PropertyName = "etag")]
         public string ETag { get; set; }
@@ -22,6 +22,9 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanyFiling
         public int StartIndex { get; set; }
 
         [JsonProperty(PropertyName = "items")]
-        public HistoryItem[] Items { get; set; }
+        public FilingHistoryItem[] Items { get; set; }
+
+        [JsonProperty(PropertyName = "kind")]
+        public string Kind { get; set; }
     }
 }
