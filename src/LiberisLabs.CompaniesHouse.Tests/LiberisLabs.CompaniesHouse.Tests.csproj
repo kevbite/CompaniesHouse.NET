@@ -65,6 +65,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompaniesHouseCompanyFilingHistoryClientTests\CompaniesHouseCompanyFilingHistoryClientTests.cs" />
+    <Compile Include="CompaniesHouseCompanyFilingHistoryClientTests\CompaniesHouseCompanyFilingHistoryClientTestCase.cs" />
     <Compile Include="CompaniesHouseCompanyFilingHistoryClientTests\CompanyFilingHistoryBuilder.cs" />
     <Compile Include="ResourceBuilders\CompanyFilingHistoryResourceBuilder.cs" />
     <Compile Include="CompaniesHouseCompanyProfileClientTests\CompaniesHouseCompanyProfileClientTestCase.cs" />

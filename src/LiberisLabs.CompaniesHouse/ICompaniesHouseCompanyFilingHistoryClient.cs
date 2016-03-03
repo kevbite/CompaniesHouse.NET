@@ -6,6 +6,6 @@ namespace LiberisLabs.CompaniesHouse
 {
     public interface ICompaniesHouseCompanyFilingHistoryClient
     {
-        Task<CompaniesHouseClientResponse<CompanyFilingHistory>> GetCompanyProfileAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken));
+        Task<CompaniesHouseClientResponse<CompanyFilingHistory>> GetCompanyFilingHistoryAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
