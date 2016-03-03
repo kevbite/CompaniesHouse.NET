@@ -1,7 +1,6 @@
 ﻿using System.Linq;
-using LiberisLabs.CompaniesHouse.Tests.ResourceBuilders;
 
-namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseCompanyFilingHistoryClientTests
+namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
 {
     public class CompanyFilingHistoryResourceBuilder
     {

@@ -66,7 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompaniesHouseCompanyFilingHistoryClientTests\CompanyFilingHistoryBuilder.cs" />
-    <Compile Include="CompaniesHouseCompanyFilingHistoryClientTests\CompanyFilingHistoryResourceBuilder.cs" />
+    <Compile Include="ResourceBuilders\CompanyFilingHistoryResourceBuilder.cs" />
     <Compile Include="CompaniesHouseCompanyProfileClientTests\CompaniesHouseCompanyProfileClientTestCase.cs" />
     <Compile Include="CompaniesHouseCompanyProfileClientTests\CompaniesHouseCompanyProfileClientTests.cs" />
     <Compile Include="CompaniesHouseCompanyProfileClientTests\CompanyProfileBuilder.cs" />
