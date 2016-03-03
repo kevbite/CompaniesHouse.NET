@@ -10,6 +10,8 @@ namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanyFilingUriBuilderTe
         private Uri _actualUri;
         private readonly Uri _baseUri = new Uri("http://liberis.co.uk/bla1/bla2/");
         private string _companyNumber;
+        private int _pageSize;
+        private int _startIndex;
 
 
         [OneTimeSetUp]
@@ -21,8 +23,10 @@ namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanyFilingUriBuilderTe
         [SetUp]
         public void WhenBuildingUriWithCompanySearchRequest()
         {
+            _pageSize = 10;
+            _startIndex = 5;
             _companyNumber = "123456789";
-            _actualUri = _uriBuilder.Build(_companyNumber);
+            _actualUri = _uriBuilder.Build(_companyNumber, _pageSize, _startIndex);
         }
 
         [Test]
@@ -35,7 +39,16 @@ namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanyFilingUriBuilderTe
         public void ThenTheUriPathIsCorrect()
         {
             var uri = new Uri(_baseUri, _actualUri);
-            Assert.That(uri.AbsolutePath, Is.EqualTo("/bla1/bla2/company/" + _companyNumber + "/filing-history"));
+            var expected = string.Format("/bla1/bla2/company/{0}/filing-history", _companyNumber);
+            Assert.That(uri.AbsolutePath, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void ThenTheUriQueryStringIsCorrect()
+        {
+            var uri = new Uri(_baseUri, _actualUri);
+            var expected = string.Format("?items_per_page={0}&start_index={1}", _pageSize, _startIndex);
+            Assert.That(uri.Query, Is.EqualTo(expected));
         }
     }
 }

@@ -4,6 +4,6 @@ namespace LiberisLabs.CompaniesHouse.UriBuilders
 {
     public interface ICompanyFilingUriBuilder
     {
-        Uri Build(string companyNumber);
+        Uri Build(string companyNumber, int pageSize, int startIndex);
     }
 }
