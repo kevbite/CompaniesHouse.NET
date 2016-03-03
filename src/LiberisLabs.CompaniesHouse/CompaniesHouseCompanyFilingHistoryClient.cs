@@ -2,7 +2,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using LiberisLabs.CompaniesHouse.Response.CompanyFiling;
-using LiberisLabs.CompaniesHouse.Response.CompanyProfile;
 using LiberisLabs.CompaniesHouse.UriBuilders;
 
 namespace LiberisLabs.CompaniesHouse
