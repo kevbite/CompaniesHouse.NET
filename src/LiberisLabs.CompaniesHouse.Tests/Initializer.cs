@@ -18,6 +18,10 @@ namespace LiberisLabs.CompaniesHouse.Tests
             AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<LastAccountsTypeMapProvider, LastAccountsType>>();
             AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<JurisdictionMapProvider, Jurisdiction>>();
             AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<OfficerRoleMapProvider, OfficerRole>>();
+            AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<FilingCategoriesMapProvider, FilingCategory>>();
+            AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<FilingSubcategoriesMapProvider, FilingSubcategory>>();
+            AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<ResolutionCategoriesMapProvider, ResolutionCategory>>();
+            AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<FilingHistoryStatusMapProvider, FilingHistoryStatus>>();
         }
     }
 }

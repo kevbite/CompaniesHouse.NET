@@ -36,7 +36,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseCompanyFilingHistoryCli
             var filingHistory = fixture.Build<CompanyFilingHistory>()
                 .With(x => x.HistoryStatus, testCase.HistoryStatus)
                 .With(x => x.Items, items)
-               .Create();
+                .Create();
 
             return filingHistory;
         }

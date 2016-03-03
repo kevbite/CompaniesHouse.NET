@@ -68,6 +68,10 @@
     <Compile Include="CompaniesHouseCompanyFilingHistoryClientTests\CompaniesHouseCompanyFilingHistoryClientTests.cs" />
     <Compile Include="CompaniesHouseCompanyFilingHistoryClientTests\CompaniesHouseCompanyFilingHistoryClientTestCase.cs" />
     <Compile Include="CompaniesHouseCompanyFilingHistoryClientTests\CompanyFilingHistoryBuilder.cs" />
+    <Compile Include="MapProviders\FilingCategoriesMapProvider.cs" />
+    <Compile Include="MapProviders\FilingHistoryStatusMapProvider.cs" />
+    <Compile Include="MapProviders\FilingSubcategoriesMapProvider.cs" />
+    <Compile Include="MapProviders\ResolutionCategoriesMapProvider.cs" />
     <Compile Include="ResourceBuilders\CompanyFilingHistoryResourceBuilder.cs" />
     <Compile Include="CompaniesHouseCompanyProfileClientTests\CompaniesHouseCompanyProfileClientTestCase.cs" />
     <Compile Include="CompaniesHouseCompanyProfileClientTests\CompaniesHouseCompanyProfileClientTests.cs" />
