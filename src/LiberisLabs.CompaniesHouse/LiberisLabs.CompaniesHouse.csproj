@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="CompaniesHouseClient.cs" />
     <Compile Include="CompaniesHouseClientResponse.cs" />
+    <Compile Include="CompaniesHouseCompanyFilingHistoryClient.cs" />
     <Compile Include="CompaniesHouseCompanyProfileClient.cs" />
     <Compile Include="CompaniesHouseSettings.cs" />
     <Compile Include="CompaniesHouseUris.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="DelegatingHandlers\CompaniesHouseAuthorizationHandler.cs" />
     <Compile Include="HttpClientFactory.cs" />
     <Compile Include="ICompaniesHouseClient.cs" />
+    <Compile Include="ICompaniesHouseCompanyFilingHistoryClient.cs" />
     <Compile Include="ICompaniesHouseCompanyProfileClient.cs" />
     <Compile Include="ICompaniesHouseSettings.cs" />
     <Compile Include="ICompaniesHouseSearchCompanyClient.cs" />
@@ -65,7 +67,11 @@
     <Compile Include="JsonConverters\OptionalDateJsonConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request\CompanySearchRequest.cs" />
-    <Compile Include="Response\CompanyFiling\CompanyFiling.cs" />
+    <Compile Include="Response\CompanyFiling\FilingSubcategory.cs" />
+    <Compile Include="Response\CompanyFiling\FilingCategory.cs" />
+    <Compile Include="Response\CompanyFiling\HistoryItem.cs" />
+    <Compile Include="Response\CompanyFiling\HistoryStatus.cs" />
+    <Compile Include="Response\CompanyFiling\CompanyFilingHistory.cs" />
     <Compile Include="Response\CompanyProfile\OfficerRole.cs" />
     <Compile Include="Response\CompanyProfile\OfficerDateOfBirth.cs" />
     <Compile Include="Response\CompanyProfile\Officer.cs" />
@@ -85,10 +91,10 @@
     <Compile Include="Response\CompanySearch\Company.cs" />
     <Compile Include="Response\CompanySearch\CompanySearch.cs" />
     <Compile Include="Response\CompanySearch\Links.cs" />
-    <Compile Include="UriBuilders\CompanyFilingUriBuilder.cs" />
+    <Compile Include="UriBuilders\CompanyFilingHistoryHistoryUriBuilder.cs" />
     <Compile Include="UriBuilders\CompanyProfileUriBuilder.cs" />
     <Compile Include="UriBuilders\CompanySearchUriBuilder.cs" />
-    <Compile Include="UriBuilders\ICompanyFilingUriBuilder.cs" />
+    <Compile Include="UriBuilders\ICompanyFilingHistoryUriBuilder.cs" />
     <Compile Include="UriBuilders\ICompanyProfileUriBuilder.cs" />
     <Compile Include="UriBuilders\ICompanySearchUriBuilder.cs" />
   </ItemGroup>

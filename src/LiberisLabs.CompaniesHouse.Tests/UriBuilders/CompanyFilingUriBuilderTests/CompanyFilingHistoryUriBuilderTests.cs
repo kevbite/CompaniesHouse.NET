@@ -4,9 +4,9 @@ using NUnit.Framework;
 
 namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanyFilingUriBuilderTests
 {
-    public class CompanyFilingUriBuilderTests
+    public class CompanyFilingHistoryUriBuilderTests
     {
-        private CompanyFilingUriBuilder _uriBuilder;
+        private CompanyFilingHistoryUriBuilder _uriBuilder;
         private Uri _actualUri;
         private readonly Uri _baseUri = new Uri("http://liberis.co.uk/bla1/bla2/");
         private string _companyNumber;
@@ -17,7 +17,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanyFilingUriBuilderTe
         [OneTimeSetUp]
         public void GivenACompanyProfileUriBuilder()
         {
-            _uriBuilder = new CompanyFilingUriBuilder();
+            _uriBuilder = new CompanyFilingHistoryUriBuilder();
         }
 
         [SetUp]
@@ -26,7 +26,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanyFilingUriBuilderTe
             _pageSize = 10;
             _startIndex = 5;
             _companyNumber = "123456789";
-            _actualUri = _uriBuilder.Build(_companyNumber, _pageSize, _startIndex);
+            _actualUri = _uriBuilder.Build(_companyNumber, _startIndex, _pageSize);
         }
 
         [Test]

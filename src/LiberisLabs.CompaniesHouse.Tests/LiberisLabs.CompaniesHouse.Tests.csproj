@@ -98,7 +98,7 @@
     <Compile Include="ResourceBuilders\ResourceDetails.cs" />
     <Compile Include="StubHttpMessageHandler.cs" />
     <Compile Include="UniversalDateSpecimenBuilder.cs" />
-    <Compile Include="UriBuilders\CompanyFilingUriBuilderTests\CompanyFilingUriBuilderTests.cs" />
+    <Compile Include="UriBuilders\CompanyFilingUriBuilderTests\CompanyFilingHistoryUriBuilderTests.cs" />
     <Compile Include="UriBuilders\CompanyProfileUriBuilderTests\CompanyProfileUriBuilderTests.cs" />
     <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsBase+Thens.cs" />
     <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsBase.cs" />
