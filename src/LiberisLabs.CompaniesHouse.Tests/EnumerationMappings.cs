@@ -124,5 +124,39 @@ namespace LiberisLabs.CompaniesHouse.Tests
             {"other", CompanyType.Other},
             {"european-public-limited-liability-company-se", CompanyType.EuropeanPublicLimitedLiabilityCompanySe}
         };
+
+        public static readonly IReadOnlyDictionary<string, ResolutionCategory> PossibleResolutionCategories = new Dictionary
+            <string, ResolutionCategory>()
+        {
+            {"miscellaneous", ResolutionCategory.Miscellaneous}
+        };
+
+        public static readonly IReadOnlyDictionary<string, FilingHistoryStatus> PossibleFilingHistoryStatus = new Dictionary
+            <string, FilingHistoryStatus>()
+        {
+            {"filing-history-available", FilingHistoryStatus.FilingHistoryAvailable}
+        };
+
+        public static readonly IReadOnlyDictionary<string, FilingSubcategory> PossibleFilingSubcategories = new Dictionary
+            <string, FilingSubcategory>()
+        {
+            {"resolution", FilingSubcategory.Resolution}
+        };
+
+        public static readonly IReadOnlyDictionary<string, FilingCategory> PossibleFilingCategories = new Dictionary
+            <string, FilingCategory>()
+        {
+            {"accounts", FilingCategory.Accounts},
+            {"address", FilingCategory.Address},
+            {"annual-return", FilingCategory.AnnualReturn},
+            {"capital", FilingCategory.Capital},
+            {"change-of-name", FilingCategory.ChangeOfName},
+            {"incorporation", FilingCategory.Incorporation},
+            {"liquidation", FilingCategory.Liquidation},
+            {"miscellaneous", FilingCategory.Miscellaneous},
+            {"mortgage", FilingCategory.Mortgage},
+            {"officers", FilingCategory.Officers},
+            {"resolution", FilingCategory.Resolution}
+        };
     }
 }

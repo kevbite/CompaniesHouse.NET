@@ -70,11 +70,12 @@
     <Compile Include="Response\CompanyFiling\FilingHistoryItemResolution.cs" />
     <Compile Include="Response\CompanyFiling\FilingHistoryItemAnnotation.cs" />
     <Compile Include="Response\CompanyFiling\FilingHistoryItemAssociatedFiling.cs" />
+    <Compile Include="Response\CompanyFiling\Links.cs" />
     <Compile Include="Response\ResolutionCategory.cs" />
     <Compile Include="Response\FilingSubcategory.cs" />
     <Compile Include="Response\FilingCategory.cs" />
     <Compile Include="Response\CompanyFiling\FilingHistoryItem.cs" />
-    <Compile Include="Response\CompanyFiling\FilingHistoryStatus.cs" />
+    <Compile Include="Response\FilingHistoryStatus.cs" />
     <Compile Include="Response\CompanyFiling\CompanyFilingHistory.cs" />
     <Compile Include="Response\CompanyProfile\OfficerRole.cs" />
     <Compile Include="Response\CompanyProfile\OfficerDateOfBirth.cs" />

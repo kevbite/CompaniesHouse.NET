@@ -7,6 +7,6 @@ namespace LiberisLabs.CompaniesHouse.Response
         None = 0,
 
         [EnumMember(Value = "resolution")]
-        Resloution,
+        Resolution,
     }
 }

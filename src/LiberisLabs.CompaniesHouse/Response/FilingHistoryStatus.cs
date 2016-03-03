@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace LiberisLabs.CompaniesHouse.Response.CompanyFiling
+namespace LiberisLabs.CompaniesHouse.Response
 {
     public enum FilingHistoryStatus
     {

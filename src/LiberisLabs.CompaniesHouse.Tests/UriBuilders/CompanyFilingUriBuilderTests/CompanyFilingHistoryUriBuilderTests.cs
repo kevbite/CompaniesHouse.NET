@@ -39,7 +39,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanyFilingUriBuilderTe
         public void ThenTheUriPathIsCorrect()
         {
             var uri = new Uri(_baseUri, _actualUri);
-            var expected = string.Format("/bla1/bla2/company/{0}/filing-history", _companyNumber);
+            var expected = $"/bla1/bla2/company/{_companyNumber}/filing-history";
             Assert.That(uri.AbsolutePath, Is.EqualTo(expected));
         }
 
@@ -47,7 +47,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanyFilingUriBuilderTe
         public void ThenTheUriQueryStringIsCorrect()
         {
             var uri = new Uri(_baseUri, _actualUri);
-            var expected = string.Format("?items_per_page={0}&start_index={1}", _pageSize, _startIndex);
+            var expected = $"?items_per_page={_pageSize}&start_index={_startIndex}";
             Assert.That(uri.Query, Is.EqualTo(expected));
         }
     }

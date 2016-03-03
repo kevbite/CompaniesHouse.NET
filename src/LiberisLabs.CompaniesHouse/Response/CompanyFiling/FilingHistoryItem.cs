@@ -1,5 +1,4 @@
 ﻿using System;
-using LiberisLabs.CompaniesHouse.Response.CompanySearch;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
