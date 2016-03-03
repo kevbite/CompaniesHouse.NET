@@ -84,8 +84,10 @@
     <Compile Include="Response\CompanySearch\Company.cs" />
     <Compile Include="Response\CompanySearch\CompanySearch.cs" />
     <Compile Include="Response\CompanySearch\Links.cs" />
+    <Compile Include="UriBuilders\CompanyFilingUriBuilder.cs" />
     <Compile Include="UriBuilders\CompanyProfileUriBuilder.cs" />
     <Compile Include="UriBuilders\CompanySearchUriBuilder.cs" />
+    <Compile Include="UriBuilders\ICompanyFilingUriBuilder.cs" />
     <Compile Include="UriBuilders\ICompanyProfileUriBuilder.cs" />
     <Compile Include="UriBuilders\ICompanySearchUriBuilder.cs" />
   </ItemGroup>
