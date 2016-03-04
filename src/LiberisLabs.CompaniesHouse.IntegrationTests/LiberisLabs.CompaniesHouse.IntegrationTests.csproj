@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tests\CompanyFilingHistoryTests\CompanyFilingHistoryTestBase.cs" />
+    <Compile Include="Tests\CompanyFilingHistoryTests\CompanyFilingHistoryTestsValid.cs" />
+    <Compile Include="Tests\CompanyFilingHistoryTests\CompanyFilingHistoryTestsInvalid.cs" />
     <Compile Include="Tests\CompanyProfileTests\CompanyProfileTestsInvalid.cs" />
     <Compile Include="Tests\CompanyProfileTests\CompanyProfileTestsValid.cs" />
     <Compile Include="Tests\CompanyProfileTests\CompanyProfileTestsBase.cs" />

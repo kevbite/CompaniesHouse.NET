@@ -1,0 +1,18 @@
+﻿using System.Runtime.Serialization;
+
+namespace LiberisLabs.CompaniesHouse.Response
+{
+    public enum ResolutionCategory
+    {
+        None = 0,
+
+        [EnumMember(Value = "capital")]
+        Capital,
+
+        [EnumMember(Value = "incorporation")]
+        Incorporation,
+
+        [EnumMember(Value = "miscellaneous")]
+        Miscellaneous,
+    }
+}

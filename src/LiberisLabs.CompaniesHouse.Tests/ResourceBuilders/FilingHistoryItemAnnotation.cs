@@ -1,0 +1,13 @@
+﻿using System;
+
+namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
+{
+    public class FilingHistoryItemAnnotation
+    {
+        public string Annotation { get; set; }
+
+        public DateTime DateOfAnnotation { get; set; }
+
+        public string Description { get; set; }
+    }
+}

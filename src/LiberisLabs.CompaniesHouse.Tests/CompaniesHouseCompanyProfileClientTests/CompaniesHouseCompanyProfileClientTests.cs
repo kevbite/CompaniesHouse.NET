@@ -17,7 +17,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTes
 
         private CompaniesHouseClientResponse<CompanyProfile> _result;
         private ResourceBuilders.CompanyProfile _companyProfile;
-        
+
         [TestCaseSource(nameof(TestCases))]
         public void GivenACompaniesHouseCompanyProfileClient_WhenGettingACompanyProfile(CompaniesHouseCompanyProfileClientTestCase testCase)
         {
@@ -31,7 +31,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTes
             var httpClientFactory = new Mock<IHttpClientFactory>();
             httpClientFactory.Setup(x => x.CreateHttpClient())
                 .Returns(new HttpClient(handler));
-            
+
             var uriBuilder = new Mock<ICompanyProfileUriBuilder>();
             uriBuilder.Setup(x => x.Build(It.IsAny<string>()))
                 .Returns(uri);
