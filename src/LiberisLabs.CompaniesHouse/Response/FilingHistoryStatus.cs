@@ -8,5 +8,8 @@ namespace LiberisLabs.CompaniesHouse.Response
 
         [EnumMember(Value = "filing-history-available")]
         FilingHistoryAvailable,
+
+        [EnumMember(Value = "filing-history-not-available-invalid-format")]
+        InvalidFormat,
     }
 }

@@ -8,5 +8,14 @@ namespace LiberisLabs.CompaniesHouse.Response
 
         [EnumMember(Value = "resolution")]
         Resolution,
+
+        [EnumMember(Value = "change")]
+        Change,
+
+        [EnumMember(Value = "appointments")]
+        Appointments,
+
+        [EnumMember(Value = "termination")]
+        Termination,
     }
 }

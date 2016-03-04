@@ -6,6 +6,12 @@ namespace LiberisLabs.CompaniesHouse.Response
     {
         None = 0,
 
+        [EnumMember(Value = "capital")]
+        Capital,
+
+        [EnumMember(Value = "incorporation")]
+        Incorporation,
+
         [EnumMember(Value = "miscellaneous")]
         Miscellaneous,
     }

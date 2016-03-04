@@ -38,7 +38,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseCompanyFilingHistoryCli
 
             _client = new CompaniesHouseCompanyFilingHistoryClient(httpClientFactory.Object, uriBuilder.Object);
 
-            _result = _client.GetCompanyFilingHistoryAsync("abc").Result;
+            _result = _client.GetCompanyFilingHistoryAsync("abc", 0, 25).Result;
 
             _result.Data.ShouldBeEquivalentTo(_companyFilingHistory);
         }
