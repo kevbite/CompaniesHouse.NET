@@ -2,9 +2,9 @@
   branches:
     only:
       - master
-   
-  version: 1.3.0
-  
+
+  version: 1.3.1
+
   install:
     - ps : .\environment-install.ps1
 
@@ -14,9 +14,9 @@
     assembly_informational_version: '{version}'
     file: AssemblyInfo.*
     patch: true
-   
+
   os: Visual Studio 2015
- 
+
   before_build:
     - ps : .\build-before_build.ps1
 
@@ -30,20 +30,20 @@
       secure: Fc+nnp3vXkqInQmAJ1l8OmuEKPgcBQG7cz5FPmiUZPUyh3apYnE8S+bDip7FNzq4
 
   configuration: Release
-   
+
   cache:
     - packages -> **\packages.config
     - C:\downloads -> appveyor.yml
-   
+
   test:
     assemblies:
       - '**\*.Tests.dll'
       - '**\*.FunctionalTests.dll'
       - '**\*..IntegrationTests.dll'
-               
+
   artifacts:
     - path: '*.nupkg'
-     
+
   deploy:
     - provider: Environment
       name: Liberis NuGet
@@ -60,7 +60,7 @@
 
   install:
     - ps : .\environment-install.ps1
-    
+
   assembly_info:
     assembly_version: '{version}'
     assembly_file_version: '{version}'
@@ -83,11 +83,11 @@
       secure: Fc+nnp3vXkqInQmAJ1l8OmuEKPgcBQG7cz5FPmiUZPUyh3apYnE8S+bDip7FNzq4
 
   configuration: Release
-   
+
   cache:
     - packages -> **\packages.config
     - C:\downloads -> appveyor.yml
-   
+
   test:
     assemblies:
       - '**\*.Tests.dll'
