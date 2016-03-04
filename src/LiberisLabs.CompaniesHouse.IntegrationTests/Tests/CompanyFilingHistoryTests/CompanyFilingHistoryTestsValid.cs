@@ -11,7 +11,7 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistory
         [SetUp]
         protected override void When()
         {
-            WhenRetrievingAnInvalidCompanyProfile();
+            WhenRetrievingAnCompanyFilingHistoryForAValidCompany();
         }
 
         [Test]
@@ -20,7 +20,7 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistory
             Assert.That(_result.Data.Items, Is.Not.Empty);
         }
 
-        private void WhenRetrievingAnInvalidCompanyProfile()
+        private void WhenRetrievingAnCompanyFilingHistoryForAValidCompany()
         {
             _result = _client.GetCompanyFilingHistoryAsync(ValidCompanyNumber).Result;
         }
