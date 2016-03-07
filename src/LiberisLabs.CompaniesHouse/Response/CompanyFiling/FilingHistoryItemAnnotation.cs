@@ -1,9 +1,11 @@
 ﻿using System;
+using LiberisLabs.CompaniesHouse.Description;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace LiberisLabs.CompaniesHouse.Response.CompanyFiling
 {
-    public class FilingHistoryItemAnnotation
+    public class FilingHistoryItemAnnotation : IDescriptable
     {
         [JsonProperty(PropertyName = "annotation")]
         public string Annotation { get; set; }
@@ -13,5 +15,13 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanyFiling
 
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
+
+        [JsonProperty(PropertyName = "description_values")]
+        private JObject DescriptionValues { get; set; }
+
+        public string GetDescription(string format)
+        {
+            return DescriptionProvider.GetDescription(format, DescriptionValues);
+        }
     }
 }

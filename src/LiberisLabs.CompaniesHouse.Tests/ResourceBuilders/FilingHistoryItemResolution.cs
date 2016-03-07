@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
 {
@@ -15,5 +16,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
         public DateTime DateOfProcessing { get; set; }
 
         public string ResolutionType { get; set; }
+
+        public Dictionary<string, string> DescriptionValues { get; set; }
     }
 }
