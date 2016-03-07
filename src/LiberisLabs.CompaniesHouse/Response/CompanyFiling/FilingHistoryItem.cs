@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -28,6 +29,9 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanyFiling
 
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
+
+        [JsonProperty(PropertyName = "description_values")]
+        public Dictionary<string, dynamic> DescriptionValues { get; set; }
 
         [JsonProperty(PropertyName = "pages")]
         public int? PageCount { get; set; }

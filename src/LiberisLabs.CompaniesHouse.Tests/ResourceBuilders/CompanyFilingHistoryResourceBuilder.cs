@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
 {
@@ -39,6 +40,9 @@ namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
                          ""category"" : ""{item.Category}"",
                          ""date"" : ""{item.DateOfProcessing.ToString("yyyy-MM-dd")}"",
                          ""description"" : ""{item.Description}"",
+                         ""description_values"" : {{
+                            {string.Join(",", item.DescriptionValues.Select(GetDictionaryJsonBlock))}
+                         }},
                          ""links"" : {{
                             ""document_metadata"" : ""{item.Links.DocumentMetaData}"",
                             ""self"" : ""{item.Links.Self}""
@@ -52,6 +56,11 @@ namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
                          ""transaction_id"" : ""{item.TransactionId}"",
                          ""type"" : ""{item.FilingType}""
                       }}";
+        }
+
+        private string GetDictionaryJsonBlock(KeyValuePair<string, string> pair)
+        {
+            return $@"""{pair.Key}"" : ""{pair.Value}""";
         }
 
         private string GetAnnotationJsonBlock(FilingHistoryItemAnnotation annotation)
