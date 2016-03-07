@@ -19,7 +19,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
 
         public string Description { get; set; }
 
-        public Dictionary<string,string> DescriptionValues { get; set; }
+        public Dictionary<string, string> DescriptionValues { get; set; }
 
         public int PageCount { get; set; }
 
