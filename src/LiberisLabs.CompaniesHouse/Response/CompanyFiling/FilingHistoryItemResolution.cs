@@ -1,10 +1,12 @@
 ﻿using System;
+using LiberisLabs.CompaniesHouse.Description;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 
 namespace LiberisLabs.CompaniesHouse.Response.CompanyFiling
 {
-    public class FilingHistoryItemResolution
+    public class FilingHistoryItemResolution : IDescriptable
     {
         [JsonProperty(PropertyName = "category")]
         [JsonConverter(typeof(StringEnumConverter))]
@@ -25,5 +27,13 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanyFiling
 
         [JsonProperty(PropertyName = "type")]
         public string ResolutionType { get; set; }
+
+        [JsonProperty(PropertyName = "description_values")]
+        private JObject DescriptionValues { get; set; }
+
+        public string GetDescription(string format)
+        {
+            return DescriptionProvider.GetDescription(format, DescriptionValues);
+        }
     }
 }

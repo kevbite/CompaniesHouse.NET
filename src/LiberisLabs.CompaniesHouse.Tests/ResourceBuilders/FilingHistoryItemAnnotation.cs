@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
 {
@@ -9,5 +10,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
         public DateTime DateOfAnnotation { get; set; }
 
         public string Description { get; set; }
+
+        public Dictionary<string, string> DescriptionValues { get; set; }
     }
 }

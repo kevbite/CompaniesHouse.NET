@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace LiberisLabs.CompaniesHouse.Response.CompanyFiling
@@ -13,5 +14,8 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanyFiling
 
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
+
+        [JsonProperty(PropertyName = "description_values")]
+        private Dictionary<string, dynamic> DescriptionValues { get; set; }
     }
 }

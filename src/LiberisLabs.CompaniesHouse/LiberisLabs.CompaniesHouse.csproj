@@ -58,12 +58,14 @@
     <Compile Include="CompaniesHouseUris.cs" />
     <Compile Include="CompaniesHouseSearchCompanyClient.cs" />
     <Compile Include="DelegatingHandlers\CompaniesHouseAuthorizationHandler.cs" />
+    <Compile Include="Description\DescriptionProvider.cs" />
     <Compile Include="HttpClientFactory.cs" />
     <Compile Include="ICompaniesHouseClient.cs" />
     <Compile Include="ICompaniesHouseCompanyFilingHistoryClient.cs" />
     <Compile Include="ICompaniesHouseCompanyProfileClient.cs" />
     <Compile Include="ICompaniesHouseSettings.cs" />
     <Compile Include="ICompaniesHouseSearchCompanyClient.cs" />
+    <Compile Include="Description\IDescriptable.cs" />
     <Compile Include="IHttpClientFactory.cs" />
     <Compile Include="JsonConverters\OptionalDateJsonConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

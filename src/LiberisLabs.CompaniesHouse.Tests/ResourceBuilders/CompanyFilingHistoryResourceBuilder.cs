@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
 {
@@ -39,6 +40,9 @@ namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
                          ""category"" : ""{item.Category}"",
                          ""date"" : ""{item.DateOfProcessing.ToString("yyyy-MM-dd")}"",
                          ""description"" : ""{item.Description}"",
+                         ""description_values"" : {{
+                            {string.Join(",", item.DescriptionValues.Select(GetDictionaryJsonBlock))}
+                         }},
                          ""links"" : {{
                             ""document_metadata"" : ""{item.Links.DocumentMetaData}"",
                             ""self"" : ""{item.Links.Self}""
@@ -54,12 +58,20 @@ namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
                       }}";
         }
 
+        private string GetDictionaryJsonBlock(KeyValuePair<string, string> pair)
+        {
+            return $@"""{pair.Key}"" : ""{pair.Value}""";
+        }
+
         private string GetAnnotationJsonBlock(FilingHistoryItemAnnotation annotation)
         {
             return $@"{{
                          ""annotation"" : ""{annotation.Annotation}"",
                          ""date"" : ""{annotation.DateOfAnnotation.ToString("yyyy-MM-dd")}"",
-                         ""description"" : ""{annotation.Description}""
+                         ""description"" : ""{annotation.Description}"",
+                         ""description_values"" : {{
+                            {string.Join(",", annotation.DescriptionValues.Select(GetDictionaryJsonBlock))}
+                         }}
                       }}";
         }
 
@@ -68,7 +80,10 @@ namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
             return $@"{{
                          ""date"" : ""{associated.Date.ToString("yyyy-MM-dd")}"",
                          ""description"" : ""{associated.Description}"",
-                         ""type"" : ""{associated.FilingType}""
+                         ""type"" : ""{associated.FilingType}"",
+                         ""description_values"" : {{
+                            {string.Join(",", associated.DescriptionValues.Select(GetDictionaryJsonBlock))}
+                         }}
                       }}";
         }
 
@@ -80,7 +95,10 @@ namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
                          ""document_id"" : ""{resolution.DocumentId}"",
                          ""receive_date"" : ""{resolution.DateOfProcessing.ToString("yyyy-MM-dd")}"",
                          ""subcategory"" : ""{resolution.Subcategory}"",
-                         ""type"" : ""{resolution.ResolutionType}""
+                         ""type"" : ""{resolution.ResolutionType}"",
+                         ""description_values"" : {{
+                            {string.Join(",", resolution.DescriptionValues.Select(GetDictionaryJsonBlock))}
+                         }}
                       }}";
         }
 

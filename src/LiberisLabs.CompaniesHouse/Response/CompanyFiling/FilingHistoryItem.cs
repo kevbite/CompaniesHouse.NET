@@ -1,10 +1,12 @@
 ﻿using System;
+using LiberisLabs.CompaniesHouse.Description;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 
 namespace LiberisLabs.CompaniesHouse.Response.CompanyFiling
 {
-    public class FilingHistoryItem
+    public class FilingHistoryItem : IDescriptable
     {
         [JsonProperty(PropertyName = "category")]
         [JsonConverter(typeof(StringEnumConverter))]
@@ -29,6 +31,9 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanyFiling
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
+        [JsonProperty(PropertyName = "description_values")]
+        private JObject DescriptionValues { get; set; }
+
         [JsonProperty(PropertyName = "pages")]
         public int? PageCount { get; set; }
 
@@ -46,5 +51,10 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanyFiling
 
         [JsonProperty(PropertyName = "links")]
         public Links Links { get; set; }
+
+        public string GetDescription(string format)
+        {
+            return DescriptionProvider.GetDescription(format, DescriptionValues);
+        }
     }
 }

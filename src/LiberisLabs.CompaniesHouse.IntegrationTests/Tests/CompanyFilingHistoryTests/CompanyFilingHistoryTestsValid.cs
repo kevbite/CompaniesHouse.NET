@@ -15,7 +15,7 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistory
         }
 
         [Test]
-        public void ThenTheProfileIsNotReturned()
+        public void ThenTheDataItemsAreNotEmpty()
         {
             Assert.That(_result.Data.Items, Is.Not.Empty);
         }
