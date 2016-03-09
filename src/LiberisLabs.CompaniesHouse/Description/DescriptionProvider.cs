@@ -5,7 +5,7 @@ namespace LiberisLabs.CompaniesHouse.Description
 {
     public class DescriptionProvider
     {
-        private static readonly Regex _pattern = new Regex(@"({[a-zA-Z0-9.-]*})");
+        private static readonly Regex _pattern = new Regex(@"({[a-zA-Z0-9.-_]*})");
 
         public static string GetDescription(string format, JObject values)
         {
