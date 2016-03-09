@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="CompaniesHouseClient.cs" />
     <Compile Include="CompaniesHouseClientResponse.cs" />
+    <Compile Include="CompaniesHouseOfficersClient.cs" />
     <Compile Include="CompaniesHouseCompanyFilingHistoryClient.cs" />
     <Compile Include="CompaniesHouseCompanyProfileClient.cs" />
     <Compile Include="CompaniesHouseSettings.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="ICompaniesHouseClient.cs" />
     <Compile Include="ICompaniesHouseCompanyFilingHistoryClient.cs" />
     <Compile Include="ICompaniesHouseCompanyProfileClient.cs" />
+    <Compile Include="ICompaniesHouseOfficersClient.cs" />
     <Compile Include="ICompaniesHouseSettings.cs" />
     <Compile Include="ICompaniesHouseSearchCompanyClient.cs" />
     <Compile Include="Description\IDescriptable.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Response\CompanyFiling\FilingHistoryItemAnnotation.cs" />
     <Compile Include="Response\CompanyFiling\FilingHistoryItemAssociatedFiling.cs" />
     <Compile Include="Response\CompanyFiling\Links.cs" />
+    <Compile Include="Response\Officers\Officers.cs" />
     <Compile Include="Response\ResolutionCategory.cs" />
     <Compile Include="Response\FilingSubcategory.cs" />
     <Compile Include="Response\FilingCategory.cs" />
