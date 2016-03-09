@@ -2,11 +2,11 @@
 using LiberisLabs.CompaniesHouse.UriBuilders;
 using NUnit.Framework;
 
-namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanyFilingUriBuilderTests
+namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.OfficersUriBuilderTests
 {
-    public class CompanyFilingHistoryUriBuilderTests
+    public class OfficersUriBuilderTests
     {
-        private CompanyFilingHistoryUriBuilder _uriBuilder;
+        private OfficersUriBuilder _uriBuilder;
         private Uri _actualUri;
         private readonly Uri _baseUri = new Uri("http://liberis.co.uk/bla1/bla2/");
         private string _companyNumber;
@@ -17,7 +17,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanyFilingUriBuilderTe
         [OneTimeSetUp]
         public void GivenAUriBuilder()
         {
-            _uriBuilder = new CompanyFilingHistoryUriBuilder();
+            _uriBuilder = new OfficersUriBuilder();
         }
 
         [SetUp]
@@ -39,7 +39,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanyFilingUriBuilderTe
         public void ThenTheUriPathIsCorrect()
         {
             var uri = new Uri(_baseUri, _actualUri);
-            var expected = $"/bla1/bla2/company/{_companyNumber}/filing-history";
+            var expected = $"/bla1/bla2/company/{_companyNumber}/officers";
             Assert.That(uri.AbsolutePath, Is.EqualTo(expected));
         }
 

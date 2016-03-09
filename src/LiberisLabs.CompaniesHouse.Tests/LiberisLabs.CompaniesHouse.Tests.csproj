@@ -66,6 +66,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompaniesHouseOfficersTests\CompaniesHouseCompanyOfficersClientTests.cs" />
+    <Compile Include="CompaniesHouseOfficersTests\OfficersBuilder.cs" />
     <Compile Include="CompaniesHouseCompanyFilingHistoryClientTests\CompaniesHouseCompanyFilingHistoryClientTests.cs" />
     <Compile Include="CompaniesHouseCompanyFilingHistoryClientTests\CompaniesHouseCompanyFilingHistoryClientTestCase.cs" />
     <Compile Include="CompaniesHouseCompanyFilingHistoryClientTests\CompanyFilingHistoryBuilder.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="CompanyHouseSearchCompanyClientTests\CompanyHouseSearchCompanyClientTests.cs" />
     <Compile Include="ResourceBuilders\CompanyFilingHistory.cs" />
     <Compile Include="ResourceBuilders\CompanyProfile.cs" />
+    <Compile Include="ResourceBuilders\OfficersResourceBuilder.cs" />
     <Compile Include="ResourceBuilders\CompanyProfileResourceBuilder.cs" />
     <Compile Include="ResourceBuilders\CompanySearchResourceBuilder.cs" />
     <Compile Include="DelegatingHandlers\CompaniesHouseAuthorizationHandlerTests.cs" />
@@ -108,6 +111,7 @@
     <Compile Include="ResourceBuilders\LastAccounts.cs" />
     <Compile Include="ResourceBuilders\Links.cs" />
     <Compile Include="ResourceBuilders\Officer.cs" />
+    <Compile Include="ResourceBuilders\Officers.cs" />
     <Compile Include="ResourceBuilders\OfficerSummary.cs" />
     <Compile Include="ResourceBuilders\PreviousCompanyNames.cs" />
     <Compile Include="ResourceBuilders\RegisteredOfficeAddress.cs" />
@@ -121,6 +125,7 @@
     <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsBaseForQuery.cs" />
     <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsForItemsPerPage.cs" />
     <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsForStartIndex.cs" />
+    <Compile Include="UriBuilders\OfficersUriBuilderTests\OfficersUriBuilderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

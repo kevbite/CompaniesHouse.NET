@@ -3,7 +3,8 @@
     public interface ICompaniesHouseClient :
         ICompaniesHouseSearchCompanyClient,
         ICompaniesHouseCompanyProfileClient,
-        ICompaniesHouseCompanyFilingHistoryClient
+        ICompaniesHouseCompanyFilingHistoryClient,
+        ICompaniesHouseOfficersClient
     {
 
     }
