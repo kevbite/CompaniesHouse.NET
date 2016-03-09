@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Net.Http;
 using FluentAssertions;
-using LiberisLabs.CompaniesHouse.Response.Officers;
 using LiberisLabs.CompaniesHouse.Tests.ResourceBuilders;
 using LiberisLabs.CompaniesHouse.UriBuilders;
 using Moq;
 using NUnit.Framework;
+using Officers = LiberisLabs.CompaniesHouse.Response.Officers.Officers;
 
 namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseOfficersTests
 {
@@ -15,7 +15,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseOfficersTests
         private CompaniesHouseOfficersClient _client;
 
         private CompaniesHouseClientResponse<Officers> _result;
-        private Officers _officers;
+        private ResourceBuilders.Officers _officers;
 
         [Test]
         public void GivenACompaniesHouseCompanyProfileClient_WhenGettingACompanyProfile()

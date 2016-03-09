@@ -111,6 +111,7 @@
     <Compile Include="ResourceBuilders\LastAccounts.cs" />
     <Compile Include="ResourceBuilders\Links.cs" />
     <Compile Include="ResourceBuilders\Officer.cs" />
+    <Compile Include="ResourceBuilders\Officers.cs" />
     <Compile Include="ResourceBuilders\OfficerSummary.cs" />
     <Compile Include="ResourceBuilders\PreviousCompanyNames.cs" />
     <Compile Include="ResourceBuilders\RegisteredOfficeAddress.cs" />

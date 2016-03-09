@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using LiberisLabs.CompaniesHouse.Response.Officers;
 
 namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
 {
@@ -11,8 +10,6 @@ namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
         {
             _officers = officers;
         }
-
-
 
         public string Create()
         {
@@ -26,10 +23,10 @@ namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
                 }}";
         }
 
-        private string GetOfficerJsonBlock(Response.CompanyProfile.Officer officer)
+        private string GetOfficerJsonBlock(Officer officer)
         {
             return $@" {{
-                    ""appointed_on"" : ""{officer.AppointedOn?.ToString("yyyy-MM-dd")}"",
+                    ""appointed_on"" : ""{officer.AppointedOn.ToString("yyyy-MM-dd")}"",
                     ""date_of_birth"" : {{
                        ""day"" : {officer.DateOfBirth.Day},
                        ""month"" : {officer.DateOfBirth.Month},

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using LiberisLabs.CompaniesHouse.Response.Officers;
+using LiberisLabs.CompaniesHouse.Tests.ResourceBuilders;
 using Ploeh.AutoFixture;
 
 namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseOfficersTests
@@ -10,11 +10,11 @@ namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseOfficersTests
         public Officers Build()
         {
             var fixture = new Fixture();
+            fixture.Customizations.Add(new UniversalDateSpecimenBuilder<Officer>(x => x.AppointedOn));
 
-            var officers = EnumerationMappings.PossibleOfficerRoles.Values.Select(x => fixture.Build<Response.CompanyProfile.Officer>()
-            .With(y => y.OfficerRole, x)
-            .With(y => y.AppointedOn, new DateTime(2000, 01, 01))
-            .Create()).ToArray();
+            var officers = EnumerationMappings.PossibleOfficerRoles.Keys.Select(x => fixture.Build<Officer>()
+               .With(y => y.OfficerRole, x)
+               .Create()).ToArray();
 
             var officerSummary = fixture.Build<Officers>().With(x => x.Items, officers).Create();
 
