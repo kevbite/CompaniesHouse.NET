@@ -17,7 +17,7 @@ namespace LiberisLabs.CompaniesHouse
             _officersUriBuilder = officersUriBuilder;
         }
 
-        public async Task<CompaniesHouseClientResponse<Officers>> GetCompanyFilingHistoryAsync(string companyNumber, int startIndex, int pageSize, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<CompaniesHouseClientResponse<Officers>> GetOfficersAsync(string companyNumber, int startIndex, int pageSize, CancellationToken cancellationToken = default(CancellationToken))
         {
             using (var httpClient = _httpClientFactory.CreateHttpClient())
             {

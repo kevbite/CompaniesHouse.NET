@@ -36,7 +36,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseOfficersTests
 
             _client = new CompaniesHouseOfficersClient(httpClientFactory.Object, uriBuilder.Object);
 
-            _result = _client.GetCompanyFilingHistoryAsync("abc", 0, 25).Result;
+            _result = _client.GetOfficersAsync("abc", 0, 25).Result;
 
             _result.Data.ShouldBeEquivalentTo(_officers);
         }
