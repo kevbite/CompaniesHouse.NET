@@ -121,6 +121,7 @@
     <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsBaseForQuery.cs" />
     <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsForItemsPerPage.cs" />
     <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsForStartIndex.cs" />
+    <Compile Include="UriBuilders\OfficersUriBuilderTests\OfficersUriBuilderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

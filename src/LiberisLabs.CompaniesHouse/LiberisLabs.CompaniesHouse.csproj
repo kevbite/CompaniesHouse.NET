@@ -100,6 +100,8 @@
     <Compile Include="Response\CompanySearch\CompanySearch.cs" />
     <Compile Include="Response\CompanySearch\Links.cs" />
     <Compile Include="UriBuilders\CompanyFilingHistoryHistoryUriBuilder.cs" />
+    <Compile Include="UriBuilders\IOfficersUriBuilder.cs" />
+    <Compile Include="UriBuilders\OfficersUriBuilder.cs" />
     <Compile Include="UriBuilders\CompanyProfileUriBuilder.cs" />
     <Compile Include="UriBuilders\CompanySearchUriBuilder.cs" />
     <Compile Include="UriBuilders\ICompanyFilingHistoryUriBuilder.cs" />
