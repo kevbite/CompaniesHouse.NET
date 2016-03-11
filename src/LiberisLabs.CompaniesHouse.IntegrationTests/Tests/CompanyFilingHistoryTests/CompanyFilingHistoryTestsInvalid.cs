@@ -7,7 +7,7 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistory
     {
         private const string InvalidCompanyNumber = "ABC00000";
 
-        [Test]
+        [SetUp]
         protected override void When()
         {
             WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany();
