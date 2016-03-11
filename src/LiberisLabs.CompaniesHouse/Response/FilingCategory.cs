@@ -6,6 +6,9 @@ namespace LiberisLabs.CompaniesHouse.Response
     {
         None = 0,
 
+        [EnumMember(Value = "auditors")]
+        Auditors,
+
         [EnumMember(Value = "accounts")]
         Accounts,
 
@@ -37,6 +40,12 @@ namespace LiberisLabs.CompaniesHouse.Response
         Officers,
 
         [EnumMember(Value = "resolution")]
-        Resolution
+        Resolution,
+
+        [EnumMember(Value = "change-of-constitution")]
+        ChangeOfConstitution,
+
+        [EnumMember(Value = "document-replacement")]
+        DocumentReplacement
     }
 }
