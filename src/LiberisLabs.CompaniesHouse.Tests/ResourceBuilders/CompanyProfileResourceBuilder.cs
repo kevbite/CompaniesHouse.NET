@@ -81,6 +81,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
         {
             return $@" {{
             ""appointed_on"" : ""{officer.AppointedOn.ToString("yyyy-MM-dd")}"",
+            ""resigned_on"" : ""{officer.ResignedOn.ToString("yyyy-MM-dd")}"",
             ""date_of_birth"" : {{
                ""day"" : {officer.DateOfBirth.Day},
                ""month"" : {officer.DateOfBirth.Month},

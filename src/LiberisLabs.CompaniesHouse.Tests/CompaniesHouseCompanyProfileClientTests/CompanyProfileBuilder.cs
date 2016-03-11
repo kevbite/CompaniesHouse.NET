@@ -21,6 +21,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTes
             fixture.Customizations.Add(
                 new UniversalDateSpecimenBuilder<CompanyProfile>(x => x.LastFullMembersListDate));
             fixture.Customizations.Add(new UniversalDateSpecimenBuilder<Officer>(x => x.AppointedOn));
+            fixture.Customizations.Add(new UniversalDateSpecimenBuilder<Officer>(x => x.ResignedOn));
 
 
             var lastAccounts = fixture.Build<LastAccounts>()

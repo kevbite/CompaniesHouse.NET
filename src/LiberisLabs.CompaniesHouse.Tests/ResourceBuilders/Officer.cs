@@ -6,6 +6,8 @@ namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
     {
         public DateTime AppointedOn { get; set; }
 
+        public DateTime ResignedOn { get; set; }
+
         public DateOfBirth DateOfBirth { get; set; }
 
         public string Name { get; set; }

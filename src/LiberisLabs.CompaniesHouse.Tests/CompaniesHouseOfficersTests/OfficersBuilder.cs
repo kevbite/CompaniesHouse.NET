@@ -11,6 +11,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseOfficersTests
         {
             var fixture = new Fixture();
             fixture.Customizations.Add(new UniversalDateSpecimenBuilder<Officer>(x => x.AppointedOn));
+            fixture.Customizations.Add(new UniversalDateSpecimenBuilder<Officer>(x => x.ResignedOn));
 
             var officers = EnumerationMappings.PossibleOfficerRoles.Keys.Select(x => fixture.Build<Officer>()
                .With(y => y.OfficerRole, x)
