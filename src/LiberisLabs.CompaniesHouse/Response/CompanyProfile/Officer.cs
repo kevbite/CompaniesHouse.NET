@@ -9,6 +9,9 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanyProfile
         [JsonProperty(PropertyName = "appointed_on")]
         public DateTime? AppointedOn { get; set; }
 
+        [JsonProperty(PropertyName = "resigned_on")]
+        public DateTime? ResignedOn { get; set; }
+
         [JsonProperty(PropertyName = "date_of_birth")]
         public OfficerDateOfBirth DateOfBirth { get; set; }
 
