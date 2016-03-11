@@ -14,5 +14,8 @@ namespace LiberisLabs.CompaniesHouse.Response
 
         [EnumMember(Value = "miscellaneous")]
         Miscellaneous,
+
+        [EnumMember(Value = "resolution")]
+        Resolution
     }
 }

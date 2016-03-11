@@ -6,11 +6,17 @@ namespace LiberisLabs.CompaniesHouse.Response
     {
         None = 0,
 
+        [EnumMember(Value = "annual-return")]
+        AnnualReturn,
+
         [EnumMember(Value = "resolution")]
         Resolution,
 
         [EnumMember(Value = "change")]
         Change,
+
+        [EnumMember(Value = "certificate")]
+        Certificate,
 
         [EnumMember(Value = "appointments")]
         Appointments,
