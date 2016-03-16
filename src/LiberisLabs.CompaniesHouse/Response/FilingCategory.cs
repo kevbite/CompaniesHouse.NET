@@ -1,4 +1,4 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 
 namespace LiberisLabs.CompaniesHouse.Response
 {
@@ -20,6 +20,9 @@ namespace LiberisLabs.CompaniesHouse.Response
 
         [EnumMember(Value = "capital")]
         Capital,
+
+        [EnumMember(Value = "gazette")]
+        Gazette,
 
         [EnumMember(Value = "change-of-name")]
         ChangeOfName,

@@ -1,4 +1,4 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 
 namespace LiberisLabs.CompaniesHouse.Response
 {
@@ -16,6 +16,9 @@ namespace LiberisLabs.CompaniesHouse.Response
         Miscellaneous,
 
         [EnumMember(Value = "resolution")]
-        Resolution
+        Resolution,
+
+        [EnumMember(Value = "change-of-name")]
+        ChangeOfName
     }
 }
