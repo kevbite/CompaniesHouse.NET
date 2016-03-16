@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using LiberisLabs.CompaniesHouse.Response.CompanyFiling;
 using NUnit.Framework;
@@ -14,6 +14,7 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistory
             {
                 "03977902", // Google
                 "00445790", // Tesco
+                "00002065", // Lloyds Bank PLC
                 "09965459"  // Amazebytes
             };
         }
