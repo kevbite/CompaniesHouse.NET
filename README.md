@@ -51,7 +51,7 @@ var result = await client.SearchCompanyAsync(request);
 
 ### Getting a company profile
 
-To get a company profile, we pass in a company number in to the `GetCompanyProfileAsync` method and await on the task.
+To get a company profile, we pass a company number in to the `GetCompanyProfileAsync` method and await on the task.
 
 ```csharp
 var result = await client.GetCompanyProfileAsync("03977902");
@@ -61,7 +61,7 @@ If there was no match for that company number then `null` will be returned.
 
 ### Getting company officer list
 
-To get a list of officers for a company, we pass in the company number in to the `GetOfficersAsync` method and await on the task.
+To get a list of officers for a company, we pass a company number in to the `GetOfficersAsync` method and await on the task.
 
 ```csharp
 var result = await client.GetOfficersAsync("03977902");
