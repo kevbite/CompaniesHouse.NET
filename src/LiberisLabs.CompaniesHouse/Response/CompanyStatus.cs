@@ -29,7 +29,15 @@ namespace LiberisLabs.CompaniesHouse.Response
         ConvertedClosed,
 
         [EnumMember(Value = "insolvency-proceedings")]
-        InsolvencyProceedings
+        InsolvencyProceedings,
+
+        [EnumMember(Value = "open")]
+        Open,
+
+        [EnumMember(Value = "closed")]
+        Closed,
+
+
 
     }
 }
