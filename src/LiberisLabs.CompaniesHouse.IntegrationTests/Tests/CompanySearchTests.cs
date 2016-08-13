@@ -5,11 +5,18 @@ using NUnit.Framework;
 
 namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests
 {
-    [TestFixture]
+    [TestFixture("Liberis")]
+    [TestFixture("British Gas")]
     public class CompanySearchTests
     {
+        private readonly string _query;
         private CompaniesHouseClient _client;
         private CompaniesHouseClientResponse<CompanySearch> _result;
+
+        public CompanySearchTests(string query)
+        {
+            _query = query;
+        }
 
         [OneTimeSetUp]
         public void GivenACompaniesHouseClient()
@@ -24,7 +31,7 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests
         [SetUp]
         public void WhenSearchingForACompany()
         {
-            _result = _client.SearchCompanyAsync(new CompanySearchRequest() {Query = "Liberis"}).Result;
+            _result = _client.SearchCompanyAsync(new CompanySearchRequest() {Query = _query }).Result;
         }
 
         [Test]
