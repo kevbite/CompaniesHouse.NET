@@ -80,5 +80,8 @@ namespace LiberisLabs.CompaniesHouse.Response
 
         [EnumMember(Value = "european-public-limited-liability-company-se")]
         EuropeanPublicLimitedLiabilityCompanySe,
+
+        [EnumMember(Value = "uk-establishment")]
+        UkEstablishment,
     }
 }
