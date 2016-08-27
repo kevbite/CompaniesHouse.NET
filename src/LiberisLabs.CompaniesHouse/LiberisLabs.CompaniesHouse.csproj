@@ -76,6 +76,7 @@
     <Compile Include="Response\CompanyFiling\FilingHistoryItemAnnotation.cs" />
     <Compile Include="Response\CompanyFiling\FilingHistoryItemAssociatedFiling.cs" />
     <Compile Include="Response\CompanyFiling\Links.cs" />
+    <Compile Include="Response\CompanyProfile\ConfirmationStatement.cs" />
     <Compile Include="Response\Officers\Officers.cs" />
     <Compile Include="Response\ResolutionCategory.cs" />
     <Compile Include="Response\FilingSubcategory.cs" />
