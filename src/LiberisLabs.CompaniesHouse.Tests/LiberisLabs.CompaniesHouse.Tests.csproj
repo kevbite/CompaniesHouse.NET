@@ -98,6 +98,7 @@
     <Compile Include="CompanyHouseSearchCompanyClientTests\CompanyHouseSearchCompanyClientTests.cs" />
     <Compile Include="ResourceBuilders\CompanyFilingHistory.cs" />
     <Compile Include="ResourceBuilders\CompanyProfile.cs" />
+    <Compile Include="ResourceBuilders\ConfirmationStatement.cs" />
     <Compile Include="ResourceBuilders\OfficersResourceBuilder.cs" />
     <Compile Include="ResourceBuilders\CompanyProfileResourceBuilder.cs" />
     <Compile Include="ResourceBuilders\CompanySearchResourceBuilder.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="ResourceBuilders\ResourceDetails.cs" />
     <Compile Include="StubHttpMessageHandler.cs" />
     <Compile Include="UniversalDateSpecimenBuilder.cs" />
+    <Compile Include="UniversalNullableDateSpecimenBuilder.cs" />
     <Compile Include="UriBuilders\CompanyFilingUriBuilderTests\CompanyFilingHistoryUriBuilderTests.cs" />
     <Compile Include="UriBuilders\CompanyProfileUriBuilderTests\CompanyProfileUriBuilderTests.cs" />
     <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsBase+Thens.cs" />
