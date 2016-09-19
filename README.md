@@ -73,6 +73,19 @@ We can also pass in some optional parameters of `startIndex` and `pageSize` whic
 var result = await client.GetOfficersAsync("03977902", 10, 10);
 ```
 
+### Getting company filing history list
+
+To get a list of the filing history for a company, we can pass a company number to the `GetCompanyFilingHistoryAsync` method and await on the task.
+
+```csharp
+var result = await client.GetCompanyFilingHistoryAsync("03977902");
+```
+
+We can also pass in some optional parameters of `startIndex` and `pageSize` which will allow us to page the results.
+
+```csharp
+var result = await client.GetCompanyFilingHistoryAsync("03977902", 10, 10);
+```
 
 ## Contributing
 
