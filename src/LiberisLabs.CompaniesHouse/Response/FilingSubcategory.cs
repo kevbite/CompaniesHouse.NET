@@ -28,6 +28,9 @@ namespace LiberisLabs.CompaniesHouse.Response
         Satisfy,
 
         [EnumMember(Value = "termination")]
-        Termination
+        Termination,
+
+        [EnumMember(Value = "release-cease")]
+        ReleaseCease
     }
 }

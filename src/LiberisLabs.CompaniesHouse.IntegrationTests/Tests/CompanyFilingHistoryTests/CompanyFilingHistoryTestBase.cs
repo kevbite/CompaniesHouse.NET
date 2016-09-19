@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using LiberisLabs.CompaniesHouse.Response.CompanyFiling;
 using NUnit.Framework;
 
@@ -7,16 +8,15 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistory
     public abstract class CompanyFilingHistoryTestBase
     {
         protected CompaniesHouseClient _client;
-        protected CompaniesHouseClientResponse<CompanyFilingHistory> _result;
 
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
             GivenACompaniesHouseClient();
-            When();
+            await When().ConfigureAwait(false);
         }
 
-        protected abstract void When();
+        protected abstract Task When();
 
         private void GivenACompaniesHouseClient()
         {

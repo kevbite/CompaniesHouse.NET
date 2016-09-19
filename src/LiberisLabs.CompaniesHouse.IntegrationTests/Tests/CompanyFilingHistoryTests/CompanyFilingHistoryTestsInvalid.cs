@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.Threading.Tasks;
+using LiberisLabs.CompaniesHouse.Response.CompanyFiling;
+using NUnit.Framework;
 
 namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
 {
@@ -7,10 +9,11 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistory
     {
         private const string InvalidCompanyNumber = "ABC00000";
 
-        [SetUp]
-        protected override void When()
+        private CompaniesHouseClientResponse<CompanyFilingHistory> _result;
+
+        protected override async Task When()
         {
-            WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany();
+            await WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany().ConfigureAwait(false);
         }
 
         [Test]
@@ -19,9 +22,9 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistory
             Assert.That(_result.Data.Items, Is.Null);
         }
 
-        private void WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany()
+        private async Task WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany()
         {
-            _result = _client.GetCompanyFilingHistoryAsync(InvalidCompanyNumber).Result;
+            _result = await _client.GetCompanyFilingHistoryAsync(InvalidCompanyNumber);
         }
     }
 }
