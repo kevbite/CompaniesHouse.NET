@@ -40,6 +40,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.CompanyHouseSearchCompanyClientTests
                 fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "insolvency-proceedings").With(x => x.CompanyType, "private-unlimited").Create(),
                 fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "open").With(x => x.CompanyType, "private-unlimited").Create(),
                 fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "closed").With(x => x.CompanyType, "private-unlimited").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "closed-on").With(x => x.CompanyType, "private-unlimited").Create(),
             };
 
             var uri = new Uri("https://wibble.com/search/companies");
@@ -106,7 +107,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.CompanyHouseSearchCompanyClientTests
         [Test]
         public void ThenTheNumberOfReturnedCompaniesIsCorrect()
         {
-            Assert.That(_result.Data.Companies.Count(), Is.EqualTo(11));
+            Assert.That(_result.Data.Companies.Count(), Is.EqualTo(12));
 
         }
 
@@ -153,7 +154,8 @@ namespace LiberisLabs.CompaniesHouse.Tests.CompanyHouseSearchCompanyClientTests
             {"converted-closed", CompanyStatus.ConvertedClosed},
             {"insolvency-proceedings", CompanyStatus.InsolvencyProceedings},
             {"open", CompanyStatus.Open},
-            {"closed", CompanyStatus.Closed}
+            {"closed", CompanyStatus.Closed},
+            {"closed-on", CompanyStatus.ClosedOn}
         };
 
         private static readonly IReadOnlyDictionary<string, CompanyType> ExpectedCompanyType = new Dictionary
