@@ -41,6 +41,12 @@ namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
    ""company_number"" : ""{_companyProfile.CompanyNumber}"",
    ""company_status"" : ""{_companyProfile.CompanyStatus}"",
    ""company_status_detail"" : ""{_companyProfile.CompanyStatusDetail}"",
+   ""confirmation_statement"" : {{
+      ""last_made_up_to"" : ""{_companyProfile.ConfirmationStatement.LastMadeUpTo:yyyy-MM-dd}"",
+      ""next_due"" : ""{_companyProfile.ConfirmationStatement.NextDue:yyyy-MM-dd}"",
+      ""next_made_up_to"" : ""{_companyProfile.ConfirmationStatement.NextMadeUpTo:yyyy-MM-dd}"",
+      ""overdue"" : ""{_companyProfile.ConfirmationStatement.Overdue.ToString().ToLower()}""
+   }},
    ""date_of_creation"" : ""{_companyProfile.DateOfCreation.ToString("yyyy-MM-dd")}"",
    ""date_of_dissolution"" : ""{_companyProfile.DateOfDissolution.ToString("yyyy-MM-dd")}"",
    ""etag"" : ""{_companyProfile.ETag}"",

@@ -1,6 +1,13 @@
 using System.Linq;
-using LiberisLabs.CompaniesHouse.Tests.ResourceBuilders;
+using LiberisLabs.CompaniesHouse.Response.CompanyProfile;
 using Ploeh.AutoFixture;
+using Accounts = LiberisLabs.CompaniesHouse.Tests.ResourceBuilders.Accounts;
+using AnnualReturn = LiberisLabs.CompaniesHouse.Tests.ResourceBuilders.AnnualReturn;
+using CompanyProfile = LiberisLabs.CompaniesHouse.Tests.ResourceBuilders.CompanyProfile;
+using ConfirmationStatement = LiberisLabs.CompaniesHouse.Tests.ResourceBuilders.ConfirmationStatement;
+using LastAccounts = LiberisLabs.CompaniesHouse.Tests.ResourceBuilders.LastAccounts;
+using Officer = LiberisLabs.CompaniesHouse.Tests.ResourceBuilders.Officer;
+using OfficerSummary = LiberisLabs.CompaniesHouse.Tests.ResourceBuilders.OfficerSummary;
 
 namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTests
 {
@@ -23,6 +30,9 @@ namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTes
             fixture.Customizations.Add(new UniversalDateSpecimenBuilder<Officer>(x => x.AppointedOn));
             fixture.Customizations.Add(new UniversalDateSpecimenBuilder<Officer>(x => x.ResignedOn));
 
+            fixture.Customizations.Add(new UniversalNullableDateSpecimenBuilder<ConfirmationStatement>(x => x.NextMadeUpTo));
+            fixture.Customizations.Add(new UniversalNullableDateSpecimenBuilder<ConfirmationStatement>(x => x.LastMadeUpTo));
+            fixture.Customizations.Add(new UniversalNullableDateSpecimenBuilder<ConfirmationStatement>(x => x.NextDue));
 
             var lastAccounts = fixture.Build<LastAccounts>()
                 .With(x => x.Type, testCase.LastAccountsType)

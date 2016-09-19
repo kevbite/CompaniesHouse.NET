@@ -44,6 +44,8 @@ namespace LiberisLabs.CompaniesHouse.Tests.ResourceBuilders
 
         public PreviousCompanyNames[] PreviousCompanyNames { get; set; }
 
+        public ConfirmationStatement ConfirmationStatement { get; set; }
+
         public bool CanFile { get; set; }
 
         public OfficerSummary OfficerSummary { get; set; }
