@@ -4,7 +4,7 @@ A simple .NET client wrapper for CompaniesHouse API.
 
 [![install from nuget](http://img.shields.io/nuget/v/CompaniesHouse.svg?style=flat-square)](https://www.nuget.org/packages/CompaniesHouse)
 [![downloads](http://img.shields.io/nuget/dt/CompaniesHouse.svg?style=flat-square)](https://www.nuget.org/packages/CompaniesHouse)
-[![Build status](https://ci.appveyor.com/api/projects/status/0pgf5s626c0ybyrx/branch/master?svg=true)](https://ci.appveyor.com/project/Liberis/companieshouse-net/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/6uv0pemfr07nf4bs/branch/master?svg=true)](https://ci.appveyor.com/project/kevbite/companieshouse-net/branch/master)
 
 ## Getting Started
 
@@ -73,6 +73,19 @@ We can also pass in some optional parameters of `startIndex` and `pageSize` whic
 var result = await client.GetOfficersAsync("03977902", 10, 10);
 ```
 
+### Getting company filing history list
+
+To get a list of the filing history for a company, we can pass a company number to the `GetCompanyFilingHistoryAsync` method and await on the task.
+
+```csharp
+var result = await client.GetCompanyFilingHistoryAsync("03977902");
+```
+
+We can also pass in some optional parameters of `startIndex` and `pageSize` which will allow us to page the results.
+
+```csharp
+var result = await client.GetCompanyFilingHistoryAsync("03977902", 10, 10);
+```
 
 ## Contributing
 

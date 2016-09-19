@@ -3,7 +3,7 @@
     only:
       - master
 
-  version: 1.5.0
+  version: 1.5.1
 
   install:
     - ps : .\environment-install.ps1
@@ -27,7 +27,7 @@
 
   environment:
     CompaniesHouseApiKey:
-      secure: Fc+nnp3vXkqInQmAJ1l8OmuEKPgcBQG7cz5FPmiUZPUyh3apYnE8S+bDip7FNzq4
+      secure: 5Vvsw47sNEHcqtv5xUJIxivwfwGyNl2cYH1dHTFzrPpFcFUD4Bl8/6sVS+vYa8kM
 
   configuration: Release
 
@@ -39,7 +39,7 @@
     assemblies:
       - '**\*.Tests.dll'
       - '**\*.FunctionalTests.dll'
-      - '**\*..IntegrationTests.dll'
+      - '**\*.IntegrationTests.dll'
 
   artifacts:
     - path: '*.nupkg'
@@ -77,7 +77,7 @@
 
   environment:
     CompaniesHouseApiKey:
-      secure: Fc+nnp3vXkqInQmAJ1l8OmuEKPgcBQG7cz5FPmiUZPUyh3apYnE8S+bDip7FNzq4
+      secure: 5Vvsw47sNEHcqtv5xUJIxivwfwGyNl2cYH1dHTFzrPpFcFUD4Bl8/6sVS+vYa8kM
 
   configuration: Release
 
@@ -89,7 +89,7 @@
     assemblies:
       - '**\*.Tests.dll'
       - '**\*.FunctionalTests.dll'
-      - '**\*..IntegrationTests.dll'
+      - '**\*.IntegrationTests.dll'
 
   artifacts:
     - path: '*.nupkg'

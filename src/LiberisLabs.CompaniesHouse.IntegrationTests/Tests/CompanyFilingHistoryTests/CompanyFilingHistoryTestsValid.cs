@@ -1,13 +1,22 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using LiberisLabs.CompaniesHouse.Response.CompanyFiling;
 using NUnit.Framework;
 
 namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
 {
-    [TestFixture]
+    [TestFixtureSource(nameof(TestCases))]
     public class CompanyFilingHistoryTestsValid : CompanyFilingHistoryTestBase
     {
+        private readonly string _companyNumber;
+        private List<FilingHistoryItem> _results;
+
+        public CompanyFilingHistoryTestsValid(string companyNumber)
+        {
+            _companyNumber = companyNumber;
+        }
+
         public static string[] TestCases()
         {
             return new[]
@@ -19,24 +28,24 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistory
             };
         }
 
-        protected override void When()
-        {
-        }
-
-        [TestCaseSource(nameof(TestCases))]
-        public void ThenTheDataItemsAreNotEmpty(string testCase)
+        protected override async Task When()
         {
             var page = 0;
             var size = 100;
-            var results = new List<FilingHistoryItem>();
+            _results = new List<FilingHistoryItem>();
 
+            CompaniesHouseClientResponse<CompanyFilingHistory> result;
             do
             {
-                _result = _client.GetCompanyFilingHistoryAsync(testCase, page++ * size, size).Result;
-                results.AddRange(_result.Data.Items);
-            } while (_result.Data.Items.Any());
+                result = await _client.GetCompanyFilingHistoryAsync(_companyNumber, page++ * size, size);
+                _results.AddRange(result.Data.Items);
+            } while (result.Data.Items.Any());
+        }
 
-            Assert.That(results, Is.Not.Empty);
+        [Test]
+        public void ThenTheDataItemsAreNotEmpty()
+        {
+            Assert.That(_results, Is.Not.Empty);
         }
     }
 }
