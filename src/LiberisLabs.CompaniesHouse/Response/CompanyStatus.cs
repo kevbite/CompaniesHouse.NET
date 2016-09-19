@@ -36,7 +36,9 @@ namespace LiberisLabs.CompaniesHouse.Response
 
         [EnumMember(Value = "closed")]
         Closed,
-
+        
+        [EnumMember(Value = "closed-on")]
+        ClosedOn,
 
 
     }
