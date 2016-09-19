@@ -20,6 +20,9 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanyProfile
         [JsonProperty(PropertyName = "annual_return")]
         public AnnualReturn AnnualReturn { get; set; }
 
+        [JsonProperty(PropertyName = "confirmation_statement")]
+        public ConfirmationStatement ConfirmationStatement { get; set; }
+
         [JsonProperty(PropertyName = "can_file")]
         public bool? CanFile { get; set; }
 
