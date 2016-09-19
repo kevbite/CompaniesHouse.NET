@@ -39,7 +39,7 @@
     assemblies:
       - '**\*.Tests.dll'
       - '**\*.FunctionalTests.dll'
-      - '**\*..IntegrationTests.dll'
+      - '**\*.IntegrationTests.dll'
 
   artifacts:
     - path: '*.nupkg'
@@ -89,7 +89,7 @@
     assemblies:
       - '**\*.Tests.dll'
       - '**\*.FunctionalTests.dll'
-      - '**\*..IntegrationTests.dll'
+      - '**\*.IntegrationTests.dll'
 
   artifacts:
     - path: '*.nupkg'
