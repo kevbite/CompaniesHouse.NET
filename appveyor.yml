@@ -3,7 +3,7 @@
     only:
       - master
 
-  version: 1.4.6
+  version: 1.4.7
 
   install:
     - ps : .\environment-install.ps1
@@ -46,10 +46,7 @@
 
   deploy:
     - provider: Environment
-      name: Liberis NuGet
-
-    - provider: Environment
-      name: Liberis MyGet
+      name: NuGet.org
 
 -
   branches:
