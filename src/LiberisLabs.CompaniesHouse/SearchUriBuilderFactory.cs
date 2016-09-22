@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using LiberisLabs.CompaniesHouse.Response.CompanySearch;
+using LiberisLabs.CompaniesHouse.Response.OfficerSearch;
 using LiberisLabs.CompaniesHouse.UriBuilders;
 
 namespace LiberisLabs.CompaniesHouse
@@ -17,7 +18,8 @@ namespace LiberisLabs.CompaniesHouse
         private readonly IDictionary<Type, Func<ISearchUriBuilder>> _map = new Dictionary
             <Type, Func<ISearchUriBuilder>>()
             {
-                {typeof(CompanySearch), () => new SearchUriBuilder("search/companies")}
+                {typeof(CompanySearch), () => new SearchUriBuilder("search/companies")},
+                {typeof(OfficerSearch), () => new SearchUriBuilder("search/officers")}
             };
     }
 }

@@ -3,7 +3,7 @@ using LiberisLabs.CompaniesHouse.Request;
 using LiberisLabs.CompaniesHouse.Response.CompanySearch;
 using NUnit.Framework;
 
-namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests
+namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.SearchingTests
 {
     [TestFixture("Liberis")]
     [TestFixture("British Gas")]

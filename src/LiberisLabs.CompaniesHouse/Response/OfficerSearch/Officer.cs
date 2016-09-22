@@ -20,7 +20,7 @@ namespace LiberisLabs.CompaniesHouse.Response.OfficerSearch
         public string Description { get; set; }
 
         [JsonProperty(PropertyName = "description_identifiers")]
-        public int[] DescriptionIdentifiers { get; set; }
+        public string[] DescriptionIdentifiers { get; set; }
 
         [JsonProperty(PropertyName = "kind")]
         public string Kind { get; set; }
@@ -29,7 +29,7 @@ namespace LiberisLabs.CompaniesHouse.Response.OfficerSearch
         public Links Links { get; set; }
 
         [JsonProperty(PropertyName = "matches")]
-        public Match[] Matches { get; set; }
+        public Match Matches { get; set; }
 
         [JsonProperty(PropertyName = "snippet")]
         public string Snippet { get; set; }
