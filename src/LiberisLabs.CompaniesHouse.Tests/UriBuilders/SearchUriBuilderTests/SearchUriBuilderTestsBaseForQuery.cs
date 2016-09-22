@@ -1,9 +1,9 @@
 using NUnit.Framework;
 
-namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanySearchUriBuilderTests
+namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
 {
     [TestFixture]
-    public class CompanySearchUriBuilderTestsBaseForQuery : CompanySearchUriBuilderTestsBase
+    public class SearchUriBuilderTestsBaseForQuery : SearchUriBuilderTestsBase
     {
         [Test]
         public void ThenTheUriQueryStringContainsTheQuery() => Then.TheUriQueryStringContainsTheQuery();

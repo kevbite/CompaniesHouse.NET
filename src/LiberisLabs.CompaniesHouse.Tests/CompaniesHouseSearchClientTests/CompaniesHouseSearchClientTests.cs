@@ -11,12 +11,12 @@ using Moq;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
 
-namespace LiberisLabs.CompaniesHouse.Tests.CompanyHouseSearchCompanyClientTests
+namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseSearchClientTests
 {
     [TestFixture]
-    public class CompanyHouseSearchCompanyClientTests
+    public class CompaniesHouseSearchClientTests
     {
-        private CompaniesHouseSearchCompanyClient _client;
+        private CompaniesHouseSearchClient _client;
 
         private CompaniesHouseClientResponse<CompanySearch> _result;
         private ResourceDetails _resourceDetails;
@@ -56,13 +56,17 @@ namespace LiberisLabs.CompaniesHouse.Tests.CompanyHouseSearchCompanyClientTests
             httpClientFactory.Setup(x => x.CreateHttpClient())
                 .Returns(new HttpClient(handler));
 
-            var uriBuilder = new Mock<ICompanySearchUriBuilder>();
-            uriBuilder.Setup(x => x.Build(It.IsAny<CompanySearchRequest>()))
+            var uriBuilder = new Mock<ISearchUriBuilder>();
+            uriBuilder.Setup(x => x.Build(It.IsAny<SearchRequest>()))
                 .Returns(uri);
 
-            _client = new CompaniesHouseSearchCompanyClient(httpClientFactory.Object, uriBuilder.Object);
+            var uriBuilderFactory = new Mock<ISearchUriBuilderFactory>();
+            uriBuilderFactory.Setup(x => x.Create<CompanySearch>())
+                .Returns(uriBuilder.Object);
 
-            _result = _client.SearchCompanyAsync(new CompanySearchRequest()).Result;
+            _client = new CompaniesHouseSearchClient(httpClientFactory.Object, uriBuilderFactory.Object);
+
+            _result = _client.SearchAsync<CompanySearch>(new SearchRequest()).Result;
         }
 
         [Test]

@@ -3,12 +3,17 @@ using LiberisLabs.CompaniesHouse.Request;
 
 namespace LiberisLabs.CompaniesHouse.UriBuilders
 {
-    public class CompanySearchUriBuilder : ICompanySearchUriBuilder
+    public class SearchUriBuilder : ISearchUriBuilder
     {
-        public Uri Build(CompanySearchRequest request)
-        {
-            var path = "search/companies";
+        private readonly string _path;
 
+        public SearchUriBuilder(string path)
+        {
+            _path = path;
+        }
+
+        public Uri Build(SearchRequest request)
+        {
             var query = $"?q={Uri.EscapeDataString(request.Query)}";
 
             if (request.ItemsPerPage.HasValue)
@@ -21,7 +26,7 @@ namespace LiberisLabs.CompaniesHouse.UriBuilders
                 query += "&start_index=" + request.StartIndex.Value;
             }
 
-            var pathAndQuery = path + query;
+            var pathAndQuery = _path + query;
 
             return new Uri(pathAndQuery, UriKind.Relative);
         }

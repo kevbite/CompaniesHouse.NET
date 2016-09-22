@@ -6,12 +6,13 @@ using LiberisLabs.CompaniesHouse.Response.CompanySearch;
 using LiberisLabs.CompaniesHouse.UriBuilders;
 using LiberisLabs.CompaniesHouse.Response.CompanyProfile;
 using LiberisLabs.CompaniesHouse.Response.Officers;
+using LiberisLabs.CompaniesHouse.Response.OfficerSearch;
 
 namespace LiberisLabs.CompaniesHouse
 {
     public class CompaniesHouseClient : ICompaniesHouseClient
     {
-        private readonly ICompaniesHouseSearchCompanyClient _companiesHouseSearchCompanyClient;
+        private readonly ICompaniesHouseSearchClient _companiesHouseSearchClient;
         private readonly ICompaniesHouseCompanyProfileClient _companiesHouseCompanyProfileClient;
         private readonly ICompaniesHouseCompanyFilingHistoryClient _companiesHouseCompanyFilingHistoryClient;
         private readonly ICompaniesHouseOfficersClient _companiesHouseOfficersClient;
@@ -20,15 +21,20 @@ namespace LiberisLabs.CompaniesHouse
         {
             var httpClientFactory = new HttpClientFactory(settings);
 
-            _companiesHouseSearchCompanyClient = new CompaniesHouseSearchCompanyClient(httpClientFactory, new CompanySearchUriBuilder());
+            _companiesHouseSearchClient = new CompaniesHouseSearchClient(httpClientFactory, new SearchUriBuilderFactory());
             _companiesHouseCompanyProfileClient = new CompaniesHouseCompanyProfileClient(httpClientFactory, new CompanyProfileUriBuilder());
             _companiesHouseCompanyFilingHistoryClient = new CompaniesHouseCompanyFilingHistoryClient(httpClientFactory, new CompanyFilingHistoryUriBuilder());
             _companiesHouseOfficersClient = new CompaniesHouseOfficersClient(httpClientFactory, new OfficersUriBuilder());
         }
 
-        public Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAsync(CompanySearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAsync(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return _companiesHouseSearchCompanyClient.SearchCompanyAsync(request, cancellationToken);
+            return _companiesHouseSearchClient.SearchAsync<CompanySearch>(request, cancellationToken);
+        }
+
+        public Task<CompaniesHouseClientResponse<OfficerSearch>> SearchOfficerAsync(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return _companiesHouseSearchClient.SearchAsync<OfficerSearch>(request, cancellationToken);
         }
 
         public Task<CompaniesHouseClientResponse<CompanyProfile>> GetCompanyProfileAsync(string companyNumber, CancellationToken cancellationToken = default(CancellationToken))
