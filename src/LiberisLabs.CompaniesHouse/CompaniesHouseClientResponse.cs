@@ -1,5 +1,3 @@
-using System.Runtime.InteropServices.ComTypes;
-
 namespace LiberisLabs.CompaniesHouse
 {
     public class CompaniesHouseClientResponse<T>
