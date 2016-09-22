@@ -7,6 +7,6 @@ namespace LiberisLabs.CompaniesHouse
 {
     public interface ICompaniesHouseSearchCompanyClient
     {
-        Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAsync(CompanySearchRequest request, CancellationToken cancellationToken = default(CancellationToken));
+        Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAsync(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

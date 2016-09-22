@@ -3,24 +3,24 @@ using System.Collections.Specialized;
 using System.Web;
 using NUnit.Framework;
 
-namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanySearchUriBuilderTests
+namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
 {
-    public abstract partial class CompanySearchUriBuilderTestsBase
+    public abstract partial class SearchUriBuilderTestsBase
     {
         public class Thens
         {
-            private readonly CompanySearchUriBuilderTestsBase _companySearchUriBuilderTestsBase;
+            private readonly SearchUriBuilderTestsBase _searchUriBuilderTestsBase;
 
-            public Thens(CompanySearchUriBuilderTestsBase companySearchUriBuilderTestsBase)
+            public Thens(SearchUriBuilderTestsBase searchUriBuilderTestsBase)
             {
-                _companySearchUriBuilderTestsBase = companySearchUriBuilderTestsBase;
+                _searchUriBuilderTestsBase = searchUriBuilderTestsBase;
             }
 
             public void TheUriQueryStringContainsTheQuery()
             {
                 var query = GetQuery();
 
-                Assert.That(query["q"], Is.EqualTo(_companySearchUriBuilderTestsBase.Query));
+                Assert.That(query["q"], Is.EqualTo(_searchUriBuilderTestsBase.Query));
             }
 
             public void TheUriQueryStringDoesNotContainsTheItemsPerPage()
@@ -34,14 +34,14 @@ namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanySearchUriBuilderTe
             {
                 var query = GetQuery();
 
-                Assert.That(query["items_per_page"], Is.EqualTo(_companySearchUriBuilderTestsBase.ItemsPerPage.ToString()));
+                Assert.That(query["items_per_page"], Is.EqualTo(_searchUriBuilderTestsBase.ItemsPerPage.ToString()));
             }
 
             public void TheUriQueryStringContainsTheStartIndex()
             {
                 var query = GetQuery();
 
-                Assert.That(query["start_index"], Is.EqualTo(_companySearchUriBuilderTestsBase.StartIndex.ToString()));
+                Assert.That(query["start_index"], Is.EqualTo(_searchUriBuilderTestsBase.StartIndex.ToString()));
             }
 
             public void TheUriQueryStringDoesNotContainsTheStartIndex()
@@ -53,7 +53,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanySearchUriBuilderTe
 
             protected NameValueCollection GetQuery()
             {
-                var uri = new Uri(_companySearchUriBuilderTestsBase._baseUri, _companySearchUriBuilderTestsBase._actualUri);
+                var uri = new Uri(_searchUriBuilderTestsBase._baseUri, _searchUriBuilderTestsBase._actualUri);
                 var query = HttpUtility.ParseQueryString(uri.Query);
                 return query;
             }

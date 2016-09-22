@@ -3,8 +3,8 @@ using LiberisLabs.CompaniesHouse.Request;
 
 namespace LiberisLabs.CompaniesHouse.UriBuilders
 {
-    public interface ICompanySearchUriBuilder
+    public interface ISearchUriBuilder
     {
-        Uri Build(CompanySearchRequest request);
+        Uri Build(SearchRequest request);
     }
 }

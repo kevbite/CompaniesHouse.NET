@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Specialized;
-using System.Web;
 using LiberisLabs.CompaniesHouse.Request;
 using LiberisLabs.CompaniesHouse.UriBuilders;
 using NUnit.Framework;
 
-namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanySearchUriBuilderTests
+namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
 {
-    public abstract partial class CompanySearchUriBuilderTestsBase
+    public abstract partial class SearchUriBuilderTestsBase
     {
-        private CompanySearchUriBuilder _uriBuilder;
+        private SearchUriBuilder _uriBuilder;
         private Uri _actualUri;
         private readonly Uri _baseUri = new Uri("http://liberis.co.uk/bla1/bla2/");
 
@@ -19,16 +17,20 @@ namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanySearchUriBuilderTe
 
         protected virtual int? StartIndex { get; } = null;
 
+        private string _path;
+
+
         [OneTimeSetUp]
         public void GivenACompanySearchUriBuilder()
         {
-            _uriBuilder = new CompanySearchUriBuilder();
+            _path = "wat/wat/1";
+            _uriBuilder = new SearchUriBuilder(_path);
         }
 
         [SetUp]
         public void WhenBuildingUriWithCompanySearchRequest()
         {
-            var request = new CompanySearchRequest
+            var request = new SearchRequest
             {
                 Query = Query,
                 ItemsPerPage = ItemsPerPage,
@@ -48,7 +50,7 @@ namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanySearchUriBuilderTe
         public void ThenTheUriPathIsCorrect()
         {
             var uri = new Uri(_baseUri, _actualUri);
-            Assert.That(uri.AbsolutePath, Is.EqualTo("/bla1/bla2/search/companies"));
+            Assert.That(uri.AbsolutePath, Is.EqualTo($"/bla1/bla2/{_path}"));
         }
 
         public Thens Then => new Thens(this);

@@ -95,7 +95,7 @@
     <Compile Include="ResourceBuilders\Accounts.cs" />
     <Compile Include="ResourceBuilders\AnnualReturn.cs" />
     <Compile Include="ResourceBuilders\CompanyDetails.cs" />
-    <Compile Include="CompanyHouseSearchCompanyClientTests\CompanyHouseSearchCompanyClientTests.cs" />
+    <Compile Include="CompaniesHouseSearchClientTests\CompaniesHouseSearchClientTests.cs" />
     <Compile Include="ResourceBuilders\CompanyFilingHistory.cs" />
     <Compile Include="ResourceBuilders\CompanyProfile.cs" />
     <Compile Include="ResourceBuilders\ConfirmationStatement.cs" />
@@ -110,7 +110,7 @@
     <Compile Include="ResourceBuilders\FilingHistoryItemAssociatedFiling.cs" />
     <Compile Include="ResourceBuilders\FilingHistoryItemResolution.cs" />
     <Compile Include="ResourceBuilders\LastAccounts.cs" />
-    <Compile Include="ResourceBuilders\Links.cs" />
+    <Compile Include="ResourceBuilders\CompanyFillingLinks.cs" />
     <Compile Include="ResourceBuilders\Officer.cs" />
     <Compile Include="ResourceBuilders\Officers.cs" />
     <Compile Include="ResourceBuilders\OfficerSummary.cs" />
@@ -122,11 +122,11 @@
     <Compile Include="UniversalNullableDateSpecimenBuilder.cs" />
     <Compile Include="UriBuilders\CompanyFilingUriBuilderTests\CompanyFilingHistoryUriBuilderTests.cs" />
     <Compile Include="UriBuilders\CompanyProfileUriBuilderTests\CompanyProfileUriBuilderTests.cs" />
-    <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsBase+Thens.cs" />
-    <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsBase.cs" />
-    <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsBaseForQuery.cs" />
-    <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsForItemsPerPage.cs" />
-    <Compile Include="UriBuilders\CompanySearchUriBuilderTests\CompanySearchUriBuilderTestsForStartIndex.cs" />
+    <Compile Include="UriBuilders\SearchUriBuilderTests\CompanySearchUriBuilderTestsBase+Thens.cs" />
+    <Compile Include="UriBuilders\SearchUriBuilderTests\SearchUriBuilderTestsBase.cs" />
+    <Compile Include="UriBuilders\SearchUriBuilderTests\SearchUriBuilderTestsBaseForQuery.cs" />
+    <Compile Include="UriBuilders\SearchUriBuilderTests\SearchUriBuilderTestsForItemsPerPage.cs" />
+    <Compile Include="UriBuilders\SearchUriBuilderTests\SearchUriBuilderTestsForStartIndex.cs" />
     <Compile Include="UriBuilders\OfficersUriBuilderTests\OfficersUriBuilderTests.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,7 @@ using LiberisLabs.CompaniesHouse.Request;
 using LiberisLabs.CompaniesHouse.Response.CompanySearch;
 using NUnit.Framework;
 
-namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests
+namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.SearchingTests
 {
     [TestFixture("Liberis")]
     [TestFixture("British Gas")]
@@ -31,7 +31,7 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests
         [SetUp]
         public void WhenSearchingForACompany()
         {
-            _result = _client.SearchCompanyAsync(new CompanySearchRequest() {Query = _query }).Result;
+            _result = _client.SearchCompanyAsync(new SearchRequest() { Query = _query }).Result;
         }
 
         [Test]

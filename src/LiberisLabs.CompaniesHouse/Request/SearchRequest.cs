@@ -1,6 +1,6 @@
 ﻿namespace LiberisLabs.CompaniesHouse.Request
 {
-    public class CompanySearchRequest
+    public class SearchRequest
     {
         public string Query { get; set; }
 

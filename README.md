@@ -30,9 +30,9 @@ This is the object we'll use going forward with any interaction to the Companies
 
 ## Usage
 
-### Searching for a company
+### Searching for a company or officer
 
-To search for a company, we first need to create a `CompanySearchRequest` with details of the search we require.
+To search for a company or an officer, we first need to create a `SearchRequest` with details of the search we require.
 
 ```csharp
 var request = new CompanySearchRequest()
@@ -43,10 +43,12 @@ var request = new CompanySearchRequest()
 };
 ```
 
-We can then pass the request object in to the `SearchCompanyAsync` method and await on the task.
+We can then pass the request object in to the required search method, either `SearchCompanyAsync` or `SearchOfficerAsync` and await on the task.
 
 ```csharp
-var result = await client.SearchCompanyAsync(request);
+var result1 = await client.SearchCompanyAsync(request);
+
+var result2 = await client.SearchOfficerAsync(request);
 ```
 
 ### Getting a company profile

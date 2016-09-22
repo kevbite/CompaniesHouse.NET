@@ -1,10 +1,10 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.CompanySearchUriBuilderTests
+namespace LiberisLabs.CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
 {
     [TestFixture]
-    public class CompanySearchUriBuilderTestsForItemsPerPage : CompanySearchUriBuilderTestsBase
+    public class SearchUriBuilderTestsForItemsPerPage : SearchUriBuilderTestsBase
     {
         protected override int? ItemsPerPage { get; } = new Random().Next();
 
