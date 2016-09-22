@@ -5,7 +5,7 @@ using LiberisLabs.CompaniesHouse.Response.CompanySearch;
 
 namespace LiberisLabs.CompaniesHouse
 {
-    public interface ICompaniesHouseCompanySearchClient
+    public interface ICompaniesHouseSearchCompanyClient
     {
         Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAsync(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken));
     }

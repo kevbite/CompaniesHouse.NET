@@ -5,7 +5,7 @@ using LiberisLabs.CompaniesHouse.Response.OfficerSearch;
 
 namespace LiberisLabs.CompaniesHouse
 {
-    public interface ICompaniesHouseOfficerSearchClient
+    public interface ICompaniesHouseSearchOfficerClient
     {
         Task<CompaniesHouseClientResponse<OfficerSearch>> SearchOfficerAsync(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken));
     }

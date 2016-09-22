@@ -4,8 +4,8 @@ using LiberisLabs.CompaniesHouse.Response.OfficerSearch;
 namespace LiberisLabs.CompaniesHouse
 {
     public interface ICompaniesHouseClient :
-        ICompaniesHouseCompanySearchClient,
-        ICompaniesHouseOfficerSearchClient,
+        ICompaniesHouseSearchCompanyClient,
+        ICompaniesHouseSearchOfficerClient,
         ICompaniesHouseCompanyProfileClient,
         ICompaniesHouseCompanyFilingHistoryClient,
         ICompaniesHouseOfficersClient

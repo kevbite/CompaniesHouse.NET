@@ -64,9 +64,9 @@
     <Compile Include="ICompaniesHouseClient.cs" />
     <Compile Include="ICompaniesHouseCompanyFilingHistoryClient.cs" />
     <Compile Include="ICompaniesHouseCompanyProfileClient.cs" />
-    <Compile Include="ICompaniesHouseCompanySearchClient.cs" />
+    <Compile Include="ICompaniesHouseSearchCompanyClient.cs" />
     <Compile Include="ICompaniesHouseOfficersClient.cs" />
-    <Compile Include="ICompaniesHouseOfficerSearchClient.cs" />
+    <Compile Include="ICompaniesHouseSearchOfficerClient.cs" />
     <Compile Include="ICompaniesHouseSettings.cs" />
     <Compile Include="ICompaniesHouseSearchClient.cs" />
     <Compile Include="Description\IDescriptable.cs" />
