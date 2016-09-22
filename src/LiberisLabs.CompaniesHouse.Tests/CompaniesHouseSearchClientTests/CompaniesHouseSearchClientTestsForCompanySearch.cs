@@ -5,7 +5,7 @@ using System.Net.Http;
 using LiberisLabs.CompaniesHouse.Request;
 using LiberisLabs.CompaniesHouse.Response;
 using LiberisLabs.CompaniesHouse.Response.CompanySearch;
-using LiberisLabs.CompaniesHouse.Tests.ResourceBuilders;
+using LiberisLabs.CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource;
 using LiberisLabs.CompaniesHouse.UriBuilders;
 using Moq;
 using NUnit.Framework;
@@ -14,7 +14,7 @@ using Ploeh.AutoFixture;
 namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseSearchClientTests
 {
     [TestFixture]
-    public class CompaniesHouseSearchClientTests
+    public class CompaniesHouseSearchClientTestsForCompanySearch
     {
         private CompaniesHouseSearchClient _client;
 
