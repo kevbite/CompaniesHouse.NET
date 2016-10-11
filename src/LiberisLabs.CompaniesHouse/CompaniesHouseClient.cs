@@ -5,6 +5,7 @@ using LiberisLabs.CompaniesHouse.Response.CompanyFiling;
 using LiberisLabs.CompaniesHouse.Response.CompanySearch;
 using LiberisLabs.CompaniesHouse.UriBuilders;
 using LiberisLabs.CompaniesHouse.Response.CompanyProfile;
+using LiberisLabs.CompaniesHouse.Response.DisqualifiedOfficersSearch;
 using LiberisLabs.CompaniesHouse.Response.Officers;
 using LiberisLabs.CompaniesHouse.Response.OfficerSearch;
 
@@ -35,6 +36,11 @@ namespace LiberisLabs.CompaniesHouse
         public Task<CompaniesHouseClientResponse<OfficerSearch>> SearchOfficerAsync(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHouseSearchClient.SearchAsync<OfficerSearch>(request, cancellationToken);
+        }
+
+        public Task<CompaniesHouseClientResponse<DisqualifiedOfficerSearch>> SearchDisqualifiedOfficerAsync(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return _companiesHouseSearchClient.SearchAsync<DisqualifiedOfficerSearch>(request, cancellationToken);
         }
 
         public Task<CompaniesHouseClientResponse<CompanyProfile>> GetCompanyProfileAsync(string companyNumber, CancellationToken cancellationToken = default(CancellationToken))

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using LiberisLabs.CompaniesHouse.Response.CompanySearch;
+using LiberisLabs.CompaniesHouse.Response.DisqualifiedOfficersSearch;
 using LiberisLabs.CompaniesHouse.Response.OfficerSearch;
 using LiberisLabs.CompaniesHouse.UriBuilders;
 
@@ -19,7 +20,8 @@ namespace LiberisLabs.CompaniesHouse
             <Type, Func<ISearchUriBuilder>>()
             {
                 {typeof(CompanySearch), () => new SearchUriBuilder("search/companies")},
-                {typeof(OfficerSearch), () => new SearchUriBuilder("search/officers")}
+                {typeof(OfficerSearch), () => new SearchUriBuilder("search/officers")},
+                {typeof(DisqualifiedOfficerSearch), () => new SearchUriBuilder("search/disqualified-officers")}
             };
     }
 }

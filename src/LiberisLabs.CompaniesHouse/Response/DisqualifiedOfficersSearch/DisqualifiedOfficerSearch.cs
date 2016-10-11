@@ -2,7 +2,7 @@
 
 namespace LiberisLabs.CompaniesHouse.Response.DisqualifiedOfficersSearch
 {
-    public class DisqualifiedOfficersSearch
+    public class DisqualifiedOfficerSearch
     {
         [JsonProperty(PropertyName = "items")]
         public DisqualifiedOfficer[] DisqualifiedOfficers { get; set; }

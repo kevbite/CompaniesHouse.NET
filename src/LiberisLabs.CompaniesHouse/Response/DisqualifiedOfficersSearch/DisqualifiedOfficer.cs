@@ -27,7 +27,7 @@ namespace LiberisLabs.CompaniesHouse.Response.DisqualifiedOfficersSearch
         public Links Links { get; set; }
 
         [JsonProperty(PropertyName = "matches")]
-        public Match[] Matches { get; set; }
+        public Match Matches { get; set; }
 
         [JsonProperty(PropertyName = "snippet")]
         public string Snippet { get; set; }
