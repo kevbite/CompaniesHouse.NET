@@ -21,9 +21,7 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.SearchingTests
         [OneTimeSetUp]
         public void GivenACompaniesHouseClient()
         {
-            var apiKey = "vYiy5KBmCX0el1lmz4e-l4sDVr0-4-xAwlMw9lvs";
-
-            var settings = new CompaniesHouseSettings(apiKey);
+            var settings = new CompaniesHouseSettings(Keys.ApiKey);
 
             _client = new CompaniesHouseClient(settings);
         }
