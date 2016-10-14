@@ -66,6 +66,7 @@
     <Compile Include="ICompaniesHouseCompanyProfileClient.cs" />
     <Compile Include="ICompaniesHouseSearchCompanyClient.cs" />
     <Compile Include="ICompaniesHouseOfficersClient.cs" />
+    <Compile Include="ICompaniesHouseSearchDisqualifiedOfficerClient.cs" />
     <Compile Include="ICompaniesHouseSearchOfficerClient.cs" />
     <Compile Include="ICompaniesHouseSettings.cs" />
     <Compile Include="ICompaniesHouseSearchClient.cs" />
@@ -80,6 +81,11 @@
     <Compile Include="Response\CompanyFiling\FilingHistoryItemAssociatedFiling.cs" />
     <Compile Include="Response\CompanyFiling\Links.cs" />
     <Compile Include="Response\CompanyProfile\ConfirmationStatement.cs" />
+    <Compile Include="Response\DisqualifiedOfficersSearch\Address.cs" />
+    <Compile Include="Response\DisqualifiedOfficersSearch\DisqualifiedOfficer.cs" />
+    <Compile Include="Response\DisqualifiedOfficersSearch\DisqualifiedOfficerSearch.cs" />
+    <Compile Include="Response\DisqualifiedOfficersSearch\Links.cs" />
+    <Compile Include="Response\DisqualifiedOfficersSearch\Match.cs" />
     <Compile Include="Response\OfficerSearch\Address.cs" />
     <Compile Include="Response\OfficerSearch\OfficerSearch.cs" />
     <Compile Include="Response\OfficerSearch\DateOfBirth.cs" />

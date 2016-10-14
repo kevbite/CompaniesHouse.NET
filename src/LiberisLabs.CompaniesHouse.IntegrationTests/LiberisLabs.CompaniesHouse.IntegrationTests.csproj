@@ -56,6 +56,7 @@
     <Compile Include="Tests\CompanyProfileTests\CompanyProfileTestsBase.cs" />
     <Compile Include="Tests\SearchingTests\CompanySearchTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\SearchingTests\DisqualifiedOfficersSearchTests.cs" />
     <Compile Include="Tests\SearchingTests\OfficersSearchTests.cs" />
   </ItemGroup>
   <ItemGroup>
