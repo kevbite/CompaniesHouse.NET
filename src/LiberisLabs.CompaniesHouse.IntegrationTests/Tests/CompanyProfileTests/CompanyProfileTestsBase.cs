@@ -21,8 +21,7 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.CompanyProfileTests
 
         private void GivenACompaniesHouseClient()
         {
-            var apiKey = Environment.GetEnvironmentVariable("CompaniesHouseApiKey");
-            var settings = new CompaniesHouseSettings(apiKey);
+            var settings = new CompaniesHouseSettings(Keys.ApiKey);
             _client = new CompaniesHouseClient(settings);
         }
     }

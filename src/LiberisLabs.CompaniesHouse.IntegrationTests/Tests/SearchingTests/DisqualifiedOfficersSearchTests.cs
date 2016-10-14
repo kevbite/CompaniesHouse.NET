@@ -1,4 +1,3 @@
-using System;
 using LiberisLabs.CompaniesHouse.Request;
 using LiberisLabs.CompaniesHouse.Response.DisqualifiedOfficersSearch;
 using LiberisLabs.CompaniesHouse.Response.OfficerSearch;
@@ -15,9 +14,7 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.SearchingTests
         [OneTimeSetUp]
         public void GivenACompaniesHouseClient()
         {
-            var apiKey = Environment.GetEnvironmentVariable("CompaniesHouseApiKey");
-
-            var settings = new CompaniesHouseSettings(apiKey);
+            var settings = new CompaniesHouseSettings(Keys.ApiKey);
 
             _client = new CompaniesHouseClient(settings);
         }
