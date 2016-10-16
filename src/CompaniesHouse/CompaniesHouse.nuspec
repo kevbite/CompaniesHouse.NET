@@ -11,7 +11,7 @@
     <releaseNotes>N/A</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>CompaniesHouse LiberisLabs API REST</tags>
-    <projectUrl>https://github.com/LiberisLabs/CompaniesHouse.NET</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/LiberisLabs/CompaniesHouse.NET/master/liberis-labs.jpg</iconUrl>
+    <projectUrl>https://github.com/kevbite/CompaniesHouse.NET</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/kevbite/CompaniesHouse.NET/master/companies-house.jpg</iconUrl>
   </metadata>
 </package>
