@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using FluentAssertions;
 using LiberisLabs.CompaniesHouse.Request;
-using LiberisLabs.CompaniesHouse.Response.OfficerSearch;
+using LiberisLabs.CompaniesHouse.Response.Search.OfficerSearch;
 using LiberisLabs.CompaniesHouse.Tests.ResourceBuilders.OfficerSearchResource;
 using LiberisLabs.CompaniesHouse.UriBuilders;
 using Moq;
@@ -23,7 +24,12 @@ namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseSearchClientTests
         public async Task GivenACompanyHouseSearchClient_WhenSearchingForAOfficer()
         {
             var fixture = new Fixture();
-            _resourceDetails = fixture.Create<ResourceDetails>();
+            var items = fixture.Build<Item>()
+                .With(x => x.Kind, "searchresults#officer")
+                .CreateMany().ToArray();
+            _resourceDetails = fixture.Build<ResourceDetails>()
+                .With(x => x.Officers, items)
+                .Create();
             
             var uri = new Uri("https://wibble.com/search/companies");
 

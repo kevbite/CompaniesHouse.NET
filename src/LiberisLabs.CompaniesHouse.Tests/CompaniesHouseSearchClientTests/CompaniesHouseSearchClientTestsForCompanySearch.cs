@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using LiberisLabs.CompaniesHouse.Request;
 using LiberisLabs.CompaniesHouse.Response;
-using LiberisLabs.CompaniesHouse.Response.CompanySearch;
+using LiberisLabs.CompaniesHouse.Response.Search.CompanySearch;
 using LiberisLabs.CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource;
 using LiberisLabs.CompaniesHouse.UriBuilders;
 using Moq;
@@ -30,22 +30,22 @@ namespace LiberisLabs.CompaniesHouse.Tests.CompaniesHouseSearchClientTests
             _resourceDetails = fixture.Create<ResourceDetails>();
             _expectedCompanies = new List<CompanyDetails>
             {
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "active").With(x => x.CompanyType, "private-unlimited").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "dissolved").With(x => x.CompanyType, "private-unlimited").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "liquidation").With(x => x.CompanyType, "private-unlimited").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "receivership").With(x => x.CompanyType, "private-unlimited").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "administration").With(x => x.CompanyType, "private-unlimited").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "voluntary-arrangement").With(x => x.CompanyType, "private-unlimited").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "converted-closed").With(x => x.CompanyType, "private-unlimited").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "insolvency-proceedings").With(x => x.CompanyType, "private-unlimited").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "open").With(x => x.CompanyType, "private-unlimited").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "closed").With(x => x.CompanyType, "private-unlimited").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "closed-on").With(x => x.CompanyType, "private-unlimited").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "active").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "dissolved").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "liquidation").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "receivership").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "administration").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "voluntary-arrangement").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "converted-closed").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "insolvency-proceedings").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "open").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "closed").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "closed-on").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
             };
 
             var uri = new Uri("https://wibble.com/search/companies");
 
-            _companyWithUnknownDateOfCessation = fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "insolvency-proceedings").With(x => x.CompanyType, "private-unlimited").Create();
+            _companyWithUnknownDateOfCessation = fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "insolvency-proceedings").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create();
             var resource = new CompanySearchResourceBuilder()
                 .AddCompanies(_expectedCompanies)
                 .AddCompanyWithUnknownDateOfCessation(_companyWithUnknownDateOfCessation)

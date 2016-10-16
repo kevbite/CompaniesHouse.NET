@@ -1,12 +1,11 @@
 ﻿using Newtonsoft.Json;
 
-namespace LiberisLabs.CompaniesHouse.Response.OfficerSearch
+namespace LiberisLabs.CompaniesHouse.Response.Search.DisqualifiedOfficersSearch
 {
-
-    public class OfficerSearch
+    public class DisqualifiedOfficerSearch
     {
         [JsonProperty(PropertyName = "items")]
-        public Officer[] Officers { get; set; }
+        public DisqualifiedOfficer[] DisqualifiedOfficers { get; set; }
 
         [JsonProperty(PropertyName = "items_per_page")]
         public int ItemsPerPage { get; set; }

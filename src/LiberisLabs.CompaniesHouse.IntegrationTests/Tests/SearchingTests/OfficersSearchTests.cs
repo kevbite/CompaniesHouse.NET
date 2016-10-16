@@ -1,6 +1,6 @@
 using System;
 using LiberisLabs.CompaniesHouse.Request;
-using LiberisLabs.CompaniesHouse.Response.OfficerSearch;
+using LiberisLabs.CompaniesHouse.Response.Search.OfficerSearch;
 using NUnit.Framework;
 
 namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.SearchingTests

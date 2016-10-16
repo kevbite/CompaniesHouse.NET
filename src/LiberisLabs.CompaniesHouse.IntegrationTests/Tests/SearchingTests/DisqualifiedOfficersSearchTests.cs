@@ -1,6 +1,5 @@
 using LiberisLabs.CompaniesHouse.Request;
-using LiberisLabs.CompaniesHouse.Response.DisqualifiedOfficersSearch;
-using LiberisLabs.CompaniesHouse.Response.OfficerSearch;
+using LiberisLabs.CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
 using NUnit.Framework;
 
 namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.SearchingTests

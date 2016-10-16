@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace LiberisLabs.CompaniesHouse.Response.OfficerSearch
+namespace LiberisLabs.CompaniesHouse.Response.Search.OfficerSearch
 {
     public class Match
     {

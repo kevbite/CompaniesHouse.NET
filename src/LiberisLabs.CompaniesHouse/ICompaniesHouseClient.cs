@@ -1,12 +1,10 @@
-﻿using LiberisLabs.CompaniesHouse.Response.CompanySearch;
-using LiberisLabs.CompaniesHouse.Response.OfficerSearch;
-
-namespace LiberisLabs.CompaniesHouse
+﻿namespace LiberisLabs.CompaniesHouse
 {
     public interface ICompaniesHouseClient :
         ICompaniesHouseSearchCompanyClient,
         ICompaniesHouseSearchOfficerClient,
         ICompaniesHouseSearchDisqualifiedOfficerClient,
+        ICompaniesHouseSearchAllClient,
         ICompaniesHouseCompanyProfileClient,
         ICompaniesHouseCompanyFilingHistoryClient,
         ICompaniesHouseOfficersClient

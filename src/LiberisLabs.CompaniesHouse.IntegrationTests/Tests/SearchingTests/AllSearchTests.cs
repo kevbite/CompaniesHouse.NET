@@ -1,19 +1,19 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using LiberisLabs.CompaniesHouse.Request;
-using LiberisLabs.CompaniesHouse.Response.Search.CompanySearch;
+using LiberisLabs.CompaniesHouse.Response.Search.AllSearch;
 using NUnit.Framework;
 
 namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.SearchingTests
 {
-    [TestFixture("Liberis")]
     [TestFixture("British Gas")]
-    public class CompanySearchTests
+    [TestFixture("Kevin")]
+    public class AllSearchTests
     {
         private readonly string _query;
         private CompaniesHouseClient _client;
-        private CompaniesHouseClientResponse<CompanySearch> _result;
+        private CompaniesHouseClientResponse<AllSearch> _result;
 
-        public CompanySearchTests(string query)
+        public AllSearchTests(string query)
         {
             _query = query;
         }
@@ -27,15 +27,15 @@ namespace LiberisLabs.CompaniesHouse.IntegrationTests.Tests.SearchingTests
         }
 
         [SetUp]
-        public void WhenSearchingForACompany()
+        public async Task WhenSearching()
         {
-            _result = _client.SearchCompanyAsync(new SearchRequest() { Query = _query }).Result;
+            _result = await _client.SearchAllAsync(new SearchRequest() { Query = _query });
         }
 
         [Test]
-        public void ThenCompaniesAreReturned()
+        public void TheItemsAreReturned()
         {
-            Assert.That(_result.Data.Companies, Is.Not.Empty);
+            Assert.That(_result.Data.Items, Is.Not.Empty);
         }
     }
 }

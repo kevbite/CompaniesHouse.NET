@@ -54,6 +54,7 @@
     <Compile Include="Tests\CompanyProfileTests\CompanyProfileTestsInvalid.cs" />
     <Compile Include="Tests\CompanyProfileTests\CompanyProfileTestsValid.cs" />
     <Compile Include="Tests\CompanyProfileTests\CompanyProfileTestsBase.cs" />
+    <Compile Include="Tests\SearchingTests\AllSearchTests.cs" />
     <Compile Include="Tests\SearchingTests\CompanySearchTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\SearchingTests\DisqualifiedOfficersSearchTests.cs" />

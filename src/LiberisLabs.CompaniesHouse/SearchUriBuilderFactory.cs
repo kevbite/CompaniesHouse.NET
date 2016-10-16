@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using LiberisLabs.CompaniesHouse.Response.CompanySearch;
-using LiberisLabs.CompaniesHouse.Response.DisqualifiedOfficersSearch;
-using LiberisLabs.CompaniesHouse.Response.OfficerSearch;
+using LiberisLabs.CompaniesHouse.Response.Search.AllSearch;
+using LiberisLabs.CompaniesHouse.Response.Search.CompanySearch;
+using LiberisLabs.CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
+using LiberisLabs.CompaniesHouse.Response.Search.OfficerSearch;
 using LiberisLabs.CompaniesHouse.UriBuilders;
 
 namespace LiberisLabs.CompaniesHouse
@@ -21,7 +22,8 @@ namespace LiberisLabs.CompaniesHouse
             {
                 {typeof(CompanySearch), () => new SearchUriBuilder("search/companies")},
                 {typeof(OfficerSearch), () => new SearchUriBuilder("search/officers")},
-                {typeof(DisqualifiedOfficerSearch), () => new SearchUriBuilder("search/disqualified-officers")}
+                {typeof(DisqualifiedOfficerSearch), () => new SearchUriBuilder("search/disqualified-officers")},
+                {typeof(AllSearch), () => new SearchUriBuilder("search")}
             };
     }
 }

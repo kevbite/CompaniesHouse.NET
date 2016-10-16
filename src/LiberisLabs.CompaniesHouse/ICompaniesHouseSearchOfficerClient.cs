@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using LiberisLabs.CompaniesHouse.Request;
-using LiberisLabs.CompaniesHouse.Response.OfficerSearch;
+using LiberisLabs.CompaniesHouse.Response.Search.OfficerSearch;
 
 namespace LiberisLabs.CompaniesHouse
 {

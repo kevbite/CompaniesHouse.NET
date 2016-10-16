@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace LiberisLabs.CompaniesHouse.Response.DisqualifiedOfficersSearch
+namespace LiberisLabs.CompaniesHouse.Response.Search.DisqualifiedOfficersSearch
 {
     public class Address
     {

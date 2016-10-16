@@ -3,9 +3,9 @@ using LiberisLabs.CompaniesHouse.JsonConverters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace LiberisLabs.CompaniesHouse.Response.CompanySearch
+namespace LiberisLabs.CompaniesHouse.Response.Search.CompanySearch
 {
-    public class Company
+    public class Company : SearchItem
     {
         [JsonProperty(PropertyName = "address")]
         public Address Address { get; set; }
@@ -33,12 +33,6 @@ namespace LiberisLabs.CompaniesHouse.Response.CompanySearch
 
         [JsonProperty(PropertyName = "description_identifier")]
         public object[] DescriptionIdentifier { get; set; }
-
-        [JsonProperty(PropertyName = "kind")]
-        public string Kind { get; set; }
-
-        [JsonProperty(PropertyName = "links")]
-        public Links Links { get; set; }
 
         [JsonProperty(PropertyName = "matches")]
         public Matches Matches { get; set; }
