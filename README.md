@@ -30,25 +30,38 @@ This is the object we'll use going forward with any interaction to the Companies
 
 ## Usage
 
-### Searching for a company or officer
+### Searching for resources
 
-To search for a company or an officer, we first need to create a `SearchRequest` with details of the search we require.
+To search for a resource, we first need to create a `SearchRequest` with details of the search we require.
 
 ```csharp
-var request = new CompanySearchRequest()
+var request = new SearchRequest()
 {
-    Query = "Liberis",
+    Query = "Jay2Base",
     StartIndex = 10,
     ItemsPerPage = 10
 };
 ```
 
-We can then pass the request object in to the required search method, either `SearchCompanyAsync` or `SearchOfficerAsync` and await on the task.
+We can then pass the `SearchRequest` object in to the `SearchAllAsync` method and await on the task, this will then return all related resources.
+
+```csharp
+var result = await client.SearchAllAsync(request);
+
+foreach (var item in _result.Data.Items)
+{
+    // Do something...
+}
+```
+
+If we need to be more precise on the resources we require, we can then pass the request object in to the required search method, either `SearchCompanyAsync` or `SearchOfficerAsync` or `SearchDisqualifiedOfficerAsync` and await on the task.
 
 ```csharp
 var result1 = await client.SearchCompanyAsync(request);
 
 var result2 = await client.SearchOfficerAsync(request);
+
+var result3 = await client.SearchDisqualifiedOfficerAsync(request);
 ```
 
 ### Getting a company profile
@@ -56,7 +69,7 @@ var result2 = await client.SearchOfficerAsync(request);
 To get a company profile, we pass a company number in to the `GetCompanyProfileAsync` method and await on the task.
 
 ```csharp
-var result = await client.GetCompanyProfileAsync("03977902");
+var result = await client.GetCompanyProfileAsync("10440441");
 ```
 
 If there was no match for that company number then `null` will be returned.
@@ -80,13 +93,13 @@ var result = await client.GetOfficersAsync("03977902", 10, 10);
 To get a list of the filing history for a company, we can pass a company number to the `GetCompanyFilingHistoryAsync` method and await on the task.
 
 ```csharp
-var result = await client.GetCompanyFilingHistoryAsync("03977902");
+var result = await client.GetCompanyFilingHistoryAsync("10440441");
 ```
 
 We can also pass in some optional parameters of `startIndex` and `pageSize` which will allow us to page the results.
 
 ```csharp
-var result = await client.GetCompanyFilingHistoryAsync("03977902", 10, 10);
+var result = await client.GetCompanyFilingHistoryAsync("10440441", 10, 10);
 ```
 
 ## Contributing
