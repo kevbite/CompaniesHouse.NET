@@ -5,12 +5,12 @@
     <version>$version$</version>
     <title>$title$</title>
     <authors>$author$</authors>
-    <owners>$author$</owners>
+    <owners>Kevin Smith</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A simple .NET wrapper around CompaniesHouse API</description>
     <releaseNotes>N/A</releaseNotes>
-    <copyright>Copyright 2015</copyright>
-    <tags>CompaniesHouse LiberisLabs API REST</tags>
+    <copyright>Copyright 2016</copyright>
+    <tags>CompaniesHouse Registrar Kevsoft API REST</tags>
     <projectUrl>https://github.com/kevbite/CompaniesHouse.NET</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/kevbite/CompaniesHouse.NET/master/companies-house.jpg</iconUrl>
   </metadata>

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("CompaniesHouse.NET")]
 [assembly: AssemblyDescription("A simple .NET API client wrapper for CompaniesHouse")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("LiberisLabs")]
+[assembly: AssemblyCompany("Kevsoft")]
 [assembly: AssemblyProduct("CompaniesHouse")]
 [assembly: AssemblyCopyright("Copyright © LiberisLabs 2015")]
 [assembly: AssemblyTrademark("")]
