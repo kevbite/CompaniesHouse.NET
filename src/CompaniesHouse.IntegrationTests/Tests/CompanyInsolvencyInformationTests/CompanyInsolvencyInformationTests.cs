@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
-using CompaniesHouse.Request;
 using CompaniesHouse.Response.Insolvency;
 using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
+namespace CompaniesHouse.IntegrationTests.Tests.CompanyInsolvencyInformationTests
 {
     [TestFixture]
     public class CompanyInsolvencyInformationTests
