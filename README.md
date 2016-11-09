@@ -102,6 +102,16 @@ We can also pass in some optional parameters of `startIndex` and `pageSize` whic
 var result = await client.GetCompanyFilingHistoryAsync("10440441", 10, 10);
 ```
 
+### Getting company insolvency information
+
+To get the insolvency information for a company, we can pass a company number to the `GetCompanyInsolvencyInformationAsync` method and await on the task.
+
+```csharp
+var result = await client.GetCompanyInsolvencyInformationAsync("10440441");
+```
+
+If there was no insolvency information for the given company number then `null` will be returned.
+
 ## Contributing
 
 1. Fork

@@ -7,7 +7,8 @@
         ICompaniesHouseSearchAllClient,
         ICompaniesHouseCompanyProfileClient,
         ICompaniesHouseCompanyFilingHistoryClient,
-        ICompaniesHouseOfficersClient
+        ICompaniesHouseOfficersClient,
+        ICompaniesHouseCompanyInsolvencyInformationClient
     {
 
     }

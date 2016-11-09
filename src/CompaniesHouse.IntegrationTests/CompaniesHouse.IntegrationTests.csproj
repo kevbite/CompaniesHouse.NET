@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tests\CompanyInsolvencyInformationTests\CompanyInsolvencyInformationTests.cs" />
     <Compile Include="Tests\OfficerTests\OfficersTestBase.cs" />
     <Compile Include="Tests\OfficerTests\OfficersTestsInvalid.cs" />
     <Compile Include="Tests\OfficerTests\OfficersTestsValid.cs" />

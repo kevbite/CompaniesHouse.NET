@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response.CompanyFiling;
 using CompaniesHouse.Response.CompanyProfile;
+using CompaniesHouse.Response.Insolvency;
 using CompaniesHouse.Response.Officers;
 using CompaniesHouse.Response.Search.AllSearch;
 using CompaniesHouse.Response.Search.CompanySearch;
@@ -18,6 +19,7 @@ namespace CompaniesHouse
         private readonly ICompaniesHouseCompanyProfileClient _companiesHouseCompanyProfileClient;
         private readonly ICompaniesHouseCompanyFilingHistoryClient _companiesHouseCompanyFilingHistoryClient;
         private readonly ICompaniesHouseOfficersClient _companiesHouseOfficersClient;
+        private readonly ICompaniesHouseCompanyInsolvencyInformationClient _companiesHouseCompanyInsolvencyInformationClient;
 
         public CompaniesHouseClient(ICompaniesHouseSettings settings)
         {
@@ -27,6 +29,8 @@ namespace CompaniesHouse
             _companiesHouseCompanyProfileClient = new CompaniesHouseCompanyProfileClient(httpClientFactory, new CompanyProfileUriBuilder());
             _companiesHouseCompanyFilingHistoryClient = new CompaniesHouseCompanyFilingHistoryClient(httpClientFactory, new CompanyFilingHistoryUriBuilder());
             _companiesHouseOfficersClient = new CompaniesHouseOfficersClient(httpClientFactory, new OfficersUriBuilder());
+            _companiesHouseCompanyInsolvencyInformationClient = new CompaniesHouseCompanyInsolvencyInformationClient(httpClientFactory);
+
         }
 
         public Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAsync(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
@@ -62,6 +66,11 @@ namespace CompaniesHouse
         public Task<CompaniesHouseClientResponse<Officers>> GetOfficersAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHouseOfficersClient.GetOfficersAsync(companyNumber, startIndex, pageSize, cancellationToken);
+        }
+
+        public Task<CompaniesHouseClientResponse<CompanyInsolvencyInformation>> GetCompanyInsolvencyInformationAsync(string companyNumber, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return _companiesHouseCompanyInsolvencyInformationClient.GetCompanyInsolvencyInformationAsync(companyNumber, cancellationToken);
         }
     }
 }
