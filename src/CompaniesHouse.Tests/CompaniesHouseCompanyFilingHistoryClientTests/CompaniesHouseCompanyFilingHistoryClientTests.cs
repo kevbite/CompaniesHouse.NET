@@ -28,15 +28,12 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyFilingHistoryClientTests
             var uri = new Uri("https://wibble.com/search/companies");
 
             HttpMessageHandler handler = new StubHttpMessageHandler(uri, resource);
-            var httpClientFactory = new Mock<IHttpClientFactory>();
-            httpClientFactory.Setup(x => x.CreateHttpClient())
-                .Returns(new HttpClient(handler));
 
             var uriBuilder = new Mock<ICompanyFilingHistoryUriBuilder>();
             uriBuilder.Setup(x => x.Build(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()))
                 .Returns(uri);
 
-            _client = new CompaniesHouseCompanyFilingHistoryClient(httpClientFactory.Object, uriBuilder.Object);
+            _client = new CompaniesHouseCompanyFilingHistoryClient(new HttpClient(handler), uriBuilder.Object);
 
             _result = _client.GetCompanyFilingHistoryAsync("abc", 0, 25).Result;
 

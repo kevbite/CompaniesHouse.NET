@@ -24,13 +24,13 @@ namespace CompaniesHouse
         public CompaniesHouseClient(ICompaniesHouseSettings settings)
         {
             var httpClientFactory = new HttpClientFactory(settings);
+            var httpClient = httpClientFactory.CreateHttpClient();
 
-            _companiesHouseSearchClient = new CompaniesHouseSearchClient(httpClientFactory, new SearchUriBuilderFactory());
-            _companiesHouseCompanyProfileClient = new CompaniesHouseCompanyProfileClient(httpClientFactory, new CompanyProfileUriBuilder());
-            _companiesHouseCompanyFilingHistoryClient = new CompaniesHouseCompanyFilingHistoryClient(httpClientFactory, new CompanyFilingHistoryUriBuilder());
-            _companiesHouseOfficersClient = new CompaniesHouseOfficersClient(httpClientFactory, new OfficersUriBuilder());
-            _companiesHouseCompanyInsolvencyInformationClient = new CompaniesHouseCompanyInsolvencyInformationClient(httpClientFactory);
-
+            _companiesHouseSearchClient = new CompaniesHouseSearchClient(httpClient, new SearchUriBuilderFactory());
+            _companiesHouseCompanyProfileClient = new CompaniesHouseCompanyProfileClient(httpClient, new CompanyProfileUriBuilder());
+            _companiesHouseCompanyFilingHistoryClient = new CompaniesHouseCompanyFilingHistoryClient(httpClient, new CompanyFilingHistoryUriBuilder());
+            _companiesHouseOfficersClient = new CompaniesHouseOfficersClient(httpClient, new OfficersUriBuilder());
+            _companiesHouseCompanyInsolvencyInformationClient = new CompaniesHouseCompanyInsolvencyInformationClient(httpClient);
         }
 
         public Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAsync(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken))

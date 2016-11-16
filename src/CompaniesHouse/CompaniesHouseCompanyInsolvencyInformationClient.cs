@@ -7,27 +7,24 @@ namespace CompaniesHouse
 {
     public class CompaniesHouseCompanyInsolvencyInformationClient : ICompaniesHouseCompanyInsolvencyInformationClient
     {
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly HttpClient _httpClient;
 
-        public CompaniesHouseCompanyInsolvencyInformationClient(IHttpClientFactory httpClientFactory)
+        public CompaniesHouseCompanyInsolvencyInformationClient(HttpClient httpClient)
         {
-            _httpClientFactory = httpClientFactory;
+            _httpClient = httpClient;
         }
 
         public async Task<CompaniesHouseClientResponse<CompanyInsolvencyInformation>> GetCompanyInsolvencyInformationAsync(string companyNumber, CancellationToken cancellationToken = default (CancellationToken))
         {
-            using (var httpClient = _httpClientFactory.CreateHttpClient())
-            {
-                var requestUri = $"company/{companyNumber}/insolvency";
+            var requestUri = $"company/{companyNumber}/insolvency";
 
-                var response = await httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
+            var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
                 
-                response.EnsureSuccessStatusCode();
+            response.EnsureSuccessStatusCode();
 
-                var result = await response.Content.ReadAsAsync<CompanyInsolvencyInformation>(cancellationToken).ConfigureAwait(false);
+            var result = await response.Content.ReadAsAsync<CompanyInsolvencyInformation>(cancellationToken).ConfigureAwait(false);
 
-                return new CompaniesHouseClientResponse<CompanyInsolvencyInformation>(result);
-            }
+            return new CompaniesHouseClientResponse<CompanyInsolvencyInformation>(result);
         }
     }
 }

@@ -8,33 +8,30 @@ namespace CompaniesHouse
 {
     public class CompaniesHouseCompanyProfileClient : ICompaniesHouseCompanyProfileClient
     {
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly HttpClient _httpClient;
         private readonly ICompanyProfileUriBuilder _companyProfileUriBuilder;
 
-        public CompaniesHouseCompanyProfileClient(IHttpClientFactory httpClientFactory, ICompanyProfileUriBuilder companyProfileUriBuilder)
+        public CompaniesHouseCompanyProfileClient(HttpClient httpClient, ICompanyProfileUriBuilder companyProfileUriBuilder)
         {
-            _httpClientFactory = httpClientFactory;
+            _httpClient = httpClient;
             _companyProfileUriBuilder = companyProfileUriBuilder;
         }
 
         public async Task<CompaniesHouseClientResponse<CompanyProfile>> GetCompanyProfileAsync(string companyNumber, CancellationToken cancellationToken = default(CancellationToken))
         {
-            using (var httpClient = _httpClientFactory.CreateHttpClient())
-            {
-                var requestUri = _companyProfileUriBuilder.Build(companyNumber);
+            var requestUri = _companyProfileUriBuilder.Build(companyNumber);
 
-                var response = await httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
+            var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-                // Return a null profile on 404s, but raise exception for all other error codes
-                if (response.StatusCode != System.Net.HttpStatusCode.NotFound)
-                    response.EnsureSuccessStatusCode();
+            // Return a null profile on 404s, but raise exception for all other error codes
+            if (response.StatusCode != System.Net.HttpStatusCode.NotFound)
+                response.EnsureSuccessStatusCode();
 
-                CompanyProfile result = response.IsSuccessStatusCode
-                    ? await response.Content.ReadAsAsync<CompanyProfile>(cancellationToken).ConfigureAwait(false)
-                    : null;
+            CompanyProfile result = response.IsSuccessStatusCode
+                ? await response.Content.ReadAsAsync<CompanyProfile>(cancellationToken).ConfigureAwait(false)
+                : null;
 
-                return new CompaniesHouseClientResponse<CompanyProfile>(result);
-            }
+            return new CompaniesHouseClientResponse<CompanyProfile>(result);
         }
     }
 }

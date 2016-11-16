@@ -7,31 +7,27 @@ namespace CompaniesHouse
 {
     public class CompaniesHouseSearchClient : ICompaniesHouseSearchClient
     {
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly HttpClient _httpClient;
         private readonly ISearchUriBuilderFactory _searchUriBuilderFactory;
 
-        public CompaniesHouseSearchClient(IHttpClientFactory httpClientFactory, ISearchUriBuilderFactory searchUriBuilderFactory)
+        public CompaniesHouseSearchClient(HttpClient httpClient, ISearchUriBuilderFactory searchUriBuilderFactory)
         {
-            _httpClientFactory = httpClientFactory;
+            _httpClient = httpClient;
             _searchUriBuilderFactory = searchUriBuilderFactory;
         }
 
         public async Task<CompaniesHouseClientResponse<TSearch>> SearchAsync<TSearch>(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
-            using (var httpClient = _httpClientFactory.CreateHttpClient())
-            {
-                var searchUriBuilder = _searchUriBuilderFactory.Create<TSearch>();
-                var requestUri = searchUriBuilder.Build(request);
+            var searchUriBuilder = _searchUriBuilderFactory.Create<TSearch>();
+            var requestUri = searchUriBuilder.Build(request);
 
-                var response = await httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
+            var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-                response.EnsureSuccessStatusCode();
+            response.EnsureSuccessStatusCode();
 
-                var result = await response.Content.ReadAsAsync<TSearch>(cancellationToken).ConfigureAwait(false);
+            var result = await response.Content.ReadAsAsync<TSearch>(cancellationToken).ConfigureAwait(false);
 
-                return new CompaniesHouseClientResponse<TSearch>(result);
-            }
-
+            return new CompaniesHouseClientResponse<TSearch>(result);
         }
     }
 }
