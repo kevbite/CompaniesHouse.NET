@@ -52,9 +52,6 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
                 .CreateResource(_resourceDetails);
 
             HttpMessageHandler handler = new StubHttpMessageHandler(uri, resource);
-            var httpClientFactory = new Mock<IHttpClientFactory>();
-            httpClientFactory.Setup(x => x.CreateHttpClient())
-                .Returns(new HttpClient(handler));
 
             var uriBuilder = new Mock<ISearchUriBuilder>();
             uriBuilder.Setup(x => x.Build(It.IsAny<SearchRequest>()))
@@ -64,7 +61,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
             uriBuilderFactory.Setup(x => x.Create<CompanySearch>())
                 .Returns(uriBuilder.Object);
 
-            _client = new CompaniesHouseSearchClient(httpClientFactory.Object, uriBuilderFactory.Object);
+            _client = new CompaniesHouseSearchClient(new HttpClient(handler), uriBuilderFactory.Object);
 
             _result = _client.SearchAsync<CompanySearch>(new SearchRequest()).Result;
         }
