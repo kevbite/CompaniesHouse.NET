@@ -23,10 +23,13 @@ var settings = new CompaniesHouseSettings(apiKey);
 We need to now create a `CompaniesHouseClient` - passing in the settings that we've just created.
 
 ```csharp
-var client = new CompaniesHouseClient(settings);
+vusing(ar client = new CompaniesHouseClient(settings))
+{
+    // Do some work...
+}
 ```
 
-This is the object we'll use going forward with any interaction to the CompaniesHouse API.
+This is the object we'll use going forward for any interaction to the CompaniesHouse API, but don't forget to call `Dispose` after you've finish (or wrap in a `using` block).
 
 ## Usage
 
