@@ -49,6 +49,9 @@ namespace CompaniesHouse.Response
         ChangeOfConstitution,
 
         [EnumMember(Value = "document-replacement")]
-        DocumentReplacement
+        DocumentReplacement,
+
+        [EnumMember(Value = "insolvency")]
+        Insolvency
     }
 }
