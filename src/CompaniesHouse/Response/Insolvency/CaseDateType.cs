@@ -50,6 +50,9 @@ namespace CompaniesHouse.Response.Insolvency
         MoratoriumEndedOn,
 
         [EnumMember(Value = "declaration-solvent-on")]
-        DeclarationSolventOn
+        DeclarationSolventOn,
+
+        [EnumMember(Value = "dissolved-on")]
+        DissolvedOn,
     }
 }

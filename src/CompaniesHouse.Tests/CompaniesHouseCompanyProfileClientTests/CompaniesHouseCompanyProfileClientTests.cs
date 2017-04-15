@@ -28,15 +28,12 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTests
             var uri = new Uri("https://wibble.com/search/companies");
 
             HttpMessageHandler handler = new StubHttpMessageHandler(uri, resource);
-            var httpClientFactory = new Mock<IHttpClientFactory>();
-            httpClientFactory.Setup(x => x.CreateHttpClient())
-                .Returns(new HttpClient(handler));
 
             var uriBuilder = new Mock<ICompanyProfileUriBuilder>();
             uriBuilder.Setup(x => x.Build(It.IsAny<string>()))
                 .Returns(uri);
 
-            _client = new CompaniesHouseCompanyProfileClient(httpClientFactory.Object, uriBuilder.Object);
+            _client = new CompaniesHouseCompanyProfileClient(new HttpClient(handler), uriBuilder.Object);
 
             _result = _client.GetCompanyProfileAsync("abc").Result;
 

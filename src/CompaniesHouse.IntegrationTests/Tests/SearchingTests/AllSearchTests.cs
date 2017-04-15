@@ -33,7 +33,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
         }
 
         [Test]
-        public void TheItemsAreReturned()
+        public void ThenItemsAreReturned()
         {
             Assert.That(_result.Data.Items, Is.Not.Empty);
         }

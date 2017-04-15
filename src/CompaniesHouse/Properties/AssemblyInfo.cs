@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Kevsoft")]
 [assembly: AssemblyProduct("CompaniesHouse")]
-[assembly: AssemblyCopyright("Copyright © LiberisLabs 2015")]
+[assembly: AssemblyCopyright("Copyright © Kevsoft 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

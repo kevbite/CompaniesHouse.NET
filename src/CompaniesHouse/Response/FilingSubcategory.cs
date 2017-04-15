@@ -31,6 +31,12 @@ namespace CompaniesHouse.Response
         Termination,
 
         [EnumMember(Value = "release-cease")]
-        ReleaseCease
+        ReleaseCease,
+
+        [EnumMember(Value = "voluntary")]
+        Voluntary,
+
+        [EnumMember(Value = "administration")]
+        Administration
     }
 }
