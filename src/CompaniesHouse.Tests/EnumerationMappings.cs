@@ -156,7 +156,8 @@ namespace CompaniesHouse.Tests
             {"miscellaneous", FilingCategory.Miscellaneous},
             {"mortgage", FilingCategory.Mortgage},
             {"officers", FilingCategory.Officers},
-            {"resolution", FilingCategory.Resolution}
+            {"resolution", FilingCategory.Resolution},
+            {"confirmation-statement", FilingCategory.ConfirmationStatement}
         };
     }
 }

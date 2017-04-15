@@ -52,6 +52,9 @@ namespace CompaniesHouse.Response
         DocumentReplacement,
 
         [EnumMember(Value = "insolvency")]
-        Insolvency
+        Insolvency,
+
+        [EnumMember(Value = "confirmation-statement")]
+        ConfirmationStatement
     }
 }
