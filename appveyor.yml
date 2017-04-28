@@ -22,7 +22,9 @@
   build:
     parallel: true
     verbosity: normal
-    publish_nuget: true
+
+  after_build:
+    - ps : dotnet pack .\src\CompaniesHouse\CompaniesHouse.csproj -c Release /p:Version=$env:APPVEYOR_BUILD_VERSION
 
   environment:
     CompaniesHouseApiKey:
@@ -72,7 +74,9 @@
   build:
     parallel: true
     verbosity: normal
-    publish_nuget: true
+
+  after_build:
+    - ps : dotnet pack .\src\CompaniesHouse\CompaniesHouse.csproj -c Release /p:Version=$env:APPVEYOR_BUILD_VERSION
 
   environment:
     CompaniesHouseApiKey:

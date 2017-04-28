@@ -14,8 +14,6 @@
   <PropertyGroup>
     <AssemblyName>CompaniesHouse</AssemblyName>
     <PackageId>CompaniesHouse</PackageId>
-    <VersionPrefix>1.0.0</VersionPrefix>
-    <VersionSuffix>alpha</VersionSuffix>
     <Authors>Kevin Smith</Authors>
     <Company>Kevsoft</Company>
     <AssemblyTitle>CompaniesHouse.NET</AssemblyTitle>
