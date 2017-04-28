@@ -20,10 +20,16 @@ namespace CompaniesHouse
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
             };
 
+            var companiesHouseAuthorizationHandler = new CompaniesHouseAuthorizationHandler(_settings.ApiKey)
+            {
+                InnerHandler = httpClientHandler
+            };
 
-            var httpClient = System.Net.Http.HttpClientFactory.Create(httpClientHandler, new CompaniesHouseAuthorizationHandler(_settings.ApiKey));
+            var httpClient = new HttpClient(companiesHouseAuthorizationHandler)
+            {
+                BaseAddress = _settings.BaseUri
+            };
 
-            httpClient.BaseAddress = _settings.BaseUri;
 
             return httpClient;
         }

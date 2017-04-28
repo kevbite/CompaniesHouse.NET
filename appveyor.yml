@@ -3,7 +3,7 @@
     only:
       - master
 
-  version: 3.1.7
+  version: 3.2.0
   install:
     - ps : .\environment-install.ps1
 
@@ -14,7 +14,7 @@
     file: AssemblyInfo.*
     patch: true
 
-  os: Visual Studio 2015
+  image: Visual Studio 2017
 
   before_build:
     - ps : .\build-before_build.ps1
@@ -22,7 +22,9 @@
   build:
     parallel: true
     verbosity: normal
-    publish_nuget: true
+
+  after_build:
+    - ps : dotnet pack .\src\CompaniesHouse\CompaniesHouse.csproj -c Release /p:Version=$env:APPVEYOR_BUILD_VERSION
 
   environment:
     CompaniesHouseApiKey:
@@ -41,7 +43,7 @@
       - '**\*.IntegrationTests.dll'
 
   artifacts:
-    - path: '*.nupkg'
+    - path: '**\bin\**\*.nupkg'
 
   deploy:
     - provider: Environment
@@ -64,7 +66,7 @@
     file: AssemblyInfo.*
     patch: true
 
-  os: Visual Studio 2015
+  image: Visual Studio 2017
 
   before_build:
     - ps : .\build-before_build.ps1
@@ -72,7 +74,9 @@
   build:
     parallel: true
     verbosity: normal
-    publish_nuget: true
+
+  after_build:
+    - ps : dotnet pack .\src\CompaniesHouse\CompaniesHouse.csproj -c Release /p:Version=$env:APPVEYOR_BUILD_VERSION
 
   environment:
     CompaniesHouseApiKey:
@@ -91,4 +95,4 @@
       - '**\*.IntegrationTests.dll'
 
   artifacts:
-    - path: '*.nupkg'
+    - path: '**\bin\**\*.nupkg'

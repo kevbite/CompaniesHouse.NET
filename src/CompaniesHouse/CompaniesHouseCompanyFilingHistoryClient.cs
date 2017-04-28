@@ -28,7 +28,7 @@ namespace CompaniesHouse
                 response.EnsureSuccessStatusCode();
 
             CompanyFilingHistory result = response.IsSuccessStatusCode
-                ? await response.Content.ReadAsAsync<CompanyFilingHistory>(cancellationToken).ConfigureAwait(false)
+                ? await response.Content.ReadAsJsonAsync<CompanyFilingHistory>().ConfigureAwait(false)
                 : null;
 
             return new CompaniesHouseClientResponse<CompanyFilingHistory>(result);
