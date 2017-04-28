@@ -1,10 +1,45 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.1</TargetFramework>
+    <TargetFrameworks>netstandard1.1;net45</TargetFrameworks>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net45'">
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard1.1'">
+    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <AssemblyName>CompaniesHouse</AssemblyName>
+    <PackageId>CompaniesHouse</PackageId>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <VersionSuffix>alpha</VersionSuffix>
+    <Authors>Kevin Smith</Authors>
+    <Company>Kevsoft</Company>
+    <AssemblyTitle>CompaniesHouse.NET</AssemblyTitle>
+    <Description>
+      A simple .NET API client wrapper for CompaniesHouse
+    </Description>
+    <Copyright>Copyright © Kevsoft 2017</Copyright>
   </PropertyGroup>
 
-  <ItemGroup>
+  <PropertyGroup>
+    <PackageTags>CompaniesHouse;Registrar;Kevsoft;API;REST;WebService</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/kevbite/CompaniesHouse.NET/master/companies-house.jpg</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/kevbite/CompaniesHouse.NET</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/kevbite/CompaniesHouse.NET</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+    <PackageReference Include="newtonsoft.json" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.1'">
     <PackageReference Include="newtonsoft.json" Version="10.0.2" />
   </ItemGroup>
 
