@@ -43,7 +43,7 @@
       - '**\*.IntegrationTests.dll'
 
   artifacts:
-    - path: '*.nupkg'
+    - path: '**\*.nupkg'
 
   deploy:
     - provider: Environment
@@ -95,4 +95,4 @@
       - '**\*.IntegrationTests.dll'
 
   artifacts:
-    - path: '*.nupkg'
+    - path: '**\*.nupkg'
