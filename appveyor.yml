@@ -14,7 +14,7 @@
     file: AssemblyInfo.*
     patch: true
 
-  os: Visual Studio 2015
+  image: Visual Studio 2017
 
   before_build:
     - ps : .\build-before_build.ps1
@@ -64,7 +64,7 @@
     file: AssemblyInfo.*
     patch: true
 
-  os: Visual Studio 2015
+  image: Visual Studio 2017
 
   before_build:
     - ps : .\build-before_build.ps1
