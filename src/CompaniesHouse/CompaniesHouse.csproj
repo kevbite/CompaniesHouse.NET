@@ -12,7 +12,8 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <AssemblyName>CompaniesHouse.NET</AssemblyName>
+    <Title>CompaniesHouse.NET</Title>
+    <AssemblyName>CompaniesHouse</AssemblyName>
     <PackageId>CompaniesHouse</PackageId>
     <Authors>Kevin Smith</Authors>
     <Company>Kevsoft</Company>
