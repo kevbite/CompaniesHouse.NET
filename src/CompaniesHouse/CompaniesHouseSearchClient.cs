@@ -25,7 +25,7 @@ namespace CompaniesHouse
 
             response.EnsureSuccessStatusCode();
 
-            var result = await response.Content.ReadAsAsync<TSearch>(cancellationToken).ConfigureAwait(false);
+            var result = await response.Content.ReadAsJsonAsync<TSearch>().ConfigureAwait(false);
 
             return new CompaniesHouseClientResponse<TSearch>(result);
         }

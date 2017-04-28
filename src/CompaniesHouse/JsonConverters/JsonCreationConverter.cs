@@ -10,7 +10,7 @@ namespace CompaniesHouse.JsonConverters
 
         public override bool CanConvert(Type objectType)
         {
-            return typeof(T).IsAssignableFrom(objectType);
+            return typeof(T) == objectType;
         }
 
         public override bool CanWrite => false;

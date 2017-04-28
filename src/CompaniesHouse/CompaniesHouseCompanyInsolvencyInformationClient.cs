@@ -2,6 +2,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using CompaniesHouse.Response.Insolvency;
+using Newtonsoft.Json;
 
 namespace CompaniesHouse
 {
@@ -22,9 +23,22 @@ namespace CompaniesHouse
                 
             response.EnsureSuccessStatusCode();
 
-            var result = await response.Content.ReadAsAsync<CompanyInsolvencyInformation>(cancellationToken).ConfigureAwait(false);
+            var result = await response.Content.ReadAsJsonAsync<CompanyInsolvencyInformation>().ConfigureAwait(false);
 
             return new CompaniesHouseClientResponse<CompanyInsolvencyInformation>(result);
+        }
+    }
+
+    public static class HttpContentExtensions
+    {
+        public static async Task<T> ReadAsJsonAsync<T>(this HttpContent content)
+        {
+            var input = await content.ReadAsStringAsync()
+                .ConfigureAwait(false);
+
+            var obj = JsonConvert.DeserializeObject<T>(input);
+
+            return obj;
         }
     }
 }

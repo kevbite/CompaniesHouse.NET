@@ -28,7 +28,7 @@ namespace CompaniesHouse
                 response.EnsureSuccessStatusCode();
 
             var result = response.IsSuccessStatusCode
-                ? await response.Content.ReadAsAsync<Officers>(cancellationToken).ConfigureAwait(false)
+                ? await response.Content.ReadAsJsonAsync<Officers>().ConfigureAwait(false)
                 : null;
 
             return new CompaniesHouseClientResponse<Officers>(result);
