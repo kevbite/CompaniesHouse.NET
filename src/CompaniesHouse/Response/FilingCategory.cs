@@ -55,6 +55,9 @@ namespace CompaniesHouse.Response
         Insolvency,
 
         [EnumMember(Value = "confirmation-statement")]
-        ConfirmationStatement
+        ConfirmationStatement,
+
+        [EnumMember(Value = "persons-with-significant-control")]
+        PersonsWithSignificantControl,
     }
 }

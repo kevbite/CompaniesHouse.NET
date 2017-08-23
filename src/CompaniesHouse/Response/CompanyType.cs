@@ -83,5 +83,8 @@ namespace CompaniesHouse.Response
 
         [EnumMember(Value = "uk-establishment")]
         UkEstablishment,
+
+        [EnumMember(Value = "registered-society-non-jurisdictional")]
+        RegisteredSociety,
     }
 }
