@@ -39,6 +39,12 @@ namespace CompaniesHouse.Response
         [EnumMember(Value = "administration")]
         Administration,
 
+        [EnumMember(Value = "compulsory")]
+        Compulsory,
+
+        [EnumMember(Value = "court-order")]
+        CourtOrder,
+
         [EnumMember(Value = "other")]
         Other
     }
