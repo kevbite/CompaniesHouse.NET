@@ -76,6 +76,9 @@
     <Compile Include="CompaniesHouseCompanyFilingHistoryClientTests\CompanyFilingHistoryBuilder.cs" />
     <Compile Include="CompaniesHouseSearchClientTests\CompaniesHouseSearchClientTestsForOfficerSearch.cs" />
     <Compile Include="DescriptionTests\DescriptionProviderTests.cs" />
+    <Compile Include="JsonConverters\FilingSubcategoryConverterTests\FilingSubcategoryConverterTestsBase.cs" />
+    <Compile Include="JsonConverters\FilingSubcategoryConverterTests\FilingSubcategoryConverterTestsForMultipleValues.cs" />
+    <Compile Include="JsonConverters\FilingSubcategoryConverterTests\FilingSubcategoryConverterTestsForSingleValue.cs" />
     <Compile Include="MapProviders\FilingCategoriesMapProvider.cs" />
     <Compile Include="MapProviders\FilingHistoryStatusMapProvider.cs" />
     <Compile Include="MapProviders\FilingSubcategoriesMapProvider.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using CompaniesHouse.Description;
+using CompaniesHouse.JsonConverters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
@@ -13,8 +14,8 @@ namespace CompaniesHouse.Response.CompanyFiling
         public FilingCategory Category { get; set; }
 
         [JsonProperty(PropertyName = "subcategory")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public FilingSubcategory Subcategory { get; set; }
+        [JsonConverter(typeof(FilingSubcategoryConverter))]
+        public FilingSubcategory[] Subcategory { get; set; }
 
         [JsonProperty(PropertyName = "transaction_id")]
         public string TransactionId { get; set; }
