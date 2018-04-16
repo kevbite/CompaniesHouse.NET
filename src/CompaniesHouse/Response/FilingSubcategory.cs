@@ -37,6 +37,9 @@ namespace CompaniesHouse.Response
         Voluntary,
 
         [EnumMember(Value = "administration")]
-        Administration
+        Administration,
+
+        [EnumMember(Value = "other")]
+        Other
     }
 }
