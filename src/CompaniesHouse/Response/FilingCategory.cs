@@ -59,5 +59,11 @@ namespace CompaniesHouse.Response
 
         [EnumMember(Value = "persons-with-significant-control")]
         PersonsWithSignificantControl,
+
+        [EnumMember(Value = "historical")]
+        Historical,
+
+        [EnumMember(Value = "dissolution")]
+        Dissolution,
     }
 }

@@ -24,7 +24,8 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
                 "03977902", // Google
                 "00445790", // Tesco
                 "00002065", // Lloyds Bank PLC
-                "09965459"  // Amazebytes
+                "09965459",  // Amazebytes
+                "06768813"  // TEST & COOL LTD
             };
         }
 
