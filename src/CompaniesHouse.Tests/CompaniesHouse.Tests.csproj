@@ -75,6 +75,7 @@
     <Compile Include="CompaniesHouseCompanyFilingHistoryClientTests\CompaniesHouseCompanyFilingHistoryClientTestCase.cs" />
     <Compile Include="CompaniesHouseCompanyFilingHistoryClientTests\CompanyFilingHistoryBuilder.cs" />
     <Compile Include="CompaniesHouseSearchClientTests\CompaniesHouseSearchClientTestsForOfficerSearch.cs" />
+    <Compile Include="ComparingArrayEnumWith.cs" />
     <Compile Include="DescriptionTests\DescriptionProviderTests.cs" />
     <Compile Include="JsonConverters\FilingSubcategoryConverterTests\FilingSubcategoryConverterTestsBase.cs" />
     <Compile Include="JsonConverters\FilingSubcategoryConverterTests\FilingSubcategoryConverterTestsForMultipleValues.cs" />
