@@ -23,7 +23,7 @@ var settings = new CompaniesHouseSettings(apiKey);
 We need to now create a `CompaniesHouseClient` - passing in the settings that we've just created.
 
 ```csharp
-vusing(ar client = new CompaniesHouseClient(settings))
+using(var client = new CompaniesHouseClient(settings))
 {
     // Do some work...
 }
