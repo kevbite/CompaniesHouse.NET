@@ -86,5 +86,19 @@ namespace CompaniesHouse.Response
 
         [EnumMember(Value = "registered-society-non-jurisdictional")]
         RegisteredSociety,
-    }
+
+		[EnumMember(Value = "protected-cell-company")]
+	    ProtectedCellCompany,
+
+	    [EnumMember(Value = "scottish-partnership")]
+		ScottishPartnership,
+
+		[EnumMember(Value = "charitable-incorporated-organisation")]
+	    CharitableIncorporatedOrganisation,
+
+		[EnumMember(Value = "scottish-charitable-incorporated-organisation")]
+		ScottishCharitableIncorporatedOrganisation,
+
+
+	}
 }
