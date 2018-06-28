@@ -5,9 +5,9 @@ using NUnit.Framework;
 
 namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
 {
-    [TestFixture("Liberis")]
+    [TestFixture("brighouse computers")]
     [TestFixture("British Gas")]
-    public class CompanySearchTests
+	public class CompanySearchTests
     {
         private readonly string _query;
         private CompaniesHouseClient _client;

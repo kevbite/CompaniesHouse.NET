@@ -35,7 +35,11 @@ namespace CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource
 
         public CompanySearchResourceBuilder AddCompany(CompanyDetails companyDetails)
         {
-            var itemBlock = 
+	        var companyStatusField = companyDetails.CompanyStatus == null
+		        ? "null"
+		        : "\"" + companyDetails.CompanyStatus + "\"";
+
+			var itemBlock = 
                 $@" {{
          ""address"": {{
             ""address_line_1"" : ""{companyDetails.AddressLine1}"",
@@ -48,7 +52,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource
             ""region"" : ""{companyDetails.Region}""
          }},
          ""company_number"" : ""{companyDetails.CompanyNumber}"",
-         ""company_status"" : ""{companyDetails.CompanyStatus}"",
+         ""company_status"" : {companyStatusField},
          ""company_type"" : ""{companyDetails.CompanyType}"",
          ""date_of_cessation"" : ""{companyDetails.DateOfCessation.ToString("yyyy-MM-dd")}"",
          ""date_of_creation"" : ""{companyDetails.DateOfCreation.ToString("yyyy-MM-dd")}"",
