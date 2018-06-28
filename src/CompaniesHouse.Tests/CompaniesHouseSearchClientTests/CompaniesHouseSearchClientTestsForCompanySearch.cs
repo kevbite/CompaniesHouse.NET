@@ -41,6 +41,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
                 fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "open").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
                 fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "closed").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
                 fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "closed-on").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, null).With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
             };
 
             var uri = new Uri("https://wibble.com/search/companies");
@@ -108,7 +109,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
         [Test]
         public void ThenTheNumberOfReturnedCompaniesIsCorrect()
         {
-            Assert.That(_result.Data.Companies.Count(), Is.EqualTo(12));
+            Assert.That(_result.Data.Companies.Count(), Is.EqualTo(13));
 
         }
 
@@ -130,7 +131,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
                 Assert.That(actual.Address.PostalCode, Is.EqualTo(companyDetails.PostalCode));
                 Assert.That(actual.Address.Region, Is.EqualTo(companyDetails.Region));
 
-                Assert.That(actual.CompanyStatus, Is.EqualTo(ExpectedCompanyStatus[companyDetails.CompanyStatus]));
+				Assert.That(actual.CompanyStatus, Is.EqualTo(ExpectedCompanyStatus[companyDetails.CompanyStatus ?? ""]));
                 Assert.That(actual.CompanyType, Is.EqualTo(ExpectedCompanyType[companyDetails.CompanyType]));
                 Assert.That(actual.DateOfCessation, Is.EqualTo(companyDetails.DateOfCessation.Date));
                 Assert.That(actual.DateOfCreation, Is.EqualTo(companyDetails.DateOfCreation.Date));
@@ -146,6 +147,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
         private static readonly IReadOnlyDictionary<string, CompanyStatus> ExpectedCompanyStatus = new Dictionary
             <string, CompanyStatus>()
         {
+            {"", CompanyStatus.None},
             {"active", CompanyStatus.Active},
             {"dissolved", CompanyStatus.Dissolved},
             {"liquidation", CompanyStatus.Liquidation},

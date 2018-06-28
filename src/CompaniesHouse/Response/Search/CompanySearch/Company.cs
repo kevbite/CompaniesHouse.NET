@@ -14,7 +14,7 @@ namespace CompaniesHouse.Response.Search.CompanySearch
         public string CompanyNumber { get; set; }
 
         [JsonProperty(PropertyName = "company_status")]
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(OptionalStringEnumConverter<CompanyStatus>), CompanyStatus.None)]
         public CompanyStatus CompanyStatus { get; set; }
 
         [JsonProperty(PropertyName = "company_type")]
