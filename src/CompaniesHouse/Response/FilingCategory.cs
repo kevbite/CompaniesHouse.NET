@@ -44,7 +44,7 @@ namespace CompaniesHouse.Response
 
         [EnumMember(Value = "resolution")]
         Resolution,
-
+               
         [EnumMember(Value = "change-of-constitution")]
         ChangeOfConstitution,
 
@@ -65,5 +65,8 @@ namespace CompaniesHouse.Response
 
         [EnumMember(Value = "dissolution")]
         Dissolution,
+
+        [EnumMember(Value = "restoration")]
+        Restoration,
     }
 }
