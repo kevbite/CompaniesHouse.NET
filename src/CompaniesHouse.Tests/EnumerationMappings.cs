@@ -159,7 +159,8 @@ namespace CompaniesHouse.Tests
             {"officers", FilingCategory.Officers},
             {"resolution", FilingCategory.Resolution},
             {"confirmation-statement", FilingCategory.ConfirmationStatement},
-            {"persons-with-significant-control", FilingCategory.PersonsWithSignificantControl}
+            {"persons-with-significant-control", FilingCategory.PersonsWithSignificantControl},
+            {"restoration", FilingCategory.Restoration }
         };
     }
 }
