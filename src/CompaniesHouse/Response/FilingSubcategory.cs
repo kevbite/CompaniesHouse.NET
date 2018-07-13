@@ -46,6 +46,10 @@ namespace CompaniesHouse.Response
         CourtOrder,
 
         [EnumMember(Value = "other")]
-        Other
+        Other,
+
+        [EnumMember(Value = "notifications")]
+        Notifications,
+
     }
 }
