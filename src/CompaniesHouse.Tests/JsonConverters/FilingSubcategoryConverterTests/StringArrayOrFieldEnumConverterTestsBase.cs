@@ -1,20 +1,21 @@
 ﻿using System.IO;
 using CompaniesHouse.JsonConverters;
+using CompaniesHouse.Response;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace CompaniesHouse.Tests.JsonConverters.FilingSubcategoryConverterTests
 {
     [TestFixture]
-    public abstract class FilingSubcategoryConverterTestsBase
+    public abstract class StringArrayOrFieldEnumConverterTestsBase
     {
-        private FilingSubcategoryConverter _convertor;
+        private StringArrayOrFieldEnumConverter _convertor;
         protected object Result;
 
         [OneTimeSetUp]
         public void GivenAFilingSubcategoryConverter()
         {
-            _convertor = new FilingSubcategoryConverter();
+            _convertor = new StringArrayOrFieldEnumConverter();
         }
 
         [SetUp]
@@ -23,7 +24,7 @@ namespace CompaniesHouse.Tests.JsonConverters.FilingSubcategoryConverterTests
             var json = GetJson();
             var jsonTextReader = new JsonTextReader(new StringReader(json));
             jsonTextReader.Read();
-            Result = _convertor.ReadJson(jsonTextReader, null, null, null);
+            Result = _convertor.ReadJson(jsonTextReader, typeof(FilingSubcategory[]), null, null);
         }
 
         protected abstract string GetJson();
