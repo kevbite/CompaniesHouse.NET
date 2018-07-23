@@ -51,5 +51,7 @@ namespace CompaniesHouse.Response
         [EnumMember(Value = "notifications")]
         Notifications,
 
+        [EnumMember(Value = "officers")]
+        Officers,
     }
 }
