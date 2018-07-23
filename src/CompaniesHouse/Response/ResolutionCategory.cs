@@ -19,6 +19,9 @@ namespace CompaniesHouse.Response
         Resolution,
 
         [EnumMember(Value = "change-of-name")]
-        ChangeOfName
+        ChangeOfName,
+
+        [EnumMember(Value = "liquidation")]
+        Liquidation
     }
 }
