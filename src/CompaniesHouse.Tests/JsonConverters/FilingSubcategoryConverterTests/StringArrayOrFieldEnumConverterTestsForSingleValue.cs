@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace CompaniesHouse.Tests.JsonConverters.FilingSubcategoryConverterTests
 {
     [TestFixture]
-    public class FilingSubcategoryConverterTestsForSingleValue : FilingSubcategoryConverterTestsBase
+    public class StringArrayOrFieldEnumConverterTestsForSingleValue : StringArrayOrFieldEnumConverterTestsBase
     {
         protected override string GetJson()
         {

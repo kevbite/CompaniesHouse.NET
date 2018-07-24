@@ -14,7 +14,7 @@ namespace CompaniesHouse.Response.CompanyFiling
         public FilingCategory Category { get; set; }
 
         [JsonProperty(PropertyName = "subcategory")]
-        [JsonConverter(typeof(FilingSubcategoryConverter))]
+        [JsonConverter(typeof(StringArrayOrFieldEnumConverter))]
         public FilingSubcategory[] Subcategory { get; set; }
 
         [JsonProperty(PropertyName = "transaction_id")]

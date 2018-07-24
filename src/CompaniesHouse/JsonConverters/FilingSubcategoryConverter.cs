@@ -1,50 +1,63 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using CompaniesHouse.Response;
+using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace CompaniesHouse.JsonConverters
 {
-    public class FilingSubcategoryConverter : JsonConverter
+    public class StringArrayOrFieldEnumConverter : JsonConverter
     {
         private readonly StringEnumConverter _stringEnumConverter;
 
-        public FilingSubcategoryConverter()
+        public StringArrayOrFieldEnumConverter()
         {
             _stringEnumConverter = new StringEnumConverter();
         }
 
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(FilingSubcategory[]);
-        }
+            if (objectType.IsArray && _stringEnumConverter.CanConvert(objectType.GetElementType()))
+            {
+                return true;
+            }
 
+            return false;
+        }
+        
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
+            var elementType = objectType.GetElementType();
+
+            var list = new List<object>() as IList;
+
             if (reader.TokenType == JsonToken.StartArray)
             {
-                var l = new List<FilingSubcategory>();
                 reader.Read();
                 while (reader.TokenType != JsonToken.EndArray)
                 {
-                    var filingSubcategory = ReadValue(reader, existingValue, serializer);
-                    l.Add(filingSubcategory);
+                    var value = ReadValue(reader, elementType, existingValue, serializer);
+                    list.Add(value);
 
                     reader.Read();
                 }
-
-                return l.ToArray();
+            }
+            else
+            {
+                var value = ReadValue(reader, elementType, existingValue, serializer);
+                list.Add(value);
             }
 
-            return new []{ ReadValue(reader, existingValue, serializer) };
+            var array = (Array)Activator.CreateInstance(elementType.MakeArrayType(), list.Count);
+            list.CopyTo(array, 0);
+
+            return array;
         }
 
-        private FilingSubcategory ReadValue(JsonReader reader, object existingValue, JsonSerializer serializer)
+        private object ReadValue(JsonReader reader, Type elementType, object existingValue, JsonSerializer serializer)
         {
-            var filingSubcategory =
-                (FilingSubcategory)_stringEnumConverter.ReadJson(reader, typeof(FilingSubcategory), existingValue, serializer);
-            return filingSubcategory;
+            return _stringEnumConverter.ReadJson(reader, elementType, existingValue, serializer);
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
