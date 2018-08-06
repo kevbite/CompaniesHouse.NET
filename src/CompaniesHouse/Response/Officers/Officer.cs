@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace CompaniesHouse.Response.CompanyProfile
+namespace CompaniesHouse.Response.Officers
 {
     public class Officer
     {
@@ -21,5 +21,8 @@ namespace CompaniesHouse.Response.CompanyProfile
         [JsonProperty(PropertyName = "officer_role")]
         [JsonConverter(typeof(StringEnumConverter))]
         public OfficerRole OfficerRole { get; set; }
+
+        [JsonProperty(PropertyName = "nationality")]
+        public string Nationality { get; set; }
     }
 }

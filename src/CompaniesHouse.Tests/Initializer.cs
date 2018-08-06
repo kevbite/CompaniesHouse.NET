@@ -1,5 +1,6 @@
 ﻿using CompaniesHouse.Response;
 using CompaniesHouse.Response.CompanyProfile;
+using CompaniesHouse.Response.Officers;
 using CompaniesHouse.Tests.MapProviders;
 using FluentAssertions;
 using NUnit.Framework;

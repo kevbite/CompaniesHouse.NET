@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.CompanyProfile
+namespace CompaniesHouse.Response.Officers
 {
     public class OfficerDateOfBirth
     {
