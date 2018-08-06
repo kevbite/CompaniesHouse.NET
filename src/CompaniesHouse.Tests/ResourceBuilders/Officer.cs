@@ -13,5 +13,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
         public string Name { get; set; }
 
         public string OfficerRole { get; set; }
+
+        public string Nationality { get; set; }
     }
 }

@@ -34,7 +34,8 @@ namespace CompaniesHouse.Tests.ResourceBuilders
                        ""year"" : {officer.DateOfBirth.Year}
                     }},
                     ""name"" : ""{officer.Name}"",
-                    ""officer_role"" : ""{officer.OfficerRole}""
+                    ""officer_role"" : ""{officer.OfficerRole}"",
+                    ""nationality"" : ""{officer.Nationality}""
                  }}";
         }
     }

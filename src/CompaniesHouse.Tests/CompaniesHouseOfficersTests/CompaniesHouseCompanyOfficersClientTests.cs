@@ -14,7 +14,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseOfficersTests
     {
         private CompaniesHouseOfficersClient _client;
 
-        private CompaniesHouseClientResponse<Response.Officers.Officers> _result;
+        private CompaniesHouseClientResponse<Officers> _result;
         private ResourceBuilders.Officers _officers;
 
         [Test]

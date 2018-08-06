@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace CompaniesHouse.Response.CompanyProfile
+namespace CompaniesHouse.Response.Officers
 {
     public class Officer
     {

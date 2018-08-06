@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using CompaniesHouse.Response.CompanyProfile;
+using CompaniesHouse.Response.Officers;
 
 namespace CompaniesHouse.Tests.MapProviders
 {
