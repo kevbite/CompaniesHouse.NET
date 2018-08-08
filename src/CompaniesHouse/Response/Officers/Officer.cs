@@ -24,5 +24,20 @@ namespace CompaniesHouse.Response.Officers
 
         [JsonProperty(PropertyName = "nationality")]
         public string Nationality { get; set; }
+
+        [JsonProperty(PropertyName = "occupation")]
+        public string Occupation { get; set; }
+
+        [JsonProperty(PropertyName = "address")]
+        public Address Address { get; set; }
+
+        [JsonProperty(PropertyName = "country_of_residence")]
+        public string CountryOfResidence { get; set; }
+
+        [JsonProperty(PropertyName = "former_names")]
+        public OfficerFormerName[] FormerNames { get; set; }
+
+        [JsonProperty(PropertyName = "identification")]
+        public OfficerIdentification Identification { get; set; }
     }
 }

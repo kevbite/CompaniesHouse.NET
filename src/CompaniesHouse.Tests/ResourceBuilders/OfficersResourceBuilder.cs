@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CompaniesHouse.Response.Officers;
 
 namespace CompaniesHouse.Tests.ResourceBuilders
 {
@@ -35,8 +36,39 @@ namespace CompaniesHouse.Tests.ResourceBuilders
                     }},
                     ""name"" : ""{officer.Name}"",
                     ""officer_role"" : ""{officer.OfficerRole}"",
-                    ""nationality"" : ""{officer.Nationality}""
+                    ""nationality"" : ""{officer.Nationality}"",
+                    ""occupation"" : ""{officer.Occupation}"",
+                    ""address"" : {{
+                       ""address_line_1"" : ""{officer.Address.AddressLine1}"",
+                       ""address_line_2"" : ""{officer.Address.AddressLine2}"",
+                       ""care_of"" : ""{officer.Address.CareOf}"",
+                       ""country"" : ""{officer.Address.Country}"",
+                       ""locality"" : ""{officer.Address.Locality}"",
+                       ""po_box"" : ""{officer.Address.PoBox}"",
+                       ""postal_code"" : ""{officer.Address.PostalCode}"",
+                       ""premises"" : ""{officer.Address.Premises}"",
+                       ""region"" : ""{officer.Address.Region}"",
+                    }},
+                    ""country_of_residence"" : ""{officer.CountryOfResidence}"",
+                    ""former_names"" : [
+                        {string.Join(",", officer.FormerNames.Select(GetOfficerFormerNameJsonBlock).ToArray())}
+                    ],
+                    ""identification"": {{
+                        ""identification_type"": ""{officer.Identification.IdentificationType}"",
+                        ""legal_authority"": ""{officer.Identification.LegalAuthority}"",
+                        ""legal_form"": ""{officer.Identification.LegalForm}"",
+                        ""place_registered"": ""{officer.Identification.PlaceRegistered}"",
+                        ""registration_number"": ""{officer.Identification.RegistrationNumber}""
+                    }}
                  }}";
+        }
+
+        private static string GetOfficerFormerNameJsonBlock(OfficerFormerName officerFormerName)
+        {
+            return $@"{{
+                    ""forenames"": ""{officerFormerName.ForeNames}"",
+                    ""surname"": ""{officerFormerName.Surname}""
+            }}";
         }
     }
 }
