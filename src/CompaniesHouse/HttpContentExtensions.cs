@@ -1,3 +1,4 @@
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -8,12 +9,17 @@ namespace CompaniesHouse
     {
         public static async Task<T> ReadAsJsonAsync<T>(this HttpContent content)
         {
-            var input = await content.ReadAsStringAsync()
-                .ConfigureAwait(false);
+            using (var s = await content.ReadAsStreamAsync()
+                .ConfigureAwait(false))
+            {
+                using (var sr = new StreamReader(s))
+                using (var reader = new JsonTextReader(sr))
+                {
+                    var serializer = new JsonSerializer();
 
-            var obj = JsonConvert.DeserializeObject<T>(input);
-
-            return obj;
+                    return serializer.Deserialize<T>(reader);
+                }
+            }
         }
     }
 }
