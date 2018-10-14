@@ -1,131 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BC825074-5662-421D-A849-FD94158F3029}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CompaniesHouse.Tests</RootNamespace>
-    <AssemblyName>CompaniesHouse.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFrameworks>net462</TargetFrameworks>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="CompaniesHouseOfficersTests\CompaniesHouseCompanyOfficersClientTests.cs" />
-    <Compile Include="CompaniesHouseOfficersTests\OfficersBuilder.cs" />
-    <Compile Include="CompaniesHouseCompanyFilingHistoryClientTests\CompaniesHouseCompanyFilingHistoryClientTests.cs" />
-    <Compile Include="CompaniesHouseCompanyFilingHistoryClientTests\CompaniesHouseCompanyFilingHistoryClientTestCase.cs" />
-    <Compile Include="CompaniesHouseCompanyFilingHistoryClientTests\CompanyFilingHistoryBuilder.cs" />
-    <Compile Include="CompaniesHouseSearchClientTests\CompaniesHouseSearchClientTestsForOfficerSearch.cs" />
-    <Compile Include="ComparingArrayEnumWith.cs" />
-    <Compile Include="DescriptionTests\DescriptionProviderTests.cs" />
-    <Compile Include="JsonConverters\FilingSubcategoryConverterTests\StringArrayOrFieldEnumConverterTestsBase.cs" />
-    <Compile Include="JsonConverters\FilingSubcategoryConverterTests\StringArrayOrFieldEnumConverterTestsForMultipleValues.cs" />
-    <Compile Include="JsonConverters\FilingSubcategoryConverterTests\StringArrayOrFieldEnumConverterTestsForSingleValue.cs" />
-    <Compile Include="MapProviders\FilingCategoriesMapProvider.cs" />
-    <Compile Include="MapProviders\FilingHistoryStatusMapProvider.cs" />
-    <Compile Include="MapProviders\FilingSubcategoriesMapProvider.cs" />
-    <Compile Include="MapProviders\ResolutionCategoriesMapProvider.cs" />
-    <Compile Include="ResourceBuilders\CompanyFilingHistoryResourceBuilder.cs" />
-    <Compile Include="CompaniesHouseCompanyProfileClientTests\CompaniesHouseCompanyProfileClientTestCase.cs" />
-    <Compile Include="CompaniesHouseCompanyProfileClientTests\CompaniesHouseCompanyProfileClientTests.cs" />
-    <Compile Include="CompaniesHouseCompanyProfileClientTests\CompanyProfileBuilder.cs" />
-    <Compile Include="Initializer.cs" />
-    <Compile Include="MapProviders\CompanyStatusDetailMapProvider.cs" />
-    <Compile Include="MapProviders\CompanyStatusMapProvider.cs" />
-    <Compile Include="MapProviders\CompanyTypesMapProvider.cs" />
-    <Compile Include="ComparingEnumWith.cs" />
-    <Compile Include="EnumerationMappings.cs" />
-    <Compile Include="MapProviders\IEnumDataMapProvider.cs" />
-    <Compile Include="JsonConverters\OptionalDateJsonConverterTests\OptionalDateJsonConverterTestsForUnknownValue.cs" />
-    <Compile Include="MapProviders\JurisdictionMapProvider.cs" />
-    <Compile Include="MapProviders\LastAccountsTypeMapProvider.cs" />
-    <Compile Include="MapProviders\OfficerRoleMapProvider.cs" />
-    <Compile Include="ResourceBuilders\AccountingReferenceDate.cs" />
-    <Compile Include="ResourceBuilders\Accounts.cs" />
-    <Compile Include="ResourceBuilders\AnnualReturn.cs" />
-    <Compile Include="ResourceBuilders\CompanySearchResource\CompanyDetails.cs" />
-    <Compile Include="CompaniesHouseSearchClientTests\CompaniesHouseSearchClientTestsForCompanySearch.cs" />
-    <Compile Include="ResourceBuilders\CompanyFilingHistory.cs" />
-    <Compile Include="ResourceBuilders\CompanyProfile.cs" />
-    <Compile Include="ResourceBuilders\ConfirmationStatement.cs" />
-    <Compile Include="ResourceBuilders\OfficerSearchResource\Address.cs" />
-    <Compile Include="ResourceBuilders\OfficerSearchResource\ResourceDetails.cs" />
-    <Compile Include="ResourceBuilders\OfficerSearchResource\DateOfBirth.cs" />
-    <Compile Include="ResourceBuilders\OfficerSearchResource\Item.cs" />
-    <Compile Include="ResourceBuilders\OfficerSearchResource\Links.cs" />
-    <Compile Include="ResourceBuilders\OfficerSearchResource\Matches.cs" />
-    <Compile Include="ResourceBuilders\OfficerSearchResource\OfficerSearchResourceBuilder.cs" />
-    <Compile Include="ResourceBuilders\OfficersResourceBuilder.cs" />
-    <Compile Include="ResourceBuilders\CompanyProfileResourceBuilder.cs" />
-    <Compile Include="ResourceBuilders\CompanySearchResource\CompanySearchResourceBuilder.cs" />
-    <Compile Include="DelegatingHandlers\CompaniesHouseAuthorizationHandlerTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResourceBuilders\DateOfBirth.cs" />
-    <Compile Include="ResourceBuilders\FilingHistoryItem.cs" />
-    <Compile Include="ResourceBuilders\FilingHistoryItemAnnotation.cs" />
-    <Compile Include="ResourceBuilders\FilingHistoryItemAssociatedFiling.cs" />
-    <Compile Include="ResourceBuilders\FilingHistoryItemResolution.cs" />
-    <Compile Include="ResourceBuilders\LastAccounts.cs" />
-    <Compile Include="ResourceBuilders\CompanyFillingLinks.cs" />
-    <Compile Include="ResourceBuilders\Officer.cs" />
-    <Compile Include="ResourceBuilders\Officers.cs" />
-    <Compile Include="ResourceBuilders\OfficerSummary.cs" />
-    <Compile Include="ResourceBuilders\PreviousCompanyNames.cs" />
-    <Compile Include="ResourceBuilders\RegisteredOfficeAddress.cs" />
-    <Compile Include="ResourceBuilders\CompanySearchResource\ResourceDetails.cs" />
-    <Compile Include="StubHttpMessageHandler.cs" />
-    <Compile Include="UniversalDateSpecimenBuilder.cs" />
-    <Compile Include="UniversalNullableDateSpecimenBuilder.cs" />
-    <Compile Include="UriBuilders\CompanyFilingUriBuilderTests\CompanyFilingHistoryUriBuilderTests.cs" />
-    <Compile Include="UriBuilders\CompanyProfileUriBuilderTests\CompanyProfileUriBuilderTests.cs" />
-    <Compile Include="UriBuilders\SearchUriBuilderTests\CompanySearchUriBuilderTestsBase+Thens.cs" />
-    <Compile Include="UriBuilders\SearchUriBuilderTests\SearchUriBuilderTestsBase.cs" />
-    <Compile Include="UriBuilders\SearchUriBuilderTests\SearchUriBuilderTestsBaseForQuery.cs" />
-    <Compile Include="UriBuilders\SearchUriBuilderTests\SearchUriBuilderTestsForItemsPerPage.cs" />
-    <Compile Include="UriBuilders\SearchUriBuilderTests\SearchUriBuilderTestsForStartIndex.cs" />
-    <Compile Include="UriBuilders\OfficersUriBuilderTests\OfficersUriBuilderTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EquivalencySteps\" />
-  </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\CompaniesHouse\CompaniesHouse.csproj">
       <Project>{9639747a-c49f-42e9-85a4-41fcbfcb7a16}</Project>
@@ -149,12 +27,5 @@
       <Version>3.5.0</Version>
     </PackageReference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
