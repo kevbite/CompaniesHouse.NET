@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Web;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Primitives;
 using NUnit.Framework;
 
 namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
@@ -20,41 +24,41 @@ namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
             {
                 var query = GetQuery();
 
-                Assert.That(query["q"], Is.EqualTo(_searchUriBuilderTestsBase.Query));
+                Assert.That(query["q"].FirstOrDefault(), Is.EqualTo(_searchUriBuilderTestsBase.Query));
             }
 
             public void TheUriQueryStringDoesNotContainsTheItemsPerPage()
             {
                 var query = GetQuery();
 
-                Assert.That(query["items_per_page"], Is.Null);
+                Assert.That(query.ContainsKey("items_per_page"), Is.False);
             }
 
             public void TheUriQueryStringContainsTheItemsPerPage()
             {
                 var query = GetQuery();
 
-                Assert.That(query["items_per_page"], Is.EqualTo(_searchUriBuilderTestsBase.ItemsPerPage.ToString()));
+                Assert.That(query["items_per_page"].FirstOrDefault(), Is.EqualTo(_searchUriBuilderTestsBase.ItemsPerPage.ToString()));
             }
 
             public void TheUriQueryStringContainsTheStartIndex()
             {
                 var query = GetQuery();
 
-                Assert.That(query["start_index"], Is.EqualTo(_searchUriBuilderTestsBase.StartIndex.ToString()));
+                Assert.That(query["start_index"].FirstOrDefault(), Is.EqualTo(_searchUriBuilderTestsBase.StartIndex.ToString()));
             }
 
             public void TheUriQueryStringDoesNotContainsTheStartIndex()
             {
                 var query = GetQuery();
 
-                Assert.That(query["start_index"], Is.Null);
+                Assert.That(query.ContainsKey("start_index"), Is.False);
             }
 
-            protected NameValueCollection GetQuery()
+            protected Dictionary<string, StringValues> GetQuery()
             {
                 var uri = new Uri(_searchUriBuilderTestsBase._baseUri, _searchUriBuilderTestsBase._actualUri);
-                var query = HttpUtility.ParseQueryString(uri.Query);
+                var query = QueryHelpers.ParseQuery(uri.Query);
                 return query;
             }
         }
