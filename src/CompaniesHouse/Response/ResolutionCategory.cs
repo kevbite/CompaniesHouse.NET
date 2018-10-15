@@ -22,6 +22,9 @@ namespace CompaniesHouse.Response
         ChangeOfName,
 
         [EnumMember(Value = "liquidation")]
-        Liquidation
+        Liquidation,
+
+        [EnumMember(Value = "auditors")]
+        Auditors
     }
 }
