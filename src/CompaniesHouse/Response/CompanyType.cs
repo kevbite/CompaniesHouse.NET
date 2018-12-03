@@ -4,6 +4,7 @@ namespace CompaniesHouse.Response
 {
     public enum CompanyType
     {
+        [EnumMember(Value = "")]
         None = 0,
 
         [EnumMember(Value = "private-unlimited")]
