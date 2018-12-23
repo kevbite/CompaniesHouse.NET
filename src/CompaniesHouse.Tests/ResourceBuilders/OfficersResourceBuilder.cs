@@ -34,6 +34,11 @@ namespace CompaniesHouse.Tests.ResourceBuilders
                        ""month"" : {officer.DateOfBirth.Month},
                        ""year"" : {officer.DateOfBirth.Year}
                     }},
+                    ""links"" : {{
+                        ""officer"" : {{
+                            ""appointments"" : ""{officer.Links.Officer.AppointmentsResource}""                                                               
+                            }}                    
+                    }},
                     ""name"" : ""{officer.Name}"",
                     ""officer_role"" : ""{officer.OfficerRole}"",
                     ""nationality"" : ""{officer.Nationality}"",

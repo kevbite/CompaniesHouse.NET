@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 
 namespace CompaniesHouse.Response.Officers
 {
@@ -39,5 +40,32 @@ namespace CompaniesHouse.Response.Officers
 
         [JsonProperty(PropertyName = "identification")]
         public OfficerIdentification Identification { get; set; }
+
+        [JsonProperty(PropertyName = "links")]
+        public OfficerLinks Links { get; set; }
+
+        public string OfficerId {
+            get
+            {
+                return Links.Officer.OfficerId;
+            }
+        }
+    }
+
+    public class OfficerLinks
+    {
+        [JsonProperty(PropertyName = "officer")]
+        public OfficerAppointmentLink Officer { get; set; }
+    }
+
+    public class OfficerAppointmentLink
+    {
+        [JsonProperty(PropertyName = "appointments")]
+        public string AppointmentsResource { get; set; }
+
+        public string OfficerId
+        {
+            get { return AppointmentsResource.Split('/')[2]; }
+        }       
     }
 }

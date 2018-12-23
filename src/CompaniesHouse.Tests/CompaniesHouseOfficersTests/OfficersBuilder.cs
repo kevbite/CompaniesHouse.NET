@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
-using CompaniesHouse.Tests.ResourceBuilders;
+using CompaniesHouse.Response.Officers;
 using Ploeh.AutoFixture;
+using Officer = CompaniesHouse.Tests.ResourceBuilders.Officer;
+using Officers = CompaniesHouse.Tests.ResourceBuilders.Officers;
 
 namespace CompaniesHouse.Tests.CompaniesHouseOfficersTests
 {
@@ -14,8 +16,11 @@ namespace CompaniesHouse.Tests.CompaniesHouseOfficersTests
             fixture.Customizations.Add(new UniversalDateSpecimenBuilder<Officer>(x => x.ResignedOn));
 
             var officers = EnumerationMappings.PossibleOfficerRoles.Keys.Select(x => fixture.Build<Officer>()
-               .With(y => y.OfficerRole, x)
-               .Create()).ToArray();
+                .With(y => y.OfficerRole, x)
+                .With(y => y.Links,
+                    new OfficerLinks()
+                        {Officer = new OfficerAppointmentLink() {AppointmentsResource = "/officers/xyz/appointments"}})
+                .Create()).ToArray();
 
             var officerSummary = fixture.Build<Officers>().With(x => x.Items, officers).Create();
 
