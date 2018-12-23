@@ -51,21 +51,4 @@ namespace CompaniesHouse.Response.Officers
             }
         }
     }
-
-    public class OfficerLinks
-    {
-        [JsonProperty(PropertyName = "officer")]
-        public OfficerAppointmentLink Officer { get; set; }
-    }
-
-    public class OfficerAppointmentLink
-    {
-        [JsonProperty(PropertyName = "appointments")]
-        public string AppointmentsResource { get; set; }
-
-        public string OfficerId
-        {
-            get { return AppointmentsResource.Split('/')[2]; }
-        }       
-    }
 }
