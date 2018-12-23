@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
+namespace CompaniesHouse.IntegrationTests.Tests.AppointmentsTests
 {
     [TestFixture]
-    public class OfficersTestsValid : OfficersTestBase
+    public class AppointmentsTestsValid : AppointmentsTestBase
     {
         // Google UK company number, unlikely to go away soon
         private const string ValidCompanyNumber = "03977902";
@@ -18,12 +18,12 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
         public void ThenTheDataItemsAreNotEmpty()
         {
             Assert.That(_result.Data.Items, Is.Not.Empty);
-            Assert.That(_result.Data.Items[0].OfficerId, Is.Not.Empty);
         }
 
         private void WhenRetrievingAnCompanyFilingHistoryForAValidCompany()
         {
-            _result = _client.GetOfficersAsync(ValidCompanyNumber).Result;
+            var res = _client.GetOfficersAsync(ValidCompanyNumber).Result;            
+            _result = _client.GetAppointmentsAsync(res.Data.Items[0].OfficerId).Result;
         }
     }
 }

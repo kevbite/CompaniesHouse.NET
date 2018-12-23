@@ -27,5 +27,11 @@ namespace CompaniesHouse.Tests.ResourceBuilders
         public OfficerFormerName[] FormerNames { get; set; }
 
         public OfficerIdentification Identification { get; set; }
+
+        public OfficerLinks Links { get; set; }
+        public string OfficerId
+        {
+            get { return Links.Officer.OfficerId; }
+        }
     }
 }
