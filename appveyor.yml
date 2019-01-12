@@ -3,7 +3,7 @@
     only:
       - master
 
-  version: 6.1.5
+  version: 6.1.6
   install:
     - ps : .\environment-install.ps1
 
@@ -41,6 +41,7 @@
       - '**\*.Tests.dll'
       - '**\*.FunctionalTests.dll'
       - '**\*.IntegrationTests.dll'
+      - '**\*.ScenarioTests.dll'
 
   artifacts:
     - path: '**\bin\**\*.nupkg'

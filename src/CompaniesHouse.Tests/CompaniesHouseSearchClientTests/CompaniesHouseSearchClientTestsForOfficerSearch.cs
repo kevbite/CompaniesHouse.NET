@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response.Search.OfficerSearch;
@@ -54,7 +55,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
         [Test]
         public void ThenResultDataIsCorrect()
         {
-            _result.Data.ShouldBeEquivalentTo(_resourceDetails);
+            _result.Data.ShouldBeEquivalentTo(_resourceDetails, opt => opt.Excluding(su => Regex.IsMatch(su.SelectedMemberPath, @"Officers\[.+\]\.OfficerId")));
         }  
     }
 }
