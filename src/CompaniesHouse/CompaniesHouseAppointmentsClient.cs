@@ -7,7 +7,7 @@ namespace CompaniesHouse
 {
     public class CompaniesHouseAppointmentsClient : ICompaniesHouseAppointmentsClient
     {
-        private HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
 
         public CompaniesHouseAppointmentsClient(HttpClient httpClient)
         {

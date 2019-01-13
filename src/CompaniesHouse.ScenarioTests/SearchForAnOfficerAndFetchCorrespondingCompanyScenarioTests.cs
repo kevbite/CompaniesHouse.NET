@@ -7,7 +7,7 @@ namespace CompaniesHouse.ScenarioTests
 {
     public class SearchForAnOfficerAndFetchCorrespondingCompanyScenarioTests
     {
-        private CompaniesHouseClient _client;
+        private ICompaniesHouseClient _client;
 
         [SetUp]
         public void Setup()
