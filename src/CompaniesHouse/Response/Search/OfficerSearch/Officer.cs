@@ -30,5 +30,10 @@ namespace CompaniesHouse.Response.Search.OfficerSearch
 
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
+
+        public string OfficerId
+        {
+            get { return Links.Self.Split('/')[2]; }
+        }
     }
 }

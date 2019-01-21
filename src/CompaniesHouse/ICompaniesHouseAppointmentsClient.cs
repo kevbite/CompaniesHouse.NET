@@ -4,8 +4,8 @@ using CompaniesHouse.Response.Appointments;
 
 namespace CompaniesHouse
 {
-    internal interface ICompaniesHouseAppointmentsClient
+    public interface ICompaniesHouseAppointmentsClient
     {
-        Task<CompaniesHouseClientResponse<Appointments>> GetAppointmentsAsync(string officerId, int startIndex, int pageSize, CancellationToken cancellationToken);
+        Task<CompaniesHouseClientResponse<Appointments>> GetAppointmentsAsync(string officerId, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
