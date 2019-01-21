@@ -8,7 +8,7 @@ namespace CompaniesHouse.Response.Appointments
     public class Appointments
     {
         [JsonProperty(PropertyName = "total_results")]
-        public string TotalResults { get; set; }
+        public int TotalResults { get; set; }
 
         [JsonProperty(PropertyName = "kind")]
         public string Kind { get; set; }
