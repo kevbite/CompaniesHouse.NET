@@ -48,7 +48,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
       ""overdue"" : ""{_companyProfile.ConfirmationStatement.Overdue.ToString().ToLower()}""
    }},
    ""date_of_creation"" : ""{_companyProfile.DateOfCreation.ToString("yyyy-MM-dd")}"",
-   ""date_of_dissolution"" : ""{_companyProfile.DateOfDissolution.ToString("yyyy-MM-dd")}"",
+   ""date_of_cessation"" : ""{_companyProfile.DateOfCessation.ToString("yyyy-MM-dd")}"",
    ""etag"" : ""{_companyProfile.ETag}"",
    ""has_been_liquidated"" : {_companyProfile.HasBeenLiquidated.ToString().ToLower()},
    ""has_charges"" : {_companyProfile.HasCharges.ToString().ToLower()},
