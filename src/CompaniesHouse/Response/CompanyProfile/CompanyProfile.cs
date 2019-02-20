@@ -43,9 +43,9 @@ namespace CompaniesHouse.Response.CompanyProfile
         [JsonProperty(PropertyName = "date_of_creation")]
         public DateTime? DateOfCreation { get; set; }
 
-        [JsonProperty(PropertyName = "date_of_dissolution")]
+        [JsonProperty(PropertyName = "date_of_cessation")]
         [JsonConverter(typeof(OptionalDateJsonConverter))]
-        public DateTime? DateOfDissolution { get; set; }
+        public DateTime? DateOfCessation { get; set; }
 
         [JsonProperty(PropertyName = "has_been_liquidated")]
         public bool? HasBeenLiquidated { get; set; }

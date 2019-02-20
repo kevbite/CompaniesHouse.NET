@@ -24,7 +24,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTests
             fixture.Customizations.Add(new UniversalDateSpecimenBuilder<ResourceBuilders.AnnualReturn>(x => x.NextMadeUpTo));
             fixture.Customizations.Add(new UniversalDateSpecimenBuilder<ResourceBuilders.CompanyProfile>(x => x.DateOfCreation));
             fixture.Customizations.Add(
-                new UniversalDateSpecimenBuilder<ResourceBuilders.CompanyProfile>(x => x.DateOfDissolution));
+                new UniversalDateSpecimenBuilder<ResourceBuilders.CompanyProfile>(x => x.DateOfCessation));
             fixture.Customizations.Add(
                 new UniversalDateSpecimenBuilder<ResourceBuilders.CompanyProfile>(x => x.LastFullMembersListDate));
             fixture.Customizations.Add(new UniversalDateSpecimenBuilder<ResourceBuilders.Officer>(x => x.AppointedOn));

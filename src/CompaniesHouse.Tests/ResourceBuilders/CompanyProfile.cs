@@ -20,7 +20,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
 
         public DateTime DateOfCreation { get; set; }
 
-        public DateTime DateOfDissolution { get; set; }
+        public DateTime DateOfCessation { get; set; }
 
         public bool UndeliverableRegisteredOfficeAddress { get; set; }
 
