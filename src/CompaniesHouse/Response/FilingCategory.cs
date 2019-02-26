@@ -68,5 +68,8 @@ namespace CompaniesHouse.Response
 
         [EnumMember(Value = "restoration")]
         Restoration,
+
+        [EnumMember(Value = "return")]
+        Return,
     }
 }
