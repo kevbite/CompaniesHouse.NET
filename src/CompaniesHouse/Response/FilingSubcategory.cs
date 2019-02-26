@@ -53,5 +53,12 @@ namespace CompaniesHouse.Response
 
         [EnumMember(Value = "officers")]
         Officers,
+
+        [EnumMember(Value = "document-replacement")]
+        DocumentReplacement,
+
+        [EnumMember(Value = "statements")]
+        Statements,
+
     }
 }
