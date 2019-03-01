@@ -42,7 +42,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
 
         public bool HasCharges { get; set; }
 
-        public PreviousCompanyNames[] PreviousCompanyNames { get; set; }
+        public PreviousCompanyName[] PreviousCompanyNames { get; set; }
 
         public ConfirmationStatement ConfirmationStatement { get; set; }
 

@@ -24,7 +24,15 @@ namespace CompaniesHouse.Tests.ResourceBuilders
       }},
       ""last_accounts"" : {{
          ""made_up_to"" : ""{_companyProfile.Accounts.LastAccounts.MadeUpTo.ToString("yyyy-MM-dd")}"",
-         ""type"" : ""{_companyProfile.Accounts.LastAccounts.Type}""
+         ""type"" : ""{_companyProfile.Accounts.LastAccounts.Type}"",
+         ""period_end_on"" : ""{_companyProfile.Accounts.LastAccounts.PeriodEndOn:yyyy-MM-dd}"",
+         ""period_start_on"" : ""{_companyProfile.Accounts.LastAccounts.PeriodStartOn:yyyy-MM-dd}""
+      }},
+      ""next_accounts"": {{
+         ""due_on"" : ""{_companyProfile.Accounts.NextAccounts.DueOn:yyyy-MM-dd}"",
+         ""period_end_on"" : ""{_companyProfile.Accounts.NextAccounts.PeriodEndOn:yyyy-MM-dd}"",
+         ""period_start_on"" : ""{_companyProfile.Accounts.NextAccounts.PeriodStartOn:yyyy-MM-dd}"",
+         ""overdue"" : ""{_companyProfile.Accounts.NextAccounts.Overdue.ToString().ToLower()}""
       }},
       ""next_due"" : ""{_companyProfile.Accounts.NextDue.ToString("yyyy-MM-dd")}"",
       ""next_made_up_to"" : ""{_companyProfile.Accounts.NextMadeUpTo.ToString("yyyy-MM-dd")}"",
@@ -63,6 +71,9 @@ namespace CompaniesHouse.Tests.ResourceBuilders
       ],
       ""resigned_count"" : {_companyProfile.OfficerSummary.ResignedCount}
    }},
+   ""previous_company_names"" : [
+      {string.Join(",", _companyProfile.PreviousCompanyNames.Select(GetPreviousCompanyNameJsonBlock).ToArray())}
+   ],
    ""registered_office_address"" : {{
       ""address_line_1"" : ""{_companyProfile.RegisteredOfficeAddress.AddressLine1}"",
       ""address_line_2"" : ""{_companyProfile.RegisteredOfficeAddress.AddressLine2}"",
@@ -96,6 +107,15 @@ namespace CompaniesHouse.Tests.ResourceBuilders
             ""name"" : ""{officer.Name}"",
             ""officer_role"" : ""{officer.OfficerRole}""
          }}";
+        }
+
+        private string GetPreviousCompanyNameJsonBlock(PreviousCompanyName name)
+        {
+            return $@"{{
+                ""name"" : ""{name.Name}"",
+                ""ceased_on"" : ""{name.CeasedOn:yyyy-MM-dd}"",
+                ""effective_from"" : ""{name.EffectiveFrom:yyyy-MM-dd}""
+            }}";
         }
     }
 }
