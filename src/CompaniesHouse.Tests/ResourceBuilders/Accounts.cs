@@ -10,6 +10,8 @@ namespace CompaniesHouse.Tests.ResourceBuilders
 
         public LastAccounts LastAccounts { get; set; }
 
+        public NextAccounts NextAccounts { get; set; }
+
         public DateTime NextMadeUpTo { get; set; }
 
         public bool Overdue { get; set; }

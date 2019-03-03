@@ -67,6 +67,9 @@ namespace CompaniesHouse.Response.CompanyProfile
         [JsonConverter(typeof(OptionalDateJsonConverter))]
         public DateTime? LastFullMembersListDate { get; set; }
 
+        [JsonProperty(PropertyName = "previous_company_names")]
+        public PreviousCompanyName[] PreviousCompanyNames { get; set; }
+
         [JsonProperty(PropertyName = "registered_office_address")]
         public Address RegisteredOfficeAddress { get; set; }
 

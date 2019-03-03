@@ -12,14 +12,20 @@ namespace CompaniesHouse.Response.CompanyProfile
         [JsonProperty(PropertyName = "last_accounts")]
         public LastAccounts LastAccounts { get; set; }
 
+        [JsonProperty(PropertyName = "next_accounts")]
+        public NextAccounts NextAccounts { get; set; }
+
         [JsonProperty(PropertyName = "next_due")]
         [JsonConverter(typeof(OptionalDateJsonConverter))]
+        [Obsolete("Deprecated - use NextAccounts.DueOn")]
         public DateTime? NextDue { get; set; }
 
         [JsonProperty(PropertyName = "next_made_up_to")]
+        [Obsolete("Deprecated - use NextAccounts.PeriodEndOn")]
         public DateTime? NextMadeUpTo { get; set; }
 
         [JsonProperty(PropertyName = "overdue")]
+        [Obsolete("Deprecated - use NextAccounts.Overdue")]
         public bool? Overdue { get; set; }
     }
 }
