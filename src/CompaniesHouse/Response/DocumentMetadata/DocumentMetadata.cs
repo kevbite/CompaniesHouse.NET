@@ -19,7 +19,7 @@ namespace CompaniesHouse.Response.DocumentMetadata
         public int Pages { get; set; }
         [JsonProperty("created_at")]
         public string CreatedAt { get; set; }
-        [JsonProperty("etag ")]
+        [JsonProperty("etag")]
         public string Etag { get; set; }
         [JsonProperty("links")]
         public Links Links { get; set; }
