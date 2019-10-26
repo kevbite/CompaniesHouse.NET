@@ -3,7 +3,7 @@
     only:
       - master
 
-  version: 7.1.0
+  version: 7.2.0
   install:
     - ps : .\environment-install.ps1
 
@@ -14,7 +14,7 @@
     file: AssemblyInfo.*
     patch: true
 
-  image: Visual Studio 2017
+  image: Visual Studio 2019
 
   before_build:
     - ps : .\build-before_build.ps1

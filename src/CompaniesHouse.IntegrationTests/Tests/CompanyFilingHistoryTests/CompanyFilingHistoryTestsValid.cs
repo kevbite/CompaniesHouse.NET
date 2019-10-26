@@ -27,7 +27,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
                 "09965459",  // Amazebytes
                 "06768813",  // TEST & COOL LTD,
                 "00059337",
-                "06484911",
+                "SC171417",
                 "09018331"
             };
         }
