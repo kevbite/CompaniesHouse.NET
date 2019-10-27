@@ -1,9 +1,10 @@
-﻿using NUnit.Framework;
+﻿using CompaniesHouse.Response.DocumentMetadata;
+using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.DocumentMetadataTests
+namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
 {
     [TestFixture]
-    public class DocumentMetadataTestsValid : DocumentMetadataTestBase
+    public class DocumentMetadataTestsValid : DocumentTestBase<DocumentMetadata>
     {
         private const string DocumentId = "FIxRR8teCKodjkBLRDHv2Cb8y0-nQ7T5G3BEXfWtOu4";
 
