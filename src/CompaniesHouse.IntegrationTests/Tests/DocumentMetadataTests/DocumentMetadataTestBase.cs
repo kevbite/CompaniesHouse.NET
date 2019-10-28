@@ -1,4 +1,5 @@
-﻿using CompaniesHouse.Response.DocumentMetadata;
+﻿using System.Threading.Tasks;
+using CompaniesHouse.Response.DocumentMetadata;
 using NUnit.Framework;
 
 namespace CompaniesHouse.IntegrationTests.Tests.DocumentMetadataTests
@@ -9,13 +10,13 @@ namespace CompaniesHouse.IntegrationTests.Tests.DocumentMetadataTests
         protected CompaniesHouseClientResponse<DocumentMetadata> Result;
 
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
             GivenACompaniesHouseClient();
-            When();
+            await When().ConfigureAwait(false);
         }
 
-        protected abstract void When();
+        protected abstract Task When();
 
         private void GivenACompaniesHouseClient()
         {

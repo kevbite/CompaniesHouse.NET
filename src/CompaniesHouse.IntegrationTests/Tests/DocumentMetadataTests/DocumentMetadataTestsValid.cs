@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace CompaniesHouse.IntegrationTests.Tests.DocumentMetadataTests
 {
@@ -8,9 +9,9 @@ namespace CompaniesHouse.IntegrationTests.Tests.DocumentMetadataTests
         private const string DocumentId = "FIxRR8teCKodjkBLRDHv2Cb8y0-nQ7T5G3BEXfWtOu4";
 
         [SetUp]
-        protected override void When() => RetrievingDocumentMetadata();
+        protected override async Task When() => await RetrievingDocumentMetadata().ConfigureAwait(false);
 
-        private void RetrievingDocumentMetadata() => Result = Client.GetDocumentMetadataAsync(DocumentId).Result;
+        private async Task RetrievingDocumentMetadata() => Result = await Client.GetDocumentMetadataAsync(DocumentId).ConfigureAwait(false);
 
         [Test]
         public void ThenDocumentMetadataAreNotEmpty()

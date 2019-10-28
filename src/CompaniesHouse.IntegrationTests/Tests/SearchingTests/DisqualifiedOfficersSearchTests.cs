@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
 using NUnit.Framework;
@@ -19,9 +20,10 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
         }
 
         [SetUp]
-        public void WhenSearchingForADisqualifiedOfficers()
+        public async Task WhenSearchingForADisqualifiedOfficers()
         {
-            _result = _client.SearchDisqualifiedOfficerAsync(new SearchRequest() { Query = "Kevin" }).Result;
+            _result = await _client.SearchDisqualifiedOfficerAsync(new SearchRequest() { Query = "Kevin" })
+                .ConfigureAwait(false);
         }
 
         [Test]
