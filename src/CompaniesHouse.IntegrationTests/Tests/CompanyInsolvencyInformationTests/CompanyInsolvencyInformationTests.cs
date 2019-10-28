@@ -21,7 +21,8 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyInsolvencyInformationTest
         [SetUp]
         public async Task WhenSearching()
         {
-            _result = await _client.GetCompanyInsolvencyInformationAsync("08749409");
+            _result = await _client.GetCompanyInsolvencyInformationAsync("08749409")
+                .ConfigureAwait(false);
         }
 
         [Test]

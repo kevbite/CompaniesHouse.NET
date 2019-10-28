@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response.Search.OfficerSearch;
 using NUnit.Framework;
@@ -20,9 +21,10 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
         }
 
         [SetUp]
-        public void WhenSearchingForAOfficer()
+        public async Task WhenSearchingForAOfficer()
         {
-            _result = _client.SearchOfficerAsync(new SearchRequest() { Query = "Kevin" }).Result;
+            _result = await _client.SearchOfficerAsync(new SearchRequest() { Query = "Kevin" })
+                .ConfigureAwait(false);
         }
 
         [Test]

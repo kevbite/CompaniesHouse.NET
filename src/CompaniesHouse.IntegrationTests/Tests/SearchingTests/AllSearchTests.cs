@@ -29,7 +29,8 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
         [SetUp]
         public async Task WhenSearching()
         {
-            _result = await _client.SearchAllAsync(new SearchRequest() { Query = _query });
+            _result = await _client.SearchAllAsync(new SearchRequest() { Query = _query })
+                .ConfigureAwait(false);
         }
 
         [Test]

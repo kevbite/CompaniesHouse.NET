@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
 {
@@ -8,9 +9,9 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
         private const string InvalidCompanyNumber = "ABC00000";
 
         [SetUp]
-        protected override void When()
+        protected override async Task When()
         {
-            WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany();
+            await WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany().ConfigureAwait(false);
         }
 
         [Test]
@@ -19,9 +20,9 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
             Assert.That(_result.Data, Is.Null);
         }
 
-        private void WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany()
+        private async Task WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany()
         {
-            _result = _client.GetOfficersAsync(InvalidCompanyNumber).Result;
+            _result = await _client.GetOfficersAsync(InvalidCompanyNumber).ConfigureAwait(false);
         }
     }
 }
