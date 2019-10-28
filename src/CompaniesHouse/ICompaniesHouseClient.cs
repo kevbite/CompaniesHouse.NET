@@ -9,7 +9,8 @@
         ICompaniesHouseCompanyFilingHistoryClient,
         ICompaniesHouseOfficersClient,
         ICompaniesHouseCompanyInsolvencyInformationClient,
-        ICompaniesHouseAppointmentsClient
+        ICompaniesHouseAppointmentsClient,
+        ICompaniesHouseDocumentMetadataClient
     {
 
     }
