@@ -7,7 +7,7 @@ using CompaniesHouse.Request;
 using CompaniesHouse.Response.Appointments;
 using CompaniesHouse.Response.CompanyFiling;
 using CompaniesHouse.Response.CompanyProfile;
-using CompaniesHouse.Response.DocumentMetadata;
+using CompaniesHouse.Response.Document;
 using CompaniesHouse.Response.Insolvency;
 using CompaniesHouse.Response.Officers;
 using CompaniesHouse.Response.Search.AllSearch;
@@ -102,9 +102,9 @@ namespace CompaniesHouse
             return _companiesHouseDocumentMetadataClient.GetDocumentMetadataAsync(documentId, caneCancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<Stream>> DownloadDocumentAsync(string documentId, CancellationToken cancellationToken = default)
+        public Task<CompaniesHouseClientResponse<DocumentDownload>> DownloadDocumentAsync(string documentId, CancellationToken cancellationToken = default)
         {
-            return _companiesHouseDocumentClient.DownloadDocumentAsync(documentId);
+            return _companiesHouseDocumentClient.DownloadDocumentAsync(documentId, cancellationToken);
         }
     }
 }

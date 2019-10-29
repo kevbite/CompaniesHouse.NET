@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using CompaniesHouse.Response.DocumentMetadata;
+using CompaniesHouse.Response.Document;
 using CompaniesHouse.UriBuilders;
 
 namespace CompaniesHouse

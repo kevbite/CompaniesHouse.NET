@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using CompaniesHouse.Response.DocumentMetadata;
+using CompaniesHouse.Response.Document;
 using NUnit.Framework;
 
 namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
