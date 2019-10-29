@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
@@ -8,16 +9,13 @@ namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
         private const string TestPdf = "test.pdf";
 
         [SetUp]
-        protected override void When() => DownloadingDocument();
+        protected override async Task When() => await DownloadingDocument();
 
-        private void DownloadingDocument()
+        private async Task DownloadingDocument()
         {
             using var fileStream = File.Open(TestPdf, FileMode.OpenOrCreate);
-            Client
-                .DownloadDocumentAsync("Mw2JX3NUZqy8_TwPkbHJSsZH1Xz-MygUbnurqpZZwvU")
-                .Result.Data.CopyToAsync(fileStream)
-                .ConfigureAwait(false).GetAwaiter().GetResult();
-
+            await Client.DownloadDocumentAsync("Mw2JX3NUZqy8_TwPkbHJSsZH1Xz-MygUbnurqpZZwvU").Result
+                .Data.CopyToAsync(fileStream);
         }
 
         [Test]

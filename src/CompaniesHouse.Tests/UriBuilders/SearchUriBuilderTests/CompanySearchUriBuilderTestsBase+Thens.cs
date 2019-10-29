@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Web;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Primitives;
 using NUnit.Framework;
+
 
 namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
 {
@@ -24,7 +21,7 @@ namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
             {
                 var query = GetQuery();
 
-                Assert.That(query["q"].FirstOrDefault(), Is.EqualTo(_searchUriBuilderTestsBase.Query));
+                Assert.That(query["q"], Is.EqualTo(_searchUriBuilderTestsBase.Query));
             }
 
             public void TheUriQueryStringDoesNotContainsTheItemsPerPage()
@@ -38,14 +35,14 @@ namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
             {
                 var query = GetQuery();
 
-                Assert.That(query["items_per_page"].FirstOrDefault(), Is.EqualTo(_searchUriBuilderTestsBase.ItemsPerPage.ToString()));
+                Assert.That(query["items_per_page"], Is.EqualTo(_searchUriBuilderTestsBase.ItemsPerPage.ToString()));
             }
 
             public void TheUriQueryStringContainsTheStartIndex()
             {
                 var query = GetQuery();
 
-                Assert.That(query["start_index"].FirstOrDefault(), Is.EqualTo(_searchUriBuilderTestsBase.StartIndex.ToString()));
+                Assert.That(query["start_index"], Is.EqualTo(_searchUriBuilderTestsBase.StartIndex.ToString()));
             }
 
             public void TheUriQueryStringDoesNotContainsTheStartIndex()
@@ -55,14 +52,18 @@ namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
                 Assert.That(query.ContainsKey("start_index"), Is.False);
             }
 
-            protected Dictionary<string, StringValues> GetQuery()
+            protected Dictionary<string, string> GetQuery()
             {
-                var uri = new Uri(_searchUriBuilderTestsBase._baseUri, _searchUriBuilderTestsBase._actualUri);
-                var query = QueryHelpers.ParseQuery(uri.Query);
-                return query;
+                return new Uri(_searchUriBuilderTestsBase._baseUri, _searchUriBuilderTestsBase._actualUri)
+                    .ToString()
+                    .Split('?')
+                    .Last()
+                    .Split('&')
+                    .ToDictionary(GetKey, GetValue);
+
+                string GetKey(string keyValue) => keyValue.Split('=')[0];
+                string GetValue(string keyValue) => Uri.UnescapeDataString(keyValue.Split('=')[1]);
             }
         }
-
-
     }
 }

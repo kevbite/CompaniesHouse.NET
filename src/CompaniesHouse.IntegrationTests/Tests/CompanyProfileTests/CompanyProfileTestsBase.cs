@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CompaniesHouse.Response.CompanyProfile;
 using NUnit.Framework;
 
@@ -17,7 +18,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyProfileTests
             When();
         }
 
-        protected abstract void When();
+        protected abstract Task When();
 
         private void GivenACompaniesHouseClient()
         {

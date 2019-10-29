@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CompaniesHouse.Response.Appointments;
 using CompaniesHouse.Response.Officers;
 using NUnit.Framework;
@@ -17,7 +18,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.AppointmentsTests
             When();
         }
 
-        protected abstract void When();
+        protected abstract Task When();
 
         private void GivenACompaniesHouseClient()
         {

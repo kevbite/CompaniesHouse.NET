@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace CompaniesHouse.IntegrationTests.Tests.AppointmentsTests
 {
@@ -9,9 +10,10 @@ namespace CompaniesHouse.IntegrationTests.Tests.AppointmentsTests
         private const string ValidCompanyNumber = "03977902";
 
         [SetUp]
-        protected override void When()
+        protected override async Task When()
         {
-            WhenRetrievingAnCompanyFilingHistoryForAValidCompany();
+            await WhenRetrievingAnCompanyFilingHistoryForAValidCompany()
+                .ConfigureAwait(false);
         }
 
         [Test]
@@ -20,10 +22,12 @@ namespace CompaniesHouse.IntegrationTests.Tests.AppointmentsTests
             Assert.That(_result.Data.Items, Is.Not.Empty);
         }
 
-        private void WhenRetrievingAnCompanyFilingHistoryForAValidCompany()
+        private async Task WhenRetrievingAnCompanyFilingHistoryForAValidCompany()
         {
-            var res = _client.GetOfficersAsync(ValidCompanyNumber).Result;            
-            _result = _client.GetAppointmentsAsync(res.Data.Items[0].OfficerId).Result;
+            var res = await _client.GetOfficersAsync(ValidCompanyNumber)
+                .ConfigureAwait(false);            
+            _result = await _client.GetAppointmentsAsync(res.Data.Items[0].OfficerId)
+                .ConfigureAwait(false);
         }
     }
 }

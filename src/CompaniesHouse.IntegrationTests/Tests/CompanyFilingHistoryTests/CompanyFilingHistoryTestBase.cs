@@ -13,7 +13,8 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
         public async Task Setup()
         {
             GivenACompaniesHouseClient();
-            await When().ConfigureAwait(false);
+            await When()
+                .ConfigureAwait(false);
         }
 
         protected abstract Task When();

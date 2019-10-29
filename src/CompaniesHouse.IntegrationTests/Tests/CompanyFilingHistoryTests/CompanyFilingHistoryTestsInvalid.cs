@@ -13,7 +13,8 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
 
         protected override async Task When()
         {
-            await WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany().ConfigureAwait(false);
+            await WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany()
+                .ConfigureAwait(false);
         }
 
         [Test]
@@ -24,7 +25,8 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
 
         private async Task WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany()
         {
-            _result = await _client.GetCompanyFilingHistoryAsync(InvalidCompanyNumber);
+            _result = await _client.GetCompanyFilingHistoryAsync(InvalidCompanyNumber)
+                .ConfigureAwait(false);
         }
     }
 }
