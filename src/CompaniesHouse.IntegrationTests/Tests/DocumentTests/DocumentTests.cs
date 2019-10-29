@@ -16,7 +16,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
         private async Task DownloadingDocument() => _result = await Client.DownloadDocumentAsync(DocumentId);
 
         [Test]
-        public async Task ThenFileIsDownloaded()
+        public async Task ThenDocumentContentIsNotEmpty()
         {
             using var memoryStream = new MemoryStream();
             await _result.Data.Content.CopyToAsync(memoryStream);
