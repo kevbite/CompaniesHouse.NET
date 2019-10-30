@@ -26,14 +26,14 @@ namespace CompaniesHouse
             if (response.StatusCode != HttpStatusCode.NotFound)
                 response.EnsureSuccessStatusCode();
 
-            if (!response.IsSuccessStatusCode) return null;
-
-            var data = new DocumentDownload
-            {
-                Content = await response.Content.ReadAsStreamAsync(),
-                ContentLength = response.Content.Headers.ContentLength,
-                ContentType = response.Content.Headers.ContentType.MediaType
-            };
+            var data = response.IsSuccessStatusCode
+                ? new DocumentDownload
+                {
+                    Content = await response.Content.ReadAsStreamAsync(),
+                    ContentLength = response.Content.Headers.ContentLength,
+                    ContentType = response.Content.Headers.ContentType.MediaType
+                }
+                : null;
 
             return new CompaniesHouseClientResponse<DocumentDownload>(data);
         }
