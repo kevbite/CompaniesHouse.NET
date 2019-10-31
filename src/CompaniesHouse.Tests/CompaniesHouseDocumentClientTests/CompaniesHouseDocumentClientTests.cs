@@ -33,7 +33,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseDocumentClientTests
         [Test]
         public void ThenDocumentContentIsCorrect()
         {
-            var memoryStream = new MemoryStream();
+            using var memoryStream = new MemoryStream();
             _result.Data.Content.CopyToAsync(memoryStream);
             memoryStream.Seek(0, SeekOrigin.Begin);
 
