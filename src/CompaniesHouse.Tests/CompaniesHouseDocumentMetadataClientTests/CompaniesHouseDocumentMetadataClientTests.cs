@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using CompaniesHouse.Response.DocumentMetadata;
+using CompaniesHouse.Response.Document;
 using CompaniesHouse.UriBuilders;
 using FluentAssertions;
 using Moq;
@@ -31,9 +31,9 @@ namespace CompaniesHouse.Tests.CompaniesHouseDocumentMetadataClientTests
         [Test]
         public void ThenDocumentMetadataIsCorrect() => _result.Data.ShouldBeEquivalentTo(_expected);
 
-        private static Mock<IDocumentMetadataUriBuilder> SetupRequestUri(Uri catchUri)
+        private static Mock<IDocumentUriBuilder> SetupRequestUri(Uri catchUri)
         {
-            var mockUriBuilder = new Mock<IDocumentMetadataUriBuilder>();
+            var mockUriBuilder = new Mock<IDocumentUriBuilder>();
             mockUriBuilder.Setup(x => x.Build(DocumentId)).Returns(catchUri.ToString());
             return mockUriBuilder;
         }

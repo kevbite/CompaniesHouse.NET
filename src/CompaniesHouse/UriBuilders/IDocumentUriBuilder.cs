@@ -1,7 +1,8 @@
 ﻿namespace CompaniesHouse.UriBuilders
 {
-    public interface IDocumentMetadataUriBuilder
+    public interface IDocumentUriBuilder
     {
+        IDocumentUriBuilder WithContent();
         string Build(string documentId);
     }
 }

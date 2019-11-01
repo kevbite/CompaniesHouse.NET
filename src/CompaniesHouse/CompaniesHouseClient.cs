@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ using CompaniesHouse.Request;
 using CompaniesHouse.Response.Appointments;
 using CompaniesHouse.Response.CompanyFiling;
 using CompaniesHouse.Response.CompanyProfile;
-using CompaniesHouse.Response.DocumentMetadata;
+using CompaniesHouse.Response.Document;
 using CompaniesHouse.Response.Insolvency;
 using CompaniesHouse.Response.Officers;
 using CompaniesHouse.Response.Search.AllSearch;
@@ -26,6 +27,7 @@ namespace CompaniesHouse
         private readonly ICompaniesHouseCompanyInsolvencyInformationClient _companiesHouseCompanyInsolvencyInformationClient;
         private readonly ICompaniesHouseAppointmentsClient _companiesHouseCompanyAppointmentsClient;
         private readonly ICompaniesHouseDocumentMetadataClient _companiesHouseDocumentMetadataClient;
+        private readonly ICompaniesHouseDocumentClient _companiesHouseDocumentClient;
         private readonly HttpClient _httpClient;
 
         public CompaniesHouseClient(ICompaniesHouseSettings settings)
@@ -39,7 +41,9 @@ namespace CompaniesHouse
             _companiesHouseOfficersClient = new CompaniesHouseOfficersClient(_httpClient, new OfficersUriBuilder());
             _companiesHouseCompanyInsolvencyInformationClient = new CompaniesHouseCompanyInsolvencyInformationClient(_httpClient);
             _companiesHouseCompanyAppointmentsClient = new CompaniesHouseAppointmentsClient(_httpClient);
-            _companiesHouseDocumentMetadataClient = new CompaniesHouseDocumentMetadataClient(_httpClient, new DocumentMetadataUriBuilder());
+            var documentUriBuilder = new DocumentUriBuilder();
+            _companiesHouseDocumentMetadataClient = new CompaniesHouseDocumentMetadataClient(_httpClient, documentUriBuilder);
+            _companiesHouseDocumentClient = new CompaniesHouseDocumentClient(_httpClient, documentUriBuilder);
         }
 
         public Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAsync(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
@@ -96,6 +100,11 @@ namespace CompaniesHouse
         public Task<CompaniesHouseClientResponse<DocumentMetadata>> GetDocumentMetadataAsync(string documentId, CancellationToken caneCancellationToken = default)
         {
             return _companiesHouseDocumentMetadataClient.GetDocumentMetadataAsync(documentId, caneCancellationToken);
+        }
+
+        public Task<CompaniesHouseClientResponse<DocumentDownload>> DownloadDocumentAsync(string documentId, CancellationToken cancellationToken = default)
+        {
+            return _companiesHouseDocumentClient.DownloadDocumentAsync(documentId, cancellationToken);
         }
     }
 }

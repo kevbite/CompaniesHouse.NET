@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.DocumentMetadata
+namespace CompaniesHouse.Response.Document
 {
     public class Links
     {

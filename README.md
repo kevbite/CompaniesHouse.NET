@@ -115,6 +115,26 @@ var result = await client.GetCompanyInsolvencyInformationAsync("10440441");
 
 If there was no insolvency information for the given company number then `null` will be returned.
 
+### Getting document metadata information
+
+To get the metadata for a document, we can pass document id to the `GetDocumentMetadataAsync` method and await on the task.
+
+```csharp
+var result = await client.GetDocumentMetadataAsync("FIxRR8teCKodjkBLRDHv2Cb8y0-nQ7T5G3BEXfWtOu4");
+```
+
+If there was no document metadata for the given document id then `null` will be returned.
+
+### Downloading a document
+
+To download a document, we can pass document id to the `DownloadDocumentAsync` method and await on the task.
+
+```csharp
+var result = await client.DownloadDocumentAsync("FIxRR8teCKodjkBLRDHv2Cb8y0-nQ7T5G3BEXfWtOu4");
+```
+
+If there was no document for the given document id then `null` will be returned.
+
 ## Contributing
 
 1. Fork

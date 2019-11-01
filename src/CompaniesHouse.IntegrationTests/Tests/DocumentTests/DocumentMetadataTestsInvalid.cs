@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
+using CompaniesHouse.Response.Document;
 using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.DocumentMetadataTests
+namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
 {
     [TestFixture]
-    public class DocumentMetadataTestsInvalid : DocumentMetadataTestBase
+    public class DocumentTestsInvalid : DocumentTestBase<DocumentMetadata>
     {
         private const string DocumentId = "0000000000000000-00000000000000";
 
