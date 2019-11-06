@@ -10,6 +10,7 @@ using CompaniesHouse.Response.CompanyProfile;
 using CompaniesHouse.Response.Document;
 using CompaniesHouse.Response.Insolvency;
 using CompaniesHouse.Response.Officers;
+using CompaniesHouse.Response.PersonsWithSignificantControl;
 using CompaniesHouse.Response.Search.AllSearch;
 using CompaniesHouse.Response.Search.CompanySearch;
 using CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
@@ -28,6 +29,8 @@ namespace CompaniesHouse
         private readonly ICompaniesHouseAppointmentsClient _companiesHouseCompanyAppointmentsClient;
         private readonly ICompaniesHouseDocumentMetadataClient _companiesHouseDocumentMetadataClient;
         private readonly ICompaniesHouseDocumentClient _companiesHouseDocumentClient;
+        private readonly ICompaniesHousePersonsWithSignificantControlClient _companiesHousePersonsWithSignificantControlClient;
+
         private readonly HttpClient _httpClient;
 
         public CompaniesHouseClient(ICompaniesHouseSettings settings)
@@ -44,6 +47,7 @@ namespace CompaniesHouse
             var documentUriBuilder = new DocumentUriBuilder();
             _companiesHouseDocumentMetadataClient = new CompaniesHouseDocumentMetadataClient(_httpClient, documentUriBuilder);
             _companiesHouseDocumentClient = new CompaniesHouseDocumentClient(_httpClient, documentUriBuilder);
+			_companiesHousePersonsWithSignificantControlClient = new CompaniesHousePersonsWithSignificantControlClient(_httpClient, new PersonsWithSignificantControlBuilder());
         }
 
         public Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAsync(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
@@ -105,6 +109,11 @@ namespace CompaniesHouse
         public Task<CompaniesHouseClientResponse<DocumentDownload>> DownloadDocumentAsync(string documentId, CancellationToken cancellationToken = default)
         {
             return _companiesHouseDocumentClient.DownloadDocumentAsync(documentId, cancellationToken);
+        }
+		
+		public Task<CompaniesHouseClientResponse<PersonsWithSignificantControl>> GetPersonsWithSignificantControlAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return _companiesHousePersonsWithSignificantControlClient.GetPersonsWithSignificantControlAsync(companyNumber, startIndex, pageSize, cancellationToken);
         }
     }
 }

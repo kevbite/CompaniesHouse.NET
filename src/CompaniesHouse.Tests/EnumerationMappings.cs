@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using CompaniesHouse.Response;
 using CompaniesHouse.Response.CompanyProfile;
 using CompaniesHouse.Response.Officers;
+using CompaniesHouse.Response.PersonsWithSignificantControl;
 
 namespace CompaniesHouse.Tests
 {
@@ -165,6 +166,14 @@ namespace CompaniesHouse.Tests
             {"persons-with-significant-control", FilingCategory.PersonsWithSignificantControl},
             {"restoration", FilingCategory.Restoration },
             {"return", FilingCategory.Return }
-    };
+        };
+
+        public static readonly IReadOnlyDictionary<string, PersonWithSignificantControlKind> PossiblePersonWithSignificantControlKinds = new Dictionary
+              <string, PersonWithSignificantControlKind>()
+        {
+            {"corporate-entity-person-with-significant-control", PersonWithSignificantControlKind.CorporateEntityPersonWithSignificantControl},
+            {"individual-person-with-significant-control", PersonWithSignificantControlKind.IndividualPersonWithSignificantControl},
+        };
+
     }
 }

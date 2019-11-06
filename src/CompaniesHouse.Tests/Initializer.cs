@@ -1,6 +1,7 @@
 ﻿using CompaniesHouse.Response;
 using CompaniesHouse.Response.CompanyProfile;
 using CompaniesHouse.Response.Officers;
+using CompaniesHouse.Response.PersonsWithSignificantControl;
 using CompaniesHouse.Tests.MapProviders;
 using FluentAssertions;
 using NUnit.Framework;
@@ -24,6 +25,7 @@ namespace CompaniesHouse.Tests
             AssertionOptions.EquivalencySteps.Insert<ComparingArrayEnumWith<FilingSubcategoriesMapProvider, FilingSubcategory>>();
             AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<ResolutionCategoriesMapProvider, ResolutionCategory>>();
             AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<FilingHistoryStatusMapProvider, FilingHistoryStatus>>();
+            AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<PersonWithSignificantControlKindMapProvider, PersonWithSignificantControlKind>>();
         }
     }
 }
