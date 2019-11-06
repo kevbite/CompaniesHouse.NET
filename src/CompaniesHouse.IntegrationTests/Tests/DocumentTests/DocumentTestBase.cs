@@ -1,13 +1,12 @@
 ﻿using System.Threading.Tasks;
-using CompaniesHouse.Response.DocumentMetadata;
 using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.DocumentMetadataTests
+namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
 {
-    public abstract class DocumentMetadataTestBase
+    public abstract class DocumentTestBase<T>
     {
         protected CompaniesHouseClient Client;
-        protected CompaniesHouseClientResponse<DocumentMetadata> Result;
+        protected CompaniesHouseClientResponse<T> Result;
 
         [SetUp]
         public async Task Setup()
