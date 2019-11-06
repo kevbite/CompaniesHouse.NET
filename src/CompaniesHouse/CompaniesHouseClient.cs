@@ -9,6 +9,7 @@ using CompaniesHouse.Response.CompanyProfile;
 using CompaniesHouse.Response.DocumentMetadata;
 using CompaniesHouse.Response.Insolvency;
 using CompaniesHouse.Response.Officers;
+using CompaniesHouse.Response.PersonsWithSignificantControl;
 using CompaniesHouse.Response.Search.AllSearch;
 using CompaniesHouse.Response.Search.CompanySearch;
 using CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
@@ -26,6 +27,8 @@ namespace CompaniesHouse
         private readonly ICompaniesHouseCompanyInsolvencyInformationClient _companiesHouseCompanyInsolvencyInformationClient;
         private readonly ICompaniesHouseAppointmentsClient _companiesHouseCompanyAppointmentsClient;
         private readonly ICompaniesHouseDocumentMetadataClient _companiesHouseDocumentMetadataClient;
+        private readonly ICompaniesHousePersonsWithSignificantControlClient _companiesHousePersonsWithSignificantControlClient;
+
         private readonly HttpClient _httpClient;
 
         public CompaniesHouseClient(ICompaniesHouseSettings settings)
@@ -40,6 +43,7 @@ namespace CompaniesHouse
             _companiesHouseCompanyInsolvencyInformationClient = new CompaniesHouseCompanyInsolvencyInformationClient(_httpClient);
             _companiesHouseCompanyAppointmentsClient = new CompaniesHouseAppointmentsClient(_httpClient);
             _companiesHouseDocumentMetadataClient = new CompaniesHouseDocumentMetadataClient(_httpClient, new DocumentMetadataUriBuilder());
+            _companiesHousePersonsWithSignificantControlClient = new CompaniesHousePersonsWithSignificantControlClient(_httpClient, new PersonsWithSignificantControlBuilder());
         }
 
         public Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAsync(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
@@ -96,6 +100,11 @@ namespace CompaniesHouse
         public Task<CompaniesHouseClientResponse<DocumentMetadata>> GetDocumentMetadataAsync(string documentId, CancellationToken caneCancellationToken = default)
         {
             return _companiesHouseDocumentMetadataClient.GetDocumentMetadataAsync(documentId, caneCancellationToken);
+        }
+
+        public Task<CompaniesHouseClientResponse<PersonsWithSignificantControl>> GetPersonsWithSignificantControlAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return _companiesHousePersonsWithSignificantControlClient.GetPersonsWithSignificantControlAsync(companyNumber, startIndex, pageSize, cancellationToken);
         }
     }
 }
