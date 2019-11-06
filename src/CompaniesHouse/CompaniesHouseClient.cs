@@ -28,6 +28,8 @@ namespace CompaniesHouse
         private readonly ICompaniesHouseCompanyInsolvencyInformationClient _companiesHouseCompanyInsolvencyInformationClient;
         private readonly ICompaniesHouseAppointmentsClient _companiesHouseCompanyAppointmentsClient;
         private readonly ICompaniesHouseDocumentMetadataClient _companiesHouseDocumentMetadataClient;
+        private readonly ICompaniesHouseDocumentClient _companiesHouseDocumentClient;
+        private readonly ICompaniesHousePersonsWithSignificantControlClient _companiesHousePersonsWithSignificantControlClient;
 
         private readonly HttpClient _httpClient;
 
