@@ -6,7 +6,7 @@ using CompaniesHouse.Core.UriBuilders;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using CompanyFilingHistory = CompaniesHouse.Response.CompanyFiling.CompanyFilingHistory;
+using CompanyFilingHistory = CompaniesHouse.Core.Response.CompanyFiling.CompanyFilingHistory;
 
 namespace CompaniesHouse.Core.Tests.CompaniesHouseCompanyFilingHistoryClientTests
 {

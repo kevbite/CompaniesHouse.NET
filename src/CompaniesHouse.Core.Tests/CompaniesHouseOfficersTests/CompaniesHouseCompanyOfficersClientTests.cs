@@ -5,7 +5,7 @@ using CompaniesHouse.Core.UriBuilders;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using Officers = CompaniesHouse.Response.Officers.Officers;
+using Officers = CompaniesHouse.Core.Response.Officers.Officers;
 
 namespace CompaniesHouse.Core.Tests.CompaniesHouseOfficersTests
 {

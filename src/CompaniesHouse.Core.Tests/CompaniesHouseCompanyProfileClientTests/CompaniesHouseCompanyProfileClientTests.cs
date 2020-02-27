@@ -6,7 +6,7 @@ using CompaniesHouse.Core.UriBuilders;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using CompanyProfile = CompaniesHouse.Response.CompanyProfile.CompanyProfile;
+using CompanyProfile = CompaniesHouse.Core.Response.CompanyProfile.CompanyProfile;
 
 namespace CompaniesHouse.Core.Tests.CompaniesHouseCompanyProfileClientTests
 {

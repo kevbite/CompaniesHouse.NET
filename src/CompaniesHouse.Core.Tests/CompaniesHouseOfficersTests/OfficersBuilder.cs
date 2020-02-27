@@ -2,8 +2,8 @@
 using System.Linq;
 using CompaniesHouse.Core.Response.Officers;
 using Ploeh.AutoFixture;
-using Officer = CompaniesHouse.Tests.ResourceBuilders.Officer;
-using Officers = CompaniesHouse.Tests.ResourceBuilders.Officers;
+using Officer = CompaniesHouse.Core.Tests.ResourceBuilders.Officer;
+using Officers = CompaniesHouse.Core.Tests.ResourceBuilders.Officers;
 
 namespace CompaniesHouse.Core.Tests.CompaniesHouseOfficersTests
 {

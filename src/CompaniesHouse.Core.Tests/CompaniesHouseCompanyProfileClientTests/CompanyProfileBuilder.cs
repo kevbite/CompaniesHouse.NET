@@ -1,13 +1,13 @@
 using System.Linq;
 using CompaniesHouse.Core.Response.CompanyProfile;
 using Ploeh.AutoFixture;
-using Accounts = CompaniesHouse.Tests.ResourceBuilders.Accounts;
-using AnnualReturn = CompaniesHouse.Tests.ResourceBuilders.AnnualReturn;
-using CompanyProfile = CompaniesHouse.Tests.ResourceBuilders.CompanyProfile;
-using ConfirmationStatement = CompaniesHouse.Tests.ResourceBuilders.ConfirmationStatement;
-using LastAccounts = CompaniesHouse.Tests.ResourceBuilders.LastAccounts;
-using Officer = CompaniesHouse.Tests.ResourceBuilders.Officer;
-using OfficerSummary = CompaniesHouse.Tests.ResourceBuilders.OfficerSummary;
+using Accounts = CompaniesHouse.Core.Tests.ResourceBuilders.Accounts;
+using AnnualReturn = CompaniesHouse.Core.Tests.ResourceBuilders.AnnualReturn;
+using CompanyProfile = CompaniesHouse.Core.Tests.ResourceBuilders.CompanyProfile;
+using ConfirmationStatement = CompaniesHouse.Core.Tests.ResourceBuilders.ConfirmationStatement;
+using LastAccounts = CompaniesHouse.Core.Tests.ResourceBuilders.LastAccounts;
+using Officer = CompaniesHouse.Core.Tests.ResourceBuilders.Officer;
+using OfficerSummary = CompaniesHouse.Core.Tests.ResourceBuilders.OfficerSummary;
 
 namespace CompaniesHouse.Core.Tests.CompaniesHouseCompanyProfileClientTests
 {

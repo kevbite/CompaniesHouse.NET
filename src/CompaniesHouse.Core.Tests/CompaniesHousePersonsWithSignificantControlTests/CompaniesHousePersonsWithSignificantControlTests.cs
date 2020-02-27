@@ -5,7 +5,7 @@ using CompaniesHouse.Core.UriBuilders;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using PersonsWithSignificantControl = CompaniesHouse.Response.PersonsWithSignificantControl.PersonsWithSignificantControl;
+using PersonsWithSignificantControl = CompaniesHouse.Core.Response.PersonsWithSignificantControl.PersonsWithSignificantControl;
 
 namespace CompaniesHouse.Core.Tests.CompaniesHousePersonsWithSignificantControlTests
 {

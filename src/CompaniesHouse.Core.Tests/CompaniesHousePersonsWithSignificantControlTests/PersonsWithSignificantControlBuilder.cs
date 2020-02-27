@@ -1,6 +1,6 @@
 ﻿using Ploeh.AutoFixture;
-using PersonWithSignificantControl = CompaniesHouse.Tests.ResourceBuilders.PersonWithSignificantControl;
-using PersonsWithSignificantControl = CompaniesHouse.Tests.ResourceBuilders.PersonsWithSignificantControl;
+using PersonWithSignificantControl = CompaniesHouse.Core.Tests.ResourceBuilders.PersonWithSignificantControl;
+using PersonsWithSignificantControl = CompaniesHouse.Core.Tests.ResourceBuilders.PersonsWithSignificantControl;
 using System.Linq;
 
 namespace CompaniesHouse.Core.Tests.CompaniesHousePersonsWithSignificantControlTests
