@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.1;net45;netcoreapp3.1</TargetFrameworks>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <Title>CompaniesHouse.NET</Title>
+    <AssemblyName>CompaniesHouse.Core</AssemblyName>
+    <PackageId>CompaniesHouse.Core</PackageId>
+    <Authors>LiberisFinance</Authors>
+    <Company>LiberisFinance</Company>
+    <AssemblyTitle>CompaniesHouse.Net.Core</AssemblyTitle>
+    <Description>
+      A simple .NET Core API client wrapper for CompaniesHouse
+    </Description>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageTags>CompaniesHouse;API;REST;WebService</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/LiberisFinance/CompaniesHouse.NET/blob/master/companies-house.jpg</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/LiberisFinance/CompaniesHouse.NET</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/LiberisFinance/CompaniesHouse.NET</RepositoryUrl>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+</Project>

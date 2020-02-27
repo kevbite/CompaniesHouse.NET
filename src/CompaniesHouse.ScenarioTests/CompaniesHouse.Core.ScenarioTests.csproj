@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
 
@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CompaniesHouse\CompaniesHouse.csproj" />
+    <ProjectReference Include="..\CompaniesHouse\CompaniesHouse.Core.csproj" />
   </ItemGroup>
 
 </Project>
