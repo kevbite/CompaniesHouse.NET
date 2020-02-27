@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.Insolvency
+namespace CompaniesHouse.Core.Response.Insolvency
 {
     public class Address
     {

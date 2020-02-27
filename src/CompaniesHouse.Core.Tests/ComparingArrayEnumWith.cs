@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CompaniesHouse.Tests.MapProviders;
+using CompaniesHouse.Core.Tests.MapProviders;
 using FluentAssertions.Equivalency;
 
-namespace CompaniesHouse.Tests
+namespace CompaniesHouse.Core.Tests
 {
     public class ComparingArrayEnumWith<TMapProvider, TEnum> : IEquivalencyStep
         where TMapProvider : IEnumDataMapProvider<TEnum>, new()

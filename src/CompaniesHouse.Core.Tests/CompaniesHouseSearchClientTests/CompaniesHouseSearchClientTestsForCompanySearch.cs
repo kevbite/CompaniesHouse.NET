@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using CompaniesHouse.Request;
-using CompaniesHouse.Response;
-using CompaniesHouse.Response.Search.CompanySearch;
-using CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource;
-using CompaniesHouse.UriBuilders;
+using CompaniesHouse.Core.Request;
+using CompaniesHouse.Core.Response;
+using CompaniesHouse.Core.Response.Search.CompanySearch;
+using CompaniesHouse.Core.Tests.ResourceBuilders.CompanySearchResource;
+using CompaniesHouse.Core.UriBuilders;
 using Moq;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
 
-namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
+namespace CompaniesHouse.Core.Tests.CompaniesHouseSearchClientTests
 {
     [TestFixture]
     public class CompaniesHouseSearchClientTestsForCompanySearch

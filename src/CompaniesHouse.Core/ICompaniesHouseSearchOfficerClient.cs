@@ -1,9 +1,9 @@
 using System.Threading;
 using System.Threading.Tasks;
-using CompaniesHouse.Request;
-using CompaniesHouse.Response.Search.OfficerSearch;
+using CompaniesHouse.Core.Request;
+using CompaniesHouse.Core.Response.Search.OfficerSearch;
 
-namespace CompaniesHouse
+namespace CompaniesHouse.Core
 {
     public interface ICompaniesHouseSearchOfficerClient
     {

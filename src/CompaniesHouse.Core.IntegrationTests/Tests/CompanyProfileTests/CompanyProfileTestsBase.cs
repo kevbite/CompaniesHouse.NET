@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CompaniesHouse.Response.CompanyProfile;
+using CompaniesHouse.Core.Response.CompanyProfile;
 using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.CompanyProfileTests
+namespace CompaniesHouse.Core.IntegrationTests.Tests.CompanyProfileTests
 {
     [TestFixture]
     public abstract class CompanyProfileTestsBase

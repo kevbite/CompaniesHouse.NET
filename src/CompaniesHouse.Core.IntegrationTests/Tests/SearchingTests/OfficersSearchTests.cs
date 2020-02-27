@@ -1,10 +1,10 @@
 using System;
 using System.Threading.Tasks;
-using CompaniesHouse.Request;
-using CompaniesHouse.Response.Search.OfficerSearch;
+using CompaniesHouse.Core.Request;
+using CompaniesHouse.Core.Response.Search.OfficerSearch;
 using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
+namespace CompaniesHouse.Core.IntegrationTests.Tests.SearchingTests
 {
     [TestFixture]
     public class OfficersSearchTests

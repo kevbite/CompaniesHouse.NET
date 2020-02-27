@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.AppointmentsTests
+namespace CompaniesHouse.Core.IntegrationTests.Tests.AppointmentsTests
 {
     [TestFixture]
     public class AppointmentsTestsValid : AppointmentsTestBase

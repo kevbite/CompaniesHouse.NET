@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.PersonsWithSignificantControl
+namespace CompaniesHouse.Core.Response.PersonsWithSignificantControl
 {
     public class PersonsWithSignificantControl
     {

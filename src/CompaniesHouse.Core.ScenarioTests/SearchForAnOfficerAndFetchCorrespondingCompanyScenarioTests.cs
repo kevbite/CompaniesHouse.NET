@@ -1,9 +1,9 @@
 using System.Linq;
 using System.Threading.Tasks;
-using CompaniesHouse.Request;
+using CompaniesHouse.Core.Request;
 using NUnit.Framework;
 
-namespace CompaniesHouse.ScenarioTests
+namespace CompaniesHouse.Core.ScenarioTests
 {
     public class SearchForAnOfficerAndFetchCorrespondingCompanyScenarioTests
     {

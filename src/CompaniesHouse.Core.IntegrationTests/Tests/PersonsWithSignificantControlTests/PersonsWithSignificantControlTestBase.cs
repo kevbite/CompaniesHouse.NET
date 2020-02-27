@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using CompaniesHouse.Response.PersonsWithSignificantControl;
+using CompaniesHouse.Core.Response.PersonsWithSignificantControl;
 using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.PersonsWithSignificantControlTests
+namespace CompaniesHouse.Core.IntegrationTests.Tests.PersonsWithSignificantControlTests
 {
     public abstract class PersonsWithSignificantControlTestBase
     {

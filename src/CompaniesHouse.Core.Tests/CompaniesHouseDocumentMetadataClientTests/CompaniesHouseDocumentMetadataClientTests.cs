@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using CompaniesHouse.Response.Document;
-using CompaniesHouse.UriBuilders;
+using CompaniesHouse.Core.Response.Document;
+using CompaniesHouse.Core.UriBuilders;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 
-namespace CompaniesHouse.Tests.CompaniesHouseDocumentMetadataClientTests
+namespace CompaniesHouse.Core.Tests.CompaniesHouseDocumentMetadataClientTests
 {
     [TestFixture]
     public class CompaniesHouseDocumentMetadataClientTests

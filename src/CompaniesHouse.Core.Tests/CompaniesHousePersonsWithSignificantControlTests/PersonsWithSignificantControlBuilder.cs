@@ -3,7 +3,7 @@ using PersonWithSignificantControl = CompaniesHouse.Tests.ResourceBuilders.Perso
 using PersonsWithSignificantControl = CompaniesHouse.Tests.ResourceBuilders.PersonsWithSignificantControl;
 using System.Linq;
 
-namespace CompaniesHouse.Tests.CompaniesHousePersonsWithSignificantControlTests
+namespace CompaniesHouse.Core.Tests.CompaniesHousePersonsWithSignificantControlTests
 {
     public class PersonsWithSignificantControlBuilder
     {

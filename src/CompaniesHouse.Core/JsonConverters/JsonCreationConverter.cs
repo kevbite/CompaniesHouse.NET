@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace CompaniesHouse.JsonConverters
+namespace CompaniesHouse.Core.JsonConverters
 {
     public abstract class JsonCreationConverter<T> : JsonConverter
     {

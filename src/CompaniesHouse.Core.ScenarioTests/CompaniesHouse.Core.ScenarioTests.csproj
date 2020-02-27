@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CompaniesHouse\CompaniesHouse.Core.csproj" />
+    <ProjectReference Include="..\CompaniesHouse.Core\CompaniesHouse.Core.csproj" />
   </ItemGroup>
 
 </Project>

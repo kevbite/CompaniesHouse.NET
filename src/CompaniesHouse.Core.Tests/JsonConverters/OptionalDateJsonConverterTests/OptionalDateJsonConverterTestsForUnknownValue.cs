@@ -1,9 +1,9 @@
-﻿using CompaniesHouse.JsonConverters;
+﻿using CompaniesHouse.Core.JsonConverters;
 using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
-namespace CompaniesHouse.Tests.JsonConverters.OptionalDateJsonConverterTests
+namespace CompaniesHouse.Core.Tests.JsonConverters.OptionalDateJsonConverterTests
 {
     [TestFixture]
     public class OptionalDateJsonConverterTestsForUnknownValue

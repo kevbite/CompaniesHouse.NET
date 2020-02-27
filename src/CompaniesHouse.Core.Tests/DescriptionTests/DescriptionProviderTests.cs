@@ -1,9 +1,9 @@
-﻿using CompaniesHouse.Description;
+﻿using CompaniesHouse.Core.Description;
 using FluentAssertions;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
-namespace CompaniesHouse.Tests.DescriptionTests
+namespace CompaniesHouse.Core.Tests.DescriptionTests
 {
     [TestFixture]
     public class DescriptionProviderTests

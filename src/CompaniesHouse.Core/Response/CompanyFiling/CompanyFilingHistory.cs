@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace CompaniesHouse.Response.CompanyFiling
+namespace CompaniesHouse.Core.Response.CompanyFiling
 {
     public class CompanyFilingHistory
     {

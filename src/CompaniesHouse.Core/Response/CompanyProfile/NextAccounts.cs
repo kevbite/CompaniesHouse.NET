@@ -1,10 +1,10 @@
-﻿using CompaniesHouse.JsonConverters;
+﻿using CompaniesHouse.Core.JsonConverters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CompaniesHouse.Response.CompanyProfile
+namespace CompaniesHouse.Core.Response.CompanyProfile
 {
     public class NextAccounts
     {

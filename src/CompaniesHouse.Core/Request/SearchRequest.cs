@@ -1,4 +1,4 @@
-﻿namespace CompaniesHouse.Request
+﻿namespace CompaniesHouse.Core.Request
 {
     public class SearchRequest
     {

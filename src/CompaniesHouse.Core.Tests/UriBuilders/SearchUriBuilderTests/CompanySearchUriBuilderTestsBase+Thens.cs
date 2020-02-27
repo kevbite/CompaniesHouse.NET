@@ -4,7 +4,7 @@ using System.Linq;
 using NUnit.Framework;
 
 
-namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
+namespace CompaniesHouse.Core.Tests.UriBuilders.SearchUriBuilderTests
 {
     public abstract partial class SearchUriBuilderTestsBase
     {

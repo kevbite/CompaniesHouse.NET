@@ -1,7 +1,7 @@
-﻿using CompaniesHouse.JsonConverters;
+﻿using CompaniesHouse.Core.JsonConverters;
 using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.Search.AllSearch
+namespace CompaniesHouse.Core.Response.Search.AllSearch
 {
     public class AllSearch
     {

@@ -1,4 +1,4 @@
-namespace CompaniesHouse.Response.Search.AllSearch
+namespace CompaniesHouse.Core.Response.Search.AllSearch
 {
     public class Item
     {

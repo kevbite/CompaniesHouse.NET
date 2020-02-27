@@ -1,7 +1,8 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using CompaniesHouse.Response.Appointments;
+using CompaniesHouse.Core;
+using CompaniesHouse.Core.Response.Appointments;
 
 namespace CompaniesHouse
 {

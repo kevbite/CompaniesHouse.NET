@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using CompaniesHouse.Response.PersonsWithSignificantControl;
+using CompaniesHouse.Core.Response.PersonsWithSignificantControl;
 
-namespace CompaniesHouse
+namespace CompaniesHouse.Core
 {
     public interface ICompaniesHousePersonsWithSignificantControlClient
     {

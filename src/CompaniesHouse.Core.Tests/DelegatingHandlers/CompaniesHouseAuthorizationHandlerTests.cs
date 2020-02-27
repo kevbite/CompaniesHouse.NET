@@ -1,12 +1,12 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using CompaniesHouse.DelegatingHandlers;
+using CompaniesHouse.Core.DelegatingHandlers;
 using Moq;
 using Moq.Protected;
 using NUnit.Framework;
 
-namespace CompaniesHouse.Tests.DelegatingHandlers
+namespace CompaniesHouse.Core.Tests.DelegatingHandlers
 {
     [TestFixture]
     public class CompaniesHouseAuthorizationHandlerTests

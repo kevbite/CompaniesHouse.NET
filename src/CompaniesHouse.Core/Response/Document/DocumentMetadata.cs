@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.Document
+namespace CompaniesHouse.Core.Response.Document
 {
     public class DocumentMetadata
     {

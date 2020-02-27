@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CompaniesHouse.Tests.CompaniesHouseDocumentMetadataClientTests
+namespace CompaniesHouse.Core.Tests.CompaniesHouseDocumentMetadataClientTests
 {
     public class DocumentMetadataTestCase
     {

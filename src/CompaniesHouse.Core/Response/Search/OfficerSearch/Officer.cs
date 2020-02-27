@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.Search.OfficerSearch
+namespace CompaniesHouse.Core.Response.Search.OfficerSearch
 {
     public class Officer : SearchItem
     {

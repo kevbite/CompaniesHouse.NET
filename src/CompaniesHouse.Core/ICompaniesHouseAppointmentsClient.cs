@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using CompaniesHouse.Response.Appointments;
+using CompaniesHouse.Core.Response.Appointments;
 
-namespace CompaniesHouse
+namespace CompaniesHouse.Core
 {
     public interface ICompaniesHouseAppointmentsClient
     {

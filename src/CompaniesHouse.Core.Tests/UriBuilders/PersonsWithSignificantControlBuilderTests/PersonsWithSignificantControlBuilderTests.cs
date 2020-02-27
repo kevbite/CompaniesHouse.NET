@@ -1,8 +1,8 @@
 ﻿using System;
-using CompaniesHouse.UriBuilders;
+using CompaniesHouse.Core.UriBuilders;
 using NUnit.Framework;
 
-namespace CompaniesHouse.Tests.UriBuilders.OfficersUriBuilderTests
+namespace CompaniesHouse.Core.Tests.UriBuilders.OfficersUriBuilderTests
 {
     public class PersonsWithSignificantControlBuilderTests
     {

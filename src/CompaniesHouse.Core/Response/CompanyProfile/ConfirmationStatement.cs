@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.CompanyProfile
+namespace CompaniesHouse.Core.Response.CompanyProfile
 {
     public class ConfirmationStatement
     {

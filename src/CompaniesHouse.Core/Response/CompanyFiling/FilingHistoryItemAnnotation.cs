@@ -1,9 +1,9 @@
 ﻿using System;
-using CompaniesHouse.Description;
+using CompaniesHouse.Core.Description;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace CompaniesHouse.Response.CompanyFiling
+namespace CompaniesHouse.Core.Response.CompanyFiling
 {
     public class FilingHistoryItemAnnotation : IDescriptable
     {

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using CompaniesHouse.Tests.ResourceBuilders;
+using CompaniesHouse.Core.Tests.ResourceBuilders;
 using Ploeh.AutoFixture;
 
-namespace CompaniesHouse.Tests.CompaniesHouseCompanyFilingHistoryClientTests
+namespace CompaniesHouse.Core.Tests.CompaniesHouseCompanyFilingHistoryClientTests
 {
     public class CompanyFilingHistoryBuilder
     {

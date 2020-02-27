@@ -1,4 +1,4 @@
-namespace CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTests
+namespace CompaniesHouse.Core.Tests.CompaniesHouseCompanyProfileClientTests
 {
     public class CompaniesHouseCompanyProfileClientTestCase
     {

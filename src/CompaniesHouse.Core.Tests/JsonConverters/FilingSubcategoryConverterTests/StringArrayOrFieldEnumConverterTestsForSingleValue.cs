@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CompaniesHouse.Response;
+using CompaniesHouse.Core.Response;
 using Moq;
 using NUnit.Framework;
 
-namespace CompaniesHouse.Tests.JsonConverters.FilingSubcategoryConverterTests
+namespace CompaniesHouse.Core.Tests.JsonConverters.FilingSubcategoryConverterTests
 {
     [TestFixture]
     public class StringArrayOrFieldEnumConverterTestsForSingleValue : StringArrayOrFieldEnumConverterTestsBase

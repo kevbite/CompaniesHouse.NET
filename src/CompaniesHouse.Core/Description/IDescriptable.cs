@@ -1,4 +1,4 @@
-﻿namespace CompaniesHouse.Description
+﻿namespace CompaniesHouse.Core.Description
 {
     public interface IDescriptable
     {

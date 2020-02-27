@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using CompaniesHouse.Response;
-using CompaniesHouse.Response.CompanyProfile;
-using CompaniesHouse.Response.Officers;
-using CompaniesHouse.Response.PersonsWithSignificantControl;
+using CompaniesHouse.Core.Response;
+using CompaniesHouse.Core.Response.CompanyProfile;
+using CompaniesHouse.Core.Response.Officers;
+using CompaniesHouse.Core.Response.PersonsWithSignificantControl;
 
-namespace CompaniesHouse.Tests
+namespace CompaniesHouse.Core.Tests
 {
     public static class EnumerationMappings
     {

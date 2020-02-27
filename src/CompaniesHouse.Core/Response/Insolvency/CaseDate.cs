@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace CompaniesHouse.Response.Insolvency
+namespace CompaniesHouse.Core.Response.Insolvency
 {
     public class CaseDate
     {

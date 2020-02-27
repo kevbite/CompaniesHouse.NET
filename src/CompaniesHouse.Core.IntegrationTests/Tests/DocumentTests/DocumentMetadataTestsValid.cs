@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using CompaniesHouse.Response.Document;
+using CompaniesHouse.Core.Response.Document;
 using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
+namespace CompaniesHouse.Core.IntegrationTests.Tests.DocumentTests
 {
     [TestFixture]
     public class DocumentTestsValid : DocumentTestBase<DocumentMetadata>

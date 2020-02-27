@@ -1,8 +1,8 @@
 using System;
-using CompaniesHouse.Response;
-using CompaniesHouse.Response.Officers;
+using CompaniesHouse.Core.Response;
+using CompaniesHouse.Core.Response.Officers;
 
-namespace CompaniesHouse.Tests.ResourceBuilders
+namespace CompaniesHouse.Core.Tests.ResourceBuilders
 {
     public class Officer
     {

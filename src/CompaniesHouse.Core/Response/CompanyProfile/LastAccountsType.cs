@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace CompaniesHouse.Response.CompanyProfile
+namespace CompaniesHouse.Core.Response.CompanyProfile
 {
     public enum LastAccountsType
     {

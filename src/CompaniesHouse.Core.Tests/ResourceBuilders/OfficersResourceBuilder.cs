@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using CompaniesHouse.Response.Officers;
+using CompaniesHouse.Core.Response.Officers;
 
-namespace CompaniesHouse.Tests.ResourceBuilders
+namespace CompaniesHouse.Core.Tests.ResourceBuilders
 {
     public class OfficersResourceBuilder
     {

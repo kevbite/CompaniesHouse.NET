@@ -1,11 +1,11 @@
 ﻿using System;
-using CompaniesHouse.Description;
-using CompaniesHouse.JsonConverters;
+using CompaniesHouse.Core.Description;
+using CompaniesHouse.Core.JsonConverters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 
-namespace CompaniesHouse.Response.CompanyFiling
+namespace CompaniesHouse.Core.Response.CompanyFiling
 {
     public class FilingHistoryItemResolution : IDescriptable
     {

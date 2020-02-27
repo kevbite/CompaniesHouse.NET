@@ -1,8 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
-using CompaniesHouse.Response.Officers;
+using CompaniesHouse.Core.Response.Officers;
 
-namespace CompaniesHouse
+namespace CompaniesHouse.Core
 {
     public interface ICompaniesHouseOfficersClient
     {

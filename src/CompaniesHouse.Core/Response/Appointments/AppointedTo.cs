@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.Appointments
+namespace CompaniesHouse.Core.Response.Appointments
 {
     public class AppointedTo
     {

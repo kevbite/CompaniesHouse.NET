@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CompaniesHouse.Request;
-using CompaniesHouse.Response.Search.CompanySearch;
+using CompaniesHouse.Core.Request;
+using CompaniesHouse.Core.Response.Search.CompanySearch;
 using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
+namespace CompaniesHouse.Core.IntegrationTests.Tests.SearchingTests
 {
     [TestFixture("brighouse computers")]
     [TestFixture("British Gas")]

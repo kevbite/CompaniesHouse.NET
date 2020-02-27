@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CompaniesHouse.Response.Appointments;
-using CompaniesHouse.Response.Officers;
+using CompaniesHouse.Core.Response.Appointments;
+using CompaniesHouse.Core.Response.Officers;
 using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.AppointmentsTests
+namespace CompaniesHouse.Core.IntegrationTests.Tests.AppointmentsTests
 {
     public abstract class AppointmentsTestBase
     {

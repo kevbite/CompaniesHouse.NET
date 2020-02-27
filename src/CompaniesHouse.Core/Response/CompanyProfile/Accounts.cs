@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
-using CompaniesHouse.JsonConverters;
+using CompaniesHouse.Core.JsonConverters;
 
-namespace CompaniesHouse.Response.CompanyProfile
+namespace CompaniesHouse.Core.Response.CompanyProfile
 {
     public class Accounts
     {

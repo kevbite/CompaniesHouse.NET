@@ -1,4 +1,4 @@
-﻿namespace CompaniesHouse.Tests.ResourceBuilders.OfficerSearchResource
+﻿namespace CompaniesHouse.Core.Tests.ResourceBuilders.OfficerSearchResource
 {
     public class Address
     {

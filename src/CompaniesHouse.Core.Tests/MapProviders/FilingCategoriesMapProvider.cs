@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using CompaniesHouse.Response;
+using CompaniesHouse.Core.Response;
 
-namespace CompaniesHouse.Tests.MapProviders
+namespace CompaniesHouse.Core.Tests.MapProviders
 {
     public class FilingCategoriesMapProvider : IEnumDataMapProvider<FilingCategory>
     {

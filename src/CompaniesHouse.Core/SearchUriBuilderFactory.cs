@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-using CompaniesHouse.Response.Search.AllSearch;
-using CompaniesHouse.Response.Search.CompanySearch;
-using CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
-using CompaniesHouse.Response.Search.OfficerSearch;
-using CompaniesHouse.UriBuilders;
+using CompaniesHouse.Core.Response.Search.AllSearch;
+using CompaniesHouse.Core.Response.Search.CompanySearch;
+using CompaniesHouse.Core.Response.Search.DisqualifiedOfficersSearch;
+using CompaniesHouse.Core.Response.Search.OfficerSearch;
+using CompaniesHouse.Core.UriBuilders;
 
-namespace CompaniesHouse
+namespace CompaniesHouse.Core
 {
     public class SearchUriBuilderFactory : ISearchUriBuilderFactory
     {

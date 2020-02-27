@@ -1,8 +1,8 @@
 ﻿using System;
-using CompaniesHouse.JsonConverters;
+using CompaniesHouse.Core.JsonConverters;
 using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.CompanyProfile
+namespace CompaniesHouse.Core.Response.CompanyProfile
 {
     public class AnnualReturn
     {

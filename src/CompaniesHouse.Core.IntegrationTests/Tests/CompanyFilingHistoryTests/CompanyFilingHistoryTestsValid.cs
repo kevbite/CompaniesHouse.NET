@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CompaniesHouse.Response.CompanyFiling;
+using CompaniesHouse.Core.Response.CompanyFiling;
 using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
+namespace CompaniesHouse.Core.IntegrationTests.Tests.CompanyFilingHistoryTests
 {
     [TestFixtureSource(nameof(TestCases))]
     public class CompanyFilingHistoryTestsValid : CompanyFilingHistoryTestBase

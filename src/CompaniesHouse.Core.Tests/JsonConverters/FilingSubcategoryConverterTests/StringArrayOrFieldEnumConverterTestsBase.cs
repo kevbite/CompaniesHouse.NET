@@ -1,10 +1,10 @@
 ﻿using System.IO;
-using CompaniesHouse.JsonConverters;
-using CompaniesHouse.Response;
+using CompaniesHouse.Core.JsonConverters;
+using CompaniesHouse.Core.Response;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
-namespace CompaniesHouse.Tests.JsonConverters.FilingSubcategoryConverterTests
+namespace CompaniesHouse.Core.Tests.JsonConverters.FilingSubcategoryConverterTests
 {
     [TestFixture]
     public abstract class StringArrayOrFieldEnumConverterTestsBase

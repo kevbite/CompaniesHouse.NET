@@ -1,8 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
-using CompaniesHouse.Request;
+using CompaniesHouse.Core.Request;
 
-namespace CompaniesHouse
+namespace CompaniesHouse.Core
 {
     public interface ICompaniesHouseSearchClient
     {

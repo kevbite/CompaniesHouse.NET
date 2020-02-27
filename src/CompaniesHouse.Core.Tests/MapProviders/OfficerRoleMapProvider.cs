@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using CompaniesHouse.Response.Officers;
+using CompaniesHouse.Core.Response.Officers;
 
-namespace CompaniesHouse.Tests.MapProviders
+namespace CompaniesHouse.Core.Tests.MapProviders
 {
     public class OfficerRoleMapProvider : IEnumDataMapProvider<OfficerRole>
     {

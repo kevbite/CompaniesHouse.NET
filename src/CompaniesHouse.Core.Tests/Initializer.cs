@@ -1,12 +1,12 @@
-﻿using CompaniesHouse.Response;
-using CompaniesHouse.Response.CompanyProfile;
-using CompaniesHouse.Response.Officers;
-using CompaniesHouse.Response.PersonsWithSignificantControl;
-using CompaniesHouse.Tests.MapProviders;
+﻿using CompaniesHouse.Core.Response;
+using CompaniesHouse.Core.Response.CompanyProfile;
+using CompaniesHouse.Core.Response.Officers;
+using CompaniesHouse.Core.Response.PersonsWithSignificantControl;
+using CompaniesHouse.Core.Tests.MapProviders;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace CompaniesHouse.Tests
+namespace CompaniesHouse.Core.Tests
 {
     [SetUpFixture]
     public class Initializer

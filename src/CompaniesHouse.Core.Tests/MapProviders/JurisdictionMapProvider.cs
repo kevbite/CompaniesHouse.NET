@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using CompaniesHouse.Response.CompanyProfile;
+using CompaniesHouse.Core.Response.CompanyProfile;
 
-namespace CompaniesHouse.Tests.MapProviders
+namespace CompaniesHouse.Core.Tests.MapProviders
 {
     public class JurisdictionMapProvider : IEnumDataMapProvider<Jurisdiction>
     {

@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace CompaniesHouse.Response.Insolvency
+namespace CompaniesHouse.Core.Response.Insolvency
 {
     public enum CaseDateType
     {

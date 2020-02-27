@@ -1,10 +1,10 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using CompaniesHouse.Response.CompanyFiling;
-using CompaniesHouse.UriBuilders;
+using CompaniesHouse.Core.Response.CompanyFiling;
+using CompaniesHouse.Core.UriBuilders;
 
-namespace CompaniesHouse
+namespace CompaniesHouse.Core
 {
     public class CompaniesHouseCompanyFilingHistoryClient : ICompaniesHouseCompanyFilingHistoryClient
     {

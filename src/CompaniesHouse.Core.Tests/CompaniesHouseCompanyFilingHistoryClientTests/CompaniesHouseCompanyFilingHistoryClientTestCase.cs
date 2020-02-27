@@ -1,4 +1,4 @@
-namespace CompaniesHouse.Tests.CompaniesHouseCompanyFilingHistoryClientTests
+namespace CompaniesHouse.Core.Tests.CompaniesHouseCompanyFilingHistoryClientTests
 {
     public class CompaniesHouseCompanyFilingHistoryClientTestCase
     {

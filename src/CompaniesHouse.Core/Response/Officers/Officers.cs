@@ -1,7 +1,7 @@
-﻿using CompaniesHouse.Response.CompanyProfile;
+﻿using CompaniesHouse.Core.Response.CompanyProfile;
 using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.Officers
+namespace CompaniesHouse.Core.Response.Officers
 {
     public class Officers
     {

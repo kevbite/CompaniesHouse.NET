@@ -1,9 +1,9 @@
 ﻿using System;
-using CompaniesHouse.Request;
-using CompaniesHouse.UriBuilders;
+using CompaniesHouse.Core.Request;
+using CompaniesHouse.Core.UriBuilders;
 using NUnit.Framework;
 
-namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
+namespace CompaniesHouse.Core.Tests.UriBuilders.SearchUriBuilderTests
 {
     public abstract partial class SearchUriBuilderTestsBase
     {

@@ -1,4 +1,4 @@
-namespace CompaniesHouse.ScenarioTests
+namespace CompaniesHouse.Core.ScenarioTests
 {
     public static class Keys
     {

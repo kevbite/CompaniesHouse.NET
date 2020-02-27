@@ -1,8 +1,8 @@
-﻿using CompaniesHouse.JsonConverters;
-using CompaniesHouse.Response.Search.CompanySearch;
+﻿using CompaniesHouse.Core.JsonConverters;
+using CompaniesHouse.Core.Response.Search.CompanySearch;
 using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.Search
+namespace CompaniesHouse.Core.Response.Search
 {
     [JsonConverter(typeof(SearchItemConverter))]
     public abstract class SearchItem

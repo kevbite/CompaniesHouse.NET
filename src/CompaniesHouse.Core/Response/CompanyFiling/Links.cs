@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.CompanyFiling
+namespace CompaniesHouse.Core.Response.CompanyFiling
 {
     public class Links
     {

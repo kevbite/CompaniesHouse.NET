@@ -1,12 +1,12 @@
 ﻿using System;
-using CompaniesHouse.Response.Search;
-using CompaniesHouse.Response.Search.CompanySearch;
-using CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
-using CompaniesHouse.Response.Search.OfficerSearch;
+using CompaniesHouse.Core.Response.Search;
+using CompaniesHouse.Core.Response.Search.CompanySearch;
+using CompaniesHouse.Core.Response.Search.DisqualifiedOfficersSearch;
+using CompaniesHouse.Core.Response.Search.OfficerSearch;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace CompaniesHouse.JsonConverters
+namespace CompaniesHouse.Core.JsonConverters
 {
     public class SearchItemConverter : JsonCreationConverter<SearchItem>
     {

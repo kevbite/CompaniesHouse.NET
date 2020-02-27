@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using CompaniesHouse.Response.Search.OfficerSearch;
+using CompaniesHouse.Core.Response.Search.OfficerSearch;
 using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.Appointments
+namespace CompaniesHouse.Core.Response.Appointments
 {
     public class Appointments
     {

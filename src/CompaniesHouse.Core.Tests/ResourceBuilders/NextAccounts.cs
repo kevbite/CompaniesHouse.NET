@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompaniesHouse.Tests.ResourceBuilders
+namespace CompaniesHouse.Core.Tests.ResourceBuilders
 {
     public class NextAccounts
     {

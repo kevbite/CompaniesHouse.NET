@@ -1,9 +1,9 @@
 ﻿using System;
-using CompaniesHouse.Response.Officers;
+using CompaniesHouse.Core.Response.Officers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace CompaniesHouse.Response.Appointments
+namespace CompaniesHouse.Core.Response.Appointments
 {
     public class Appointment
     {

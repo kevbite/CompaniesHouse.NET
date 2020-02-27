@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace CompaniesHouse.Response
+namespace CompaniesHouse.Core.Response
 {
     public enum FilingSubcategory
     {

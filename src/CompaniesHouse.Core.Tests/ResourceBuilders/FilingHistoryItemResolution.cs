@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CompaniesHouse.Tests.ResourceBuilders
+namespace CompaniesHouse.Core.Tests.ResourceBuilders
 {
     public class FilingHistoryItemResolution
     {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CompaniesHouse.DelegatingHandlers
+namespace CompaniesHouse.Core.DelegatingHandlers
 {
     public class CompaniesHouseAuthorizationHandler : DelegatingHandler
     {

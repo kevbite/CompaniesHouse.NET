@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CompaniesHouse
+namespace CompaniesHouse.Core
 {
     public class CompaniesHouseSettings : ICompaniesHouseSettings
     {

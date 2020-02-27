@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
+namespace CompaniesHouse.Core.IntegrationTests.Tests.DocumentTests
 {
     public abstract class DocumentTestBase<T>
     {

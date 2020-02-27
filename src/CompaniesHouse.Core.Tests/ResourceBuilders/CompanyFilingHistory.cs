@@ -1,4 +1,4 @@
-﻿namespace CompaniesHouse.Tests.ResourceBuilders
+﻿namespace CompaniesHouse.Core.Tests.ResourceBuilders
 {
     public class CompanyFilingHistory
     {

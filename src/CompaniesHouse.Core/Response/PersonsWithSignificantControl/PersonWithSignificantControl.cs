@@ -1,9 +1,9 @@
-﻿using CompaniesHouse.Response.Appointments;
+﻿using CompaniesHouse.Core.Response.Appointments;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 
-namespace CompaniesHouse.Response.PersonsWithSignificantControl
+namespace CompaniesHouse.Core.Response.PersonsWithSignificantControl
 {
     public class PersonWithSignificantControl
     {

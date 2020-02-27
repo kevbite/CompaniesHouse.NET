@@ -4,7 +4,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace CompaniesHouse.JsonConverters
+namespace CompaniesHouse.Core.JsonConverters
 {
     public class OptionalStringEnumConverter<T> : StringEnumConverter
 	{

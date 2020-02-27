@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.Search.DisqualifiedOfficersSearch
+namespace CompaniesHouse.Core.Response.Search.DisqualifiedOfficersSearch
 {
     public class DisqualifiedOfficer : SearchItem
     {

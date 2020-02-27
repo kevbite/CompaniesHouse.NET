@@ -1,7 +1,7 @@
-﻿using CompaniesHouse.Response;
+﻿using CompaniesHouse.Core.Response;
 using NUnit.Framework;
 
-namespace CompaniesHouse.Tests.JsonConverters.FilingSubcategoryConverterTests
+namespace CompaniesHouse.Core.Tests.JsonConverters.FilingSubcategoryConverterTests
 {
     [TestFixture]
     public class StringArrayOrFieldEnumConverterTestsForMultipleValues : StringArrayOrFieldEnumConverterTestsBase

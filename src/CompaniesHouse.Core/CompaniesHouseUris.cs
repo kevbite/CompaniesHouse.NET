@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CompaniesHouse
+namespace CompaniesHouse.Core
 {
     public static class CompaniesHouseUris
     {

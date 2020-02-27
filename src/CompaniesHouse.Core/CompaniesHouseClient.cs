@@ -3,21 +3,21 @@ using System.IO;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using CompaniesHouse.Request;
-using CompaniesHouse.Response.Appointments;
-using CompaniesHouse.Response.CompanyFiling;
-using CompaniesHouse.Response.CompanyProfile;
-using CompaniesHouse.Response.Document;
-using CompaniesHouse.Response.Insolvency;
-using CompaniesHouse.Response.Officers;
-using CompaniesHouse.Response.PersonsWithSignificantControl;
-using CompaniesHouse.Response.Search.AllSearch;
-using CompaniesHouse.Response.Search.CompanySearch;
-using CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
-using CompaniesHouse.Response.Search.OfficerSearch;
-using CompaniesHouse.UriBuilders;
+using CompaniesHouse.Core.Request;
+using CompaniesHouse.Core.Response.Appointments;
+using CompaniesHouse.Core.Response.CompanyFiling;
+using CompaniesHouse.Core.Response.CompanyProfile;
+using CompaniesHouse.Core.Response.Document;
+using CompaniesHouse.Core.Response.Insolvency;
+using CompaniesHouse.Core.Response.Officers;
+using CompaniesHouse.Core.Response.PersonsWithSignificantControl;
+using CompaniesHouse.Core.Response.Search.AllSearch;
+using CompaniesHouse.Core.Response.Search.CompanySearch;
+using CompaniesHouse.Core.Response.Search.DisqualifiedOfficersSearch;
+using CompaniesHouse.Core.Response.Search.OfficerSearch;
+using CompaniesHouse.Core.UriBuilders;
 
-namespace CompaniesHouse
+namespace CompaniesHouse.Core
 {
     public class CompaniesHouseClient : ICompaniesHouseClient, IDisposable
     {

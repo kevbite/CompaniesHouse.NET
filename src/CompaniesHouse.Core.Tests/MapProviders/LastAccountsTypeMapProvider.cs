@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using CompaniesHouse.Response.CompanyProfile;
-using CompaniesHouse.Response;
+using CompaniesHouse.Core.Response.CompanyProfile;
+using CompaniesHouse.Core.Response;
 
-namespace CompaniesHouse.Tests.MapProviders
+namespace CompaniesHouse.Core.Tests.MapProviders
 {
     public class LastAccountsTypeMapProvider : IEnumDataMapProvider<LastAccountsType>
     {

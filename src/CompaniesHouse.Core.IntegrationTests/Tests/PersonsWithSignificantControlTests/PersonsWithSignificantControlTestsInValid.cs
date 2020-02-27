@@ -2,7 +2,7 @@
 using NUnit.Framework;
 
 
-namespace CompaniesHouse.IntegrationTests.Tests.PersonsWithSignificantControlTests
+namespace CompaniesHouse.Core.IntegrationTests.Tests.PersonsWithSignificantControlTests
 {
     [TestFixture]
     public class PersonsWithSignificantControlTestsInValid : PersonsWithSignificantControlTestBase

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace CompaniesHouse.Tests.MapProviders
+namespace CompaniesHouse.Core.Tests.MapProviders
 {
     public interface IEnumDataMapProvider<TEnum>
     {

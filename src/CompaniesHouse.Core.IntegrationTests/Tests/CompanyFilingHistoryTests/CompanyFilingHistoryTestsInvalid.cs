@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using CompaniesHouse.Response.CompanyFiling;
+using CompaniesHouse.Core.Response.CompanyFiling;
 using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
+namespace CompaniesHouse.Core.IntegrationTests.Tests.CompanyFilingHistoryTests
 {
     [TestFixture]
     public class CompanyFilingHistoryTestsInvalid : CompanyFilingHistoryTestBase

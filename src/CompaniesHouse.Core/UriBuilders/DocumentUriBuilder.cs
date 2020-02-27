@@ -1,4 +1,4 @@
-﻿namespace CompaniesHouse.UriBuilders
+﻿namespace CompaniesHouse.Core.UriBuilders
 {
     public class DocumentUriBuilder : IDocumentUriBuilder
     {

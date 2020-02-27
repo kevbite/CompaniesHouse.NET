@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
-using CompaniesHouse.Request;
-using CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
+using CompaniesHouse.Core.Request;
+using CompaniesHouse.Core.Response.Search.DisqualifiedOfficersSearch;
 using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
+namespace CompaniesHouse.Core.IntegrationTests.Tests.SearchingTests
 {
     [TestFixture]
     public class DisqualifiedOfficersSearchTests

@@ -1,6 +1,6 @@
 using System;
 
-namespace CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource
+namespace CompaniesHouse.Core.Tests.ResourceBuilders.CompanySearchResource
 {
     public class CompanyDetails
     {

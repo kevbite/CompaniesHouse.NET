@@ -1,9 +1,9 @@
 ﻿using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using CompaniesHouse.Response.Document;
+using CompaniesHouse.Core.Response.Document;
 
-namespace CompaniesHouse
+namespace CompaniesHouse.Core
 {
     public interface ICompaniesHouseDocumentClient
     {

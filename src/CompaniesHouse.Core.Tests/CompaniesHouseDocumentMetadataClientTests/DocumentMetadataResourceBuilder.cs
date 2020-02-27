@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace CompaniesHouse.Tests.CompaniesHouseDocumentMetadataClientTests
+namespace CompaniesHouse.Core.Tests.CompaniesHouseDocumentMetadataClientTests
 {
     public class DocumentMetadataResourceBuilder
     {

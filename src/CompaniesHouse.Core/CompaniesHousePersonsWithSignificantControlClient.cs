@@ -1,10 +1,10 @@
-﻿using CompaniesHouse.Response.PersonsWithSignificantControl;
-using CompaniesHouse.UriBuilders;
+﻿using CompaniesHouse.Core.Response.PersonsWithSignificantControl;
+using CompaniesHouse.Core.UriBuilders;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CompaniesHouse
+namespace CompaniesHouse.Core
 {
     public class CompaniesHousePersonsWithSignificantControlClient : ICompaniesHousePersonsWithSignificantControlClient
     {

@@ -1,11 +1,11 @@
-﻿using CompaniesHouse.Response.PersonsWithSignificantControl;
-using CompaniesHouse.Response.Appointments;
+﻿using CompaniesHouse.Core.Response.PersonsWithSignificantControl;
+using CompaniesHouse.Core.Response.Appointments;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
-using CompaniesHouse.Response;
+using CompaniesHouse.Core.Response;
 
-namespace CompaniesHouse.Tests.ResourceBuilders
+namespace CompaniesHouse.Core.Tests.ResourceBuilders
 {
     public class PersonWithSignificantControl
     {

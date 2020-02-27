@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using CompaniesHouse.Response.Officers;
+using CompaniesHouse.Core.Response.Officers;
 using Ploeh.AutoFixture;
 using Officer = CompaniesHouse.Tests.ResourceBuilders.Officer;
 using Officers = CompaniesHouse.Tests.ResourceBuilders.Officers;
 
-namespace CompaniesHouse.Tests.CompaniesHouseOfficersTests
+namespace CompaniesHouse.Core.Tests.CompaniesHouseOfficersTests
 {
     public class OfficersBuilder
     {

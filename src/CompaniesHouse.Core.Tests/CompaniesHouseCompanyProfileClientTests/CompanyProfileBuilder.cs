@@ -1,5 +1,5 @@
 using System.Linq;
-using CompaniesHouse.Response.CompanyProfile;
+using CompaniesHouse.Core.Response.CompanyProfile;
 using Ploeh.AutoFixture;
 using Accounts = CompaniesHouse.Tests.ResourceBuilders.Accounts;
 using AnnualReturn = CompaniesHouse.Tests.ResourceBuilders.AnnualReturn;
@@ -9,7 +9,7 @@ using LastAccounts = CompaniesHouse.Tests.ResourceBuilders.LastAccounts;
 using Officer = CompaniesHouse.Tests.ResourceBuilders.Officer;
 using OfficerSummary = CompaniesHouse.Tests.ResourceBuilders.OfficerSummary;
 
-namespace CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTests
+namespace CompaniesHouse.Core.Tests.CompaniesHouseCompanyProfileClientTests
 {
     public class CompanyProfileBuilder
     {

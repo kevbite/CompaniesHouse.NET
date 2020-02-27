@@ -4,7 +4,7 @@ using System.Reflection;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 
-namespace CompaniesHouse.Tests
+namespace CompaniesHouse.Core.Tests
 {
     public class UniversalDateSpecimenBuilder<TEntity> : ISpecimenBuilder
     {

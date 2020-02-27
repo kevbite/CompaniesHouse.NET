@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace CompaniesHouse.Response.Officers
+namespace CompaniesHouse.Core.Response.Officers
 {
     public enum OfficerRole
     {

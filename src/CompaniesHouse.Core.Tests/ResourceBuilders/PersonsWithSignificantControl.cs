@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CompaniesHouse.Tests.ResourceBuilders
+namespace CompaniesHouse.Core.Tests.ResourceBuilders
 {
     public class PersonsWithSignificantControl
     {

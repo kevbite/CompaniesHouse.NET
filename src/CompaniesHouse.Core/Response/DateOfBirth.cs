@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response
+namespace CompaniesHouse.Core.Response
 {
     public class DateOfBirth
     {

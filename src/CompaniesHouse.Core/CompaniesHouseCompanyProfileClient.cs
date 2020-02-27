@@ -1,10 +1,10 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using CompaniesHouse.Response.CompanyProfile;
-using CompaniesHouse.UriBuilders;
+using CompaniesHouse.Core.Response.CompanyProfile;
+using CompaniesHouse.Core.UriBuilders;
 
-namespace CompaniesHouse
+namespace CompaniesHouse.Core
 {
     public class CompaniesHouseCompanyProfileClient : ICompaniesHouseCompanyProfileClient
     {

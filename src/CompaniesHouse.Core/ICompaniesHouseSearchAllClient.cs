@@ -1,9 +1,9 @@
 using System.Threading;
 using System.Threading.Tasks;
-using CompaniesHouse.Request;
-using CompaniesHouse.Response.Search.AllSearch;
+using CompaniesHouse.Core.Request;
+using CompaniesHouse.Core.Response.Search.AllSearch;
 
-namespace CompaniesHouse
+namespace CompaniesHouse.Core
 {
     public interface ICompaniesHouseSearchAllClient
     {

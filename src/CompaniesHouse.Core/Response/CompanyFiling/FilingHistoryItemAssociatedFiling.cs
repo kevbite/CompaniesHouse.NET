@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.CompanyFiling
+namespace CompaniesHouse.Core.Response.CompanyFiling
 {
     public class FilingHistoryItemAssociatedFiling
     {

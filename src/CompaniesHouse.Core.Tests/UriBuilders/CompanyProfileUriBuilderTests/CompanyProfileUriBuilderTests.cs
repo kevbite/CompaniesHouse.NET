@@ -1,8 +1,8 @@
 ﻿using System;
-using CompaniesHouse.UriBuilders;
+using CompaniesHouse.Core.UriBuilders;
 using NUnit.Framework;
 
-namespace CompaniesHouse.Tests.UriBuilders.CompanyProfileUriBuilderTests
+namespace CompaniesHouse.Core.Tests.UriBuilders.CompanyProfileUriBuilderTests
 {
     public class CompanyProfileUriBuilderTests
     {

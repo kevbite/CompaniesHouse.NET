@@ -1,7 +1,7 @@
-﻿using CompaniesHouse.Response.PersonsWithSignificantControl;
+﻿using CompaniesHouse.Core.Response.PersonsWithSignificantControl;
 using System.Linq;
 
-namespace CompaniesHouse.Tests.ResourceBuilders
+namespace CompaniesHouse.Core.Tests.ResourceBuilders
 {
     public class PersonsWithSignificantControlResourceBuilder
     {

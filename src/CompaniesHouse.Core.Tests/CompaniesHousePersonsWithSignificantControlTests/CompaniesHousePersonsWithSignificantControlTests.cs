@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Net.Http;
-using CompaniesHouse.Tests.ResourceBuilders;
-using CompaniesHouse.UriBuilders;
+using CompaniesHouse.Core.Tests.ResourceBuilders;
+using CompaniesHouse.Core.UriBuilders;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PersonsWithSignificantControl = CompaniesHouse.Response.PersonsWithSignificantControl.PersonsWithSignificantControl;
 
-namespace CompaniesHouse.Tests.CompaniesHousePersonsWithSignificantControlTests
+namespace CompaniesHouse.Core.Tests.CompaniesHousePersonsWithSignificantControlTests
 {
     [TestFixture]
     public class CompaniesHousePersonsWithSignificantControlTests

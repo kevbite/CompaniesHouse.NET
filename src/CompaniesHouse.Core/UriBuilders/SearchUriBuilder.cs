@@ -1,7 +1,7 @@
 ﻿using System;
-using CompaniesHouse.Request;
+using CompaniesHouse.Core.Request;
 
-namespace CompaniesHouse.UriBuilders
+namespace CompaniesHouse.Core.UriBuilders
 {
     public class SearchUriBuilder : ISearchUriBuilder
     {

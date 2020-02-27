@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CompaniesHouse.Response.Officers;
+using CompaniesHouse.Core.Response.Officers;
 using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
+namespace CompaniesHouse.Core.IntegrationTests.Tests.OfficerTests
 {
     public abstract class OfficersTestBase
     {

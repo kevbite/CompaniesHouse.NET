@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CompaniesHouse.Tests
+namespace CompaniesHouse.Core.Tests
 {
     public class StubHttpMessageHandler : HttpMessageHandler
     {

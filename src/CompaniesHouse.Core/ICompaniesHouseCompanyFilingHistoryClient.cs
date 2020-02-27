@@ -1,8 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
-using CompaniesHouse.Response.CompanyFiling;
+using CompaniesHouse.Core.Response.CompanyFiling;
 
-namespace CompaniesHouse
+namespace CompaniesHouse.Core
 {
     public interface ICompaniesHouseCompanyFilingHistoryClient
     {

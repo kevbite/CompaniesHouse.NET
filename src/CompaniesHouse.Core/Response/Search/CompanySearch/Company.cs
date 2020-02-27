@@ -1,9 +1,9 @@
 using System;
-using CompaniesHouse.JsonConverters;
+using CompaniesHouse.Core.JsonConverters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace CompaniesHouse.Response.Search.CompanySearch
+namespace CompaniesHouse.Core.Response.Search.CompanySearch
 {
     public class Company : SearchItem
     {

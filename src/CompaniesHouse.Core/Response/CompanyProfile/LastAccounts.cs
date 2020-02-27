@@ -1,9 +1,9 @@
 ﻿using System;
-using CompaniesHouse.JsonConverters;
+using CompaniesHouse.Core.JsonConverters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace CompaniesHouse.Response.CompanyProfile
+namespace CompaniesHouse.Core.Response.CompanyProfile
 {
     public class LastAccounts
     {

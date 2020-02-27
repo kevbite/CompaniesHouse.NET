@@ -3,16 +3,16 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using CompaniesHouse.Request;
-using CompaniesHouse.Response.Search.OfficerSearch;
-using CompaniesHouse.Tests.ResourceBuilders.OfficerSearchResource;
-using CompaniesHouse.UriBuilders;
+using CompaniesHouse.Core.Request;
+using CompaniesHouse.Core.Response.Search.OfficerSearch;
+using CompaniesHouse.Core.Tests.ResourceBuilders.OfficerSearchResource;
+using CompaniesHouse.Core.UriBuilders;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
 
-namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
+namespace CompaniesHouse.Core.Tests.CompaniesHouseSearchClientTests
 {
     [TestFixture]
     public class CompaniesHouseSearchClientTestsForOfficerSearch

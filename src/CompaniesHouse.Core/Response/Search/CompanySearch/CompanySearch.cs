@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.Search.CompanySearch
+namespace CompaniesHouse.Core.Response.Search.CompanySearch
 {
     public class CompanySearch
     {

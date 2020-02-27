@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
+namespace CompaniesHouse.Core.IntegrationTests.Tests.OfficerTests
 {
     [TestFixture]
     public class OfficersTestsInvalid : OfficersTestBase

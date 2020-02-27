@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 
-namespace CompaniesHouse.Description
+namespace CompaniesHouse.Core.Description
 {
     public class DescriptionProvider
     {

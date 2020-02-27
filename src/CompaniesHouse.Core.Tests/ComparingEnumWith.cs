@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using CompaniesHouse.Tests.MapProviders;
+using CompaniesHouse.Core.Tests.MapProviders;
 using FluentAssertions.Equivalency;
 
-namespace CompaniesHouse.Tests
+namespace CompaniesHouse.Core.Tests
 {
     public class ComparingEnumWith<TMapProvider, TEnum> : IEquivalencyStep
         where TMapProvider : IEnumDataMapProvider<TEnum>, new()

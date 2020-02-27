@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http;
-using CompaniesHouse.Tests.ResourceBuilders;
-using CompaniesHouse.UriBuilders;
+using CompaniesHouse.Core.Tests.ResourceBuilders;
+using CompaniesHouse.Core.UriBuilders;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using CompanyFilingHistory = CompaniesHouse.Response.CompanyFiling.CompanyFilingHistory;
 
-namespace CompaniesHouse.Tests.CompaniesHouseCompanyFilingHistoryClientTests
+namespace CompaniesHouse.Core.Tests.CompaniesHouseCompanyFilingHistoryClientTests
 {
     [TestFixture]
     public class CompaniesHouseCompanyFilingHistoryClientTests

@@ -1,6 +1,6 @@
 using System.Net.Http;
 
-namespace CompaniesHouse
+namespace CompaniesHouse.Core
 {
     public interface IHttpClientFactory
     {

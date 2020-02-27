@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using CompaniesHouse.Response.PersonsWithSignificantControl;
+using CompaniesHouse.Core.Response.PersonsWithSignificantControl;
 
-namespace CompaniesHouse.Tests.MapProviders
+namespace CompaniesHouse.Core.Tests.MapProviders
 {
     public class PersonWithSignificantControlKindMapProvider : IEnumDataMapProvider<PersonWithSignificantControlKind>
     {

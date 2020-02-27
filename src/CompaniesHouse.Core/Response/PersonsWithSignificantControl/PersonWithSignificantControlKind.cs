@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace CompaniesHouse.Response.PersonsWithSignificantControl
+namespace CompaniesHouse.Core.Response.PersonsWithSignificantControl
 {
     public enum PersonWithSignificantControlKind
     {

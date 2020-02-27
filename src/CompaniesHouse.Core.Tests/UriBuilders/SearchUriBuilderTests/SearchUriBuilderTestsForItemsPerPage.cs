@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
+namespace CompaniesHouse.Core.Tests.UriBuilders.SearchUriBuilderTests
 {
     [TestFixture]
     public class SearchUriBuilderTestsForItemsPerPage : SearchUriBuilderTestsBase

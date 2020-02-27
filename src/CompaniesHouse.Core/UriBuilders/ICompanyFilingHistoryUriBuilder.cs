@@ -1,6 +1,6 @@
 using System;
 
-namespace CompaniesHouse.UriBuilders
+namespace CompaniesHouse.Core.UriBuilders
 {
     public interface ICompanyFilingHistoryUriBuilder
     {

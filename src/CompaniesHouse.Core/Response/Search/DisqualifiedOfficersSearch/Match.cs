@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace CompaniesHouse.Response.Search.DisqualifiedOfficersSearch
+namespace CompaniesHouse.Core.Response.Search.DisqualifiedOfficersSearch
 {
     public class Match
     {

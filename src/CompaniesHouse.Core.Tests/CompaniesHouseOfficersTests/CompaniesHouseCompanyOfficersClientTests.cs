@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Net.Http;
-using CompaniesHouse.Tests.ResourceBuilders;
-using CompaniesHouse.UriBuilders;
+using CompaniesHouse.Core.Tests.ResourceBuilders;
+using CompaniesHouse.Core.UriBuilders;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Officers = CompaniesHouse.Response.Officers.Officers;
 
-namespace CompaniesHouse.Tests.CompaniesHouseOfficersTests
+namespace CompaniesHouse.Core.Tests.CompaniesHouseOfficersTests
 {
     [TestFixture]
     public class CompaniesHouseCompanyOfficersClientTests

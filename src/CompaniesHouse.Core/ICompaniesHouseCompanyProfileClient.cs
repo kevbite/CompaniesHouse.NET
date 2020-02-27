@@ -1,8 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
-using CompaniesHouse.Response.CompanyProfile;
+using CompaniesHouse.Core.Response.CompanyProfile;
 
-namespace CompaniesHouse
+namespace CompaniesHouse.Core
 {
     public interface ICompaniesHouseCompanyProfileClient
     {

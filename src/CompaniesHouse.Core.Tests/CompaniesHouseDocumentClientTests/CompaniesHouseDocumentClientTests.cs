@@ -2,13 +2,13 @@
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using CompaniesHouse.Response.Document;
-using CompaniesHouse.UriBuilders;
+using CompaniesHouse.Core.Response.Document;
+using CompaniesHouse.Core.UriBuilders;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 
-namespace CompaniesHouse.Tests.CompaniesHouseDocumentClientTests
+namespace CompaniesHouse.Core.Tests.CompaniesHouseDocumentClientTests
 {
     [TestFixture]
     public class CompaniesHouseDocumentClientTests

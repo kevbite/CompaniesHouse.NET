@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
-namespace CompaniesHouse.Response.Officers
+namespace CompaniesHouse.Core.Response.Officers
 {
     public class Officer
     {

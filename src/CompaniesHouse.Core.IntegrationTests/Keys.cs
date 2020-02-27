@@ -1,6 +1,6 @@
 using System;
 
-namespace CompaniesHouse.IntegrationTests
+namespace CompaniesHouse.Core.IntegrationTests
 {
     public static class Keys
     {

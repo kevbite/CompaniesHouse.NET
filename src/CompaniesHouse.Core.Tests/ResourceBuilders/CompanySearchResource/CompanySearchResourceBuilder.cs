@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource
+namespace CompaniesHouse.Core.Tests.ResourceBuilders.CompanySearchResource
 {
     public class CompanySearchResourceBuilder
     {
