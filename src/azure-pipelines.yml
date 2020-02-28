@@ -1,0 +1,34 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  - master
+  - develop
+  - feature/*
+
+pool:
+  vmImage: "windows-latest"
+
+steps:
+  - task: UseDotNet@2
+    inputs:
+      packageType: "sdk"
+      version: "3.x"
+  - task: DotNetCoreCLI@2
+    displayName: "Restore dependencies"
+    inputs:
+      command: 'restore'
+      feedsToUse: 'config'
+      nugetConfigPath: 'src/nuget.config'
+  - script: dotnet build ./src/CompaniesHouse.Core.sln --configuration Release
+    displayName: "Build solution"
+  - script: dotnet test
+    displayName: "Run unit tests"
+  - script: dotnet pack ./src/CompaniesHouse.Core/CompaniesHouse.Core.csproj --configuration Release --no-build --output $(Build.ArtifactStagingDirectory)/nupkg -p:PackageVersion=1.0.$(Build.BuildId)
+    displayName: "Make package"
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)/nupkg'
+      artifactName: drop

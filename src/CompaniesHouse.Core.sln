@@ -14,8 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stuff", "Stuff", "{F0091515
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C8235BA8-D63E-4F03-B62B-C33EFB29E02F}"
 	ProjectSection(SolutionItems) = preProject
-		..\appveyor.yml = ..\appveyor.yml
-		..\build-before_build.ps1 = ..\build-before_build.ps1
+		azure-pipelines.yml = azure-pipelines.yml
+		nuget.config = nuget.config
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompaniesHouse.Core.IntegrationTests", "CompaniesHouse.Core.IntegrationTests\CompaniesHouse.Core.IntegrationTests.csproj", "{6B83B8C2-9DA6-42D5-BB32-BD0C6FDFC14D}"
