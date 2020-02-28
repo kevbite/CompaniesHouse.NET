@@ -31,7 +31,6 @@ steps:
     inputs:
       testSelector: 'testAssemblies'
       testAssemblyVer2: |
-        **\CompaniesHouse.Core.IntegrationTests.dll
         **\CompaniesHouse.Core.Tests.dll
         !**\*TestAdapter.dll
         !**\obj\**
