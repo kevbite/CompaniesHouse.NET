@@ -31,10 +31,12 @@ steps:
     inputs:
       testSelector: 'testAssemblies'
       testAssemblyVer2: |
-        **\*test*.dll
+        **\CompaniesHouse.Core.IntegrationTests.dll
+        **\CompaniesHouse.Core.Tests.dll
         !**\*TestAdapter.dll
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)'
+  - script: dotnet test ./src/CompaniesHouse.Core.ScenarioTests/CompaniesHouse.Core.ScenarioTests.csproj --configuration Release --no-build
   - script: dotnet pack ./src/CompaniesHouse.Core/CompaniesHouse.Core.csproj --configuration Release --no-build --output $(Build.ArtifactStagingDirectory)/nupkg -p:PackageVersion=1.0.$(Build.BuildId)
     displayName: "Make package"
   - task: PublishBuildArtifacts@1
