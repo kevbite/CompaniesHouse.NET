@@ -23,10 +23,18 @@ steps:
       projects: 'src/CompaniesHouse.Core.sln'
       feedsToUse: 'config'
       nugetConfigPath: 'src/nuget.config'
-  - script: dotnet build ./src/CompaniesHouse.Core.sln --configuration Release
-    displayName: "Build solution"
-  - script: dotnet test
-    displayName: "Run unit tests"
+  - task: MSBuild@1
+    inputs:
+      solution: '**/*.sln'
+      configuration: 'Release'
+  - task: VSTest@2
+    inputs:
+      testSelector: 'testAssemblies'
+      testAssemblyVer2: |
+        **\*test*.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
+      searchFolder: '$(System.DefaultWorkingDirectory)'
   - script: dotnet pack ./src/CompaniesHouse.Core/CompaniesHouse.Core.csproj --configuration Release --no-build --output $(Build.ArtifactStagingDirectory)/nupkg -p:PackageVersion=1.0.$(Build.BuildId)
     displayName: "Make package"
   - task: PublishBuildArtifacts@1
