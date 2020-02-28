@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stuff", "Stuff", "{F0091515
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C8235BA8-D63E-4F03-B62B-C33EFB29E02F}"
 	ProjectSection(SolutionItems) = preProject
-		azure-pipelines.yml = azure-pipelines.yml
+		..\azure-pipelines.yml = ..\azure-pipelines.yml
 		nuget.config = nuget.config
 	EndProjectSection
 EndProject
