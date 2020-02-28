@@ -31,7 +31,7 @@ steps:
     inputs:
       testSelector: 'testAssemblies'
       testAssemblyVer2: |
-        **\CompaniesHouse.Core.Tests.dll
+        **\CompaniesHouse.Core.IntegrationTests.dll
         !**\*TestAdapter.dll
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)'
