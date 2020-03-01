@@ -20,23 +20,14 @@ steps:
     displayName: "Restore dependencies"
     inputs:
       command: 'restore'
-      projects: 'src/CompaniesHouse.Core.sln'
+      projects: 'CompaniesHouse.Core.sln'
       feedsToUse: 'config'
       nugetConfigPath: 'src/nuget.config'
-  - task: MSBuild@1
-    inputs:
-      solution: '**/*.sln'
-      configuration: 'Release'
-  - task: VSTest@2
-    inputs:
-      testSelector: 'testAssemblies'
-      testAssemblyVer2: |
-        **\CompaniesHouse.Core.IntegrationTests.dll
-        !**\*TestAdapter.dll
-        !**\obj\**
-      searchFolder: '$(System.DefaultWorkingDirectory)'
-  - script: dotnet test ./src/CompaniesHouse.Core.ScenarioTests/CompaniesHouse.Core.ScenarioTests.csproj --configuration Release --no-build
-  - script: dotnet pack ./src/CompaniesHouse.Core/CompaniesHouse.Core.csproj --configuration Release --no-build --output $(Build.ArtifactStagingDirectory)/nupkg -p:PackageVersion=1.0.$(Build.BuildId)
+  - script: dotnet build CompaniesHouse.Core.sln --configuration Release
+    displayName: "Build solution"
+  - script: dotnet test CompaniesHouse.Core.sln --configuration Release --no-build
+    displayName: "Test solution"
+  - script: dotnet pack CompaniesHouse.Core/CompaniesHouse.Core.csproj --configuration Release --no-build --output $(Build.ArtifactStagingDirectory)/nupkg -p:PackageVersion=1.0.$(Build.BuildId)
     displayName: "Make package"
   - task: PublishBuildArtifacts@1
     inputs:
