@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using CompaniesHouse.Core.Tests.ResourceBuilders;
-using Ploeh.AutoFixture;
+using AutoFixture;
 
 namespace CompaniesHouse.Core.Tests.CompaniesHouseCompanyFilingHistoryClientTests
 {

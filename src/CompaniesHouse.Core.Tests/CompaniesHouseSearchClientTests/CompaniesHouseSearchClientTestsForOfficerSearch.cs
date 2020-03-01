@@ -10,7 +10,7 @@ using CompaniesHouse.Core.UriBuilders;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using Ploeh.AutoFixture;
+using AutoFixture;
 
 namespace CompaniesHouse.Core.Tests.CompaniesHouseSearchClientTests
 {
@@ -55,7 +55,7 @@ namespace CompaniesHouse.Core.Tests.CompaniesHouseSearchClientTests
         [Test]
         public void ThenResultDataIsCorrect()
         {
-            _result.Data.ShouldBeEquivalentTo(_resourceDetails, opt => opt.Excluding(su => Regex.IsMatch(su.SelectedMemberPath, @"Officers\[.+\]\.OfficerId")));
+            _result.Data.Should().BeEquivalentTo(_resourceDetails, opt => opt.Excluding(su => Regex.IsMatch(su.SelectedMemberPath, @"Officers\[.+\]\.OfficerId")));
         }  
     }
 }

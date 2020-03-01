@@ -1,4 +1,4 @@
-﻿using Ploeh.AutoFixture;
+﻿using AutoFixture;
 using PersonWithSignificantControl = CompaniesHouse.Core.Tests.ResourceBuilders.PersonWithSignificantControl;
 using PersonsWithSignificantControl = CompaniesHouse.Core.Tests.ResourceBuilders.PersonsWithSignificantControl;
 using System.Linq;

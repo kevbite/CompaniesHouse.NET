@@ -29,7 +29,7 @@ namespace CompaniesHouse.Core.Tests.CompaniesHouseDocumentMetadataClientTests
         }
 
         [Test]
-        public void ThenDocumentMetadataIsCorrect() => _result.Data.ShouldBeEquivalentTo(_expected);
+        public void ThenDocumentMetadataIsCorrect() => _result.Data.Should().BeEquivalentTo(_expected);
 
         private static Mock<IDocumentUriBuilder> SetupRequestUri(Uri catchUri)
         {

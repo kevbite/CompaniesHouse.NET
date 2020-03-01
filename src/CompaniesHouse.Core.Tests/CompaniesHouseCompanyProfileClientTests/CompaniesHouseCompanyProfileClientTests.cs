@@ -37,7 +37,7 @@ namespace CompaniesHouse.Core.Tests.CompaniesHouseCompanyProfileClientTests
 
             _result = _client.GetCompanyProfileAsync("abc").Result;
 
-            _result.Data.ShouldBeEquivalentTo(_companyProfile);
+            _result.Data.Should().BeEquivalentTo(_companyProfile);
         }
 
 

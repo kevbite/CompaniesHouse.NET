@@ -35,7 +35,7 @@ namespace CompaniesHouse.Core.Tests.CompaniesHouseOfficersTests
 
             _result = _client.GetOfficersAsync("abc", 0, 25).Result;
 
-            _result.Data.ShouldBeEquivalentTo(_officers);
+            _result.Data.Should().BeEquivalentTo(_officers);
         }
     }
 }

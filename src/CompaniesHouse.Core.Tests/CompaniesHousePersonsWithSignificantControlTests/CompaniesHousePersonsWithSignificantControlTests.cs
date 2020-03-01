@@ -35,7 +35,7 @@ namespace CompaniesHouse.Core.Tests.CompaniesHousePersonsWithSignificantControlT
 
             _result = _client.GetPersonsWithSignificantControlAsync("abc", 0, 25).Result;
 
-            _result.Data.ShouldBeEquivalentTo(_personsWithSignificantControl);
+            _result.Data.Should().BeEquivalentTo(_personsWithSignificantControl);
         }
     }
 }

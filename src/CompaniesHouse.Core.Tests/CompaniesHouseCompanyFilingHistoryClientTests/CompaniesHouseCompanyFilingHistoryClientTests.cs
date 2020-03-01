@@ -37,7 +37,7 @@ namespace CompaniesHouse.Core.Tests.CompaniesHouseCompanyFilingHistoryClientTest
 
             _result = _client.GetCompanyFilingHistoryAsync("abc", 0, 25).Result;
 
-            _result.Data.ShouldBeEquivalentTo(_companyFilingHistory);
+            _result.Data.Should().BeEquivalentTo(_companyFilingHistory);
         }
 
 

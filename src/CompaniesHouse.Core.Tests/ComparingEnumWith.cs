@@ -27,7 +27,7 @@ namespace CompaniesHouse.Core.Tests
 
         public bool CanHandle(IEquivalencyValidationContext context, IEquivalencyAssertionOptions config)
         {
-            var subjectType = config.GetSubjectType(context);
+            var subjectType = config.GetExpectationType(context);
 
             return subjectType != null && subjectType == _enumType && context.Expectation is string;
         }

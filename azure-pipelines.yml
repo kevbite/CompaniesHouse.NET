@@ -25,7 +25,7 @@ steps:
       nugetConfigPath: 'src/nuget.config'
   - script: dotnet build ./src/CompaniesHouse.Core.sln --configuration Release
     displayName: "Build solution"
-  - script: dotnet test
+  - script: dotnet test ./src/CompaniesHouse.Core.sln
     displayName: "Run unit tests"
   - script: dotnet pack ./src/CompaniesHouse.Core/CompaniesHouse.Core.csproj --configuration Release --no-build --output $(Build.ArtifactStagingDirectory)/nupkg -p:PackageVersion=1.0.$(Build.BuildId)
     displayName: "Make package"

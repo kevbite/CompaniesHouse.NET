@@ -1,6 +1,6 @@
 using System.Linq;
 using CompaniesHouse.Core.Response.CompanyProfile;
-using Ploeh.AutoFixture;
+using AutoFixture;
 using Accounts = CompaniesHouse.Core.Tests.ResourceBuilders.Accounts;
 using AnnualReturn = CompaniesHouse.Core.Tests.ResourceBuilders.AnnualReturn;
 using CompanyProfile = CompaniesHouse.Core.Tests.ResourceBuilders.CompanyProfile;

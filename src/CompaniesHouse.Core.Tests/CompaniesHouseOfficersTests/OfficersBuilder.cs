@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CompaniesHouse.Core.Response.Officers;
-using Ploeh.AutoFixture;
+using AutoFixture;
 using Officer = CompaniesHouse.Core.Tests.ResourceBuilders.Officer;
 using Officers = CompaniesHouse.Core.Tests.ResourceBuilders.Officers;
 
