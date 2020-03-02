@@ -22,7 +22,7 @@ steps:
     displayName: "Build solution"
   - script: dotnet test CompaniesHouse.Core.sln --configuration Release --no-build
     displayName: "Test solution"
-  - script: dotnet pack CompaniesHouse.Core/CompaniesHouse.Core.csproj --configuration Release --no-build --output $(Build.ArtifactStagingDirectory)/nupkg -p:PackageVersion=1.0.$(Build.BuildId)
+  - script: dotnet pack src/CompaniesHouse.Core/CompaniesHouse.Core.csproj --configuration Release --no-build --output $(Build.ArtifactStagingDirectory)/nupkg -p:PackageVersion=1.0.$(Build.BuildId)
     displayName: "Make package"
   - task: PublishBuildArtifacts@1
     inputs:
