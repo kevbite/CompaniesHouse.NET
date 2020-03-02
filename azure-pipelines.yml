@@ -16,13 +16,8 @@ steps:
     inputs:
       packageType: "sdk"
       version: "3.x"
-  - task: DotNetCoreCLI@2
+  - script: dotnet restore CompaniesHouse.Core.sln
     displayName: "Restore dependencies"
-    inputs:
-      command: 'restore'
-      projects: 'CompaniesHouse.Core.sln'
-      feedsToUse: 'config'
-      nugetConfigPath: 'src/nuget.config'
   - script: dotnet build CompaniesHouse.Core.sln --configuration Release
     displayName: "Build solution"
   - script: dotnet test CompaniesHouse.Core.sln --configuration Release --no-build
@@ -31,5 +26,5 @@ steps:
     displayName: "Make package"
   - task: PublishBuildArtifacts@1
     inputs:
-      pathtoPublish: '$(Build.ArtifactStagingDirectory)/nupkg'
+      pathtoPublish: "$(Build.ArtifactStagingDirectory)/nupkg"
       artifactName: drop
