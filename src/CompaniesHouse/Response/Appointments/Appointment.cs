@@ -34,5 +34,8 @@ namespace CompaniesHouse.Response.Appointments
 
         [JsonProperty(PropertyName = "appointed_on")]
         public DateTime? AppointedOn { get; set; }
+
+        [JsonProperty(PropertyName = "resigned_on")]
+        public DateTime? ResignedOn { get; set; }
     }
 }
