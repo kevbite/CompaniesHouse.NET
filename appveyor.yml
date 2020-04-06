@@ -3,7 +3,7 @@
     only:
       - master
 
-  version: 7.5.1
+  version: 7.5.2
   install:
     - ps : .\environment-install.ps1
 
@@ -45,6 +45,7 @@
 
   artifacts:
     - path: '**\bin\**\*.nupkg'
+    - path: '**\bin\**\*.snupkg'
 
   deploy:
     - provider: Environment
