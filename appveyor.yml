@@ -97,3 +97,4 @@
 
   artifacts:
     - path: '**\bin\**\*.nupkg'
+    - path: '**\bin\**\*.snupkg'

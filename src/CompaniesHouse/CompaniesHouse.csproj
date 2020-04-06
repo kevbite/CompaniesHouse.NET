@@ -3,6 +3,11 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard1.1;net45</TargetFrameworks>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
   
   <PropertyGroup Condition="'$(TargetFramework)' == 'net45'">
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
