@@ -27,12 +27,17 @@
   <PropertyGroup>
     <PackageTags>CompaniesHouse;Registrar;Kevsoft;API;REST;WebService</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/kevbite/CompaniesHouse.NET/master/companies-house.jpg</PackageIconUrl>
+    <PackageIcon>companies-house.jpg</PackageIcon>
     <PackageProjectUrl>https://github.com/kevbite/CompaniesHouse.NET</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/kevbite/CompaniesHouse.NET</RepositoryUrl>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\companies-house.jpg" Pack="true" PackagePath=""/>
+  </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
