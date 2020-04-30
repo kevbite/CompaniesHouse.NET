@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 
 namespace CompaniesHouse
 {
@@ -7,5 +8,7 @@ namespace CompaniesHouse
         Uri BaseUri { get; }
 
         string ApiKey { get; }
+
+        Func<HttpMessageHandler> HttpMessageHandlerCreator { get; }
     }
 }

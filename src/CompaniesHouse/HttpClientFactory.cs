@@ -15,14 +15,9 @@ namespace CompaniesHouse
 
         public HttpClient CreateHttpClient()
         {
-            var httpClientHandler = new HttpClientHandler
-            {
-                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
-            };
-
             var companiesHouseAuthorizationHandler = new CompaniesHouseAuthorizationHandler(_settings.ApiKey)
             {
-                InnerHandler = httpClientHandler
+                InnerHandler = _settings.HttpMessageHandlerCreator()
             };
 
             var httpClient = new HttpClient(companiesHouseAuthorizationHandler)
