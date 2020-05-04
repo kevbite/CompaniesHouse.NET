@@ -9,6 +9,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
     [TestFixture("brighouse computers")]
     [TestFixture("British Gas")]
     [TestFixture("Bay Horse")]
+
     public class CompanySearchTests
     {
         private readonly string _query;
