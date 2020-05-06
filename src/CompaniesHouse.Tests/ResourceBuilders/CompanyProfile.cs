@@ -51,5 +51,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
         public OfficerSummary OfficerSummary { get; set; }
 
         public bool RegisteredOfficeIsInDispute { get; set; }
+
+        public CompanyProfileLinks Links { get; set; }
     }
 }

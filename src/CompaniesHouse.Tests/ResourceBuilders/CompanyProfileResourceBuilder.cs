@@ -64,6 +64,16 @@ namespace CompaniesHouse.Tests.ResourceBuilders
    ""is_community_interest_company"" : {_companyProfile.IsCommunityInterestCompany.ToString().ToLower()},
    ""jurisdiction"" : ""{_companyProfile.Jurisdiction}"",
    ""last_full_members_list_date"" : ""{_companyProfile.LastFullMembersListDate.ToString("yyyy-MM-dd")}"",
+   ""links"" : {{
+      ""charges"" : ""{_companyProfile.Links.Charges}"",
+      ""filing_history"" : ""{_companyProfile.Links.FilingHistory}"",
+      ""insolvency"" : ""{_companyProfile.Links.Insolvency}"",
+      ""officers"" : ""{_companyProfile.Links.Officers}"",
+      ""persons_with_significant_control"" : ""{_companyProfile.Links.PersonsWithSignificantControl}"",
+      ""persons_with_significant_control_statements"" : ""{_companyProfile.Links.PersonsWithSignificantControlStatements}"",
+      ""registers"" : ""{_companyProfile.Links.Registers}"",
+      ""self"" : ""{_companyProfile.Links.Self}""
+   }},
    ""officer_summary"" : {{
       ""active_count"" : {_companyProfile.OfficerSummary.ActiveCount},
       ""officers"" : [
