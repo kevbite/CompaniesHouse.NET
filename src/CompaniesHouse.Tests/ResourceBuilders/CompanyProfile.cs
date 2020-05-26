@@ -53,5 +53,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
         public bool RegisteredOfficeIsInDispute { get; set; }
 
         public CompanyProfileLinks Links { get; set; }
+
+        public CompanyProfileBranchCompanyDetails BranchCompanyDetails { get; set; }
     }
 }

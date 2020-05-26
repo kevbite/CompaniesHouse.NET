@@ -84,5 +84,8 @@ namespace CompaniesHouse.Response.CompanyProfile
 
         [JsonProperty(PropertyName = "undeliverable_registered_office_address")]
         public bool? UndeliverableRegisteredOfficeAddress { get; set; }
+
+        [JsonProperty(PropertyName = "branch_company_details")]
+        public BranchCompanyDetails BranchCompanyDetails { get; set; }
     }
 }

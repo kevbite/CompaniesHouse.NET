@@ -44,6 +44,11 @@ namespace CompaniesHouse.Tests.ResourceBuilders
       ""next_made_up_to"" : ""{_companyProfile.AnnualReturn.NextMadeUpTo.ToString("yyyy-MM-dd")}"",
       ""overdue"" : {_companyProfile.AnnualReturn.Overdue.ToString().ToLower()}
    }},
+    ""branch_company_details"" : {{
+      ""business_activity"" : ""{_companyProfile.BranchCompanyDetails.BusinessActivity}"",
+      ""parent_company_name"" : ""{_companyProfile.BranchCompanyDetails.ParentCompanyName}"",
+      ""parent_company_number"" : ""{_companyProfile.BranchCompanyDetails.ParentCompanyNumber}""
+   }},
    ""can_file"" : {_companyProfile.CanFile.ToString().ToLower()},
    ""company_name"" : ""{_companyProfile.CompanyName}"",
    ""company_number"" : ""{_companyProfile.CompanyNumber}"",
