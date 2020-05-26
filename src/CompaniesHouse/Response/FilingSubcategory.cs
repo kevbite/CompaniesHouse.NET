@@ -60,5 +60,10 @@ namespace CompaniesHouse.Response
         [EnumMember(Value = "statements")]
         Statements,
 
+        [EnumMember(Value = "voluntary-arrangement")]
+        VoluntaryArrangement,
+
+        [EnumMember(Value = "alter")]
+        Alter,
     }
 }

@@ -71,5 +71,8 @@ namespace CompaniesHouse.Response
 
         [EnumMember(Value = "return")]
         Return,
+
+        [EnumMember(Value = "other")]
+        Other,
     }
 }

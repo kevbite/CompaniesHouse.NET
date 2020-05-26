@@ -145,8 +145,9 @@ namespace CompaniesHouse.Tests
         {
             {"resolution", FilingSubcategory.Resolution},
             {"document-replacement", FilingSubcategory.DocumentReplacement},
-            {"statements", FilingSubcategory.Statements}
-        };
+            {"statements", FilingSubcategory.Statements},
+            {"voluntary-arrangement", FilingSubcategory.VoluntaryArrangement}
+    };
 
         public static readonly IReadOnlyDictionary<string, FilingCategory> PossibleFilingCategories = new Dictionary
             <string, FilingCategory>()
@@ -165,7 +166,8 @@ namespace CompaniesHouse.Tests
             {"confirmation-statement", FilingCategory.ConfirmationStatement},
             {"persons-with-significant-control", FilingCategory.PersonsWithSignificantControl},
             {"restoration", FilingCategory.Restoration },
-            {"return", FilingCategory.Return }
+            {"return", FilingCategory.Return },
+            {"other", FilingCategory.Other }
         };
 
         public static readonly IReadOnlyDictionary<string, PersonWithSignificantControlKind> PossiblePersonWithSignificantControlKinds = new Dictionary
@@ -173,6 +175,8 @@ namespace CompaniesHouse.Tests
         {
             {"corporate-entity-person-with-significant-control", PersonWithSignificantControlKind.CorporateEntityPersonWithSignificantControl},
             {"individual-person-with-significant-control", PersonWithSignificantControlKind.IndividualPersonWithSignificantControl},
+            {"super-secure-person-with-significant-control", PersonWithSignificantControlKind.IndividualPersonWithSignificantControl},
+            {"legal-person-person-with-significant-control", PersonWithSignificantControlKind.IndividualPersonWithSignificantControl},
         };
 
     }

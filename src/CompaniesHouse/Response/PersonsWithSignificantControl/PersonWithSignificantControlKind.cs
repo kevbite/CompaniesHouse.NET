@@ -8,6 +8,12 @@ namespace CompaniesHouse.Response.PersonsWithSignificantControl
         CorporateEntityPersonWithSignificantControl,
 
         [EnumMember(Value = "individual-person-with-significant-control")]
-        IndividualPersonWithSignificantControl
+        IndividualPersonWithSignificantControl,
+
+        [EnumMember(Value = "super-secure-person-with-significant-control")]
+        SuperSecurePersonWithSignificantControl,
+
+        [EnumMember(Value = "legal-person-person-with-significant-control")]
+        LegalPersonPersonWithSignificantControl,
     }
 }
