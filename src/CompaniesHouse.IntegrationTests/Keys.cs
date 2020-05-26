@@ -4,6 +4,6 @@ namespace CompaniesHouse.IntegrationTests
 {
     public static class Keys
     {
-        public static string ApiKey { get; } = "vJjHSXMBpqIwFlwVfbRfXQtDB1Xl-v5QwwPLfWWU";
+        public static string ApiKey { get; } = Environment.GetEnvironmentVariable("api_key");
     }
 }

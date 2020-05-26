@@ -7,6 +7,10 @@
   install:
     - ps : .\environment-install.ps1
 
+  environment:
+    api_key:
+      secure: Saoyv+h9vvZ5D6YbH4WPVVDQcubZ9asXQ6sFDjYFCTfwbFmTL2d9pPYwQByXg0LL
+
   assembly_info:
     assembly_version: '{version}'
     assembly_file_version: '{version}'
@@ -60,6 +64,10 @@
 
   install:
     - ps : .\environment-install.ps1
+
+  environment:
+    api_key:
+      secure: Saoyv+h9vvZ5D6YbH4WPVVDQcubZ9asXQ6sFDjYFCTfwbFmTL2d9pPYwQByXg0LL
 
   assembly_info:
     assembly_version: '{version}'
