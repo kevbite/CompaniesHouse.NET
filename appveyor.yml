@@ -30,10 +30,6 @@
   after_build:
     - ps : dotnet pack .\src\CompaniesHouse\CompaniesHouse.csproj -c Release /p:Version=$env:APPVEYOR_BUILD_VERSION
 
-  environment:
-    CompaniesHouseApiKey:
-      secure: MyplhKXpS1d9yob+xCzzJvgePFVi4ts5sPuMGWS7k6mOnVl1EcDAR+mpGOSSQWUQ
-
   configuration: Release
 
   cache:
@@ -64,6 +60,10 @@
 
   install:
     - ps : .\environment-install.ps1
+
+  environment:
+    CompaniesHouseApiKey:
+      secure: MyplhKXpS1d9yob+xCzzJvgePFVi4ts5sPuMGWS7k6mOnVl1EcDAR+mpGOSSQWUQ
 
   environment:
     api_key:
