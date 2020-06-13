@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CompaniesHouse.JsonConverters;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace CompaniesHouse.Response.CompanyFiling
@@ -6,7 +7,7 @@ namespace CompaniesHouse.Response.CompanyFiling
     public class CompanyFilingHistory
     {
         [JsonProperty(PropertyName = "filing_history_status")]
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(OptionalStringEnumConverter<FilingHistoryStatus>), FilingHistoryStatus.None)]
         public FilingHistoryStatus HistoryStatus { get; set; }
 
         [JsonProperty(PropertyName = "etag")]

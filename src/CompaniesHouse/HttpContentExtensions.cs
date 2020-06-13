@@ -9,17 +9,13 @@ namespace CompaniesHouse
     {
         public static async Task<T> ReadAsJsonAsync<T>(this HttpContent content)
         {
-            using (var s = await content.ReadAsStreamAsync()
-                .ConfigureAwait(false))
-            {
-                using (var sr = new StreamReader(s))
-                using (var reader = new JsonTextReader(sr))
-                {
-                    var serializer = new JsonSerializer();
+            using var s = await content.ReadAsStreamAsync()
+                .ConfigureAwait(false);
+            using var sr = new StreamReader(s);
+            using var reader = new JsonTextReader(sr);
+            var serializer = new JsonSerializer();
 
-                    return serializer.Deserialize<T>(reader);
-                }
-            }
+            return serializer.Deserialize<T>(reader);
         }
     }
 }

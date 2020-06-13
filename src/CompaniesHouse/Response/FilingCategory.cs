@@ -74,5 +74,9 @@ namespace CompaniesHouse.Response
 
         [EnumMember(Value = "other")]
         Other,
+
+        [EnumMember(Value = "court-order")]
+        CourtOrder,
+
     }
 }
