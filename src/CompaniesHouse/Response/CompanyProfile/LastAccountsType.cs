@@ -49,6 +49,9 @@ namespace CompaniesHouse.Response.CompanyProfile
         MicroEntity,
         
         [EnumMember(Value = "unaudited-abridged")]
-        UnauditedAbridged
+        UnauditedAbridged,
+        
+        [EnumMember(Value = "audited-abridged")]
+        AuditedAbridged
     }
 }

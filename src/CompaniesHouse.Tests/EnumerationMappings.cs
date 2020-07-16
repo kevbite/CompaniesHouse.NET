@@ -26,7 +26,8 @@ namespace CompaniesHouse.Tests
             {"audit-exemption-subsidiary", LastAccountsType.AuditExemptionSubsidiary},
             {"filing-exemption-subsidiary", LastAccountsType.FilingExemptionSubsidiary},
             {"micro-entity", LastAccountsType.MicroEntity},
-            {"unaudited-abridged", LastAccountsType.UnauditedAbridged}
+            {"unaudited-abridged", LastAccountsType.UnauditedAbridged},
+            {"audited-abridged", LastAccountsType.AuditedAbridged}
     };
 
         public static readonly IReadOnlyDictionary<string, CompanyStatus> PossibleCompanyStatuses = new Dictionary
