@@ -28,8 +28,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
                 "06768813",  // TEST & COOL LTD,
                 "00059337",
                 "SC171417",
-                "09018331",
-                "RS007401"
+                "09018331"
             };
         }
 
