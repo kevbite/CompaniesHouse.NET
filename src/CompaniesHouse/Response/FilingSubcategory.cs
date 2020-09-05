@@ -65,5 +65,26 @@ namespace CompaniesHouse.Response
 
         [EnumMember(Value = "alter")]
         Alter,
+        
+        [EnumMember(Value = "register")]
+        Register,
+
+        [EnumMember(Value = "receiver")]
+        Receiver,
+
+        [EnumMember(Value = "voluntary-arrangement-moratoria")]
+        VoluntaryArrangementMoratoria,
+
+        [EnumMember(Value = "acquire")]
+        Acquire,
+
+        [EnumMember(Value = "trustee")]
+        Trustee,
+
+        [EnumMember(Value = "mortgage")]
+        Mortgage,
+
+        [EnumMember(Value = "transfer")]
+        Transfer,
     }
 }

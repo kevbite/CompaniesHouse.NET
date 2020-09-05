@@ -145,11 +145,34 @@ namespace CompaniesHouse.Tests
         public static readonly IReadOnlyDictionary<string, FilingSubcategory> PossibleFilingSubcategories = new Dictionary
             <string, FilingSubcategory>()
         {
+            {"annual-return", FilingSubcategory.AnnualReturn},
             {"resolution", FilingSubcategory.Resolution},
+            {"change", FilingSubcategory.Change},
+            {"create", FilingSubcategory.Create},
+            {"certificate", FilingSubcategory.Certificate},
+            {"appointments", FilingSubcategory.Appointments},
+            {"satisfy", FilingSubcategory.Satisfy},
+            {"termination", FilingSubcategory.Termination},
+            {"release-cease", FilingSubcategory.ReleaseCease},
+            {"voluntary", FilingSubcategory.Voluntary},
+            {"administration", FilingSubcategory.Administration},
+            {"compulsory", FilingSubcategory.Compulsory},
+            {"court-order", FilingSubcategory.CourtOrder},
+            {"other", FilingSubcategory.Other},
+            {"notifications", FilingSubcategory.Notifications},
+            {"officers", FilingSubcategory.Officers},
             {"document-replacement", FilingSubcategory.DocumentReplacement},
             {"statements", FilingSubcategory.Statements},
-            {"voluntary-arrangement", FilingSubcategory.VoluntaryArrangement}
-    };
+            {"voluntary-arrangement", FilingSubcategory.VoluntaryArrangement},
+            {"alter", FilingSubcategory.Alter},
+            {"register", FilingSubcategory.Register},
+            {"receiver", FilingSubcategory.Receiver},
+            {"voluntary-arrangement-moratoria", FilingSubcategory.VoluntaryArrangementMoratoria},
+            {"acquire", FilingSubcategory.Acquire},
+            {"trustee", FilingSubcategory.Trustee},
+            {"mortgage", FilingSubcategory.Mortgage},
+            {"transfer", FilingSubcategory.Transfer},
+        };
 
         public static readonly IReadOnlyDictionary<string, FilingCategory> PossibleFilingCategories = new Dictionary
             <string, FilingCategory>()
@@ -169,7 +192,9 @@ namespace CompaniesHouse.Tests
             {"persons-with-significant-control", FilingCategory.PersonsWithSignificantControl},
             {"restoration", FilingCategory.Restoration },
             {"return", FilingCategory.Return },
-            {"other", FilingCategory.Other }
+            {"other", FilingCategory.Other },
+            {"reregistration", FilingCategory.ReRegistration },
+            {"certificate", FilingCategory.Certificate },
         };
 
         public static readonly IReadOnlyDictionary<string, PersonWithSignificantControlKind> PossiblePersonWithSignificantControlKinds = new Dictionary
