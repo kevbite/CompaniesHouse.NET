@@ -35,5 +35,8 @@ namespace CompaniesHouse.Response
 
         [EnumMember(Value = "filing-history-not-available-northern-ireland-industrial-and-provident-society")]
         FilingHistoryNotAvailableNorthernIrelandIndustrialAndProvidentSociety,
+
+        [EnumMember(Value = "filing-history-not-available-unknown-prefix")]
+        FilingHistoryNotAvailableUnknownPrefix,
     }
 }
