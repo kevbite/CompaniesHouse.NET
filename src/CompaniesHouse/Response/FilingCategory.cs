@@ -78,5 +78,10 @@ namespace CompaniesHouse.Response
         [EnumMember(Value = "court-order")]
         CourtOrder,
 
+        [EnumMember(Value = "reregistration")]
+        ReRegistration,
+
+        [EnumMember(Value = "certificate")]
+        Certificate,
     }
 }

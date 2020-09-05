@@ -25,6 +25,9 @@ namespace CompaniesHouse.Response
         Liquidation,
 
         [EnumMember(Value = "auditors")]
-        Auditors
+        Auditors,
+        
+        [EnumMember(Value = "insolvency")]
+        Insolvency,
     }
 }

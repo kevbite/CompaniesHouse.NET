@@ -103,6 +103,15 @@ namespace CompaniesHouse.Response.PersonsWithSignificantControl
         [EnumMember(Value = "part-right-to-share-surplus-assets-25-to-50-percent")]
         PartRightToShareSurplusAssets25To50Percent,
         [EnumMember(Value = "part-right-to-share-surplus-assets-50-to-75-percent")]
-        PartRightToShareSurplusAssets50To75Percent
+        PartRightToShareSurplusAssets50To75Percent,
+        [EnumMember(Value = "part-right-to-share-surplus-assets-75-to-100-percent")]
+        PartRightToShareSurplusAssets75To100Percent,
+        [EnumMember(Value = "part-right-to-share-surplus-assets-50-to-75-percent-as-trust")]
+        PartRightToShareSurplusAssets50To75PercentAsTrust,
+        [EnumMember(Value = "right-to-appoint-and-remove-person")]
+        RightToAppointAndRemovePerson,
+
+
+
     }
 }
