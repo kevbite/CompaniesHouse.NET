@@ -140,3 +140,10 @@ If there was no document for the given document id then `null` will be returned.
 1. Fork
 1. Hack!
 1. Pull Request
+
+
+## Running Unit tests
+
+In order for the integration tests to run, you need an API Key from  [CompaniesHouse API website](https://developer.companieshouse.gov.uk/developer/applications)
+Setup API Key in an environment variable called "api_key", and then run the tests.
+
