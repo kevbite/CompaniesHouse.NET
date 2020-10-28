@@ -10,7 +10,7 @@ using CompaniesHouse.UriBuilders;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using Ploeh.AutoFixture;
+using AutoFixture;
 
 namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
 {

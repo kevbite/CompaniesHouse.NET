@@ -9,7 +9,7 @@ using CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource;
 using CompaniesHouse.UriBuilders;
 using Moq;
 using NUnit.Framework;
-using Ploeh.AutoFixture;
+using AutoFixture;
 
 namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
 {

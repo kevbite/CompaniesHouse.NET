@@ -6,6 +6,11 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies"
+                      Version="1.0.0" PrivateAssets="all"/>
+  </ItemGroup>
+  
+  <ItemGroup>
     <ProjectReference Include="..\CompaniesHouse\CompaniesHouse.csproj">
       <Project>{9639747a-c49f-42e9-85a4-41fcbfcb7a16}</Project>
       <Name>CompaniesHouse</Name>
