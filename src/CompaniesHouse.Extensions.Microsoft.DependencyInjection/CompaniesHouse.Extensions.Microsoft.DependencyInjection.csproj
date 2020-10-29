@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+    
+    <PropertyGroup>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Title>CompaniesHouse.Extensions.Microsoft.DependencyInjection</Title>
+        <AssemblyName>CompaniesHouse.Extensions.Microsoft.DependencyInjection</AssemblyName>
+        <PackageId>CompaniesHouse.Extensions.Microsoft.DependencyInjection</PackageId>
+        <Authors>Kevin Smith</Authors>
+        <Company>Kevsoft</Company>
+        <AssemblyTitle>CompaniesHouse.Extensions.Microsoft.DependencyInjection</AssemblyTitle>
+        <Description>
+            The CompaniesHouse extensions for ASP.NET Core
+        </Description>
+        <Copyright>Copyright © Kevsoft 2020</Copyright>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageTags>CompaniesHouse;Registrar;Kevsoft;API;REST;WebService</PackageTags>
+        <PackageIconUrl>https://raw.githubusercontent.com/kevbite/CompaniesHouse.NET/master/companies-house.jpg</PackageIconUrl>
+        <PackageIcon>companies-house.jpg</PackageIcon>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/kevbite/CompaniesHouse.NET</PackageProjectUrl>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/kevbite/CompaniesHouse.NET</RepositoryUrl>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <None Include="..\..\companies-house.jpg" Pack="true" PackagePath=""/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.9" />
+      <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.9" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CompaniesHouse\CompaniesHouse.csproj" />
+    </ItemGroup>
+
+</Project>
