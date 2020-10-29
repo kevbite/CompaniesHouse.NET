@@ -26,6 +26,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompaniesHouse.ScenarioTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleProject", "SampleProject\SampleProject.csproj", "{4F078B5D-05F5-4134-9B8F-1AC43BFCFD7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompaniesHouse.Extensions.Microsoft.DependencyInjection", "CompaniesHouse.Extensions.Microsoft.DependencyInjection\CompaniesHouse.Extensions.Microsoft.DependencyInjection.csproj", "{5C6AC4CD-8E8B-4700-B01B-7B57C74AE791}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests", "CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests\CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests.csproj", "{011662B7-5E03-4E6A-BAEA-B5C3FE169D3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +56,14 @@ Global
 		{4F078B5D-05F5-4134-9B8F-1AC43BFCFD7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F078B5D-05F5-4134-9B8F-1AC43BFCFD7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F078B5D-05F5-4134-9B8F-1AC43BFCFD7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C6AC4CD-8E8B-4700-B01B-7B57C74AE791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C6AC4CD-8E8B-4700-B01B-7B57C74AE791}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C6AC4CD-8E8B-4700-B01B-7B57C74AE791}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C6AC4CD-8E8B-4700-B01B-7B57C74AE791}.Release|Any CPU.Build.0 = Release|Any CPU
+		{011662B7-5E03-4E6A-BAEA-B5C3FE169D3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{011662B7-5E03-4E6A-BAEA-B5C3FE169D3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{011662B7-5E03-4E6A-BAEA-B5C3FE169D3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{011662B7-5E03-4E6A-BAEA-B5C3FE169D3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

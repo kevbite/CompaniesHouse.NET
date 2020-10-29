@@ -33,11 +33,9 @@ namespace CompaniesHouse
 
         private readonly HttpClient _httpClient;
 
-        public CompaniesHouseClient(ICompaniesHouseSettings settings)
+        public CompaniesHouseClient(HttpClient httpClient)
         {
-            var httpClientFactory = new HttpClientFactory(settings);
-            _httpClient = httpClientFactory.CreateHttpClient();
-
+            _httpClient = httpClient;
             _companiesHouseSearchClient = new CompaniesHouseSearchClient(_httpClient, new SearchUriBuilderFactory());
             _companiesHouseCompanyProfileClient = new CompaniesHouseCompanyProfileClient(_httpClient, new CompanyProfileUriBuilder());
             _companiesHouseCompanyFilingHistoryClient = new CompaniesHouseCompanyFilingHistoryClient(_httpClient, new CompanyFilingHistoryUriBuilder());
@@ -47,7 +45,12 @@ namespace CompaniesHouse
             var documentUriBuilder = new DocumentUriBuilder();
             _companiesHouseDocumentMetadataClient = new CompaniesHouseDocumentMetadataClient(_httpClient, documentUriBuilder);
             _companiesHouseDocumentClient = new CompaniesHouseDocumentClient(_httpClient, documentUriBuilder);
-			_companiesHousePersonsWithSignificantControlClient = new CompaniesHousePersonsWithSignificantControlClient(_httpClient, new PersonsWithSignificantControlBuilder());
+            _companiesHousePersonsWithSignificantControlClient = new CompaniesHousePersonsWithSignificantControlClient(_httpClient, new PersonsWithSignificantControlBuilder());
+        }
+        
+        public CompaniesHouseClient(ICompaniesHouseSettings settings)
+            :this(new HttpClientFactory(settings).CreateHttpClient())
+        {
         }
 
         public Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAsync(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken))

@@ -29,6 +29,7 @@
 
   after_build:
     - ps : dotnet pack .\src\CompaniesHouse\CompaniesHouse.csproj -c Release /p:Version=$env:APPVEYOR_BUILD_VERSION
+    - ps : dotnet pack .\src\CompaniesHouse.Extensions.Microsoft.DependencyInjection\CompaniesHouse.Extensions.Microsoft.DependencyInjection.csproj -c Release /p:Version=$env:APPVEYOR_BUILD_VERSION
 
   configuration: Release
 
@@ -83,6 +84,7 @@
 
   after_build:
     - ps : dotnet pack .\src\CompaniesHouse\CompaniesHouse.csproj -c Release /p:Version=$env:APPVEYOR_BUILD_VERSION
+    - ps : dotnet pack .\src\CompaniesHouse.Extensions.Microsoft.DependencyInjection\CompaniesHouse.Extensions.Microsoft.DependencyInjection.csproj -c Release /p:Version=$env:APPVEYOR_BUILD_VERSION
 
   configuration: Release
 
@@ -95,6 +97,7 @@
       - '**\*.Tests.dll'
       - '**\*.FunctionalTests.dll'
       - '**\*.IntegrationTests.dll'
+      - '**\*.ScenarioTests.dll'
 
   artifacts:
     - path: '**\bin\**\*.nupkg'
