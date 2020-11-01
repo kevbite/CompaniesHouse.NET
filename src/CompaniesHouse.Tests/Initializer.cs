@@ -26,6 +26,11 @@ namespace CompaniesHouse.Tests
             AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<ResolutionCategoriesMapProvider, ResolutionCategory>>();
             AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<FilingHistoryStatusMapProvider, FilingHistoryStatus>>();
             AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<PersonWithSignificantControlKindMapProvider, PersonWithSignificantControlKind>>();
+            AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<AssetsCeasedReleasedMapProvider, AssetsCeasedReleased>>();
+            AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<ChargeStatusMapProvider, ChargeStatus>>();
+            AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<ClassificationChargeTypeMapProvider, ClassificationChargeType>>();
+            AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<ParticularTypeMapProvider, ParticularType>>();
+            AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<SecureDetailTypeMapProvider, SecuredDetailType>>();
         }
     }
 }

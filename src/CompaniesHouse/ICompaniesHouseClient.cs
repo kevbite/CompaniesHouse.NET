@@ -11,7 +11,8 @@
         ICompaniesHouseCompanyInsolvencyInformationClient,
         ICompaniesHouseAppointmentsClient,
         ICompaniesHouseDocumentMetadataClient,
-        ICompaniesHousePersonsWithSignificantControlClient
+        ICompaniesHousePersonsWithSignificantControlClient,
+        ICompaniesHouseChargesClient
     {
 
     }

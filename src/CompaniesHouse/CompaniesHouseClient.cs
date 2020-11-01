@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response.Appointments;
+using CompaniesHouse.Response.Charges;
 using CompaniesHouse.Response.CompanyFiling;
 using CompaniesHouse.Response.CompanyProfile;
 using CompaniesHouse.Response.Document;
@@ -30,7 +31,7 @@ namespace CompaniesHouse
         private readonly ICompaniesHouseDocumentMetadataClient _companiesHouseDocumentMetadataClient;
         private readonly ICompaniesHouseDocumentClient _companiesHouseDocumentClient;
         private readonly ICompaniesHousePersonsWithSignificantControlClient _companiesHousePersonsWithSignificantControlClient;
-
+        private readonly ICompaniesHouseChargesClient _companiesHouseChargesClient;
         private readonly HttpClient _httpClient;
 
         public CompaniesHouseClient(HttpClient httpClient)
@@ -46,6 +47,7 @@ namespace CompaniesHouse
             _companiesHouseDocumentMetadataClient = new CompaniesHouseDocumentMetadataClient(_httpClient, documentUriBuilder);
             _companiesHouseDocumentClient = new CompaniesHouseDocumentClient(_httpClient, documentUriBuilder);
             _companiesHousePersonsWithSignificantControlClient = new CompaniesHousePersonsWithSignificantControlClient(_httpClient, new PersonsWithSignificantControlBuilder());
+            _companiesHouseChargesClient = new CompaniesHouseChargesClient(_httpClient, new ChargesUriBuilder());
         }
         
         public CompaniesHouseClient(ICompaniesHouseSettings settings)
@@ -93,10 +95,7 @@ namespace CompaniesHouse
             return _companiesHouseCompanyInsolvencyInformationClient.GetCompanyInsolvencyInformationAsync(companyNumber, cancellationToken);
         }
 
-        public void Dispose()
-        {
-            _httpClient.Dispose();
-        }
+        public void Dispose() => _httpClient.Dispose();
 
         public Task<CompaniesHouseClientResponse<Appointments>> GetAppointmentsAsync(string officerId, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -117,6 +116,11 @@ namespace CompaniesHouse
 		public Task<CompaniesHouseClientResponse<PersonsWithSignificantControl>> GetPersonsWithSignificantControlAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHousePersonsWithSignificantControlClient.GetPersonsWithSignificantControlAsync(companyNumber, startIndex, pageSize, cancellationToken);
+        }
+
+        public Task<CompaniesHouseClientResponse<Charges>> GetChargesListAsync(string companyNumber, CancellationToken cancellationToken = default)
+        {
+            return _companiesHouseChargesClient.GetChargesListAsync(companyNumber, cancellationToken);
         }
     }
 }

@@ -10,6 +10,11 @@ namespace CompaniesHouse.Tests
     {
         private readonly PropertyInfo _prop;
 
+        public UniversalDateSpecimenBuilder(Expression<Func<TEntity, DateTime?>> getter)
+        {
+            _prop = (PropertyInfo)((MemberExpression)getter.Body).Member;
+        }
+        
         public UniversalDateSpecimenBuilder(Expression<Func<TEntity, DateTime>> getter)
         {
             _prop = (PropertyInfo)((MemberExpression)getter.Body).Member;
