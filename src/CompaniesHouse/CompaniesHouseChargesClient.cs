@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using CompaniesHouse.Response.Charges;
+using CompaniesHouse.UriBuilders;
 
 namespace CompaniesHouse
 {
@@ -17,9 +18,9 @@ namespace CompaniesHouse
             _chargesUriBuilder = chargesUriBuilder;
         }
 
-        public async Task<CompaniesHouseClientResponse<Charges>> GetChargesListAsync(string companyNumber, CancellationToken cancellationToken = default)
+        public async Task<CompaniesHouseClientResponse<Charges>> GetChargesListAsync(string companyNumber,int startIndex, int pageSize, CancellationToken cancellationToken = default)
         {
-            var requestUri = _chargesUriBuilder.Build(companyNumber);
+            var requestUri = _chargesUriBuilder.Build(companyNumber, startIndex, pageSize);
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
             if (response.StatusCode != HttpStatusCode.NotFound)

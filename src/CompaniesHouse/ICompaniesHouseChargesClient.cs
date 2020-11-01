@@ -6,6 +6,6 @@ namespace CompaniesHouse
 {
     public interface ICompaniesHouseChargesClient
     {
-        Task<CompaniesHouseClientResponse<Charges>> GetChargesListAsync(string companyNumber, CancellationToken cancellationToken);
+        Task<CompaniesHouseClientResponse<Charges>> GetChargesListAsync(string companyNumber,int startIndex, int pageSize, CancellationToken cancellationToken);
     }
 }

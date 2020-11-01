@@ -118,9 +118,9 @@ namespace CompaniesHouse
             return _companiesHousePersonsWithSignificantControlClient.GetPersonsWithSignificantControlAsync(companyNumber, startIndex, pageSize, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<Charges>> GetChargesListAsync(string companyNumber, CancellationToken cancellationToken = default)
+        public Task<CompaniesHouseClientResponse<Charges>> GetChargesListAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default)
         {
-            return _companiesHouseChargesClient.GetChargesListAsync(companyNumber, cancellationToken);
+            return _companiesHouseChargesClient.GetChargesListAsync(companyNumber,startIndex, pageSize, cancellationToken);
         }
     }
 }

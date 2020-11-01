@@ -3,18 +3,25 @@ using NUnit.Framework;
 
 namespace CompaniesHouse.IntegrationTests.Tests.ChargesTests
 {
-    [TestFixture]
+    [TestFixtureSource(nameof(TestCases))]
     public class ChargesListTestsValid : ChargesTestBase
     {
-        private const string CompanyNumber = "00445790";
-        protected override async Task When() => Result = await Client.GetChargesListAsync(CompanyNumber);
+        private readonly string _companyNumber;
 
+        public ChargesListTestsValid(string companyNumber) => _companyNumber = companyNumber;
+        protected override async Task When() => Result = await Client.GetChargesListAsync(_companyNumber);
 
         [Test]
-        public void ThenChargesListIsNotEmpty()
+        public void ThenChargesListIsNotEmpty() => Assert.IsNotEmpty(Result.Data.Items);
+
+        public static string[] TestCases()
         {
-            Assert.NotNull(Result.Data);
-            Assert.IsNotEmpty(Result.Data.Items);
-        }
+            return new[]
+            {
+                "03977902", // Google
+                "00445790", // Tesco
+                "00002065", // Lloyds Bank PLC
+            };
+        } 
     }
 }

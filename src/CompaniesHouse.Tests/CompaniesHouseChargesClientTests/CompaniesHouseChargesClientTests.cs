@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CompaniesHouse.Tests.ResourceBuilders;
+using CompaniesHouse.UriBuilders;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -20,10 +21,10 @@ namespace CompaniesHouse.Tests.CompaniesHouseChargesClientTests
             var uri = new Uri("https://wibble.com/company/1/charges");
             var handler = new StubHttpMessageHandler(uri, resource);
             var uriBuilder = new Mock<IChargesUriBuilder>();
-            uriBuilder.Setup(x => x.Build(It.IsAny<string>())).Returns(uri);
+            uriBuilder.Setup(x => x.Build(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>())).Returns(uri);
             var client = new CompaniesHouseChargesClient(new HttpClient(handler), uriBuilder.Object);
 
-            var result = await client.GetChargesListAsync("1");
+            var result = await client.GetChargesListAsync("1", 0, 25);
 
             result.Data.ShouldBeEquivalentTo(charges);
         }
