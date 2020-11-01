@@ -71,7 +71,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseChargesClientTests
                 AssetsCeasedReleased = EnumerationMappings.PossibleAssetsCeasedReleased.Keys.First(),
                 ParticularType = EnumerationMappings.PossibleParticularTypes.Keys.First(),
                 SecureDetailType = EnumerationMappings.PossibleSecuredDetailTypes.Keys.First(),
-                ClassificationChargeType = EnumerationMappings.PossibleChargeStatuses.Keys.First(),
+                ClassificationChargeType = EnumerationMappings.PossibleClassificationChargeTypes.Keys.First(),
                 Status = x
             });
 

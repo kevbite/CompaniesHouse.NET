@@ -211,7 +211,7 @@ namespace CompaniesHouse.Tests
             {"part-property-release-and-ceased-to-belong", AssetsCeasedReleased.PartPropertyReleaseAndCeasedToBelong},
             {"part-property-released", AssetsCeasedReleased.PartPropertyReleased},
             {"part-property-ceased-to-belong", AssetsCeasedReleased.PartPropertyCeasedToBelong},
-            {"whole-property-released", AssetsCeasedReleased.PartPropertyReleased},
+            {"whole-property-released", AssetsCeasedReleased.WholePropertyReleased},
             {"multiple-filings", AssetsCeasedReleased.MultipleFilings},
             {"whole-property-released-and-ceased-to-belong", AssetsCeasedReleased.WholePropertyReleasedAndCeasedToBelong}
         };
