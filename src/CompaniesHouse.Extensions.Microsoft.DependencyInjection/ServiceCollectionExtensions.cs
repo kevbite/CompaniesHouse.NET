@@ -36,6 +36,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<ICompaniesHouseAppointmentsClient>(provider => provider.GetService<ICompaniesHouseClient>());
             services.AddTransient<ICompaniesHouseDocumentMetadataClient>(provider => provider.GetService<ICompaniesHouseClient>());
             services.AddTransient<ICompaniesHousePersonsWithSignificantControlClient>(provider => provider.GetService<ICompaniesHouseClient>());
+            services.AddTransient<ICompaniesHouseChargesClient>(provider => provider.GetService<ICompaniesHouseClient>());
             
             return services;
         }

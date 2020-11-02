@@ -190,3 +190,6 @@ MailMerge/*.htm
 # SASS detritus
 # =========================
 *.sass-cache*
+
+# Jetbrains Rider
+.idea/
