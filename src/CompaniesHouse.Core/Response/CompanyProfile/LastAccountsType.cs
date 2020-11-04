@@ -46,6 +46,12 @@ namespace CompaniesHouse.Core.Response.CompanyProfile
         FilingExemptionSubsidiary,
 
         [EnumMember(Value = "micro-entity")]
-        MicroEntity
+        MicroEntity,
+
+        [EnumMember(Value = "unaudited-abridged")]
+        UnauditedAbridged,
+
+
+
     }
 }
