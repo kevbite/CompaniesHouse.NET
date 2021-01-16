@@ -6,33 +6,25 @@ namespace CompaniesHouse.Response.CompanyProfile
     {
         None = 0,
 
-        [EnumMember(Value = "null")]
-        Null,
+        [EnumMember(Value = "null")] Null,
 
-        [EnumMember(Value = "full")]
-        Full,
+        [EnumMember(Value = "full")] Full,
 
-        [EnumMember(Value = "small")]
-        Small,
+        [EnumMember(Value = "small")] Small,
 
-        [EnumMember(Value = "medium")]
-        Medium,
+        [EnumMember(Value = "medium")] Medium,
 
-        [EnumMember(Value = "group")]
-        Group,
+        [EnumMember(Value = "group")] Group,
 
-        [EnumMember(Value = "dormant")]
-        Dormant,
+        [EnumMember(Value = "dormant")] Dormant,
 
-        [EnumMember(Value = "interim")]
-        Interim,
+        [EnumMember(Value = "interim")] Interim,
 
-        [EnumMember(Value = "initial")]
-        Initial,
+        [EnumMember(Value = "initial")] Initial,
 
         [EnumMember(Value = "total-exemption-full")]
         TotalExemptionFull,
-        
+
         [EnumMember(Value = "total-exemption-small")]
         TotalExemptionSmall,
 
@@ -45,13 +37,15 @@ namespace CompaniesHouse.Response.CompanyProfile
         [EnumMember(Value = "filing-exemption-subsidiary")]
         FilingExemptionSubsidiary,
 
-        [EnumMember(Value = "micro-entity")]
-        MicroEntity,
-        
+        [EnumMember(Value = "micro-entity")] MicroEntity,
+
         [EnumMember(Value = "unaudited-abridged")]
         UnauditedAbridged,
-        
+
         [EnumMember(Value = "audited-abridged")]
-        AuditedAbridged
+        AuditedAbridged,
+
+        [EnumMember(Value = "no-accounts-type-available")]
+        NoAccountsTypeAvailable
     }
 }
