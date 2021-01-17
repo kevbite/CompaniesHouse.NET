@@ -31,6 +31,42 @@ using(var client = new CompaniesHouseClient(settings))
 
 This is the object we'll use going forward for any interaction to the CompaniesHouse API, but don't forget to call `Dispose` after you've finish (or wrap in a `using` block).
 
+### ASP.NET Core
+
+If you're using [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-5.0) you can configure the IoC container with one simple extention method call. But first you'll need to install the [CompaniesHouse.Extensions.Microsoft.DependencyInjection](https://www.nuget.org/packages/CompaniesHouse.Extensions.Microsoft.DependencyInjection/) NuGet package.
+
+```powershell
+PM> Install-Package CompaniesHouse.Extensions.Microsoft.DependencyInjection
+```
+
+Once installed, in your [Startup class](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/startup?view=aspnetcore-5.0) in the `ConfigureServices` method, call the `AddCompaniesHouseClient` method on the `services` object.
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    // ...
+    services.AddCompaniesHouseClient("Your API Key");
+}
+```
+
+This will then register a range of interfaces in to the IoC container that can be injected in to any of your dependancies. A list of these can be found in the [ServiceCollectionExtensionsTests](https://github.com/kevbite/CompaniesHouse.NET/blob/master/src/CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests/ServiceCollectionExtensionsTests.cs#L17).
+
+For example if we wanted to use the `ICompaniesHouseClient` which is the main facade interface, we could inject this in to our page model.
+
+```csharp
+public class MyPageModel : PageModel
+{
+    private readonly ICompaniesHouseClient _client;
+
+    public Index2Model(ICompaniesHouseClient client)
+    {
+        _client = client;            
+    }
+}
+```
+
+Under the hood this is using [typed clients](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-5.0#typed-clients) for the `HttpClient` used by CompaniesHouse.NET and it's also possible to use this package with any dependency injection framework that implements `Microsoft.Extensions.DependencyInjection.Abstractions`.
+
 ## Usage
 
 ### Searching for resources
