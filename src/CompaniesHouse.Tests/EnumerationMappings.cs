@@ -127,7 +127,9 @@ namespace CompaniesHouse.Tests
                 {"unregistered-company", CompanyType.UnregisteredCompany},
                 {"other", CompanyType.Other},
                 {"european-public-limited-liability-company-se", CompanyType.EuropeanPublicLimitedLiabilityCompanySe},
-                {"registered-society-non-jurisdictional", CompanyType.RegisteredSociety}
+                {"registered-society-non-jurisdictional", CompanyType.RegisteredSociety},
+                {"ukeig", CompanyType.UnitedKingdomEconomicInterestGroupings},
+                {"united-kingdom-societas", CompanyType.UnitedKingdomSocietas}
             };
 
         public static readonly IReadOnlyDictionary<string, ResolutionCategory> PossibleResolutionCategories = new Dictionary

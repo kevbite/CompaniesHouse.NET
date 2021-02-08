@@ -162,10 +162,10 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
         };
 
         private static readonly IReadOnlyDictionary<string, CompanyType> ExpectedCompanyType = new Dictionary
-    <string, CompanyType>()
-        {
-            {"private-unlimited", CompanyType.PrivateUnlimited}
-        };
+            <string, CompanyType>()
+            {
+                {"private-unlimited", CompanyType.PrivateUnlimited}
+            };
 
         private CompanyDetails _companyWithUnknownDateOfCessation;
     }

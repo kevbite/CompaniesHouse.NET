@@ -103,5 +103,11 @@ namespace CompaniesHouse.Response
 	    [EnumMember(Value = "further-education-or-sixth-form-college-corporation")]
         FurtherEducationOrSixthFormCollegeCorporation,
 
-	}
+        [EnumMember(Value = "ukeig")]
+        UnitedKingdomEconomicInterestGroupings,
+
+        [EnumMember(Value = "united-kingdom-societas")]
+        UnitedKingdomSocietas,
+
+    }
 }
