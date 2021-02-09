@@ -19,6 +19,12 @@ namespace CompaniesHouse.Response
         TransformedToSe,
 
         [EnumMember(Value = "converted-to-plc")]
-        ConvertedToPlc
+        ConvertedToPlc,
+
+        [EnumMember(Value = "converted-to-ukeig")]
+        ConvertedToUnitedKingdomEconomicInterestGroupings,
+
+        [EnumMember(Value = "converted-to-uk-societas")]
+        ConvertedToUnitedKingdomSocietas
     }
 }

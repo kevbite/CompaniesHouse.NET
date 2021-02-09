@@ -50,7 +50,9 @@ namespace CompaniesHouse.Tests
                 {"active-proposal-to-strike-off", CompanyStatusDetail.ActiveProposalToStrikeOff},
                 {"petition-to-restore-dissolved", CompanyStatusDetail.PetitionToRestoreDissolved},
                 {"transformed-to-se", CompanyStatusDetail.TransformedToSe},
-                {"converted-to-plc", CompanyStatusDetail.ConvertedToPlc}
+                {"converted-to-plc", CompanyStatusDetail.ConvertedToPlc},
+                {"converted-to-ukeig", CompanyStatusDetail.ConvertedToUnitedKingdomEconomicInterestGroupings},
+                {"converted-to-uk-societas", CompanyStatusDetail.ConvertedToUnitedKingdomSocietas},
             };
 
         public static readonly IReadOnlyDictionary<string, Jurisdiction> PossibleJurisdictions = new Dictionary
