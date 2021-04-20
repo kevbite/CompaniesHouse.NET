@@ -25,8 +25,22 @@ namespace CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests
             Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseCompanyInsolvencyInformationClient>());
             Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseCompanyInsolvencyInformationClient>());
             Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseAppointmentsClient>());
-            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseDocumentMetadataClient>());
             Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHousePersonsWithSignificantControlClient>());
+        }
+
+        [Test]
+        public void CanResolveCompaniesHouseDocumentClients()
+        {
+            
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddCompaniesHouseDocumentClient("ApiKey");
+            
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+            using var scope = serviceProvider.CreateScope();
+
+            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseDocumentClient>());
+            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseDocumentDownloadClient>());
+            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseDocumentMetadataClient>());
         }
     }
 }

@@ -8,7 +8,6 @@ using CompaniesHouse.Response.Appointments;
 using CompaniesHouse.Response.Charges;
 using CompaniesHouse.Response.CompanyFiling;
 using CompaniesHouse.Response.CompanyProfile;
-using CompaniesHouse.Response.Document;
 using CompaniesHouse.Response.Insolvency;
 using CompaniesHouse.Response.Officers;
 using CompaniesHouse.Response.PersonsWithSignificantControl;
@@ -28,8 +27,6 @@ namespace CompaniesHouse
         private readonly ICompaniesHouseOfficersClient _companiesHouseOfficersClient;
         private readonly ICompaniesHouseCompanyInsolvencyInformationClient _companiesHouseCompanyInsolvencyInformationClient;
         private readonly ICompaniesHouseAppointmentsClient _companiesHouseCompanyAppointmentsClient;
-        private readonly ICompaniesHouseDocumentMetadataClient _companiesHouseDocumentMetadataClient;
-        private readonly ICompaniesHouseDocumentClient _companiesHouseDocumentClient;
         private readonly ICompaniesHousePersonsWithSignificantControlClient _companiesHousePersonsWithSignificantControlClient;
         private readonly ICompaniesHouseChargesClient _companiesHouseChargesClient;
         private readonly HttpClient _httpClient;
@@ -43,9 +40,6 @@ namespace CompaniesHouse
             _companiesHouseOfficersClient = new CompaniesHouseOfficersClient(_httpClient, new OfficersUriBuilder());
             _companiesHouseCompanyInsolvencyInformationClient = new CompaniesHouseCompanyInsolvencyInformationClient(_httpClient);
             _companiesHouseCompanyAppointmentsClient = new CompaniesHouseAppointmentsClient(_httpClient);
-            var documentUriBuilder = new DocumentUriBuilder();
-            _companiesHouseDocumentMetadataClient = new CompaniesHouseDocumentMetadataClient(_httpClient, documentUriBuilder);
-            _companiesHouseDocumentClient = new CompaniesHouseDocumentClient(_httpClient, documentUriBuilder);
             _companiesHousePersonsWithSignificantControlClient = new CompaniesHousePersonsWithSignificantControlClient(_httpClient, new PersonsWithSignificantControlBuilder());
             _companiesHouseChargesClient = new CompaniesHouseChargesClient(_httpClient, new ChargesUriBuilder());
         }
@@ -103,15 +97,6 @@ namespace CompaniesHouse
                 cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<DocumentMetadata>> GetDocumentMetadataAsync(string documentId, CancellationToken caneCancellationToken = default)
-        {
-            return _companiesHouseDocumentMetadataClient.GetDocumentMetadataAsync(documentId, caneCancellationToken);
-        }
-
-        public Task<CompaniesHouseClientResponse<DocumentDownload>> DownloadDocumentAsync(string documentId, CancellationToken cancellationToken = default)
-        {
-            return _companiesHouseDocumentClient.DownloadDocumentAsync(documentId, cancellationToken);
-        }
 		
 		public Task<CompaniesHouseClientResponse<PersonsWithSignificantControl>> GetPersonsWithSignificantControlAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken))
         {

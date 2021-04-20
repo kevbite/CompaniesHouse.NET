@@ -1,6 +1,5 @@
 ﻿
 using System;
-using System.Net.Http;
 using CompaniesHouse;
 using CompaniesHouse.DelegatingHandlers;
 
@@ -34,7 +33,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<ICompaniesHouseOfficersClient>(provider => provider.GetService<ICompaniesHouseClient>());
             services.AddTransient<ICompaniesHouseCompanyInsolvencyInformationClient>(provider => provider.GetService<ICompaniesHouseClient>());
             services.AddTransient<ICompaniesHouseAppointmentsClient>(provider => provider.GetService<ICompaniesHouseClient>());
-            services.AddTransient<ICompaniesHouseDocumentMetadataClient>(provider => provider.GetService<ICompaniesHouseClient>());
             services.AddTransient<ICompaniesHousePersonsWithSignificantControlClient>(provider => provider.GetService<ICompaniesHouseClient>());
             services.AddTransient<ICompaniesHouseChargesClient>(provider => provider.GetService<ICompaniesHouseClient>());
             
@@ -50,6 +48,37 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddCompaniesHouseClient(this IServiceCollection services, string apiKey)
         {
             return services.AddCompaniesHouseClient(CompaniesHouseUris.Default, apiKey);
+        }
+
+        /// <summary>
+        /// Registers the companies house document client
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="apiKey"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddCompaniesHouseDocumentClient(this IServiceCollection services, string apiKey)
+        {
+            return services.AddCompaniesHouseDocumentClient(CompaniesHouseUris.DocumentApi, apiKey);
+        }
+
+        /// <summary>
+        /// Registers the companies house document client to the service collection
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="baseUri"></param>
+        /// <param name="apiKey"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddCompaniesHouseDocumentClient(this IServiceCollection services, Uri baseUri, string apiKey)
+        {
+            services.AddTransient(provider => new CompaniesHouseAuthorizationHandler(apiKey));
+            
+            services.AddHttpClient<ICompaniesHouseDocumentClient, CompaniesHouseDocumentClient>(cfg => cfg.BaseAddress = baseUri)
+                .AddHttpMessageHandler<CompaniesHouseAuthorizationHandler>();
+            
+            services.AddTransient<ICompaniesHouseDocumentMetadataClient>(provider => provider.GetService<ICompaniesHouseDocumentClient>());
+            services.AddTransient<ICompaniesHouseDocumentDownloadClient>(provider => provider.GetService<ICompaniesHouseDocumentClient>());
+
+            return services;
         }
 
     }

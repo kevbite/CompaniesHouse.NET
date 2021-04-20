@@ -5,7 +5,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
 {
     public abstract class DocumentTestBase<T>
     {
-        protected CompaniesHouseClient Client;
+        protected CompaniesHouseDocumentClient Client;
         protected CompaniesHouseClientResponse<T> Result;
 
         [SetUp]
@@ -19,7 +19,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
 
         private void GivenACompaniesHouseClient()
         {
-            Client = new CompaniesHouseClient(new CompaniesHouseSettings(CompaniesHouseUris.DocumentApi, Keys.ApiKey));
+            Client = new CompaniesHouseDocumentClient(new CompaniesHouseSettings(CompaniesHouseUris.DocumentApi, Keys.ApiKey));
         }
     }
 }

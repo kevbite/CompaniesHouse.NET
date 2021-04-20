@@ -10,7 +10,6 @@
         ICompaniesHouseOfficersClient,
         ICompaniesHouseCompanyInsolvencyInformationClient,
         ICompaniesHouseAppointmentsClient,
-        ICompaniesHouseDocumentMetadataClient,
         ICompaniesHousePersonsWithSignificantControlClient,
         ICompaniesHouseChargesClient
     {

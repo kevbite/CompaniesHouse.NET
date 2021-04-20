@@ -1,8 +1,9 @@
-﻿namespace CompaniesHouse.UriBuilders
+﻿using System;
+
+namespace CompaniesHouse.UriBuilders
 {
     public interface IDocumentUriBuilder
     {
-        IDocumentUriBuilder WithContent();
-        string Build(string documentId);
+        Uri Build(string documentId);
     }
 }
