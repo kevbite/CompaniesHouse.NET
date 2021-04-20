@@ -11,6 +11,6 @@ namespace CompaniesHouse.Response.Charges
         public InsolvencyCaseLinks Links { get; set; }
         
         [JsonProperty("transaction_id")]
-        public int? TransactionId { get; set; }
+        public long? TransactionId { get; set; }
     }
 }

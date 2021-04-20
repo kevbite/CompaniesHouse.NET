@@ -20,7 +20,8 @@ namespace CompaniesHouse.IntegrationTests.Tests.ChargesTests
             {
                 "03977902", // Google
                 "00445790", // Tesco
-                "00002065", // Lloyds Bank PLC
+                "00002065", // Lloyds Bank PLCo
+                "03487070"
             };
         } 
     }
