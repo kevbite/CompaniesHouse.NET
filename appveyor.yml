@@ -3,7 +3,7 @@
     only:
       - master
 
-  version: 7.9.7
+  version: 7.9.8
   install:
     - ps : .\environment-install.ps1
 

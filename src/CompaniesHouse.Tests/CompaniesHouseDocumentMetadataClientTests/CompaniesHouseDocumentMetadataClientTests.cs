@@ -34,7 +34,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseDocumentMetadataClientTests
         private static Mock<IDocumentUriBuilder> SetupRequestUri(Uri catchUri)
         {
             var mockUriBuilder = new Mock<IDocumentUriBuilder>();
-            mockUriBuilder.Setup(x => x.Build(DocumentId)).Returns(catchUri.ToString());
+            mockUriBuilder.Setup(x => x.Build(DocumentId)).Returns(catchUri);
             return mockUriBuilder;
         }
 

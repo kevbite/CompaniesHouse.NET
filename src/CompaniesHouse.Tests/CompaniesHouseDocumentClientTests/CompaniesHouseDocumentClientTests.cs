@@ -24,10 +24,9 @@ namespace CompaniesHouse.Tests.CompaniesHouseDocumentClientTests
             var requestUri = new Uri($"https://document-api.companieshouse.gov.uk/document/{DocumentId}/content");
             var stubHttpMessageHandler = new StubHttpMessageHandler(requestUri, ExpectedContent, ExpectedMediaType);
             var mockUriBuilder = new Mock<IDocumentUriBuilder>();
-            mockUriBuilder.Setup(x => x.WithContent()).Returns(mockUriBuilder.Object);
-            mockUriBuilder.Setup(x => x.Build(DocumentId)).Returns(requestUri.ToString());
+            mockUriBuilder.Setup(x => x.Build(DocumentId)).Returns(requestUri);
 
-            _result = await new CompaniesHouseDocumentClient(new HttpClient(stubHttpMessageHandler), mockUriBuilder.Object).DownloadDocumentAsync(DocumentId);
+            _result = await new CompaniesHouseDocumentDownloadClient(new HttpClient(stubHttpMessageHandler), mockUriBuilder.Object).DownloadDocumentAsync(DocumentId);
         }
 
         [Test]

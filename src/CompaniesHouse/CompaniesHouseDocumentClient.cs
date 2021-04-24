@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,35 +7,35 @@ using CompaniesHouse.UriBuilders;
 
 namespace CompaniesHouse
 {
-    public class CompaniesHouseDocumentClient : ICompaniesHouseDocumentClient
+    public class CompaniesHouseDocumentClient : ICompaniesHouseDocumentClient, IDisposable
     {
+        private readonly ICompaniesHouseDocumentMetadataClient _companiesHouseDocumentMetadataClient;
+        private readonly CompaniesHouseDocumentDownloadClient _companiesHouseDocumentDownloadClient;
         private readonly HttpClient _httpClient;
-        private readonly IDocumentUriBuilder _documentUriBuilder;
-
-        public CompaniesHouseDocumentClient(HttpClient httpClient, IDocumentUriBuilder documentUriBuilder)
+        
+        public CompaniesHouseDocumentClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _documentUriBuilder = documentUriBuilder;
+            _companiesHouseDocumentMetadataClient = new CompaniesHouseDocumentMetadataClient(_httpClient, new DocumentMetadataUriBuilder());
+            _companiesHouseDocumentDownloadClient = new CompaniesHouseDocumentDownloadClient(_httpClient, new DocumentContentUriBuilder());
         }
 
-        public async Task<CompaniesHouseClientResponse<DocumentDownload>> DownloadDocumentAsync(string documentId, CancellationToken cancellationToken = default)
+        public CompaniesHouseDocumentClient(ICompaniesHouseSettings settings) 
+            : this(new HttpClientFactory(settings).CreateHttpClient())
         {
-            var requestUri = _documentUriBuilder.WithContent().Build(documentId);
-            var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
-
-            if (response.StatusCode != HttpStatusCode.NotFound)
-                response.EnsureSuccessStatusCode();
-
-            var data = response.IsSuccessStatusCode
-                ? new DocumentDownload
-                {
-                    Content = await response.Content.ReadAsStreamAsync(),
-                    ContentLength = response.Content.Headers.ContentLength,
-                    ContentType = response.Content.Headers.ContentType.MediaType
-                }
-                : null;
-
-            return new CompaniesHouseClientResponse<DocumentDownload>(data);
+            
         }
+        
+        public Task<CompaniesHouseClientResponse<DocumentMetadata>> GetDocumentMetadataAsync(string documentId, CancellationToken caneCancellationToken = default)
+        {
+            return _companiesHouseDocumentMetadataClient.GetDocumentMetadataAsync(documentId, caneCancellationToken);
+        }
+
+        public Task<CompaniesHouseClientResponse<DocumentDownload>> DownloadDocumentAsync(string documentId, CancellationToken cancellationToken = default)
+        {
+            return _companiesHouseDocumentDownloadClient.DownloadDocumentAsync(documentId, cancellationToken);
+        }
+
+        public void Dispose() => _httpClient.Dispose();
     }
 }
