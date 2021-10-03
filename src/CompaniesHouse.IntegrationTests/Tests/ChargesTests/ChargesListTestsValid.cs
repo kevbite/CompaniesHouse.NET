@@ -1,10 +1,11 @@
 using System.Threading.Tasks;
+using CompaniesHouse.Response.Charges;
 using NUnit.Framework;
 
 namespace CompaniesHouse.IntegrationTests.Tests.ChargesTests
 {
     [TestFixtureSource(nameof(TestCases))]
-    public class ChargesListTestsValid : ChargesTestBase
+    public class ChargesListTestsValid : ChargesTestBase<Charges>
     {
         private readonly string _companyNumber;
 

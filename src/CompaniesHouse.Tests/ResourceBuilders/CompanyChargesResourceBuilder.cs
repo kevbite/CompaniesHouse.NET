@@ -22,6 +22,8 @@ namespace CompaniesHouse.Tests.ResourceBuilders
  }}";
         }
 
+        public static string CreateOne(Charge charge) => GetChargesJson(charge);
+
         private static string GetChargesJson(Charge charge) => $@"{{
     ""acquired_on"" : ""{charge.AcquiredOn?.ToString("yyyy-MM-dd")}"",
     ""assets_ceased_released"" : ""{charge.AssetsCeasedReleased}"",
