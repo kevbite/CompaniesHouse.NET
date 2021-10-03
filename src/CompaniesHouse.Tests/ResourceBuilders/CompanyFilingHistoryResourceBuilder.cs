@@ -27,7 +27,12 @@ namespace CompaniesHouse.Tests.ResourceBuilders
                     }}";
         }
 
-        private string GetItemJsonBlock(FilingHistoryItem item)
+        public static string CreateOne(FilingHistoryItem item)
+        {
+            return GetItemJsonBlock(item);
+        }
+
+        private static string GetItemJsonBlock(FilingHistoryItem item)
         {
             return $@"{{
                          ""annotations"" : [
@@ -58,12 +63,12 @@ namespace CompaniesHouse.Tests.ResourceBuilders
                       }}";
         }
 
-        private string GetDictionaryJsonBlock(KeyValuePair<string, string> pair)
+        private static string GetDictionaryJsonBlock(KeyValuePair<string, string> pair)
         {
             return $@"""{pair.Key}"" : ""{pair.Value}""";
         }
 
-        private string GetAnnotationJsonBlock(FilingHistoryItemAnnotation annotation)
+        private static string GetAnnotationJsonBlock(FilingHistoryItemAnnotation annotation)
         {
             return $@"{{
                          ""annotation"" : ""{annotation.Annotation}"",
@@ -75,7 +80,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
                       }}";
         }
 
-        private string GetAssociatedFilingJsonBlock(FilingHistoryItemAssociatedFiling associated)
+        private static string GetAssociatedFilingJsonBlock(FilingHistoryItemAssociatedFiling associated)
         {
             return $@"{{
                          ""date"" : ""{associated.Date.ToString("yyyy-MM-dd")}"",
@@ -87,7 +92,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
                       }}";
         }
 
-        private string GetResolutionJsonBlock(FilingHistoryItemResolution resolution)
+        private static string GetResolutionJsonBlock(FilingHistoryItemResolution resolution)
         {
             return $@"{{
                          ""category"" : ""{resolution.Category}"",
@@ -101,7 +106,5 @@ namespace CompaniesHouse.Tests.ResourceBuilders
                          }}
                       }}";
         }
-
-
     }
 }

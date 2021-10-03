@@ -33,5 +33,22 @@ namespace CompaniesHouse
 
             return new CompaniesHouseClientResponse<CompanyFilingHistory>(result);
         }
+
+        public async Task<CompaniesHouseClientResponse<FilingHistoryItem>> GetFilingHistoryByTransactionAsync(string companyNumber, string transactionId, CancellationToken cancellationToken = default)
+        {
+            var requestUri = _companyFilingHistoryUriBuilder.Build(companyNumber, transactionId);
+
+            var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
+
+            // Return a null profile on 404s, but raise exception for all other error codes
+            if (response.StatusCode != System.Net.HttpStatusCode.NotFound)
+                response.EnsureSuccessStatusCode();
+
+            var result = response.IsSuccessStatusCode
+                ? await response.Content.ReadAsJsonAsync<FilingHistoryItem>().ConfigureAwait(false)
+                : null;
+
+            return new CompaniesHouseClientResponse<FilingHistoryItem>(result);
+        }
     }
 }

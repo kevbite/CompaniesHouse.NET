@@ -10,5 +10,12 @@ namespace CompaniesHouse.UriBuilders
 
             return new Uri(path, UriKind.Relative);
         }
+
+        public Uri Build(string companyNumber, string transactionId)
+        {
+            var path = $"company/{Uri.EscapeDataString(companyNumber)}/filing-history/{transactionId}";
+
+            return new Uri(path, UriKind.Relative);
+        }
     }
 }
