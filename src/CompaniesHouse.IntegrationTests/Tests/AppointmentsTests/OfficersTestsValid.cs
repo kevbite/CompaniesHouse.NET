@@ -6,28 +6,25 @@ namespace CompaniesHouse.IntegrationTests.Tests.AppointmentsTests
     [TestFixture]
     public class AppointmentsTestsValid : AppointmentsTestBase
     {
-        // Google UK company number, unlikely to go away soon
-        private const string ValidCompanyNumber = "03977902";
+        // Sergey Brin's officer id
+        private const string ValidOfficerId = "uQNQ-blSo-8PiOaehWClTPmbZNI";
 
         [SetUp]
         protected override async Task When()
         {
-            await WhenRetrievingAnCompanyFilingHistoryForAValidCompany()
+            await WhenRetrievingAppointmentsForAValidOfficer()
                 .ConfigureAwait(false);
         }
 
         [Test]
         public void ThenTheDataItemsAreNotEmpty()
         {
-            Assert.That(_result.Data.Items, Is.Not.Empty);
+            Assert.That(Result.Data.Items, Is.Not.Empty);
         }
 
-        private async Task WhenRetrievingAnCompanyFilingHistoryForAValidCompany()
+        private async Task WhenRetrievingAppointmentsForAValidOfficer()
         {
-            var res = await _client.GetOfficersAsync(ValidCompanyNumber)
-                .ConfigureAwait(false);            
-            _result = await _client.GetAppointmentsAsync(res.Data.Items[0].OfficerId)
-                .ConfigureAwait(false);
+            Result = await Client.GetAppointmentsAsync(ValidOfficerId).ConfigureAwait(false);
         }
     }
 }

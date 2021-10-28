@@ -9,10 +9,5 @@ namespace CompaniesHouse.Response.PersonsWithSignificantControl
 
         [JsonProperty(PropertyName = "statement")]
         public string Statement { get; set; }
-
-        public string PersonWithSignificantControlId
-        {
-            get { return Self.Split('/')[5]; }
-        }
     }
 }

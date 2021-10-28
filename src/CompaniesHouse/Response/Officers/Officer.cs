@@ -43,12 +43,5 @@ namespace CompaniesHouse.Response.Officers
 
         [JsonProperty(PropertyName = "links")]
         public OfficerLinks Links { get; set; }
-
-        public string OfficerId {
-            get
-            {
-                return Links.Officer.OfficerId;
-            }
-        }
     }
 }

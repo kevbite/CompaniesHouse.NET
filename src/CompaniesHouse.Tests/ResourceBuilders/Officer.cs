@@ -29,9 +29,5 @@ namespace CompaniesHouse.Tests.ResourceBuilders
         public OfficerIdentification Identification { get; set; }
 
         public OfficerLinks Links { get; set; }
-        public string OfficerId
-        {
-            get { return Links.Officer.OfficerId; }
-        }
     }
 }

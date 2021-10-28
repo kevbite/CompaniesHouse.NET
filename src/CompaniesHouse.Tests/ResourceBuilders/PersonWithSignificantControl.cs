@@ -1,9 +1,9 @@
 ﻿using CompaniesHouse.Response.PersonsWithSignificantControl;
-using CompaniesHouse.Response.Appointments;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using CompaniesHouse.Response;
+using CompaniesHouse.Response.Appointments;
 
 namespace CompaniesHouse.Tests.ResourceBuilders
 {
@@ -30,14 +30,6 @@ namespace CompaniesHouse.Tests.ResourceBuilders
 
         [JsonProperty(PropertyName = "links")]
         public PersonWithSignificantControlLinks Links { get; set; }
-
-        public string PersonWithSignificantControlId
-        {
-            get
-            {
-                return Links.PersonWithSignificantControlId;
-            }
-        }
 
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }

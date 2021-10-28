@@ -1,15 +1,13 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CompaniesHouse.Response.Appointments;
-using CompaniesHouse.Response.Officers;
 using NUnit.Framework;
 
 namespace CompaniesHouse.IntegrationTests.Tests.AppointmentsTests
 {
     public abstract class AppointmentsTestBase
     {
-        protected CompaniesHouseClient _client;
-        protected CompaniesHouseClientResponse<Appointments> _result;
+        protected CompaniesHouseClient Client;
+        protected CompaniesHouseClientResponse<Appointments> Result;
 
         [SetUp]
         public void Setup()
@@ -23,7 +21,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.AppointmentsTests
         private void GivenACompaniesHouseClient()
         {
             var settings = new CompaniesHouseSettings(Keys.ApiKey);
-            _client = new CompaniesHouseClient(settings);
+            Client = new CompaniesHouseClient(settings);
         }
     }
 }

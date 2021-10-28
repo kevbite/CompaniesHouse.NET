@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
+using CompaniesHouse.Response.Officers;
 using NUnit.Framework;
 
 namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
 {
     [TestFixture]
-    public class OfficersTestsInvalid : OfficersTestBase
+    public class OfficersTestsInvalid : OfficersTestBase<Officers>
     {
         private const string InvalidCompanyNumber = "ABC00000";
 
@@ -17,12 +18,12 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
         [Test]
         public void ThenTheDataItemsAreNull()
         {
-            Assert.That(_result.Data, Is.Null);
+            Assert.That(Result.Data, Is.Null);
         }
 
         private async Task WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany()
         {
-            _result = await _client.GetOfficersAsync(InvalidCompanyNumber).ConfigureAwait(false);
+            Result = await Client.GetOfficersAsync(InvalidCompanyNumber).ConfigureAwait(false);
         }
     }
 }

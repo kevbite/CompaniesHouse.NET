@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
+using CompaniesHouse.Response.Officers;
 using NUnit.Framework;
 
 namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
 {
     [TestFixture]
-    public class OfficersTestsValid : OfficersTestBase
+    public class OfficersTestsValid : OfficersTestBase<Officers>
     {
         // Google UK company number, unlikely to go away soon
         private const string ValidCompanyNumber = "03977902";
@@ -19,13 +20,12 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
         [Test]
         public void ThenTheDataItemsAreNotEmpty()
         {
-            Assert.That(_result.Data.Items, Is.Not.Empty);
-            Assert.That(_result.Data.Items[0].OfficerId, Is.Not.Empty);
+            Assert.That(Result.Data.Items, Is.Not.Empty);
         }
 
         private async Task WhenRetrievingAnCompanyFilingHistoryForAValidCompany()
         {
-            _result = await _client.GetOfficersAsync(ValidCompanyNumber)
+            Result = await Client.GetOfficersAsync(ValidCompanyNumber)
                 .ConfigureAwait(false);
         }
     }

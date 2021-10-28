@@ -20,7 +20,6 @@ namespace CompaniesHouse.IntegrationTests.Tests.PersonsWithSignificantControlTes
         public void ThenTheDataItemsAreNotEmpty()
         {
             Assert.That(_result.Data.Items, Is.Not.Empty);
-            Assert.That(_result.Data.Items[0].PersonWithSignificantControlId, Is.Not.Empty);
         }
 
         private async Task WhenRetrievingAnCompanyPersonsWithSignificantControlForAnValidCompany()
