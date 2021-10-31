@@ -18,13 +18,13 @@ namespace CompaniesHouse.Tests.ResourceBuilders
                 $@"{{
                       ""active_count"" : {_officers.ActiveCount},
                       ""items"" : [
-                        {string.Join(",", _officers.Items.Select(GetOfficerJsonBlock).ToArray())}
+                        {string.Join(",", _officers.Items.Select(CreateSingle).ToArray())}
                       ],
                       ""resigned_count"" : {_officers.ResignedCount}
                 }}";
         }
 
-        private string GetOfficerJsonBlock(Officer officer)
+        public static string CreateSingle(Officer officer)
         {
             return $@" {{
                     ""appointed_on"" : ""{officer.AppointedOn.ToString("yyyy-MM-dd")}"",

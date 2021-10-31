@@ -1,14 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
-using CompaniesHouse.Response.Officers;
+﻿using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
 {
-    public abstract class OfficersTestBase
+    public abstract class OfficersTestBase<T>
     {
-        protected CompaniesHouseClient _client;
-        protected CompaniesHouseClientResponse<Officers> _result;
+        protected CompaniesHouseClient Client;
+        protected CompaniesHouseClientResponse<T> Result;
 
         [SetUp]
         public void Setup()
@@ -22,7 +20,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
         private void GivenACompaniesHouseClient()
         {
             var settings = new CompaniesHouseSettings(Keys.ApiKey);
-            _client = new CompaniesHouseClient(settings);
+            Client = new CompaniesHouseClient(settings);
         }
     }
 }

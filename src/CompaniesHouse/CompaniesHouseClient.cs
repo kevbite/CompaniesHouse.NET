@@ -16,6 +16,7 @@ using CompaniesHouse.Response.Search.CompanySearch;
 using CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
 using CompaniesHouse.Response.Search.OfficerSearch;
 using CompaniesHouse.UriBuilders;
+using Officer = CompaniesHouse.Response.Officers.Officer;
 
 namespace CompaniesHouse
 {
@@ -30,6 +31,7 @@ namespace CompaniesHouse
         private readonly ICompaniesHousePersonsWithSignificantControlClient _companiesHousePersonsWithSignificantControlClient;
         private readonly ICompaniesHouseChargesClient _companiesHouseChargesClient;
         private readonly ICompaniesHouseRegisteredOfficeAddressClient _companiesHouseRegisteredOfficeAddressClient;
+        private readonly ICompaniesHouseOfficerByAppointmentClient _companiesHouseOfficerByAppointmentClient;
         private readonly HttpClient _httpClient;
 
         public CompaniesHouseClient(HttpClient httpClient)
@@ -44,6 +46,7 @@ namespace CompaniesHouse
             _companiesHousePersonsWithSignificantControlClient = new CompaniesHousePersonsWithSignificantControlClient(_httpClient, new PersonsWithSignificantControlBuilder());
             _companiesHouseChargesClient = new CompaniesHouseChargesClient(_httpClient, new ChargesUriBuilder());
             _companiesHouseRegisteredOfficeAddressClient = new CompaniesHouseRegisteredOfficeAddressClient(_httpClient, new RegisteredOfficeAddressUriBuilder());
+            _companiesHouseOfficerByAppointmentClient = new CompaniesHouseOfficerByByAppointmentClient(_httpClient, new OfficersAppointmentUriBuilder());
         }
         
         public CompaniesHouseClient(ICompaniesHouseSettings settings)
@@ -96,15 +99,13 @@ namespace CompaniesHouse
             return _companiesHouseCompanyInsolvencyInformationClient.GetCompanyInsolvencyInformationAsync(companyNumber, cancellationToken);
         }
 
-        public void Dispose() => _httpClient.Dispose();
-
         public Task<CompaniesHouseClientResponse<Appointments>> GetAppointmentsAsync(string officerId, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHouseCompanyAppointmentsClient.GetAppointmentsAsync(officerId, startIndex, pageSize,
                 cancellationToken);
         }
-		
-		public Task<CompaniesHouseClientResponse<PersonsWithSignificantControl>> GetPersonsWithSignificantControlAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken))
+
+        public Task<CompaniesHouseClientResponse<PersonsWithSignificantControl>> GetPersonsWithSignificantControlAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHousePersonsWithSignificantControlClient.GetPersonsWithSignificantControlAsync(companyNumber, startIndex, pageSize, cancellationToken);
         }
@@ -113,7 +114,7 @@ namespace CompaniesHouse
         {
             return _companiesHouseChargesClient.GetChargesListAsync(companyNumber,startIndex, pageSize, cancellationToken);
         }
-        
+
         public Task<CompaniesHouseClientResponse<Charge>> GetChargeByIdAsync(string companyNumber, string chargeId, CancellationToken cancellationToken = default)
         {
             return _companiesHouseChargesClient.GetChargeByIdAsync(companyNumber, chargeId, cancellationToken);
@@ -123,5 +124,12 @@ namespace CompaniesHouse
         {
             return _companiesHouseRegisteredOfficeAddressClient.GetRegisteredOfficeAddress(companyNumber, cancellationToken);
         }
+
+        public Task<CompaniesHouseClientResponse<Officer>> GetOfficerByAppointmentIdAsync(string companyNumber, string appointmentId, CancellationToken cancellationToken = default)
+        {
+            return _companiesHouseOfficerByAppointmentClient.GetOfficerByAppointmentIdAsync(companyNumber, appointmentId, cancellationToken);
+        }
+
+        public void Dispose() => _httpClient.Dispose();
     }
 }

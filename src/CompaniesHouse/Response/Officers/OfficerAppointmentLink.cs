@@ -6,10 +6,5 @@ namespace CompaniesHouse.Response.Officers
     {
         [JsonProperty(PropertyName = "appointments")]
         public string AppointmentsResource { get; set; }
-
-        public string OfficerId
-        {
-            get { return AppointmentsResource.Split('/')[2]; }
-        }       
     }
 }

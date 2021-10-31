@@ -29,14 +29,6 @@ namespace CompaniesHouse.Response.PersonsWithSignificantControl
         [JsonProperty(PropertyName = "links")]
         public PersonWithSignificantControlLinks Links { get; set; }
 
-        public string PersonWithSignificantControlId
-        {
-            get
-            {
-                return Links.PersonWithSignificantControlId;
-            }
-        }
-
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
