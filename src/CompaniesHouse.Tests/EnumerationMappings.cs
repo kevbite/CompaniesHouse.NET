@@ -3,6 +3,7 @@ using CompaniesHouse.Response;
 using CompaniesHouse.Response.CompanyProfile;
 using CompaniesHouse.Response.Officers;
 using CompaniesHouse.Response.PersonsWithSignificantControl;
+using CompaniesHouse.Response.RegisteredOfficeAddress;
 
 namespace CompaniesHouse.Tests
 {
@@ -247,6 +248,17 @@ namespace CompaniesHouse.Tests
             {"fully-satisfied", ChargeStatus.FullySatisfied},
             {"part-satisfied", ChargeStatus.PartSatisfied},
             {"satisfied", ChargeStatus.Satisfied}
+        };
+        
+        public static readonly IReadOnlyDictionary<string, OfficeAddressCountry> PossibleRegisteredOfficeAddressCountry = new Dictionary<string, OfficeAddressCountry>
+        {
+            {"England", OfficeAddressCountry.England},
+            {"Scotland", OfficeAddressCountry.Scotland},
+            {"Wales", OfficeAddressCountry.Wales},
+            {"Great Britain", OfficeAddressCountry.GreatBritain},
+            {"Northern Ireland", OfficeAddressCountry.NorthernIreland},
+            {"Not specified", OfficeAddressCountry.NotSpecified},
+            {"United Kingdom", OfficeAddressCountry.UnitedKingdom}
         };
     }
 }
