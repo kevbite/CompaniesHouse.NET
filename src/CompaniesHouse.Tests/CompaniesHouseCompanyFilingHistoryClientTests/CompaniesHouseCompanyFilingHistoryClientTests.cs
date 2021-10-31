@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 using CompaniesHouse.Tests.ResourceBuilders;
 using CompaniesHouse.UriBuilders;
 using FluentAssertions;
@@ -13,17 +14,12 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyFilingHistoryClientTests
     [TestFixture]
     public class CompaniesHouseCompanyFilingHistoryClientTests
     {
-        private CompaniesHouseCompanyFilingHistoryClient _client;
-
-        private CompaniesHouseClientResponse<Response.CompanyFiling.CompanyFilingHistory> _result;
-        private ResourceBuilders.CompanyFilingHistory _companyFilingHistory;
-
         [TestCaseSource(nameof(TestCases))]
-        public void GivenACompaniesHouseCompanyProfileClient_WhenGettingACompanyProfile(CompaniesHouseCompanyFilingHistoryClientTestCase testCase)
+        public async Task GivenACompaniesHouseCompanyProfileClient_WhenGettingACompanyProfile(CompaniesHouseCompanyFilingHistoryClientTestCase testCase)
         {
-            _companyFilingHistory = new CompanyFilingHistoryBuilder().Build(testCase);
-            var resource = new CompanyFilingHistoryResourceBuilder(_companyFilingHistory)
-                                .Create();
+            var companyFilingHistory = CompanyFilingHistoryBuilder.Build(testCase);
+            var resource = new CompanyFilingHistoryResourceBuilder(companyFilingHistory)
+                .Create();
 
             var uri = new Uri("https://wibble.com/search/companies");
 
@@ -33,13 +29,32 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyFilingHistoryClientTests
             uriBuilder.Setup(x => x.Build(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()))
                 .Returns(uri);
 
-            _client = new CompaniesHouseCompanyFilingHistoryClient(new HttpClient(handler), uriBuilder.Object);
+            var client = new CompaniesHouseCompanyFilingHistoryClient(new HttpClient(handler), uriBuilder.Object);
 
-            _result = _client.GetCompanyFilingHistoryAsync("abc", 0, 25).Result;
+            var result = await client.GetCompanyFilingHistoryAsync("abc", 0, 25);
 
-            _result.Data.ShouldBeEquivalentTo(_companyFilingHistory);
+            result.Data.ShouldBeEquivalentTo(companyFilingHistory);
         }
 
+        [TestCaseSource(nameof(TestCases))]
+        public async Task GivenACompaniesHouseCompanyFilingHistoryClient_WhenGettingAFilingHistoryItem(CompaniesHouseCompanyFilingHistoryClientTestCase testCase)
+        {
+            var filingHistory = CompanyFilingHistoryBuilder.BuildOne(testCase);
+            var resource = CompanyFilingHistoryResourceBuilder.CreateOne(filingHistory);
+
+            var uri = new Uri("https://wibble.com/company/1/filing-history/1");
+
+            HttpMessageHandler handler = new StubHttpMessageHandler(uri, resource);
+
+            var uriBuilder = new Mock<ICompanyFilingHistoryUriBuilder>();
+            uriBuilder.Setup(x => x.Build(It.IsAny<string>(), It.IsAny<string>())).Returns(uri);
+
+            var client = new CompaniesHouseCompanyFilingHistoryClient(new HttpClient(handler), uriBuilder.Object);
+
+            var result = await client.GetFilingHistoryByTransactionAsync("abc", "id1");
+
+            result.Data.ShouldBeEquivalentTo(filingHistory);
+        }
 
         public static CompaniesHouseCompanyFilingHistoryClientTestCase[] TestCases()
         {
@@ -80,11 +95,10 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyFilingHistoryClientTests
                 });
 
             return allFilingCategories
-                    .Concat(allFilingSubcategories)
-                    .Concat(allFilingHistoryStatus)
-                    .Concat(allFilingResolutionCategories)
-                    .ToArray();
+                .Concat(allFilingSubcategories)
+                .Concat(allFilingHistoryStatus)
+                .Concat(allFilingResolutionCategories)
+                .ToArray();
         }
-
     }
 }
