@@ -4,10 +4,10 @@ using NUnit.Framework;
 
 namespace CompaniesHouse.IntegrationTests.Tests.ChargesTests
 {
-    public abstract class ChargesTestBase
+    public abstract class ChargesTestBase<T>
     {
         protected CompaniesHouseClient Client { get; set; }
-        protected CompaniesHouseClientResponse<Charges> Result; 
+        protected CompaniesHouseClientResponse<T> Result; 
 
         [SetUp]
         public async Task Setup()

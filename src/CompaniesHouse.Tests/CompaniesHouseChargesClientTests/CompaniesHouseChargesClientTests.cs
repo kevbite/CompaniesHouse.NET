@@ -29,6 +29,22 @@ namespace CompaniesHouse.Tests.CompaniesHouseChargesClientTests
             result.Data.ShouldBeEquivalentTo(charges);
         }
 
+        [TestCaseSource(nameof(TestCases))]
+        public async Task GivenACompaniesHouseChargesClient_WhenGettingCompanyChargeById(CompaniesHouseChargesClientTestCase testCase)
+        {
+            var charge = CompanyChargesBuilder.CreateOne(testCase);
+            var resource = CompanyChargesResourceBuilder.CreateOne(charge);
+            var uri = new Uri("https://wibble.com/company/1/charges/1");
+            var handler = new StubHttpMessageHandler(uri, resource);
+            var uriBuilder = new Mock<IChargesUriBuilder>();
+            uriBuilder.Setup(x => x.Build(It.IsAny<string>(), It.IsAny<string>())).Returns(uri);
+            var client = new CompaniesHouseChargesClient(new HttpClient(handler), uriBuilder.Object);
+
+            var result = await client.GetChargeByIdAsync("1", "1");
+
+            result.Data.ShouldBeEquivalentTo(charge);
+        }
+        
         private static CompaniesHouseChargesClientTestCase[] TestCases()
         {
             var allAssetsCeasedReleased = EnumerationMappings.PossibleAssetsCeasedReleased.Keys.Select(x => new CompaniesHouseChargesClientTestCase
