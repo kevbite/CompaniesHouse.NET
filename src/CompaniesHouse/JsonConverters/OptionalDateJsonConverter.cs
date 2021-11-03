@@ -7,7 +7,11 @@ namespace CompaniesHouse.JsonConverters
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            if ( value is DateTime? ) {
+                if ( value != null ) {
+                    writer.WriteValue(((DateTime)value).ToString("yyyy-MM-dd"));
+                }
+            }
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
