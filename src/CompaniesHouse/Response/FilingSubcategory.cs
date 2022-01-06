@@ -86,5 +86,8 @@ namespace CompaniesHouse.Response
 
         [EnumMember(Value = "transfer")]
         Transfer,
+        
+        [EnumMember(Value = "debenture")]
+        Debenture,
     }
 }
