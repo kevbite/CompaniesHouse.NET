@@ -110,8 +110,5 @@ namespace CompaniesHouse.Response.PersonsWithSignificantControl
         PartRightToShareSurplusAssets50To75PercentAsTrust,
         [EnumMember(Value = "right-to-appoint-and-remove-person")]
         RightToAppointAndRemovePerson,
-
-
-
     }
 }

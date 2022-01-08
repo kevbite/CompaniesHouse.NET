@@ -43,5 +43,8 @@ namespace CompaniesHouse.Response.PersonsWithSignificantControl
 
         [JsonProperty(PropertyName = "notified_on")]
         public DateTime NotifiedOn { get; set; }
+
+        [JsonProperty(PropertyName = "identification")]
+        public PersonWithSignificantControlIdentification Identification { get; set; }
     }
 }
