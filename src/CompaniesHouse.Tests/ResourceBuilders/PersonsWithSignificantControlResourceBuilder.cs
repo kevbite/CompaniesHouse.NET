@@ -62,7 +62,8 @@ namespace CompaniesHouse.Tests.ResourceBuilders
                     ""natures_of_control"" : [
                           {string.Join(",", personWithSignificantControl.NaturesOfControl.Select(GetPersonWithSignificantControlNatureOfControlsJsonBlock).ToArray())}
                     ],
-                    ""notified_on"" : ""{personWithSignificantControl.NotifiedOn.ToString("yyyy-MM-dd")}""
+                    ""notified_on"" : ""{personWithSignificantControl.NotifiedOn.ToString("yyyy-MM-dd")}"",
+                    ""identification"": {GetPersonWithSignificantControlIdentificationJsonBlock(personWithSignificantControl.Identification)}
                  }}";
         }
         
@@ -70,5 +71,14 @@ namespace CompaniesHouse.Tests.ResourceBuilders
         {
             return $@"""{natureOfControl}""";
         }
+
+        private static string GetPersonWithSignificantControlIdentificationJsonBlock(PersonWithSignificantControlIdentification identification) =>
+            $@"{{
+      ""legal_authority"": ""{identification.LegalAuthority}"",
+      ""legal_form"": ""{identification.LegalForm}"",
+      ""place_registered"": ""{identification.PlaceRegistered}"",
+      ""registration_number"": ""{identification.RegistrationNumber}"",
+      ""country_registered"": ""{identification.CountryRegistered}"" 
+}}";
     }
 }
