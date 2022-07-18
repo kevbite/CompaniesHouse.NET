@@ -7,6 +7,8 @@ using CompaniesHouse.UriBuilders;
 
 namespace CompaniesHouse
 {
+    using CompaniesHouse.Extensions;
+
     public class CompaniesHouseRegisteredOfficeAddressClient : ICompaniesHouseRegisteredOfficeAddressClient
     {
         private readonly HttpClient _httpClient;
@@ -24,7 +26,7 @@ namespace CompaniesHouse
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
             if (response.StatusCode != HttpStatusCode.NotFound)
-                response.EnsureSuccessStatusCode();
+                response.EnsureSuccessStatusCode2();
 
             var data = response.IsSuccessStatusCode
                 ? await response.Content.ReadAsJsonAsync<OfficeAddress>()

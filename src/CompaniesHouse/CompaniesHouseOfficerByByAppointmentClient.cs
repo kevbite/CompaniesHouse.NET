@@ -6,6 +6,8 @@ using CompaniesHouse.UriBuilders;
 
 namespace CompaniesHouse
 {
+    using CompaniesHouse.Extensions;
+
     public class CompaniesHouseOfficerByByAppointmentClient : ICompaniesHouseOfficerByAppointmentClient
     {
         private readonly HttpClient _httpClient;
@@ -25,7 +27,7 @@ namespace CompaniesHouse
 
             // Return a null profile on 404s, but raise exception for all other error codes
             if (response.StatusCode != System.Net.HttpStatusCode.NotFound)
-                response.EnsureSuccessStatusCode();
+                response.EnsureSuccessStatusCode2();
 
             var result = response.IsSuccessStatusCode
                 ? await response.Content.ReadAsJsonAsync<Officer>().ConfigureAwait(false)

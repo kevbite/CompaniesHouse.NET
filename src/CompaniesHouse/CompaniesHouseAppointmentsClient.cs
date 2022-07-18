@@ -5,6 +5,8 @@ using CompaniesHouse.Response.Appointments;
 
 namespace CompaniesHouse
 {
+    using CompaniesHouse.Extensions;
+
     public class CompaniesHouseAppointmentsClient : ICompaniesHouseAppointmentsClient
     {
         private readonly HttpClient _httpClient;
@@ -20,7 +22,7 @@ namespace CompaniesHouse
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            response.EnsureSuccessStatusCode();
+            response.EnsureSuccessStatusCode2();
 
             var result = await response.Content.ReadAsJsonAsync<Appointments>().ConfigureAwait(false);
 
