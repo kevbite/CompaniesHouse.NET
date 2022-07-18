@@ -5,6 +5,8 @@ using CompaniesHouse.Response.Insolvency;
 
 namespace CompaniesHouse
 {
+    using CompaniesHouse.Extensions;
+
     public class CompaniesHouseCompanyInsolvencyInformationClient : ICompaniesHouseCompanyInsolvencyInformationClient
     {
         private readonly HttpClient _httpClient;
@@ -20,7 +22,7 @@ namespace CompaniesHouse
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
                 
-            response.EnsureSuccessStatusCode();
+            response.EnsureSuccessStatusCode2();
 
             var result = await response.Content.ReadAsJsonAsync<CompanyInsolvencyInformation>().ConfigureAwait(false);
 

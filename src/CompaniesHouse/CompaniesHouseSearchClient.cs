@@ -5,6 +5,8 @@ using CompaniesHouse.Request;
 
 namespace CompaniesHouse
 {
+    using CompaniesHouse.Extensions;
+
     public class CompaniesHouseSearchClient : ICompaniesHouseSearchClient
     {
         private readonly HttpClient _httpClient;
@@ -23,7 +25,7 @@ namespace CompaniesHouse
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            response.EnsureSuccessStatusCode();
+            response.EnsureSuccessStatusCode2();
 
             var result = await response.Content.ReadAsJsonAsync<TSearch>().ConfigureAwait(false);
 
