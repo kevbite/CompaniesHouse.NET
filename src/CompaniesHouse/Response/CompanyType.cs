@@ -109,5 +109,8 @@ namespace CompaniesHouse.Response
         [EnumMember(Value = "united-kingdom-societas")]
         UnitedKingdomSocietas,
 
+        [EnumMember(Value = "registered-overseas-entity")]
+        RegisteredOverseasEntity,
+
     }
 }
