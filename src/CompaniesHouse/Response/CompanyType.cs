@@ -33,7 +33,7 @@ namespace CompaniesHouse.Response
 
         [EnumMember(Value = "private-unlimited-nsc")]
         PrivateUnlimitedNsc,
-        
+
         [EnumMember(Value = "private-limited-shares-section-30-exemption")]
         PrivateLimitedSharesSection30Exemption,
 
@@ -64,9 +64,6 @@ namespace CompaniesHouse.Response
         [EnumMember(Value = "northern-ireland-other")]
         NorthernIrelandOther,
 
-        [EnumMember(Value = "llp")]
-        Llp,
-
         [EnumMember(Value = "royal-charter")]
         RoyalCharter,
 
@@ -76,11 +73,17 @@ namespace CompaniesHouse.Response
         [EnumMember(Value = "unregistered-company")]
         UnregisteredCompany,
 
+        [EnumMember(Value = "llp")]
+        Llp,
+
         [EnumMember(Value = "other")]
         Other,
 
         [EnumMember(Value = "european-public-limited-liability-company-se")]
         EuropeanPublicLimitedLiabilityCompanySe,
+
+        [EnumMember(Value = "registered-overseas-entity")]
+        RegisteredOverseasEntity,
 
         [EnumMember(Value = "uk-establishment")]
         UkEstablishment,
@@ -88,19 +91,19 @@ namespace CompaniesHouse.Response
         [EnumMember(Value = "registered-society-non-jurisdictional")]
         RegisteredSociety,
 
-		[EnumMember(Value = "protected-cell-company")]
-	    ProtectedCellCompany,
+        [EnumMember(Value = "protected-cell-company")]
+        ProtectedCellCompany,
 
-	    [EnumMember(Value = "scottish-partnership")]
-		ScottishPartnership,
+        [EnumMember(Value = "scottish-partnership")]
+        ScottishPartnership,
 
-		[EnumMember(Value = "charitable-incorporated-organisation")]
-	    CharitableIncorporatedOrganisation,
+        [EnumMember(Value = "charitable-incorporated-organisation")]
+        CharitableIncorporatedOrganisation,
 
-		[EnumMember(Value = "scottish-charitable-incorporated-organisation")]
-		ScottishCharitableIncorporatedOrganisation,
+        [EnumMember(Value = "scottish-charitable-incorporated-organisation")]
+        ScottishCharitableIncorporatedOrganisation,
 
-	    [EnumMember(Value = "further-education-or-sixth-form-college-corporation")]
+        [EnumMember(Value = "further-education-or-sixth-form-college-corporation")]
         FurtherEducationOrSixthFormCollegeCorporation,
 
         [EnumMember(Value = "ukeig")]
@@ -108,6 +111,5 @@ namespace CompaniesHouse.Response
 
         [EnumMember(Value = "united-kingdom-societas")]
         UnitedKingdomSocietas,
-
     }
 }

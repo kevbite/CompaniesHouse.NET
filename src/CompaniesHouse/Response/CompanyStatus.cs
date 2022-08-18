@@ -36,11 +36,14 @@ namespace CompaniesHouse.Response
 
         [EnumMember(Value = "closed")]
         Closed,
-        
+
         [EnumMember(Value = "closed-on")]
         ClosedOn,
 
+        [EnumMember(Value = "registered")]
+        Registered,
 
+        [EnumMember(Value = "removed")]
+        Removed,
     }
 }
- 
