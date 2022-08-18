@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using AutoFixture;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response;
 using CompaniesHouse.Response.Search.CompanySearch;
@@ -9,7 +10,6 @@ using CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource;
 using CompaniesHouse.UriBuilders;
 using Moq;
 using NUnit.Framework;
-using AutoFixture;
 
 namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
 {
@@ -109,7 +109,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
         [Test]
         public void ThenTheNumberOfReturnedCompaniesIsCorrect()
         {
-            Assert.That(_result.Data.Companies.Count(), Is.EqualTo(13));
+            Assert.That(_result.Data.Companies.Length, Is.EqualTo(13));
 
         }
 
@@ -131,7 +131,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
                 Assert.That(actual.Address.PostalCode, Is.EqualTo(companyDetails.PostalCode));
                 Assert.That(actual.Address.Region, Is.EqualTo(companyDetails.Region));
 
-				Assert.That(actual.CompanyStatus, Is.EqualTo(ExpectedCompanyStatus[companyDetails.CompanyStatus ?? ""]));
+                Assert.That(actual.CompanyStatus, Is.EqualTo(ExpectedCompanyStatus[companyDetails.CompanyStatus ?? ""]));
                 Assert.That(actual.CompanyType, Is.EqualTo(ExpectedCompanyType[companyDetails.CompanyType]));
                 Assert.That(actual.DateOfCessation, Is.EqualTo(companyDetails.DateOfCessation.Date));
                 Assert.That(actual.DateOfCreation, Is.EqualTo(companyDetails.DateOfCreation.Date));
@@ -158,7 +158,9 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
             {"insolvency-proceedings", CompanyStatus.InsolvencyProceedings},
             {"open", CompanyStatus.Open},
             {"closed", CompanyStatus.Closed},
-            {"closed-on", CompanyStatus.ClosedOn}
+            {"closed-on", CompanyStatus.ClosedOn},
+            {"registered", CompanyStatus.Registered},
+            {"removed", CompanyStatus.Removed},
         };
 
         private static readonly IReadOnlyDictionary<string, CompanyType> ExpectedCompanyType = new Dictionary
