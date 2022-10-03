@@ -2,6 +2,7 @@
 using System;
 using CompaniesHouse;
 using CompaniesHouse.DelegatingHandlers;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -19,22 +20,22 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>Service collection</returns>
         public static IServiceCollection AddCompaniesHouseClient(this IServiceCollection services, Uri baseUri, string apiKey)
         {
-            services.AddTransient(provider => new CompaniesHouseAuthorizationHandler(apiKey));
+            services.TryAddTransient(provider => new CompaniesHouseAuthorizationHandler(apiKey));
 
             services.AddHttpClient<ICompaniesHouseClient, CompaniesHouseClient>(cfg => cfg.BaseAddress = baseUri)
                 .AddHttpMessageHandler<CompaniesHouseAuthorizationHandler>();
 
-            services.AddTransient<ICompaniesHouseSearchCompanyClient>(provider => provider.GetService<ICompaniesHouseClient>());
-            services.AddTransient<ICompaniesHouseSearchOfficerClient>(provider => provider.GetService<ICompaniesHouseClient>());
-            services.AddTransient<ICompaniesHouseSearchDisqualifiedOfficerClient>(provider => provider.GetService<ICompaniesHouseClient>());
-            services.AddTransient<ICompaniesHouseSearchAllClient>(provider => provider.GetService<ICompaniesHouseClient>());
-            services.AddTransient<ICompaniesHouseCompanyProfileClient>(provider => provider.GetService<ICompaniesHouseClient>());
-            services.AddTransient<ICompaniesHouseCompanyFilingHistoryClient>(provider => provider.GetService<ICompaniesHouseClient>());
-            services.AddTransient<ICompaniesHouseOfficersClient>(provider => provider.GetService<ICompaniesHouseClient>());
-            services.AddTransient<ICompaniesHouseCompanyInsolvencyInformationClient>(provider => provider.GetService<ICompaniesHouseClient>());
-            services.AddTransient<ICompaniesHouseAppointmentsClient>(provider => provider.GetService<ICompaniesHouseClient>());
-            services.AddTransient<ICompaniesHousePersonsWithSignificantControlClient>(provider => provider.GetService<ICompaniesHouseClient>());
-            services.AddTransient<ICompaniesHouseChargesClient>(provider => provider.GetService<ICompaniesHouseClient>());
+            services.TryAddTransient<ICompaniesHouseSearchCompanyClient>(provider => provider.GetService<ICompaniesHouseClient>());
+            services.TryAddTransient<ICompaniesHouseSearchOfficerClient>(provider => provider.GetService<ICompaniesHouseClient>());
+            services.TryAddTransient<ICompaniesHouseSearchDisqualifiedOfficerClient>(provider => provider.GetService<ICompaniesHouseClient>());
+            services.TryAddTransient<ICompaniesHouseSearchAllClient>(provider => provider.GetService<ICompaniesHouseClient>());
+            services.TryAddTransient<ICompaniesHouseCompanyProfileClient>(provider => provider.GetService<ICompaniesHouseClient>());
+            services.TryAddTransient<ICompaniesHouseCompanyFilingHistoryClient>(provider => provider.GetService<ICompaniesHouseClient>());
+            services.TryAddTransient<ICompaniesHouseOfficersClient>(provider => provider.GetService<ICompaniesHouseClient>());
+            services.TryAddTransient<ICompaniesHouseCompanyInsolvencyInformationClient>(provider => provider.GetService<ICompaniesHouseClient>());
+            services.TryAddTransient<ICompaniesHouseAppointmentsClient>(provider => provider.GetService<ICompaniesHouseClient>());
+            services.TryAddTransient<ICompaniesHousePersonsWithSignificantControlClient>(provider => provider.GetService<ICompaniesHouseClient>());
+            services.TryAddTransient<ICompaniesHouseChargesClient>(provider => provider.GetService<ICompaniesHouseClient>());
             
             return services;
         }
@@ -70,13 +71,13 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns></returns>
         public static IServiceCollection AddCompaniesHouseDocumentClient(this IServiceCollection services, Uri baseUri, string apiKey)
         {
-            services.AddTransient(provider => new CompaniesHouseAuthorizationHandler(apiKey));
+            services.TryAddTransient(provider => new CompaniesHouseAuthorizationHandler(apiKey));
             
             services.AddHttpClient<ICompaniesHouseDocumentClient, CompaniesHouseDocumentClient>(cfg => cfg.BaseAddress = baseUri)
                 .AddHttpMessageHandler<CompaniesHouseAuthorizationHandler>();
             
-            services.AddTransient<ICompaniesHouseDocumentMetadataClient>(provider => provider.GetService<ICompaniesHouseDocumentClient>());
-            services.AddTransient<ICompaniesHouseDocumentDownloadClient>(provider => provider.GetService<ICompaniesHouseDocumentClient>());
+            services.TryAddTransient<ICompaniesHouseDocumentMetadataClient>(provider => provider.GetService<ICompaniesHouseDocumentClient>());
+            services.TryAddTransient<ICompaniesHouseDocumentDownloadClient>(provider => provider.GetService<ICompaniesHouseDocumentClient>());
 
             return services;
         }
