@@ -25,7 +25,7 @@ namespace CompaniesHouse.Tests.DelegatingHandlers
                 .ReturnsAsync(new HttpResponseMessage());
 
             _apiKey = "42c8154e-982d-4a62-913d-89aafb320dbc";
-            _handler = new CompaniesHouseAuthorizationHandler(_apiKey)
+            _handler = new CompaniesHouseAuthorizationHandler(new StaticApiKeyProvider(_apiKey))
             {
                 InnerHandler = innerHandler.Object
             };

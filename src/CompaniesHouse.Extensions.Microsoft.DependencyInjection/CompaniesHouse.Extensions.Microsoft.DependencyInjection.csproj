@@ -34,7 +34,7 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <None Include="..\..\companies-house.jpg" Pack="true" PackagePath=""/>
+        <None Include="..\..\companies-house.jpg" Pack="true" PackagePath="" />
     </ItemGroup>
 
     <ItemGroup>
