@@ -112,31 +112,5 @@ namespace Microsoft.Extensions.DependencyInjection
 
             return services;
         }
-
-        /// <summary>
-        /// Registers the companies house document client to the service collection
-        /// </summary>
-        /// <param name="services"></param>
-        /// <param name="baseUri"></param>
-        /// <param name="apiKey"></param>
-        /// <returns></returns>
-        public static IServiceCollection AddCompaniesHouseDocumentClient(this IServiceCollection services, Uri baseUri,
-            string apiKey)
-        {
-            services.TryAddTransient<IApiKeyProvider>(_ => new StaticApiKeyProvider(apiKey));
-
-            services.TryAddTransient<CompaniesHouseAuthorizationHandler>();
-
-            services.AddHttpClient<ICompaniesHouseDocumentClient, CompaniesHouseDocumentClient>(cfg =>
-                    cfg.BaseAddress = baseUri)
-                .AddHttpMessageHandler<CompaniesHouseAuthorizationHandler>();
-
-            services.TryAddTransient<ICompaniesHouseDocumentMetadataClient>(provider =>
-                provider.GetService<ICompaniesHouseDocumentClient>());
-            services.TryAddTransient<ICompaniesHouseDocumentDownloadClient>(provider =>
-                provider.GetService<ICompaniesHouseDocumentClient>());
-
-            return services;
-        }
     }
 }
