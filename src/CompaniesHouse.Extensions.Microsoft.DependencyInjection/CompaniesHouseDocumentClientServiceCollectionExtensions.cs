@@ -70,7 +70,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 return options;
             });
             
-            services.TryAddTransient(provider =>
+            services.TryAddTransient<IApiKeyProvider>(provider =>
             {
                 var options = provider.GetRequiredService<CompaniesHouseClientDocumentOptions>();
 
