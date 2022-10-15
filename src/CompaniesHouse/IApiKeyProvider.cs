@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace CompaniesHouse.DelegatingHandlers;
+namespace CompaniesHouse;
 
 public interface IApiKeyProvider
 {
