@@ -9,18 +9,19 @@ namespace CompaniesHouse.DelegatingHandlers
 {
     public class CompaniesHouseAuthorizationHandler : DelegatingHandler
     {
-        private readonly string _apiKey;
+        private readonly IApiKeyProvider _apiKeyProvider;
 
-        public CompaniesHouseAuthorizationHandler(string apiKey)
+        public CompaniesHouseAuthorizationHandler(IApiKeyProvider apiKeyProvider)
         {
-            _apiKey = apiKey;
+            _apiKeyProvider = apiKeyProvider;
         }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            request.Headers.Authorization = new AuthenticationHeaderValue("Basic", Base64Encode(_apiKey));
+            var apiKey = await _apiKeyProvider.GetApiKey();
+            request.Headers.Authorization = new AuthenticationHeaderValue("Basic", Base64Encode(apiKey));
 
-            return base.SendAsync(request, cancellationToken);
+            return await base.SendAsync(request, cancellationToken);
         }
 
         private string Base64Encode(string apiKey)

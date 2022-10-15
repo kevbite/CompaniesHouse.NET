@@ -15,7 +15,8 @@ namespace CompaniesHouse
 
         public HttpClient CreateHttpClient()
         {
-            var companiesHouseAuthorizationHandler = new CompaniesHouseAuthorizationHandler(_settings.ApiKey)
+            var staticApiKeyProvider = new StaticApiKeyProvider(_settings.ApiKey);
+            var companiesHouseAuthorizationHandler = new CompaniesHouseAuthorizationHandler(staticApiKeyProvider)
             {
                 InnerHandler = _settings.HttpMessageHandlerCreator()
             };
