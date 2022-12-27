@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net48;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
-    <LangVersion>8.0</LangVersion>
+    <TargetFramework>net7.0</TargetFramework>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
   
   <ItemGroup>
@@ -10,10 +10,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\CompaniesHouse\CompaniesHouse.csproj">
-      <Project>{9639747a-c49f-42e9-85a4-41fcbfcb7a16}</Project>
-      <Name>CompaniesHouse</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\src\CompaniesHouse\CompaniesHouse.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoFixture">
