@@ -1,0 +1,23 @@
+<Project>
+  <PropertyGroup>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>Kevin Smith</Authors>
+    <Company>Kevsoft</Company>
+    <Copyright>Copyright © Kevsoft 2020</Copyright>
+
+    <PackageTags>CompaniesHouse;Registrar;Kevsoft;API;REST;WebService</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/kevbite/CompaniesHouse.NET/master/companies-house.jpg</PackageIconUrl>
+    <PackageIcon>companies-house.jpg</PackageIcon>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/kevbite/CompaniesHouse.NET</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/kevbite/CompaniesHouse.NET</RepositoryUrl>
+  </PropertyGroup>
+</Project>
