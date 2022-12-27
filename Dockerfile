@@ -32,7 +32,7 @@ RUN dotnet build --configuration $CONFIGURATION --no-restore
 
 FROM build as test
 ARG COMPANIES_HOUSE_API_KEY
-RUN dotnet test --logger "junit" --configuration $CONFIGURATION --no-build
+RUN dotnet test --logger trx --configuration $CONFIGURATION --no-build
 
 FROM build as pack
 RUN mkdir -p artifacts
@@ -41,7 +41,7 @@ RUN dotnet pack --configuration Release -p:Version=${NUGET_PACKAGE_VERSION} --no
 FROM scratch
 COPY --from=pack /artifacts/*.nupkg /artifacts/
 COPY --from=pack /artifacts/*.snupkg /artifacts/
-COPY --from=test /tests/CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests/TestResults/*.xml /TestResults/CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests/
-COPY --from=test /tests/CompaniesHouse.IntegrationTests/TestResults/*.xml /TestResults/CompaniesHouse.IntegrationTests/
-COPY --from=test /tests/CompaniesHouse.ScenarioTests/TestResults/*.xml /TestResults/CompaniesHouse.ScenarioTests/
-COPY --from=test /tests/CompaniesHouse.Tests/TestResults/*.xml /TestResults/CompaniesHouse.Tests/
+COPY --from=test /tests/CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests/TestResults/*.trx /TestResults/CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests/
+COPY --from=test /tests/CompaniesHouse.IntegrationTests/TestResults/*.trx /TestResults/CompaniesHouse.IntegrationTests/
+COPY --from=test /tests/CompaniesHouse.ScenarioTests/TestResults/*.trx /TestResults/CompaniesHouse.ScenarioTests/
+COPY --from=test /tests/CompaniesHouse.Tests/TestResults/*.trx /TestResults/CompaniesHouse.Tests/
