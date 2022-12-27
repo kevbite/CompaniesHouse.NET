@@ -12,6 +12,6 @@ namespace CompaniesHouse.IntegrationTests.Tests.ChargesTests
         protected override async Task When() => Result = await Client.GetChargesListAsync(CompanyNumber);
 
         [Test]
-        public void ThenChargesListIsNull() => Assert.Null(Result.Data);
+        public void ThenChargesListIsNull() => Assert.IsEmpty(Result.Data.Items);
     }
 }
