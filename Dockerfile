@@ -9,7 +9,7 @@ COPY ./*.props .
 COPY ./*.targets .
 COPY ./*.sln .
 COPY ./*.jpg .
-COPY ./README .
+COPY ./README.md .
 COPY ./LICENSE .
 
 COPY ./src/CompaniesHouse/*.csproj ./src/CompaniesHouse/
