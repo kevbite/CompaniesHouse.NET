@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\CompaniesHouse.Extensions.Microsoft.DependencyInjection\CompaniesHouse.Extensions.Microsoft.DependencyInjection.csproj" />
+      <ProjectReference Include="..\..\src\CompaniesHouse.Extensions.Microsoft.DependencyInjection\CompaniesHouse.Extensions.Microsoft.DependencyInjection.csproj" />
     </ItemGroup>
 
 </Project>
