@@ -20,6 +20,9 @@ namespace CompaniesHouse.Response.Officers
 
         [EnumMember(Value = "corporate-manager-of-an-eeig")]
         CorporateManagerOfAnEeig,
+        
+        [EnumMember(Value = "corporate-managing-officer")]
+        CorporateManagingOfficer,
 
         [EnumMember(Value = "corporate-member-of-a-management-organ")]
         CorporateMemberOfAManagementOrgan,
@@ -59,7 +62,10 @@ namespace CompaniesHouse.Response.Officers
 
         [EnumMember(Value = "manager-of-an-eeig")]
         ManagerOfAnEeig,
-
+        
+        [EnumMember(Value = "managing-officer")]
+        ManagingOfficer,
+        
         [EnumMember(Value = "member-of-a-management-organ")]
         MemberOfAManagementOrgan,
 
