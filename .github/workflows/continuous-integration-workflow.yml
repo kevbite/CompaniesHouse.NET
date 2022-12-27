@@ -17,7 +17,7 @@ jobs:
       run: |
         docker build --build-arg NUGET_PACKAGE_VERSION=${{ env.VERSION }} --build-arg COMPANIES_HOUSE_API_KEY=${{ secrets.COMPANIES_HOUSE_API_KEY }} -f ./Dockerfile --output ./ .
     - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v1
+      uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
       with:
         trx_files: TestResults/**/*.trx
