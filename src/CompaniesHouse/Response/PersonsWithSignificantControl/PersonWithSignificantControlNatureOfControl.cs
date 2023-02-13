@@ -22,6 +22,12 @@ namespace CompaniesHouse.Response.PersonsWithSignificantControl
         OwnershipOfShares50To75PercentAsFirm,
         [EnumMember(Value = "ownership-of-shares-75-to-100-percent-as-firm")]
         OwnershipOfShares75To100PercentAsFirm,
+        [EnumMember(Value = "ownership-of-shares-more-than-25-percent-registered-overseas-entity")]
+        OwnershipOfSharesMoreThan25PercentRegisteredOverseasEntity,
+        [EnumMember(Value = "ownership-of-shares-more-than-25-percent-as-trust-registered-overseas-entity")]
+        OwnershipOfSharesMoreThan25PercentAsTrustRegisteredOverseasEntity,
+        [EnumMember(Value = "ownership-of-shares-more-than-25-percent-as-firm-registered-overseas-entity")]
+        OwnershipOfSharesMoreThan25PercentAsFirmRegisteredOverseasEntity,
         [EnumMember(Value = "voting-rights-25-to-50-percent")]
         VotingRights25To50Percent,
         [EnumMember(Value = "voting-rights-50-to-75-percent")]
@@ -40,6 +46,12 @@ namespace CompaniesHouse.Response.PersonsWithSignificantControl
         VotingRights50To75PercentAsFirm,
         [EnumMember(Value = "voting-rights-75-to-100-percent-as-firm")]
         VotingRights75To100PercentAsFirm,
+        [EnumMember(Value = "voting-rights-more-than-25-percent-registered-overseas-entity")]
+        VotingRightsMoreThan25PercentRegisteredOverseasEntity,
+        [EnumMember(Value = "voting-rights-more-than-25-percent-as-trust-registered-overseas-entity")]
+        VotingRightsMoreThan25PercentAsTrustRegisteredOverseasEntity,
+        [EnumMember(Value = "voting-rights-more-than-25-percent-as-firm-registered-overseas-entity")]
+        VotingRightsMoreThan25PercentAsFirmRegisteredOverseasEntity,
         [EnumMember(Value = "right-to-appoint-and-remove-directors")]
         RightToAppointAndRemoveDirectors,
         [EnumMember(Value = "right-to-appoint-and-remove-directors-as-trust")]
@@ -100,15 +112,41 @@ namespace CompaniesHouse.Response.PersonsWithSignificantControl
         SignificantInfluenceOrControlAsTrustLimitedLiabilityPartnership,
         [EnumMember(Value = "significant-influence-or-control-as-firm-limited-liability-partnership")]
         SignificantInfluenceOrControlAsFirmLimitedLiabilityPartnership,
+        [EnumMember(Value = "significant-influence-or-control-registered-overseas-entity")]
+        SignificantInfluenceOrControlRegisteredOverseasEntity,
+        [EnumMember(Value = "significant-influence-or-control-as-trust-registered-overseas-entity")]
+        SignificantInfluenceOrControlAsTrustRegisteredOverseasEntity,
+        [EnumMember(Value = "significant-influence-or-control-as-firm-registered-overseas-entity")]
+        SignificantInfluenceOrControlAsFirmRegisteredOverseasEntity,
         [EnumMember(Value = "part-right-to-share-surplus-assets-25-to-50-percent")]
         PartRightToShareSurplusAssets25To50Percent,
         [EnumMember(Value = "part-right-to-share-surplus-assets-50-to-75-percent")]
         PartRightToShareSurplusAssets50To75Percent,
         [EnumMember(Value = "part-right-to-share-surplus-assets-75-to-100-percent")]
         PartRightToShareSurplusAssets75To100Percent,
+        [EnumMember(Value = "part-right-to-share-surplus-assets-25-to-50-percent-as-trust")]
+        PartRightToShareSurplusAssets25To50PercentAsTrust,
         [EnumMember(Value = "part-right-to-share-surplus-assets-50-to-75-percent-as-trust")]
         PartRightToShareSurplusAssets50To75PercentAsTrust,
+        [EnumMember(Value = "part-right-to-share-surplus-assets-75-to-100-percent-as-trust")]
+        PartRightToShareSurplusAssets75To100PercentAsTrust,
+        [EnumMember(Value = "part-right-to-share-surplus-assets-25-to-50-percent-as-firm")]
+        PartRightToShareSurplusAssets25To50PercentAsFirm,
+        [EnumMember(Value = "part-right-to-share-surplus-assets-50-to-75-percent-as-firm")]
+        PartRightToShareSurplusAssets50To75PercentAsFirm,
+        [EnumMember(Value = "part-right-to-share-surplus-assets-75-to-100-percent-as-firm")]
+        PartRightToShareSurplusAssets75To100PercentAsFirm,
         [EnumMember(Value = "right-to-appoint-and-remove-person")]
         RightToAppointAndRemovePerson,
+        [EnumMember(Value = "right-to-appoint-and-remove-person-as-firm")]
+        RightToAppointAndRemovePersonAsFirm,
+        [EnumMember(Value = "right-to-appoint-and-remove-person-as-trust")]
+        RightToAppointAndRemovePersonAsTrust,
+        [EnumMember(Value = "right-to-appoint-and-remove-directors-registered-overseas-entity")]
+        RightToAppointAndRemoveDirectorsRegisteredOverseasEntity,
+        [EnumMember(Value = "right-to-appoint-and-remove-directors-as-trust-registered-overseas-entity")]
+        RightToAppointAndRemoveDirectorsAsTrustRegisteredOverseasEntity,
+        [EnumMember(Value = "right-to-appoint-and-remove-directors-as-firm-registered-overseas-entity")]
+        RightToAppointAndRemoveDirectorsAsFirmRegisteredOverseasEntity,
     }
 }
