@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      VERSION: 7.12.${{ github.run_number }}
+      VERSION: 8.0.${{ github.run_number }}
       DOCKER_BUILDKIT: 1
       BUILDKIT_PROGRESS: plain
     steps:
