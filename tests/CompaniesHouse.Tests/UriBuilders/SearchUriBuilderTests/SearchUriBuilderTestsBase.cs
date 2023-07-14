@@ -7,9 +7,9 @@ namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
 {
     public abstract partial class SearchUriBuilderTestsBase
     {
-        private SearchUriBuilder _uriBuilder;
+        private SearchUriBuilder<SearchCompanyRequest> _uriBuilder;
         private Uri _actualUri;
-        private readonly Uri _baseUri = new Uri("http://liberis.co.uk/bla1/bla2/");
+        private readonly Uri _baseUri = new Uri("http://testing123.co.uk/bla1/bla2/");
 
         private string Query { get; } = Guid.NewGuid().ToString();
 
@@ -24,13 +24,13 @@ namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
         public void GivenACompanySearchUriBuilder()
         {
             _path = "wat/wat/1";
-            _uriBuilder = new SearchUriBuilder(_path);
+            _uriBuilder = new SearchUriBuilder<SearchCompanyRequest>(_path);
         }
 
         [SetUp]
         public void WhenBuildingUriWithCompanySearchRequest()
         {
-            var request = new SearchRequest
+            var request = new SearchCompanyRequest
             {
                 Query = Query,
                 ItemsPerPage = ItemsPerPage,

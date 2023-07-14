@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CompaniesHouse.Request;
 using CompaniesHouse.Response.Search.AllSearch;
 using CompaniesHouse.Response.Search.CompanySearch;
 using CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
@@ -10,20 +11,25 @@ namespace CompaniesHouse
 {
     public class SearchUriBuilderFactory : ISearchUriBuilderFactory
     {
-        public ISearchUriBuilder Create<TSearch>()
+        public ISearchUriBuilder<TSearch> Create<TSearch, TReturn>() where TSearch : SearchRequest<TReturn>
         {
             var type = typeof(TSearch);
 
-            return _map[type]();
-        }
-
-        private readonly IDictionary<Type, Func<ISearchUriBuilder>> _map = new Dictionary
-            <Type, Func<ISearchUriBuilder>>()
+            if (type == typeof(CompanySearch))
             {
-                {typeof(CompanySearch), () => new SearchUriBuilder("search/companies")},
-                {typeof(OfficerSearch), () => new SearchUriBuilder("search/officers")},
-                {typeof(DisqualifiedOfficerSearch), () => new SearchUriBuilder("search/disqualified-officers")},
-                {typeof(AllSearch), () => new SearchUriBuilder("search")}
-            };
+                return (ISearchUriBuilder<TSearch>)new SearchCompanyUriBuilder("search/companies");
+            }else if (type == typeof(OfficerSearch))
+            {
+                return new SearchUriBuilder<TSearch>("search/officers");
+            }else if (type == typeof(DisqualifiedOfficerSearch))
+            {
+                return new SearchUriBuilder<TSearch>("search/disqualified-officers");
+            } else if (type == typeof(AllSearch))
+            {
+                return new SearchUriBuilder<TSearch>("search");
+            }
+
+            throw new InvalidOperationException();
+        }
     }
 }

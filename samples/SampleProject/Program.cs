@@ -27,7 +27,7 @@ namespace SampleProject
             var settings = new CompaniesHouseSettings( api_key );
             using (var client = new CompaniesHouseClient( settings ))
             {
-                var request = new SearchRequest()
+                var request = new SearchAllRequest()
                 {
                     Query = nameToSearchFor,
                     StartIndex = 0,

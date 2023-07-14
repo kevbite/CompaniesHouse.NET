@@ -18,18 +18,20 @@ namespace CompaniesHouse
             _searchUriBuilderFactory = searchUriBuilderFactory;
         }
 
-        public async Task<CompaniesHouseClientResponse<TSearch>> SearchAsync<TSearch>(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<CompaniesHouseClientResponse<TReturn>> SearchAsync<TSearchRequest, TReturn>(TSearchRequest request,
+            CancellationToken cancellationToken = default(CancellationToken))
+            where TSearchRequest : SearchRequest<TReturn>
         {
-            var searchUriBuilder = _searchUriBuilderFactory.Create<TSearch>();
+            var searchUriBuilder = _searchUriBuilderFactory.Create<TSearchRequest, TReturn>();
             var requestUri = searchUriBuilder.Build(request);
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
             response.EnsureSuccessStatusCode2();
 
-            var result = await response.Content.ReadAsJsonAsync<TSearch>().ConfigureAwait(false);
+            var result = await response.Content.ReadAsJsonAsync<TReturn>().ConfigureAwait(false);
 
-            return new CompaniesHouseClientResponse<TSearch>(result);
+            return new CompaniesHouseClientResponse<TReturn>(result);
         }
     }
 }

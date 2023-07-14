@@ -32,24 +32,17 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
                 .With(x => x.Officers, items)
                 .Create();
             
-            var uri = new Uri("https://wibble.com/search/companies");
+            var uri = new Uri("https://wibble.com/search/officers");
 
             var resource = new OfficerSearchResourceBuilder()
                 .CreateResource(_resourceDetails);
 
             HttpMessageHandler handler = new StubHttpMessageHandler(uri, resource);
 
-            var uriBuilder = new Mock<ISearchUriBuilder>();
-            uriBuilder.Setup(x => x.Build(It.IsAny<SearchRequest>()))
-                .Returns(uri);
 
-            var uriBuilderFactory = new Mock<ISearchUriBuilderFactory>();
-            uriBuilderFactory.Setup(x => x.Create<OfficerSearch>())
-                .Returns(uriBuilder.Object);
+            _client = new CompaniesHouseSearchClient(new HttpClient(handler), new SearchUriBuilderFactory());
 
-            _client = new CompaniesHouseSearchClient(new HttpClient(handler), uriBuilderFactory.Object);
-
-            _result = await _client.SearchAsync<OfficerSearch>(new SearchRequest());
+            _result = await _client.SearchAsync<SearchOfficerRequest, OfficerSearch>(new SearchOfficerRequest());
         }
 
         [Test]

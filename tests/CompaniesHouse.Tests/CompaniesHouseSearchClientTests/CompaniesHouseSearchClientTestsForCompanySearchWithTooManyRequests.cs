@@ -22,19 +22,11 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
 
             HttpMessageHandler handler = new TooManyRequestsHttpMessageHandler();
 
-            var uriBuilder = new Mock<ISearchUriBuilder>();
-            uriBuilder.Setup(x => x.Build(It.IsAny<SearchRequest>()))
-                .Returns(uri);
-
-            var uriBuilderFactory = new Mock<ISearchUriBuilderFactory>();
-            uriBuilderFactory.Setup(x => x.Create<CompanySearch>())
-                .Returns(uriBuilder.Object);
-
-            var client = new CompaniesHouseSearchClient(new HttpClient(handler), uriBuilderFactory.Object);
+            var client = new CompaniesHouseSearchClient(new HttpClient(handler), new SearchUriBuilderFactory());
 
             try
             {
-                await client.SearchAsync<CompanySearch>(new SearchRequest());
+                await client.SearchAsync<SearchCompanyRequest, CompanySearch>(new SearchCompanyRequest());
             }
             catch (Exception ex)
             {

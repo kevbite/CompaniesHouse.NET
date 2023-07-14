@@ -22,7 +22,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
         [SetUp]
         public async Task WhenSearchingForADisqualifiedOfficers()
         {
-            _result = await _client.SearchDisqualifiedOfficerAsync(new SearchRequest() { Query = "Kevin" })
+            _result = await _client.SearchDisqualifiedOfficerAsync(new SearchDisqualifiedOfficerRequest() { Query = "Kevin" })
                 .ConfigureAwait(false);
         }
 

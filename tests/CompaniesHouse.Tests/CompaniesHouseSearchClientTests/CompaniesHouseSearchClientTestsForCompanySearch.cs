@@ -53,18 +53,10 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
                 .CreateResource(_resourceDetails);
 
             HttpMessageHandler handler = new StubHttpMessageHandler(uri, resource);
+            
+            _client = new CompaniesHouseSearchClient(new HttpClient(handler), new SearchUriBuilderFactory());
 
-            var uriBuilder = new Mock<ISearchUriBuilder>();
-            uriBuilder.Setup(x => x.Build(It.IsAny<SearchRequest>()))
-                .Returns(uri);
-
-            var uriBuilderFactory = new Mock<ISearchUriBuilderFactory>();
-            uriBuilderFactory.Setup(x => x.Create<CompanySearch>())
-                .Returns(uriBuilder.Object);
-
-            _client = new CompaniesHouseSearchClient(new HttpClient(handler), uriBuilderFactory.Object);
-
-            _result = _client.SearchAsync<CompanySearch>(new SearchRequest()).Result;
+            _result = _client.SearchAsync<SearchCompanyRequest, CompanySearch>(new SearchCompanyRequest()).Result;
         }
 
         [Test]

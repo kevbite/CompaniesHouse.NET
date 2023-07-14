@@ -32,7 +32,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
         [SetUp]
         public async Task WhenSearchingForACompany()
         {
-            _result = await _client.SearchCompanyAsync(new SearchRequest() { Query = _query, StartIndex = 0, ItemsPerPage = 100 })
+            _result = await _client.SearchCompanyAsync(new SearchCompanyRequest() { Query = _query, StartIndex = 0, ItemsPerPage = 100 })
                 .ConfigureAwait(false);
         }
 

@@ -1,9 +1,10 @@
+using CompaniesHouse.Request;
 using CompaniesHouse.UriBuilders;
 
 namespace CompaniesHouse
 {
     public interface ISearchUriBuilderFactory
     {
-        ISearchUriBuilder Create<TSearch>();
+        ISearchUriBuilder<TSearch> Create<TSearch, TReturn>() where TSearch : SearchRequest<TReturn>;
     }
 }

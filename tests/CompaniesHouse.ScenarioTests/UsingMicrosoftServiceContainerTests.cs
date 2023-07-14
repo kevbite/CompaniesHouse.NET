@@ -19,7 +19,7 @@ namespace CompaniesHouse.ScenarioTests
 
             var client = scope.ServiceProvider.GetService<ICompaniesHouseClient>();
 
-            var response = await client.SearchCompanyAsync(new SearchRequest {Query = "Boon & Moil"});
+            var response = await client.SearchCompanyAsync(new SearchCompanyRequest {Query = "Boon & Moil"});
             
             Assert.IsNotEmpty(response.Data.Companies);
         }

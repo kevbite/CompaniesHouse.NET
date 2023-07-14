@@ -3,7 +3,26 @@ using CompaniesHouse.Request;
 
 namespace CompaniesHouse.UriBuilders
 {
-    public class SearchUriBuilder : ISearchUriBuilder
+    public class SearchCompanyUriBuilder : SearchUriBuilder<SearchCompanyRequest>
+    {
+        public SearchCompanyUriBuilder(string path) : base(path)
+        {
+        }
+
+        protected override string BuildQuery(SearchCompanyRequest request)
+        {
+            var query = base.BuildQuery(request);
+
+            if (string.IsNullOrWhiteSpace(request.Restrictions))
+            {
+                query += "&restrictions=" + request.Restrictions;
+            }
+
+            return query;
+        }
+    }
+
+    public class SearchUriBuilder<TSearch> : ISearchUriBuilder<TSearch> where TSearch : ISearchRequest
     {
         private readonly string _path;
 
@@ -12,7 +31,16 @@ namespace CompaniesHouse.UriBuilders
             _path = path;
         }
 
-        public Uri Build(SearchRequest request)
+        public Uri Build(TSearch request)
+        {
+            var query = BuildQuery(request);
+
+            var pathAndQuery = _path + query;
+
+            return new Uri(pathAndQuery, UriKind.Relative);
+        }
+
+        protected virtual string BuildQuery(TSearch request)
         {
             var query = $"?q={Uri.EscapeDataString(request.Query)}";
 
@@ -26,15 +54,7 @@ namespace CompaniesHouse.UriBuilders
                 query += "&start_index=" + request.StartIndex.Value;
             }
 
-
-            if (string.IsNullOrWhiteSpace(request.Restrictions))
-            {
-                query += "&restrictions=" + request.Restrictions;
-            }
-
-            var pathAndQuery = _path + query;
-
-            return new Uri(pathAndQuery, UriKind.Relative);
+            return query;
         }
     }
 }

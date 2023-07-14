@@ -54,24 +54,24 @@ namespace CompaniesHouse
         {
         }
 
-        public Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAsync(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAsync(SearchCompanyRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return _companiesHouseSearchClient.SearchAsync<CompanySearch>(request, cancellationToken);
+            return _companiesHouseSearchClient.SearchAsync<SearchCompanyRequest, CompanySearch>(request, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<OfficerSearch>> SearchOfficerAsync(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseClientResponse<OfficerSearch>> SearchOfficerAsync(SearchOfficerRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return _companiesHouseSearchClient.SearchAsync<OfficerSearch>(request, cancellationToken);
+            return _companiesHouseSearchClient.SearchAsync<SearchOfficerRequest, OfficerSearch>(request, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<DisqualifiedOfficerSearch>> SearchDisqualifiedOfficerAsync(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseClientResponse<DisqualifiedOfficerSearch>> SearchDisqualifiedOfficerAsync(SearchDisqualifiedOfficerRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return _companiesHouseSearchClient.SearchAsync<DisqualifiedOfficerSearch>(request, cancellationToken);
+            return _companiesHouseSearchClient.SearchAsync<SearchDisqualifiedOfficerRequest, DisqualifiedOfficerSearch>(request, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<AllSearch>> SearchAllAsync(SearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseClientResponse<AllSearch>> SearchAllAsync(SearchAllRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return _companiesHouseSearchClient.SearchAsync<AllSearch>(request, cancellationToken);
+            return _companiesHouseSearchClient.SearchAsync<SearchAllRequest, AllSearch>(request, cancellationToken);
         }
 
         public Task<CompaniesHouseClientResponse<CompanyProfile>> GetCompanyProfileAsync(string companyNumber, CancellationToken cancellationToken = default(CancellationToken))

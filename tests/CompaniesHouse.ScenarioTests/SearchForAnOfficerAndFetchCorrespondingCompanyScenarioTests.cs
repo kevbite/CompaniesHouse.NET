@@ -19,7 +19,7 @@ namespace CompaniesHouse.ScenarioTests
         [Test]
         public async Task RunScenario()
         {
-            var officersSearch = await _client.SearchOfficerAsync(new SearchRequest() {Query = "Richard Branson" })
+            var officersSearch = await _client.SearchOfficerAsync(new SearchOfficerRequest() {Query = "Richard Branson" })
                 .ConfigureAwait(false);
 
             var foundOfficer = officersSearch.Data.Officers.Single(x => x.DateOfBirth?.Year == 1950 && x.DateOfBirth?.Month == 7);

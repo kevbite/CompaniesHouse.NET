@@ -23,7 +23,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
         [SetUp]
         public async Task WhenSearchingForAOfficer()
         {
-            _result = await _client.SearchOfficerAsync(new SearchRequest() { Query = "Kevin" })
+            _result = await _client.SearchOfficerAsync(new SearchOfficerRequest() { Query = "Kevin" })
                 .ConfigureAwait(false);
         }
 
