@@ -26,6 +26,12 @@ namespace CompaniesHouse.UriBuilders
                 query += "&start_index=" + request.StartIndex.Value;
             }
 
+
+            if (string.IsNullOrWhiteSpace(request.Restrictions))
+            {
+                query += "&restrictions=" + request.Restrictions;
+            }
+
             var pathAndQuery = _path + query;
 
             return new Uri(pathAndQuery, UriKind.Relative);
