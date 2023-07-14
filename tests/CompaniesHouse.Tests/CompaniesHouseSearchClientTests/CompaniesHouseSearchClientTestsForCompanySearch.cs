@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using AutoFixture;
+﻿using AutoFixture;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response;
 using CompaniesHouse.Response.Search.CompanySearch;
 using CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource;
-using CompaniesHouse.UriBuilders;
-using Moq;
 using NUnit.Framework;
 
 namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
@@ -30,31 +24,46 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
             _resourceDetails = fixture.Create<ResourceDetails>();
             _expectedCompanies = new List<CompanyDetails>
             {
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "active").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "dissolved").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "liquidation").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "receivership").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "administration").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "voluntary-arrangement").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "converted-closed").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "insolvency-proceedings").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "open").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "closed").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "closed-on").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, null).With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "active")
+                    .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "dissolved")
+                    .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "liquidation")
+                    .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "receivership")
+                    .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "administration")
+                    .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "voluntary-arrangement")
+                    .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "converted-closed")
+                    .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "insolvency-proceedings")
+                    .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "open")
+                    .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "closed")
+                    .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "closed-on")
+                    .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, null)
+                    .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
             };
 
             var uri = new Uri("https://wibble.com/search/companies");
 
-            _companyWithUnknownDateOfCessation = fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "insolvency-proceedings").With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create();
+            _companyWithUnknownDateOfCessation = fixture.Build<CompanyDetails>()
+                .With(x => x.CompanyStatus, "insolvency-proceedings").With(x => x.CompanyType, "private-unlimited")
+                .With(x => x.Kind, "searchresults#company").Create();
             var resource = new CompanySearchResourceBuilder()
                 .AddCompanies(_expectedCompanies)
                 .AddCompanyWithUnknownDateOfCessation(_companyWithUnknownDateOfCessation)
                 .CreateResource(_resourceDetails);
 
             HttpMessageHandler handler = new StubHttpMessageHandler(uri, resource);
-            
-            _client = new CompaniesHouseSearchClient(new HttpClient(handler), new SearchUriBuilderFactory());
+
+            _client = new CompaniesHouseSearchClient(
+                new HttpClient(handler) { BaseAddress = new Uri("https://wibble.com/") }, new SearchUriBuilderFactory());
 
             _result = _client.SearchAsync<SearchCompanyRequest, CompanySearch>(new SearchCompanyRequest()).Result;
         }
@@ -73,7 +82,8 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
         [Test]
         public void ThenTheCompanyWithUnknownDateOfCessationIsReturned()
         {
-            var actual = _result.Data.Companies.First(x => x.CompanyNumber == _companyWithUnknownDateOfCessation.CompanyNumber);
+            var actual =
+                _result.Data.Companies.First(x => x.CompanyNumber == _companyWithUnknownDateOfCessation.CompanyNumber);
 
             Assert.That(actual.CompanyNumber, Is.EqualTo(_companyWithUnknownDateOfCessation.CompanyNumber));
 
@@ -86,8 +96,10 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
             Assert.That(actual.Address.PostalCode, Is.EqualTo(_companyWithUnknownDateOfCessation.PostalCode));
             Assert.That(actual.Address.Region, Is.EqualTo(_companyWithUnknownDateOfCessation.Region));
 
-            Assert.That(actual.CompanyStatus, Is.EqualTo(ExpectedCompanyStatus[_companyWithUnknownDateOfCessation.CompanyStatus]));
-            Assert.That(actual.CompanyType, Is.EqualTo(ExpectedCompanyType[_companyWithUnknownDateOfCessation.CompanyType]));
+            Assert.That(actual.CompanyStatus,
+                Is.EqualTo(ExpectedCompanyStatus[_companyWithUnknownDateOfCessation.CompanyStatus]));
+            Assert.That(actual.CompanyType,
+                Is.EqualTo(ExpectedCompanyType[_companyWithUnknownDateOfCessation.CompanyType]));
             Assert.That(actual.DateOfCessation, Is.Null);
             Assert.That(actual.DateOfCreation, Is.EqualTo(_companyWithUnknownDateOfCessation.DateOfCreation.Date));
             Assert.That(actual.Description, Is.EqualTo(_companyWithUnknownDateOfCessation.Description));
@@ -102,7 +114,6 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
         public void ThenTheNumberOfReturnedCompaniesIsCorrect()
         {
             Assert.That(_result.Data.Companies.Length, Is.EqualTo(13));
-
         }
 
         [Test]
@@ -123,7 +134,8 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
                 Assert.That(actual.Address.PostalCode, Is.EqualTo(companyDetails.PostalCode));
                 Assert.That(actual.Address.Region, Is.EqualTo(companyDetails.Region));
 
-                Assert.That(actual.CompanyStatus, Is.EqualTo(ExpectedCompanyStatus[companyDetails.CompanyStatus ?? ""]));
+                Assert.That(actual.CompanyStatus,
+                    Is.EqualTo(ExpectedCompanyStatus[companyDetails.CompanyStatus ?? ""]));
                 Assert.That(actual.CompanyType, Is.EqualTo(ExpectedCompanyType[companyDetails.CompanyType]));
                 Assert.That(actual.DateOfCessation, Is.EqualTo(companyDetails.DateOfCessation.Date));
                 Assert.That(actual.DateOfCreation, Is.EqualTo(companyDetails.DateOfCreation.Date));
@@ -138,27 +150,27 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
 
         private static readonly IReadOnlyDictionary<string, CompanyStatus> ExpectedCompanyStatus = new Dictionary
             <string, CompanyStatus>()
-        {
-            {"", CompanyStatus.None},
-            {"active", CompanyStatus.Active},
-            {"dissolved", CompanyStatus.Dissolved},
-            {"liquidation", CompanyStatus.Liquidation},
-            {"receivership", CompanyStatus.Receivership},
-            {"administration", CompanyStatus.Administration},
-            {"voluntary-arrangement", CompanyStatus.VoluntaryArrangement},
-            {"converted-closed", CompanyStatus.ConvertedClosed},
-            {"insolvency-proceedings", CompanyStatus.InsolvencyProceedings},
-            {"open", CompanyStatus.Open},
-            {"closed", CompanyStatus.Closed},
-            {"closed-on", CompanyStatus.ClosedOn},
-            {"registered", CompanyStatus.Registered},
-            {"removed", CompanyStatus.Removed},
-        };
+            {
+                { "", CompanyStatus.None },
+                { "active", CompanyStatus.Active },
+                { "dissolved", CompanyStatus.Dissolved },
+                { "liquidation", CompanyStatus.Liquidation },
+                { "receivership", CompanyStatus.Receivership },
+                { "administration", CompanyStatus.Administration },
+                { "voluntary-arrangement", CompanyStatus.VoluntaryArrangement },
+                { "converted-closed", CompanyStatus.ConvertedClosed },
+                { "insolvency-proceedings", CompanyStatus.InsolvencyProceedings },
+                { "open", CompanyStatus.Open },
+                { "closed", CompanyStatus.Closed },
+                { "closed-on", CompanyStatus.ClosedOn },
+                { "registered", CompanyStatus.Registered },
+                { "removed", CompanyStatus.Removed },
+            };
 
         private static readonly IReadOnlyDictionary<string, CompanyType> ExpectedCompanyType = new Dictionary
             <string, CompanyType>()
             {
-                {"private-unlimited", CompanyType.PrivateUnlimited}
+                { "private-unlimited", CompanyType.PrivateUnlimited }
             };
 
         private CompanyDetails _companyWithUnknownDateOfCessation;

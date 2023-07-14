@@ -2,7 +2,7 @@
 {
     public abstract class SearchRequest<TReturn> : ISearchRequest
     {
-        public string Query { get; set; }
+        public string Query { get; set; } = "";
 
         public int? ItemsPerPage { get; set; }
 

@@ -15,7 +15,7 @@ namespace CompaniesHouse
         {
             var type = typeof(TSearch);
 
-            if (type == typeof(CompanySearch))
+            if (type == typeof(SearchCompanyRequest))
             {
                 return (ISearchUriBuilder<TSearch>)new SearchCompanyUriBuilder("search/companies");
             }else if (type == typeof(OfficerSearch))

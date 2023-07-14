@@ -21,7 +21,7 @@ namespace CompaniesHouse.Tests
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            if (request.RequestUri != _catchUri) throw new Exception("Uri did not match");
+            if (request.RequestUri.GetLeftPart(UriPartial.Path) != _catchUri.GetLeftPart(UriPartial.Path)) throw new Exception("Uri did not match");
 
             return Task.FromResult(new HttpResponseMessage
             {

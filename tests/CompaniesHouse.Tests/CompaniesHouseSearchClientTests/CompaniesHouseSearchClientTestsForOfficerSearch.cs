@@ -40,7 +40,10 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
             HttpMessageHandler handler = new StubHttpMessageHandler(uri, resource);
 
 
-            _client = new CompaniesHouseSearchClient(new HttpClient(handler), new SearchUriBuilderFactory());
+            _client = new CompaniesHouseSearchClient(new HttpClient(handler)
+            {
+                BaseAddress = new Uri("https://wibble.com/")
+            }, new SearchUriBuilderFactory());
 
             _result = await _client.SearchAsync<SearchOfficerRequest, OfficerSearch>(new SearchOfficerRequest());
         }

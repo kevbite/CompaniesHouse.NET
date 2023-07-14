@@ -22,7 +22,10 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
 
             HttpMessageHandler handler = new TooManyRequestsHttpMessageHandler();
 
-            var client = new CompaniesHouseSearchClient(new HttpClient(handler), new SearchUriBuilderFactory());
+            var client = new CompaniesHouseSearchClient(new HttpClient(handler)
+            {
+                BaseAddress = new Uri("https://wibble.com/")
+            }, new SearchUriBuilderFactory());
 
             try
             {
