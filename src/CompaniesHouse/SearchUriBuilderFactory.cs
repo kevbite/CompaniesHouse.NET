@@ -1,10 +1,4 @@
-using System;
-using System.Collections.Generic;
 using CompaniesHouse.Request;
-using CompaniesHouse.Response.Search.AllSearch;
-using CompaniesHouse.Response.Search.CompanySearch;
-using CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
-using CompaniesHouse.Response.Search.OfficerSearch;
 using CompaniesHouse.UriBuilders;
 
 namespace CompaniesHouse
@@ -18,13 +12,14 @@ namespace CompaniesHouse
             if (type == typeof(SearchCompanyRequest))
             {
                 return (ISearchUriBuilder<TSearch>)new SearchCompanyUriBuilder("search/companies");
-            }else if (type == typeof(OfficerSearch))
+            }
+            else if (type == typeof(SearchOfficerRequest))
             {
                 return new SearchUriBuilder<TSearch>("search/officers");
-            }else if (type == typeof(DisqualifiedOfficerSearch))
+            }else if (type == typeof(SearchDisqualifiedOfficerRequest))
             {
                 return new SearchUriBuilder<TSearch>("search/disqualified-officers");
-            } else if (type == typeof(AllSearch))
+            } else if (type == typeof(SearchAllRequest))
             {
                 return new SearchUriBuilder<TSearch>("search");
             }
