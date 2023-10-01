@@ -20,7 +20,9 @@ namespace CompaniesHouse.Tests.ResourceBuilders
                       ""items"" : [
                         {string.Join(",", _officers.Items.Select(CreateSingle).ToArray())}
                       ],
-                      ""resigned_count"" : {_officers.ResignedCount}
+                      ""resigned_count"" : {_officers.ResignedCount},
+                      ""total_results"" : {_officers.TotalResults},
+                      ""start_index"" : {_officers.StartIndex},
                 }}";
         }
 
