@@ -28,6 +28,8 @@ namespace CompaniesHouse.Tests.CompaniesHouseOfficersTests
                 .With(x => x.Items, officerSummary.Items)
                 .With(x => x.ActiveCount, officerSummary.ActiveCount)
                 .With(x => x.ResignedCount, officerSummary.ResignedCount)
+                .With(x => x.TotalResults, officerSummary.Items.Length)
+                .With(x => x.StartIndex, 1)
                 .Create();
 
             return result;

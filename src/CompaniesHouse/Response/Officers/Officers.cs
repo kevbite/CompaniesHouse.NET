@@ -1,5 +1,4 @@
-﻿using CompaniesHouse.Response.CompanyProfile;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CompaniesHouse.Response.Officers
 {
@@ -13,5 +12,11 @@ namespace CompaniesHouse.Response.Officers
 
         [JsonProperty(PropertyName = "resigned_count")]
         public int? ResignedCount { get; set; }
+        
+        [JsonProperty(PropertyName = "total_results")]
+        public int TotalResults { get; set; }
+        
+        [JsonProperty(PropertyName = "start_index")]
+        public int StartIndex { get; set; }
     }
 }
