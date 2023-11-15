@@ -25,17 +25,23 @@ namespace CompaniesHouse.UriBuilders
         {
             var queryBuilder = new StringBuilder($"?q={Uri.EscapeDataString(request.Query)}");
 
-            if (request.ItemsPerPage.HasValue)
-            {
-                queryBuilder.Append($"&items_per_page={request.ItemsPerPage.Value}");
-            }
-
-            if (request.StartIndex.HasValue)
-            {
-                queryBuilder.Append($"&start_index={request.StartIndex.Value}");
-            }
+            AppendParameterIfValid(queryBuilder, "items_per_page", request.ItemsPerPage, value => value.HasValue);
+            AppendParameterIfValid(queryBuilder, "start_index", request.StartIndex, value => value.HasValue);
 
             return queryBuilder.ToString();
+        }
+
+        protected void AppendParameterIfValid<T>(StringBuilder builder, string parameterName, T parameterValue, Func<T, bool> isValid)
+        {
+            if (!isValid(parameterValue)) return;
+
+            var value = parameterValue switch
+            {
+                string s => Uri.EscapeDataString(s),
+                _ => parameterValue.ToString()
+            };
+
+            builder.Append($"&{parameterName}={value}");
         }
     }
 }

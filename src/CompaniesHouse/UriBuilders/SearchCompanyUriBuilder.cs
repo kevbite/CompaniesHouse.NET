@@ -13,10 +13,7 @@ public class SearchCompanyUriBuilder : SearchUriBuilder<SearchCompanyRequest>
     {
         var queryBuilder = new StringBuilder(base.BuildQuery(request));
 
-        if (!string.IsNullOrWhiteSpace(request.Restrictions))
-        {
-            queryBuilder.Append($"&restrictions={Uri.EscapeDataString(request.Restrictions)}");
-        }
+        AppendParameterIfValid(queryBuilder, "restrictions", request.Restrictions, value => !string.IsNullOrWhiteSpace(value));
 
         return queryBuilder.ToString();
     }
