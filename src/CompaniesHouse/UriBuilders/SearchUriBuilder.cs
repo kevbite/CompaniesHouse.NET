@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Text;
 using CompaniesHouse.Request;
 
 namespace CompaniesHouse.UriBuilders
@@ -23,19 +23,19 @@ namespace CompaniesHouse.UriBuilders
 
         protected virtual string BuildQuery(TSearch request)
         {
-            var query = $"?q={Uri.EscapeDataString(request.Query)}";
+            var queryBuilder = new StringBuilder($"?q={Uri.EscapeDataString(request.Query)}");
 
             if (request.ItemsPerPage.HasValue)
             {
-                query += "&items_per_page=" + request.ItemsPerPage.Value;
+                queryBuilder.Append($"&items_per_page={request.ItemsPerPage.Value}");
             }
 
             if (request.StartIndex.HasValue)
             {
-                query += "&start_index=" + request.StartIndex.Value;
+                queryBuilder.Append($"&start_index={request.StartIndex.Value}");
             }
 
-            return query;
+            return queryBuilder.ToString();
         }
     }
 }
