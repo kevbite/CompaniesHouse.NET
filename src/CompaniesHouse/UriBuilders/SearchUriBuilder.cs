@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Text;
 using CompaniesHouse.Request;
 
 namespace CompaniesHouse.UriBuilders
@@ -23,19 +23,25 @@ namespace CompaniesHouse.UriBuilders
 
         protected virtual string BuildQuery(TSearch request)
         {
-            var query = $"?q={Uri.EscapeDataString(request.Query)}";
+            var queryBuilder = new StringBuilder($"?q={Uri.EscapeDataString(request.Query)}");
 
-            if (request.ItemsPerPage.HasValue)
+            AppendParameterIfValid(queryBuilder, "items_per_page", request.ItemsPerPage, value => value.HasValue);
+            AppendParameterIfValid(queryBuilder, "start_index", request.StartIndex, value => value.HasValue);
+
+            return queryBuilder.ToString();
+        }
+
+        protected void AppendParameterIfValid<T>(StringBuilder builder, string parameterName, T parameterValue, Func<T, bool> isValid)
+        {
+            if (!isValid(parameterValue)) return;
+
+            var value = parameterValue switch
             {
-                query += "&items_per_page=" + request.ItemsPerPage.Value;
-            }
+                string s => Uri.EscapeDataString(s),
+                _ => parameterValue.ToString()
+            };
 
-            if (request.StartIndex.HasValue)
-            {
-                query += "&start_index=" + request.StartIndex.Value;
-            }
-
-            return query;
+            builder.Append($"&{parameterName}={value}");
         }
     }
 }
