@@ -89,5 +89,8 @@ namespace CompaniesHouse.Response
         
         [EnumMember(Value = "debenture")]
         Debenture,
+
+        [EnumMember(Value = "social-landlord")]
+        SocialLandlord,
     }
 }

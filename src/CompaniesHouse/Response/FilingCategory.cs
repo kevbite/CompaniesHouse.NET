@@ -83,5 +83,11 @@ namespace CompaniesHouse.Response
 
         [EnumMember(Value = "certificate")]
         Certificate,
+
+        [EnumMember(Value = "officer")]
+        Officer,
+
+        [EnumMember(Value = "social-landlord")]
+        SocialLandlord,
     }
 }
