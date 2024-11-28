@@ -55,5 +55,48 @@ namespace CompaniesHouse.Tests.DescriptionTests
 
             result.Should().Be(@"some value: {nullvariable}");
         }
+
+        [Test]
+        public void GivenFormatAndMatchingDateVariableNoDateFormat()
+        {
+            var format = "some value: {variable}";
+            var values = JObject.Parse(@"{ ""variable"": ""2024-11-28"" }");
+            var result = DescriptionProvider.GetDescription(format, values);
+
+            result.Should().Be(@"some value: 2024-11-28");
+        }
+
+        [Test]
+        public void GivenFormatAndMatchingDateVariableWithDateFormat()
+        {
+            var format = "some value: {variable}";
+            var values = JObject.Parse(@"{ ""variable"": ""2024-11-28"" }");
+            var dateFormat = "dd-MMM-yyyy";
+            var result = DescriptionProvider.GetDescription(format, values, dateFormat);
+
+            result.Should().Be(@"some value: 28-Nov-2024");
+        }
+
+        [Test]
+        public void GivenFormatAndInvalidDateVariableWithDateFormat()
+        {
+            var format = "some value: {variable}";
+            var values = JObject.Parse(@"{ ""variable"": ""2024-20-28"" }");
+            var dateFormat = "dd-MMM-yyyy";
+            var result = DescriptionProvider.GetDescription(format, values, dateFormat);
+
+            result.Should().Be(@"some value: 2024-20-28");
+        }
+
+        [Test]
+        public void GivenFormatAndIsNotDateVariableWithDateFormat()
+        {
+            var format = "some value: {variable}";
+            var values = JObject.Parse(@"{ ""variable"": ""Value"" }");
+            var dateFormat = "dd-MMM-yyyy";
+            var result = DescriptionProvider.GetDescription(format, values, dateFormat);
+
+            result.Should().Be(@"some value: Value");
+        }
     }
 }
