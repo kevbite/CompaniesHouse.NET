@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CompaniesHouse.Response;
 using CompaniesHouse.Response.CompanyFiling;
 using NUnit.Framework;
 
@@ -18,9 +19,13 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
         }
 
         [Test]
-        public void ThenTheDataItemsAreNull()
+        public void ThenTheDataHasSomeEmptyPropertiesAndStatusOfInvalidFormat()
         {
-            Assert.That(_result.Data.Items, Is.Null);
+            Assert.That(_result.Data.Items, Is.Empty);
+            Assert.That(_result.Data.HistoryStatus, Is.EqualTo(FilingHistoryStatus.InvalidFormat));
+            Assert.That(_result.Data.StartIndex, Is.EqualTo(0));
+            Assert.That(_result.Data.TotalCount, Is.EqualTo(0));
+
         }
 
         private async Task WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany()

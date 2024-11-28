@@ -35,5 +35,6 @@ namespace CompaniesHouse
 
             return new CompaniesHouseClientResponse<PersonsWithSignificantControl>(result);
         }
+
     }
 }
