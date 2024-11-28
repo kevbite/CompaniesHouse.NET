@@ -16,9 +16,13 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
         }
 
         [Test]
-        public void ThenTheDataItemsAreNull()
+        public void ThenTheDataIsFullWithEmptyProperties()
         {
-            Assert.That(Result.Data, Is.Null);
+            Assert.That(Result.Data.Items, Is.Empty);
+            Assert.That(Result.Data.ActiveCount, Is.EqualTo(0));
+            Assert.That(Result.Data.ResignedCount,Is.EqualTo(0));
+            Assert.That(Result.Data.StartIndex, Is.EqualTo(0));
+            Assert.That(Result.Data.TotalResults, Is.EqualTo(0));;
         }
 
         private async Task WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany()
