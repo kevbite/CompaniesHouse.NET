@@ -53,9 +53,9 @@ namespace CompaniesHouse.Response.CompanyFiling
         [JsonProperty(PropertyName = "links")]
         public Links Links { get; set; }
 
-        public string GetDescription(string format)
+        public string GetDescription(string format, string dateFormat = null)
         {
-            return DescriptionProvider.GetDescription(format, DescriptionValues);
+            return DescriptionProvider.GetDescription(format, DescriptionValues, dateFormat);
         }
     }
 }
