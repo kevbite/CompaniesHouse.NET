@@ -32,9 +32,9 @@ namespace CompaniesHouse.Response.CompanyFiling
         [JsonProperty(PropertyName = "description_values")]
         private JObject DescriptionValues { get; set; }
 
-        public string GetDescription(string format)
+        public string GetDescription(string format, string dateFormat = null)
         {
-            return DescriptionProvider.GetDescription(format, DescriptionValues);
+            return DescriptionProvider.GetDescription(format, DescriptionValues, dateFormat);
         }
     }
 }
