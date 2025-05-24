@@ -105,7 +105,35 @@ namespace CompaniesHouse.Tests.ResourceBuilders
       {string.Join(",", _companyProfile.SicCodes.Select(x => $@"""{x}"""))}
    ],
    ""type"" : ""{_companyProfile.Type}"",
-   ""undeliverable_registered_office_address"" : {_companyProfile.UndeliverableRegisteredOfficeAddress.ToString().ToLower()}
+   ""undeliverable_registered_office_address"" : {_companyProfile.UndeliverableRegisteredOfficeAddress.ToString().ToLower()},
+   ""foreign_company_details"" : {{
+        ""accounting_requirement"": {{
+            ""foreign_account_type"": ""{_companyProfile.ForeignCompanyDetails.AccountingRequirement.ForeignAccountType}"",
+            ""terms_of_account_publication"": ""{_companyProfile.ForeignCompanyDetails.AccountingRequirement.TermsOfAccountPublication}""
+        }},
+        ""accounts"": {{
+            ""account_period_from:"": {{
+                ""day"": ""{_companyProfile.ForeignCompanyDetails.Accounts.AccountPeriodFrom.Day}"",
+                ""month"": ""{_companyProfile.ForeignCompanyDetails.Accounts.AccountPeriodFrom.Month}""
+            }},
+            ""account_period_to"": {{
+                ""day"": ""{_companyProfile.ForeignCompanyDetails.Accounts.AccountPeriodTo.Day}"",
+                ""month"": ""{_companyProfile.ForeignCompanyDetails.Accounts.AccountPeriodTo.Month}""
+            }},
+            ""must_file_within"": {{
+                ""months"": ""{_companyProfile.ForeignCompanyDetails.Accounts.MustFileWithin.Months}"",
+            }}
+        }},
+        ""business_activity"": ""{_companyProfile.ForeignCompanyDetails.BusinessActivity}"",
+        ""company_type"": ""{_companyProfile.ForeignCompanyDetails.CompanyType}"",
+        ""governed_by"": ""{_companyProfile.ForeignCompanyDetails.GovernedBy}"",
+        ""is_a_credit_finance_institution"": {_companyProfile.ForeignCompanyDetails.IsACreditFinanceInstitution.ToString().ToLower()},
+        ""originating_registry"": {{
+            ""country"": ""{_companyProfile.ForeignCompanyDetails.OriginatingRegistry.Country}"",
+            ""name"": ""{_companyProfile.ForeignCompanyDetails.OriginatingRegistry.Name}""
+        }},
+        ""registration_number"": ""{_companyProfile.ForeignCompanyDetails.RegistrationNumber}""
+    }}
 }}";
         }
 

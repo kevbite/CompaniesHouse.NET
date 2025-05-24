@@ -240,6 +240,20 @@ namespace CompaniesHouse.Tests
             {"nature-of-charge", ClassificationChargeType.NatureOfCharge}
         };
 
+        public static readonly IReadOnlyDictionary<string, TermsOfAccountPublication> PossibleTermsOfAccountPublication = new Dictionary<string, TermsOfAccountPublication>
+        {
+            {"", TermsOfAccountPublication.None},
+            {"accounts-publication-date-supplied-by-company", TermsOfAccountPublication.AccountsPublicationDateSuppliedByCompany},
+            {"accounting-publication-date-does-not-need-to-be-supplied-by-company", TermsOfAccountPublication.AccountingPublicationDateDoesNotNeedToBeSuppliedByCompany},
+            {"accounting-reference-date-allocated-by-companies-house", TermsOfAccountPublication.AccountingReferenceDateAllocatedByCompaniesHouse},
+            
+          };
+        public static readonly IReadOnlyDictionary<string, ForeignAccountType> PossibleForeignAccountTypes = new Dictionary<string, ForeignAccountType>
+        {
+            {"", ForeignAccountType.None},
+            {"accounting-requirements-of-originating-country-apply", ForeignAccountType.AccountingRequirementsOfOriginatingCountryApply},
+            {"accounting-requirements-of-originating-country-do-not-apply", ForeignAccountType.AccountingRequirementsOfOriginatingCountryDoNotApply},
+        };
         public static readonly IReadOnlyDictionary<string, SecuredDetailType> PossibleSecuredDetailTypes = new Dictionary<string, SecuredDetailType>
         {
             {"amount-secured", SecuredDetailType.AmountSecured},

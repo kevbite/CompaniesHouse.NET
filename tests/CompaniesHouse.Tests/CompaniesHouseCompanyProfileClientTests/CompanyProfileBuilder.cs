@@ -1,13 +1,4 @@
-using System.Linq;
-using CompaniesHouse.Response.CompanyProfile;
 using AutoFixture;
-using Accounts = CompaniesHouse.Tests.ResourceBuilders.Accounts;
-using AnnualReturn = CompaniesHouse.Tests.ResourceBuilders.AnnualReturn;
-using CompanyProfile = CompaniesHouse.Tests.ResourceBuilders.CompanyProfile;
-using ConfirmationStatement = CompaniesHouse.Tests.ResourceBuilders.ConfirmationStatement;
-using LastAccounts = CompaniesHouse.Tests.ResourceBuilders.LastAccounts;
-using Officer = CompaniesHouse.Tests.ResourceBuilders.Officer;
-using OfficerSummary = CompaniesHouse.Tests.ResourceBuilders.OfficerSummary;
 
 namespace CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTests
 {
@@ -63,6 +54,15 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTests
 
             var officerSummary = fixture.Build<ResourceBuilders.OfficerSummary>().With(x => x.Officers, officers).Create();
 
+            var accountingRequirement = fixture.Build<ResourceBuilders.AccountingRequirement>()
+                .With(x => x.ForeignAccountType, "")
+                .With(x => x.TermsOfAccountPublication, "")
+                .Create();
+            
+            var foreignCompanyDetails = fixture.Build<ResourceBuilders.ForeignCompanyDetails>()
+                .With(x => x.AccountingRequirement, accountingRequirement)
+                .Create();
+            
             var companyProfile = fixture.Build<ResourceBuilders.CompanyProfile>()
                 .With(x => x.Accounts, accounts)
                 .With(x => x.CompanyStatus, testCase.CompanyStatus)
@@ -71,6 +71,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTests
                 .With(x => x.Type, testCase.Type)
                 .With(x => x.OfficerSummary, officerSummary)
                 .With(x => x.PreviousCompanyNames, previousCompanyNames)
+                .With(x => x.ForeignCompanyDetails, foreignCompanyDetails)
                 .Create();
 
             return companyProfile;

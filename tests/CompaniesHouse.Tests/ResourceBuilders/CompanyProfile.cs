@@ -55,5 +55,69 @@ namespace CompaniesHouse.Tests.ResourceBuilders
         public CompanyProfileLinks Links { get; set; }
 
         public CompanyProfileBranchCompanyDetails BranchCompanyDetails { get; set; }
+        
+        public ForeignCompanyDetails ForeignCompanyDetails { get; set; }
+    }
+    
+    public class ForeignCompanyDetails
+    {
+        public AccountingRequirement AccountingRequirement { get; set; }
+
+        public ForeignCompanyAccounts Accounts { get; set; }
+
+        public string BusinessActivity { get; set; }
+
+        public string CompanyType { get; set; }
+
+        public string GovernedBy { get; set; }
+
+        public bool? IsACreditFinanceInstitution { get; set; }
+
+        public OriginatingRegistry OriginatingRegistry { get; set; }
+
+        public string RegistrationNumber { get; set; }
+    }
+
+    public class OriginatingRegistry
+    {
+        public string Country { get; set; }
+
+        public string Name { get; set; }
+    }
+
+    public class ForeignCompanyAccounts
+    {
+        public ForeignCompanyPeriodFrom AccountPeriodFrom { get; set; }
+
+        public ForeignCompanyPeriodTo AccountPeriodTo { get; set; }
+
+        public MustFileWithin MustFileWithin { get; set; }
+
+    }
+
+    public class MustFileWithin
+    {
+        public int? Months { get; set; }
+    }
+
+    public class ForeignCompanyPeriodTo
+    {
+        public int? Day { get; set; }
+
+        public int? Month { get; set; }
+    }
+
+    public class ForeignCompanyPeriodFrom
+    {
+        public int? Day { get; set; }
+
+        public int? Month { get; set; }
+    }
+
+    public class AccountingRequirement
+    {
+        public string ForeignAccountType { get; set; }
+
+        public string TermsOfAccountPublication { get; set; }
     }
 }

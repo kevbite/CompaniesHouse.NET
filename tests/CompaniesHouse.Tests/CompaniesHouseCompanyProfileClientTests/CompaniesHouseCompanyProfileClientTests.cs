@@ -1,12 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Net.Http;
-using CompaniesHouse.Tests.ResourceBuilders;
+﻿using CompaniesHouse.Tests.ResourceBuilders;
 using CompaniesHouse.UriBuilders;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using CompanyProfile = CompaniesHouse.Response.CompanyProfile.CompanyProfile;
 
 namespace CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTests
 {

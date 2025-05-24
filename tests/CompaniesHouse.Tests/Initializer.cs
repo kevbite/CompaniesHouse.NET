@@ -31,6 +31,8 @@ namespace CompaniesHouse.Tests
             AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<ClassificationChargeTypeMapProvider, ClassificationChargeType>>();
             AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<ParticularTypeMapProvider, ParticularType>>();
             AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<SecureDetailTypeMapProvider, SecuredDetailType>>();
+            AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<ForeignAccountTypeMapProvider, ForeignAccountType>>();
+            AssertionOptions.EquivalencySteps.Insert<ComparingEnumWith<TermsOfAccountPublicationMapProvider, TermsOfAccountPublication>>();
         }
     }
 }
