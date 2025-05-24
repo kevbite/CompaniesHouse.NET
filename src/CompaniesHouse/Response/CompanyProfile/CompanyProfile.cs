@@ -87,5 +87,8 @@ namespace CompaniesHouse.Response.CompanyProfile
 
         [JsonProperty(PropertyName = "branch_company_details")]
         public BranchCompanyDetails BranchCompanyDetails { get; set; }
+        
+        [JsonProperty(PropertyName = "foreign_company_details")]
+        public ForeignCompanyDetails ForeignCompanyDetails { get; set; }
     }
 }
