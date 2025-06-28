@@ -181,6 +181,7 @@ namespace CompaniesHouse.Tests
                 {"mortgage", FilingSubcategory.Mortgage},
                 {"transfer", FilingSubcategory.Transfer},
                 {"debenture", FilingSubcategory.Debenture},
+                {"investment-company", FilingSubcategory.InvestmentCompany},
             };
 
         public static readonly IReadOnlyDictionary<string, FilingCategory> PossibleFilingCategories = new Dictionary
