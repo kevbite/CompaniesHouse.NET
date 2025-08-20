@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Net.Http;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response.Appointments;
 using CompaniesHouse.Response.Charges;
@@ -57,6 +54,11 @@ namespace CompaniesHouse
         public Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAsync(SearchCompanyRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHouseSearchClient.SearchAsync<SearchCompanyRequest, CompanySearch>(request, cancellationToken);
+        }
+        
+        public Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAdvancedAsync(AdvancedSearchCompanyRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return _companiesHouseSearchClient.SearchAsync<AdvancedSearchCompanyRequest, CompanySearch>(request, cancellationToken);
         }
 
         public Task<CompaniesHouseClientResponse<OfficerSearch>> SearchOfficerAsync(SearchOfficerRequest request, CancellationToken cancellationToken = default(CancellationToken))

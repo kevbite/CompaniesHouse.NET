@@ -3,7 +3,7 @@ using CompaniesHouse.Request;
 
 namespace CompaniesHouse.UriBuilders;
 
-public class SearchCompanyUriBuilder : SearchUriBuilder<SearchCompanyRequest>
+public class SearchCompanyUriBuilder : QuerySearchUriBuilder<SearchCompanyRequest>
 {
     public SearchCompanyUriBuilder(string path) : base(path)
     {

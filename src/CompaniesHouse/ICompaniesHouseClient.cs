@@ -2,6 +2,7 @@
 {
     public interface ICompaniesHouseClient :
         ICompaniesHouseSearchCompanyClient,
+        ICompaniesHouseSearchCompanyAdvancedClient,
         ICompaniesHouseSearchOfficerClient,
         ICompaniesHouseSearchDisqualifiedOfficerClient,
         ICompaniesHouseSearchAllClient,

@@ -19,12 +19,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>Service collection</returns>
         public static IServiceCollection AddCompaniesHouseClient(this IServiceCollection services, string apiKey)
         {
-            return services.AddCompaniesHouseClient(opt =>
-            {
-                opt.ApiKey = apiKey;
-            });
+            return services.AddCompaniesHouseClient(opt => { opt.ApiKey = apiKey; });
         }
-        
+
         /// <summary>
         /// Registers the companies house client
         /// </summary>
@@ -69,7 +66,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 configure.Invoke(provider, options);
                 return options;
             });
-            
+
             services.TryAddTransient<IApiKeyProvider>(provider =>
             {
                 var options = provider.GetRequiredService<CompaniesHouseClientOptions>();
@@ -89,6 +86,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.TryAddTransient<ICompaniesHouseSearchCompanyClient>(provider =>
                 provider.GetService<ICompaniesHouseClient>());
+            services.TryAddTransient<ICompaniesHouseSearchCompanyAdvancedClient>(provider =>
+                provider.GetService<ICompaniesHouseClient>());
             services.TryAddTransient<ICompaniesHouseSearchOfficerClient>(provider =>
                 provider.GetService<ICompaniesHouseClient>());
             services.TryAddTransient<ICompaniesHouseSearchDisqualifiedOfficerClient>(provider =>
@@ -103,8 +102,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 provider.GetService<ICompaniesHouseClient>());
             services.TryAddTransient<ICompaniesHouseCompanyInsolvencyInformationClient>(provider =>
                 provider.GetService<ICompaniesHouseClient>());
-            services.TryAddTransient<ICompaniesHouseAppointmentsClient>(
-                provider => provider.GetService<ICompaniesHouseClient>());
+            services.TryAddTransient<ICompaniesHouseAppointmentsClient>(provider =>
+                provider.GetService<ICompaniesHouseClient>());
             services.TryAddTransient<ICompaniesHousePersonsWithSignificantControlClient>(provider =>
                 provider.GetService<ICompaniesHouseClient>());
             services.TryAddTransient<ICompaniesHouseChargesClient>(provider =>
