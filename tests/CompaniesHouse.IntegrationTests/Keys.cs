@@ -4,6 +4,17 @@ namespace CompaniesHouse.IntegrationTests
 {
     public static class Keys
     {
-        public static string ApiKey { get; } = "QNAJ_N174kLfqk8RAQOL3Nir48KjcZckCvolW1s6";
+        public static string ApiKey
+        {
+            get
+            {
+                var key = Environment.GetEnvironmentVariable("COMPANIES_HOUSE_API_KEY");
+                if (string.IsNullOrEmpty(key))
+                {
+                    throw new InvalidOperationException("COMPANIES_HOUSE_API_KEY environment variable is not set.");
+                }
+                return key;
+            }
+        }
     }
 }
