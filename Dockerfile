@@ -1,7 +1,7 @@
 ARG CONFIGURATION="Release"
 ARG NUGET_PACKAGE_VERSION="1.0.0"
 ARG COMPANIES_HOUSE_API_KEY
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS restore
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS restore
 
 ARG CONFIGURATION
 
