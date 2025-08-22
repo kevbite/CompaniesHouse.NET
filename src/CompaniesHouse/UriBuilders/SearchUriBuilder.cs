@@ -77,7 +77,6 @@ namespace CompaniesHouse.UriBuilders
                 builder.Append("&");
             }
 
-            ;
             builder.Append($"{parameterName}={value}");
         }
 
