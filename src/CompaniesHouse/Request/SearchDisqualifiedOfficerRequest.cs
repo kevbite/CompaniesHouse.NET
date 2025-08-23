@@ -2,6 +2,6 @@
 
 namespace CompaniesHouse.Request;
 
-public class SearchDisqualifiedOfficerRequest : SearchRequest<DisqualifiedOfficerSearch>
+public class SearchDisqualifiedOfficerRequest : QuerySearchRequest<DisqualifiedOfficerSearch>
 {
 }

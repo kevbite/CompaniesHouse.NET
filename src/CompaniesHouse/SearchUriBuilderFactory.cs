@@ -13,15 +13,26 @@ namespace CompaniesHouse
             {
                 return (ISearchUriBuilder<TSearch>)new SearchCompanyUriBuilder("search/companies");
             }
-            else if (type == typeof(SearchOfficerRequest))
+
+            if (type == typeof(SearchOfficerRequest))
             {
-                return new SearchUriBuilder<TSearch>("search/officers");
-            }else if (type == typeof(SearchDisqualifiedOfficerRequest))
+                return (ISearchUriBuilder<TSearch>)new QuerySearchUriBuilder<SearchOfficerRequest>("search/officers");
+            }
+
+            if (type == typeof(SearchDisqualifiedOfficerRequest))
             {
-                return new SearchUriBuilder<TSearch>("search/disqualified-officers");
-            } else if (type == typeof(SearchAllRequest))
+                return (ISearchUriBuilder<TSearch>)new QuerySearchUriBuilder<SearchDisqualifiedOfficerRequest>(
+                    "search/disqualified-officers");
+            }
+
+            if (type == typeof(SearchAllRequest))
             {
-                return new SearchUriBuilder<TSearch>("search");
+                return (ISearchUriBuilder<TSearch>)new QuerySearchUriBuilder<SearchAllRequest>("search");
+            }
+
+            if (type == typeof(AdvancedSearchCompanyRequest))
+            {
+                return (ISearchUriBuilder<TSearch>)new AdvancedSearchCompanyUriBuilder("advanced-search/companies");
             }
 
             throw new InvalidOperationException();

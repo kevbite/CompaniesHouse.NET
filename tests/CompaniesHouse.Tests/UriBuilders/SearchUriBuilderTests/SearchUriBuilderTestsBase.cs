@@ -7,7 +7,7 @@ namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
 {
     public abstract partial class SearchUriBuilderTestsBase
     {
-        private SearchUriBuilder<SearchCompanyRequest> _uriBuilder;
+        private QuerySearchUriBuilder<SearchCompanyRequest> _uriBuilder;
         private Uri _actualUri;
         private readonly Uri _baseUri = new Uri("http://testing123.co.uk/bla1/bla2/");
 
@@ -24,7 +24,7 @@ namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
         public void GivenACompanySearchUriBuilder()
         {
             _path = "wat/wat/1";
-            _uriBuilder = new SearchUriBuilder<SearchCompanyRequest>(_path);
+            _uriBuilder = new QuerySearchUriBuilder<SearchCompanyRequest>(_path);
         }
 
         [SetUp]

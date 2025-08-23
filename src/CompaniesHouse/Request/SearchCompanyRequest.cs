@@ -1,8 +1,9 @@
-﻿using CompaniesHouse.Response.Search.CompanySearch;
+﻿#nullable enable
+using CompaniesHouse.Response.Search.CompanySearch;
 
 namespace CompaniesHouse.Request;
 
-public class SearchCompanyRequest : SearchRequest<CompanySearch>
+public class SearchCompanyRequest : QuerySearchRequest<CompanySearch>
 {
-    public string Restrictions { get; set; }
+    public string? Restrictions { get; set; }
 }

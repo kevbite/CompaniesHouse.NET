@@ -20,7 +20,11 @@ namespace CompaniesHouse.Response.Search.CompanySearch
         [JsonProperty(PropertyName = "company_type")]
         [JsonConverter(typeof(StringEnumConverter))]
         public CompanyType CompanyType { get; set; }
-
+        
+        [JsonProperty(PropertyName = "company_subtype")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public CompanySubType CompanySubType { get; set; }
+        
         [JsonProperty(PropertyName = "date_of_cessation")]
         [JsonConverter(typeof(OptionalDateJsonConverter))]
         public DateTime? DateOfCessation { get; set; }

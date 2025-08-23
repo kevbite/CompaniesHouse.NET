@@ -2,6 +2,6 @@
 
 namespace CompaniesHouse.Request;
 
-public class SearchAllRequest : SearchRequest<AllSearch>
+public class SearchAllRequest : QuerySearchRequest<AllSearch>
 {
 }
