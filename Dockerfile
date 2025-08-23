@@ -21,7 +21,7 @@ COPY ./tests/CompaniesHouse.Tests/*.csproj ./tests/CompaniesHouse.Tests/
 COPY ./samples/SampleProject/*.csproj ./samples/SampleProject/
 RUN dotnet restore
 
-FROM restore as build
+FROM restore AS build
 ARG CONFIGURATION
 ARG NUGET_PACKAGE_VERSION
 
@@ -30,11 +30,11 @@ COPY ./tests/ ./tests/
 COPY ./samples/ ./samples/
 RUN dotnet build --configuration $CONFIGURATION --no-restore
 
-FROM build as test
+FROM build AS test
 ARG COMPANIES_HOUSE_API_KEY
 RUN dotnet test --logger trx --configuration $CONFIGURATION --no-build
 
-FROM build as pack
+FROM build AS pack
 RUN mkdir -p artifacts
 RUN dotnet pack --configuration Release -p:Version=${NUGET_PACKAGE_VERSION} --no-build --output ./artifacts
 
