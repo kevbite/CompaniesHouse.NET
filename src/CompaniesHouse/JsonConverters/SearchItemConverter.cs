@@ -1,5 +1,6 @@
 ﻿using System;
 using CompaniesHouse.Response.Search;
+using CompaniesHouse.Response.Search.AdvancedCompanySearch;
 using CompaniesHouse.Response.Search.CompanySearch;
 using CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
 using CompaniesHouse.Response.Search.OfficerSearch;
@@ -13,9 +14,13 @@ namespace CompaniesHouse.JsonConverters
         protected override SearchItem Create(Type objectType, JObject jObject)
         {
             var kind = jObject.Value<string>("kind");
-            if (kind is "searchresults#company" or "search-results#company")
+            if (kind is "searchresults#company")
             {
                 return new Company();
+            }
+            if (kind is "search-results#company")
+            {
+                return new AdvancedSearchedCompany();
             }
             else if (kind is "searchresults#officer")
             {

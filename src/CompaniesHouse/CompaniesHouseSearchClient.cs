@@ -18,7 +18,8 @@ namespace CompaniesHouse
             _searchUriBuilderFactory = searchUriBuilderFactory;
         }
 
-        public async Task<CompaniesHouseClientResponse<TReturn>> SearchAsync<TSearchRequest, TReturn>(TSearchRequest request,
+        public async Task<CompaniesHouseClientResponse<TReturn>> SearchAsync<TSearchRequest, TReturn>(
+            TSearchRequest request,
             CancellationToken cancellationToken = default(CancellationToken))
             where TSearchRequest : SearchRequest<TReturn>
         {

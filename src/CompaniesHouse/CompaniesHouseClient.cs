@@ -8,11 +8,12 @@ using CompaniesHouse.Response.Insolvency;
 using CompaniesHouse.Response.Officers;
 using CompaniesHouse.Response.PersonsWithSignificantControl;
 using CompaniesHouse.Response.RegisteredOfficeAddress;
+using CompaniesHouse.Response.Search.AdvancedCompanySearch;
 using CompaniesHouse.Response.Search.AllSearch;
-using CompaniesHouse.Response.Search.CompanySearch;
 using CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
 using CompaniesHouse.Response.Search.OfficerSearch;
 using CompaniesHouse.UriBuilders;
+using CompanySearch = CompaniesHouse.Response.Search.CompanySearch.CompanySearch;
 using Officer = CompaniesHouse.Response.Officers.Officer;
 
 namespace CompaniesHouse
@@ -56,9 +57,9 @@ namespace CompaniesHouse
             return _companiesHouseSearchClient.SearchAsync<SearchCompanyRequest, CompanySearch>(request, cancellationToken);
         }
         
-        public Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAdvancedAsync(AdvancedSearchCompanyRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseClientResponse<AdvancedCompanySearch>> SearchCompanyAdvancedAsync(AdvancedSearchCompanyRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return _companiesHouseSearchClient.SearchAsync<AdvancedSearchCompanyRequest, CompanySearch>(request, cancellationToken);
+            return _companiesHouseSearchClient.SearchAsync<AdvancedSearchCompanyRequest, AdvancedCompanySearch>(request, cancellationToken);
         }
 
         public Task<CompaniesHouseClientResponse<OfficerSearch>> SearchOfficerAsync(SearchOfficerRequest request, CancellationToken cancellationToken = default(CancellationToken))

@@ -1,10 +1,11 @@
 ﻿#nullable enable
 using CompaniesHouse.Response;
+using CompaniesHouse.Response.Search.AdvancedCompanySearch;
 using CompaniesHouse.Response.Search.CompanySearch;
 
 namespace CompaniesHouse.Request;
 
-public class AdvancedSearchCompanyRequest : SearchRequest<CompanySearch>
+public class AdvancedSearchCompanyRequest : SearchRequest<AdvancedCompanySearch>
 {
     public string? CompanyNameIncludes { get; set; }
     public string? CompanyNameExcludes { get; set; }

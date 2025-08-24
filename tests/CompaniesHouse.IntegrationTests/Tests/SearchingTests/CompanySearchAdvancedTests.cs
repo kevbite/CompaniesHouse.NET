@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using CompaniesHouse.Request;
+using CompaniesHouse.Response.Search.AdvancedCompanySearch;
 using CompaniesHouse.Response.Search.CompanySearch;
 using NUnit.Framework;
 
@@ -13,7 +14,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
     {
         private readonly string _query;
         private CompaniesHouseClient _client;
-        private CompaniesHouseClientResponse<CompanySearch> _result;
+        private CompaniesHouseClientResponse<AdvancedCompanySearch> _result;
 
         public CompanySearchAdvancedTests(string query)
         {
