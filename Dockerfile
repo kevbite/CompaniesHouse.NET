@@ -19,7 +19,7 @@ COPY ./tests/CompaniesHouse.IntegrationTests/*.csproj ./tests/CompaniesHouse.Int
 COPY ./tests/CompaniesHouse.ScenarioTests/*.csproj ./tests/CompaniesHouse.ScenarioTests/
 COPY ./tests/CompaniesHouse.Tests/*.csproj ./tests/CompaniesHouse.Tests/
 COPY ./samples/SampleProject/*.csproj ./samples/SampleProject/
-RUN dotnet restore
+RUN dotnet restore 
 
 FROM restore AS build
 ARG CONFIGURATION
@@ -28,7 +28,7 @@ ARG NUGET_PACKAGE_VERSION
 COPY ./src/ ./src/
 COPY ./tests/ ./tests/
 COPY ./samples/ ./samples/
-RUN dotnet build --configuration $CONFIGURATION --no-restore
+RUN dotnet build --configuration $CONFIGURATION
 
 FROM build AS test
 ARG COMPANIES_HOUSE_API_KEY
