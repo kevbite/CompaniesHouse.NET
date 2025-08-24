@@ -12,5 +12,14 @@ namespace CompaniesHouse.Response.PersonsWithSignificantControl
 
         [JsonProperty(PropertyName = "ceased_count")]
         public int? CeasedCount { get; set; }
+        
+        [JsonProperty(PropertyName = "items_per_page")]
+        public int ItemsPerPage { get; set; }
+        
+        [JsonProperty(PropertyName = "start_index")]
+        public int StartIndex { get; set; }
+
+        [JsonProperty(PropertyName = "total_results")]
+        public int TotalResults { get; set; }
     }
 }
