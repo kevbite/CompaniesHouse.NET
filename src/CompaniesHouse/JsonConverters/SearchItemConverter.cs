@@ -13,15 +13,15 @@ namespace CompaniesHouse.JsonConverters
         protected override SearchItem Create(Type objectType, JObject jObject)
         {
             var kind = jObject.Value<string>("kind");
-            if (kind == "searchresults#company")
+            if (kind is "searchresults#company" or "search-results#company")
             {
                 return new Company();
             }
-            else if (kind == "searchresults#officer")
+            else if (kind is "searchresults#officer")
             {
                 return new Officer();
             }
-            else if (kind == "searchresults#disqualified-officer")
+            else if (kind is "searchresults#disqualified-officer")
             {
                 return new DisqualifiedOfficer();
             }

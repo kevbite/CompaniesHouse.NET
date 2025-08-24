@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
 {
-    [TestFixture("brighouse computers")]
+    [TestFixture("brighouse")]
     [TestFixture("British Gas")]
     [TestFixture("Bay Horse")]
     public class CompanySearchAdvancedTests
