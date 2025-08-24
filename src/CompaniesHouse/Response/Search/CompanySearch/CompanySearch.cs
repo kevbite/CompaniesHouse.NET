@@ -11,18 +11,18 @@ namespace CompaniesHouse.Response.Search.CompanySearch
         public Company[] Companies { get; set; }
 
         [JsonProperty(PropertyName = "items_per_page")]
-        public int? ItemsPerPage { get; set; }
+        public int ItemsPerPage { get; set; }
 
         [JsonProperty(PropertyName = "kind")]
         public string Kind { get; set; }
 
         [JsonProperty(PropertyName = "page_number")]
-        public int? PageNumber { get; set; }
+        public int PageNumber { get; set; }
 
         [JsonProperty(PropertyName = "start_index")]
-        public int? StartIndex { get; set; }
+        public int StartIndex { get; set; }
 
         [JsonProperty(PropertyName = "total_results")]
-        public int? TotalResults { get; set; }
+        public int TotalResults { get; set; }
     }
 }

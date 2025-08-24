@@ -12,15 +12,15 @@ namespace CompaniesHouse.Response.Search.AllSearch
         public SearchItem[] Items { get; set; }
 
         [JsonProperty(PropertyName = "items_per_page")]
-        public string ItemsPerPage { get; set; }
+        public int ItemsPerPage { get; set; }
 
         [JsonProperty(PropertyName = "kind")]
         public string Kind { get; set; }
 
         [JsonProperty(PropertyName = "start_index")]
-        public string StartIndex { get; set; }
+        public int StartIndex { get; set; }
 
         [JsonProperty(PropertyName = "total_results")]
-        public string TotalResults { get; set; }
+        public int TotalResults { get; set; }
     }
 }
