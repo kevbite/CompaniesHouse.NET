@@ -66,7 +66,8 @@ namespace CompaniesHouse.Tests.ResourceBuilders
                         ""legal_form"": ""{officer.Identification.LegalForm}"",
                         ""place_registered"": ""{officer.Identification.PlaceRegistered}"",
                         ""registration_number"": ""{officer.Identification.RegistrationNumber}""
-                    }}
+                    }},
+                    ""person_number"" : ""{officer.PersonNumber}""
                  }}";
         }
 
