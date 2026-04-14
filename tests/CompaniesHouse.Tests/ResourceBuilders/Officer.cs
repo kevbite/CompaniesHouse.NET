@@ -29,5 +29,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
         public OfficerIdentification Identification { get; set; }
 
         public OfficerLinks Links { get; set; }
+
+        public string PersonNumber { get; set; }
     }
 }
