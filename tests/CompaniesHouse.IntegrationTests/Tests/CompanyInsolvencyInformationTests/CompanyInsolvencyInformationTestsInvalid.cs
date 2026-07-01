@@ -12,7 +12,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyInsolvencyInformationTest
         protected override async Task When() =>
             Result = await Client.GetCompanyInsolvencyInformationAsync(InvalidCompanyNumber);
 
-        [Fact]
+        [IntegrationFact]
         public void ThenTheItemsAreNull() => Result.Data.ShouldBeNull();
     }
 }

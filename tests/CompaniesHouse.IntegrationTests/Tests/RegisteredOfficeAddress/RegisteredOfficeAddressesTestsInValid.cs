@@ -11,7 +11,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.RegisteredOfficeAddress
 
         protected override async Task When() => Result = await Client.GetRegisteredOfficeAddress(InvalidCompanyNumber);
         
-        [Fact]
+        [IntegrationFact]
         public void ThenRegisteredOfficeAddressIsNull() => Result.Data.ShouldBeNull();
     }
 }

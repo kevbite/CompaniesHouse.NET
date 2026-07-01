@@ -17,7 +17,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
 
         private async Task DownloadingDocument() => _result = await Client.DownloadDocumentAsync(DocumentId);
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenDocumentContentIsNotEmpty()
         {
             using var memoryStream = new MemoryStream();
@@ -40,7 +40,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
 
         private async Task DownloadingDocument() => _result = await Client.DownloadDocumentAsync(DocumentId);
 
-        [Fact]
+        [IntegrationFact]
         public void ThenDocumentDataIsNull() => _result.Data.ShouldBeNull();
     }
 }

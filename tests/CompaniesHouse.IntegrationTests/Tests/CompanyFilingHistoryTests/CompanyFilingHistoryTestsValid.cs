@@ -16,7 +16,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
             _client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
         }
 
-        [Theory]
+        [IntegrationTheory]
         [InlineData("03977902")]
         [InlineData("00445790")]
         [InlineData("00002065")]
@@ -41,7 +41,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
             results.ShouldNotBeEmpty();
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenKnownFilingHistoryIncludesObservedPaginationFields()
         {
             var result = await _client.GetCompanyFilingHistoryAsync("00445790");

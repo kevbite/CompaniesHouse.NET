@@ -19,13 +19,13 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
                 ;
         }
 
-        [Fact]
+        [IntegrationFact]
         public void ThenTheDataItemsAreNull()
         {
             _result.Data.ShouldNotBeNull();
         }
 
-        [Fact]
+        [IntegrationFact]
         public void ThenObservedFieldsAreReturned()
         {
             _result.Data.Links?.DocumentMetaData.ShouldNotBeNullOrWhiteSpace();

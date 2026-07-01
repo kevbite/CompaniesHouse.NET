@@ -13,7 +13,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.ChargesTests
             _client = new CompaniesHouseClient(new CompaniesHouseSettings(CompaniesHouseUris.Default, Keys.ApiKey));
         }
 
-        [Theory]
+        [IntegrationTheory]
         [InlineData("03977902")]
         [InlineData("00445790")]
         [InlineData("00002065")]
@@ -25,7 +25,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.ChargesTests
             result.Data.Items.ShouldNotBeEmpty();
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenKnownChargeListIncludesObservedGeneratedValues()
         {
             var result = await _client.GetChargesListAsync("03977902");

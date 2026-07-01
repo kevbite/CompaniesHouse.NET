@@ -17,13 +17,13 @@ namespace CompaniesHouse.IntegrationTests.Tests.AppointmentsTests
                 ;
         }
 
-        [Fact]
+        [IntegrationFact]
         public void ThenTheDataItemsAreNotEmpty()
         {
             Result.Data.Items.ShouldNotBeEmpty();
         }
 
-        [Fact]
+        [IntegrationFact]
         public void ThenObservedEnvelopeFieldsAreReturned()
         {
             Result.Data.Kind.ShouldBe("personal-appointment");

@@ -18,7 +18,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
                 ;
         }
 
-        [Fact]
+        [IntegrationFact]
         public void ThenTheDataItemsAreNull()
         {
             _result.Data.ShouldNotBeNull();

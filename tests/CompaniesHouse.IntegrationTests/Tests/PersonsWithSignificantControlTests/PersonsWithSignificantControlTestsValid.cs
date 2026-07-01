@@ -16,13 +16,13 @@ namespace CompaniesHouse.IntegrationTests.Tests.PersonsWithSignificantControlTes
             await WhenRetrievingAnCompanyPersonsWithSignificantControlForAnValidCompany();
         }
 
-        [Fact]
+        [IntegrationFact]
         public void ThenTheDataItemsAreNotEmpty()
         {
             _result.Data.Items.ShouldNotBeEmpty();
         }
 
-        [Fact]
+        [IntegrationFact]
         public void ThenObservedCountsAndKindsAreReturned()
         {
             _result.Data.TotalResults.ShouldNotBeNull();

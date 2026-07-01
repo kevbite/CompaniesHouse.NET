@@ -16,7 +16,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
         private async Task RetrievingDocumentMetadata()
             => Result = await Client.GetDocumentMetadataAsync(DocumentId);
 
-        [Fact]
+        [IntegrationFact]
         public void ThenDocumentMetadataIsNull() => Result.Data.ShouldBeNull();
     }
 }

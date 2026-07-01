@@ -13,10 +13,10 @@ namespace CompaniesHouse.IntegrationTests.Tests.ChargesTests
 
         protected override async Task When() => Result = await Client.GetChargeByIdAsync(CompanyNumber, ChargeId);
 
-        [Fact]
+        [IntegrationFact]
         public void ThenChargesListIsNull() => Result.Data.ShouldNotBeNull();
 
-        [Fact]
+        [IntegrationFact]
         public void ThenKnownObservedFieldsAreReturned()
         {
             Result.Data.Status.Value.ShouldNotBeNullOrWhiteSpace();

@@ -15,7 +15,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
 
         private async Task RetrievingDocumentMetadata() => Result = await Client.GetDocumentMetadataAsync(DocumentId);
 
-        [Fact]
+        [IntegrationFact]
         public void ThenDocumentMetadataAreNotEmpty()
         {
             Result.Data.CompanyNumber.ShouldNotBeNullOrEmpty();
@@ -23,7 +23,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
             Result.Data.Resources.ShouldNotBeEmpty();
         }
 
-        [Fact]
+        [IntegrationFact]
         public void ThenObservedFilenameAndDocumentLinkAreReturned()
         {
             Result.Data.Filename.ShouldNotBeNullOrWhiteSpace();

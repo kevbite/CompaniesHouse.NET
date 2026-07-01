@@ -11,10 +11,10 @@ namespace CompaniesHouse.IntegrationTests.Tests.RegisteredOfficeAddress
 
         protected override async Task When() => Result = await Client.GetRegisteredOfficeAddress(CompanyNumber);
 
-        [Fact]
+        [IntegrationFact]
         public void ThenRegisteredOfficeAddressIsNotNull() => Result.Data.ShouldNotBeNull();
 
-        [Fact]
+        [IntegrationFact]
         public void ThenObservedFieldsAreReturned()
         {
             Result.Data.Country.ShouldBe("United Kingdom");

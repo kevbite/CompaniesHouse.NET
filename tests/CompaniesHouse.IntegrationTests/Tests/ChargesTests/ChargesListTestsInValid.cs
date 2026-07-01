@@ -12,7 +12,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.ChargesTests
 
         protected override async Task When() => Result = await Client.GetChargesListAsync(CompanyNumber);
 
-        [Fact]
+        [IntegrationFact]
         public void ThenChargesListIsNull() => Result.Data.Items.ShouldBeEmpty();
     }
 }

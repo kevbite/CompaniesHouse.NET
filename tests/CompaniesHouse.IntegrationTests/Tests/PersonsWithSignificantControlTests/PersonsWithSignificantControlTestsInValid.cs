@@ -15,7 +15,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.PersonsWithSignificantControlTes
             await WhenRetrievingAnCompanyPersonsWithSignificantControlForAnInvalidCompany();
         }
 
-        [Fact]
+        [IntegrationFact]
         public void ThenTheDataItemsAreNull()
         {
             _result.Data.ShouldNotBeNull();
