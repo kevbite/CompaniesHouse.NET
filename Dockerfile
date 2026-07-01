@@ -29,6 +29,8 @@ ARG NUGET_PACKAGE_VERSION
 COPY ./src/ ./src/
 COPY ./tests/ ./tests/
 COPY ./samples/ ./samples/
+COPY ./external/ ./external/
+COPY ./enumerations/ ./enumerations/
 RUN dotnet build --configuration $CONFIGURATION --no-restore
 
 FROM build as test
