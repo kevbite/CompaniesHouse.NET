@@ -5,7 +5,7 @@ using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
 {
-    
+
     public class CompanyFilingHistoryTestsInvalid : CompanyFilingHistoryTestBase
     {
         private const string InvalidCompanyNumber = "ABC00000";
@@ -21,7 +21,8 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
         [Fact]
         public void ThenTheDataItemsAreNull()
         {
-            _result.Data.Items.ShouldBeNull();
+            _result.Data.ShouldNotBeNull();
+            _result.Data.Items.ShouldBeEmpty();
         }
 
         private async Task WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany()

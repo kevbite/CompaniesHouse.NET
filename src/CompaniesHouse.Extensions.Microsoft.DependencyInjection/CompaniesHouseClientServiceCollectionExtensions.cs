@@ -175,6 +175,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 provider.GetRequiredService<ICompaniesHouseClient>());
             services.TryAddTransient<ICompaniesHouseChargesClient>(provider =>
                 provider.GetRequiredService<ICompaniesHouseClient>());
+            services.TryAddTransient<ICompaniesHouseRegisteredOfficeAddressClient>(provider =>
+                provider.GetRequiredService<ICompaniesHouseClient>());
 
             return services;
         }
@@ -354,6 +356,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddKeyedTransient<ICompaniesHousePersonsWithSignificantControlClient>(name, (provider, key) =>
                 provider.GetRequiredKeyedService<ICompaniesHouseClient>(key));
             services.TryAddKeyedTransient<ICompaniesHouseChargesClient>(name, (provider, key) =>
+                provider.GetRequiredKeyedService<ICompaniesHouseClient>(key));
+            services.TryAddKeyedTransient<ICompaniesHouseRegisteredOfficeAddressClient>(name, (provider, key) =>
                 provider.GetRequiredKeyedService<ICompaniesHouseClient>(key));
 
             return services;

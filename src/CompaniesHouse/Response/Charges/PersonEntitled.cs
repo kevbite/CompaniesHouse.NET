@@ -5,6 +5,6 @@ namespace CompaniesHouse.Response.Charges
     public class PersonEntitled
     {
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

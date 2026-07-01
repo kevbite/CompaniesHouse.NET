@@ -9,15 +9,15 @@ namespace CompaniesHouse.Response.Charges
         public DateTime? DeliveredOn { get; set; }
 
         [JsonPropertyName("filing_type")]
-        public string FilingType { get; set; }
+        public string? FilingType { get; set; }
 
         [JsonPropertyName("insolvency_case_number")]
         public int? InsolvencyCaseNumber { get; set; }
 
         [JsonPropertyName("links")]
-        public TransactionLinks Links { get; set; }
+        public TransactionLinks? Links { get; set; }
 
         [JsonPropertyName("transaction_id")]
-        public int? TransactionId { get; set; }
+        public long? TransactionId { get; set; }
     }
 }

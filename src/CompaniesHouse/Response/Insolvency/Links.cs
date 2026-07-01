@@ -5,6 +5,6 @@ namespace CompaniesHouse.Response.Insolvency
     public class Links
     {
         [JsonPropertyName("charge")]
-        public string Charge { get; set; }
+        public string? Charge { get; set; }
     }
 }

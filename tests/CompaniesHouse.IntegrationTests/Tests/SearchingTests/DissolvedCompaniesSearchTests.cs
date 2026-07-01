@@ -33,12 +33,16 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
         [IntegrationFact]
         public async Task ThenPreviousNameSearchReturnsMatchedPreviousCompanyName()
         {
-            var result = await _client.SearchDissolvedCompaniesAsync(new SearchDissolvedCompaniesRequest
+            CompaniesHouseClientResponse<Response.Search.DissolvedCompaniesSearch.DissolvedCompaniesSearch> result;
+
+            try
             {
-                Query = "radio rentals",
-                SearchType = "previous-name-dissolved",
-                Size = 10,
-            });
+                result = await SearchPreviousNamesAsync();
+            }
+            catch (CompaniesHouseApiException exception) when (exception.StatusCode == 500)
+            {
+                result = await SearchPreviousNamesAsync();
+            }
 
             result.Data.Kind.ShouldBe("search#previous-name-dissolved");
             result.Data.TopHit.MatchedPreviousCompanyName.ShouldNotBeNull();
@@ -58,5 +62,13 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             result.Data.Kind.ShouldBe("search#alphabetical-dissolved");
             result.Data.Items.ShouldContain(x => !string.IsNullOrWhiteSpace(x.OrderedAlphaKeyWithId));
         }
+
+        private Task<CompaniesHouseClientResponse<Response.Search.DissolvedCompaniesSearch.DissolvedCompaniesSearch>> SearchPreviousNamesAsync() =>
+            _client.SearchDissolvedCompaniesAsync(new SearchDissolvedCompaniesRequest
+            {
+                Query = "radio rentals",
+                SearchType = "previous-name-dissolved",
+                Size = 10,
+            });
     }
 }

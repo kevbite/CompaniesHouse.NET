@@ -19,7 +19,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseDocumentMetadataClientTests
 
     public class ResourceContentLength
     {
-        public int ContentLength { get; set; }
+        public long ContentLength { get; set; }
     }
 
     public class Links

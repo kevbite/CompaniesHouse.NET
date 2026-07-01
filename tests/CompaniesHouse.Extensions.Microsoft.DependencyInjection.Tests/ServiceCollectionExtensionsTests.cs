@@ -35,6 +35,7 @@ namespace CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests
             scope.ServiceProvider.GetService<ICompaniesHouseAppointmentsClient>().ShouldNotBeNull();
             scope.ServiceProvider.GetService<ICompaniesHousePersonsWithSignificantControlClient>().ShouldNotBeNull();
             scope.ServiceProvider.GetService<ICompaniesHouseChargesClient>().ShouldNotBeNull();
+            scope.ServiceProvider.GetService<ICompaniesHouseRegisteredOfficeAddressClient>().ShouldNotBeNull();
         }
 
         [Fact]
@@ -92,6 +93,7 @@ namespace CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests
             scope.ServiceProvider.GetRequiredKeyedService<ICompaniesHouseSearchCompaniesAlphabeticallyClient>("first").ShouldNotBeNull();
             scope.ServiceProvider.GetRequiredKeyedService<ICompaniesHouseAdvancedCompanySearchClient>("second").ShouldNotBeNull();
             scope.ServiceProvider.GetRequiredKeyedService<ICompaniesHouseChargesClient>("second").ShouldNotBeNull();
+            scope.ServiceProvider.GetRequiredKeyedService<ICompaniesHouseRegisteredOfficeAddressClient>("second").ShouldNotBeNull();
         }
 
         [Fact]

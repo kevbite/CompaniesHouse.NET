@@ -17,8 +17,8 @@ namespace CompaniesHouse.Response.Charges
         [JsonPropertyName("contains_negative_pledge")]
         public bool? ContainsNegativePledge { get; set; }
 
-        [JsonPropertyName("description")] 
-        public string Description { get; set; }
+        [JsonPropertyName("description")]
+        public string? Description { get; set; }
 
         [JsonPropertyName("floating_charge_covers_all")]
         public bool? FloatingChargeCoversAll { get; set; }

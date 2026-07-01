@@ -14,7 +14,7 @@ namespace CompaniesHouse.Response.CompanyFiling
         public DateTime? DateOfAnnotation { get; set; }
 
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [JsonInclude]
         [JsonPropertyName("description_values")]

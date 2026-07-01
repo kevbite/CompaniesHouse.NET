@@ -5,9 +5,9 @@ namespace CompaniesHouse.Response.Charges
     public class TransactionLinks
     {
         [JsonPropertyName("filing")]
-        public string Filing { get; set; }
-        
+        public string? Filing { get; set; }
+
         [JsonPropertyName("insolvency_case")]
-        public string InsolvencyCase { get; set; }
+        public string? InsolvencyCase { get; set; }
     }
 }

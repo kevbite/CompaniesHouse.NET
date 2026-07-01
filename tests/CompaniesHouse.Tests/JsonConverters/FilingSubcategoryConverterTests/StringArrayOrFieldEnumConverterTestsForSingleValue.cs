@@ -14,7 +14,7 @@ namespace CompaniesHouse.Tests.JsonConverters.FilingSubcategoryConverterTests
         [Fact]
         public void ThenSingleItemInAnArrayIsReturned()
         {
-            Result.ShouldBe(new[] { FilingSubcategory.Change });
+            Result.ShouldBe(new[] { new FilingSubcategory("change") });
 
         }
     }

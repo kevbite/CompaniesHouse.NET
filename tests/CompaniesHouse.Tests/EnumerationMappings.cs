@@ -150,128 +150,128 @@ namespace CompaniesHouse.Tests
         public static readonly IReadOnlyDictionary<string, ResolutionCategory> PossibleResolutionCategories = new Dictionary
             <string, ResolutionCategory>()
             {
-                {"miscellaneous", ResolutionCategory.Miscellaneous}
+                {"miscellaneous", new ResolutionCategory("miscellaneous")}
             };
 
         public static readonly IReadOnlyDictionary<string, FilingHistoryStatus> PossibleFilingHistoryStatus = new Dictionary
             <string, FilingHistoryStatus>()
             {
-                {"filing-history-available", FilingHistoryStatus.FilingHistoryAvailable}
+                {"filing-history-available", new FilingHistoryStatus("filing-history-available")}
             };
 
         public static readonly IReadOnlyDictionary<string, FilingSubcategory> PossibleFilingSubcategories = new Dictionary
             <string, FilingSubcategory>()
             {
-                {"annual-return", FilingSubcategory.AnnualReturn},
-                {"resolution", FilingSubcategory.Resolution},
-                {"change", FilingSubcategory.Change},
-                {"create", FilingSubcategory.Create},
-                {"certificate", FilingSubcategory.Certificate},
-                {"appointments", FilingSubcategory.Appointments},
-                {"satisfy", FilingSubcategory.Satisfy},
-                {"termination", FilingSubcategory.Termination},
-                {"release-cease", FilingSubcategory.ReleaseCease},
-                {"voluntary", FilingSubcategory.Voluntary},
-                {"administration", FilingSubcategory.Administration},
-                {"compulsory", FilingSubcategory.Compulsory},
-                {"court-order", FilingSubcategory.CourtOrder},
-                {"other", FilingSubcategory.Other},
-                {"notifications", FilingSubcategory.Notifications},
-                {"officers", FilingSubcategory.Officers},
-                {"document-replacement", FilingSubcategory.DocumentReplacement},
-                {"statements", FilingSubcategory.Statements},
-                {"voluntary-arrangement", FilingSubcategory.VoluntaryArrangement},
-                {"alter", FilingSubcategory.Alter},
-                {"register", FilingSubcategory.Register},
-                {"receiver", FilingSubcategory.Receiver},
-                {"voluntary-arrangement-moratoria", FilingSubcategory.VoluntaryArrangementMoratoria},
-                {"acquire", FilingSubcategory.Acquire},
-                {"trustee", FilingSubcategory.Trustee},
-                {"mortgage", FilingSubcategory.Mortgage},
-                {"transfer", FilingSubcategory.Transfer},
-                {"debenture", FilingSubcategory.Debenture},
+                {"annual-return", new FilingSubcategory("annual-return")},
+                {"resolution", new FilingSubcategory("resolution")},
+                {"change", new FilingSubcategory("change")},
+                {"create", new FilingSubcategory("create")},
+                {"certificate", new FilingSubcategory("certificate")},
+                {"appointments", new FilingSubcategory("appointments")},
+                {"satisfy", new FilingSubcategory("satisfy")},
+                {"termination", new FilingSubcategory("termination")},
+                {"release-cease", new FilingSubcategory("release-cease")},
+                {"voluntary", new FilingSubcategory("voluntary")},
+                {"administration", new FilingSubcategory("administration")},
+                {"compulsory", new FilingSubcategory("compulsory")},
+                {"court-order", new FilingSubcategory("court-order")},
+                {"other", new FilingSubcategory("other")},
+                {"notifications", new FilingSubcategory("notifications")},
+                {"officers", new FilingSubcategory("officers")},
+                {"document-replacement", new FilingSubcategory("document-replacement")},
+                {"statements", new FilingSubcategory("statements")},
+                {"voluntary-arrangement", new FilingSubcategory("voluntary-arrangement")},
+                {"alter", new FilingSubcategory("alter")},
+                {"register", new FilingSubcategory("register")},
+                {"receiver", new FilingSubcategory("receiver")},
+                {"voluntary-arrangement-moratoria", new FilingSubcategory("voluntary-arrangement-moratoria")},
+                {"acquire", new FilingSubcategory("acquire")},
+                {"trustee", new FilingSubcategory("trustee")},
+                {"mortgage", new FilingSubcategory("mortgage")},
+                {"transfer", new FilingSubcategory("transfer")},
+                {"debenture", new FilingSubcategory("debenture")},
             };
 
         public static readonly IReadOnlyDictionary<string, FilingCategory> PossibleFilingCategories = new Dictionary
             <string, FilingCategory>()
             {
-                {"accounts", FilingCategory.Accounts},
-                {"address", FilingCategory.Address},
-                {"annual-return", FilingCategory.AnnualReturn},
-                {"capital", FilingCategory.Capital},
-                {"change-of-name", FilingCategory.ChangeOfName},
-                {"incorporation", FilingCategory.Incorporation},
-                {"liquidation", FilingCategory.Liquidation},
-                {"miscellaneous", FilingCategory.Miscellaneous},
-                {"mortgage", FilingCategory.Mortgage},
-                {"officers", FilingCategory.Officers},
-                {"resolution", FilingCategory.Resolution},
-                {"confirmation-statement", FilingCategory.ConfirmationStatement},
-                {"persons-with-significant-control", FilingCategory.PersonsWithSignificantControl},
-                {"restoration", FilingCategory.Restoration},
-                {"return", FilingCategory.Return},
-                {"other", FilingCategory.Other},
-                {"reregistration", FilingCategory.ReRegistration},
-                {"certificate", FilingCategory.Certificate},
+                {"accounts", new FilingCategory("accounts")},
+                {"address", new FilingCategory("address")},
+                {"annual-return", new FilingCategory("annual-return")},
+                {"capital", new FilingCategory("capital")},
+                {"change-of-name", new FilingCategory("change-of-name")},
+                {"incorporation", new FilingCategory("incorporation")},
+                {"liquidation", new FilingCategory("liquidation")},
+                {"miscellaneous", new FilingCategory("miscellaneous")},
+                {"mortgage", new FilingCategory("mortgage")},
+                {"officers", new FilingCategory("officers")},
+                {"resolution", new FilingCategory("resolution")},
+                {"confirmation-statement", new FilingCategory("confirmation-statement")},
+                {"persons-with-significant-control", new FilingCategory("persons-with-significant-control")},
+                {"restoration", new FilingCategory("restoration")},
+                {"return", new FilingCategory("return")},
+                {"other", new FilingCategory("other")},
+                {"reregistration", new FilingCategory("reregistration")},
+                {"certificate", new FilingCategory("certificate")},
             };
 
         public static readonly IReadOnlyDictionary<string, PersonWithSignificantControlKind> PossiblePersonWithSignificantControlKinds = new Dictionary
             <string, PersonWithSignificantControlKind>()
             {
-                {"corporate-entity-person-with-significant-control", PersonWithSignificantControlKind.CorporateEntityPersonWithSignificantControl},
-                {"individual-person-with-significant-control", PersonWithSignificantControlKind.IndividualPersonWithSignificantControl},
-                {"super-secure-person-with-significant-control", PersonWithSignificantControlKind.IndividualPersonWithSignificantControl},
-                {"legal-person-person-with-significant-control", PersonWithSignificantControlKind.IndividualPersonWithSignificantControl},
+                {"corporate-entity-person-with-significant-control", new PersonWithSignificantControlKind("corporate-entity-person-with-significant-control")},
+                {"individual-person-with-significant-control", new PersonWithSignificantControlKind("individual-person-with-significant-control")},
+                {"super-secure-person-with-significant-control", new PersonWithSignificantControlKind("super-secure-person-with-significant-control")},
+                {"legal-person-person-with-significant-control", new PersonWithSignificantControlKind("legal-person-person-with-significant-control")},
             };
 
         public static readonly IReadOnlyDictionary<string, AssetsCeasedReleased> PossibleAssetsCeasedReleased = new Dictionary<string, AssetsCeasedReleased>
         {
-            {"property-ceased-to-belong", AssetsCeasedReleased.PropertyCeasedToBelong},
-            {"part-property-release-and-ceased-to-belong", AssetsCeasedReleased.PartPropertyReleaseAndCeasedToBelong},
-            {"part-property-released", AssetsCeasedReleased.PartPropertyReleased},
-            {"part-property-ceased-to-belong", AssetsCeasedReleased.PartPropertyCeasedToBelong},
-            {"whole-property-released", AssetsCeasedReleased.WholePropertyReleased},
-            {"multiple-filings", AssetsCeasedReleased.MultipleFilings},
-            {"whole-property-released-and-ceased-to-belong", AssetsCeasedReleased.WholePropertyReleasedAndCeasedToBelong}
+            {"property-ceased-to-belong", new AssetsCeasedReleased("property-ceased-to-belong")},
+            {"part-property-release-and-ceased-to-belong", new AssetsCeasedReleased("part-property-release-and-ceased-to-belong")},
+            {"part-property-released", new AssetsCeasedReleased("part-property-released")},
+            {"part-property-ceased-to-belong", new AssetsCeasedReleased("part-property-ceased-to-belong")},
+            {"whole-property-released", new AssetsCeasedReleased("whole-property-released")},
+            {"multiple-filings", new AssetsCeasedReleased("multiple-filings")},
+            {"whole-property-released-and-ceased-to-belong", new AssetsCeasedReleased("whole-property-released-and-ceased-to-belong")}
         };
 
         public static readonly IReadOnlyDictionary<string, ParticularType> PossibleParticularTypes = new Dictionary<string, ParticularType>
         {
-            {"short-particulars", ParticularType.ShortParticulars},
-            {"charged-property-description", ParticularType.ChargedPropertyDescription},
-            {"charged-property-or-undertaking-description", ParticularType.ChargedPropertyOrUndertakingDescription},
-            {"brief-description", ParticularType.BriefDescription}
+            {"short-particulars", new ParticularType("short-particulars")},
+            {"charged-property-description", new ParticularType("charged-property-description")},
+            {"charged-property-or-undertaking-description", new ParticularType("charged-property-or-undertaking-description")},
+            {"brief-description", new ParticularType("brief-description")}
         };
 
         public static readonly IReadOnlyDictionary<string, ClassificationChargeType> PossibleClassificationChargeTypes = new Dictionary<string, ClassificationChargeType>
         {
-            {"charge-description", ClassificationChargeType.ChargeDescription},
-            {"nature-of-charge", ClassificationChargeType.NatureOfCharge}
+            {"charge-description", new ClassificationChargeType("charge-description")},
+            {"nature-of-charge", new ClassificationChargeType("nature-of-charge")}
         };
 
         public static readonly IReadOnlyDictionary<string, SecuredDetailType> PossibleSecuredDetailTypes = new Dictionary<string, SecuredDetailType>
         {
-            {"amount-secured", SecuredDetailType.AmountSecured},
-            {"obligations-secured", SecuredDetailType.ObligationsSecured},
+            {"amount-secured", new SecuredDetailType("amount-secured")},
+            {"obligations-secured", new SecuredDetailType("obligations-secured")},
         };
 
         public static readonly IReadOnlyDictionary<string, ChargeStatus> PossibleChargeStatuses = new Dictionary<string, ChargeStatus>
         {
-            {"outstanding", ChargeStatus.Outstanding},
-            {"fully-satisfied", ChargeStatus.FullySatisfied},
-            {"part-satisfied", ChargeStatus.PartSatisfied},
-            {"satisfied", ChargeStatus.Satisfied}
+            {"outstanding", new ChargeStatus("outstanding")},
+            {"fully-satisfied", new ChargeStatus("fully-satisfied")},
+            {"part-satisfied", new ChargeStatus("part-satisfied")},
+            {"satisfied", new ChargeStatus("satisfied")}
         };
 
-        public static readonly IReadOnlyDictionary<string, OfficeAddressCountry> PossibleRegisteredOfficeAddressCountry = new Dictionary<string, OfficeAddressCountry>
+        public static readonly IReadOnlyDictionary<string, string> PossibleRegisteredOfficeAddressCountry = new Dictionary<string, string>
         {
-            {"England", OfficeAddressCountry.England},
-            {"Scotland", OfficeAddressCountry.Scotland},
-            {"Wales", OfficeAddressCountry.Wales},
-            {"Great Britain", OfficeAddressCountry.GreatBritain},
-            {"Northern Ireland", OfficeAddressCountry.NorthernIreland},
-            {"Not specified", OfficeAddressCountry.NotSpecified},
-            {"United Kingdom", OfficeAddressCountry.UnitedKingdom}
+            {"England", "England"},
+            {"Scotland", "Scotland"},
+            {"Wales", "Wales"},
+            {"Great Britain", "Great Britain"},
+            {"Northern Ireland", "Northern Ireland"},
+            {"Not specified", "Not specified"},
+            {"United Kingdom", "United Kingdom"}
         };
     }
 }

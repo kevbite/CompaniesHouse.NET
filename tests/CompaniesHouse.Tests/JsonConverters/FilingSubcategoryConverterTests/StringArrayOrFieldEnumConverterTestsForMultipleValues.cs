@@ -14,7 +14,7 @@ namespace CompaniesHouse.Tests.JsonConverters.FilingSubcategoryConverterTests
         [Fact]
         public void ThenMultipleItemsAreReturned()
         {
-            Result.ShouldBe(new[] { FilingSubcategory.Compulsory, FilingSubcategory.CourtOrder });
+            Result.ShouldBe(new[] { new FilingSubcategory("compulsory"), new FilingSubcategory("court-order") });
         }
     }
 }

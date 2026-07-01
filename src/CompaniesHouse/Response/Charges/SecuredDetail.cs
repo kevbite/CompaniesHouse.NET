@@ -6,7 +6,7 @@ namespace CompaniesHouse.Response.Charges
     public class SecuredDetail
     {
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [JsonPropertyName("type")]
         public SecuredDetailType Type { get; set; }

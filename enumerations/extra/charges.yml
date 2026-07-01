@@ -1,0 +1,29 @@
+charge_status:
+    'outstanding': ''
+    'fully-satisfied': ''
+    'part-satisfied': ''
+    'satisfied': ''
+
+classification_charge_type:
+    'charge-description': ''
+    'nature-of-charge': ''
+
+particular_type:
+    'short-particulars': ''
+    'charged-property-description': ''
+    'charged-property-or-undertaking-description': ''
+    'brief-description': ''
+
+secured_detail_type:
+    'amount-secured': ''
+    'obligations-secured': ''
+
+assets_ceased_released:
+    'property-ceased-to-belong': ''
+    'part-property-release-and-ceased-to-belong': ''
+    'part-property-released': ''
+    'part-property-ceased-to-belong': ''
+    'whole-property-released': ''
+    'multiple-filings': ''
+    'whole-property-released-and-ceased-to-belong': ''
+

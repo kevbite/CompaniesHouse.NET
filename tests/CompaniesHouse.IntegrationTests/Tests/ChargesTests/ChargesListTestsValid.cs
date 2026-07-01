@@ -24,5 +24,16 @@ namespace CompaniesHouse.IntegrationTests.Tests.ChargesTests
 
             result.Data.Items.ShouldNotBeEmpty();
         }
+
+        [Fact]
+        public async Task ThenKnownChargeListIncludesObservedGeneratedValues()
+        {
+            var result = await _client.GetChargesListAsync("03977902");
+
+            result.Data.UnfilteredCount.ShouldNotBeNull();
+            result.Data.UnfilteredCount.Value.ShouldBeGreaterThan(0);
+            result.Data.Items[0].Status.Value.ShouldNotBeNullOrWhiteSpace();
+            result.Data.Items[0].Links?.Self.ShouldNotBeNullOrWhiteSpace();
+        }
     }
 }

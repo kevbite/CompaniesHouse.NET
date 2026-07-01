@@ -5,6 +5,6 @@ namespace CompaniesHouse.Response.Charges
     public class InsolvencyCaseLinks
     {
         [JsonPropertyName("case")]
-        public string Case { get; set; }
+        public string? Case { get; set; }
     }
 }

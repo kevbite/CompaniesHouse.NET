@@ -4,12 +4,12 @@ using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.PersonsWithSignificantControlTests
 {
-    
+
     public class PersonsWithSignificantControlTestsInValid : PersonsWithSignificantControlTestBase
     {
         private const string InvalidCompanyNumber = "ABC00000";
 
-        
+
         protected override async Task When()
         {
             await WhenRetrievingAnCompanyPersonsWithSignificantControlForAnInvalidCompany();
@@ -18,7 +18,8 @@ namespace CompaniesHouse.IntegrationTests.Tests.PersonsWithSignificantControlTes
         [Fact]
         public void ThenTheDataItemsAreNull()
         {
-            _result.Data.ShouldBeNull();
+            _result.Data.ShouldNotBeNull();
+            _result.Data.Items.ShouldBeEmpty();
         }
 
         private async Task WhenRetrievingAnCompanyPersonsWithSignificantControlForAnInvalidCompany()

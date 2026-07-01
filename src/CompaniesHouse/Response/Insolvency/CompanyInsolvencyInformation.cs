@@ -5,12 +5,12 @@ namespace CompaniesHouse.Response.Insolvency
     public class CompanyInsolvencyInformation
     {
         [JsonPropertyName("cases")]
-        public Case[] Cases { get; set; }
+        public Case[]? Cases { get; set; }
 
         [JsonPropertyName("etag")]
-        public string Etag { get; set; }
+        public string? Etag { get; set; }
 
         [JsonPropertyName("status")]
-        public InsolvencyStatus[] Status { get; set; }
+        public InsolvencyStatus[]? Status { get; set; }
     }
 }

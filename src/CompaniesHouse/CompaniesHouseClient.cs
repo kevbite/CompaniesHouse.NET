@@ -44,8 +44,8 @@ namespace CompaniesHouse
             _companiesHouseCompanyProfileClient = new CompaniesHouseCompanyProfileClient(_httpClient, new CompanyProfileUriBuilder());
             _companiesHouseCompanyFilingHistoryClient = new CompaniesHouseCompanyFilingHistoryClient(_httpClient, new CompanyFilingHistoryUriBuilder());
             _companiesHouseOfficersClient = new CompaniesHouseOfficersClient(_httpClient, new OfficersUriBuilder());
-            _companiesHouseCompanyInsolvencyInformationClient = new CompaniesHouseCompanyInsolvencyInformationClient(_httpClient);
-            _companiesHouseCompanyAppointmentsClient = new CompaniesHouseAppointmentsClient(_httpClient);
+            _companiesHouseCompanyInsolvencyInformationClient = new CompaniesHouseCompanyInsolvencyInformationClient(_httpClient, new CompanyInsolvencyInformationUriBuilder());
+            _companiesHouseCompanyAppointmentsClient = new CompaniesHouseAppointmentsClient(_httpClient, new AppointmentsUriBuilder());
             _companiesHousePersonsWithSignificantControlClient = new CompaniesHousePersonsWithSignificantControlClient(_httpClient, new PersonsWithSignificantControlBuilder());
             _companiesHouseChargesClient = new CompaniesHouseChargesClient(_httpClient, new ChargesUriBuilder());
             _companiesHouseRegisteredOfficeAddressClient = new CompaniesHouseRegisteredOfficeAddressClient(_httpClient, new RegisteredOfficeAddressUriBuilder());

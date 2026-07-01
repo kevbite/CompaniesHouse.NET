@@ -12,8 +12,22 @@ namespace CompaniesHouse.JsonConverters
     /// </summary>
     public sealed class EnumArrayOrSingleJsonConverterFactory : JsonConverterFactory
     {
-        public override bool CanConvert(Type typeToConvert) =>
-            typeToConvert.IsArray && typeToConvert.GetElementType() is { IsEnum: true };
+        public override bool CanConvert(Type typeToConvert)
+        {
+            if (!typeToConvert.IsArray)
+            {
+                return false;
+            }
+
+            var elementType = typeToConvert.GetElementType();
+            if (elementType is null)
+            {
+                return false;
+            }
+
+            return elementType.IsEnum
+                   || Attribute.IsDefined(elementType, typeof(JsonConverterAttribute), inherit: false);
+        }
 
         public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
         {
@@ -22,10 +36,9 @@ namespace CompaniesHouse.JsonConverters
             return (JsonConverter)Activator.CreateInstance(converterType)!;
         }
 
-        private sealed class EnumArrayOrSingleJsonConverter<TEnum> : JsonConverter<TEnum[]>
-            where TEnum : struct, Enum
+        private sealed class EnumArrayOrSingleJsonConverter<TElement> : JsonConverter<TElement[]>
         {
-            public override TEnum[]? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override TElement[]? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
@@ -34,21 +47,21 @@ namespace CompaniesHouse.JsonConverters
 
                 if (reader.TokenType == JsonTokenType.StartArray)
                 {
-                    var items = new System.Collections.Generic.List<TEnum>();
+                    var items = new System.Collections.Generic.List<TElement>();
 
                     while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
                     {
-                        items.Add(JsonSerializer.Deserialize<TEnum>(ref reader, options));
+                        items.Add(JsonSerializer.Deserialize<TElement>(ref reader, options)!);
                     }
 
                     return items.ToArray();
                 }
 
-                var value = JsonSerializer.Deserialize<TEnum>(ref reader, options);
+                var value = JsonSerializer.Deserialize<TElement>(ref reader, options)!;
                 return new[] { value };
             }
 
-            public override void Write(Utf8JsonWriter writer, TEnum[] value, JsonSerializerOptions options)
+            public override void Write(Utf8JsonWriter writer, TElement[] value, JsonSerializerOptions options)
             {
                 writer.WriteStartArray();
 

@@ -5,13 +5,13 @@ namespace CompaniesHouse.Response.Appointments
     public class AppointedTo
     {
         [JsonPropertyName("company_status")]
-        public string CompanyStatus { get; set; }
+        public CompanyStatus CompanyStatus { get; set; }
 
         [JsonPropertyName("company_number")]
-        public string CompanyNumber { get; set; }
+        public string? CompanyNumber { get; set; }
 
         [JsonPropertyName("company_name")]
-        public string CompanyName { get; set; }
+        public string? CompanyName { get; set; }
 
     }
 }

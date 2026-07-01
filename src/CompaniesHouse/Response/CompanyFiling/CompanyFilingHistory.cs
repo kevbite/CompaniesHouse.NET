@@ -9,7 +9,7 @@ namespace CompaniesHouse.Response.CompanyFiling
         public FilingHistoryStatus HistoryStatus { get; set; }
 
         [JsonPropertyName("etag")]
-        public string ETag { get; set; }
+        public string? ETag { get; set; }
 
         [JsonPropertyName("total_count")]
         public int TotalCount { get; set; }
@@ -21,9 +21,9 @@ namespace CompaniesHouse.Response.CompanyFiling
         public int StartIndex { get; set; }
 
         [JsonPropertyName("items")]
-        public FilingHistoryItem[] Items { get; set; }
+        public FilingHistoryItem[]? Items { get; set; }
 
         [JsonPropertyName("kind")]
-        public string Kind { get; set; }
+        public string? Kind { get; set; }
     }
 }

@@ -5,8 +5,8 @@ namespace CompaniesHouse.Response.Document
     public class Links
     {
         [JsonPropertyName("self")]
-        public string Self { get; set; }
+        public string? Self { get; set; }
         [JsonPropertyName("document")]
-        public string Document { get; set; }
+        public string? Document { get; set; }
     }
 }

@@ -14,7 +14,8 @@
         ICompaniesHouseCompanyInsolvencyInformationClient,
         ICompaniesHouseAppointmentsClient,
         ICompaniesHousePersonsWithSignificantControlClient,
-        ICompaniesHouseChargesClient
+        ICompaniesHouseChargesClient,
+        ICompaniesHouseRegisteredOfficeAddressClient
     {
 
     }

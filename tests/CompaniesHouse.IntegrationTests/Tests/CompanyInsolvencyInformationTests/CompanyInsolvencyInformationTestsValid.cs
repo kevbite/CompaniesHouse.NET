@@ -4,7 +4,7 @@ using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.CompanyInsolvencyInformationTests
 {
-    
+
     public class CompanyInsolvencyInformationTestsValid : CompanyInsolvencyInformationTestBase
     {
         private const string ValidCompanyNumber = "08749409";
@@ -14,5 +14,13 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyInsolvencyInformationTest
 
         [Fact]
         public void ThenTheItemsAreReturned() => Result.Data.ShouldNotBeNull();
+
+        [Fact]
+        public void ThenObservedStatusesAndCaseTypesAreReturned()
+        {
+            Result.Data.Cases.ShouldNotBeNull();
+            Result.Data.Cases.ShouldNotBeEmpty();
+            Result.Data.Cases[0].Type.Value.ShouldNotBeNullOrWhiteSpace();
+        }
     }
 }

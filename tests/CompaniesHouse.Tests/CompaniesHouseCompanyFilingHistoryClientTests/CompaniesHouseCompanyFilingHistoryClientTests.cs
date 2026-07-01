@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using CompaniesHouse.Response;
+using CompaniesHouse.Response.CompanyFiling;
 using CompaniesHouse.Tests.ResourceBuilders;
 using CompaniesHouse.UriBuilders;
 using Moq;
@@ -100,6 +102,40 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyFilingHistoryClientTests
                 .Concat(allFilingHistoryStatus)
                 .Concat(allFilingResolutionCategories)
                 .Select(testCase => new object[] { testCase });
+        }
+
+        [Fact]
+        public async Task GivenARealCapturedMortgageFiling_WhenGettingAFilingHistoryItem_ThenSingleSubcategoryAndActionDateDeserialize()
+        {
+            const string json = """
+                {
+                  "transaction_id":"MzUyMDQ1NzU4MWFkaXF6a2N4",
+                  "barcode":"XF1MYMJM",
+                  "type":"MR01",
+                  "date":"2026-05-08",
+                  "category":"mortgage",
+                  "subcategory":"create",
+                  "description":"mortgage-create-with-deed-with-charge-number-charge-creation-date",
+                  "description_values":{"charge_number":"000020650090","charge_creation_date":"2026-05-06"},
+                  "pages":16,
+                  "action_date":"2026-05-06",
+                  "links":{"self":"/company/00002065/filing-history/MzUyMDQ1NzU4MWFkaXF6a2N4","document_metadata":"https://document-api.company-information.service.gov.uk/document/yiC6UOsmY5UnJERjCxHDRMUIKbFEY_R5zcSTVyVLT-A"}
+                }
+                """;
+
+            var uri = new Uri("https://wibble.com/company/00002065/filing-history/id");
+            HttpMessageHandler handler = new StubHttpMessageHandler(uri, json);
+            var uriBuilder = new Mock<ICompanyFilingHistoryUriBuilder>();
+            uriBuilder.Setup(x => x.Build(It.IsAny<string>(), It.IsAny<string>())).Returns(uri);
+
+            var client = new CompaniesHouseCompanyFilingHistoryClient(new HttpClient(handler), uriBuilder.Object);
+            var result = await client.GetFilingHistoryByTransactionAsync("00002065", "id");
+
+            result.Data.ShouldNotBeNull();
+            result.Data.Category.ShouldBe(new FilingCategory("mortgage"));
+            result.Data.Subcategory.ShouldBe([new FilingSubcategory("create")]);
+            result.Data.ActionDate.ShouldBe(new DateTime(2026, 05, 06));
+            result.Data.Links?.DocumentMetaData.ShouldBe("https://document-api.company-information.service.gov.uk/document/yiC6UOsmY5UnJERjCxHDRMUIKbFEY_R5zcSTVyVLT-A");
         }
     }
 }

@@ -40,5 +40,16 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
 
             results.ShouldNotBeEmpty();
         }
+
+        [Fact]
+        public async Task ThenKnownFilingHistoryIncludesObservedPaginationFields()
+        {
+            var result = await _client.GetCompanyFilingHistoryAsync("00445790");
+
+            result.Data.TotalCount.ShouldBeGreaterThan(0);
+            result.Data.ItemsPerPage.ShouldBeGreaterThan(0);
+            result.Data.Items.ShouldNotBeEmpty();
+            result.Data.Items[0].Category.Value.ShouldNotBeNullOrWhiteSpace();
+        }
     }
 }

@@ -4,8 +4,8 @@ using CompaniesHouse.Response.RegisteredOfficeAddress;
 
 namespace CompaniesHouse
 {
-    internal interface ICompaniesHouseRegisteredOfficeAddressClient
+    public interface ICompaniesHouseRegisteredOfficeAddressClient
     {
-        Task<CompaniesHouseClientResponse<OfficeAddress>> GetRegisteredOfficeAddress(string companyNumber, CancellationToken cancellationToken);
+        Task<CompaniesHouseClientResponse<OfficeAddress>> GetRegisteredOfficeAddress(string companyNumber, CancellationToken cancellationToken = default);
     }
 }

@@ -13,7 +13,7 @@ namespace CompaniesHouse.Response.Charges
         public AssetsCeasedReleased AssetsCeasedReleased { get; set; }
 
         [JsonPropertyName("charge_code")]
-        public string ChargeCode { get; set; }
+        public string? ChargeCode { get; set; }
 
         [JsonPropertyName("charge_number")]
         public int? ChargeNumber { get; set; }
@@ -31,25 +31,25 @@ namespace CompaniesHouse.Response.Charges
         public DateTime? DeliveredOn { get; set; }
 
         [JsonPropertyName("etag")]
-        public string Etag { get; set; }
+        public string? Etag { get; set; }
 
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         [JsonPropertyName("insolvency_cases")]
-        public InsolvencyCase[] InsolvencyCases { get; set; }
+        public InsolvencyCase[]? InsolvencyCases { get; set; }
 
         [JsonPropertyName("links")]
-        public Links Links { get; set; }
+        public Links? Links { get; set; }
 
         [JsonPropertyName("more_than_four_persons_entitled")]
         public bool? MoreThanFourPersonsEntitled { get; set; }
 
         [JsonPropertyName("particulars")]
-        public Particular Particular { get; set; }
+        public Particular? Particular { get; set; }
 
         [JsonPropertyName("persons_entitled")]
-        public PersonEntitled[] PersonsEntitled { get; set; }
+        public PersonEntitled[]? PersonsEntitled { get; set; }
 
         [JsonPropertyName("resolved_on")]
         public DateTime? ResolvedOn { get; set; }
@@ -58,15 +58,15 @@ namespace CompaniesHouse.Response.Charges
         public DateTime? SatisfiedOn { get; set; }
 
         [JsonPropertyName("scottish_alterations")]
-        public ScottishAlterations ScottishAlterations { get; set; }
+        public ScottishAlterations? ScottishAlterations { get; set; }
 
         [JsonPropertyName("secured_details")]
-        public SecuredDetail SecuredDetail { get; set; }
+        public SecuredDetail? SecuredDetail { get; set; }
 
         [JsonPropertyName("status")]
         public ChargeStatus Status { get; set; }
 
         [JsonPropertyName("transactions")]
-        public Transaction[] Transactions { get; set; }
+        public Transaction[]? Transactions { get; set; }
     }
 }
