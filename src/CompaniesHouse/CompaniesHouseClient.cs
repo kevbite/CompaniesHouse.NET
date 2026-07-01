@@ -12,8 +12,11 @@ using CompaniesHouse.Response.Officers;
 using CompaniesHouse.Response.PersonsWithSignificantControl;
 using CompaniesHouse.Response.RegisteredOfficeAddress;
 using CompaniesHouse.Response.Search.AllSearch;
+using CompaniesHouse.Response.Search.AdvancedCompanySearch;
+using CompaniesHouse.Response.Search.CompaniesAlphabeticallySearch;
 using CompaniesHouse.Response.Search.CompanySearch;
 using CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
+using CompaniesHouse.Response.Search.DissolvedCompaniesSearch;
 using CompaniesHouse.Response.Search.OfficerSearch;
 using CompaniesHouse.UriBuilders;
 using Officer = CompaniesHouse.Response.Officers.Officer;
@@ -72,6 +75,21 @@ namespace CompaniesHouse
         public Task<CompaniesHouseClientResponse<AllSearch>> SearchAllAsync(SearchAllRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHouseSearchClient.SearchAsync<SearchAllRequest, AllSearch>(request, cancellationToken);
+        }
+
+        public Task<CompaniesHouseClientResponse<CompaniesAlphabeticallySearch>> SearchCompaniesAlphabeticallyAsync(SearchCompaniesAlphabeticallyRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return _companiesHouseSearchClient.SearchAsync<SearchCompaniesAlphabeticallyRequest, CompaniesAlphabeticallySearch>(request, cancellationToken);
+        }
+
+        public Task<CompaniesHouseClientResponse<DissolvedCompaniesSearch>> SearchDissolvedCompaniesAsync(SearchDissolvedCompaniesRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return _companiesHouseSearchClient.SearchAsync<SearchDissolvedCompaniesRequest, DissolvedCompaniesSearch>(request, cancellationToken);
+        }
+
+        public Task<CompaniesHouseClientResponse<AdvancedCompanySearch>> AdvancedCompanySearchAsync(AdvancedCompanySearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return _companiesHouseSearchClient.SearchAsync<AdvancedCompanySearchRequest, AdvancedCompanySearch>(request, cancellationToken);
         }
 
         public Task<CompaniesHouseClientResponse<CompanyProfile>> GetCompanyProfileAsync(string companyNumber, CancellationToken cancellationToken = default(CancellationToken))

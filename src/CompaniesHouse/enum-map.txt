@@ -8,3 +8,5 @@
 # up a new static member - no hand-editing of generated types required.
 
 company_status|CompaniesHouse.Response|CompanyStatus|true
+company_type|CompaniesHouse.Response|CompanyType|true
+company_subtype|CompaniesHouse.Response|CompanySubtype|true

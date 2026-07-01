@@ -20,7 +20,6 @@ namespace CompaniesHouse
 
         public async Task<CompaniesHouseClientResponse<TReturn>> SearchAsync<TSearchRequest, TReturn>(TSearchRequest request,
             CancellationToken cancellationToken = default(CancellationToken))
-            where TSearchRequest : SearchRequest<TReturn>
         {
             var searchUriBuilder = _searchUriBuilderFactory.Create<TSearchRequest, TReturn>();
             var requestUri = searchUriBuilder.Build(request);

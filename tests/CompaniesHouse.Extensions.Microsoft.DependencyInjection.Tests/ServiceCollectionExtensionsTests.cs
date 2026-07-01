@@ -24,6 +24,9 @@ namespace CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests
             scope.ServiceProvider.GetService<ICompaniesHouseSearchOfficerClient>().ShouldNotBeNull();
             scope.ServiceProvider.GetService<ICompaniesHouseSearchDisqualifiedOfficerClient>().ShouldNotBeNull();
             scope.ServiceProvider.GetService<ICompaniesHouseSearchAllClient>().ShouldNotBeNull();
+            scope.ServiceProvider.GetService<ICompaniesHouseSearchCompaniesAlphabeticallyClient>().ShouldNotBeNull();
+            scope.ServiceProvider.GetService<ICompaniesHouseSearchDissolvedCompaniesClient>().ShouldNotBeNull();
+            scope.ServiceProvider.GetService<ICompaniesHouseAdvancedCompanySearchClient>().ShouldNotBeNull();
             scope.ServiceProvider.GetService<ICompaniesHouseCompanyProfileClient>().ShouldNotBeNull();
             scope.ServiceProvider.GetService<ICompaniesHouseCompanyFilingHistoryClient>().ShouldNotBeNull();
             scope.ServiceProvider.GetService<ICompaniesHouseOfficersClient>().ShouldNotBeNull();
@@ -86,6 +89,8 @@ namespace CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests
             first.ShouldNotBeSameAs(second);
 
             scope.ServiceProvider.GetRequiredKeyedService<ICompaniesHouseSearchCompanyClient>("first").ShouldNotBeNull();
+            scope.ServiceProvider.GetRequiredKeyedService<ICompaniesHouseSearchCompaniesAlphabeticallyClient>("first").ShouldNotBeNull();
+            scope.ServiceProvider.GetRequiredKeyedService<ICompaniesHouseAdvancedCompanySearchClient>("second").ShouldNotBeNull();
             scope.ServiceProvider.GetRequiredKeyedService<ICompaniesHouseChargesClient>("second").ShouldNotBeNull();
         }
 

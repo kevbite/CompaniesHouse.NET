@@ -11,7 +11,7 @@ namespace CompaniesHouse.Tests
     /// <summary>
     /// A small, dependency-free replacement for FluentAssertions' <c>BeEquivalentTo</c>.
     /// Recursively compares public properties of two object graphs, with built-in bridging
-    /// between production enum values and the raw wire strings used by the test
+    /// between production enum/value-type values and the raw wire strings used by the test
     /// <c>ResourceBuilders</c> fixtures (matched via each enum member's <see cref="EnumMemberAttribute"/>).
     /// This removes the need for the old FluentAssertions <c>IEquivalencyStep</c>/<c>MapProviders</c> machinery.
     /// </summary>
@@ -42,7 +42,7 @@ namespace CompaniesHouse.Tests
                 return;
             }
 
-            // Enum <-> raw wire string bridging (either direction).
+            // Enum/string-backed-value-type <-> raw wire string bridging (either direction).
             if (actual is Enum actualEnum && expected is string expectedString)
             {
                 var actualWireValue = GetEnumMemberValue(actualEnum);
@@ -60,6 +60,26 @@ namespace CompaniesHouse.Tests
                 if (expectedWireValue != actualString)
                 {
                     differences.Add($"{path}: expected <{expectedWireValue}> but was <{actualString}>");
+                }
+
+                return;
+            }
+
+            if (TryGetStringBackedValue(actual, out var actualRawValueFromValueType) && expected is string expectedRawValue)
+            {
+                if (actualRawValueFromValueType != expectedRawValue)
+                {
+                    differences.Add($"{path}: expected <{expectedRawValue}> but was <{actualRawValueFromValueType}>");
+                }
+
+                return;
+            }
+
+            if (TryGetStringBackedValue(expected, out var expectedRawValueFromValueType) && actual is string actualRawValue)
+            {
+                if (expectedRawValueFromValueType != actualRawValue)
+                {
+                    differences.Add($"{path}: expected <{expectedRawValueFromValueType}> but was <{actualRawValue}>");
                 }
 
                 return;
@@ -138,6 +158,11 @@ namespace CompaniesHouse.Tests
                 return GetEnumMemberValue(actualEnum) == expectedString;
             }
 
+            if (TryGetStringBackedValue(actual, out var actualRawValueFromValueType) && expected is string expectedRawValue)
+            {
+                return actualRawValueFromValueType == expectedRawValue;
+            }
+
             return Equals(actual, expected);
         }
 
@@ -150,6 +175,25 @@ namespace CompaniesHouse.Tests
             var enumMember = (EnumMemberAttribute[])info?.GetCustomAttributes(typeof(EnumMemberAttribute), false);
 
             return enumMember is { Length: > 0 } ? enumMember[0].Value : enumValue.ToString();
+        }
+
+        private static bool TryGetStringBackedValue(object value, out string rawValue)
+        {
+            rawValue = string.Empty;
+
+            if (value is null || value is string || value is Enum)
+            {
+                return false;
+            }
+
+            var valueProperty = value.GetType().GetProperty("Value");
+            if (valueProperty?.PropertyType != typeof(string))
+            {
+                return false;
+            }
+
+            rawValue = (string?)valueProperty.GetValue(value) ?? string.Empty;
+            return true;
         }
     }
 }

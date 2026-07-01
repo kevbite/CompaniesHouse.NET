@@ -7,7 +7,6 @@ namespace CompaniesHouse
     public interface ICompaniesHouseSearchClient
     {
         Task<CompaniesHouseClientResponse<TReturn>> SearchAsync<TSearchRequest, TReturn>(TSearchRequest request,
-            CancellationToken cancellationToken = default(CancellationToken))
-            where TSearchRequest : SearchRequest<TReturn>;
+            CancellationToken cancellationToken = default(CancellationToken));
     }
 }

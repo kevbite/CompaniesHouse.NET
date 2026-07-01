@@ -5,6 +5,6 @@ namespace CompaniesHouse
 {
     public interface ISearchUriBuilderFactory
     {
-        ISearchUriBuilder<TSearch> Create<TSearch, TReturn>() where TSearch : SearchRequest<TReturn>;
+        ISearchUriBuilder<TSearch> Create<TSearch, TReturn>();
     }
 }

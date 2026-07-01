@@ -12,9 +12,9 @@ public class SearchCompanyUriBuilder : SearchUriBuilder<SearchCompanyRequest>
     {
         var query = base.BuildQuery(request);
 
-        if (string.IsNullOrWhiteSpace(request.Restrictions))
+        if (!string.IsNullOrWhiteSpace(request.Restrictions))
         {
-            query += "&restrictions=" + request.Restrictions;
+            query += "&restrictions=" + Uri.EscapeDataString(request.Restrictions);
         }
 
         return query;

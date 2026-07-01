@@ -101,6 +101,30 @@ namespace CompaniesHouse.SourceGenerator.Tests
             diagnostics.ShouldContain(d => d.Id == "CHENUM001");
         }
 
+        [Fact]
+        public void GeneratesMultipleConfiguredGroupsFromASingleEnumMapFile()
+        {
+            var additionalFiles = new[]
+            {
+                new InMemoryAdditionalText(@"external\api-enumerations\constants.yml", """
+                    company_status:
+                        'active' : "Active"
+                    company_type:
+                        'ltd' : "Private limited company"
+                    """),
+                new InMemoryAdditionalText(@"enum-map.txt", """
+                    company_status|CompaniesHouse.Response|CompanyStatus|true
+                    company_type|CompaniesHouse.Response|CompanyType|true
+                    """),
+            };
+
+            var generated = RunGenerator(additionalFiles);
+
+            generated.ShouldContainKey("CompanyStatus.g.cs");
+            generated.ShouldContainKey("CompanyType.g.cs");
+            generated["CompanyType.g.cs"].ShouldContain("public static CompanyType Ltd => new(\"ltd\");");
+        }
+
         private static Dictionary<string, string> RunGenerator(IEnumerable<InMemoryAdditionalText> additionalFiles)
         {
             var compilation = CreateCompilation();

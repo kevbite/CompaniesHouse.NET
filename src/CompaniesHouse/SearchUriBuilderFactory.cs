@@ -5,7 +5,7 @@ namespace CompaniesHouse
 {
     public class SearchUriBuilderFactory : ISearchUriBuilderFactory
     {
-        public ISearchUriBuilder<TSearch> Create<TSearch, TReturn>() where TSearch : SearchRequest<TReturn>
+        public ISearchUriBuilder<TSearch> Create<TSearch, TReturn>()
         {
             var type = typeof(TSearch);
 
@@ -15,13 +15,27 @@ namespace CompaniesHouse
             }
             else if (type == typeof(SearchOfficerRequest))
             {
-                return new SearchUriBuilder<TSearch>("search/officers");
-            }else if (type == typeof(SearchDisqualifiedOfficerRequest))
+                return (ISearchUriBuilder<TSearch>)new SearchUriBuilder<SearchOfficerRequest>("search/officers");
+            }
+            else if (type == typeof(SearchDisqualifiedOfficerRequest))
             {
-                return new SearchUriBuilder<TSearch>("search/disqualified-officers");
-            } else if (type == typeof(SearchAllRequest))
+                return (ISearchUriBuilder<TSearch>)new SearchUriBuilder<SearchDisqualifiedOfficerRequest>("search/disqualified-officers");
+            }
+            else if (type == typeof(SearchAllRequest))
             {
-                return new SearchUriBuilder<TSearch>("search");
+                return (ISearchUriBuilder<TSearch>)new SearchUriBuilder<SearchAllRequest>("search");
+            }
+            else if (type == typeof(SearchCompaniesAlphabeticallyRequest))
+            {
+                return (ISearchUriBuilder<TSearch>)new SearchCompaniesAlphabeticallyUriBuilder("alphabetical-search/companies");
+            }
+            else if (type == typeof(SearchDissolvedCompaniesRequest))
+            {
+                return (ISearchUriBuilder<TSearch>)new SearchDissolvedCompaniesUriBuilder("dissolved-search/companies");
+            }
+            else if (type == typeof(AdvancedCompanySearchRequest))
+            {
+                return (ISearchUriBuilder<TSearch>)new AdvancedCompanySearchUriBuilder("advanced-search/companies");
             }
 
             throw new InvalidOperationException();

@@ -155,6 +155,12 @@ namespace Microsoft.Extensions.DependencyInjection
                 provider.GetRequiredService<ICompaniesHouseClient>());
             services.TryAddTransient<ICompaniesHouseSearchAllClient>(provider =>
                 provider.GetRequiredService<ICompaniesHouseClient>());
+            services.TryAddTransient<ICompaniesHouseSearchCompaniesAlphabeticallyClient>(provider =>
+                provider.GetRequiredService<ICompaniesHouseClient>());
+            services.TryAddTransient<ICompaniesHouseSearchDissolvedCompaniesClient>(provider =>
+                provider.GetRequiredService<ICompaniesHouseClient>());
+            services.TryAddTransient<ICompaniesHouseAdvancedCompanySearchClient>(provider =>
+                provider.GetRequiredService<ICompaniesHouseClient>());
             services.TryAddTransient<ICompaniesHouseCompanyProfileClient>(provider =>
                 provider.GetRequiredService<ICompaniesHouseClient>());
             services.TryAddTransient<ICompaniesHouseCompanyFilingHistoryClient>(provider =>
@@ -328,6 +334,12 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddKeyedTransient<ICompaniesHouseSearchDisqualifiedOfficerClient>(name, (provider, key) =>
                 provider.GetRequiredKeyedService<ICompaniesHouseClient>(key));
             services.TryAddKeyedTransient<ICompaniesHouseSearchAllClient>(name, (provider, key) =>
+                provider.GetRequiredKeyedService<ICompaniesHouseClient>(key));
+            services.TryAddKeyedTransient<ICompaniesHouseSearchCompaniesAlphabeticallyClient>(name, (provider, key) =>
+                provider.GetRequiredKeyedService<ICompaniesHouseClient>(key));
+            services.TryAddKeyedTransient<ICompaniesHouseSearchDissolvedCompaniesClient>(name, (provider, key) =>
+                provider.GetRequiredKeyedService<ICompaniesHouseClient>(key));
+            services.TryAddKeyedTransient<ICompaniesHouseAdvancedCompanySearchClient>(name, (provider, key) =>
                 provider.GetRequiredKeyedService<ICompaniesHouseClient>(key));
             services.TryAddKeyedTransient<ICompaniesHouseCompanyProfileClient>(name, (provider, key) =>
                 provider.GetRequiredKeyedService<ICompaniesHouseClient>(key));
