@@ -7,13 +7,15 @@
 
   <ItemGroup>
     <!-- Shipped library dependencies -->
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.0" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Options" Version="9.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.0" />
-    <!-- Microsoft.Extensions.Options / .ConfigurationExtensions above are reserved
-         for plan 02 (IOptions<> DI rework); not yet referenced by any project. -->
+    <PackageVersion Include="Microsoft.Extensions.Options.DataAnnotations" Version="9.0.0" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
 
     <!-- Test dependencies -->
