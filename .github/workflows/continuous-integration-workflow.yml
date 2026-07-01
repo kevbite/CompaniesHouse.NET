@@ -6,7 +6,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      VERSION: 8.0.${{ github.run_number }}
+      VERSION: ${{ github.ref == 'refs/heads/master' && format('8.0.{0}', github.run_number) || format('9.0.0-pre{0}', github.run_number) }}
+      PUBLISH_PACKAGE: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/prerelease' }}
       DOCKER_BUILDKIT: 1
       BUILDKIT_PROGRESS: plain
     steps:
@@ -22,12 +23,12 @@ jobs:
       with:
         trx_files: TestResults/**/*.trx
     - name: NuGet.Org push
-      if: github.ref == 'refs/heads/master'
+      if: ${{ env.PUBLISH_PACKAGE }}
       run: |
         dotnet nuget push ./artifacts/*.nupkg --source NuGet.org --api-key ${{ secrets.NUGET_API_KEY }}
     - name: Create Release
       id: create_release
-      if: github.ref == 'refs/heads/master'
+      if: ${{ env.PUBLISH_PACKAGE }}
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
