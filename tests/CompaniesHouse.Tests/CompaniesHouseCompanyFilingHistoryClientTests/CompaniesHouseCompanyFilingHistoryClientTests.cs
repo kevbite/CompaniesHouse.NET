@@ -1,19 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CompaniesHouse.Tests.ResourceBuilders;
 using CompaniesHouse.UriBuilders;
-using FluentAssertions;
 using Moq;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.Tests.CompaniesHouseCompanyFilingHistoryClientTests
 {
-    [TestFixture]
     public class CompaniesHouseCompanyFilingHistoryClientTests
     {
-        [TestCaseSource(nameof(TestCases))]
+        [Theory]
+        [MemberData(nameof(TestCases))]
         public async Task GivenACompaniesHouseCompanyProfileClient_WhenGettingACompanyProfile(CompaniesHouseCompanyFilingHistoryClientTestCase testCase)
         {
             var companyFilingHistory = CompanyFilingHistoryBuilder.Build(testCase);
@@ -32,10 +33,11 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyFilingHistoryClientTests
 
             var result = await client.GetCompanyFilingHistoryAsync("abc", 0, 25);
 
-            result.Data.ShouldBeEquivalentTo(companyFilingHistory);
+            EquivalencyAssertionExtensions.ShouldBeEquivalentTo((object)result.Data, companyFilingHistory);
         }
 
-        [TestCaseSource(nameof(TestCases))]
+        [Theory]
+        [MemberData(nameof(TestCases))]
         public async Task GivenACompaniesHouseCompanyFilingHistoryClient_WhenGettingAFilingHistoryItem(CompaniesHouseCompanyFilingHistoryClientTestCase testCase)
         {
             var filingHistory = CompanyFilingHistoryBuilder.BuildOne(testCase);
@@ -52,10 +54,10 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyFilingHistoryClientTests
 
             var result = await client.GetFilingHistoryByTransactionAsync("abc", "id1");
 
-            result.Data.ShouldBeEquivalentTo(filingHistory);
+            EquivalencyAssertionExtensions.ShouldBeEquivalentTo((object)result.Data, filingHistory);
         }
 
-        public static CompaniesHouseCompanyFilingHistoryClientTestCase[] TestCases()
+        public static IEnumerable<object[]> TestCases()
         {
             var allFilingCategories = EnumerationMappings.PossibleFilingCategories.Keys
                 .Select(x => new CompaniesHouseCompanyFilingHistoryClientTestCase
@@ -97,7 +99,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyFilingHistoryClientTests
                 .Concat(allFilingSubcategories)
                 .Concat(allFilingHistoryStatus)
                 .Concat(allFilingResolutionCategories)
-                .ToArray();
+                .Select(testCase => new object[] { testCase });
         }
     }
 }

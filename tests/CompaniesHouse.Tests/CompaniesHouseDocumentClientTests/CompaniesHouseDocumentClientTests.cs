@@ -4,22 +4,20 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using CompaniesHouse.Response.Document;
 using CompaniesHouse.UriBuilders;
-using FluentAssertions;
 using Moq;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.Tests.CompaniesHouseDocumentClientTests
 {
-    [TestFixture]
-    public class CompaniesHouseDocumentClientTests
+    public class CompaniesHouseDocumentClientTests : IAsyncLifetime
     {
         private CompaniesHouseClientResponse<DocumentDownload> _result;
         private const string ExpectedMediaType = "application/pdf";
         private const string ExpectedContent = "test pdf";
         private const string DocumentId = "wibble";
 
-        [SetUp]
-        public async Task GivenAClient_WhenDownloadingDocument()
+        public async Task InitializeAsync()
         {
             var requestUri = new Uri($"https://document-api.companieshouse.gov.uk/document/{DocumentId}/content");
             var stubHttpMessageHandler = new StubHttpMessageHandler(requestUri, ExpectedContent, ExpectedMediaType);
@@ -29,14 +27,16 @@ namespace CompaniesHouse.Tests.CompaniesHouseDocumentClientTests
             _result = await new CompaniesHouseDocumentDownloadClient(new HttpClient(stubHttpMessageHandler), mockUriBuilder.Object).DownloadDocumentAsync(DocumentId);
         }
 
-        [Test]
-        public void ThenDocumentContentIsCorrect()
+        public Task DisposeAsync() => Task.CompletedTask;
+
+        [Fact]
+        public async Task ThenDocumentContentIsCorrect()
         {
             using var memoryStream = new MemoryStream();
-            _result.Data.Content.CopyToAsync(memoryStream);
+            await _result.Data.Content.CopyToAsync(memoryStream);
             memoryStream.Seek(0, SeekOrigin.Begin);
 
-            new StreamReader(memoryStream).ReadToEnd().Should().Be(ExpectedContent);
+            new StreamReader(memoryStream).ReadToEnd().ShouldBe(ExpectedContent);
         }
     }
 }

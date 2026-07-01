@@ -1,0 +1,195 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Companies House Public Data API",
+        "description": "An API suite providing read only access to search and retrieve public company data"
+    },
+    "host": "api.company-information.service.gov.uk",
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "tags": [{
+            "name": "registeredOfficeAddress",
+            "description": "Registered office address"
+        },
+        {
+            "name": "companyProfile",
+            "description": "Company profile"
+        },
+        {
+            "name": "search",
+            "description": "Search"
+        },
+        {
+            "name": "officers",
+            "description": "Officers"
+        },
+        {
+            "name": "registers",
+            "description": "Registers"
+        },
+        {
+            "name": "charges",
+            "description": "Charges"
+        },
+        {
+            "name": "filingHistory",
+            "description": "Filing history"
+        },
+        {
+            "name": "insolvency",
+            "description": "Insolvency"
+        },
+        {
+            "name": "exemptions",
+            "description": "Exemptions"
+        },
+        {
+            "name": "officerDisqualifications",
+            "description": "Officer disqualifications"
+        },
+        {
+            "name": "officerAppointments",
+            "description": "Officer appointments"
+        },
+        {
+            "name": "UKEstablishments",
+            "description": "UK Establishments"
+        },
+        {
+            "name": "personsWithSignificantControl",
+            "description": "Persons with significant control"
+        },
+        {
+            "name": "pscDiscrepancies",
+            "description": "PSC discrepancies"
+        },
+        {
+            "name": "personsWithSignificantControlNotifications",
+            "description": "Persons with significant control notifications"
+        }
+    ],
+    "securityDefinitions": {
+        "api_key": {
+            "type": "apiKey",
+            "name": "api_key",
+            "in": "header"
+        }
+    },
+    "security": [{
+            "api_key": []
+        }
+    ],
+    "paths": {
+        "/company/{companyNumber}/registered-office-address": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/companyAddress.json#/getCompanyAddress"
+        },
+        "/company/{companyNumber}": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/companyProfile.json"
+        },
+        "/search": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/search.json#/searchAll"
+        },
+        "/search/companies": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/search.json#/searchCompanies"
+        },
+        "/search/officers": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/search.json#/searchOfficers"
+        },
+        "/search/disqualified-officers": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/search.json#/searchDisqualified-officers"
+        },
+        "/dissolved-search/companies": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/search-companies.json#/searchDissolved"
+        },
+        "/alphabetical-search/companies": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/search-companies.json#/searchAlphabetic"
+        },
+        "/advanced-search/companies": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/search-companies.json#/searchAdvanced"
+        },
+        "/company/{company_number}/officers": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/companyOfficerList.json#/listCompanyOfficers"
+        },
+        "/company/{company_number}/appointments/{appointment_id}": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/companyOfficerList.json#/getCompanyOfficerAppointment"
+        },
+        "/company/{company_number}/registers": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/companyRegisters.json"
+        },
+        "/company/{company_number}/filing-history/{transaction_id}": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/filingHistory.json#/getFilingHistory"
+        },
+        "/company/{company_number}/filing-history": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/filingHistory.json#/listFilingHistory"
+        },
+        "/company/{company_number}/exemptions": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/exemptions.json"
+        },
+        "/disqualified-officers/natural/{officer_id}": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/disqualifications.json#/getNatural"
+        },
+        "/disqualified-officers/corporate/{officer_id}": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/disqualifications.json#/getCorporate"
+        },
+        "/officers/{officer_id}/appointments": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/officerAppointmentList.json"
+        },
+        "/company/{company_number}/charges": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/charges.json#/chargeList"
+        },
+        "/company/{company_number}/charges/{charge_id}": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/charges.json#/chargeDetails"
+        },
+        "/company/{company_number}/insolvency": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/insolvency.json#/insolvencyCase"
+        },
+        "/company/{company_number}/uk-establishments": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/companyUKEstablishments.json"
+        },
+        "/company/{company_number}/persons-with-significant-control": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/psc.json#/listCompanyPSC"
+        },
+        "/company/{company_number}/persons-with-significant-control/individual/{notification_id}": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/psc.json#/getIndividualPSC"
+        },
+        "/company/{company_number}/persons-with-significant-control/individual-beneficial-owner/{notification_id}": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/psc.json#/getIndividualBO"
+        },
+        "/company/{company_number}/persons-with-significant-control/corporate-entity/{notification_id}": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/psc.json#/getCorporateEntityPSC"
+        },
+        "/company/{company_number}/persons-with-significant-control/corporate-entity-beneficial-owner/{notification_id}": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/psc.json#/getCorporateEntityBO"
+        },
+        "/company/{company_number}/persons-with-significant-control/legal-person/{notification_id}": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/psc.json#/getLegalPersonPSC"
+        },
+        "/company/{company_number}/persons-with-significant-control/legal-person-beneficial-owner/{notification_id}": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/psc.json#/getLegalPersonBO"
+        },
+        "/company/{company_number}/persons-with-significant-control-statements": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/psc.json#/listCompanyPSCStatements"
+        },
+        "/company/{company_number}/persons-with-significant-control-statements/{statement_id}": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/psc.json#/getPSCStatement"
+        },
+        "/company/{company_number}/persons-with-significant-control/super-secure/{super_secure_id}": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/psc.json#/getSuperSecurePSC"
+        },
+        "/company/{company_number}/persons-with-significant-control/super-secure-beneficial-owner/{super_secure_id}": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/psc.json#/getSuperSecureBO"
+        },
+        "/company/{company_number}/persons-with-significant-control/{psc_id}/notifications": {
+            "$ref": "http://127.0.0.1:10000/api.ch.gov.uk-specifications/swagger-2.0/spec/pscNotificationList.json"
+        }
+    }
+}

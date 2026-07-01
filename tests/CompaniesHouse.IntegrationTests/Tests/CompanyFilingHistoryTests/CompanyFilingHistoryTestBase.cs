@@ -1,21 +1,19 @@
-﻿using System;
 using System.Threading.Tasks;
-using CompaniesHouse.Response.CompanyFiling;
-using NUnit.Framework;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
 {
-    public abstract class CompanyFilingHistoryTestBase
+    public abstract class CompanyFilingHistoryTestBase : IAsyncLifetime
     {
-        protected CompaniesHouseClient _client;
+        protected CompaniesHouseClient _client = null!;
 
-        [SetUp]
-        public async Task Setup()
+        public async Task InitializeAsync()
         {
             GivenACompaniesHouseClient();
-            await When()
-                .ConfigureAwait(false);
+            await When();
         }
+
+        public Task DisposeAsync() => Task.CompletedTask;
 
         protected abstract Task When();
 

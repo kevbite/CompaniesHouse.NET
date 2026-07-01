@@ -1,45 +1,29 @@
-﻿using System;
 using System.Threading.Tasks;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response.Search.CompanySearch;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
 {
-    [TestFixture("brighouse computers")]
-    [TestFixture("British Gas")]
-    [TestFixture("Bay Horse")]
-
     public class CompanySearchTests
     {
-        private readonly string _query;
-        private CompaniesHouseClient _client;
-        private CompaniesHouseClientResponse<CompanySearch> _result;
+        private readonly CompaniesHouseClient _client;
 
-        public CompanySearchTests(string query)
+        public CompanySearchTests()
         {
-            _query = query;
+            _client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
         }
 
-        [OneTimeSetUp]
-        public void GivenACompaniesHouseClient()
+        [Theory]
+        [InlineData("brighouse computers")]
+        [InlineData("British Gas")]
+        [InlineData("Bay Horse")]
+        public async Task ThenCompaniesAreReturned(string query)
         {
-            var settings = new CompaniesHouseSettings(Keys.ApiKey);
+            var result = await _client.SearchCompanyAsync(new SearchCompanyRequest { Query = query, StartIndex = 0, ItemsPerPage = 100 });
 
-            _client = new CompaniesHouseClient(settings);
-        }
-
-        [SetUp]
-        public async Task WhenSearchingForACompany()
-        {
-            _result = await _client.SearchCompanyAsync(new SearchCompanyRequest() { Query = _query, StartIndex = 0, ItemsPerPage = 100 })
-                .ConfigureAwait(false);
-        }
-
-        [Test]
-        public void ThenCompaniesAreReturned()
-        {
-            Assert.That(_result.Data.Companies, Is.Not.Empty);
+            result.Data.Companies.ShouldNotBeEmpty();
         }
     }
 }

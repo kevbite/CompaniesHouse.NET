@@ -1,20 +1,21 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using CompaniesHouse.Tests.ResourceBuilders;
 using CompaniesHouse.UriBuilders;
-using FluentAssertions;
 using Moq;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.Tests.CompaniesHouseRegisteredOfficeAddressTests
 {
-    [TestFixture]
     public class CompaniesHouseRegisteredOfficeAddressTests
     {
-        [TestCaseSource(nameof(TestCases))]
+        [Theory]
+        [MemberData(nameof(TestCases))]
         public async Task GivenACompaniesHouseRegistereOfficeAddressClient_WhenGettingARegisteredOfficeAddress(CompaniesHouseRegisteredOfficeAddressTestCase testCase)
         {
             var registeredOfficeAddress = RegisteredOfficeAddressBuilder.Build(testCase);
@@ -31,18 +32,18 @@ namespace CompaniesHouse.Tests.CompaniesHouseRegisteredOfficeAddressTests
 
             var result = await client.GetRegisteredOfficeAddress("abc");
 
-            result.Data.ShouldBeEquivalentTo(registeredOfficeAddress, opt => opt.Excluding(x => x.Country));
+            EquivalencyAssertionExtensions.ShouldBeEquivalentTo((object)result.Data, registeredOfficeAddress, nameof(RegisteredOfficeAddress.Country));
 
-            result.Data.Country.GetEnumMemberValue().Should().Be(registeredOfficeAddress.Country);
+            result.Data.Country.GetEnumMemberValue().ShouldBe(registeredOfficeAddress.Country);
         }
 
-        public static CompaniesHouseRegisteredOfficeAddressTestCase[] TestCases() =>
+        public static IEnumerable<object[]> TestCases() =>
             EnumerationMappings.PossibleRegisteredOfficeAddressCountry.Keys
                 .Select(x => new CompaniesHouseRegisteredOfficeAddressTestCase
                 {
                     Country = x
                 })
-                .ToArray();
+                .Select(testCase => new object[] { testCase });
     }
 
     internal static class EnumExtensions

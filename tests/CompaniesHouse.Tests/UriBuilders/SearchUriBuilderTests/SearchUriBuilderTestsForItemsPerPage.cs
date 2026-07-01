@@ -1,20 +1,19 @@
 ﻿using System;
-using NUnit.Framework;
+using Xunit;
 
 namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
 {
-    [TestFixture]
     public class SearchUriBuilderTestsForItemsPerPage : SearchUriBuilderTestsBase
     {
         protected override int? ItemsPerPage { get; } = new Random().Next();
 
-        [Test]
+        [Fact]
         public void ThenTheUriQueryStringContainsTheQuery() => Then.TheUriQueryStringContainsTheQuery();
 
-        [Test]
+        [Fact]
         public void ThenTheUriQueryStringContainsTheItemsPerPage() => Then.TheUriQueryStringContainsTheItemsPerPage();
 
-        [Test]
+        [Fact]
         public void ThenTheUriQueryStringDoesNotContainsTheStartIndex() => Then.TheUriQueryStringDoesNotContainsTheStartIndex();
     }
 }

@@ -1,34 +1,25 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using CompaniesHouse.Response.Insolvency;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.CompanyInsolvencyInformationTests
 {
-    [TestFixture]
     public class CompanyInsolvencyInformationTests
     {
-        private CompaniesHouseClient _client;
-        private CompaniesHouseClientResponse<CompanyInsolvencyInformation> _result;
-        
-        [OneTimeSetUp]
-        public void GivenACompaniesHouseClient()
-        {
-            var settings = new CompaniesHouseSettings(Keys.ApiKey);
+        private readonly CompaniesHouseClient _client;
 
-            _client = new CompaniesHouseClient(settings);
+        public CompanyInsolvencyInformationTests()
+        {
+            _client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
         }
 
-        [SetUp]
-        public async Task WhenSearching()
+        [Fact]
+        public async Task TheItemsAreReturned()
         {
-            _result = await _client.GetCompanyInsolvencyInformationAsync("08749409")
-                .ConfigureAwait(false);
-        }
+            var result = await _client.GetCompanyInsolvencyInformationAsync("08749409");
 
-        [Test]
-        public void TheItemsAreReturned()
-        {
-            Assert.That(_result.Data, Is.Not.Null);
+            result.Data.ShouldNotBeNull();
         }
     }
 }

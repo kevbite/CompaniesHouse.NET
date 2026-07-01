@@ -1,20 +1,21 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CompaniesHouse.Tests.ResourceBuilders;
 using CompaniesHouse.UriBuilders;
-using FluentAssertions;
 using Moq;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.Tests.CompaniesHouseOfficersAppointmentClientTests
 {
-    [TestFixture]
     public class CompaniesHouseOfficersAppointmentClientTests
     {
 
-        [TestCaseSource(nameof(TestCases))]
+        [Theory]
+        [MemberData(nameof(TestCases))]
         public async Task GivenACompaniesHouseOffficerAppointmentClient_WhenGettingAnOfficerByAppointmentId(CompaniesHouseOfficerByAppointmentTestCase testCase)
         {
             var officersAppointment = OfficerBuilder.Build(testCase);
@@ -30,15 +31,16 @@ namespace CompaniesHouse.Tests.CompaniesHouseOfficersAppointmentClientTests
             var client = new CompaniesHouseOfficerByByAppointmentClient(new HttpClient(handler), uriBuilder.Object);
             var result = await client.GetOfficerByAppointmentIdAsync("abc", "1");
             
-            result.Data.ShouldBeEquivalentTo(officersAppointment);
+            EquivalencyAssertionExtensions.ShouldBeEquivalentTo((object)result.Data, officersAppointment);
         }
 
-        public static CompaniesHouseOfficerByAppointmentTestCase[] TestCases() =>
+        public static IEnumerable<object[]> TestCases() =>
             EnumerationMappings.PossibleOfficerRoles.Keys
                 .Select(x => new CompaniesHouseOfficerByAppointmentTestCase
                 {
                     OfficerRole = x
-                }).ToArray();
+                })
+                .Select(testCase => new object[] { testCase });
     }
 
 }

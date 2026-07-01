@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using CompaniesHouse.Tests.ResourceBuilders;
 using CompaniesHouse.UriBuilders;
-using FluentAssertions;
 using Moq;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 using PersonsWithSignificantControl = CompaniesHouse.Response.PersonsWithSignificantControl.PersonsWithSignificantControl;
 
 namespace CompaniesHouse.Tests.CompaniesHousePersonsWithSignificantControlTests
 {
-    [TestFixture]
     public class CompaniesHousePersonsWithSignificantControlTests
     {
         private CompaniesHousePersonsWithSignificantControlClient _client;
@@ -17,8 +17,8 @@ namespace CompaniesHouse.Tests.CompaniesHousePersonsWithSignificantControlTests
         private CompaniesHouseClientResponse<PersonsWithSignificantControl> _result;
         private ResourceBuilders.PersonsWithSignificantControl _personsWithSignificantControl;
 
-        [Test]
-        public void GivenACompaniesHouseCompanyProfileClient_WhenGettingPersonsWithSignificantControl()
+        [Fact]
+        public async Task GivenACompaniesHouseCompanyProfileClient_WhenGettingPersonsWithSignificantControl()
         {
             _personsWithSignificantControl = new PersonsWithSignificantControlBuilder().Build();
             var resource = new PersonsWithSignificantControlResourceBuilder(_personsWithSignificantControl).Create();
@@ -33,9 +33,9 @@ namespace CompaniesHouse.Tests.CompaniesHousePersonsWithSignificantControlTests
 
             _client = new CompaniesHousePersonsWithSignificantControlClient(new HttpClient(handler), uriBuilder.Object);
 
-            _result = _client.GetPersonsWithSignificantControlAsync("abc", 0, 25).Result;
+            _result = await _client.GetPersonsWithSignificantControlAsync("abc", 0, 25);
 
-            _result.Data.ShouldBeEquivalentTo(_personsWithSignificantControl);
+            EquivalencyAssertionExtensions.ShouldBeEquivalentTo((object)_result.Data, _personsWithSignificantControl);
         }
     }
 }

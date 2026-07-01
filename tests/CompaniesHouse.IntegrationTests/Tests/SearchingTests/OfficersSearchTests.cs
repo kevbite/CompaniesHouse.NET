@@ -1,36 +1,26 @@
-using System;
 using System.Threading.Tasks;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response.Search.OfficerSearch;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
 {
-    [TestFixture]
     public class OfficersSearchTests
     {
-        private CompaniesHouseClient _client;
-        private CompaniesHouseClientResponse<OfficerSearch> _result;
-        
-        [OneTimeSetUp]
-        public void GivenACompaniesHouseClient()
-        {
-            var settings = new CompaniesHouseSettings(Keys.ApiKey);
+        private readonly CompaniesHouseClient _client;
 
-            _client = new CompaniesHouseClient(settings);
+        public OfficersSearchTests()
+        {
+            _client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
         }
 
-        [SetUp]
-        public async Task WhenSearchingForAOfficer()
+        [Fact]
+        public async Task ThenOfficersAreReturned()
         {
-            _result = await _client.SearchOfficerAsync(new SearchOfficerRequest() { Query = "Kevin" })
-                .ConfigureAwait(false);
-        }
+            var result = await _client.SearchOfficerAsync(new SearchOfficerRequest { Query = "Kevin" });
 
-        [Test]
-        public void ThenOfficersAreReturned()
-        {
-            Assert.That(_result.Data.Officers, Is.Not.Empty);
+            result.Data.Officers.ShouldNotBeEmpty();
         }
     }
 }

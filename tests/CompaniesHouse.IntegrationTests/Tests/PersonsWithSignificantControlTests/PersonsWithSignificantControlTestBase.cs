@@ -1,20 +1,21 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using CompaniesHouse.Response.PersonsWithSignificantControl;
-using NUnit.Framework;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.PersonsWithSignificantControlTests
 {
-    public abstract class PersonsWithSignificantControlTestBase
+    public abstract class PersonsWithSignificantControlTestBase : IAsyncLifetime
     {
-        protected CompaniesHouseClient _client;
-        protected CompaniesHouseClientResponse<PersonsWithSignificantControl> _result;
+        protected CompaniesHouseClient _client = null!;
+        protected CompaniesHouseClientResponse<PersonsWithSignificantControl> _result = null!;
 
-        [SetUp]
-        public void Setup()
+        public async Task InitializeAsync()
         {
             GivenACompaniesHouseClient();
-            When();
+            await When();
         }
+
+        public Task DisposeAsync() => Task.CompletedTask;
 
         protected abstract Task When();
 

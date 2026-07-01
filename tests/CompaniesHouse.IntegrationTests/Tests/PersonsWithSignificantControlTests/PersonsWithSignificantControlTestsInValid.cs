@@ -1,30 +1,29 @@
-﻿using System.Threading.Tasks;
-using NUnit.Framework;
-
+using System.Threading.Tasks;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.PersonsWithSignificantControlTests
 {
-    [TestFixture]
+    
     public class PersonsWithSignificantControlTestsInValid : PersonsWithSignificantControlTestBase
     {
         private const string InvalidCompanyNumber = "ABC00000";
 
-        [SetUp]
+        
         protected override async Task When()
         {
-            await WhenRetrievingAnCompanyPersonsWithSignificantControlForAnInvalidCompany().ConfigureAwait(false);
+            await WhenRetrievingAnCompanyPersonsWithSignificantControlForAnInvalidCompany();
         }
 
-
-        [Test]
+        [Fact]
         public void ThenTheDataItemsAreNull()
         {
-            Assert.That(_result.Data, Is.Null);
+            _result.Data.ShouldBeNull();
         }
 
         private async Task WhenRetrievingAnCompanyPersonsWithSignificantControlForAnInvalidCompany()
         {
-            _result = await _client.GetPersonsWithSignificantControlAsync(InvalidCompanyNumber).ConfigureAwait(false);
+            _result = await _client.GetPersonsWithSignificantControlAsync(InvalidCompanyNumber);
         }
     }
 }

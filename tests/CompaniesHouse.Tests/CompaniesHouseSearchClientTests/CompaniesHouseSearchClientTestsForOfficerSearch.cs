@@ -1,28 +1,25 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Net.Http;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using AutoFixture;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response.Search.OfficerSearch;
 using CompaniesHouse.Tests.ResourceBuilders.OfficerSearchResource;
 using CompaniesHouse.UriBuilders;
-using FluentAssertions;
 using Moq;
-using NUnit.Framework;
-using AutoFixture;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
 {
-    [TestFixture]
-    public class CompaniesHouseSearchClientTestsForOfficerSearch
+    public class CompaniesHouseSearchClientTestsForOfficerSearch : IAsyncLifetime
     {
         private CompaniesHouseSearchClient _client;
         private CompaniesHouseClientResponse<OfficerSearch> _result;
         private ResourceDetails _resourceDetails;
         
-        [OneTimeSetUp]
-        public async Task GivenACompanyHouseSearchClient_WhenSearchingForAOfficer()
+        public async Task InitializeAsync()
         {
             var fixture = new Fixture();
             var items = fixture.Build<Item>()
@@ -48,10 +45,12 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
             _result = await _client.SearchAsync<SearchOfficerRequest, OfficerSearch>(new SearchOfficerRequest());
         }
 
-        [Test]
+        public Task DisposeAsync() => Task.CompletedTask;
+
+        [Fact]
         public void ThenResultDataIsCorrect()
         {
-            _result.Data.ShouldBeEquivalentTo(_resourceDetails, opt => opt.Excluding(su => Regex.IsMatch(su.SelectedMemberPath, @"Officers\[.+\]\.OfficerId")));
+            EquivalencyAssertionExtensions.ShouldBeEquivalentTo((object)_result.Data, _resourceDetails, "OfficerId");
         }  
     }
 }

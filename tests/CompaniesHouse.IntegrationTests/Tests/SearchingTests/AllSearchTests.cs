@@ -1,42 +1,28 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response.Search.AllSearch;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
 {
-    [TestFixture("British Gas")]
-    [TestFixture("Kevin")]
     public class AllSearchTests
     {
-        private readonly string _query;
-        private CompaniesHouseClient _client;
-        private CompaniesHouseClientResponse<AllSearch> _result;
+        private readonly CompaniesHouseClient _client;
 
-        public AllSearchTests(string query)
+        public AllSearchTests()
         {
-            _query = query;
+            _client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
         }
 
-        [OneTimeSetUp]
-        public void GivenACompaniesHouseClient()
+        [Theory]
+        [InlineData("British Gas")]
+        [InlineData("Kevin")]
+        public async Task ThenItemsAreReturned(string query)
         {
-            var settings = new CompaniesHouseSettings(Keys.ApiKey);
+            var result = await _client.SearchAllAsync(new SearchAllRequest { Query = query });
 
-            _client = new CompaniesHouseClient(settings);
-        }
-
-        [SetUp]
-        public async Task WhenSearching()
-        {
-            _result = await _client.SearchAllAsync(new SearchAllRequest() { Query = _query })
-                .ConfigureAwait(false);
-        }
-
-        [Test]
-        public void ThenItemsAreReturned()
-        {
-            Assert.That(_result.Data.Items, Is.Not.Empty);
+            result.Data.Items.ShouldNotBeEmpty();
         }
     }
 }

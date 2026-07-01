@@ -1,30 +1,31 @@
-﻿using System.Threading.Tasks;
-using NUnit.Framework;
+using System.Threading.Tasks;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.AppointmentsTests
 {
-    [TestFixture]
+    
     public class AppointmentsTestsValid : AppointmentsTestBase
     {
         // Sergey Brin's officer id
         private const string ValidOfficerId = "uQNQ-blSo-8PiOaehWClTPmbZNI";
 
-        [SetUp]
+        
         protected override async Task When()
         {
             await WhenRetrievingAppointmentsForAValidOfficer()
-                .ConfigureAwait(false);
+                ;
         }
 
-        [Test]
+        [Fact]
         public void ThenTheDataItemsAreNotEmpty()
         {
-            Assert.That(Result.Data.Items, Is.Not.Empty);
+            Result.Data.Items.ShouldNotBeEmpty();
         }
 
         private async Task WhenRetrievingAppointmentsForAValidOfficer()
         {
-            Result = await Client.GetAppointmentsAsync(ValidOfficerId).ConfigureAwait(false);
+            Result = await Client.GetAppointmentsAsync(ValidOfficerId);
         }
     }
 }

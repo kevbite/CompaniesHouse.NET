@@ -1,10 +1,11 @@
 using System.Threading.Tasks;
 using CompaniesHouse.Response.Officers;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
 {
-    [TestFixture]
+    
     public class OfficerByAppointmentTestsValid : OfficersTestBase<Officer>
     {
         // Google UK company number, unlikely to go away soon
@@ -13,19 +14,19 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
         //Sergey Brin's appointment
         private const string AppointmentId = "UmNUS-JYLQPmuNSz-DgKNbA2v7c";
         
-        [SetUp]
+        
         protected override async Task When() => 
             await WhenRetrievingAnCompanyFilingHistoryForAValidCompany()
-                .ConfigureAwait(false);
+                ;
 
         private async Task WhenRetrievingAnCompanyFilingHistoryForAValidCompany() => 
             Result = await Client
                 .GetOfficerByAppointmentIdAsync(ValidCompanyNumber, AppointmentId)
-                .ConfigureAwait(false);
+                ;
         
         
-        [Test]
+        [Fact]
         public void ThenTheDataIsNotNull() => 
-            Assert.That(Result.Data, Is.Not.Null);
+            Result.Data.ShouldNotBeNull();
     }
 }

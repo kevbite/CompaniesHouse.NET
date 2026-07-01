@@ -3,13 +3,23 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <!-- Nullable is enabled repo-wide (see AGENTS.md), but pre-existing models
+         predate nullable annotations. Nullable warnings stay visible but are
+         not build-breaking until each model is reviewed/rewritten (plans
+         01/06-09). Remove this once the codebase is fully annotated. -->
+    <WarningsNotAsErrors>$(WarningsNotAsErrors);Nullable</WarningsNotAsErrors>
+    <!-- GenerateDocumentationFile is on for shipped packages; CS1591 (missing
+         XML doc comment) is suppressed rather than enforced everywhere -
+         docs are added incrementally as models are reviewed/rewritten. -->
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup>
     <Authors>Kevin Smith</Authors>
     <Company>Kevsoft</Company>
-    <Copyright>Copyright © Kevsoft 2020</Copyright>
+    <Copyright>Copyright © Kevsoft</Copyright>
 
     <PackageTags>CompaniesHouse;Registrar;Kevsoft;API;REST;WebService</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/kevbite/CompaniesHouse.NET/master/companies-house.jpg</PackageIconUrl>
@@ -19,5 +29,13 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/kevbite/CompaniesHouse.NET</RepositoryUrl>
+  </PropertyGroup>
+
+  <!-- Deterministic builds & source link hygiene for shipped packages -->
+  <PropertyGroup>
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
 </Project>

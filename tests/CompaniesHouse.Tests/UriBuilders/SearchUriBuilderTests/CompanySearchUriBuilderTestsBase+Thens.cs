@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
+using Shouldly;
 
 
 namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
@@ -21,40 +21,40 @@ namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
             {
                 var query = GetQuery();
 
-                Assert.That(query["q"], Is.EqualTo(_searchUriBuilderTestsBase.Query));
+                query["q"].ShouldBe(_searchUriBuilderTestsBase.Query);
             }
 
             public void TheUriQueryStringDoesNotContainsTheItemsPerPage()
             {
                 var query = GetQuery();
 
-                Assert.That(query.ContainsKey("items_per_page"), Is.False);
+                query.ContainsKey("items_per_page").ShouldBeFalse();
             }
 
             public void TheUriQueryStringContainsTheItemsPerPage()
             {
                 var query = GetQuery();
 
-                Assert.That(query["items_per_page"], Is.EqualTo(_searchUriBuilderTestsBase.ItemsPerPage.ToString()));
+                query["items_per_page"].ShouldBe(_searchUriBuilderTestsBase.ItemsPerPage.ToString());
             }
 
             public void TheUriQueryStringContainsTheStartIndex()
             {
                 var query = GetQuery();
 
-                Assert.That(query["start_index"], Is.EqualTo(_searchUriBuilderTestsBase.StartIndex.ToString()));
+                query["start_index"].ShouldBe(_searchUriBuilderTestsBase.StartIndex.ToString());
             }
 
             public void TheUriQueryStringDoesNotContainsTheStartIndex()
             {
                 var query = GetQuery();
 
-                Assert.That(query.ContainsKey("start_index"), Is.False);
+                query.ContainsKey("start_index").ShouldBeFalse();
             }
 
             protected Dictionary<string, string> GetQuery()
             {
-                return new Uri(_searchUriBuilderTestsBase._baseUri, _searchUriBuilderTestsBase._actualUri)
+                return new Uri(_searchUriBuilderTestsBase._baseUri, _searchUriBuilderTestsBase.ActualUri)
                     .ToString()
                     .Split('?')
                     .Last()

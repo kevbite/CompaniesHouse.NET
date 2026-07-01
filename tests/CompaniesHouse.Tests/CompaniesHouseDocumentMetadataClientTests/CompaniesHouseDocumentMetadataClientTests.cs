@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using System.Net.Http;
 using CompaniesHouse.Response.Document;
 using CompaniesHouse.UriBuilders;
-using FluentAssertions;
 using Moq;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.Tests.CompaniesHouseDocumentMetadataClientTests
 {
-    [TestFixture]
     public class CompaniesHouseDocumentMetadataClientTests
     {
         private const string DocumentId = "wibble";
         private DocumentMetadataTestCase _expected;
         private CompaniesHouseClientResponse<DocumentMetadata> _result;
 
-        [SetUp]
-        public void GivenAClient_WhenGettingDocumentMetadata()
+        public CompaniesHouseDocumentMetadataClientTests()
         {
             _expected = SetupExpectedDocumentMetadata();
             var requestUri = new Uri($"https://document-api.companieshouse.gov.uk/document/{DocumentId}");
@@ -28,8 +26,12 @@ namespace CompaniesHouse.Tests.CompaniesHouseDocumentMetadataClientTests
                 .GetDocumentMetadataAsync(DocumentId).Result;
         }
 
-        [Test]
-        public void ThenDocumentMetadataIsCorrect() => _result.Data.ShouldBeEquivalentTo(_expected);
+        [Fact]
+        public void ThenDocumentMetadataIsCorrect()
+        {
+            EquivalencyAssertionExtensions.ShouldBeEquivalentTo((object)_result.Data, _expected, nameof(DocumentMetadata.CreatedAt));
+            _result.Data.CreatedAt.ShouldBe(_expected.CreatedAt.ToString("O"));
+        }
 
         private static Mock<IDocumentUriBuilder> SetupRequestUri(Uri catchUri)
         {

@@ -1,14 +1,14 @@
 using System.Threading.Tasks;
 using CompaniesHouse.Request;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.ScenarioTests
 {
     public class SearchingCompaniesUsingMicrosoftServiceContainerTests
     {
-        [Test]
+        [Fact]
         public async Task CanResolveCompaniesHouseClients()
         {
             var serviceCollection = new ServiceCollection();
@@ -17,11 +17,11 @@ namespace CompaniesHouse.ScenarioTests
             var serviceProvider = serviceCollection.BuildServiceProvider();
             using var scope = serviceProvider.CreateScope();
 
-            var client = scope.ServiceProvider.GetService<ICompaniesHouseClient>();
+            var client = scope.ServiceProvider.GetRequiredService<ICompaniesHouseClient>();
 
             var response = await client.SearchCompanyAsync(new SearchCompanyRequest {Query = "Boon & Moil"});
             
-            Assert.IsNotEmpty(response.Data.Companies);
+            response.Data.Companies.ShouldNotBeEmpty();
         }
     }
 }

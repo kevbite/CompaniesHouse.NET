@@ -3,11 +3,11 @@ using CompaniesHouse.Request;
 using CompaniesHouse.Response;
 using CompaniesHouse.Response.Search.CompanySearch;
 using CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
 {
-    [TestFixture]
     public class CompaniesHouseSearchClientTestsForCompanySearch
     {
         private CompaniesHouseSearchClient _client;
@@ -17,8 +17,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
         private List<CompanyDetails> _expectedCompanies;
 
 
-        [OneTimeSetUp]
-        public void GivenACompanyHouseSearchCompanyClient_WhenSearchingForACompany()
+        public CompaniesHouseSearchClientTestsForCompanySearch()
         {
             var fixture = new Fixture();
             _resourceDetails = fixture.Create<ResourceDetails>();
@@ -46,7 +45,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
                     .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
                 fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "closed-on")
                     .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, null)
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, () => (string)null)
                     .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
             };
 
@@ -68,83 +67,80 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
             _result = _client.SearchAsync<SearchCompanyRequest, CompanySearch>(new SearchCompanyRequest()).Result;
         }
 
-        [Test]
+        [Fact]
         public void ThenTheRootIsCorrect()
         {
-            Assert.That(_result.Data.ETag, Is.EqualTo(_resourceDetails.ETag));
-            Assert.That(_result.Data.ItemsPerPage, Is.EqualTo(_resourceDetails.ItemsPerPage));
-            Assert.That(_result.Data.Kind, Is.EqualTo(_resourceDetails.Kind));
-            Assert.That(_result.Data.PageNumber, Is.EqualTo(_resourceDetails.PageNumber));
-            Assert.That(_result.Data.StartIndex, Is.EqualTo(_resourceDetails.StartIndex));
-            Assert.That(_result.Data.TotalResults, Is.EqualTo(_resourceDetails.TotalResults));
+            _result.Data.ETag.ShouldBe(_resourceDetails.ETag);
+            _result.Data.ItemsPerPage.ShouldBe(_resourceDetails.ItemsPerPage);
+            _result.Data.Kind.ShouldBe(_resourceDetails.Kind);
+            _result.Data.PageNumber.ShouldBe(_resourceDetails.PageNumber);
+            _result.Data.StartIndex.ShouldBe(_resourceDetails.StartIndex);
+            _result.Data.TotalResults.ShouldBe(_resourceDetails.TotalResults);
         }
 
-        [Test]
+        [Fact]
         public void ThenTheCompanyWithUnknownDateOfCessationIsReturned()
         {
             var actual =
                 _result.Data.Companies.First(x => x.CompanyNumber == _companyWithUnknownDateOfCessation.CompanyNumber);
 
-            Assert.That(actual.CompanyNumber, Is.EqualTo(_companyWithUnknownDateOfCessation.CompanyNumber));
+            actual.CompanyNumber.ShouldBe(_companyWithUnknownDateOfCessation.CompanyNumber);
 
-            Assert.That(actual.Address.AddressLine1, Is.EqualTo(_companyWithUnknownDateOfCessation.AddressLine1));
-            Assert.That(actual.Address.AddressLine2, Is.EqualTo(_companyWithUnknownDateOfCessation.AddressLine2));
-            Assert.That(actual.Address.CareOf, Is.EqualTo(_companyWithUnknownDateOfCessation.CareOf));
-            Assert.That(actual.Address.Country, Is.EqualTo(_companyWithUnknownDateOfCessation.Country));
-            Assert.That(actual.Address.Locality, Is.EqualTo(_companyWithUnknownDateOfCessation.Locality));
-            Assert.That(actual.Address.PoBox, Is.EqualTo(_companyWithUnknownDateOfCessation.PoBox));
-            Assert.That(actual.Address.PostalCode, Is.EqualTo(_companyWithUnknownDateOfCessation.PostalCode));
-            Assert.That(actual.Address.Region, Is.EqualTo(_companyWithUnknownDateOfCessation.Region));
+            actual.Address.AddressLine1.ShouldBe(_companyWithUnknownDateOfCessation.AddressLine1);
+            actual.Address.AddressLine2.ShouldBe(_companyWithUnknownDateOfCessation.AddressLine2);
+            actual.Address.CareOf.ShouldBe(_companyWithUnknownDateOfCessation.CareOf);
+            actual.Address.Country.ShouldBe(_companyWithUnknownDateOfCessation.Country);
+            actual.Address.Locality.ShouldBe(_companyWithUnknownDateOfCessation.Locality);
+            actual.Address.PoBox.ShouldBe(_companyWithUnknownDateOfCessation.PoBox);
+            actual.Address.PostalCode.ShouldBe(_companyWithUnknownDateOfCessation.PostalCode);
+            actual.Address.Region.ShouldBe(_companyWithUnknownDateOfCessation.Region);
 
-            Assert.That(actual.CompanyStatus,
-                Is.EqualTo(ExpectedCompanyStatus[_companyWithUnknownDateOfCessation.CompanyStatus]));
-            Assert.That(actual.CompanyType,
-                Is.EqualTo(ExpectedCompanyType[_companyWithUnknownDateOfCessation.CompanyType]));
-            Assert.That(actual.DateOfCessation, Is.Null);
-            Assert.That(actual.DateOfCreation, Is.EqualTo(_companyWithUnknownDateOfCessation.DateOfCreation.Date));
-            Assert.That(actual.Description, Is.EqualTo(_companyWithUnknownDateOfCessation.Description));
-            Assert.That(actual.Kind, Is.EqualTo(_companyWithUnknownDateOfCessation.Kind));
-            Assert.That(actual.Links.Self, Is.EqualTo(_companyWithUnknownDateOfCessation.LinksSelf));
-            Assert.That(actual.Matches.Title, Is.EqualTo(_companyWithUnknownDateOfCessation.MatchesTitle));
-            Assert.That(actual.Snippet, Is.EqualTo(_companyWithUnknownDateOfCessation.Snippet));
-            Assert.That(actual.Title, Is.EqualTo(_companyWithUnknownDateOfCessation.Title));
+            actual.CompanyStatus.ShouldBe(ExpectedCompanyStatus[_companyWithUnknownDateOfCessation.CompanyStatus]);
+            actual.CompanyType.ShouldBe(ExpectedCompanyType[_companyWithUnknownDateOfCessation.CompanyType]);
+            actual.DateOfCessation.ShouldBeNull();
+            actual.DateOfCreation.ShouldBe(_companyWithUnknownDateOfCessation.DateOfCreation.Date);
+            actual.Description.ShouldBe(_companyWithUnknownDateOfCessation.Description);
+            actual.Kind.ShouldBe(_companyWithUnknownDateOfCessation.Kind);
+            actual.Links.Self.ShouldBe(_companyWithUnknownDateOfCessation.LinksSelf);
+            actual.Matches.Title.ShouldBe(_companyWithUnknownDateOfCessation.MatchesTitle);
+            actual.Snippet.ShouldBe(_companyWithUnknownDateOfCessation.Snippet);
+            actual.Title.ShouldBe(_companyWithUnknownDateOfCessation.Title);
         }
 
-        [Test]
+        [Fact]
         public void ThenTheNumberOfReturnedCompaniesIsCorrect()
         {
-            Assert.That(_result.Data.Companies.Length, Is.EqualTo(13));
+            _result.Data.Companies.Length.ShouldBe(13);
         }
 
-        [Test]
+        [Fact]
         public void ThenTheCompaniesAreCorrect()
         {
             foreach (var companyDetails in _expectedCompanies)
             {
                 var actual = _result.Data.Companies.First(x => x.CompanyNumber == companyDetails.CompanyNumber);
 
-                Assert.That(actual.CompanyNumber, Is.EqualTo(companyDetails.CompanyNumber));
+                actual.CompanyNumber.ShouldBe(companyDetails.CompanyNumber);
 
-                Assert.That(actual.Address.AddressLine1, Is.EqualTo(companyDetails.AddressLine1));
-                Assert.That(actual.Address.AddressLine2, Is.EqualTo(companyDetails.AddressLine2));
-                Assert.That(actual.Address.CareOf, Is.EqualTo(companyDetails.CareOf));
-                Assert.That(actual.Address.Country, Is.EqualTo(companyDetails.Country));
-                Assert.That(actual.Address.Locality, Is.EqualTo(companyDetails.Locality));
-                Assert.That(actual.Address.PoBox, Is.EqualTo(companyDetails.PoBox));
-                Assert.That(actual.Address.PostalCode, Is.EqualTo(companyDetails.PostalCode));
-                Assert.That(actual.Address.Region, Is.EqualTo(companyDetails.Region));
+                actual.Address.AddressLine1.ShouldBe(companyDetails.AddressLine1);
+                actual.Address.AddressLine2.ShouldBe(companyDetails.AddressLine2);
+                actual.Address.CareOf.ShouldBe(companyDetails.CareOf);
+                actual.Address.Country.ShouldBe(companyDetails.Country);
+                actual.Address.Locality.ShouldBe(companyDetails.Locality);
+                actual.Address.PoBox.ShouldBe(companyDetails.PoBox);
+                actual.Address.PostalCode.ShouldBe(companyDetails.PostalCode);
+                actual.Address.Region.ShouldBe(companyDetails.Region);
 
-                Assert.That(actual.CompanyStatus,
-                    Is.EqualTo(ExpectedCompanyStatus[companyDetails.CompanyStatus ?? ""]));
-                Assert.That(actual.CompanyType, Is.EqualTo(ExpectedCompanyType[companyDetails.CompanyType]));
-                Assert.That(actual.DateOfCessation, Is.EqualTo(companyDetails.DateOfCessation.Date));
-                Assert.That(actual.DateOfCreation, Is.EqualTo(companyDetails.DateOfCreation.Date));
-                Assert.That(actual.Description, Is.EqualTo(companyDetails.Description));
-                Assert.That(actual.Kind, Is.EqualTo(companyDetails.Kind));
-                Assert.That(actual.Links.Self, Is.EqualTo(companyDetails.LinksSelf));
-                Assert.That(actual.Matches.Title, Is.EqualTo(companyDetails.MatchesTitle));
-                Assert.That(actual.Snippet, Is.EqualTo(companyDetails.Snippet));
-                Assert.That(actual.Title, Is.EqualTo(companyDetails.Title));
+                actual.CompanyStatus.ShouldBe(ExpectedCompanyStatus[companyDetails.CompanyStatus ?? ""]);
+                actual.CompanyType.ShouldBe(ExpectedCompanyType[companyDetails.CompanyType]);
+                actual.DateOfCessation.ShouldBe(companyDetails.DateOfCessation.Date);
+                actual.DateOfCreation.ShouldBe(companyDetails.DateOfCreation.Date);
+                actual.Description.ShouldBe(companyDetails.Description);
+                actual.Kind.ShouldBe(companyDetails.Kind);
+                actual.Links.Self.ShouldBe(companyDetails.LinksSelf);
+                actual.Matches.Title.ShouldBe(companyDetails.MatchesTitle);
+                actual.Snippet.ShouldBe(companyDetails.Snippet);
+                actual.Title.ShouldBe(companyDetails.Title);
             }
         }
 

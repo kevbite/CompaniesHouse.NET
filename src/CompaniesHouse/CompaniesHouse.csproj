@@ -1,18 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard1.1;netstandard2.0;net45</TargetFrameworks>
+        <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
     </PropertyGroup>
 
     <PropertyGroup>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="all" />
-    </ItemGroup>
-
 
     <PropertyGroup>
         <Title>CompaniesHouse.NET</Title>
@@ -21,18 +17,15 @@
             A simple .NET API client wrapper for CompaniesHouse
         </Description>
     </PropertyGroup>
-    
+
 
     <ItemGroup>
         <None Include="..\..\companies-house.jpg" Pack="true" PackagePath="" />
     </ItemGroup>
 
-    <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
-        <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
-    </ItemGroup>
-
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+        <PackageReference Include="Newtonsoft.Json" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
     </ItemGroup>
 
 </Project>

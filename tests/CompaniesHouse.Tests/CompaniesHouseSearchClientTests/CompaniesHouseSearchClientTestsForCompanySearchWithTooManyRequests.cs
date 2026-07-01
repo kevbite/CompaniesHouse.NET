@@ -4,19 +4,17 @@ using System.Threading.Tasks;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response.Search.CompanySearch;
 using CompaniesHouse.UriBuilders;
-using FluentAssertions;
 using Moq;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
 {
-    [TestFixture]
-    public class CompaniesHouseSearchClientTestsForCompanySearchWithTooManyRequests
+    public class CompaniesHouseSearchClientTestsForCompanySearchWithTooManyRequests : IAsyncLifetime
     {
         private Exception _caughtException;
 
-        [OneTimeSetUp]
-        public async Task GivenACompanyHouseSearchCompanyClient_WhenSearchingForACompanyAndApiReturnsTooManyRequests()
+        public async Task InitializeAsync()
         {
             var uri = new Uri("https://wibble.com/search/companies");
 
@@ -37,12 +35,13 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
             }
         }
 
-        [Test]
+        public Task DisposeAsync() => Task.CompletedTask;
+
+        [Fact]
         public void ThenExceptionIsThrown()
         {
-            _caughtException.Should().BeOfType<HttpRequestException>();
-
-            _caughtException.As<HttpRequestException>().Message.Should().StartWith("Response status code does not indicate success: 429");
+            var exception = _caughtException.ShouldBeOfType<HttpRequestException>();
+            exception.Message.ShouldStartWith("Response status code does not indicate success: 429");
         }
 
     }

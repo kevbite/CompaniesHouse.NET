@@ -2,55 +2,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CompaniesHouse.Response.CompanyFiling;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
 {
-    [TestFixtureSource(nameof(TestCases))]
-    public class CompanyFilingHistoryTestsValid : CompanyFilingHistoryTestBase
+    public class CompanyFilingHistoryTestsValid
     {
-        private readonly string _companyNumber;
-        private List<FilingHistoryItem> _results;
+        private readonly CompaniesHouseClient _client;
 
-        public CompanyFilingHistoryTestsValid(string companyNumber)
+        public CompanyFilingHistoryTestsValid()
         {
-            _companyNumber = companyNumber;
+            _client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
         }
 
-        public static string[] TestCases()
-        {
-            return new[]
-            {
-                "03977902", // Google
-                "00445790", // Tesco
-                "00002065", // Lloyds Bank PLC
-                "09965459",  // Amazebytes
-                "06768813",  // TEST & COOL LTD,
-                "00059337",
-                "SC171417",
-                "09018331"
-            };
-        }
-
-        protected override async Task When()
+        [Theory]
+        [InlineData("03977902")]
+        [InlineData("00445790")]
+        [InlineData("00002065")]
+        [InlineData("09965459")]
+        [InlineData("06768813")]
+        [InlineData("00059337")]
+        [InlineData("SC171417")]
+        [InlineData("09018331")]
+        public async Task ThenTheDataItemsAreNotEmpty(string companyNumber)
         {
             var page = 0;
             var size = 100;
-            _results = new List<FilingHistoryItem>();
+            var results = new List<FilingHistoryItem>();
 
             CompaniesHouseClientResponse<CompanyFilingHistory> result;
             do
             {
-                result = await _client.GetCompanyFilingHistoryAsync(_companyNumber, page++ * size, size)
-                    .ConfigureAwait(false);
-                _results.AddRange(result.Data.Items);
+                result = await _client.GetCompanyFilingHistoryAsync(companyNumber, page++ * size, size);
+                results.AddRange(result.Data.Items);
             } while (result.Data.Items.Any());
-        }
 
-        [Test]
-        public void ThenTheDataItemsAreNotEmpty()
-        {
-            Assert.That(_results, Is.Not.Empty);
+            results.ShouldNotBeEmpty();
         }
     }
 }

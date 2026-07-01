@@ -1,30 +1,30 @@
-﻿using System.Threading.Tasks;
-using NUnit.Framework;
-
+using System.Threading.Tasks;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.PersonsWithSignificantControlTests
 {
-    [TestFixture]
+    
     public class PersonsWithSignificantControlTestsValid : PersonsWithSignificantControlTestBase
     {
         // Google UK company number, unlikely to go away soon
         private const string ValidCompanyNumber = "03977902";
 
-        [SetUp]
+        
         protected override async Task When()
         {
-            await WhenRetrievingAnCompanyPersonsWithSignificantControlForAnValidCompany().ConfigureAwait(false);
+            await WhenRetrievingAnCompanyPersonsWithSignificantControlForAnValidCompany();
         }
 
-        [Test]
+        [Fact]
         public void ThenTheDataItemsAreNotEmpty()
         {
-            Assert.That(_result.Data.Items, Is.Not.Empty);
+            _result.Data.Items.ShouldNotBeEmpty();
         }
 
         private async Task WhenRetrievingAnCompanyPersonsWithSignificantControlForAnValidCompany()
         {
-            _result = await _client.GetPersonsWithSignificantControlAsync(ValidCompanyNumber).ConfigureAwait(false);
+            _result = await _client.GetPersonsWithSignificantControlAsync(ValidCompanyNumber);
         }
     }
 }

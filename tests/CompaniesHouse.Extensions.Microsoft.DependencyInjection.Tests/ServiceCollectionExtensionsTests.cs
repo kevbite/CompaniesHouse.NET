@@ -1,11 +1,12 @@
 using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests
 {
     public class ServiceCollectionExtensionsTests
     {
-        [Test]
+        [Fact]
         public void CanResolveCompaniesHouseClients()
         {
             var serviceCollection = new ServiceCollection();
@@ -14,21 +15,21 @@ namespace CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests
             var serviceProvider = serviceCollection.BuildServiceProvider();
             using var scope = serviceProvider.CreateScope();
 
-            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseClient>());
-            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseSearchCompanyClient>());
-            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseSearchOfficerClient>());
-            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseSearchDisqualifiedOfficerClient>());
-            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseSearchAllClient>());
-            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseCompanyProfileClient>());
-            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseCompanyFilingHistoryClient>());
-            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseOfficersClient>());
-            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseCompanyInsolvencyInformationClient>());
-            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseCompanyInsolvencyInformationClient>());
-            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseAppointmentsClient>());
-            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHousePersonsWithSignificantControlClient>());
+            scope.ServiceProvider.GetService<ICompaniesHouseClient>().ShouldNotBeNull();
+            scope.ServiceProvider.GetService<ICompaniesHouseSearchCompanyClient>().ShouldNotBeNull();
+            scope.ServiceProvider.GetService<ICompaniesHouseSearchOfficerClient>().ShouldNotBeNull();
+            scope.ServiceProvider.GetService<ICompaniesHouseSearchDisqualifiedOfficerClient>().ShouldNotBeNull();
+            scope.ServiceProvider.GetService<ICompaniesHouseSearchAllClient>().ShouldNotBeNull();
+            scope.ServiceProvider.GetService<ICompaniesHouseCompanyProfileClient>().ShouldNotBeNull();
+            scope.ServiceProvider.GetService<ICompaniesHouseCompanyFilingHistoryClient>().ShouldNotBeNull();
+            scope.ServiceProvider.GetService<ICompaniesHouseOfficersClient>().ShouldNotBeNull();
+            scope.ServiceProvider.GetService<ICompaniesHouseCompanyInsolvencyInformationClient>().ShouldNotBeNull();
+            scope.ServiceProvider.GetService<ICompaniesHouseCompanyInsolvencyInformationClient>().ShouldNotBeNull();
+            scope.ServiceProvider.GetService<ICompaniesHouseAppointmentsClient>().ShouldNotBeNull();
+            scope.ServiceProvider.GetService<ICompaniesHousePersonsWithSignificantControlClient>().ShouldNotBeNull();
         }
 
-        [Test]
+        [Fact]
         public void CanResolveCompaniesHouseDocumentClients()
         {
             
@@ -38,9 +39,9 @@ namespace CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests
             var serviceProvider = serviceCollection.BuildServiceProvider();
             using var scope = serviceProvider.CreateScope();
 
-            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseDocumentClient>());
-            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseDocumentDownloadClient>());
-            Assert.NotNull(scope.ServiceProvider.GetService<ICompaniesHouseDocumentMetadataClient>());
+            scope.ServiceProvider.GetService<ICompaniesHouseDocumentClient>().ShouldNotBeNull();
+            scope.ServiceProvider.GetService<ICompaniesHouseDocumentDownloadClient>().ShouldNotBeNull();
+            scope.ServiceProvider.GetService<ICompaniesHouseDocumentMetadataClient>().ShouldNotBeNull();
         }
     }
 }

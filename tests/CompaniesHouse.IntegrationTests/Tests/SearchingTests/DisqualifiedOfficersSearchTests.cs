@@ -1,35 +1,26 @@
 using System.Threading.Tasks;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
 {
-    [TestFixture]
     public class DisqualifiedOfficersSearchTests
     {
-        private CompaniesHouseClient _client;
-        private CompaniesHouseClientResponse<DisqualifiedOfficerSearch> _result;
-        
-        [OneTimeSetUp]
-        public void GivenACompaniesHouseClient()
-        {
-            var settings = new CompaniesHouseSettings(Keys.ApiKey);
+        private readonly CompaniesHouseClient _client;
 
-            _client = new CompaniesHouseClient(settings);
+        public DisqualifiedOfficersSearchTests()
+        {
+            _client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
         }
 
-        [SetUp]
-        public async Task WhenSearchingForADisqualifiedOfficers()
+        [Fact]
+        public async Task ThenDisqualifiedOfficersAreReturned()
         {
-            _result = await _client.SearchDisqualifiedOfficerAsync(new SearchDisqualifiedOfficerRequest() { Query = "Kevin" })
-                .ConfigureAwait(false);
-        }
+            var result = await _client.SearchDisqualifiedOfficerAsync(new SearchDisqualifiedOfficerRequest { Query = "Kevin" });
 
-        [Test]
-        public void ThenDisqualifiedOfficersAreReturned()
-        {
-            Assert.That(_result.Data.DisqualifiedOfficers, Is.Not.Empty);
+            result.Data.DisqualifiedOfficers.ShouldNotBeEmpty();
         }
     }
 }

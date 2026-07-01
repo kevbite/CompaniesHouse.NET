@@ -1,6 +1,7 @@
 ﻿using System;
 using CompaniesHouse.UriBuilders;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.Tests.UriBuilders.CompanyProfileUriBuilderTests
 {
@@ -12,30 +13,24 @@ namespace CompaniesHouse.Tests.UriBuilders.CompanyProfileUriBuilderTests
         private string _companyNumber;
         
 
-        [OneTimeSetUp]
-        public void GivenACompanyProfileUriBuilder()
+        public CompanyProfileUriBuilderTests()
         {
             _uriBuilder = new CompanyProfileUriBuilder();
-        }
-
-        [SetUp]
-        public void WhenBuildingUriWithCompanySearchRequest()
-        {
             _companyNumber = "123456789";
             _actualUri = _uriBuilder.Build(_companyNumber);
         }
 
-        [Test]
+        [Fact]
         public void ThenTheUriIsNotAbsolute()
         {
-            Assert.That(_actualUri.IsAbsoluteUri, Is.False);
+            _actualUri.IsAbsoluteUri.ShouldBeFalse();
         }
 
-        [Test]
+        [Fact]
         public void ThenTheUriPathIsCorrect()
         {
             var uri = new Uri(_baseUri, _actualUri);
-            Assert.That(uri.AbsolutePath, Is.EqualTo("/bla1/bla2/company/" + _companyNumber));
+            uri.AbsolutePath.ShouldBe("/bla1/bla2/company/" + _companyNumber);
         }
    }
 }

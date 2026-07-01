@@ -4,16 +4,16 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using CompaniesHouse.Tests.ResourceBuilders;
 using CompaniesHouse.UriBuilders;
-using FluentAssertions;
 using Moq;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.Tests.CompaniesHouseChargesClientTests
 {
-    [TestFixture]
     public class CompaniesHouseChargesClientTests
     {
-        [TestCaseSource(nameof(TestCases))]
+        [Theory]
+        [MemberData(nameof(TestCases))]
         public async Task GivenACompaniesHouseChargesClient_WhenGettingCompanyCharges(CompaniesHouseChargesClientTestCase testCase)
         {
             var charges = CompanyChargesBuilder.Create(testCase);
@@ -26,10 +26,15 @@ namespace CompaniesHouse.Tests.CompaniesHouseChargesClientTests
 
             var result = await client.GetChargesListAsync("1", 0, 25);
 
-            result.Data.ShouldBeEquivalentTo(charges);
+            EquivalencyAssertionExtensions.ShouldBeEquivalentTo((object)result.Data, charges, "TransactionId");
+            foreach (var (actual, expected) in result.Data.Items.Zip(charges.Items))
+            {
+                actual.InsolvencyCases.Select(x => x.TransactionId).ShouldBe(expected.InsolvencyCases.Select(x => (long?)x.TransactionId));
+            }
         }
 
-        [TestCaseSource(nameof(TestCases))]
+        [Theory]
+        [MemberData(nameof(TestCases))]
         public async Task GivenACompaniesHouseChargesClient_WhenGettingCompanyChargeById(CompaniesHouseChargesClientTestCase testCase)
         {
             var charge = CompanyChargesBuilder.CreateOne(testCase);
@@ -42,10 +47,11 @@ namespace CompaniesHouse.Tests.CompaniesHouseChargesClientTests
 
             var result = await client.GetChargeByIdAsync("1", "1");
 
-            result.Data.ShouldBeEquivalentTo(charge);
+            EquivalencyAssertionExtensions.ShouldBeEquivalentTo((object)result.Data, charge, "TransactionId");
+            result.Data.InsolvencyCases.Select(x => x.TransactionId).ShouldBe(charge.InsolvencyCases.Select(x => (long?)x.TransactionId));
         }
         
-        private static CompaniesHouseChargesClientTestCase[] TestCases()
+        public static IEnumerable<object[]> TestCases()
         {
             var allAssetsCeasedReleased = EnumerationMappings.PossibleAssetsCeasedReleased.Keys.Select(x => new CompaniesHouseChargesClientTestCase
             {
@@ -97,7 +103,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseChargesClientTests
                 .Concat(allSecuredDetailTypes)
                 .Concat(allClassificationChargeTypes)
                 .Concat(allChargeStatuses)
-                .ToArray();
+                .Select(testCase => new object[] { testCase });
         }
     }
 }

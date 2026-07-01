@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CompaniesHouse.Response;
-using Moq;
-using NUnit.Framework;
+﻿using CompaniesHouse.Response;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.Tests.JsonConverters.FilingSubcategoryConverterTests
 {
-    [TestFixture]
     public class StringArrayOrFieldEnumConverterTestsForSingleValue : StringArrayOrFieldEnumConverterTestsBase
     {
         protected override string GetJson()
@@ -17,10 +11,10 @@ namespace CompaniesHouse.Tests.JsonConverters.FilingSubcategoryConverterTests
             return @"""change""";
         }
 
-        [Test]
+        [Fact]
         public void ThenSingleItemInAnArrayIsReturned()
         {
-            Assert.That(Result, Is.EqualTo( new [] {FilingSubcategory.Change }));
+            Result.ShouldBe(new[] { FilingSubcategory.Change });
 
         }
     }

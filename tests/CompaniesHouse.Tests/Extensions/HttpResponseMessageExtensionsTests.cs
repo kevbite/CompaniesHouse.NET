@@ -5,31 +5,32 @@
     using System.Net.Http;
     using System.Net.Http.Headers;
     using CompaniesHouse.Extensions;
-    using NUnit.Framework;
+    using Shouldly;
+    using Xunit;
 
-    [TestFixture]
     public class HttpResponseMessageExtensionsTests
     {
-        [Test]
+        [Fact]
         public void GivenAnHttpResponse_WhenTheStatusCodeIsSuccess_ThenEnsureSuccessStatusCode2ReturnsTheHttpResponse()
         {
             for (var statusCode = 200; statusCode < 299; statusCode++)
             {
                 var sut = new HttpResponseMessage((HttpStatusCode)200);
                 var responseMessage = sut.EnsureSuccessStatusCode2();
-                Assert.AreEqual(responseMessage, sut);
+                responseMessage.ShouldBe(sut);
             }
         }
 
-        [TestCase(410, "Gone", 0, null)]
-        [TestCase(429, "Too Many Requests", 300, null)]
-        [TestCase(503, "Service Unavailable", 0, "2015-10-08T12:34:56.000+1")]
-        [TestCase(503, "Service Unavailable", -1, null)]
+        [Theory]
+        [InlineData(410, "Gone", 0, null)]
+        [InlineData(429, "Too Many Requests", 300, null)]
+        [InlineData(503, "Service Unavailable", 0, "2015-10-08T12:34:56.000+1")]
+        [InlineData(503, "Service Unavailable", -1, null)]
         public void GivenAnHttpResponse_WhenTheStatusCodeIsNotSuccess_ThenEnsureSuccessStatusCode2ThrowsHttpRequestExceptionWithData(
             int statusCode,
             string reasonPhrase,
             int retryAfterSeconds,
-            string retryAfterDate)
+            string? retryAfterDate)
         {
             var sut = new HttpResponseMessage((HttpStatusCode)statusCode) { ReasonPhrase = reasonPhrase };
             var retryAfterDateTimeOffset = DateTimeOffset.MinValue;
@@ -45,20 +46,20 @@
                 : new RetryConditionHeaderValue(retryAfterDateTimeOffset);
             }
 
-            var exception = Assert.Throws<HttpRequestException>(() => sut.EnsureSuccessStatusCode2());
-            Assert.AreEqual(statusCode, exception.Data["StatusCode"]);
-            Assert.AreEqual(reasonPhrase, exception.Data["ReasonPhrase"]);
+            var exception = Should.Throw<HttpRequestException>(() => sut.EnsureSuccessStatusCode2());
+            exception.Data["StatusCode"].ShouldBe(statusCode);
+            exception.Data["ReasonPhrase"].ShouldBe(reasonPhrase);
 
             if (retryAfterSeconds >= 0 || !string.IsNullOrWhiteSpace(retryAfterDate))
             {
-                Assert.AreEqual(string.IsNullOrWhiteSpace(retryAfterDate)
+                exception.Data["RetryAfter"].ShouldBe(
+                    string.IsNullOrWhiteSpace(retryAfterDate)
                         ? retryAfterSeconds.ToString()
-                        : retryAfterDateTimeOffset.ToString("R"),
-                    exception.Data["RetryAfter"]);
+                        : retryAfterDateTimeOffset.ToString("R"));
             }
             else
             {
-                Assert.AreEqual(null, exception.Data["RetryAfter"]);
+                exception.Data["RetryAfter"].ShouldBeNull();
             }
         }
     }

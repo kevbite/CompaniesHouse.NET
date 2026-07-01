@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using CompaniesHouse.Tests.ResourceBuilders;
 using CompaniesHouse.UriBuilders;
-using FluentAssertions;
 using Moq;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 using Officers = CompaniesHouse.Response.Officers.Officers;
 
 namespace CompaniesHouse.Tests.CompaniesHouseOfficersTests
 {
-    [TestFixture]
     public class CompaniesHouseCompanyOfficersClientTests
     {
         private CompaniesHouseOfficersClient _client;
@@ -17,8 +17,8 @@ namespace CompaniesHouse.Tests.CompaniesHouseOfficersTests
         private CompaniesHouseClientResponse<Officers> _result;
         private ResourceBuilders.Officers _officers;
 
-        [Test]
-        public void GivenACompaniesHouseCompanyProfileClient_WhenGettingACompanyProfile()
+        [Fact]
+        public async Task GivenACompaniesHouseCompanyProfileClient_WhenGettingACompanyProfile()
         {
             _officers = new OfficersBuilder().Build();
             var resource = new OfficersResourceBuilder(_officers).Create();
@@ -33,9 +33,9 @@ namespace CompaniesHouse.Tests.CompaniesHouseOfficersTests
 
             _client = new CompaniesHouseOfficersClient(new HttpClient(handler), uriBuilder.Object);
 
-            _result = _client.GetOfficersAsync("abc", 0, 25).Result;
+            _result = await _client.GetOfficersAsync("abc", 0, 25);
 
-            _result.Data.ShouldBeEquivalentTo(_officers);
+            EquivalencyAssertionExtensions.ShouldBeEquivalentTo((object)_result.Data, _officers);
         }
     }
 }

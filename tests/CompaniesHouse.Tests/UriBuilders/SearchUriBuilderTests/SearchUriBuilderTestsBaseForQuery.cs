@@ -1,17 +1,16 @@
-using NUnit.Framework;
+using Xunit;
 
 namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
 {
-    [TestFixture]
     public class SearchUriBuilderTestsBaseForQuery : SearchUriBuilderTestsBase
     {
-        [Test]
+        [Fact]
         public void ThenTheUriQueryStringContainsTheQuery() => Then.TheUriQueryStringContainsTheQuery();
 
-        [Test]
+        [Fact]
         public void ThenTheUriQueryStringDoesNotContainsTheItemsPerPage() => Then.TheUriQueryStringDoesNotContainsTheItemsPerPage();
 
-        [Test]
+        [Fact]
         public void ThenTheUriQueryStringDoesNotContainsTheStartIndex() => Then.TheUriQueryStringDoesNotContainsTheStartIndex();
 
     }

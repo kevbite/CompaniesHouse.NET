@@ -1,20 +1,22 @@
 using System.Threading.Tasks;
 using CompaniesHouse.Response.RegisteredOfficeAddress;
-using NUnit.Framework;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.RegisteredOfficeAddress
 {
-    public abstract class RegisteredOfficeAddressTestBase
+    public abstract class RegisteredOfficeAddressTestBase : IAsyncLifetime
     {
-        protected CompaniesHouseClient Client { get; set; }
-        protected CompaniesHouseClientResponse<OfficeAddress> Result; 
+        protected CompaniesHouseClient Client { get; set; } = null!;
+        protected CompaniesHouseClientResponse<OfficeAddress> Result = null!;
 
-        [SetUp]
-        public async Task Setup()
+        public async Task InitializeAsync()
         {
             GivenACompaniesHouseClient();
-            await When().ConfigureAwait(false);
+            await When();
         }
+
+        public Task DisposeAsync() => Task.CompletedTask;
+
         protected abstract Task When();
 
         private void GivenACompaniesHouseClient()
