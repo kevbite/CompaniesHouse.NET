@@ -16,7 +16,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
             await WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany();
         }
 
-        [Fact]
+        [IntegrationFact]
         public void ThenTheDataItemsAreEmpty()
         {
             // The Companies House API returns 200 with an empty officer list for a

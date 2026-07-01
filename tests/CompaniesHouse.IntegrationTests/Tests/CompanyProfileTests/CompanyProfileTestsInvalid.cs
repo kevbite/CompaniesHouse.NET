@@ -16,7 +16,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyProfileTests
                 ;
         }
 
-        [Fact]
+        [IntegrationFact]
         public void ThenTheProfileIsNotReturned()
         {
             _result.Data.ShouldBeNull();

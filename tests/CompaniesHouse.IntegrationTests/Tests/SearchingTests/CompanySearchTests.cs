@@ -16,7 +16,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             _client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
         }
 
-        [Theory]
+        [IntegrationTheory]
         [InlineData("brighouse computers")]
         [InlineData("British Gas")]
         [InlineData("Bay Horse")]
@@ -27,7 +27,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             result.Data.Companies.ShouldNotBeEmpty();
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenForeignCompanyFieldsAreReturned()
         {
             var result = await _client.SearchCompanyAsync(new SearchCompanyRequest
@@ -44,7 +44,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             company.DescriptionIdentifier.ShouldBe(["first-uk-establishment-opened-on"]);
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenRestrictionsCanBeSentToTheLiveApi()
         {
             var result = await _client.SearchCompanyAsync(new SearchCompanyRequest

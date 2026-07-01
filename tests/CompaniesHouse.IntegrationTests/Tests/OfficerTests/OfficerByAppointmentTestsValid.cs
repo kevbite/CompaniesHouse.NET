@@ -25,7 +25,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
                 ;
         
         
-        [Fact]
+        [IntegrationFact]
         public void ThenTheDataIsNotNull() => 
             Result.Data.ShouldNotBeNull();
     }

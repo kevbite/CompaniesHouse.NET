@@ -16,7 +16,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             _client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenCompaniesAreReturned()
         {
             var result = await _client.AdvancedCompanySearchAsync(new AdvancedCompanySearchRequest
@@ -30,7 +30,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             result.Data.Items.ShouldNotBeEmpty();
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenCompanySubtypeCanBeUsedAsALiveFilter()
         {
             var result = await _client.AdvancedCompanySearchAsync(new AdvancedCompanySearchRequest
@@ -43,7 +43,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             result.Data.Items.ShouldContain(x => x.CompanySubtype == CompanySubtype.CommunityInterestCompany);
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenLocationAndSicCodeFiltersCanBeUsedTogether()
         {
             var result = await _client.AdvancedCompanySearchAsync(new AdvancedCompanySearchRequest

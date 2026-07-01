@@ -14,7 +14,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             _client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
         }
 
-        [Theory]
+        [IntegrationTheory]
         [InlineData("CARILLION")]
         [InlineData("BLOCKBUSTER")]
         public async Task ThenCompaniesAreReturned(string query)
@@ -30,7 +30,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             result.Data.Items.ShouldNotBeEmpty();
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenPreviousNameSearchReturnsMatchedPreviousCompanyName()
         {
             var result = await _client.SearchDissolvedCompaniesAsync(new SearchDissolvedCompaniesRequest
@@ -45,7 +45,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             result.Data.TopHit.MatchedPreviousCompanyName.Name.ShouldContain("RADIO RENTALS");
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenAlphabeticalSearchReturnsOrderedAlphaKeys()
         {
             var result = await _client.SearchDissolvedCompaniesAsync(new SearchDissolvedCompaniesRequest

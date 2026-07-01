@@ -14,7 +14,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             _client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
         }
 
-        [Theory]
+        [IntegrationTheory]
         [InlineData("TESCO")]
         [InlineData("TESCO PERSONAL FINANCE")]
         public async Task ThenCompaniesAreReturned(string query)
@@ -29,7 +29,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             result.Data.Items.ShouldNotBeEmpty();
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenAlphabeticalPagingParametersCanBeSent()
         {
             var firstPage = await _client.SearchCompaniesAlphabeticallyAsync(new SearchCompaniesAlphabeticallyRequest

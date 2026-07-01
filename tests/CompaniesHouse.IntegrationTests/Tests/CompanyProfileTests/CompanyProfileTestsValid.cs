@@ -19,13 +19,13 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyProfileTests
                 ;
         }
 
-        [Fact]
+        [IntegrationFact]
         public void ThenTheProfileIsReturned()
         {
             _result.Data.CompanyName.ShouldNotBeEmpty();
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenAPlainCompanyProfileIncludesExemptionsAndHasSuperSecurePscs()
         {
             var result = await _client.GetCompanyProfileAsync("00445790");
@@ -38,7 +38,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyProfileTests
             result.Data.HasSuperSecurePscs.ShouldBe(false);
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenAForeignCompanyProfileIncludesForeignCompanyDetails()
         {
             var result = await _client.GetCompanyProfileAsync("FC040879");
@@ -56,7 +56,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyProfileTests
             result.Data.Links.UkEstablishments.ShouldNotBeNullOrWhiteSpace();
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenACommunityInterestCompanyProfileIncludesSubtype()
         {
             var result = await _client.GetCompanyProfileAsync("13507518");

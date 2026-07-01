@@ -15,7 +15,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             _client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenDisqualifiedOfficersAreReturned()
         {
             var result = await _client.SearchDisqualifiedOfficerAsync(new SearchDisqualifiedOfficerRequest { Query = "Kevin" });
@@ -23,7 +23,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             result.Data.DisqualifiedOfficers.ShouldNotBeEmpty();
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenPagingMetadataAndDateOfBirthAreReturned()
         {
             var result = await _client.SearchDisqualifiedOfficerAsync(new SearchDisqualifiedOfficerRequest { Query = "john", ItemsPerPage = 20 });

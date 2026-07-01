@@ -8,7 +8,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
 {
     public class OfficerByAppointmentSchemaTests
     {
-        [Fact]
+        [IntegrationFact]
         public async Task GetOfficerByAppointmentIdAsync_DeserializesTheSharedOfficerShape()
         {
             var client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));

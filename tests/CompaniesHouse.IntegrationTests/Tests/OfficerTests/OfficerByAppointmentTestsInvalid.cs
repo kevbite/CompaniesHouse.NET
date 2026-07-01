@@ -14,7 +14,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
         protected override async Task When() =>
             Result = await Client.GetOfficerByAppointmentIdAsync(InvalidCompanyNumber, InvalidAppointmentId);
 
-        [Fact]
+        [IntegrationFact]
         public void ThenTheDataIsNull() => Result.Data.ShouldBeNull();
     }
 }

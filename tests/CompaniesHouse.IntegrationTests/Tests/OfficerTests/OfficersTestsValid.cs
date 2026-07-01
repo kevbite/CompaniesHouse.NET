@@ -18,7 +18,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
                 ;
         }
 
-        [Fact]
+        [IntegrationFact]
         public void ThenTheDataItemsAreNotEmpty()
         {
             Result.Data.Items.ShouldNotBeEmpty();

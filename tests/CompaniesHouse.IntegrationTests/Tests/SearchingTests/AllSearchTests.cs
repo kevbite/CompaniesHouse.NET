@@ -18,7 +18,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             _client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
         }
 
-        [Theory]
+        [IntegrationTheory]
         [InlineData("British Gas")]
         [InlineData("Kevin")]
         public async Task ThenItemsAreReturned(string query)
@@ -28,7 +28,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             result.Data.Items.ShouldNotBeEmpty();
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenPagingAndMixedItemTypesAreReturned()
         {
             var result = await _client.SearchAllAsync(new SearchAllRequest { Query = "john", ItemsPerPage = 20 });
@@ -38,7 +38,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             result.Data.Items.ShouldContain(x => x is Officer);
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task ThenCompanySpecificFieldsRoundTripFromSearchAll()
         {
             var result = await _client.SearchAllAsync(new SearchAllRequest { Query = "absa uk permanent establishment", ItemsPerPage = 20 });

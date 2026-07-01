@@ -9,7 +9,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
 {
     public class OfficersSchemaTests
     {
-        [Fact]
+        [IntegrationFact]
         public async Task GetOfficersAsync_DeserializesConfirmedTescoFields()
         {
             var client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
@@ -30,7 +30,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
             melissaBethell.IdentityVerificationDetails.AppointmentVerificationEndOn.ShouldBe(new DateTime(9999, 12, 31));
         }
 
-        [Fact]
+        [IntegrationFact]
         public async Task GetOfficersAsync_DeserializesCorporateIdentificationAndAppointedBefore()
         {
             var client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
