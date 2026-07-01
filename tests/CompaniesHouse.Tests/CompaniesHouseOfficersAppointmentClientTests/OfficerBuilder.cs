@@ -10,16 +10,16 @@ namespace CompaniesHouse.Tests.CompaniesHouseOfficersAppointmentClientTests
             var fixture = new Fixture();
             fixture.Customizations.Add(new UniversalDateSpecimenBuilder<ResourceBuilders.Officer>(x => x.AppointedOn));
             fixture.Customizations.Add(new UniversalDateSpecimenBuilder<ResourceBuilders.Officer>(x => x.ResignedOn));
-            
+
             return fixture
                 .Build<ResourceBuilders.Officer>()
-                .With(x => x.Links, 
+                .With(x => x.Links,
                     fixture
                         .Build<OfficerLinks>()
-                        .With(x => x.Officer, 
+                        .With(x => x.Officer,
                             fixture
                                 .Build<OfficerAppointmentLink>()
-                                .With(x => x.AppointmentsResource, "/officer/xyz/appointments")
+                                .With(x => x.AppointmentsResource, "/officers/xyz/appointments")
                                 .Create())
                         .Create())
                 .With(x => x.OfficerRole, testCase.OfficerRole)

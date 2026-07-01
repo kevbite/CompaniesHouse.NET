@@ -51,9 +51,9 @@ namespace CompaniesHouse
             _companiesHouseRegisteredOfficeAddressClient = new CompaniesHouseRegisteredOfficeAddressClient(_httpClient, new RegisteredOfficeAddressUriBuilder());
             _companiesHouseOfficerByAppointmentClient = new CompaniesHouseOfficerByByAppointmentClient(_httpClient, new OfficersAppointmentUriBuilder());
         }
-        
+
         public CompaniesHouseClient(ICompaniesHouseSettings settings)
-            :this(new HttpClientFactory(settings).CreateHttpClient())
+            : this(new HttpClientFactory(settings).CreateHttpClient())
         {
         }
 
@@ -101,15 +101,23 @@ namespace CompaniesHouse
         {
             return _companiesHouseCompanyFilingHistoryClient.GetCompanyFilingHistoryAsync(companyNumber, startIndex, pageSize, cancellationToken);
         }
-        
+
         public Task<CompaniesHouseClientResponse<FilingHistoryItem>> GetFilingHistoryByTransactionAsync(string companyNumber, string transactionId, CancellationToken cancellationToken = default)
         {
             return _companiesHouseCompanyFilingHistoryClient.GetFilingHistoryByTransactionAsync(companyNumber, transactionId, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<Officers>> GetOfficersAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken))
+        // Companies House defaults officer lists to 35 items, unlike several other paged endpoints.
+        public Task<CompaniesHouseClientResponse<Officers>> GetOfficersAsync(
+            string companyNumber,
+            int startIndex = 0,
+            int pageSize = 35,
+            string? registerType = null,
+            bool? registerView = null,
+            string? orderBy = null,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
-            return _companiesHouseOfficersClient.GetOfficersAsync(companyNumber, startIndex, pageSize, cancellationToken);
+            return _companiesHouseOfficersClient.GetOfficersAsync(companyNumber, startIndex, pageSize, registerType, registerView, orderBy, cancellationToken);
         }
 
         public Task<CompaniesHouseClientResponse<CompanyInsolvencyInformation>> GetCompanyInsolvencyInformationAsync(string companyNumber, CancellationToken cancellationToken = default(CancellationToken))
@@ -130,7 +138,7 @@ namespace CompaniesHouse
 
         public Task<CompaniesHouseClientResponse<Charges>> GetChargesListAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default)
         {
-            return _companiesHouseChargesClient.GetChargesListAsync(companyNumber,startIndex, pageSize, cancellationToken);
+            return _companiesHouseChargesClient.GetChargesListAsync(companyNumber, startIndex, pageSize, cancellationToken);
         }
 
         public Task<CompaniesHouseClientResponse<Charge>> GetChargeByIdAsync(string companyNumber, string chargeId, CancellationToken cancellationToken = default)

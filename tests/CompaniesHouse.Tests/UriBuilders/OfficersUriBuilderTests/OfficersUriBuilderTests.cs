@@ -21,7 +21,7 @@ namespace CompaniesHouse.Tests.UriBuilders.OfficersUriBuilderTests
             _pageSize = 10;
             _startIndex = 5;
             _companyNumber = "123456789";
-            _actualUri = _uriBuilder.Build(_companyNumber, _startIndex, _pageSize);
+            _actualUri = _uriBuilder.Build(_companyNumber, _startIndex, _pageSize, null, null, null);
         }
 
         [Fact]
@@ -44,6 +44,14 @@ namespace CompaniesHouse.Tests.UriBuilders.OfficersUriBuilderTests
             var uri = new Uri(_baseUri, _actualUri);
             var expected = $"?items_per_page={_pageSize}&start_index={_startIndex}";
             uri.Query.ShouldBe(expected);
+        }
+
+        [Fact]
+        public void Build_AppendsOnlySuppliedOptionalParameters()
+        {
+            var uri = new Uri(_baseUri, _uriBuilder.Build(_companyNumber, _startIndex, _pageSize, "directors", true, "appointed_on"));
+
+            uri.Query.ShouldBe("?items_per_page=10&start_index=5&register_type=directors&register_view=true&order_by=appointed_on");
         }
     }
 }

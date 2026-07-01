@@ -14,3 +14,5 @@ company_status_detail|CompaniesHouse.Response|CompanyStatusDetail|true
 jurisdiction|CompaniesHouse.Response.CompanyProfile|Jurisdiction|true
 foreign_account_type|CompaniesHouse.Response.CompanyProfile|ForeignAccountType|true
 terms_of_account_publication|CompaniesHouse.Response.CompanyProfile|TermsOfAccountPublication|true
+officer_role|CompaniesHouse.Response.Officers|OfficerRole|true
+identification_type|CompaniesHouse.Response.Officers|IdentificationType|true

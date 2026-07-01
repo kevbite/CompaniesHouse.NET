@@ -28,6 +28,10 @@ namespace CompaniesHouse.Tests.ResourceBuilders
 
         public static string CreateSingle(Officer officer)
         {
+            var selfProperty = string.IsNullOrWhiteSpace(officer.Links?.Self)
+                ? string.Empty
+                : $@"""self"" : ""{officer.Links.Self}"",";
+
             return $@" {{
                     ""appointed_on"" : ""{officer.AppointedOn.ToString("yyyy-MM-dd")}"",
                     ""resigned_on"" : ""{officer.ResignedOn.ToString("yyyy-MM-dd")}"",
@@ -37,6 +41,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
                        ""year"" : {officer.DateOfBirth.Year}
                     }},
                     ""links"" : {{
+                        {selfProperty}
                         ""officer"" : {{
                             ""appointments"" : ""{officer.Links.Officer.AppointmentsResource}""                                                               
                             }}                    
