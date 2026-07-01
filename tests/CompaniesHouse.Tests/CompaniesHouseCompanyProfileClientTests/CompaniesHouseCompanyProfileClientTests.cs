@@ -19,10 +19,10 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTests
 {
     public class CompaniesHouseCompanyProfileClientTests
     {
-        private required CompaniesHouseCompanyProfileClient _client;
+        private CompaniesHouseCompanyProfileClient _client;
 
-        private required CompaniesHouseClientResponse<Response.CompanyProfile.CompanyProfile> _result;
-        private required ResourceBuilders.CompanyProfile _companyProfile;
+        private CompaniesHouseClientResponse<Response.CompanyProfile.CompanyProfile> _result;
+        private ResourceBuilders.CompanyProfile _companyProfile;
 
         [Theory]
         [MemberData(nameof(TestCases))]
