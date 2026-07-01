@@ -28,5 +28,26 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             result.Data.ShouldNotBeNull();
             result.Data.Items.ShouldNotBeEmpty();
         }
+
+        [Fact]
+        public async Task ThenAlphabeticalPagingParametersCanBeSent()
+        {
+            var firstPage = await _client.SearchCompaniesAlphabeticallyAsync(new SearchCompaniesAlphabeticallyRequest
+            {
+                Query = "tesco",
+                Size = 5,
+            });
+
+            var secondPage = await _client.SearchCompaniesAlphabeticallyAsync(new SearchCompaniesAlphabeticallyRequest
+            {
+                Query = "tesco",
+                Size = 5,
+                SearchAbove = firstPage.Data.Items[^1].OrderedAlphaKeyWithId,
+            });
+
+            firstPage.Data.Kind.ShouldBe("search#alphabetical-search");
+            secondPage.Data.ShouldNotBeNull();
+            secondPage.Data.Items.ShouldNotBeEmpty();
+        }
     }
 }

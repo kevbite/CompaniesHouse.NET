@@ -27,15 +27,15 @@ namespace CompaniesHouse.Response.Search.DissolvedCompaniesSearch
         public string Kind { get; set; }
 
         [JsonPropertyName("matched_previous_company_name")]
-        public PreviousCompanyName MatchedPreviousCompanyName { get; set; }
+        public PreviousCompanyName? MatchedPreviousCompanyName { get; set; }
 
         [JsonPropertyName("ordered_alpha_key_with_id")]
-        public string OrderedAlphaKeyWithId { get; set; }
+        public string? OrderedAlphaKeyWithId { get; set; }
 
         [JsonPropertyName("previous_company_names")]
-        public PreviousCompanyName[] PreviousCompanyNames { get; set; }
+        public PreviousCompanyName[]? PreviousCompanyNames { get; set; }
 
         [JsonPropertyName("registered_office_address")]
-        public Address RegisteredOfficeAddress { get; set; }
+        public Address? RegisteredOfficeAddress { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace CompaniesHouse.Response.Search.AdvancedCompanySearch
         public CompanyStatus CompanyStatus { get; set; }
 
         [JsonPropertyName("company_subtype")]
-        public CompanySubtype CompanySubtype { get; set; }
+        public CompanySubtype? CompanySubtype { get; set; }
 
         [JsonPropertyName("company_type")]
         public CompanyType CompanyType { get; set; }
@@ -36,9 +36,9 @@ namespace CompaniesHouse.Response.Search.AdvancedCompanySearch
         public global::CompaniesHouse.Response.Search.CompanyProfileLinks Links { get; set; }
 
         [JsonPropertyName("registered_office_address")]
-        public Address RegisteredOfficeAddress { get; set; }
+        public Address? RegisteredOfficeAddress { get; set; }
 
         [JsonPropertyName("sic_codes")]
-        public string[] SicCodes { get; set; }
+        public string[]? SicCodes { get; set; }
     }
 }

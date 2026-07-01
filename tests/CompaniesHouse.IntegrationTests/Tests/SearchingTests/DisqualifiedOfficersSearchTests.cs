@@ -22,5 +22,14 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
 
             result.Data.DisqualifiedOfficers.ShouldNotBeEmpty();
         }
+
+        [Fact]
+        public async Task ThenPagingMetadataAndDateOfBirthAreReturned()
+        {
+            var result = await _client.SearchDisqualifiedOfficerAsync(new SearchDisqualifiedOfficerRequest { Query = "john", ItemsPerPage = 20 });
+
+            result.Data.PageNumber.ShouldBe(1);
+            result.Data.DisqualifiedOfficers[0].DateOfBirth.Year.ShouldBeGreaterThan(1900);
+        }
     }
 }

@@ -26,11 +26,15 @@ namespace CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource
 
         public string CompanyType { get; set; }
 
+        public string AddressSnippet { get; set; }
+
         public DateTime DateOfCessation { get; set; }
 
         public DateTime DateOfCreation { get; set; }
 
         public string Description { get; set; }
+
+        public string ExternalRegistrationNumber { get; set; }
 
         public string Kind { get; set; }
 
@@ -39,6 +43,8 @@ namespace CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource
         public string Snippet { get; set; }
 
         public string Title { get; set; }
+
+        public int[] MatchesSnippet { get; set; }
 
         public int[] MatchesTitle { get; set; }
     }

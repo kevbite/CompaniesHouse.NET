@@ -9,6 +9,9 @@ namespace CompaniesHouse.Response.Search.CompanySearch
         [JsonPropertyName("address")]
         public Address Address { get; set; }
 
+        [JsonPropertyName("address_snippet")]
+        public string? AddressSnippet { get; set; }
+
         [JsonPropertyName("company_number")]
         public string CompanyNumber { get; set; }
 
@@ -29,7 +32,10 @@ namespace CompaniesHouse.Response.Search.CompanySearch
         public string Description { get; set; }
 
         [JsonPropertyName("description_identifier")]
-        public object[] DescriptionIdentifier { get; set; }
+        public string[] DescriptionIdentifier { get; set; }
+
+        [JsonPropertyName("external_registration_number")]
+        public string? ExternalRegistrationNumber { get; set; }
 
         [JsonPropertyName("matches")]
         public Matches Matches { get; set; }

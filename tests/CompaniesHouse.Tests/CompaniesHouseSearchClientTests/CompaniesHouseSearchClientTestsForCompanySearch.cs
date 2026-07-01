@@ -94,14 +94,18 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
             actual.Address.PoBox.ShouldBe(_companyWithUnknownDateOfCessation.PoBox);
             actual.Address.PostalCode.ShouldBe(_companyWithUnknownDateOfCessation.PostalCode);
             actual.Address.Region.ShouldBe(_companyWithUnknownDateOfCessation.Region);
+            actual.AddressSnippet.ShouldBe(_companyWithUnknownDateOfCessation.AddressSnippet);
 
             actual.CompanyStatus.ShouldBe(ExpectedCompanyStatus[_companyWithUnknownDateOfCessation.CompanyStatus]);
             actual.CompanyType.ShouldBe(ExpectedCompanyType[_companyWithUnknownDateOfCessation.CompanyType]);
             actual.DateOfCessation.ShouldBeNull();
             actual.DateOfCreation.ShouldBe(_companyWithUnknownDateOfCessation.DateOfCreation.Date);
             actual.Description.ShouldBe(_companyWithUnknownDateOfCessation.Description);
+            actual.DescriptionIdentifier.ShouldBe(["incorporated-on"]);
+            actual.ExternalRegistrationNumber.ShouldBe(_companyWithUnknownDateOfCessation.ExternalRegistrationNumber);
             actual.Kind.ShouldBe(_companyWithUnknownDateOfCessation.Kind);
             actual.Links.Self.ShouldBe(_companyWithUnknownDateOfCessation.LinksSelf);
+            actual.Matches.Snippet.ShouldBe(_companyWithUnknownDateOfCessation.MatchesSnippet);
             actual.Matches.Title.ShouldBe(_companyWithUnknownDateOfCessation.MatchesTitle);
             actual.Snippet.ShouldBe(_companyWithUnknownDateOfCessation.Snippet);
             actual.Title.ShouldBe(_companyWithUnknownDateOfCessation.Title);
@@ -130,14 +134,18 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
                 actual.Address.PoBox.ShouldBe(companyDetails.PoBox);
                 actual.Address.PostalCode.ShouldBe(companyDetails.PostalCode);
                 actual.Address.Region.ShouldBe(companyDetails.Region);
+                actual.AddressSnippet.ShouldBe(companyDetails.AddressSnippet);
 
                 actual.CompanyStatus.ShouldBe(ExpectedCompanyStatus[companyDetails.CompanyStatus ?? ""]);
                 actual.CompanyType.ShouldBe(ExpectedCompanyType[companyDetails.CompanyType]);
                 actual.DateOfCessation.ShouldBe(companyDetails.DateOfCessation.Date);
                 actual.DateOfCreation.ShouldBe(companyDetails.DateOfCreation.Date);
                 actual.Description.ShouldBe(companyDetails.Description);
+                actual.DescriptionIdentifier.ShouldBe(["incorporated-on"]);
+                actual.ExternalRegistrationNumber.ShouldBe(companyDetails.ExternalRegistrationNumber);
                 actual.Kind.ShouldBe(companyDetails.Kind);
                 actual.Links.Self.ShouldBe(companyDetails.LinksSelf);
+                actual.Matches.Snippet.ShouldBe(companyDetails.MatchesSnippet);
                 actual.Matches.Title.ShouldBe(companyDetails.MatchesTitle);
                 actual.Snippet.ShouldBe(companyDetails.Snippet);
                 actual.Title.ShouldBe(companyDetails.Title);

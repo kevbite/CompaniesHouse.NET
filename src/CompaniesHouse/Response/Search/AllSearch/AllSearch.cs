@@ -17,6 +17,9 @@ namespace CompaniesHouse.Response.Search.AllSearch
         [JsonPropertyName("kind")]
         public string Kind { get; set; }
 
+        [JsonPropertyName("page_number")]
+        public int? PageNumber { get; set; }
+
         [JsonPropertyName("start_index")]
         public int? StartIndex { get; set; }
 

@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response.Search.OfficerSearch;
+using System.Linq;
 using Shouldly;
 using Xunit;
 
@@ -21,6 +22,17 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             var result = await _client.SearchOfficerAsync(new SearchOfficerRequest { Query = "Kevin" });
 
             result.Data.Officers.ShouldNotBeEmpty();
+        }
+
+        [Fact]
+        public async Task ThenLiveOfficerBirthMonthAndPagingMetadataAreReturned()
+        {
+            var result = await _client.SearchOfficerAsync(new SearchOfficerRequest { Query = "Alan Sugar", ItemsPerPage = 20 });
+
+            var officer = result.Data.Officers.First(x => x.Title == "Lord Alan Michael SUGAR" && x.DateOfBirth?.Year == 1947);
+            result.Data.PageNumber.ShouldBe(1);
+            officer.DateOfBirth.ShouldNotBeNull();
+            officer.DateOfBirth.Month.ShouldBe(3);
         }
     }
 }
