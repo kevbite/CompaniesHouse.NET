@@ -5,27 +5,33 @@ namespace CompaniesHouse.Response.CompanyProfile
     public class CompanyProfileLinks
     {
         [JsonPropertyName("charges")]
-        public string Charges { get; set; }
+        public required string Charges { get; set; }
+
+        [JsonPropertyName("exemptions")]
+        public string? Exemptions { get; set; }
 
         [JsonPropertyName("filing_history")]
-        public string FilingHistory { get; set; }
-        
+        public required string FilingHistory { get; set; }
+
         [JsonPropertyName("insolvency")]
-        public string Insolvency { get; set; }
-        
+        public required string Insolvency { get; set; }
+
         [JsonPropertyName("officers")]
-        public string Officers { get; set; }
-        
+        public required string Officers { get; set; }
+
         [JsonPropertyName("persons_with_significant_control")]
-        public string PersonsWithSignificantControl { get; set; }
-        
+        public required string PersonsWithSignificantControl { get; set; }
+
         [JsonPropertyName("persons_with_significant_control_statements")]
-        public string PersonsWithSignificantControlStatements { get; set; }
-        
+        public required string PersonsWithSignificantControlStatements { get; set; }
+
         [JsonPropertyName("registers")]
-        public string Registers { get; set; }
-        
+        public required string Registers { get; set; }
+
         [JsonPropertyName("self")]
-        public string Self { get; set; }
+        public required string Self { get; set; }
+
+        [JsonPropertyName("uk_establishments")]
+        public string? UkEstablishments { get; set; }
     }
 }

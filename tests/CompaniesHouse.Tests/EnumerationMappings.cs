@@ -52,21 +52,21 @@ namespace CompaniesHouse.Tests
                 {"petition-to-restore-dissolved", CompanyStatusDetail.PetitionToRestoreDissolved},
                 {"transformed-to-se", CompanyStatusDetail.TransformedToSe},
                 {"converted-to-plc", CompanyStatusDetail.ConvertedToPlc},
-                {"converted-to-ukeig", CompanyStatusDetail.ConvertedToUnitedKingdomEconomicInterestGroupings},
-                {"converted-to-uk-societas", CompanyStatusDetail.ConvertedToUnitedKingdomSocietas},
+                {"converted-to-ukeig", CompanyStatusDetail.ConvertedToUkeig},
+                {"converted-to-uk-societas", CompanyStatusDetail.ConvertedToUkSocietas},
             };
 
         public static readonly IReadOnlyDictionary<string, Jurisdiction> PossibleJurisdictions = new Dictionary
             <string, Jurisdiction>()
             {
-                {"england-wales", Jurisdiction.EnglandAndWales},
+                {"england-wales", Jurisdiction.EnglandWales},
                 {"wales", Jurisdiction.Wales},
                 {"scotland", Jurisdiction.Scotland},
                 {"northern-ireland", Jurisdiction.NorthernIreland},
                 {"european-union", Jurisdiction.EuropeanUnion},
                 {"united-kingdom", Jurisdiction.UnitedKingdom},
                 {"england", Jurisdiction.England},
-                {"noneu", Jurisdiction.NonEu}
+                {"noneu", Jurisdiction.Noneu}
             };
 
         public static readonly IReadOnlyDictionary<string, OfficerRole> PossibleOfficerRoles = new Dictionary
@@ -260,7 +260,7 @@ namespace CompaniesHouse.Tests
             {"part-satisfied", ChargeStatus.PartSatisfied},
             {"satisfied", ChargeStatus.Satisfied}
         };
-        
+
         public static readonly IReadOnlyDictionary<string, OfficeAddressCountry> PossibleRegisteredOfficeAddressCountry = new Dictionary<string, OfficeAddressCountry>
         {
             {"England", OfficeAddressCountry.England},
