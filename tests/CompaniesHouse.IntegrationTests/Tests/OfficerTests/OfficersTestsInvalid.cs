@@ -17,9 +17,14 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
         }
 
         [Fact]
-        public void ThenTheDataItemsAreNull()
+        public void ThenTheDataItemsAreEmpty()
         {
-            Result.Data.ShouldBeNull();
+            // The Companies House API returns 200 with an empty officer list for a
+            // malformed/non-existent company number rather than 404, so Data is
+            // populated but contains no items.
+            Result.Data.ShouldNotBeNull();
+            Result.Data.Items.ShouldBeEmpty();
+            Result.Data.TotalResults.ShouldBe(0);
         }
 
         private async Task WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany()
