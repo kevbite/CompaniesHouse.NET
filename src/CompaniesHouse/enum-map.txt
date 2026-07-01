@@ -1,0 +1,10 @@
+# Configures which api-enumerations YAML groups (submodule + enumerations/extra
+# overlay - see enumerations/extra/README.md) are generated into string-backed
+# value types (plan 03) by CompaniesHouse.SourceGenerator (plan 04).
+#
+# Format: group|namespace|TypeName|includeDescriptions
+#
+# Adding a new value to the relevant YAML file and rebuilding is enough to pick
+# up a new static member - no hand-editing of generated types required.
+
+company_status|CompaniesHouse.Response|CompanyStatus|true

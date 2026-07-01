@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+        Referenced as a plain (non-analyzer) project reference here so the
+        generator's internal classes (MinimalYamlParser, EnumDataMerger,
+        ValueTypeEmitter, EnumValueTypeGenerator, ...) are testable directly -
+        this is a test project, not a consumer of the generator's output.
+    -->
+    <ProjectReference Include="..\..\src\CompaniesHouse.SourceGenerator\CompaniesHouse.SourceGenerator.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+    <PackageReference Include="Shouldly" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+  </ItemGroup>
+
+</Project>

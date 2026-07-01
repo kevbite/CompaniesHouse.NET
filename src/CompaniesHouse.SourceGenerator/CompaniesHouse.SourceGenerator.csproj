@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <IsRoslynComponent>true</IsRoslynComponent>
+        <IsPackable>false</IsPackable>
+        <RootNamespace>CompaniesHouse.SourceGenerator</RootNamespace>
+        <!-- RS2008 (analyzer release tracking) is for shipped, versioned analyzer
+             packages with a public rule catalogue - not applicable to this internal,
+             build-time-only generator. -->
+        <NoWarn>$(NoWarn);RS2008</NoWarn>
+    </PropertyGroup>
+
+    <!--
+        This project is a build-time-only incremental source generator used
+        internally by CompaniesHouse.csproj. It is never packaged/shipped as an
+        analyzer to consumers - the CompaniesHouse NuGet package only contains
+        the concrete generated types compiled into CompaniesHouse.dll.
+        See .plans/completed/04-enum-source-generator.md.
+    -->
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
+    </ItemGroup>
+
+</Project>

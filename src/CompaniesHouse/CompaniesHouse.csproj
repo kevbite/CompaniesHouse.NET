@@ -27,4 +27,22 @@
         <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
     </ItemGroup>
 
+    <!--
+        Build-time-only source generator (plan 04): emits string-backed enum value
+        types (plan 03) from the api-enumerations submodule + local extras (plan 05).
+        Referenced as an analyzer only - it is not a runtime dependency and is never
+        shipped to consumers; the compiled output already contains the generated types.
+    -->
+    <ItemGroup>
+        <ProjectReference Include="..\CompaniesHouse.SourceGenerator\CompaniesHouse.SourceGenerator.csproj"
+                           OutputItemType="Analyzer"
+                           ReferenceOutputAssembly="false" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <AdditionalFiles Include="..\..\external\api-enumerations\*.yml" />
+        <AdditionalFiles Include="..\..\enumerations\extra\*.yml" />
+        <AdditionalFiles Include="enum-map.txt" />
+    </ItemGroup>
+
 </Project>
