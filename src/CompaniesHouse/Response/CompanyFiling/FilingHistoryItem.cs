@@ -1,56 +1,54 @@
-﻿using System;
+using System;
 using CompaniesHouse.Description;
 using CompaniesHouse.JsonConverters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.CompanyFiling
 {
     public class FilingHistoryItem : IDescriptable
     {
-        [JsonProperty(PropertyName = "category")]
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonPropertyName("category")]
         public FilingCategory Category { get; set; }
 
-        [JsonProperty(PropertyName = "subcategory")]
-        [JsonConverter(typeof(StringArrayOrFieldEnumConverter))]
+        [JsonPropertyName("subcategory")]
         public FilingSubcategory[] Subcategory { get; set; }
 
-        [JsonProperty(PropertyName = "transaction_id")]
+        [JsonPropertyName("transaction_id")]
         public string TransactionId { get; set; }
 
-        [JsonProperty(PropertyName = "type")]
+        [JsonPropertyName("type")]
         public string FilingType { get; set; }
 
-        [JsonProperty(PropertyName = "barcode")]
+        [JsonPropertyName("barcode")]
         public string Barcode { get; set; }
 
-        [JsonProperty(PropertyName = "date")]
+        [JsonPropertyName("date")]
         public DateTime? DateOfProcessing { get; set; }
 
-        [JsonProperty(PropertyName = "description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
-        [JsonProperty(PropertyName = "description_values")]
-        private JObject DescriptionValues { get; set; }
+        [JsonInclude]
+        [JsonPropertyName("description_values")]
+        private JsonElement? DescriptionValues { get; set; }
 
-        [JsonProperty(PropertyName = "pages")]
+        [JsonPropertyName("pages")]
         public int? PageCount { get; set; }
 
-        [JsonProperty(PropertyName = "paper_filed")]
+        [JsonPropertyName("paper_filed")]
         public bool? PaperFiled { get; set; }
 
-        [JsonProperty(PropertyName = "annotations")]
+        [JsonPropertyName("annotations")]
         public FilingHistoryItemAnnotation[] Annotations { get; set; }
 
-        [JsonProperty(PropertyName = "associated_filings")]
+        [JsonPropertyName("associated_filings")]
         public FilingHistoryItemAssociatedFiling[] AssociatedFilings { get; set; }
 
-        [JsonProperty(PropertyName = "resolutions")]
+        [JsonPropertyName("resolutions")]
         public FilingHistoryItemResolution[] Resolutions { get; set; }
 
-        [JsonProperty(PropertyName = "links")]
+        [JsonPropertyName("links")]
         public Links Links { get; set; }
 
         public string GetDescription(string format)

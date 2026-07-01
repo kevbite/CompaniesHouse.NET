@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Search.OfficerSearch
 {
     public class DateOfBirth
     {
-        [JsonProperty(PropertyName = "month")]
+        [JsonPropertyName("month")]
         public int Month { get; set; }
 
-        [JsonProperty(PropertyName = "year")]
+        [JsonPropertyName("year")]
         public int Year { get; set; }
     }
 }

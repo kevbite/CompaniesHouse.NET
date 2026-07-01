@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using CompaniesHouse.Response.Document;
@@ -25,19 +24,23 @@ namespace CompaniesHouse
             var requestUri = _documentUriBuilder.Build(documentId);
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            if (response.StatusCode != HttpStatusCode.NotFound)
-                response.EnsureSuccessStatusCode2();
+            await response.EnsureNotServerErrorAsync().ConfigureAwait(false);
 
             var data = response.IsSuccessStatusCode
                 ? new DocumentDownload
                 {
-                    Content = await response.Content.ReadAsStreamAsync(),
+                    Content = await response.Content.ReadAsStreamAsync(cancellationToken),
                     ContentLength = response.Content.Headers.ContentLength,
-                    ContentType = response.Content.Headers.ContentType.MediaType
+                    ContentType = response.Content.Headers.ContentType?.MediaType
                 }
                 : null;
 
-            return new CompaniesHouseClientResponse<DocumentDownload>(data);
+            return new CompaniesHouseClientResponse<DocumentDownload>(
+                data,
+                (int)response.StatusCode,
+                response.ReasonPhrase,
+                response.Headers.RetryAfter?.Delta,
+                response.Headers);
         }
     }
 }

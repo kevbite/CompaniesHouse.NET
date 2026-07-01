@@ -1,31 +1,31 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Search.AllSearch
 {
     public class Address
     {
-        [JsonProperty(PropertyName = "address_line_1")]
+        [JsonPropertyName("address_line_1")]
         public string AddressLine1 { get; set; }
 
-        [JsonProperty(PropertyName = "address_line_2")]
+        [JsonPropertyName("address_line_2")]
         public string AddressLine2 { get; set; }
 
-        [JsonProperty(PropertyName = "care_of")]
+        [JsonPropertyName("care_of")]
         public string CareOf { get; set; }
 
-        [JsonProperty(PropertyName = "country")]
+        [JsonPropertyName("country")]
         public string Country { get; set; }
 
-        [JsonProperty(PropertyName = "locality")]
+        [JsonPropertyName("locality")]
         public string Locality { get; set; }
 
-        [JsonProperty(PropertyName = "po_box")]
+        [JsonPropertyName("po_box")]
         public string PoBox { get; set; }
 
-        [JsonProperty(PropertyName = "postal_code")]
+        [JsonPropertyName("postal_code")]
         public string PostalCode { get; set; }
 
-        [JsonProperty(PropertyName = "region")]
+        [JsonPropertyName("region")]
         public string Region { get; set; }
     }
 }

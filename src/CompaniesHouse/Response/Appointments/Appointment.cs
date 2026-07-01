@@ -1,41 +1,39 @@
-﻿using System;
+using System;
 using CompaniesHouse.Response.Officers;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Appointments
 {
     public class Appointment
     {
-        [JsonProperty(PropertyName = "officer_role")]
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonPropertyName("officer_role")]
         public OfficerRole OfficerRole { get; set; }
 
-        [JsonProperty(PropertyName = "name_elements")]
+        [JsonPropertyName("name_elements")]
         public NameElements NameElements { get; set; }
 
-        [JsonProperty(PropertyName = "name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [JsonProperty(PropertyName = "appointed_to")]
+        [JsonPropertyName("appointed_to")]
         public AppointedTo Appointed { get; set; }
 
-        [JsonProperty(PropertyName = "nationality")]
+        [JsonPropertyName("nationality")]
         public string Nationality { get; set; }
 
-        [JsonProperty(PropertyName = "country_of_residence")]
+        [JsonPropertyName("country_of_residence")]
         public string CountryOfResidence { get; set; }
 
-        [JsonProperty(PropertyName = "occupation")]
+        [JsonPropertyName("occupation")]
         public string Occupation { get; set; }
 
-        [JsonProperty(PropertyName = "address")]
+        [JsonPropertyName("address")]
         public Address Address { get; set; }
 
-        [JsonProperty(PropertyName = "appointed_on")]
+        [JsonPropertyName("appointed_on")]
         public DateTime? AppointedOn { get; set; }
 
-        [JsonProperty(PropertyName = "resigned_on")]
+        [JsonPropertyName("resigned_on")]
         public DateTime? ResignedOn { get; set; }
     }
 }

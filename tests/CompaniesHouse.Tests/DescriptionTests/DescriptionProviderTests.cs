@@ -1,5 +1,5 @@
 ﻿using CompaniesHouse.Description;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
 using Shouldly;
 using Xunit;
 
@@ -11,7 +11,7 @@ namespace CompaniesHouse.Tests.DescriptionTests
         public void GivenFormatAndMatchingStringVariable()
         {
             var format = "some value: {variable}";
-            var values = JObject.Parse(@"{ ""variable"": ""Value"" }");
+            var values = JsonDocument.Parse(@"{ ""variable"": ""Value"" }").RootElement;
             var result = DescriptionProvider.GetDescription(format, values);
 
             result.ShouldBe(@"some value: Value");
@@ -20,7 +20,7 @@ namespace CompaniesHouse.Tests.DescriptionTests
         public void GivenFormatAndMatchingStringVariables()
         {
             var format = "some value: {variable1}, other value: {variable2}";
-            var values = JObject.Parse(@"{ ""variable1"": ""Value1"", ""variable2"": ""Value2"" }");
+            var values = JsonDocument.Parse(@"{ ""variable1"": ""Value1"", ""variable2"": ""Value2"" }").RootElement;
             var result = DescriptionProvider.GetDescription(format, values);
 
             result.ShouldBe(@"some value: Value1, other value: Value2");
@@ -30,7 +30,7 @@ namespace CompaniesHouse.Tests.DescriptionTests
         public void GivenFormatAndNotMatchingStringVariable()
         {
             var format = "some value: {variable}";
-            var values = JObject.Parse(@"{ ""otherVariable"": ""Value"" }");
+            var values = JsonDocument.Parse(@"{ ""otherVariable"": ""Value"" }").RootElement;
             var result = DescriptionProvider.GetDescription(format, values);
 
             result.ShouldBe(@"some value: {variable}");
@@ -40,7 +40,7 @@ namespace CompaniesHouse.Tests.DescriptionTests
         public void GivenFormatAndMatchingCompoundVariable()
         {
             var format = "some value: {parent.variable}";
-            var values = JObject.Parse(@"{ ""parent"": { ""variable"": ""Value"" }}");
+            var values = JsonDocument.Parse(@"{ ""parent"": { ""variable"": ""Value"" }}").RootElement;
             var result = DescriptionProvider.GetDescription(format, values);
 
             result.ShouldBe(@"some value: Value");

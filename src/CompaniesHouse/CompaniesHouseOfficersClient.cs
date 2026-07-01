@@ -25,15 +25,7 @@ namespace CompaniesHouse
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            // Return a null profile on 404s, but raise exception for all other error codes
-            if (response.StatusCode != System.Net.HttpStatusCode.NotFound)
-                response.EnsureSuccessStatusCode2();
-
-            var result = response.IsSuccessStatusCode
-                ? await response.Content.ReadAsJsonAsync<Officers>().ConfigureAwait(false)
-                : null;
-
-            return new CompaniesHouseClientResponse<Officers>(result);
+            return await response.ToCompaniesHouseClientResponseAsync<Officers>(cancellationToken).ConfigureAwait(false);
         }
     }
 }

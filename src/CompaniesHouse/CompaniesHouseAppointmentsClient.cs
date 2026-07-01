@@ -22,11 +22,7 @@ namespace CompaniesHouse
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            response.EnsureSuccessStatusCode2();
-
-            var result = await response.Content.ReadAsJsonAsync<Appointments>().ConfigureAwait(false);
-
-            return new CompaniesHouseClientResponse<Appointments>(result);
+            return await response.ToCompaniesHouseClientResponseAsync<Appointments>(cancellationToken).ConfigureAwait(false);
         }
     }
 }

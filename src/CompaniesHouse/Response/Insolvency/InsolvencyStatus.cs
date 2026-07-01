@@ -1,10 +1,7 @@
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace CompaniesHouse.Response.Insolvency
 {
-    [JsonConverter(typeof(StringEnumConverter))]
     public enum InsolvencyStatus
     {
         [EnumMember(Value = "")]

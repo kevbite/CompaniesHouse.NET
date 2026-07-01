@@ -21,12 +21,8 @@ namespace CompaniesHouse
             var requestUri = $"company/{companyNumber}/insolvency";
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
-                
-            response.EnsureSuccessStatusCode2();
 
-            var result = await response.Content.ReadAsJsonAsync<CompanyInsolvencyInformation>().ConfigureAwait(false);
-
-            return new CompaniesHouseClientResponse<CompanyInsolvencyInformation>(result);
+            return await response.ToCompaniesHouseClientResponseAsync<CompanyInsolvencyInformation>(cancellationToken).ConfigureAwait(false);
         }
     }
 }

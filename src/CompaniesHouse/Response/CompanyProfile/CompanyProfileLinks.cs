@@ -1,31 +1,31 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.CompanyProfile
 {
     public class CompanyProfileLinks
     {
-        [JsonProperty(PropertyName = "charges")]
+        [JsonPropertyName("charges")]
         public string Charges { get; set; }
 
-        [JsonProperty(PropertyName = "filing_history")]
+        [JsonPropertyName("filing_history")]
         public string FilingHistory { get; set; }
         
-        [JsonProperty(PropertyName = "insolvency")]
+        [JsonPropertyName("insolvency")]
         public string Insolvency { get; set; }
         
-        [JsonProperty(PropertyName = "officers")]
+        [JsonPropertyName("officers")]
         public string Officers { get; set; }
         
-        [JsonProperty(PropertyName = "persons_with_significant_control")]
+        [JsonPropertyName("persons_with_significant_control")]
         public string PersonsWithSignificantControl { get; set; }
         
-        [JsonProperty(PropertyName = "persons_with_significant_control_statements")]
+        [JsonPropertyName("persons_with_significant_control_statements")]
         public string PersonsWithSignificantControlStatements { get; set; }
         
-        [JsonProperty(PropertyName = "registers")]
+        [JsonPropertyName("registers")]
         public string Registers { get; set; }
         
-        [JsonProperty(PropertyName = "self")]
+        [JsonPropertyName("self")]
         public string Self { get; set; }
     }
 }

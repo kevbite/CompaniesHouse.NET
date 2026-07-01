@@ -1,15 +1,14 @@
 using CompaniesHouse.JsonConverters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Charges
 {
     public class SecuredDetail
     {
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
-        [JsonProperty("type")]
-        [JsonConverter(typeof(OptionalStringEnumConverter<SecuredDetailType>), SecuredDetailType.None)]
+        [JsonPropertyName("type")]
         public SecuredDetailType Type { get; set; }
     }
 }

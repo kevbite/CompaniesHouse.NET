@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Document
 {
     public class Links
     {
-        [JsonProperty("self")]
+        [JsonPropertyName("self")]
         public string Self { get; set; }
-        [JsonProperty("document")]
+        [JsonPropertyName("document")]
         public string Document { get; set; }
     }
 }

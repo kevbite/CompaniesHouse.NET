@@ -27,11 +27,7 @@ namespace CompaniesHouse
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            response.EnsureSuccessStatusCode2();
-
-            var result = await response.Content.ReadAsJsonAsync<TReturn>().ConfigureAwait(false);
-
-            return new CompaniesHouseClientResponse<TReturn>(result);
+            return await response.ToCompaniesHouseClientResponseAsync<TReturn>(cancellationToken).ConfigureAwait(false);
         }
     }
 }

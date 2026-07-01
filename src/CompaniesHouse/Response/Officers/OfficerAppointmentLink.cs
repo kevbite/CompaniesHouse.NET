@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Officers
 {
     public class OfficerAppointmentLink
     {
-        [JsonProperty(PropertyName = "appointments")]
+        [JsonPropertyName("appointments")]
         public string AppointmentsResource { get; set; }
 
         public string OfficerId => AppointmentsResource?.Split('/')[2];

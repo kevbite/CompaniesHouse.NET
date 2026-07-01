@@ -1,17 +1,17 @@
-﻿using System;
-using Newtonsoft.Json;
+using System;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Officers
 {
     public class OfficerDateOfBirth
     {
-        [JsonProperty(PropertyName = "day")]
+        [JsonPropertyName("day")]
         public int? Day { get; set; }
 
-        [JsonProperty(PropertyName = "month")]
+        [JsonPropertyName("month")]
         public int? Month { get; set; }
 
-        [JsonProperty(PropertyName = "year")]
+        [JsonPropertyName("year")]
         public int? Year { get; set; }
     }
 }

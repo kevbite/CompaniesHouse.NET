@@ -1,74 +1,72 @@
 using System;
 using CompaniesHouse.JsonConverters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Charges
 {
     public class Charge
     {
-        [JsonProperty("acquired_on")]
+        [JsonPropertyName("acquired_on")]
         public DateTime? AcquiredOn { get; set; }
 
-        [JsonProperty("assets_ceased_released")]
-        [JsonConverter(typeof(OptionalStringEnumConverter<AssetsCeasedReleased>), AssetsCeasedReleased.None)]
+        [JsonPropertyName("assets_ceased_released")]
         public AssetsCeasedReleased AssetsCeasedReleased { get; set; }
 
-        [JsonProperty("charge_code")]
+        [JsonPropertyName("charge_code")]
         public string ChargeCode { get; set; }
 
-        [JsonProperty("charge_number")]
+        [JsonPropertyName("charge_number")]
         public int? ChargeNumber { get; set; }
 
-        [JsonProperty("classification")]
+        [JsonPropertyName("classification")]
         public Classification Classification { get; set; }
 
-        [JsonProperty("covering_instrument_date")]
+        [JsonPropertyName("covering_instrument_date")]
         public DateTime? CoveringInstrumentDate { get; set; }
 
-        [JsonProperty("created_on")]
+        [JsonPropertyName("created_on")]
         public DateTime? CreatedOn { get; set; }
 
-        [JsonProperty("delivered_on")]
+        [JsonPropertyName("delivered_on")]
         public DateTime? DeliveredOn { get; set; }
 
-        [JsonProperty("etag")]
+        [JsonPropertyName("etag")]
         public string Etag { get; set; }
 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; }
 
-        [JsonProperty("insolvency_cases")]
+        [JsonPropertyName("insolvency_cases")]
         public InsolvencyCase[] InsolvencyCases { get; set; }
 
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Links Links { get; set; }
 
-        [JsonProperty("more_than_four_persons_entitled")]
+        [JsonPropertyName("more_than_four_persons_entitled")]
         public bool? MoreThanFourPersonsEntitled { get; set; }
 
-        [JsonProperty("particulars")]
+        [JsonPropertyName("particulars")]
         public Particular Particular { get; set; }
 
-        [JsonProperty("persons_entitled")]
+        [JsonPropertyName("persons_entitled")]
         public PersonEntitled[] PersonsEntitled { get; set; }
 
-        [JsonProperty("resolved_on")]
+        [JsonPropertyName("resolved_on")]
         public DateTime? ResolvedOn { get; set; }
 
-        [JsonProperty("satisfied_on")]
+        [JsonPropertyName("satisfied_on")]
         public DateTime? SatisfiedOn { get; set; }
 
-        [JsonProperty("scottish_alterations")]
+        [JsonPropertyName("scottish_alterations")]
         public ScottishAlterations ScottishAlterations { get; set; }
 
-        [JsonProperty("secured_details")]
+        [JsonPropertyName("secured_details")]
         public SecuredDetail SecuredDetail { get; set; }
 
-        [JsonProperty("status")]
-        [JsonConverter(typeof(OptionalStringEnumConverter<ChargeStatus>), ChargeStatus.None)]
+        [JsonPropertyName("status")]
         public ChargeStatus Status { get; set; }
 
-        [JsonProperty("transactions")]
+        [JsonPropertyName("transactions")]
         public Transaction[] Transactions { get; set; }
     }
 }

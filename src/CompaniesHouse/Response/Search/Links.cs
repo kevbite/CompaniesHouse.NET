@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Search
 {
     public class Links
     {
-        [JsonProperty(PropertyName = "self")]
+        [JsonPropertyName("self")]
         public string Self { get; set; }
     }
 }

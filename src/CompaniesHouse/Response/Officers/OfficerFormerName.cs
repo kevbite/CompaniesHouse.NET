@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Officers
 {
     public class OfficerFormerName
     {
-        [JsonProperty(PropertyName = "forenames")]
+        [JsonPropertyName("forenames")]
         public string ForeNames { get; set; }
 
-        [JsonProperty(PropertyName = "surname")]
+        [JsonPropertyName("surname")]
         public string Surname { get; set; }
     }
 }

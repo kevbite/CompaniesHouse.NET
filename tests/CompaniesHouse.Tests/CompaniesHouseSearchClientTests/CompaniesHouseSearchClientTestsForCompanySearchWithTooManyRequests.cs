@@ -12,7 +12,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
 {
     public class CompaniesHouseSearchClientTestsForCompanySearchWithTooManyRequests : IAsyncLifetime
     {
-        private Exception _caughtException;
+        private CompaniesHouseClientResponse<CompanySearch>? _response;
 
         public async Task InitializeAsync()
         {
@@ -25,24 +25,18 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
                 BaseAddress = new Uri("https://wibble.com/")
             }, new SearchUriBuilderFactory());
 
-            try
-            {
-                await client.SearchAsync<SearchCompanyRequest, CompanySearch>(new SearchCompanyRequest());
-            }
-            catch (Exception ex)
-            {
-                _caughtException = ex;
-            }
+            _response = await client.SearchAsync<SearchCompanyRequest, CompanySearch>(new SearchCompanyRequest());
         }
 
         public Task DisposeAsync() => Task.CompletedTask;
 
         [Fact]
-        public void ThenExceptionIsThrown()
+        public void ThenUnsuccessfulResponseIsReturned()
         {
-            var exception = _caughtException.ShouldBeOfType<HttpRequestException>();
-            exception.Message.ShouldStartWith("Response status code does not indicate success: 429");
+            _response.ShouldNotBeNull();
+            _response.IsSuccess.ShouldBeFalse();
+            _response.StatusCode.ShouldBe(429);
+            _response.Data.ShouldBeNull();
         }
-
     }
 }

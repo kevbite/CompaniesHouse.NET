@@ -1,6 +1,7 @@
 ﻿using CompaniesHouse.JsonConverters;
-using Moq;
-using Newtonsoft.Json;
+using System;
+using System.Text;
+using System.Text.Json;
 using Shouldly;
 using Xunit;
 
@@ -8,15 +9,14 @@ namespace CompaniesHouse.Tests.JsonConverters.OptionalDateJsonConverterTests
 {
     public class OptionalDateJsonConverterTestsForUnknownValue
     {
-        private OptionalDateJsonConverter _convertor;
-        private object _result;
+        private readonly DateTime? _result;
 
         public OptionalDateJsonConverterTestsForUnknownValue()
         {
-            _convertor = new OptionalDateJsonConverter();
-            var jsonReader = new Mock<JsonReader>();
-            jsonReader.Setup(x => x.Value).Returns("Unknown");
-            _result = _convertor.ReadJson(jsonReader.Object, null, null, null);
+            var converter = new OptionalDateJsonConverter();
+            var reader = new Utf8JsonReader(Encoding.UTF8.GetBytes(@"""Unknown"""));
+            reader.Read();
+            _result = converter.Read(ref reader, typeof(DateTime?), CompaniesHouseJsonSerializerOptions.Default);
         }
 
         [Fact]

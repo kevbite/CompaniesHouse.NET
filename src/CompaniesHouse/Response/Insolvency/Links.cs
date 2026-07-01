@@ -1,10 +1,10 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Insolvency
 {
     public class Links
     {
-        [JsonProperty("charge")]
+        [JsonPropertyName("charge")]
         public string Charge { get; set; }
     }
 }

@@ -1,23 +1,23 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Search.OfficerSearch
 {
 
     public class OfficerSearch
     {
-        [JsonProperty(PropertyName = "items")]
+        [JsonPropertyName("items")]
         public Officer[] Officers { get; set; }
 
-        [JsonProperty(PropertyName = "items_per_page")]
+        [JsonPropertyName("items_per_page")]
         public int ItemsPerPage { get; set; }
 
-        [JsonProperty(PropertyName = "kind")]
+        [JsonPropertyName("kind")]
         public string Kind { get; set; }
 
-        [JsonProperty(PropertyName = "start_index")]
+        [JsonPropertyName("start_index")]
         public int StartIndex { get; set; }
 
-        [JsonProperty(PropertyName = "total_results")]
+        [JsonPropertyName("total_results")]
         public int TotalResults { get; set; }
     }
 }

@@ -1,31 +1,29 @@
-﻿using CompaniesHouse.JsonConverters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using CompaniesHouse.JsonConverters;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.CompanyFiling
 {
     public class CompanyFilingHistory
     {
-        [JsonProperty(PropertyName = "filing_history_status")]
-        [JsonConverter(typeof(OptionalStringEnumConverter<FilingHistoryStatus>), FilingHistoryStatus.None)]
+        [JsonPropertyName("filing_history_status")]
         public FilingHistoryStatus HistoryStatus { get; set; }
 
-        [JsonProperty(PropertyName = "etag")]
+        [JsonPropertyName("etag")]
         public string ETag { get; set; }
 
-        [JsonProperty(PropertyName = "total_count")]
+        [JsonPropertyName("total_count")]
         public int TotalCount { get; set; }
 
-        [JsonProperty(PropertyName = "items_per_page")]
+        [JsonPropertyName("items_per_page")]
         public int ItemsPerPage { get; set; }
 
-        [JsonProperty(PropertyName = "start_index")]
+        [JsonPropertyName("start_index")]
         public int StartIndex { get; set; }
 
-        [JsonProperty(PropertyName = "items")]
+        [JsonPropertyName("items")]
         public FilingHistoryItem[] Items { get; set; }
 
-        [JsonProperty(PropertyName = "kind")]
+        [JsonPropertyName("kind")]
         public string Kind { get; set; }
     }
 }

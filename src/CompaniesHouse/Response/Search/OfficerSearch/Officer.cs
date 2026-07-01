@@ -1,34 +1,34 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Search.OfficerSearch
 {
     public class Officer : SearchItem
     {
-        [JsonProperty(PropertyName = "address")]
+        [JsonPropertyName("address")]
         public Address Address { get; set; }
 
-        [JsonProperty(PropertyName = "address_snippet")]
+        [JsonPropertyName("address_snippet")]
         public string AddressSnippet { get; set; }
 
-        [JsonProperty(PropertyName = "appointment_count")]
+        [JsonPropertyName("appointment_count")]
         public int AppointmentCount { get; set; }
 
-        [JsonProperty(PropertyName = "date_of_birth")]
+        [JsonPropertyName("date_of_birth")]
         public DateOfBirth DateOfBirth { get; set; }
 
-        [JsonProperty(PropertyName = "description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
-        [JsonProperty(PropertyName = "description_identifiers")]
+        [JsonPropertyName("description_identifiers")]
         public string[] DescriptionIdentifiers { get; set; }
 
-        [JsonProperty(PropertyName = "matches")]
+        [JsonPropertyName("matches")]
         public Match Matches { get; set; }
 
-        [JsonProperty(PropertyName = "snippet")]
+        [JsonPropertyName("snippet")]
         public string Snippet { get; set; }
 
-        [JsonProperty(PropertyName = "title")]
+        [JsonPropertyName("title")]
         public string Title { get; set; }
 
         public string OfficerId

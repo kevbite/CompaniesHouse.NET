@@ -1,22 +1,17 @@
-﻿using System.IO;
-using CompaniesHouse.JsonConverters;
 using CompaniesHouse.Response;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace CompaniesHouse.Tests.JsonConverters.FilingSubcategoryConverterTests
 {
     public abstract class StringArrayOrFieldEnumConverterTestsBase
     {
-        private StringArrayOrFieldEnumConverter _convertor;
-        protected object Result;
+        protected FilingSubcategory[] Result;
 
         protected StringArrayOrFieldEnumConverterTestsBase()
         {
-            _convertor = new StringArrayOrFieldEnumConverter();
-            var json = GetJson();
-            var jsonTextReader = new JsonTextReader(new StringReader(json));
-            jsonTextReader.Read();
-            Result = _convertor.ReadJson(jsonTextReader, typeof(FilingSubcategory[]), null, null);
+            Result = JsonSerializer.Deserialize<FilingSubcategory[]>(
+                GetJson(),
+                CompaniesHouseJsonSerializerOptions.Default)!;
         }
 
         protected abstract string GetJson();

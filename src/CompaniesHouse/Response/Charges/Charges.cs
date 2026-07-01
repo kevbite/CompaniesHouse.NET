@@ -1,25 +1,25 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Charges
 {
     public class Charges
     {
-        [JsonProperty("Etag")]
+        [JsonPropertyName("Etag")]
         public string Etag { get; set; }
         
-        [JsonProperty("items")]
+        [JsonPropertyName("items")]
         public Charge[] Items { get; set; }
         
-        [JsonProperty("part_satisfied_count")]
+        [JsonPropertyName("part_satisfied_count")]
         public int? PartSatisfiedCount { get; set; }
         
-        [JsonProperty("satisfied_count")]
+        [JsonPropertyName("satisfied_count")]
         public int? SatisfiedCount { get; set; }
         
-        [JsonProperty("total_count")]
+        [JsonPropertyName("total_count")]
         public int? TotalCount { get; set; }
         
-        [JsonProperty("unfiletered_count")]
+        [JsonPropertyName("unfiletered_count")]
         public int? UnfileteredCount { get; set; }
     }
 }

@@ -1,19 +1,19 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Appointments
 {
     public class NameElements
     {
-        [JsonProperty(PropertyName = "title")]
+        [JsonPropertyName("title")]
         public string Title { get; set; }
 
-        [JsonProperty(PropertyName = "forename")]
+        [JsonPropertyName("forename")]
         public string Forename { get; set; }
 
-        [JsonProperty(PropertyName = "surname")]
+        [JsonPropertyName("surname")]
         public string Surname { get; set; }
 
-        [JsonProperty(PropertyName = "other_forenames")]
+        [JsonPropertyName("other_forenames")]
         public string OtherForenames { get; set; }
 
     }

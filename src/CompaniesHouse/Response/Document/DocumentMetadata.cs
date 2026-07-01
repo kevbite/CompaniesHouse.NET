@@ -1,29 +1,29 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Document
 {
     public class DocumentMetadata
     {
-        [JsonProperty("company_number")]
+        [JsonPropertyName("company_number")]
         public string CompanyNumber { get; set; }
-        [JsonProperty("barcode")]
+        [JsonPropertyName("barcode")]
         public string Barcode { get; set; }
-        [JsonProperty("significant_date")]
+        [JsonPropertyName("significant_date")]
         public object SignificantDate { get; set; }
-        [JsonProperty("significant_date_type")]
+        [JsonPropertyName("significant_date_type")]
         public string SignificantDateType { get; set; }
-        [JsonProperty("category")]
+        [JsonPropertyName("category")]
         public string Category { get; set; }
-        [JsonProperty("pages")]
+        [JsonPropertyName("pages")]
         public int Pages { get; set; }
-        [JsonProperty("created_at")]
+        [JsonPropertyName("created_at")]
         public string CreatedAt { get; set; }
-        [JsonProperty("etag")]
+        [JsonPropertyName("etag")]
         public string Etag { get; set; }
-        [JsonProperty("links")]
+        [JsonPropertyName("links")]
         public Links Links { get; set; }
-        [JsonProperty("resources")]
+        [JsonPropertyName("resources")]
         public Dictionary<string, DocumentMetadataContentLength> Resources { get; set; }
     }
 }

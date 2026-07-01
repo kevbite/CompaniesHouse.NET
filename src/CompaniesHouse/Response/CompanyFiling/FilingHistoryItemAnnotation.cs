@@ -1,23 +1,24 @@
-﻿using System;
+using System;
 using CompaniesHouse.Description;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.CompanyFiling
 {
     public class FilingHistoryItemAnnotation : IDescriptable
     {
-        [JsonProperty(PropertyName = "annotation")]
+        [JsonPropertyName("annotation")]
         public string Annotation { get; set; }
 
-        [JsonProperty(PropertyName = "date")]
+        [JsonPropertyName("date")]
         public DateTime? DateOfAnnotation { get; set; }
 
-        [JsonProperty(PropertyName = "description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
-        [JsonProperty(PropertyName = "description_values")]
-        private JObject DescriptionValues { get; set; }
+        [JsonInclude]
+        [JsonPropertyName("description_values")]
+        private JsonElement? DescriptionValues { get; set; }
 
         public string GetDescription(string format)
         {

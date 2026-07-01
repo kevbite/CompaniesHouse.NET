@@ -1,13 +1,13 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Charges
 {
     public class TransactionLinks
     {
-        [JsonProperty("filing")]
+        [JsonPropertyName("filing")]
         public string Filing { get; set; }
         
-        [JsonProperty("insolvency_case")]
+        [JsonPropertyName("insolvency_case")]
         public string InsolvencyCase { get; set; }
     }
 }

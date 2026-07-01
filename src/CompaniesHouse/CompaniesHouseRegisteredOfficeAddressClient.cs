@@ -1,4 +1,3 @@
-using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,14 +24,7 @@ namespace CompaniesHouse
             var requestUri = _registeredOfficeAddressUriBuilder.Build(companyNumber);
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            if (response.StatusCode != HttpStatusCode.NotFound)
-                response.EnsureSuccessStatusCode2();
-
-            var data = response.IsSuccessStatusCode
-                ? await response.Content.ReadAsJsonAsync<OfficeAddress>()
-                : null;
-
-            return new CompaniesHouseClientResponse<OfficeAddress>(data);
+            return await response.ToCompaniesHouseClientResponseAsync<OfficeAddress>(cancellationToken).ConfigureAwait(false);
         }
     }
 }

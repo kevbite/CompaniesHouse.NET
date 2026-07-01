@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Document
 {
     public class DocumentMetadataContentLength
     {
-        [JsonProperty("content_length")]
+        [JsonPropertyName("content_length")]
         public int ContentLength { get; set; }
     }
 }

@@ -1,4 +1,3 @@
-using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,14 +24,7 @@ namespace CompaniesHouse
             var requestUri = _chargesUriBuilder.Build(companyNumber, startIndex, pageSize);
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            if (response.StatusCode != HttpStatusCode.NotFound)
-                response.EnsureSuccessStatusCode2();
-
-            var data = response.IsSuccessStatusCode
-                ? await response.Content.ReadAsJsonAsync<Charges>()
-                : null;
-
-            return new CompaniesHouseClientResponse<Charges>(data);
+            return await response.ToCompaniesHouseClientResponseAsync<Charges>(cancellationToken).ConfigureAwait(false);
         }
 
         public async Task<CompaniesHouseClientResponse<Charge>> GetChargeByIdAsync(string companyNumber, string chargeId, CancellationToken cancellationToken = default)
@@ -40,14 +32,7 @@ namespace CompaniesHouse
             var requestUri = _chargesUriBuilder.Build(companyNumber, chargeId);
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            if (response.StatusCode != HttpStatusCode.NotFound)
-                response.EnsureSuccessStatusCode2();
-
-            var data = response.IsSuccessStatusCode
-                ? await response.Content.ReadAsJsonAsync<Charge>()
-                : null;
-
-            return new CompaniesHouseClientResponse<Charge>(data);
+            return await response.ToCompaniesHouseClientResponseAsync<Charge>(cancellationToken).ConfigureAwait(false);
         }
     }
 }

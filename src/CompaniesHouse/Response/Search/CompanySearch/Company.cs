@@ -1,46 +1,43 @@
 using System;
 using CompaniesHouse.JsonConverters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Search.CompanySearch
 {
     public class Company : SearchItem
     {
-        [JsonProperty(PropertyName = "address")]
+        [JsonPropertyName("address")]
         public Address Address { get; set; }
 
-        [JsonProperty(PropertyName = "company_number")]
+        [JsonPropertyName("company_number")]
         public string CompanyNumber { get; set; }
 
-        [JsonProperty(PropertyName = "company_status")]
-        [JsonConverter(typeof(OptionalStringEnumConverter<CompanyStatus>), CompanyStatus.None)]
+        [JsonPropertyName("company_status")]
         public CompanyStatus CompanyStatus { get; set; }
 
-        [JsonProperty(PropertyName = "company_type")]
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonPropertyName("company_type")]
         public CompanyType CompanyType { get; set; }
 
-        [JsonProperty(PropertyName = "date_of_cessation")]
+        [JsonPropertyName("date_of_cessation")]
         [JsonConverter(typeof(OptionalDateJsonConverter))]
         public DateTime? DateOfCessation { get; set; }
 
-        [JsonProperty(PropertyName = "date_of_creation")]
+        [JsonPropertyName("date_of_creation")]
         public DateTime? DateOfCreation { get; set; }
 
-        [JsonProperty(PropertyName = "description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
-        [JsonProperty(PropertyName = "description_identifier")]
+        [JsonPropertyName("description_identifier")]
         public object[] DescriptionIdentifier { get; set; }
 
-        [JsonProperty(PropertyName = "matches")]
+        [JsonPropertyName("matches")]
         public Matches Matches { get; set; }
 
-        [JsonProperty(PropertyName = "snippet")]
+        [JsonPropertyName("snippet")]
         public string Snippet { get; set; }
 
-        [JsonProperty(PropertyName = "title")]
+        [JsonPropertyName("title")]
         public string Title { get; set; }
     }
 }

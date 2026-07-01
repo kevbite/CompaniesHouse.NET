@@ -24,14 +24,7 @@ namespace CompaniesHouse
             var requestUri = _documentUriBuilder.Build(documentId);
             var response = await _httpClient.GetAsync(requestUri, caneCancellationToken).ConfigureAwait(false);
 
-            if (response.StatusCode != System.Net.HttpStatusCode.NotFound)
-                response.EnsureSuccessStatusCode2();
-
-            var result = response.IsSuccessStatusCode
-                ? await response.Content.ReadAsJsonAsync<DocumentMetadata>().ConfigureAwait(false)
-                : null;
-
-            return new CompaniesHouseClientResponse<DocumentMetadata>(result);
+            return await response.ToCompaniesHouseClientResponseAsync<DocumentMetadata>(caneCancellationToken).ConfigureAwait(false);
         }
     }
 }

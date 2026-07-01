@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Search.CompanySearch
 {
     public class Matches
     {
-        [JsonProperty(PropertyName = "title")]
+        [JsonPropertyName("title")]
         public int[] Title { get; set; }
     }
 

@@ -7,10 +7,6 @@
 
   <ItemGroup>
     <!-- Shipped library dependencies -->
-    <!-- NOTE: Newtonsoft.Json is retained only until plan 01 (core client
-         architecture) replaces it with System.Text.Json. Do not add new
-         Newtonsoft.Json usages. -->
-    <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.0" />
