@@ -147,7 +147,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
         private static readonly IReadOnlyDictionary<string, CompanyStatus> ExpectedCompanyStatus = new Dictionary
             <string, CompanyStatus>()
             {
-                { "", CompanyStatus.None },
+                { "", default },
                 { "active", CompanyStatus.Active },
                 { "dissolved", CompanyStatus.Dissolved },
                 { "liquidation", CompanyStatus.Liquidation },
