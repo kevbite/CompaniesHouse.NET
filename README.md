@@ -14,7 +14,7 @@ CompaniesHouse.NET can be installed via the package manager console by executing
 PM> Install-Package CompaniesHouse
 ```
 
-Once we have the package installed, we can then create a `CompaniesHouseSettings` with a ApiKey which can be created via the [CompaniesHouse API website](https://developer.companieshouse.gov.uk/developer/applications)
+Once we have the package installed, we can then create a `CompaniesHouseSettings` with an API key, which can be created via the [CompaniesHouse API website](https://developer.company-information.service.gov.uk/manage-applications).
 
 ```csharp
 var settings = new CompaniesHouseSettings(apiKey);
