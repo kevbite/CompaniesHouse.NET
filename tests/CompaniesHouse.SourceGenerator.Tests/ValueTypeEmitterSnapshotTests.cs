@@ -74,14 +74,14 @@ namespace CompaniesHouse.SourceGenerator.Tests
 
                         private static readonly HashSet<string> KnownValues = new(StringComparer.Ordinal)
                         {
-                            "on",
-                            "off",
+                            On.Value,
+                            Off.Value,
                         };
 
                         private static readonly IReadOnlyDictionary<string, string> Descriptions = new Dictionary<string, string>(StringComparer.Ordinal)
                         {
-                            ["on"] = "On",
-                            ["off"] = "Off",
+                            [On.Value] = "On",
+                            [Off.Value] = "Off",
                         };
                     }
                 }

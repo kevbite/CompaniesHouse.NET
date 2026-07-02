@@ -62,20 +62,32 @@ namespace CompaniesHouse.SourceGenerator
             sb.AppendLine();
             sb.AppendLine("        private static readonly HashSet<string> KnownValues = new(StringComparer.Ordinal)");
             sb.AppendLine("        {");
-            foreach (var (_, wireValue) in members)
+            foreach (var (memberName, _) in members)
             {
-                sb.AppendLine($"            \"{Escape(wireValue)}\",");
+                sb.AppendLine($"            {memberName}.Value,");
             }
             sb.AppendLine("        };");
 
             if (entry.IncludeDescriptions)
             {
+                var memberNamesByWireValue = new Dictionary<string, string>(StringComparer.Ordinal);
+                foreach (var (memberName, wireValue) in members)
+                {
+                    memberNamesByWireValue[wireValue] = memberName;
+                }
+
                 sb.AppendLine();
                 sb.AppendLine("        private static readonly IReadOnlyDictionary<string, string> Descriptions = new Dictionary<string, string>(StringComparer.Ordinal)");
                 sb.AppendLine("        {");
                 foreach (var wireValue in group.WireValues)
                 {
-                    sb.AppendLine($"            [\"{Escape(wireValue)}\"] = \"{Escape(group.GetDescription(wireValue))}\",");
+                    // The empty-string wire value has no static member (it represents the
+                    // type's absent/default state - see BuildMembers), so it falls back to
+                    // the literal key rather than a member reference.
+                    var key = memberNamesByWireValue.TryGetValue(wireValue, out var memberName)
+                        ? $"{memberName}.Value"
+                        : $"\"{Escape(wireValue)}\"";
+                    sb.AppendLine($"            [{key}] = \"{Escape(group.GetDescription(wireValue))}\",");
                 }
                 sb.AppendLine("        };");
             }

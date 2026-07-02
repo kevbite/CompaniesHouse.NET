@@ -36,7 +36,7 @@ namespace CompaniesHouse.SourceGenerator.Tests
             generated["CompanyStatus.g.cs"].ShouldContain("public readonly record struct CompanyStatus");
             generated["CompanyStatus.g.cs"].ShouldContain("public static CompanyStatus Active => new(\"active\");");
             generated["CompanyStatus.g.cs"].ShouldContain("public static CompanyStatus Dissolved => new(\"dissolved\");");
-            generated["CompanyStatus.g.cs"].ShouldContain("[\"active\"] = \"Active\"");
+            generated["CompanyStatus.g.cs"].ShouldContain("[Active.Value] = \"Active\"");
 
             generated.ShouldContainKey("CompanyStatusJsonConverter.g.cs");
             generated["CompanyStatusJsonConverter.g.cs"].ShouldContain("public sealed class CompanyStatusJsonConverter : JsonConverter<CompanyStatus>");
@@ -61,7 +61,7 @@ namespace CompaniesHouse.SourceGenerator.Tests
 
             var generated = RunGenerator(additionalFiles);
 
-            generated["CompanyStatus.g.cs"].ShouldContain("[\"active\"] = \"Overridden\"");
+            generated["CompanyStatus.g.cs"].ShouldContain("[Active.Value] = \"Overridden\"");
             generated["CompanyStatus.g.cs"].ShouldContain("public static CompanyStatus ClosedOn => new(\"closed-on\");");
         }
 
