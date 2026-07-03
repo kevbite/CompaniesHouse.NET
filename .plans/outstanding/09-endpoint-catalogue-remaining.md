@@ -18,6 +18,6 @@ Completed in this change:
 - `..\completed\09i-disqualified-officers-detail.md`
 - `..\completed\09j-psc-detail-types.md`
 - `..\completed\09k-exemptions.md`
+- `..\completed\09l-uk-establishments.md`
 
 Still outstanding:
-- `09l-uk-establishments.md`

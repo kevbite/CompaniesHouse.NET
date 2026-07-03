@@ -19,7 +19,8 @@
         ICompaniesHouseRegistersClient,
         ICompaniesHouseDisqualifiedOfficerDetailsClient,
         ICompaniesHousePersonsWithSignificantControlDetailsClient,
-        ICompaniesHouseExemptionsClient
+        ICompaniesHouseExemptionsClient,
+        ICompaniesHouseUkEstablishmentsClient
     {
 
     }

@@ -21,6 +21,7 @@ using CompaniesHouse.Response.Search.CompanySearch;
 using CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
 using CompaniesHouse.Response.Search.DissolvedCompaniesSearch;
 using CompaniesHouse.Response.Search.OfficerSearch;
+using CompaniesHouse.Response.UkEstablishments;
 using CompaniesHouse.UriBuilders;
 using Officer = CompaniesHouse.Response.Officers.Officer;
 
@@ -42,6 +43,7 @@ namespace CompaniesHouse
         private readonly ICompaniesHouseDisqualifiedOfficerDetailsClient _companiesHouseDisqualifiedOfficerDetailsClient;
         private readonly ICompaniesHousePersonsWithSignificantControlDetailsClient _companiesHousePersonsWithSignificantControlDetailsClient;
         private readonly ICompaniesHouseExemptionsClient _companiesHouseExemptionsClient;
+        private readonly ICompaniesHouseUkEstablishmentsClient _companiesHouseUkEstablishmentsClient;
         private readonly HttpClient _httpClient;
 
         public CompaniesHouseClient(HttpClient httpClient)
@@ -61,6 +63,7 @@ namespace CompaniesHouse
             _companiesHouseDisqualifiedOfficerDetailsClient = new CompaniesHouseDisqualifiedOfficerDetailsClient(_httpClient, new DisqualifiedOfficerUriBuilder());
             _companiesHousePersonsWithSignificantControlDetailsClient = new CompaniesHousePersonsWithSignificantControlDetailsClient(_httpClient, new PersonsWithSignificantControlDetailsUriBuilder());
             _companiesHouseExemptionsClient = new CompaniesHouseExemptionsClient(_httpClient, new CompanyExemptionsUriBuilder());
+            _companiesHouseUkEstablishmentsClient = new CompaniesHouseUkEstablishmentsClient(_httpClient, new CompanyUkEstablishmentsUriBuilder());
         }
 
         public CompaniesHouseClient(ICompaniesHouseSettings settings)
@@ -200,6 +203,11 @@ namespace CompaniesHouse
         public Task<CompaniesHouseResponse<CompanyExemptions>> GetCompanyExemptionsAsync(string companyNumber, CancellationToken cancellationToken = default)
         {
             return _companiesHouseExemptionsClient.GetCompanyExemptionsAsync(companyNumber, cancellationToken);
+        }
+
+        public Task<CompaniesHouseResponse<CompanyUkEstablishments>> GetCompanyUkEstablishmentsAsync(string companyNumber, CancellationToken cancellationToken = default)
+        {
+            return _companiesHouseUkEstablishmentsClient.GetCompanyUkEstablishmentsAsync(companyNumber, cancellationToken);
         }
 
         public Task<CompaniesHouseResponse<Charges>> GetChargesListAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default)
