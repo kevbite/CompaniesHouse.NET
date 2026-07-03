@@ -15,7 +15,8 @@
         ICompaniesHouseAppointmentsClient,
         ICompaniesHousePersonsWithSignificantControlClient,
         ICompaniesHouseChargesClient,
-        ICompaniesHouseRegisteredOfficeAddressClient
+        ICompaniesHouseRegisteredOfficeAddressClient,
+        ICompaniesHouseRegistersClient
     {
 
     }

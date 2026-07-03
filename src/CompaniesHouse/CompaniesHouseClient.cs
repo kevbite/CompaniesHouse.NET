@@ -10,6 +10,7 @@ using CompaniesHouse.Response.CompanyProfile;
 using CompaniesHouse.Response.Insolvency;
 using CompaniesHouse.Response.Officers;
 using CompaniesHouse.Response.PersonsWithSignificantControl;
+using CompaniesHouse.Response.Registers;
 using CompaniesHouse.Response.RegisteredOfficeAddress;
 using CompaniesHouse.Response.Search.AllSearch;
 using CompaniesHouse.Response.Search.AdvancedCompanySearch;
@@ -35,6 +36,7 @@ namespace CompaniesHouse
         private readonly ICompaniesHouseChargesClient _companiesHouseChargesClient;
         private readonly ICompaniesHouseRegisteredOfficeAddressClient _companiesHouseRegisteredOfficeAddressClient;
         private readonly ICompaniesHouseOfficerByAppointmentClient _companiesHouseOfficerByAppointmentClient;
+        private readonly ICompaniesHouseRegistersClient _companiesHouseRegistersClient;
         private readonly HttpClient _httpClient;
 
         public CompaniesHouseClient(HttpClient httpClient)
@@ -50,6 +52,7 @@ namespace CompaniesHouse
             _companiesHouseChargesClient = new CompaniesHouseChargesClient(_httpClient, new ChargesUriBuilder());
             _companiesHouseRegisteredOfficeAddressClient = new CompaniesHouseRegisteredOfficeAddressClient(_httpClient, new RegisteredOfficeAddressUriBuilder());
             _companiesHouseOfficerByAppointmentClient = new CompaniesHouseOfficerByByAppointmentClient(_httpClient, new OfficersAppointmentUriBuilder());
+            _companiesHouseRegistersClient = new CompaniesHouseRegistersClient(_httpClient, new CompanyRegistersUriBuilder());
         }
 
         public CompaniesHouseClient(ICompaniesHouseSettings settings)
@@ -154,6 +157,11 @@ namespace CompaniesHouse
         public Task<CompaniesHouseResponse<Officer>> GetOfficerByAppointmentIdAsync(string companyNumber, string appointmentId, CancellationToken cancellationToken = default)
         {
             return _companiesHouseOfficerByAppointmentClient.GetOfficerByAppointmentIdAsync(companyNumber, appointmentId, cancellationToken);
+        }
+
+        public Task<CompaniesHouseResponse<CompanyRegisters>> GetCompanyRegistersAsync(string companyNumber, CancellationToken cancellationToken = default)
+        {
+            return _companiesHouseRegistersClient.GetCompanyRegistersAsync(companyNumber, cancellationToken);
         }
 
         public void Dispose() => _httpClient.Dispose();
