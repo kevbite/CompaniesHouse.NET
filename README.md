@@ -157,29 +157,61 @@ value types are generated from the official
 
 ## Reading responses
 
-Every client method returns a `CompaniesHouseClientResponse<T>`, which carries
-transport metadata alongside the deserialized body:
+Every client method returns a `CompaniesHouseResponse<T>` — a discriminated
+union whose concrete subtype tells you exactly what happened:
+
+| Subtype | When | Extra property |
+|---|---|---|
+| `Success` | 2xx | `Data` (non-null), `Headers` |
+| `NotFound` | 404 | — |
+| `RateLimited` | 429 | `RetryAfter` |
+| `Unauthorized` | 401/403 | — |
+| `ClientError` | other 4xx | — |
+| `ServerError` | 5xx | `RetryAfter` |
+
+All subtypes expose `StatusCode` and `ReasonPhrase`. Transport failures (network
+errors, DNS, timeout) propagate as `HttpRequestException` from the underlying
+`HttpClient`.
+
+### Simple happy path
+
+Call `.Data` directly — it returns the deserialized body on `Success` and throws
+`InvalidOperationException` for every other subtype, so you never silently get
+`null`:
 
 ```csharp
-var result = await client.GetCompanyProfileAsync(companyNumber);
-
-result.StatusCode;   // the HTTP status code, e.g. 200 or 404
-result.IsSuccess;    // true for 2xx responses
-result.ReasonPhrase; // the HTTP reason phrase, if any
-result.RetryAfter;   // the Retry-After header value, if present (e.g. on 429s)
-result.Headers;      // the raw response headers
-result.Data;         // the deserialized body, or default for non-success responses
+var company = (await client.GetCompanyProfileAsync(companyNumber)).Data;
+Console.WriteLine(company.CompanyName);
 ```
 
-`Data` is `null`/`default` (rather than throwing) when the API returns a
-non-success response, so check it (or `IsSuccess`) before using it:
+### Full branching
+
+Pattern-match when you need to handle specific outcomes:
 
 ```csharp
 var result = await client.GetCompanyProfileAsync(companyNumber);
-if (result.Data is null)
+
+switch (result)
 {
-    // no match for that company number (404), or another non-success response
-    return;
+    case CompaniesHouseResponse<CompanyProfile>.Success { Data: var company }:
+        Console.WriteLine(company.CompanyName);
+        break;
+
+    case CompaniesHouseResponse<CompanyProfile>.NotFound:
+        Console.WriteLine("Company not found.");
+        break;
+
+    case CompaniesHouseResponse<CompanyProfile>.RateLimited { RetryAfter: var delay }:
+        Console.WriteLine($"Rate limited. Retry after {delay}.");
+        break;
+
+    case CompaniesHouseResponse<CompanyProfile>.Unauthorized:
+        Console.WriteLine("Check your API key.");
+        break;
+
+    case CompaniesHouseResponse<CompanyProfile>.ServerError { RetryAfter: var delay, StatusCode: var code }:
+        Console.WriteLine($"Server error {code}. Retry after {delay}.");
+        break;
 }
 ```
 
@@ -220,7 +252,7 @@ var disqualified = await client.SearchDisqualifiedOfficerAsync(new SearchDisqual
 var result = await client.GetCompanyProfileAsync("10440441");
 ```
 
-`result.Data` is `null` if there was no match for that company number.
+`result` is a `NotFound` subtype if there was no match for that company number.
 
 ### Getting the company officer list
 
@@ -257,7 +289,7 @@ var item = await client.GetFilingHistoryByTransactionAsync("10440441", transacti
 var result = await client.GetCompanyInsolvencyInformationAsync("10440441");
 ```
 
-`result.Data` is `null` if there is no insolvency information for the company.
+`result` is a `NotFound` subtype if there is no insolvency information for the company.
 
 ### Getting persons with significant control
 
@@ -287,7 +319,7 @@ var metadata = await client.GetDocumentMetadataAsync("FIxRR8teCKodjkBLRDHv2Cb8y0
 var document = await client.DownloadDocumentAsync("FIxRR8teCKodjkBLRDHv2Cb8y0-nQ7T5G3BEXfWtOu4");
 ```
 
-`result.Data` is `null` if there was no metadata/document for the given id.
+`metadata`/`document` is a `NotFound` subtype if there was no metadata/document for the given id.
 
 More endpoints land progressively - see `.plans/` for what's in flight.
 
