@@ -7,7 +7,7 @@ namespace CompaniesHouse.Response.CompanyProfile
     public class Accounts
     {
         [JsonPropertyName("accounting_reference_date")]
-        public AccountingReferenceDate? AccountingReferenceDate { get; set; }
+        public AccountingReferenceDate AccountingReferenceDate { get; set; } = new();
 
         [JsonPropertyName("last_accounts")]
         public LastAccounts? LastAccounts { get; set; }
@@ -22,10 +22,10 @@ namespace CompaniesHouse.Response.CompanyProfile
 
         [JsonPropertyName("next_made_up_to")]
         [Obsolete("Deprecated - use NextAccounts.PeriodEndOn")]
-        public DateTime? NextMadeUpTo { get; set; }
+        public DateTime NextMadeUpTo { get; set; }
 
         [JsonPropertyName("overdue")]
         [Obsolete("Deprecated - use NextAccounts.Overdue")]
-        public bool? Overdue { get; set; }
+        public bool Overdue { get; set; }
     }
 }

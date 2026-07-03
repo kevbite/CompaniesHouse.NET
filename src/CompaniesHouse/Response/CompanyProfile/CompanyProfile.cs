@@ -22,13 +22,13 @@ namespace CompaniesHouse.Response.CompanyProfile
         public ConfirmationStatement? ConfirmationStatement { get; set; }
 
         [JsonPropertyName("can_file")]
-        public bool? CanFile { get; set; }
+        public bool CanFile { get; set; }
 
         [JsonPropertyName("company_name")]
-        public string? CompanyName { get; set; }
+        public string CompanyName { get; set; } = string.Empty;
 
         [JsonPropertyName("company_number")]
-        public string? CompanyNumber { get; set; }
+        public string CompanyNumber { get; set; } = string.Empty;
 
         [JsonPropertyName("company_status")]
         public CompanyStatus CompanyStatus { get; set; }
@@ -75,7 +75,7 @@ namespace CompaniesHouse.Response.CompanyProfile
         public DateTime? LastFullMembersListDate { get; set; }
 
         [JsonPropertyName("links")]
-        public CompanyProfileLinks? Links { get; set; }
+        public CompanyProfileLinks Links { get; set; } = new();
 
         [JsonPropertyName("previous_company_names")]
         public PreviousCompanyName[]? PreviousCompanyNames { get; set; }

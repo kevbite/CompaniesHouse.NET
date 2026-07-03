@@ -11,7 +11,7 @@ namespace CompaniesHouse.Response.Search.DisqualifiedOfficersSearch
         public int ItemsPerPage { get; set; }
 
         [JsonPropertyName("kind")]
-        public string? Kind { get; set; }
+        public string Kind { get; set; } = string.Empty;
 
         [JsonPropertyName("page_number")]
         public int? PageNumber { get; set; }

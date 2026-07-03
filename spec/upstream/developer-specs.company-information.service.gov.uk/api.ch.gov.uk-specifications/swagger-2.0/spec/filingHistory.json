@@ -1,0 +1,348 @@
+{
+    "getFilingHistory": {
+        "get": {
+            "summary": "filingHistoryItem resource",
+            "description": "Get the filing history item of a company",
+            "tags": [
+                "filingHistory"
+            ],
+            "parameters": [
+                {
+                    "name": "company_number",
+                    "in": "path",
+                    "description": "The company number that the single filing is required for.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "transaction_id",
+                    "in": "path",
+                    "description": "The transaction id that the filing history is required for.",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Filing history items resource returned",
+                    "schema": {
+                            "$ref": "filingHistory.json#/definitions/filingHistoryItem"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorised",
+                    "schema": {
+                        "$ref": "errorModel.json#/definitions/error"
+                    }
+                },
+                "404": {
+                    "description": "Filing history not available for this company"
+                }
+            }
+        }
+    },
+    "listFilingHistory": {
+        "get": {
+            "summary": "filingHistoryList resource",
+            "description": "Get the filing history list of a company",
+            "x-operationName": "list",
+            "tags": [
+                "filingHistory"
+            ],
+            "parameters": [
+                {
+                    "name": "category",
+                    "in": "query",
+                    "description": "One or more comma-separated categories to filter by (inclusive).",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "company_number",
+                    "in": "path",
+                    "description": "The company number that the filing history is required for.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "items_per_page",
+                    "in": "query",
+                    "description": "The number of filing history items to return per page.",
+                    "required": false,
+                    "type": "integer"
+                },
+                {
+                    "name": "start_index",
+                    "in": "query",
+                    "description": "The index into the entire result set that this result page starts.",
+                    "required": false,
+                    "type": "integer"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Filing history items resource returned",
+                    "schema": {
+                            "$ref": "filingHistory.json#/definitions/filingHistoryList"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorised",
+                    "schema": {
+                        "$ref": "errorModel.json#/definitions/error"
+                    }
+                },
+                "404": {
+                    "description": "Filing history not available for this company"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "annotation": {
+            "title": "annotation",
+            "required": [
+                "date",
+                "description"
+            ],
+            "properties": {
+                "annotation": {
+                    "description": "The annotation text.",
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date the annotation was added."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of the annotation.\n For enumeration descriptions see `description` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/filing_history_descriptions.yml) file."
+                }
+            }
+        },
+        "associatedFiling": {
+            "title": "associatedFiling",
+            "required": [
+                "date",
+                "description",
+                "type"
+            ],
+            "properties": {
+                "date": {
+                    "description": "The date the associated filing was processed.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of the associated filing.\n For enumeration descriptions see `description` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/filing_history_descriptions.yml) file."
+                },
+                "type": {
+                    "description": "The type of the associated filing.",
+                    "type": "string"
+                }
+            }
+        },
+        "filingHistoryItem": {
+            "title": "filingHistoryItem",
+            "required": [
+                "category",
+                "date",
+                "description",
+                "type",
+                "transaction_id"
+            ],
+            "properties": {
+                "annotations": {
+                    "description": "Annotations for the filing",
+                    "items": {
+                        "$ref": "filingHistory.json#/definitions/annotation"
+                    },
+                    "type": "array"
+                },
+                "associated_filings": {
+                    "description": "Any filings associated with the current item",
+                    "items": {
+                        "$ref": "filingHistory.json#/definitions/associatedFiling"
+                    },
+                    "type": "array"
+                },
+                "barcode": {
+                    "description": "The barcode of the document.",
+                    "type": "string"
+                },
+                "transaction_id": {
+                    "description": "The transaction ID of the filing.",
+                    "type": "string"
+                },
+                "category": {
+                    "description": "The category of the document filed.",
+                    "enum": [
+                        "accounts",
+                        "address",
+                        "annual-return",
+                        "capital",
+                        "change-of-name",
+                        "incorporation",
+                        "liquidation",
+                        "miscellaneous",
+                        "mortgage",
+                        "officers",
+                        "resolution"
+                    ],
+                    "type": "string"
+                },
+                "date": {
+                    "description": "The date the filing was processed.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "description": {
+                    "description": "A description of the filing.\n For enumeration descriptions see `description` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/filing_history_descriptions.yml) file.",
+                    "type": "string"
+                },
+                "links": {
+                    "description": "Links to other resources associated with this filing history item.",
+                    "type": "object",
+                    "items": {
+                        "$ref": "filingHistory.json#/definitions/filingHistoryItemLinks"
+                    }
+                },
+                "pages": {
+                    "description": "Number of pages within the PDF document (links.document_metadata)",
+                    "type": "integer"
+                },
+                "paper_filed": {
+                    "description": "If true, indicates this is a paper filing.",
+                    "type": "boolean"
+                },
+                "resolutions": {
+                    "description": "Resolutions for the filing",
+                    "items": {
+                        "$ref": "filingHistory.json#/definitions/resolution"
+                    },
+                    "type": "array"
+                },
+                "subcategory": {
+                    "description": "The sub-category of the document filed.",
+                    "enum": [
+                        "resolution"
+                    ],
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of filing.",
+                    "type": "string"
+                }
+            }
+        },
+        "filingHistoryItemLinks": {
+            "title": "filingHistoryItemLinks",
+            "properties": {
+                "self": {
+                    "description": "Link to this filing history item.",
+                    "type": "string"
+                },
+                "document_metadata": {
+                    "description": "Link to the document metadata associated with this filing history item. See the Document API documentation for more details.",
+                    "type": "string"
+                }
+            }
+        },
+        "filingHistoryList": {
+            "title": "filingHistoryList",
+            "required": [
+                "etag",
+                "items",
+                "items_per_page",
+                "kind",
+                "start_index",
+                "total_count"
+            ],
+            "properties": {
+                "filing_history_status": {
+                    "description": "The status of this filing history.",
+                    "type": "string",
+                    "enum": [
+                        "filing-history-available"
+                    ]
+                },
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "items": {
+                    "description": "The filing history items.",
+                    "items": {
+                        "$ref": "filingHistory.json#/definitions/filingHistoryItem"
+                    },
+                    "type": "array"
+                },
+                "items_per_page": {
+                    "description": "The number of filing history items returned per page.",
+                    "type": "integer"
+                },
+                "kind": {
+                    "description": "Indicates this resource is a filing history.",
+                    "enum": [
+                        "filing-history"
+                    ],
+                    "type": "string"
+                },
+                "start_index": {
+                    "description": "The index into the entire result set that this result page starts.",
+                    "type": "integer"
+                },
+                "total_count": {
+                    "description": "The total number of filing history items for this company.",
+                    "type": "integer"
+                }
+            }
+        },
+        "resolution": {
+            "title": "resolution",
+            "required": [
+                "category",
+                "description",
+                "receive_date",
+                "subcategory",
+                "type"
+            ],
+            "properties": {
+                "category": {
+                    "description": "The category of the resolution filed.",
+                    "enum": [
+                        "miscellaneous"
+                    ],
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A description of the associated filing.\n For enumeration descriptions see `description` section in the [enumeration mappings] (https://github.com/companieshouse/api-enumerations/blob/master/filing_history_descriptions.yml) file.",
+                    "type": "string"
+                },
+                "document_id": {
+                    "description": "The document id of the resolution.",
+                    "type": "string"
+                },
+                "receive_date": {
+                    "description": "The date the resolution was processed.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "subcategory": {
+                    "description": "The sub-category of the document filed.",
+                    "enum": [
+                        "resolution"
+                    ],
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the associated filing.",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
+

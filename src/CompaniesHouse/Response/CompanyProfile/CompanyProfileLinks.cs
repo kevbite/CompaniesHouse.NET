@@ -29,7 +29,7 @@ namespace CompaniesHouse.Response.CompanyProfile
         public string? Registers { get; set; }
 
         [JsonPropertyName("self")]
-        public string? Self { get; set; }
+        public string Self { get; set; } = string.Empty;
 
         [JsonPropertyName("uk_establishments")]
         public string? UkEstablishments { get; set; }

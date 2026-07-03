@@ -77,10 +77,15 @@ tests/
   CompaniesHouse.Extensions.*.Tests/               DI tests
 samples/SampleProject/                             runnable usage sample
 external/api-enumerations/                         (planned) git submodule
-swagger.json                                       partial CH OpenAPI 2.0 spec
+spec/swagger.json                                  local CH OpenAPI 2.0 entrypoint
+spec/upstream/developer-specs.company-information.service.gov.uk/...  vendored $ref specs
 CompaniesHouse.slnx                                solution (XML .slnx format)
 .plans/                                            the work breakdown (read this)
 ```
+
+`spec/swagger.json` is now the root local spec file. Its `$ref` graph is
+rewritten to local paths under `spec/upstream/` so spec-driven work (for
+example, model nullability decisions) can run offline and deterministically.
 
 ## Conventions
 

@@ -23,7 +23,7 @@ namespace CompaniesHouse.Response.Officers
         public OfficerDateOfBirth? DateOfBirth { get; set; }
 
         [JsonPropertyName("name")]
-        public string? Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [JsonPropertyName("officer_role")]
         public OfficerRole OfficerRole { get; set; }
@@ -47,7 +47,7 @@ namespace CompaniesHouse.Response.Officers
         public OfficerIdentification? Identification { get; set; }
 
         [JsonPropertyName("links")]
-        public OfficerLinks? Links { get; set; }
+        public OfficerLinks Links { get; set; } = new();
 
         [JsonPropertyName("person_number")]
         public string? PersonNumber { get; set; }
@@ -59,6 +59,6 @@ namespace CompaniesHouse.Response.Officers
         public IdentityVerificationDetails? IdentityVerificationDetails { get; set; }
 
         [JsonIgnore]
-        public string? OfficerId => Links?.Officer?.OfficerId;
+        public string? OfficerId => Links.Officer?.OfficerId;
     }
 }

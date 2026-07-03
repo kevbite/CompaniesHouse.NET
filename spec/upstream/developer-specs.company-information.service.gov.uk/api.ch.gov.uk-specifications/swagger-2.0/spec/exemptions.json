@@ -1,0 +1,241 @@
+{
+    "get": {
+        "description": "Company exemptions information",
+        "parameters": [
+            {
+                "name": "company_number",
+                "in": "path",
+                "description": "The company number that the exemptions list is required for.",
+                "required": true,
+                "type": "string"
+            }
+        ],
+        "tags": [
+            "exemptions"
+        ],
+        "responses": {
+            "200": {
+                "description": "Successful response",
+                "schema": {
+                        "$ref": "exemptions.json#/definitions/companyExemptions"
+                }
+            },
+            "401": {
+                "description": "Unauthorised"
+            },
+            "404": {
+                "description": "Resource not found"
+            }
+        }
+    },
+    "definitions": {
+        "companyExemptions": {
+            "title": "companyExemptions",
+            "required": [
+                "links",
+                "kind",
+                "etag",
+                "exemptions"
+            ],
+            "properties": {
+                "links": {
+                    "description": "A set of URLs related to the resource, including self.",
+                    "items": {
+                        "$ref": "exemptions.json#/definitions/linksType"
+                    },
+                    "type": "array"
+                },
+                "kind": {
+                    "type": "string",
+                    "enum": [
+                        "exemptions"
+                    ]
+                },
+                "etag": {
+                    "type": "string",
+                    "description": "The ETag of the resource."
+                },
+                "exemptions": {
+                    "description": "Company exemptions information.",
+                    "items": {
+                        "$ref": "exemptions.json#/definitions/exemptions"
+                    }
+                }
+            }
+        },
+        "exemptions": {
+            "description": "Exemptions information.",
+            "properties": {
+                "psc_exempt_as_trading_on_regulated_market": {
+                    "description": "If present the company has been or is exempt from keeping a PSC register, as it has voting shares admitted to trading on a regulated market other than the UK.",
+                    "items": {
+                        "$ref": "exemptions.json#/definitions/pscExemptAsTradingOnRegulatedMarketItem"
+                    }
+                },
+                "psc_exempt_as_shares_admitted_on_market": {
+                    "description": "If present the company has been or is exempt from keeping a PSC register, as it has voting shares admitted to trading on a market listed in the Register of People with Significant Control Regulations 2016.",
+                    "items": {
+                        "$ref": "exemptions.json#/definitions/pscExemptAsSharesAdmittedOnMarketItem"
+                    }
+                },
+                "psc_exempt_as_trading_on_uk_regulated_market": {
+                    "description": "If present the company has been or is exempt from keeping a PSC register, as it has voting shares admitted to trading on a UK regulated market.",
+                    "items": {
+                        "$ref": "exemptions.json#/definitions/pscExemptAsTradingOnUkRegualatedMarketItem"
+                    }
+                },
+                "psc_exempt_as_trading_on_eu_regulated_market": {
+                    "description": "If present the company has been or is exempt from keeping a PSC register, as it has voting shares admitted to trading on an EU regulated market.",
+                    "items": {
+                        "$ref": "exemptions.json#/definitions/pscExemptAsTradingOnEuRegualatedMarketItem"
+                    }
+                },
+                "disclosure_transparency_rules_chapter_five_applies": {
+                    "description": "If present the company has been or is exempt from keeping a PSC register, because it is a DTR issuer and the shares are admitted to trading on a regulated market.",
+                    "items": {
+                        "$ref": "exemptions.json#/definitions/diclosureTransparencyRulesChapterFiveAppliesItem"
+                    }
+                }
+            }
+        },
+        "pscExemptAsTradingOnRegulatedMarketItem": {
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "description": "List of dates",
+                    "items": {
+                        "$ref": "exemptions.json#/definitions/exemptionItem"
+                    }
+                },
+                "exemption_type": {
+                    "description": "The exemption type.",
+                    "type": "string",
+                    "enum": [
+                        "psc-exempt-as-trading-on-regulated-market"
+                    ]
+                }
+            },
+            "required": [
+                "exemption_type",
+                "items"
+            ]
+        },
+        "pscExemptAsSharesAdmittedOnMarketItem": {
+            "required": [
+                "exemption_type",
+                "items"
+            ],
+            "properties": {
+                "items": {
+                    "description": "List of dates",
+                    "type": "array",
+                    "items": {
+                        "$ref": "exemptions.json#/definitions/exemptionItem"
+                    }
+                },
+                "exemption_type": {
+                    "description": "The exemption type.",
+                    "enum": [
+                        "psc-exempt-as-shares-admitted-on-market"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "pscExemptAsTradingOnUkRegualatedMarketItem": {
+            "required": [
+                "exemption_type",
+                "items"
+            ],
+            "properties": {
+                "items": {
+                    "description": "List of dates",
+                    "type": "array",
+                    "items": {
+                        "$ref": "exemptions.json#/definitions/exemptionItem"
+                    }
+                },
+                "exemption_type": {
+                    "description": "The exemption type.",
+                    "enum": [
+                        "psc-exempt-as-trading-on-uk-regulated-market"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "pscExemptAsTradingOnEuRegualatedMarketItem": {
+            "required": [
+                "exemption_type",
+                "items"
+            ],
+            "properties": {
+                "items": {
+                    "description": "List of dates",
+                    "type": "array",
+                    "items": {
+                        "$ref": "exemptions.json#/definitions/exemptionItem"
+                    }
+                },
+                "exemption_type": {
+                    "description": "The exemption type.",
+                    "enum": [
+                        "psc-exempt-as-trading-on-eu-regulated-market"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "diclosureTransparencyRulesChapterFiveAppliesItem": {
+            "properties": {
+                "items": {
+                    "description": "List of exemption periods.",
+                    "items": {
+                        "$ref": "exemptions.json#/definitions/exemptionItem"
+                    },
+                    "type": "array"
+                },
+                "exemption_type": {
+                    "description": "The exemption type.",
+                    "enum": [
+                        "disclosure-transparency-rules-chapter-five-applies"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "exemption_type",
+                "items"
+            ]
+        },
+        "exemptionItem": {
+            "properties": {
+                "exempt_from": {
+                    "description": "Exemption valid from.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "exempt_to": {
+                    "description": "Exemption valid to.",
+                    "type": "string",
+                    "format": "date"
+                }
+            },
+            "required": [
+                "exempt_from"
+            ]
+        },
+        "linksType": {
+            "properties": {
+                "self": {
+                    "description": "The URL of this resource.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "self"
+            ]
+        }
+    }
+}
+

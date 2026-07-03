@@ -1,0 +1,255 @@
+{
+    "getCompanyAddress": {
+        "get": {
+            "summary": "Registered Office Address",
+            "description": "Get the current address of a company",
+            "parameters": [{
+                "name": "company_number",
+                "in": "path",
+                "description": "Company number for registered office address",
+                "required": true,
+                "type": "string"
+            }],
+            "tags": [
+                "registeredOfficeAddress"
+            ],
+            "security": [{
+                "oauth2": [
+                    "https://identity.company-information.service.gov.uk/user/profile.read",
+                    "https://api.company-information.service.gov.uk/company/{company_number}/registered-office-address.update"
+                ]
+            }],
+            "responses": {
+                "200": {
+                    "description": "Successful response",
+                    "schema": {
+                        "$ref": "../models/registeredOfficeAddress.json#/definitions/registeredOfficeAddress"
+                    }
+                },
+                "401": {
+                    "description": "Not authorised"
+                },
+                "404": {
+                    "description": "Resource not found"
+                }
+            }
+        }
+    },
+    "addressTransactions": {
+        "get": {
+            "summary": "Get a registered office address resource",
+            "description": "Get registered office address resource",
+            "tags": [
+                "registeredOfficeAddress"
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "parameters": [{
+                "name": "transaction_id",
+                "in": "path",
+                "type": "string",
+                "description": "transaction id",
+                "required": true
+            }],
+            "security": [{
+                "oauth2": [
+                    "https://identity.company-information.service.gov.uk/user/profile.read",
+                    "https://api.company-information.service.gov.uk/company/{company_number}/registered-office-address.update"
+                ]
+            }],
+            "responses": {
+                "200": {
+                    "description": "Registered office address resource",
+                    "schema": {
+                        "$ref": "../models/registeredOfficeAddress.json#/definitions/registeredOfficeAddressChange"
+                    }
+                },
+                "401": {
+                    "description": "Not authorised to get the registered office address resource"
+                },
+                "404": {
+                    "description": "Resource not found"
+                }
+            }
+        },
+        "put": {
+            "summary": "Replace a registered office address resource",
+            "description": "Replace a registered office address resource.  If filing with the Insolvency scope “company_number” must be provided in the request body.",
+            "tags": [
+                "registeredOfficeAddress"
+            ],
+            "consumes": [
+                "application/json"
+            ],
+            "parameters": [{
+                    "name": "transaction_id",
+                    "in": "path",
+                    "type": "string",
+                    "description": "transaction id",
+                    "required": true
+                },
+                {
+                    "name": "request",
+                    "in": "body",
+                    "description": "The writable fields of the registered office address resource",
+                    "required": true,
+                    "schema": {
+                        "$ref": "../models/registeredOfficeAddress.json#/definitions/registeredOfficeAddressChange"
+                    }
+                }
+            ],
+            "security": [{
+                "oauth2": [
+                    "https://identity.company-information.service.gov.uk/user/profile.read",
+                    "https://api.company-information.service.gov.uk/company/{company_number}/registered-office-address.update"
+                ]
+            }],
+            "responses": {
+                "200": {
+                    "description": "Registered office address resource updated",
+                    "schema": {
+                        "$ref": "../models/registeredOfficeAddress.json#/definitions/registeredOfficeAddressChange"
+                    }
+                },
+                "401": {
+                    "description": "Not authorised to update this transaction"
+                },
+                "403": {
+                    "description": "Registered office address resource cannot be updated as it's containing transaction has been closed"
+                },
+                "404": {
+                    "description": "Transaction not found"
+                }
+            }
+        },
+        "post": {
+            "summary": "Create a registered office address resource",
+            "description": "Effective 15 September 2025, the postcode of the registered office address will be a mandatory field for the \nCompanies House Service (CHS) Filed AD01 form used to change a company’s registered office address.\n\nCreate a registered office address resource will require the “postal_code” field in the request body from this date. \nTo prepare, please ensure your implementation of the registered office address resource includes a “postal_code” field in all relevant requests.",
+            "tags": [
+                "registeredOfficeAddress"
+            ],
+            "x-operationName": "create",
+            "parameters": [{
+                    "name": "transaction_id",
+                    "in": "path",
+                    "type": "string",
+                    "description": "transaction id",
+                    "required": true
+                },
+                {
+                    "name": "request",
+                    "in": "body",
+                    "description": "The writable fields of the registered office address resource",
+                    "required": false,
+                    "schema": {
+                        "$ref": "../models/registeredOfficeAddress.json#/definitions/registeredOfficeAddressChange"
+                    }
+                }
+            ],
+            "security": [{
+                "oauth2": [
+                    "https://identity.company-information.service.gov.uk/user/profile.read",
+                    "https://api.company-information.service.gov.uk/company/{company_number}/registered-office-address.update"
+                ]
+            }],
+            "responses": {
+                "201": {
+                    "description": "Registered office address resource created within transaction envelope",
+                    "schema": {
+                        "$ref": "../models/registeredOfficeAddress.json#/definitions/registeredOfficeAddressChange"
+                    }
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Not authorised to create a registered office address resource within this transaction"
+                },
+                "403": {
+                    "description": "Registered office address resource cannot be created as it's containing transaction has been closed"
+                },
+                "404": {
+                    "description": "Transaction not found"
+                },
+                "409": {
+                    "description": "Conflict. Occurs when a registered office address already exists for the given transaction"
+                }
+            }
+        }
+    },
+    "addressTransactionsValidation": {
+        "get": {
+            "summary": "Get validation status for a registered office address resource",
+            "description": "Get validation status for registered office address resource",
+            "tags": [
+                "registeredOfficeAddress"
+            ],
+            "x-operationName": "validate",
+            "produces": [
+                "application/json"
+            ],
+            "parameters": [{
+                "name": "transaction_id",
+                "in": "path",
+                "type": "string",
+                "description": "transaction id",
+                "required": true
+            }],
+            "security": [{
+                "oauth2": [
+                    "https://identity.company-information.service.gov.uk/user/profile.read",
+                    "https://api.company-information.service.gov.uk/company/{company_number}/registered-office-address.update"
+                ]
+            }],
+            "responses": {
+                "200": {
+                    "description": "Validation status for a registered office address resource.",
+                    "schema": {
+                        "$ref": "../models/errors.json#/definitions/validationStatus"
+                    }
+                },
+                "401": {
+                    "description": "Not authorised to get the registered office address resource"
+                },
+                "404": {
+                    "description": "Resource not found"
+                }
+            }
+        }
+    },
+    "filingGenerator": {
+        "get": {
+            "summary": "Get registered office address filing",
+            "description": "Generate and return registered office address filing",
+            "tags": [
+                "filing-generator"
+            ],
+            "x-operationName": "generate registered office address filing",
+            "security": [{
+                "oauth2": [
+                    "https://identity.company-information.service.gov.uk/user/profile.read",
+                    "https://api.company-information.service.gov.uk/company/{company_number}/registered-office-address.update"
+                ]
+            }],
+            "responses": {
+                "200": {
+                    "description": "Generated filings successfully returned",
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "../models/filings.json#/definitions/filing"
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad request",
+                    "schema": {
+                        "$ref": "errorModel.json#/definitions/error"
+                    }
+                }
+            }
+        }
+    }
+}
+

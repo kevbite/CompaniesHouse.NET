@@ -1,0 +1,541 @@
+{
+    "listCompanyOfficers": {
+        "get": {
+            "summary": "Company Officers",
+            "description": "List of all company officers",
+            "x-operationName": "list",
+            "tags": [
+                "officers"
+            ],
+            "parameters": [{
+                    "name": "company_number",
+                    "in": "path",
+                    "description": "The company number of the officer list being requested.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "items_per_page",
+                    "in": "query",
+                    "description": "The number of officers to return per page.",
+                    "type": "integer"
+                },
+                {
+                    "name": "register_type",
+                    "in": "query",
+                    "description": "The register_type determines which officer type is returned for the registers view.The register_type field will only work if registers_view is set to true",
+                    "type": "string",
+                    "enum": [
+                        "directors",
+                        "secretaries",
+                        "llp_members"
+                    ]
+                },
+                {
+                    "name": "register_view",
+                    "in": "query",
+                    "description": "Display register specific information. If given register is held at Companies House, registers_view set to true and correct register_type specified, only active officers will be returned. Defaults to false",
+                    "type": "string",
+                    "enum": [
+                        "true",
+                        "false"
+                    ]
+                },
+                {
+                    "name": "start_index",
+                    "in": "query",
+                    "description": "The offset into the entire result set that this page starts.",
+                    "type": "integer"
+                },
+                {
+                    "name": "order_by",
+                    "in": "query",
+                    "description": "The field by which to order the result set.",
+                    "type": "string",
+                    "enum": [
+                        "appointed_on",
+                        "resigned_on",
+                        "surname"
+                    ]
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "List the company officers",
+                    "headers": {
+                        "ETag": {
+                            "description": "The ETag of the resource.",
+                            "type": "string"
+                        }
+                    },
+                    "schema": {
+                        "$ref": "companyOfficerList.json#/definitions/officerList"
+                    }
+                },
+                "400": {
+                    "description": "Bad request",
+                    "schema": {
+                        "$ref": "errorModel.json#/definitions/error"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorised"
+                }
+            }
+        }
+    },
+    "getCompanyOfficerAppointment": {
+        "get": {
+            "summary": "Get a company officer appointment",
+            "description": "Get details of an individual company officer appointment",
+            "tags": [
+                "officers"
+            ],
+            "parameters": [{
+                    "name": "company_number",
+                    "in": "path",
+                    "description": "The company number of the officer list being requested.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "appointment_id",
+                    "in": "path",
+                    "description": "The appointment id of the company officer appointment being requested.",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Get a company officer appointment",
+                    "headers": {
+                        "ETag": {
+                            "description": "The ETag of the resource.",
+                            "type": "string"
+                        }
+                    },
+                    "schema": {
+                        "$ref": "companyOfficerList.json#/definitions/officerSummary"
+                    }
+                },
+                "400": {
+                    "description": "Bad request",
+                    "schema": {
+                        "$ref": "errorModel.json#/definitions/error"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorised"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "address": {
+            "title": "address",
+            "properties": {
+                "address_line_1": {
+                    "description": "The first line of the address.",
+                    "type": "string"
+                },
+                "address_line_2": {
+                    "description": "The second line of the address.",
+                    "type": "string"
+                },
+                "care_of": {
+                    "description": "The care of name.",
+                    "type": "string"
+                },
+                "country": {
+                    "description": "The country e.g. United Kingdom.",
+                    "type": "string"
+                },
+                "locality": {
+                    "description": "The locality e.g. London.",
+                    "type": "string"
+                },
+                "po_box": {
+                    "description": "The post-office box number.",
+                    "type": "string"
+                },
+                "postal_code": {
+                    "description": "The postal code e.g. CF14 3UZ.",
+                    "type": "string"
+                },
+                "premises": {
+                    "description": "The property name or number.",
+                    "type": "string"
+                },
+                "region": {
+                    "description": "The region e.g. Surrey.",
+                    "type": "string"
+                }
+            }
+        },
+        "contactDetails": {
+            "title": "contactDetails",
+            "properties": {
+                "contact_name": {
+                    "description": "The name of the contact.",
+                    "type": "string"
+                }
+            }
+        },
+        "officerList": {
+            "title": "officerList",
+            "properties": {
+                "active_count": {
+                    "description": "The number of active officers in this result set.",
+                    "type": "integer"
+                },
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "items": {
+                    "description": "The list of officers.",
+                    "items": {
+                        "$ref": "companyOfficerList.json#/definitions/officerSummary"
+                    },
+                    "type": "array"
+                },
+                "items_per_page": {
+                    "description": "The number of officers to return per page.",
+                    "type": "integer"
+                },
+                "kind": {
+                    "enum": [
+                        "officer-list"
+                    ],
+                    "type": "string"
+                },
+                "links": {
+                    "description": "Links to other resources associated with this officer list resource.",
+                    "items": {
+                        "$ref": "companyOfficerList.json#/definitions/linkTypes"
+                    },
+                    "type": "object"
+                },
+                "resigned_count": {
+                    "description": "The number of resigned officers in this result set.",
+                    "type": "integer"
+                },
+                "start_index": {
+                    "description": "The offset into the entire result set that this page starts.",
+                    "type": "integer"
+                },
+                "total_results": {
+                    "description": "The total number of officers in this result set.",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "etag",
+                "items_per_page",
+                "kind",
+                "links",
+                "items",
+                "start_index",
+                "total_results",
+                "active_count",
+                "resigned_count"
+            ]
+        },
+        "officerSummary": {
+            "title": "officerSummary",
+            "properties": {
+                "address": {
+                    "description": "The correspondence address of the officer.",
+                    "items": {
+                        "$ref": "companyOfficerList.json#/definitions/address"
+                    },
+                    "type": "object"
+                },
+                "appointed_on": {
+                    "description": "The date on which the officer was appointed. For the officer roles of `corporate-managing-officer` and `managing-officer` this is the date on which Companies House was notified about the officer.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "contact_details": {
+                    "description": "The contact at the `corporate-managing-officer` of a `registered-overseas-entity`.",
+                    "items": {
+                        "$ref": "companyOfficerList.json#/definitions/contactDetails"
+                    },
+                    "type": "object"
+                },
+                "country_of_residence": {
+                    "description": "The officer's country of residence.",
+                    "type": "string"
+                },
+                "date_of_birth": {
+                    "description": "Details of director date of birth.",
+                    "items": {
+                        "$ref": "companyOfficerList.json#/definitions/dateOfBirth"
+                    },
+                    "type": "object"
+                },
+                "links": {
+                    "description": "Links to other resources associated with this officer list item.",
+                    "items": {
+                        "$ref": "companyOfficerList.json#/definitions/itemLinkTypes"
+                    },
+                    "type": "object"
+                },
+                "name": {
+                    "description": "Corporate or natural officer name.",
+                    "type": "string"
+                },
+                "nationality": {
+                    "description": "The officer's nationality.",
+                    "type": "string"
+                },
+                "occupation": {
+                    "description": "The officer's job title.",
+                    "type": "string"
+                },
+                "officer_role": {
+                    "enum": [
+                        "cic-manager",
+                        "corporate-director",
+                        "corporate-llp-designated-member",
+                        "corporate-llp-member",
+                        "corporate-manager-of-an-eeig",
+                        "corporate-managing-officer",
+                        "corporate-member-of-a-management-organ",
+                        "corporate-member-of-a-supervisory-organ",
+                        "corporate-member-of-an-administrative-organ",
+                        "corporate-nominee-director",
+                        "corporate-nominee-secretary",
+                        "corporate-secretary",
+                        "director",
+                        "general-partner-in-a-limited-partnership",
+                        "judicial-factor",
+                        "limited-partner-in-a-limited-partnership",
+                        "llp-designated-member",
+                        "llp-member",
+                        "manager-of-an-eeig",
+                        "managing-officer",
+                        "member-of-a-management-organ",
+                        "member-of-a-supervisory-organ",
+                        "member-of-an-administrative-organ",
+                        "nominee-director",
+                        "nominee-secretary",
+                        "person-authorised-to-accept",
+                        "person-authorised-to-represent",
+                        "person-authorised-to-represent-and-accept",
+                        "receiver-and-manager",
+                        "secretary"
+                    ],
+                    "type": "string"
+                },
+                "person_number" : {
+                    "description" : "Unique person identifier as displayed in bulk products 195, 198, 208, 209 and 216.",
+                    "type" : "string"
+                },
+                "principal_office_address": {
+                    "description": "The principal/registered office address of a `corporate-managing-officer` of a `registered-overseas-entity`.",
+                    "items": {
+                        "$ref": "companyOfficerList.json#/definitions/principalOfficeAddress"
+                    },
+                    "type": "object"
+                },
+                "resigned_on": {
+                    "description": "The date the officer was resigned. For the officer roles of `corporate-managing-officer` and `managing-officer` this is the date on which Companies House was notified about the officers cessation.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "responsibilities": {
+                        "description": "The responsibilities of the managing officer of a `registered-overseas-entity`.",
+                        "type": "string"
+                },
+                "former_names": {
+                    "description": "Former names for the officer.",
+                    "items": {
+                        "$ref": "companyOfficerList.json#/definitions/formerNames"
+                    },
+                    "type": "array"
+                },
+                "identification": {
+                    "description": "Only one from `eea`, `non-eea`, `uk-limited-company`, `other-corporate-body-or-firm` or `registered-overseas-entity-corporate-managing-officer` can be supplied, not multiples of them.",
+                    "items": {
+                        "$ref": "companyOfficerList.json#/definitions/corporateIdent"
+                    },
+                    "type": "object"
+                },
+                "identity_verification_details": {
+                    "description": "Information relating to the identity verification of the officer",
+                    "items": {
+                        "$ref": "../models/officerChanges.json#/definitions/identityVerificationDetails"
+                    },
+                    "type": "object"
+                },
+                "appointed_before": {
+                    "description": "The date the officer was appointed before. Only present when the <code>is_pre_1992_appointment</code> attribute is <code>true</code>.",
+                    "type": "string"
+                },
+                "etag": {
+                    "description": "The Etag of the resource",
+                    "type": "string"
+                },
+                "is_pre_1992_appointment": {
+                    "description": "Indicator representing if the officer was appointed before their appointment date.",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "links",
+                "name",
+                "officer_role"
+            ]
+        },
+        "itemLinkTypes": {
+            "title": "itemLinkTypes",
+            "required": [
+                "self",
+                "officer"
+            ],
+            "properties": {
+                "self": {
+                    "description": "Link to this individual company officer appointment resource.",
+                    "type": "string"
+                },
+                "officer": {
+                    "description": "Links to other officer resources associated with this officer list item.",
+                    "items": {
+                        "$ref": "companyOfficerList.json#/definitions/officerLinkTypes"
+                    },
+                    "type": "object"
+                }
+            }
+        },
+        "linkTypes": {
+            "title": "linkTypes",
+            "required": [
+                "self"
+            ],
+            "properties": {
+                "self": {
+                    "description": "Link to this officer list resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "officerLinkTypes": {
+            "title": "officerLinkTypes",
+            "required": [
+                "appointments"
+            ],
+            "properties": {
+                "appointments": {
+                    "description": "Link to the officer appointment resource that this appointment is associated with.",
+                    "type": "string"
+                }
+            }
+        },
+        "formerNames": {
+            "title": "formerNames",
+            "properties": {
+                "forenames": {
+                    "description": "Former forenames of the officer.",
+                    "type": "string"
+                },
+                "surname": {
+                    "description": "Former surnames of the officer.",
+                    "type": "string"
+                }
+            }
+        },
+        "corporateIdent": {
+            "title": "corporateIdent",
+            "properties": {
+                "identification_type": {
+                    "description": "The officer's identity type",
+                    "enum": [
+                        "eea",
+                        "non-eea",
+                        "uk-limited-company",
+                        "other-corporate-body-or-firm",
+                        "registered-overseas-entity-corporate-managing-officer"
+                    ],
+                    "type": "string"
+                },
+                "legal_authority": {
+                    "description": "The legal authority supervising the company.",
+                    "type": "string"
+                },
+                "legal_form": {
+                    "description": "The legal form of the company as defined by its country of registration.",
+                    "type": "string"
+                },
+                "place_registered": {
+                    "description": "Place registered.",
+                    "type": "string"
+                },
+                "registration_number": {
+                    "description": "Company registration number.",
+                    "type": "string"
+                }
+            }
+        },
+        "dateOfBirth": {
+            "title": "dateOfBirth",
+            "properties": {
+                "month": {
+                    "description": "The month of date of birth.",
+                    "type": "integer"
+                },
+                "year": {
+                    "description": "The year of date of birth.",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "month",
+                "year"
+            ]
+        },
+        "principalOfficeAddress": {
+            "title": "principalOfficeAddress",
+            "properties": {
+                "address_line_1": {
+                    "description": "The first line of the address.",
+                    "type": "string"
+                },
+                "address_line_2": {
+                    "description": "The second line of the address.",
+                    "type": "string"
+                },
+                "care_of": {
+                    "description": "The care of name.",
+                    "type": "string"
+                },
+                "country": {
+                    "description": "The country e.g. United Kingdom.",
+                    "type": "string"
+                },
+                "locality": {
+                    "description": "The locality e.g. London.",
+                    "type": "string"
+                },
+                "po_box": {
+                    "description": "The post-office box number.",
+                    "type": "string"
+                },
+                "postal_code": {
+                    "description": "The postal code e.g. CF14 3UZ.",
+                    "type": "string"
+                },
+                "premises": {
+                    "description": "The property name or number.",
+                    "type": "string"
+                },
+                "region": {
+                    "description": "The region e.g. Surrey.",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
+

@@ -8,15 +8,15 @@ namespace CompaniesHouse.Response.Search.AdvancedCompanySearch
         public string? ETag { get; set; }
 
         [JsonPropertyName("hits")]
-        public int? Hits { get; set; }
+        public int Hits { get; set; }
 
         [JsonPropertyName("items")]
-        public Company[]? Items { get; set; }
+        public Company[] Items { get; set; } = [];
 
         [JsonPropertyName("kind")]
-        public string? Kind { get; set; }
+        public string Kind { get; set; } = string.Empty;
 
         [JsonPropertyName("top_hit")]
-        public Company? TopHit { get; set; }
+        public Company TopHit { get; set; } = new();
     }
 }

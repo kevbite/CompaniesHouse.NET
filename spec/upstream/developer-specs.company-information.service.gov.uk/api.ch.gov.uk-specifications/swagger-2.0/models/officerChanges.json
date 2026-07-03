@@ -1,0 +1,306 @@
+{
+    "definitions": {
+        "officerChange": {
+            "title": "officerChange",
+            "required": [
+                "etag",
+                "kind",
+                "links"
+            ],
+            "properties": {
+                "etag": {
+                    "type": "string",
+                    "description": "The ETag of the resource.",
+                    "readOnly": true
+                },
+                "kind": {
+                    "type": "string",
+                    "description": "The type of resource.",
+                    "enum": [
+                        "officer-change#officer-change"
+                    ],
+                    "readOnly": true
+                },
+                "reference_appointment_id": {
+                    "type": "string",
+                    "description": "Required for officer change and termination. The id of the current company officer appointment resource being changed or terminated (`/company/{company_number}/appointments/{officer_appointment_id}`) on the public register."
+                },
+                "reference_etag": {
+                    "type": "string",
+                    "description": "The latest etag read from the current company officer appointment resource (`/company/{company_number}/officer/{officer_id}`) on the public register. If this reference etag does not match the current register the request will be rejected."
+                },
+                "address": {
+                    "description": "The correspondence address of the officer. Required for officer appointment.",
+                    "items": {
+                        "$ref": "officerChanges.json#/definitions/address"
+                    },
+                    "type": "object"
+                },
+                "appointed_on": {
+                    "description": "The date on which the officer was appointed. Required for officer appointment.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "country_of_residence": {
+                    "description": "The officer's country of residence. Required for officer appointment.",
+                    "type": "string"
+                },
+                "date_of_birth": {
+                    "description": "Details of director date of birth. Required for officer appointment.",
+                    "items": {
+                        "$ref": "officerChanges.json#/definitions/dateOfBirth"
+                    },
+                    "type": "object"
+                },
+                "links": {
+                    "description": "Links to other resources associated with this officer change resource.",
+                    "items": {
+                        "$ref": "officerChanges.json#/definitions/itemLinkTypes"
+                    },
+                    "type": "object"
+                },
+                "name": {
+                    "description": "Corporate or natural officer name. Required for officer appointment.",
+                    "type": "string"
+                },
+                "nationality": {
+                    "description": "The officer's nationality. Required for officer appointment.",
+                    "type": "string"
+                },
+                "occupation": {
+                    "description": "The officer's job title. Required for officer appointment.",
+                    "type": "string"
+                },
+                "officer_role": {
+                    "description": "The officer's role. Required for officer appointment.",
+                    "enum": [
+                        "cic-manager",
+                        "corporate-director",
+                        "corporate-llp-designated-member",
+                        "corporate-llp-member",
+                        "corporate-manager-of-an-eeig",
+                        "corporate-member-of-a-management-organ",
+                        "corporate-member-of-a-supervisory-organ",
+                        "corporate-member-of-an-administrative-organ",
+                        "corporate-nominee-director",
+                        "corporate-nominee-secretary",
+                        "corporate-secretary",
+                        "director",
+                        "general-partner-in-a-limited-partnership",
+                        "judicial-factor",
+                        "limited-partner-in-a-limited-partnership",
+                        "llp-designated-member",
+                        "llp-member",
+                        "manager-of-an-eeig",
+                        "member-of-a-management-organ",
+                        "member-of-a-supervisory-organ",
+                        "member-of-an-administrative-organ",
+                        "nominee-director",
+                        "nominee-secretary",
+                        "person-authorised-to-accept",
+                        "person-authorised-to-represent",
+                        "person-authorised-to-represent-and-accept",
+                        "receiver-and-manager",
+                        "secretary"
+                    ],
+                    "type": "string"
+                },
+                "resigned_on": {
+                    "description": "The date on which the officer resigned.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "former_names": {
+                    "description": "Former names for the officer.",
+                    "items": {
+                        "$ref": "officerChanges.json#/definitions/formerNames"
+                    },
+                    "type": "array"
+                },
+                "identification": {
+                    "description": "Only one from `eea`, `non-eea`, `uk-limited` or `other-corporate-body-or-firm` can be supplied, not multiples of them. Required for officer appointment.",
+                    "items": {
+                        "$ref": "officerChanges.json#/definitions/corporateIdent"
+                    },
+                    "type": "object"
+                },
+                "identity_verification_details": {
+                    "description": "Information relating to the identity verification of the officer",
+                    "items": {
+                        "$ref": "officerChanges.json#/definitions/identityVerificationDetails"
+                    },
+                    "type": "object"
+                }
+            }
+        },
+        "address": {
+            "title": "address",
+            "required": [
+                "address_line_1",
+                "locality"
+            ],
+            "properties": {
+                "address_line_1": {
+                    "description": "The first line of the address.",
+                    "type": "string"
+                },
+                "address_line_2": {
+                    "description": "The second line of the address.",
+                    "type": "string"
+                },
+                "care_of": {
+                    "description": "The care of name.",
+                    "type": "string"
+                },
+                "country": {
+                    "description": "The country e.g. United Kingdom.",
+                    "type": "string"
+                },
+                "locality": {
+                    "description": "The locality e.g. London.",
+                    "type": "string"
+                },
+                "po_box": {
+                    "description": "The post-office box number.",
+                    "type": "string"
+                },
+                "postal_code": {
+                    "description": "The postal code e.g. CF14 3UZ.",
+                    "type": "string"
+                },
+                "premises": {
+                    "description": "The property name or number.",
+                    "type": "string"
+                },
+                "region": {
+                    "description": "The region e.g. Surrey.",
+                    "type": "string"
+                }
+            }
+        },
+        "itemLinkTypes": {
+            "title": "itemLinkTypes",
+            "required": [
+                "self",
+                "validation_status"
+            ],
+            "properties": {
+                "self": {
+                    "description": "Link to this individual company officer appointment resource.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "validation_status": {
+                    "type": "string",
+                    "description": "The URL of the validation status resource for the resource.",
+                    "readOnly": true
+                }
+            }
+        },
+        "formerNames": {
+            "title": "formerNames",
+            "properties": {
+                "forenames": {
+                    "description": "Former forenames of the officer.",
+                    "type": "string"
+                },
+                "surname": {
+                    "description": "Former surnames of the officer.",
+                    "type": "string"
+                }
+            }
+        },
+        "corporateIdent": {
+            "title": "corporateIdent",
+            "properties": {
+                "identification_type": {
+                    "description": "The officer's identity type",
+                    "enum": [
+                        "eea",
+                        "non-eea",
+                        "uk-limited",
+                        "other-corporate-body-or-firm"
+                    ],
+                    "type": "string"
+                },
+                "legal_authority": {
+                    "description": "The legal authority supervising the company.",
+                    "type": "string"
+                },
+                "legal_form": {
+                    "description": "The legal form of the company as defined by its country of registration.",
+                    "type": "string"
+                },
+                "place_registered": {
+                    "description": "Place registered.",
+                    "type": "string"
+                },
+                "registration_number": {
+                    "description": "Company registration number.",
+                    "type": "string"
+                }
+            }
+        },
+        "dateOfBirth": {
+            "title": "dateOfBirth",
+            "properties": {
+                "day": {
+                    "description": "The day of the date of birth.",
+                    "type": "integer"
+                },
+                "month": {
+                    "description": "The month of date of birth.",
+                    "type": "integer"
+                },
+                "year": {
+                    "description": "The year of date of birth.",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "month",
+                "year"
+            ]
+        },
+        "identityVerificationDetails": {
+            "title": "identityVerificationDetails",
+            "properties": {
+                "anti_money_laundering_supervisory_bodies": {
+                    "description": "The Anti-Money Laundering supervisory bodies that the authorised corporate service provider was registered with when verifying the officer.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "appointment_verification_end_on": {
+                    "description": "The date on which the identity verification statement was removed for the appointment.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "appointment_verification_statement_due_on": {
+                    "description": "The date by which an identity verification statement must be supplied for the appointment.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "appointment_verification_start_on": {
+                    "description": "The date on which the identity verification statement was supplied for the appointment.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "authorised_corporate_service_provider_name": {
+                    "description": "The name of the authorised corporate service provider that verified the identity of the officer.",
+                    "type": "string"
+                },
+                "identity_verified_on": {
+                    "description": "The date on which the authorised corporate service provider verified the identity of the officer.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "preferred_name": {
+                    "description": "The name provided to the authorised corporate service provider by which the officer prefers to be known.",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

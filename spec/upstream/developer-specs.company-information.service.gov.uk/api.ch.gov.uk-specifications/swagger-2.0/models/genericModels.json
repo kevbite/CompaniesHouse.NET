@@ -1,0 +1,17 @@
+{
+    "definitions": {
+        "selfLink": {
+            "required": [
+                "self"
+            ],
+            "properties": {
+                "self": {
+                    "description": "URL to this resource.",
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "uri"
+                }
+            }
+        }
+    }
+}

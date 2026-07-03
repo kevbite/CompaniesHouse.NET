@@ -1,0 +1,1598 @@
+{
+    "definitions": {
+        "address": {
+            "title": "pscAddress",
+            "required": [
+                "address_line_1",
+                "postal_code",
+                "premises"
+            ],
+            "properties": {
+                "address_line_1": {
+                    "description": "The first line of the address.",
+                    "type": "string"
+                },
+                "address_line_2": {
+                    "description": "The second line of the address.",
+                    "type": "string"
+                },
+                "care_of": {
+                    "description": "Care of name.",
+                    "type": "string"
+                },
+                "country": {
+                    "description": "The country. For example, UK.",
+                    "type": "string"
+                },
+                "locality": {
+                    "description": "The locality. For example London.",
+                    "type": "string"
+                },
+                "po_box": {
+                    "description": "The post-officer box number.",
+                    "type": "string"
+                },
+                "postal_code": {
+                    "description": "The postal code. For example CF14 3UZ.",
+                    "type": "string"
+                },
+                "premises": {
+                    "description": "The property name or number.",
+                    "type": "string"
+                },
+                "region": {
+                    "description": "The region. For example Surrey.",
+                    "type": "string"
+                }
+            }
+        },
+        "beneficialOwnerAddress": {
+            "title": "beneficialOwnerAddress",
+            "properties": {
+                "address_line_1": {
+                    "description": "The first line of the address.",
+                    "type": "string"
+                },
+                "address_line_2": {
+                    "description": "The second line of the address.",
+                    "type": "string"
+                },
+                "care_of": {
+                    "description": "The care of name.",
+                    "type": "string"
+                },
+                "country": {
+                    "description": "The country. For example, United Kingdom.",
+                    "type": "string"
+                },
+                "locality": {
+                    "description": "The locality. For example London.",
+                    "type": "string"
+                },
+                "po_box": {
+                    "description": "The post-officer box number.",
+                    "type": "string"
+                },
+                "postal_code": {
+                    "description": "The postal code. For example CF14 3UZ.",
+                    "type": "string"
+                },
+                "premises": {
+                    "description": "The property name or number.",
+                    "type": "string"
+                },
+                "region": {
+                    "description": "The region. For example Surrey.",
+                    "type": "string"
+                }
+            }
+        },
+        "list": {
+            "title": "list",
+            "properties": {
+                "items_per_page": {
+                    "description": "The number of persons with significant control to return per page.",
+                    "type": "integer"
+                },
+                "items": {
+                    "description": "The list of persons with significant control.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/listTwoSummary"
+                    },
+                    "type": "array"
+                },
+                "start_index": {
+                    "description": "The offset into the entire result set that this page starts.",
+                    "type": "integer"
+                },
+                "total_results": {
+                    "description": "The total number of persons with significant control in this result set.",
+                    "type": "integer"
+                },
+                "active_count": {
+                    "description": "The number of active persons with significant control in this result set.",
+                    "type": "integer"
+                },
+                "ceased_count": {
+                    "description": "The number of ceased persons with significant control in this result set.",
+                    "type": "integer"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource, including self.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/pscListLinksType"
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "items_per_page",
+                "items",
+                "start_index",
+                "total_results",
+                "active_count",
+                "ceased_count",
+                "links"
+            ]
+        },
+        "individualList": {
+            "title": "individualList",
+            "properties": {
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "items_per_page": {
+                    "description": "The number of individual persons with significant control to return per page.",
+                    "type": "integer"
+                },
+                "kind": {
+                    "enum": [
+                        "persons-with-significant-control#list-individual"
+                    ],
+                    "type": "string"
+                },
+                "items": {
+                    "description": "The list of individual persons with significant control.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/listSummary"
+                    },
+                    "type": "object"
+                },
+                "start_index": {
+                    "description": "The offset into the entire result set that this page starts.",
+                    "type": "integer"
+                },
+                "total_results": {
+                    "description": "The total number of individual persons with significant control in this result set.",
+                    "type": "integer"
+                },
+                "active_count": {
+                    "description": "The number of active persons with significant control in this result set.",
+                    "type": "integer"
+                },
+                "ceased_count": {
+                    "description": "The number of ceased persons with significant control in this result set.",
+                    "type": "integer"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource, including self.",
+                    "type": "object",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/pscListLinksType"
+                    }
+                }
+            },
+            "required": [
+                "etag",
+                "items_per_page",
+                "kind",
+                "items",
+                "start_index",
+                "total_results",
+                "active_count",
+                "ceased_count",
+                "links"
+            ]
+        },
+        "corporateEntityList": {
+            "title": "corporateEntityList",
+            "properties": {
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "items_per_page": {
+                    "description": "The number of corporate entity persons with significant control to return per page.",
+                    "type": "integer"
+                },
+                "kind": {
+                    "enum": [
+                        "persons-with-significant-control#list-corporate-entity"
+                    ],
+                    "type": "string"
+                },
+                "items": {
+                    "description": "The list of corporate entity persons with significant control.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/listSummary"
+                    },
+                    "type": "object"
+                },
+                "start_index": {
+                    "description": "The offset into the entire result set that this page starts.",
+                    "type": "integer"
+                },
+                "total_results": {
+                    "description": "The total number of corporate entity persons with significant control in this result set.",
+                    "type": "integer"
+                },
+                "active_count": {
+                    "description": "The number of active persons with significant control in this result set.",
+                    "type": "integer"
+                },
+                "ceased_count": {
+                    "description": "The number of ceased persons with significant control in this result set.",
+                    "type": "integer"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource, including self.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/pscListLinksType"
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "etag",
+                "items_per_page",
+                "kind",
+                "items",
+                "start_index",
+                "total_results",
+                "active_count",
+                "ceased_count",
+                "links"
+            ]
+        },
+        "legalPersonList": {
+            "title": "legalPersonList",
+            "properties": {
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "items_per_page": {
+                    "description": "The number of legal persons with significant control to return per page.",
+                    "type": "integer"
+                },
+                "kind": {
+                    "enum": [
+                        "persons-with-significant-control#list-legal-person"
+                    ],
+                    "type": "string"
+                },
+                "items": {
+                    "description": "The list of legal persons with significant control.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/listSummary"
+                    },
+                    "type": "object"
+                },
+                "start_index": {
+                    "description": "The offset into the entire result set that this page starts.",
+                    "type": "integer"
+                },
+                "total_results": {
+                    "description": "The total number of legal persons with significant control in this result set.",
+                    "type": "integer"
+                },
+                "active_count": {
+                    "description": "The number of active persons with significant control in this result set.",
+                    "type": "integer"
+                },
+                "ceased_count": {
+                    "description": "The number of ceased persons with significant control in this result set.",
+                    "type": "integer"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource, including self.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/pscListLinksType"
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "etag",
+                "items_per_page",
+                "kind",
+                "items",
+                "start_index",
+                "total_results",
+                "active_count",
+                "ceased_count",
+                "links"
+            ]
+        },
+        "pscLinksType": {
+            "title": "pscLinksType",
+            "required": [
+                "self"
+            ],
+            "properties": {
+                "self": {
+                    "description": "The URL of the resource.",
+                    "type": "string"
+                },
+                "statement": {
+                    "description": "The URL of the statement linked to this person with significant control.",
+                    "type": "string"
+                },
+                "persons_with_significant_control": {
+                    "description": "Links to other persons with significant control resources associated with this person with significant control.",
+                    "type": "object",
+                    "properties": {
+                        "notifications": {
+                            "description": "Link to the persons with significant control notification resource that this notification is associated with.",
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "pscItemsListLinksType": {
+            "title": "pscLinksType",
+            "required": [
+                "self"
+            ],
+            "properties": {
+                "self": {
+                    "description": "The URL of the resource.",
+                    "type": "string"
+                },
+                "statement": {
+                    "description": "The URL of the statement linked to this person with significant control.",
+                    "type": "string"
+                },
+                "persons_with_significant_control": {
+                    "description": "Links to other persons with significant control resources associated with this person with significant control list item.",
+                    "type": "object",
+                    "properties": {
+                        "notifications": {
+                            "description": "Link to the persons with significant control notification resource that this notification is associated with.",
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "beneficialOwnerLinksType": {
+            "title": "beneficialOwnerLinksType",
+            "required": [
+                "self"
+            ],
+            "properties": {
+                "persons_with_significant_control": {
+                    "description": "Links to other persons with significant control resources associated with this person with significant control.",
+                    "type": "object",
+                    "properties": {
+                        "notifications": {
+                            "description": "Link to the persons with significant control notification resource that this notification is associated with.",
+                            "type": "string"
+                        }
+                    }
+                },
+                "self": {
+                    "description": "The URL of the resource.",
+                    "type": "string"
+                },
+                "statement": {
+                    "description": "The URL of the statement linked to this beneficial owner.",
+                    "type": "string"
+                }
+            }
+        },
+        "pscListLinksType": {
+            "title": "pscListLinksType",
+            "required": [
+                "self"
+            ],
+            "properties": {
+                "self": {
+                    "description": "The URL of the resource.",
+                    "type": "string"
+                },
+                "persons_with_significant_control_list": {
+                    "description": "The URL of the person with significant control list resource.",
+                    "notifications": "string",
+                    "type": "string"
+                }
+            }
+        },
+        "statementListLinksType": {
+            "title": "statementListLinksType",
+            "required": [
+                "self"
+            ],
+            "properties": {
+                "self": {
+                    "description": "The URL of the resource.",
+                    "type": "string"
+                },
+                "persons_with_significant_control_statements_list": {
+                    "description": "The URL of the persons with significant control statements list resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "statementLinksType": {
+            "title": "statementLinksType",
+            "required": [
+                "self"
+            ],
+            "properties": {
+                "self": {
+                    "description": "The URL of the resource.",
+                    "type": "string"
+                },
+                "person_with_significant_control": {
+                    "description": "The URL of the person with significant control linked to this statement.",
+                    "type": "string"
+                }
+            }
+        },
+        "superSecureLinksType": {
+            "title": "superSecureLinksType",
+            "required": [
+                "self"
+            ],
+            "properties": {
+                "self": {
+                    "description": "The URL of the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "listSummary": {
+            "title": "listSummary",
+            "required": [
+                "etag",
+                "name",
+                "links",
+                "address",
+                "notified_on",
+                "natures_of_control"
+            ],
+            "properties": {
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "notified_on": {
+                    "description": "The date that Companies House was notified about this person with significant control.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "ceased_on": {
+                    "description": "The date that Companies House was notified about the cessation of this person with significant control.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "country_of_residence": {
+                    "description": "The country of residence of the person with significant control.",
+                    "type": "string"
+                },
+                "date_of_birth": {
+                    "description": "The date of birth of the person with significant control.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/dateOfBirthPSCList"
+                    },
+                    "type": "object"
+                },
+                "name": {
+                    "description": "Name of the person with significant control.",
+                    "type": "string"
+                },
+                "name_elements": {
+                    "description": "A document encapsulating the separate elements of a person with significant control's name.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/nameElements"
+                    },
+                    "type": "object"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource, including self.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/pscLinksType"
+                    },
+                    "type": "object"
+                },
+                "nationality": {
+                    "description": "The nationality of the person with significant control.",
+                    "type": "string"
+                },
+                "identification": {
+                    "description": "",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/pscListIdent"
+                    },
+                    "type": "object"
+                },
+                "identity_verification_details": {
+                    "description": "Information relating to the identity verification of the person with significant control",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/identityVerificationDetails"
+                    },
+                    "type": "object"
+                },
+                "ceased": {
+                    "description" : "Presence of that indicator means the super secure person status is ceased <br />",
+                    "type": "boolean"
+                },
+                "description": {
+                    "description" : "Description of the super secure legal statement <br />",
+                    "enum": [
+                        "super-secure-persons-with-significant-control"
+                    ],
+                    "type": "string"
+                },
+                "kind": {
+                    "enum": [
+                        "individual-person-with-significant-control",
+                        "corporate-entity-person-with-significant-control",
+                        "legal-person-with-significant-control",
+                        "super-secure-person-with-significant-control",
+                        "individual-beneficial-owner",
+                        "corporate-entity-beneficial-owner",
+                        "legal-person-beneficial-owner",
+                        "super-secure-beneficial-owner"
+                    ],
+                    "type": "string"
+                },
+                "address": {
+                    "description": "The service address of the person with significant control. If given, this address will be shown on the public record instead of the residential address.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/address"
+                    },
+                    "type": "object"
+                },
+                "natures_of_control": {
+                    "description": "Indicates the nature of control the person with significant control holds.\n For enumeration descriptions see `description` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/psc_descriptions.yml) file. \n",
+                    "items": {
+                         "type" : "string"
+                    },
+                    "type": "array"
+                },
+                "is_sanctioned": {
+                    "description": "Flag indicating if the beneficial owner was declared as being sanctioned on the latest filing of the overseas entity",
+                    "type": "boolean"
+                },
+                "principal_office_address": {
+                    "description": "The principal/registered office address of a corporate-entity-beneficial-owner or legal-person-beneficial-owner of a registered-overseas-entity.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/beneficialOwnerAddress"
+                    },
+                    "type": "object"
+                }
+            }
+        },
+        "listTwoSummary": {
+            "title": "listSummary",
+            "required": [
+                "etag",
+                "name",
+                "links",
+                "address",
+                "notified_on",
+                "natures_of_control"
+            ],
+            "properties": {
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "notified_on": {
+                    "description": "The date that Companies House was notified about this person with significant control.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "ceased_on": {
+                    "description": "The date that Companies House was notified about the cessation of this person with significant control.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "country_of_residence": {
+                    "description": "The country of residence of the person with significant control.",
+                    "type": "string"
+                },
+                "date_of_birth": {
+                    "description": "The date of birth of the person with significant control.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/dateOfBirthPSCList"
+                    },
+                    "type": "object"
+                },
+                "name": {
+                    "description": "Name of the person with significant control.",
+                    "type": "string"
+                },
+                "name_elements": {
+                    "description": "A document encapsulating the separate elements of a person with significant control's name.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/nameElements"
+                    },
+                    "type": "object"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource, including self.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/pscItemsListLinksType"
+                    },
+                    "type": "object"
+                },
+                "nationality": {
+                    "description": "The nationality of the person with significant control.",
+                    "type": "string"
+                },
+                "identification": {
+                    "description": "",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/pscListIdent"
+                    },
+                    "type": "object"
+                },
+                "identity_verification_details": {
+                    "description": "Information relating to the identity verification of the person with significant control",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/identityVerificationDetails"
+                    },
+                    "type": "object"
+                },
+                "ceased": {
+                    "description" : "Presence of that indicator means the super secure person status is ceased <br />",
+                    "type": "boolean"
+                },
+                "description": {
+                    "description" : "Description of the super secure legal statement <br />",
+                    "enum": [
+                        "super-secure-persons-with-significant-control"
+                    ],
+                    "type": "string"
+                },
+                "kind": {
+                    "enum": [
+                        "individual-person-with-significant-control",
+                        "corporate-entity-person-with-significant-control",
+                        "legal-person-with-significant-control",
+                        "super-secure-person-with-significant-control",
+                        "individual-beneficial-owner",
+                        "corporate-entity-beneficial-owner",
+                        "legal-person-beneficial-owner",
+                        "super-secure-beneficial-owner"
+                    ],
+                    "type": "string"
+                },
+                "address": {
+                    "description": "The service address of the person with significant control. If given, this address will be shown on the public record instead of the residential address.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/address"
+                    },
+                    "type": "object"
+                },
+                "natures_of_control": {
+                    "description": "Indicates the nature of control the person with significant control holds.\n For enumeration descriptions see `description` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/psc_descriptions.yml) file. \n",
+                    "items": {
+                         "type" : "string"
+                    },
+                    "type": "array"
+                },
+                "is_sanctioned": {
+                    "description": "Flag indicating if the beneficial owner was declared as being sanctioned on the latest filing of the overseas entity",
+                    "type": "boolean"
+                },
+                "principal_office_address": {
+                    "description": "The principal/registered office address of a corporate-entity-beneficial-owner or legal-person-beneficial-owner of a registered-overseas-entity.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/beneficialOwnerAddress"
+                    },
+                    "type": "object"
+                }
+            }
+        },
+        "statementList": {
+            "title": "statementList",
+            "properties": {
+                "items_per_page": {
+                    "description": "The number of persons with significant control statements to return per page.",
+                    "type": "integer"
+                },
+                "items": {
+                    "description": "The list of persons with significant control statements.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/statement"
+                    },
+                    "type": "object"
+                },
+                "start_index": {
+                    "description": "The offset into the entire result set that this page starts.",
+                    "type": "integer"
+                },
+                "total_results": {
+                    "description": "The total number of persons with significant control statements in this result set.",
+                    "type": "integer"
+                },
+                "active_count": {
+                    "description": "The number of active persons with significant control statements in this result set.",
+                    "type": "integer"
+                },
+                "ceased_count": {
+                    "description": "The number of ceased persons with significant control statements in this result set.",
+                    "type": "integer"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource, including self.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/statementListLinksType"
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "items_per_page",
+                "items",
+                "start_index",
+                "total_results",
+                "active_count",
+                "ceased_count",
+                "links"
+            ]
+        },
+        "statement": {
+            "title": "statement",
+            "required": [
+                "etag",
+                "kind",
+                "notified_on",
+                "statement",
+                "links"
+            ],
+            "properties": {
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "kind": {
+                    "enum": [
+                        "persons-with-significant-control-statement"
+                    ],
+                    "type": "string"
+                },
+                "notified_on": {
+                    "description": "The date that the person with significant control statement was processed by Companies House.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "ceased_on": {
+                    "description": "The date that Companies House was notified about the cessation of this person with significant control.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "restrictions_notice_withdrawal_reason": {
+                    "description": "The reason for the company withdrawing a <code>restrictions-notice-issued-to-psc</code> statement",
+                    "enum": [
+                        "restrictions-notice-withdrawn-by-court-order",
+                        "restrictions-notice-withdrawn-by-company",
+                        "restrictions-notice-withdrawn-by-lp",
+                        "restrictions-notice-withdrawn-by-court-order-lp",
+                        "restrictions-notice-withdrawn-by-partnership",
+                        "restrictions-notice-withdrawn-by-court-order-p"
+                    ],
+                    "type": "string"
+                },
+                "statement": {
+                    "description": "Indicates the type of statement filed.\n For enumeration descriptions see `statement_description` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/psc_descriptions.yml) file. \n",
+                    "type": "string"
+                },
+                "linked_psc_name": {
+                    "description": "The name of the psc linked to this statement.",
+                    "type": "string"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource, including self.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/statementLinksType"
+                    },
+                    "type": "object"
+                }
+            }
+        },
+        "superSecure": {
+            "title": "superSecure",
+            "required": [
+                "etag",
+                "kind",
+                "description",
+                "links"
+            ],
+            "properties": {
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "kind": {
+                    "enum": [
+                        "super-secure-person-with-significant-control"
+                    ],
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Description of the super secure legal statement \n",
+                    "enum": [
+                        "super-secure-persons-with-significant-control"
+                    ],
+                    "type": "string"
+                },
+                "identity_verification_details": {
+                    "description": "Information relating to the identity verification of the person with significant control",
+                    "properties": {
+                        "appointment_verification_end_on": {
+                            "description": "The date on which the identity verification statement was removed for the notification",
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "appointment_verification_start_on": {
+                            "description": "The date on which the identity verification statement was supplied for the notification",
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    "type": "object"
+                },
+                "ceased": {
+                    "description": "Presence of that indicator means the super secure person status is ceased \n",
+                    "type": "boolean"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource, including self.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/superSecureLinksType"
+                    },
+                    "type": "object"
+                }
+            }
+        },
+        "superSecureBeneficialOwner": {
+            "title": "superSecureBeneficialOwner",
+            "required": [
+                "etag",
+                "kind",
+                "description",
+                "links"
+            ],
+            "properties": {
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "kind": {
+                    "enum": [
+                        "super-secure-beneficial-owner"
+                    ],
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Description of the super secure legal statement \n",
+                    "enum": [
+                        "super-secure-beneficial-owner"
+                    ],
+                    "type": "string"
+                },
+                "ceased": {
+                    "description": "Presence of this indicator means the super secure beneficial owner status is ceased \n",
+                    "type": "boolean"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource, including self.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/superSecureLinksType"
+                    },
+                    "type": "object"
+                }
+            }
+        },
+        "individual": {
+            "title": "individual",
+            "required": [
+                "etag",
+                "notified_on",
+                "kind",
+                "country_of_residence",
+                "date_of_birth",
+                "name",
+                "name_elements",
+                "links",
+                "nationality",
+                "address",
+                "natures_of_control"
+            ],
+            "properties": {
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "notified_on": {
+                    "description": "The date that Companies House was notified about this person with significant control.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "ceased_on": {
+                    "description": "The date that Companies House was notified about the cessation of this person with significant control.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "kind": {
+                    "enum": [
+                        "individual-person-with-significant-control"
+                    ],
+                    "type": "string"
+                },
+                "country_of_residence": {
+                    "description": "The country of residence of the person with significant control.",
+                    "type": "string"
+                },
+                "date_of_birth": {
+                    "description": "The date of birth of the person with significant control.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/dateOfBirth"
+                    },
+                    "type": "object"
+                },
+                "name": {
+                    "description": "Name of the person with significant control. Generated by combining the name elements.",
+                    "type": "string"
+                },
+                "name_elements": {
+                    "description": "A document encapsulating the separate elements of a person with significant control's name.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/nameElements"
+                    },
+                    "type": "object"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource, including self.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/pscLinksType"
+                    },
+                    "type": "object"
+                },
+                "nationality": {
+                    "description": "The nationality of the person with significant control.",
+                    "type": "string"
+                },
+                "address": {
+                    "description": "The service address of the person with significant control. If given, this address will be shown on the public record instead of the residential address.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/address"
+                    },
+                    "type": "object"
+                },
+                "natures_of_control": {
+                    "description": "Indicates the nature of control the person with significant control holds.\n For enumeration descriptions see `description` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/psc_descriptions.yml) file. \n",
+                    "type": "array"
+                },
+                "identity_verification_details": {
+                    "description": "Information relating to the identity verification of the person with significant control",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/identityVerificationDetails"
+                    },
+                    "type": "object"
+                }
+            }
+        },
+        "individualBeneficialOwner": {
+            "title": "individualBeneficialOwner",
+            "required": [
+                "etag",
+                "kind",
+                "links"
+            ],
+            "properties": {
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "notified_on": {
+                    "description": "The date that Companies House was notified about this beneficial owner.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "ceased_on": {
+                    "description": "The date that Companies House was notified about the cessation of this beneficial owner.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "kind": {
+                    "enum": [
+                        "individual-beneficial-owner"
+                    ],
+                    "type": "string"
+                },
+                "date_of_birth": {
+                    "description": "The date of birth of the beneficial owner.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/beneficialOwnerDateOfBirth"
+                    },
+                    "type": "object"
+                },
+                "name": {
+                    "description": "Name of the beneficial owner. Generated by combining the name elements.",
+                    "type": "string"
+                },
+                "name_elements": {
+                    "description": "A document encapsulating the separate elements of a beneficial owner's name.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/beneficialOwnerNameElements"
+                    },
+                    "type": "object"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource, including self.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/beneficialOwnerLinksType"
+                    },
+                    "type": "object"
+                },
+                "nationality": {
+                    "description": "The nationality of the beneficial owner.",
+                    "type": "string"
+                },
+                "address": {
+                    "description": "The service address of the beneficial owner. If given, this address will be shown on the public record instead of the residential address.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/beneficialOwnerAddress"
+                    },
+                    "type": "object"
+                },
+                "natures_of_control": {
+                    "description": "Indicates the nature of control the beneficial owner holds.\n For enumeration descriptions see `description` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/psc_descriptions.yml) file. \n",
+                    "type": "array"
+                },
+                "is_sanctioned": {
+                    "description": "Flag indicating if the beneficial owner was declared as being sanctioned on the latest filing of the overseas entity",
+                    "type": "boolean"
+                }
+            }
+        },
+        "corporateEntity": {
+            "title": "corporateEntity",
+            "required": [
+                "etag",
+                "notified_on",
+                "kind",
+                "name",
+                "links",
+                "address",
+                "identification",
+                "natures_of_control"
+            ],
+            "properties": {
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "notified_on": {
+                    "description": "The date that Companies House was notified about this person with significant control.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "ceased_on": {
+                    "description": "The date that Companies House was notified about the cessation of this person with significant control.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "kind": {
+                    "enum": [
+                        "corporate-entity-person-with-significant-control"
+                    ],
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the person with significant control.",
+                    "type": "string"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource, including self.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/pscLinksType"
+                    },
+                    "type": "object"
+                },
+                "address": {
+                    "description": "The address of the person with significant control.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/address"
+                    },
+                    "type": "object"
+                },
+                "identification": {
+                    "description": "",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/corporateEntityIdent"
+                    },
+                    "type": "object"
+                },
+                "natures_of_control": {
+                    "description": "Indicates the nature of control the person with significant control holds.\n For enumeration descriptions see `description` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/psc_descriptions.yml) file. \n",
+                    "type": "array"
+                }
+            }
+        },
+        "corporateEntityBeneficialOwner": {
+            "title": "corporateEntityBeneficialOwner",
+            "required": [
+                "etag",
+                "kind",
+                "links"
+            ],
+            "properties": {
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "notified_on": {
+                    "description": "The date that Companies House was notified about this beneficial owner.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "ceased_on": {
+                    "description": "The date that Companies House was notified about the cessation of this beneficial owner.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "kind": {
+                    "enum": [
+                        "corporate-entity-beneficial-owner"
+                    ],
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the beneficial owner.",
+                    "type": "string"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource, including self.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/beneficialOwnerLinksType"
+                    },
+                    "type": "object"
+                },
+                "address": {
+                    "description": "The address of the beneficial owner.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/beneficialOwnerAddress"
+                    },
+                    "type": "object"
+                },
+                "principal_office_address": {
+                    "description": "The principal/registered office address of a corporate-entity-beneficial-owner of a registered-overseas-entity.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/beneficialOwnerAddress"
+                    },
+                    "type": "object"
+                },
+                "identification": {
+                    "description": "",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/beneficialOwnerCorporateEntityIdent"
+                    },
+                    "type": "object"
+                },
+                "natures_of_control": {
+                    "description": "Indicates the nature of control the beneficial owner holds.\n For enumeration descriptions see `description` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/psc_descriptions.yml) file. \n",
+                    "type": "array"
+                },
+                "is_sanctioned": {
+                    "description": "Flag indicating if the beneficial owner was declared as being sanctioned on the latest filing of the overseas entity",
+                    "type": "boolean"
+                }
+            }
+        },
+        "legalPerson": {
+            "title": "legalPerson",
+            "required": [
+                "etag",
+                "notified_on",
+                "kind",
+                "name",
+                "links",
+                "address",
+                "identification",
+                "natures_of_control"
+            ],
+            "properties": {
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "notified_on": {
+                    "description": "The date that Companies House was notified about this person with significant control.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "ceased_on": {
+                    "description": "The date that Companies House was notified about the cessation of this person with significant control.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "kind": {
+                    "enum": [
+                        "legal-person-person-with-significant-control"
+                    ],
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the person with significant control.",
+                    "type": "string"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource, including self.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/pscLinksType"
+                    },
+                    "type": "object"
+                },
+                "address": {
+                    "description": "The address of the person with significant control.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/address"
+                    },
+                    "type": "object"
+                },
+                "identification": {
+                    "description": "",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/legalPersonIdent"
+                    },
+                    "type": "object"
+                },
+                "natures_of_control": {
+                    "description": "Indicates the nature of control the person with significant control holds.\n For enumeration descriptions see `description` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/psc_descriptions.yml) file. \n",
+                    "type": "array"
+                }
+            }
+        },
+        "legalPersonBeneficialOwner": {
+            "title": "legalPersonBeneficialOwner",
+            "required": [
+                "etag",
+                "kind",
+                "links"
+            ],
+            "properties": {
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "notified_on": {
+                    "description": "The date that Companies House was notified about this beneficial owner.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "ceased_on": {
+                    "description": "The date that Companies House was notified about the cessation of this beneficial owner.",
+                    "type": "string",
+                    "format": "date"
+                },
+                "kind": {
+                    "enum": [
+                        "legal-person-beneficial-owner"
+                    ],
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the beneficial owner.",
+                    "type": "string"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource, including self.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/beneficialOwnerLinksType"
+                    },
+                    "type": "object"
+                },
+                "address": {
+                    "description": "The address of the beneficial owner.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/beneficialOwnerAddress"
+                    },
+                    "type": "object"
+                },
+                "principal_office_address": {
+                    "description": "The principal/registered office address of a legal-person-beneficial-owner of a registered-overseas-entity.",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/beneficialOwnerAddress"
+                    },
+                    "type": "object"
+                },
+                "identification": {
+                    "description": "",
+                    "items": {
+                        "$ref": "pscModels.json#/definitions/legalPersonBeneficialOwnerIdent"
+                    },
+                    "type": "object"
+                },
+                "natures_of_control": {
+                    "description": "Indicates the nature of control the beneficial owner holds.\n For enumeration descriptions see `description` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/psc_descriptions.yml) file. \n",
+                    "type": "array"
+                },
+                "is_sanctioned": {
+                    "description": "Flag indicating if the beneficial owner was declared as being sanctioned on the latest filing of the overseas entity",
+                    "type": "boolean"
+                }
+            }
+        },
+        "nameElements": {
+            "title": "nameElements",
+            "properties": {
+                "forename": {
+                    "description": "The forename of the person with significant control.",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "Title of the person with significant control.",
+                    "type": "string"
+                },
+                "middle_name": {
+                    "description": "The middle name of the person with significant control.",
+                    "type": "string"
+                },
+                "surname": {
+                    "description": "The surname of the person with significant control.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "surname"
+            ]
+        },
+        "beneficialOwnerNameElements": {
+            "title": "beneficialOwnerNameElements",
+            "properties": {
+                "forename": {
+                    "description": "The forename of the beneficial owner.",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "Title of the beneficial owner.",
+                    "type": "string"
+                },
+                "middle_name": {
+                    "description": "The middle name of the beneficial owner.",
+                    "type": "string"
+                },
+                "surname": {
+                    "description": "The surname of the beneficial owner.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "surname"
+            ]
+        },
+        "corporateEntityIdent": {
+            "title": "corporateEntityIdent",
+            "properties": {
+                "legal_authority": {
+                    "description": "The legal authority supervising the corporate entity with significant control.",
+                    "type": "string"
+                },
+                "legal_form": {
+                    "description": "The legal form of the corporate entity with significant control as defined by its country of registration.",
+                    "type": "string"
+                },
+                "place_registered": {
+                    "description": "The place the corporate entity with significant control is registered.",
+                    "type": "string"
+                },
+                "registration_number": {
+                    "description": "The registration number of the corporate entity with significant control.",
+                    "type": "string"
+                },
+                "country_registered": {
+                    "description": "The country or state the corporate entity with significant control is registered in.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "legal_authority",
+                "legal_form"
+            ]
+        },
+        "beneficialOwnerCorporateEntityIdent": {
+            "title": "beneficialOwnerCorporateEntityIdent",
+            "properties": {
+                "legal_authority": {
+                    "description": "The legal authority supervising the corporate entity beneficial owner.",
+                    "type": "string"
+                },
+                "legal_form": {
+                    "description": "The legal form of the corporate entity beneficial owner as defined by its country of registration.",
+                    "type": "string"
+                },
+                "place_registered": {
+                    "description": "The place the corporate entity beneficial owner is registered.",
+                    "type": "string"
+                },
+                "registration_number": {
+                    "description": "The registration number of the corporate entity beneficial owner.",
+                    "type": "string"
+                },
+                "country_registered": {
+                    "description": "The country or state the corporate entity beneficial owner is registered in.",
+                    "type": "string"
+                }
+            }
+        },
+        "pscListIdent": {
+            "title": "pscListIdent",
+            "properties": {
+                "legal_authority": {
+                    "description": "The legal authority supervising the corporate entity or legal person with significant control.",
+                    "type": "string"
+                },
+                "legal_form": {
+                    "description": "The legal form of the corporate entity or legal person with significant control as defined by its country of registration.",
+                    "type": "string"
+                },
+                "place_registered": {
+                    "description": "The place the corporate entity with significant control is registered.",
+                    "type": "string"
+                },
+                "registration_number": {
+                    "description": "The registration number of the corporate entity with significant control.",
+                    "type": "string"
+                },
+                "country_registered": {
+                    "description": "The country or state the corporate entity with significant control is registered in.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "legal_authority",
+                "legal_form"
+            ]
+        },
+        "identityVerificationDetails": {
+            "title": "identityVerificationDetails",
+            "properties": {
+                "anti_money_laundering_supervisory_bodies": {
+                    "description": "The Anti-Money Laundering supervisory bodies that the authorised corporate service provider was registered with when verifying the person with significant control",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "appointment_verification_end_on": {
+                    "description": "The date on which the identity verification statement was removed for the notification",
+                    "type": "string",
+                    "format": "date"
+                },
+                "appointment_verification_statement_date": {
+                    "description": "The date from which an identity verification statement can be supplied for the notification",
+                    "type": "string",
+                    "format": "date"
+                },
+                "appointment_verification_statement_due_on": {
+                    "description": "The date by which an identity verification statement must be supplied for the notification",
+                    "type": "string",
+                    "format": "date"
+                },
+                "appointment_verification_start_on": {
+                    "description": "The date on which the identity verification statement was supplied for the notification",
+                    "type": "string",
+                    "format": "date"
+                },
+                "authorised_corporate_service_provider_name": {
+                    "description": "The name of the authorised corporate service provider that verified the identity of the person with significant control",
+                    "type": "string"
+                },
+                "identity_verified_on": {
+                    "description": "The date on which the authorised corporate service provider verified the identity of the person with significant control",
+                    "type": "string",
+                    "format": "date"
+                },
+                "preferred_name": {
+                    "description": "The name provided to the authorised corporate service provider by which the person with significant control prefers to be known",
+                    "type": "string"
+                }
+            }
+        },
+        "legalPersonIdent": {
+            "title": "legalPersonIdent",
+            "properties": {
+                "legal_authority": {
+                    "description": "The legal authority supervising the legal person with significant control.",
+                    "type": "string"
+                },
+                "legal_form": {
+                    "description": "The legal form of the legal person with significant control as defined by its country of registration.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "legal_authority",
+                "legal_form"
+            ]
+        },
+        "legalPersonBeneficialOwnerIdent": {
+            "title": "legalPersonBeneficialOwnerIdent",
+            "properties": {
+                "legal_authority": {
+                    "description": "The legal authority supervising the legal person beneficial owner.",
+                    "type": "string"
+                },
+                "legal_form": {
+                    "description": "The legal form of the legal person beneficial owner as defined by its country of registration.",
+                    "type": "string"
+                }
+            }
+        },
+        "dateOfBirth": {
+            "title": "dateOfBirth",
+            "properties": {
+                "day": {
+                    "description": "The day of the date of birth.",
+                    "type": "integer"
+                },
+                "month": {
+                    "description": "The month of date of birth.",
+                    "type": "integer"
+                },
+                "year": {
+                    "description": "The year of date of birth.",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "month",
+                "year"
+            ]
+        },
+        "dateOfBirthPSCList": {
+            "title": "dateOfBirth",
+            "properties": {
+                "month": {
+                    "description": "The month of date of birth.",
+                    "type": "integer"
+                },
+                "year": {
+                    "description": "The year of date of birth.",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "month",
+                "year"
+            ]
+        },
+        "beneficialOwnerDateOfBirth": {
+            "title": "beneficialOwnerDateOfBirth",
+            "properties": {
+                "day": {
+                    "description": "The day of the date of birth.",
+                    "type": "integer"
+                },
+                "month": {
+                    "description": "The month of date of birth.",
+                    "type": "integer"
+                },
+                "year": {
+                    "description": "The year of date of birth.",
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}
+

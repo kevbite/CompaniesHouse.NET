@@ -6,10 +6,10 @@ namespace CompaniesHouse.Response.Search.CompaniesAlphabeticallySearch
     public class Company
     {
         [JsonPropertyName("company_name")]
-        public string? CompanyName { get; set; }
+        public string CompanyName { get; set; } = string.Empty;
 
         [JsonPropertyName("company_number")]
-        public string? CompanyNumber { get; set; }
+        public string CompanyNumber { get; set; } = string.Empty;
 
         [JsonPropertyName("company_status")]
         public CompanyStatus CompanyStatus { get; set; }
@@ -21,7 +21,7 @@ namespace CompaniesHouse.Response.Search.CompaniesAlphabeticallySearch
         public string? Kind { get; set; }
 
         [JsonPropertyName("links")]
-        public global::CompaniesHouse.Response.Search.CompanyProfileLinks? Links { get; set; }
+        public global::CompaniesHouse.Response.Search.CompanyProfileLinks Links { get; set; } = new();
 
         [JsonPropertyName("ordered_alpha_key_with_id")]
         public string? OrderedAlphaKeyWithId { get; set; }

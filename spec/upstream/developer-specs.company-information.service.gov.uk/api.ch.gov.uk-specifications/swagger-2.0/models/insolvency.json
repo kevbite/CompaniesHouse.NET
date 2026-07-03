@@ -1,0 +1,539 @@
+{
+  "definitions": {
+    "insolvencyResourceWritable": {
+      "title": "writeable insolvency",
+      "type": "object",
+      "required": [
+        "company_number",
+        "company_name",
+        "case_type"
+    ],
+      "properties": {
+        "company_number": {
+          "type": "string"
+        },
+        "company_name": {
+          "type": "string"
+        },
+        "case_type": {
+          "type": "string",
+          "enum": [
+            "creditors-voluntary-liquidation"
+          ]
+        }
+      }
+    },
+
+    "createdInsolvencyResource": {
+      "title": "CreatedInsolvency",
+      "type": "object",
+      "properties": {
+        "company_number": {
+          "type": "string"
+        },
+        "case_type": {
+          "type": "string",
+          "enum": [
+            "creditors-voluntary-liquidation"
+          ]
+        },
+        "etag": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "insolvency-resource#insolvency-resource"
+          ]
+        },
+        "company_name": {
+          "type": "string"
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri",
+              "example": "/transactions/{transaction_id}/insolvency"
+            },
+            "transaction": {
+              "type": "string",
+              "format": "uri",
+              "example": "/transactions/{transaction_id}"
+            },
+            "validation_status": {
+              "type": "string",
+              "format": "uri",
+              "example": "/transactions/{transaction_id}/insolvency/validation-status"
+            }
+          }
+        }
+      }
+    },
+    "practitionerWritable": {
+      "title": "writeable practitioner",
+      "type": "object",
+      "required": [
+        "first_name",
+        "last_name",
+        "ip_code",
+        "email",
+        "telephone_number",
+        "address"
+      ],
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "ip_code": {
+          "type": "string"
+        },
+        "address": {
+          "type": "object",
+          "$ref": "insolvency.json#/definitions/address"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "final-liquidator",
+            "receiver",
+            "receiver-manager",
+            "proposed-liquidator",
+            "provisional-liquidator",
+            "administrative-receiver",
+            "practitioner",
+            "interim-liquidator"
+          ]
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "At least one of email or telephone_number must be supplied."
+        },
+        "telephone_number": {
+          "type": "string",
+          "description": "At least one of email or telephone_number must be supplied."
+        }
+      }
+    },
+    "practitioner": {
+      "title": "practitioner",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/practitionerWritable"
+        },
+        {"properties": {
+          "appointed_on": {
+            "type": "string",
+            "format": "date"
+          },
+          "etag": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "insolvency-resource#liquidator"
+            ]
+          },
+          "links": {
+            "type": "object",
+            "$ref": "genericModels.json#/definitions/selfLink"
+          }
+          }
+        }
+
+      ]
+    },
+    "allPractitioners": {
+      "title": "allPractitioners",
+      "type": "array",
+      "items": {
+          "$ref": "#/definitions/practitioner"
+      }
+    },
+    
+    "address": {
+      "title": "address",
+      "type": "object",
+      "required": [
+        "premises",
+        "address_line_1",
+        "locality",
+        "postal_code"
+      ],
+      "properties": {
+        "premises": {
+          "type": "string"
+        },
+        "address_line_1": {
+          "type": "string"
+        },
+        "address_line_2": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "locality": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "postal_code": {
+          "type": "string"
+        },
+        "po_box": {
+          "type": "string"
+        }
+      }
+    },
+    "appointment": {
+      "title": "appointment",
+      "type": "object",
+      "required": [
+        "appointed_on",
+        "made_by"
+      ],
+      "properties": {
+        "appointed_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "made_by": {
+          "type": "string",
+          "enum": [
+            "creditors"
+          ]
+        }
+      }
+    },
+    "practitionerAppointment": {
+      "title": "practitionerAppointment",
+      "type": "object",
+      "properties": {
+          "appointed_on": {
+            "type": "string",
+            "format": "date"
+          },
+          "made_by": {
+            "type": "string",
+            "enum": [
+              "creditors"
+            ]
+          },
+          "links": {
+            "type": "object",
+            "$ref": "genericModels.json#/definitions/selfLink"
+          }
+        }
+    },
+    "createdAttachment": {
+      "title": "created attachment",
+      "type": "object",
+      "properties": {
+        "attachment_type": {
+          "type": "string",
+          "enum": [
+            "resolution",
+            "statement-of-affairs-director",
+            "statement-of-concurrence",
+            "progress-report"
+          ]
+        },
+        "file": {
+          "type": "object",
+          "description": "The file name, size and content type",
+          "items": {
+            "$ref": "insolvency.json#/definitions/file"
+          }
+        },
+        "etag": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "insolvency-resources#attachment"
+          ]
+        },
+        "status": {
+          "type": "string"
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri",
+              "description": "URL to this resource",
+              "example": "/transactions/010276-506416-629750/insolvency/attachments/b303f91d-bc28-469a-b325-6c9030eec26f"
+            },
+            "download": {
+              "type": "string",
+              "format": "uri",
+              "description": "URL to download the file",
+              "example": "/transactions/010276-506416-629750/insolvency/attachments/b303f91d-bc28-469a-b325-6c9030eec26f/download"
+            }
+          }
+        }
+      }
+    },
+    "attachmentWriteable": {
+      "title": "writeable attachment",
+      "type": "object",
+      "required": [
+        "attachment_type",
+        "file"
+      ],
+      "content": "multipart/formdata",
+      "properties": {        
+        "attachment_type": {
+          "type": "string",
+          "enum": [
+            "resolution",
+            "statement-of-affairs-director",
+            "statement-of-concurrence",
+            "progress-report"
+          ]
+        },
+        "file": {
+          "type": "array",
+          "items":{
+            "type": "string",
+            "format": "binary",
+            "description": "Files attached in request can be a maximum of 4MB in size"
+          }
+        }
+      }
+    },
+    "file": {
+      "title": "file",
+      "required": [
+        "name",
+        "size",
+        "content_type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The file name"
+        },
+        "size": {
+          "type": "string",
+          "description": "The size of the file"
+        },
+        "content_type": {
+          "type": "string",
+          "description": "The media type being consumed",
+          "enum": [
+            "application/pdf"
+          ]
+        }
+      }
+    },
+    "downloadedAttachment": {
+      "title": "attachment download",
+      "required": [
+        "content_type"
+      ],
+      "properties": {
+        "content_type": {
+          "type": "string",
+          "format": "binary",
+          "description": "The media type being consumed",
+          "enum": [
+            "application/pdf"
+          ]
+        }
+      }
+    },
+    "resolutionResourceWriteable": {
+      "title": "writeable resolution",
+      "required": [
+        "date_of_resolution",
+        "attachments"
+      ],
+      "properties": {
+        "date_of_resolution": {
+          "type": "string",
+          "format": "date"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      }
+    },
+    "Resolution": {
+      "title": "Resolution",
+      "required": [
+        "date_of_resolution",
+        "attachments",
+        "etag",
+        "kind",
+        "links"
+      ],
+      "type":"object",
+      "properties": {
+        "date_of_resolution": {
+          "type": "string",
+          "format":"date"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "etag": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "insolvency-resource#resolution"
+          ]
+        },
+        "links": {
+          "type": "object",
+          "$ref": "genericModels.json#/definitions/selfLink"
+        }
+      }
+    },
+    "statementOfAffairsWriteable": {
+      "title": "writeable statement of affairs",
+      "required": [
+        "statement_date",
+        "attachments"
+      ],
+      "properties": {
+        "statement_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      }
+    },
+    "statementOfAffairs": {
+      "title": "Statement Of Affairs",
+      "required": [
+        "statement_date",
+        "attachments",
+        "etag",
+        "kind",
+        "links"
+      ],
+      "type":"object",
+      "properties": {
+        "statement_date": {
+          "type": "string",
+          "format":"date"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "etag": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "insolvency-resource#statement-of-affairs"
+          ]
+        },
+        "links": {
+          "type": "object",
+          "$ref": "genericModels.json#/definitions/selfLink"
+        }
+      }
+    },
+  "progressReportWriteable": {
+    "title": "writeable progress report",
+    "required": [
+      "from_date",
+      "to_date",
+      "attachments"
+    ],
+    "properties": {
+      "from_date": {
+        "type": "string",
+        "format": "date"
+      },
+      "to_date": {
+        "type": "string",
+        "format": "date"
+      },
+      "attachments": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    }
+  },
+  "progressReport": {
+      "title": "Progress Report",
+      "required": [
+        "from_date",
+        "to_date",
+        "attachments",
+        "etag",
+        "kind",
+        "links"
+      ],
+      "type":"object",
+      "properties": {
+        "from_date": {
+          "type": "string",
+          "format":"date"
+        },
+        "to_date": {
+          "type": "string",
+          "format":"date"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "etag": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "insolvency-resource#progress-report"
+          ]
+        },
+        "links": {
+          "type": "object",
+          "$ref": "genericModels.json#/definitions/selfLink"
+        }
+      }
+    }
+  }
+}

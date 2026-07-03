@@ -1,0 +1,125 @@
+{
+    "get": {
+        "summary": "Company UK Establishments",
+        "description": "List of uk-establishments companies",
+        "parameters": [
+            {
+                "name": "company_number",
+                "in": "path",
+                "description": "Company number",
+                "required": true,
+                "type": "string"
+            }
+        ],
+        "tags": [
+            "UKEstablishments"
+        ],
+        "responses": {
+            "200": {
+                "description": "Resource returned",
+                "schema": {
+                        "$ref": "companyUKEstablishments.json#/definitions/companyUKEstablishments"
+                }
+            },
+            "401": {
+                "description": "Unauthorised"
+            }
+        }
+    },
+    "definitions": {
+        "companyUKEstablishments": {
+            "title": "companyUKEstablishments",
+            "required": [
+                "etag",
+                "kind",
+                "items"
+            ],
+            "properties": {
+                "etag": {
+                    "type": "string",
+                    "description": "The ETag of the resource."
+                },
+                "kind": {
+                    "type": "string",
+                    "description": "UK Establishment companies.",
+                    "enum": [
+                        "ukestablishment-companies"
+                    ]
+                },
+                "links": {
+                    "type": "object",
+                    "description": "UK Establishment Resources related to this company.",
+                    "items": {
+                        "$ref": "companyUKEstablishments.json#/definitions/self_links"
+                    }
+                },
+                "items": {
+                    "type": "array",
+                    "description": "List of UK Establishment companies.",
+                    "items": {
+                        "$ref": "companyUKEstablishments.json#/definitions/companyDetails"
+                    }
+                }
+            }
+        },
+        "companyDetails": {
+            "title": "companyDetails",
+            "required": [
+                "company_number",
+                "company_name",
+                "company_status",
+                "links"
+            ],
+            "properties": {
+                "company_number": {
+                    "type": "string",
+                    "description": "The number of the company."
+                },
+                "company_name": {
+                    "type": "string",
+                    "description": "The name of the company."
+                },
+                "company_status": {
+                    "type": "string",
+                    "description": "Company status."
+                },
+                "locality": {
+                    "type": "string",
+                    "description": "The locality e.g London."
+                },
+                "links": {
+                    "description": "Resources related to this company.",
+                    "type": "object",
+                    "items": {
+                        "$ref": "companyUKEstablishments.json#/definitions/links"
+                    }
+                }
+            }
+        },
+        "self_links": {
+            "title": "self_links",
+            "required": [
+                "self"
+            ],
+            "properties": {
+                "self": {
+                    "type": "string",
+                    "description": "Link to this company."
+                }
+            }
+        },
+        "links": {
+            "title": "links",
+            "required": [
+                "company"
+            ],
+            "properties": {
+                "company": {
+                    "type": "string",
+                    "description": "The link to the company."
+                }
+            }
+        }
+    }
+}
+

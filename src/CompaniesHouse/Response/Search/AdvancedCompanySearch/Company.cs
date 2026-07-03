@@ -8,10 +8,10 @@ namespace CompaniesHouse.Response.Search.AdvancedCompanySearch
     public class Company
     {
         [JsonPropertyName("company_name")]
-        public string? CompanyName { get; set; }
+        public string CompanyName { get; set; } = string.Empty;
 
         [JsonPropertyName("company_number")]
-        public string? CompanyNumber { get; set; }
+        public string CompanyNumber { get; set; } = string.Empty;
 
         [JsonPropertyName("company_status")]
         public CompanyStatus CompanyStatus { get; set; }
@@ -27,10 +27,10 @@ namespace CompaniesHouse.Response.Search.AdvancedCompanySearch
         public DateTime? DateOfCessation { get; set; }
 
         [JsonPropertyName("date_of_creation")]
-        public DateTime? DateOfCreation { get; set; }
+        public DateTime DateOfCreation { get; set; }
 
         [JsonPropertyName("kind")]
-        public string? Kind { get; set; }
+        public string Kind { get; set; } = string.Empty;
 
         [JsonPropertyName("links")]
         public global::CompaniesHouse.Response.Search.CompanyProfileLinks? Links { get; set; }

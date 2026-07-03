@@ -1,0 +1,460 @@
+{
+    "chargeList": {
+        "get": {
+            "summary": "Charges",
+            "description": "List of charges for a company.",
+            "x-operationName": "list",
+            "tags": [
+                "charges"
+            ],
+            "parameters": [
+                {
+                    "name": "company_number",
+                    "in": "path",
+                    "description": "The company number that the charge list is required for.",
+                    "paramType": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "title": "items_per_page",
+                    "description": "The number of charges to return per page.",
+                    "type": "integer",
+                    "paramType": "query",
+                    "required": false
+                },
+                {
+                    "title": "start_index",
+                    "description": "The index into the entire result set that this result page starts.",
+                    "type": "integer",
+                    "paramType": "query",
+                    "required": false
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Resource returned",
+                    "schema": {
+                            "$ref": "charges.json#/definitions/chargeList"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorised"
+                },
+                "404": {
+                    "description": "Resource not found"
+                }
+            }
+        }
+    },
+    "chargeDetails": {
+        "get": {
+            "description": "Individual charge information for company.",
+            "tags": [
+                "charges"
+            ],
+            "parameters": [
+                {
+                    "name": "company_number",
+                    "description": "The company number that the charge is required for.",
+                    "paramType": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "charge_id",
+                    "description": "The id of the charge details that are required.",
+                    "paramType": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Resource returned",
+                    "schema": {
+                            "$ref": "charges.json#/definitions/chargeDetails"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorised"
+                },
+                "404": {
+                    "description": "Resource not found"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "chargeList": {
+            "title": "chargeList",
+            "required": [
+                "etag",
+                "items"
+            ],
+            "properties": {
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "total_count": {
+                    "type": "integer",
+                    "description": "Total number of charges returned by the API (filtering applies)."
+                },
+                "unfiletered_count": {
+                    "type": "integer",
+                    "description": "Number of satisfied charges"
+                },
+                "satisfied_count": {
+                    "type": "integer",
+                    "description": "Number of satisfied charges"
+                },
+                "part_satisfied_count": {
+                    "type": "integer",
+                    "description": "Number of satisfied charges"
+                },
+                "items": {
+                    "type": "array",
+                    "description": "List of charges",
+                    "items": {
+                        "$ref": "charges.json#/definitions/chargeDetails"
+                    }
+                }
+            }
+        },
+        "chargeDetails": {
+            "title": "chargeDetails",
+            "required": [
+                "etag",
+                "status",
+                "classification",
+                "charge_number",
+                "id"
+            ],
+            "properties": {
+                "etag": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "The id of the charge"
+                },
+                "charge_code": {
+                    "type": "string",
+                    "description": "The charge code is a replacement of the mortgage description"
+                },
+                "classification": {
+                    "type": "array",
+                    "description": "Classification information",
+                    "items": {
+                        "$ref": "charges.json#/definitions/classificationDesc"
+                    }
+                },
+                "charge_number": {
+                    "type": "integer",
+                    "description": "The charge number is used to reference an individual charge"
+                },
+                "status": {
+                    "enum": [
+                        "outstanding",
+                        "fully-satisfied",
+                        "part-satisfied",
+                        "satisfied"
+                    ],
+                    "type": "string",
+                    "description": "The status of the charge.\n For enumeration descriptions see `status` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/mortgage_descriptions.yml)"
+                },
+                "assests_ceased_released": {
+                    "enum": [
+                        "property-ceased-to-belong",
+                        "part-property-release-and-ceased-to-belong",
+                        "part-property-released",
+                        "part-property-ceased-to-belong",
+                        "whole-property-released",
+                        "multiple-filings",
+                        "whole-property-released-and-ceased-to-belong"
+                    ],
+                    "type": "string",
+                    "description": "Cease/release information about the charge.\n For enumeration descriptions see `assets-ceased-released` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/mortgage_descriptions.yml)"
+                },
+                "acquired_on": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date the property or undertaking was acquired on"
+                },
+                "delivered_on": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date the charge was submitted to Companies House"
+                },
+                "resolved_on": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date the issue was resolved on"
+                },
+                "covering_instrument_date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date by which the series of debentures were created"
+                },
+                "created_on": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date the charge was created"
+                },
+                "satisfied_on": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date the charge was satisfied"
+                },
+                "particulars": {
+                    "type": "array",
+                    "description": "Details of charge or undertaking",
+                    "items": {
+                        "$ref": "charges.json#/definitions/particularDesc"
+                    }
+                },
+                "secured_details": {
+                    "type": "array",
+                    "description": "Information about what is secured against this charge",
+                    "items": {
+                        "$ref": "charges.json#/definitions/securedDetailsDesc"
+                    }
+                },
+                "scottish_alterations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "charges.json#/definitions/alterationsDesc"
+                    },
+                    "description": "Information about alterations for Scottish companies"
+                },
+                "more_than_four_persons_entitled": {
+                    "type": "boolean",
+                    "description": "Charge has more than four person entitled"
+                },
+                "persons_entitled": {
+                    "type": "array",
+                    "description": "People that are entitled to the charge",
+                    "items": {
+                        "$ref": "charges.json#/definitions/persons_entitled"
+                    }
+                },
+                "transactions": {
+                    "type": "array",
+                    "description": "Transactions that have been filed for the charge.",
+                    "items": {
+                        "$ref": "charges.json#/definitions/transactions"
+                    }
+                },
+                "insolvency_cases": {
+                    "type": "array",
+                    "description": "Transactions that have been filed for the charge.",
+                    "items": {
+                        "$ref": "charges.json#/definitions/insolvency_cases"
+                    }
+                },
+                "links": {
+                    "type": "array",
+                    "description": "The resources related to this charge",
+                    "items": {
+                        "$ref": "charges.json#/definitions/charge_links"
+                    }
+                }
+            }
+        },
+        "alterationsDesc": {
+            "title": "alterationsDesc",
+            "required": [
+                "type",
+                "description"
+            ],
+            "properties": {
+                "has_alterations_to_order": {
+                    "type": "boolean",
+                    "description": "The charge has alterations to order"
+                },
+                "has_alterations_to_prohibitions": {
+                    "type": "boolean",
+                    "description": "The charge has alterations to prohibitions"
+                },
+                "has_alterations_to_provisions": {
+                    "type": "boolean",
+                    "description": "The charge has provisions restricting the creation of further charges"
+                }
+            }
+        },
+        "securedDetailsDesc": {
+            "title": "securedDetailsDesc",
+            "required": [
+                "type",
+                "description"
+            ],
+            "properties": {
+                "type": {
+                    "enum": [
+                        "amount-secured",
+                        "obligations-secured"
+                    ],
+                    "type": "string",
+                    "description": "The type of secured details.\n For enumeration descriptions see `secured-details-description` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/mortgage_descriptions.yml)"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Details of the amount or obligation secured by the charge"
+                }
+            }
+        },
+        "particularDesc": {
+            "title": "particularDesc",
+            "required": [
+                "type",
+                "description"
+            ],
+            "properties": {
+                "type": {
+                    "enum": [
+                        "short-particulars",
+                        "charged-property-description",
+                        "charged-property-or-undertaking-description",
+                        "brief-description"
+                    ],
+                    "type": "string",
+                    "description": "The type of charge particulars.\n For enumeration descriptions see `particular-description` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/mortgage_descriptions.yml)"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Details of charge particulars"
+                },
+                "contains_floating_charge": {
+                    "type": "boolean",
+                    "description": "The charge contains a floating charge"
+                },
+                "contains_fixed_charge": {
+                    "type": "boolean",
+                    "description": "The charge contains a fixed charge"
+                },
+                "floating_charge_covers_all": {
+                    "type": "boolean",
+                    "description": "The floating charge covers all the property or undertaking or the company"
+                },
+                "contains_negative_pledge": {
+                    "type": "boolean",
+                    "description": "The charge contains a negative pledge"
+                },
+                "chargor_acting_as_bare_trustee": {
+                    "type": "boolean",
+                    "description": "The chargor is acting as a bare trustee for the property"
+                }
+            }
+        },
+        "classificationDesc": {
+            "title": "classificationDesc",
+            "required": [
+                "type",
+                "description"
+            ],
+            "properties": {
+                "type": {
+                    "enum": [
+                        "charge-description",
+                        "nature-of-charge"
+                    ],
+                    "type": "string",
+                    "description": "The type of charge classication.\n For enumeration descriptions see `classificationDesc` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/mortgage_descriptions.yml)"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Details of the charge classification"
+                }
+            }
+        },
+        "persons_entitled": {
+            "title": "persons_entitled",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the person entitled."
+                }
+            }
+        },
+        "transactions": {
+            "title": "transactions",
+            "properties": {
+                "filing_type": {
+                    "type": "string",
+                    "description": "Filing type which created, updated or satisfied the charge"
+                },
+                "delivered_on": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date the filing was submitted to Companies House"
+                },
+                "insolvency_case_number": {
+                    "type": "string",
+                    "description": "The insolvency case related to this filing"
+                },
+                "links": {
+                    "type": "array",
+                    "description": "The resources related to this filing",
+                    "items": {
+                        "$ref": "charges.json#/definitions/transaction_links"
+                    }
+                }
+            }
+        },
+        "transaction_links": {
+            "title": "transaction_links",
+            "properties": {
+                "filing": {
+                    "type": "string",
+                    "description": "Link to the charge filing data"
+                },
+                "insolvency_case": {
+                    "type": "string",
+                    "description": "Link to the insolvency case related to this filing"
+                }
+            }
+        },
+        "insolvency_cases": {
+            "title": "insolvency_cases",
+            "properties": {
+                "case_number": {
+                    "type": "string",
+                    "description": "The number of this insolvency case"
+                },
+                "links": {
+                    "type": "array",
+                    "description": "The resources related to this insolvency case",
+                    "items": {
+                        "$ref": "charges.json#/definitions/insolvency_case_links"
+                    }
+                }
+            }
+        },
+        "insolvency_case_links": {
+            "title": "insolvency_case_links",
+            "properties": {
+                "case": {
+                    "type": "string",
+                    "description": "Link to the insolvency case data"
+                }
+            }
+        },
+        "charge_links": {
+            "title": "charge_links",
+            "required": [
+                "self"
+            ],
+            "properties": {
+                "self": {
+                    "type": "string",
+                    "description": "Link to the this charge data"
+                }
+            }
+        }
+    }
+}
+

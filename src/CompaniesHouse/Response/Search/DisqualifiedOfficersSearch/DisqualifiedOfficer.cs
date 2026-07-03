@@ -6,16 +6,16 @@ namespace CompaniesHouse.Response.Search.DisqualifiedOfficersSearch
     public class DisqualifiedOfficer : SearchItem
     {
         [JsonPropertyName("address")]
-        public Address? Address { get; set; }
+        public Address Address { get; set; } = new();
 
         [JsonPropertyName("address_snippet")]
-        public string? AddressSnippet { get; set; }
+        public string AddressSnippet { get; set; } = string.Empty;
 
         [JsonPropertyName("date_of_birth")]
         public DateTime DateOfBirth { get; set; }
 
         [JsonPropertyName("description")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         [JsonPropertyName("description_identifiers")]
         public string[]? DescriptionIdentifiers { get; set; }
@@ -27,6 +27,6 @@ namespace CompaniesHouse.Response.Search.DisqualifiedOfficersSearch
         public string? Snippet { get; set; }
 
         [JsonPropertyName("title")]
-        public string? Title { get; set; }
+        public string Title { get; set; } = string.Empty;
     }
 }
