@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CompaniesHouse.Response.PersonsWithSignificantControl;
@@ -15,7 +15,7 @@ namespace CompaniesHouse.Tests.CompaniesHousePersonsWithSignificantControlTests
     {
         private CompaniesHousePersonsWithSignificantControlClient _client;
 
-        private CompaniesHouseClientResponse<PersonsWithSignificantControl> _result;
+        private CompaniesHouseResponse<PersonsWithSignificantControl> _result;
         private ResourceBuilders.PersonsWithSignificantControl _personsWithSignificantControl;
 
         [Fact]

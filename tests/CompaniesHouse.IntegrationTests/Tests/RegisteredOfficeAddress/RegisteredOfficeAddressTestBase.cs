@@ -7,7 +7,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.RegisteredOfficeAddress
     public abstract class RegisteredOfficeAddressTestBase : IAsyncLifetime
     {
         protected CompaniesHouseClient Client { get; set; } = null!;
-        protected CompaniesHouseClientResponse<OfficeAddress> Result = null!;
+        protected CompaniesHouseResponse<OfficeAddress> Result = null!;
 
         public async Task InitializeAsync()
         {

@@ -19,12 +19,12 @@ namespace CompaniesHouse
             _registeredOfficeAddressUriBuilder = registeredOfficeAddressUriBuilder;
         }
 
-        public async Task<CompaniesHouseClientResponse<OfficeAddress>> GetRegisteredOfficeAddress(string companyNumber, CancellationToken cancellationToken = default)
+        public async Task<CompaniesHouseResponse<OfficeAddress>> GetRegisteredOfficeAddress(string companyNumber, CancellationToken cancellationToken = default)
         {
             var requestUri = _registeredOfficeAddressUriBuilder.Build(companyNumber);
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            return await response.ToCompaniesHouseClientResponseAsync<OfficeAddress>(cancellationToken).ConfigureAwait(false);
+            return await response.ToCompaniesHouseResponseAsync<OfficeAddress>(cancellationToken).ConfigureAwait(false);
         }
     }
 }

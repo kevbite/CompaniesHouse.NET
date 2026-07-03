@@ -7,7 +7,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.PersonsWithSignificantControlTes
     public abstract class PersonsWithSignificantControlTestBase : IAsyncLifetime
     {
         protected CompaniesHouseClient _client = null!;
-        protected CompaniesHouseClientResponse<PersonsWithSignificantControl> _result = null!;
+        protected CompaniesHouseResponse<PersonsWithSignificantControl> _result = null!;
 
         public async Task InitializeAsync()
         {

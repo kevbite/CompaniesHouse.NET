@@ -7,6 +7,6 @@ namespace CompaniesHouse
 {
     public interface ICompaniesHouseAdvancedCompanySearchClient
     {
-        Task<CompaniesHouseClientResponse<AdvancedCompanySearch>> AdvancedCompanySearchAsync(AdvancedCompanySearchRequest request, CancellationToken cancellationToken = default(CancellationToken));
+        Task<CompaniesHouseResponse<AdvancedCompanySearch>> AdvancedCompanySearchAsync(AdvancedCompanySearchRequest request, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

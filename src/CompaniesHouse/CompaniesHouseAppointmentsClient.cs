@@ -1,4 +1,4 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using CompaniesHouse.Response.Appointments;
@@ -19,13 +19,13 @@ namespace CompaniesHouse
             _appointmentsUriBuilder = appointmentsUriBuilder;
         }
 
-        public async Task<CompaniesHouseClientResponse<Appointments>> GetAppointmentsAsync(string officerId, int startIndex, int pageSize, CancellationToken cancellationToken)
+        public async Task<CompaniesHouseResponse<Appointments>> GetAppointmentsAsync(string officerId, int startIndex, int pageSize, CancellationToken cancellationToken)
         {
             var requestUri = _appointmentsUriBuilder.Build(officerId, startIndex, pageSize);
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            return await response.ToCompaniesHouseClientResponseAsync<Appointments>(cancellationToken).ConfigureAwait(false);
+            return await response.ToCompaniesHouseResponseAsync<Appointments>(cancellationToken).ConfigureAwait(false);
         }
     }
 }

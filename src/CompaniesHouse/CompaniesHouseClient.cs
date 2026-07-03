@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -57,58 +57,58 @@ namespace CompaniesHouse
         {
         }
 
-        public Task<CompaniesHouseClientResponse<CompanySearch>> SearchCompanyAsync(SearchCompanyRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseResponse<CompanySearch>> SearchCompanyAsync(SearchCompanyRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHouseSearchClient.SearchAsync<SearchCompanyRequest, CompanySearch>(request, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<OfficerSearch>> SearchOfficerAsync(SearchOfficerRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseResponse<OfficerSearch>> SearchOfficerAsync(SearchOfficerRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHouseSearchClient.SearchAsync<SearchOfficerRequest, OfficerSearch>(request, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<DisqualifiedOfficerSearch>> SearchDisqualifiedOfficerAsync(SearchDisqualifiedOfficerRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseResponse<DisqualifiedOfficerSearch>> SearchDisqualifiedOfficerAsync(SearchDisqualifiedOfficerRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHouseSearchClient.SearchAsync<SearchDisqualifiedOfficerRequest, DisqualifiedOfficerSearch>(request, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<AllSearch>> SearchAllAsync(SearchAllRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseResponse<AllSearch>> SearchAllAsync(SearchAllRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHouseSearchClient.SearchAsync<SearchAllRequest, AllSearch>(request, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<CompaniesAlphabeticallySearch>> SearchCompaniesAlphabeticallyAsync(SearchCompaniesAlphabeticallyRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseResponse<CompaniesAlphabeticallySearch>> SearchCompaniesAlphabeticallyAsync(SearchCompaniesAlphabeticallyRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHouseSearchClient.SearchAsync<SearchCompaniesAlphabeticallyRequest, CompaniesAlphabeticallySearch>(request, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<DissolvedCompaniesSearch>> SearchDissolvedCompaniesAsync(SearchDissolvedCompaniesRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseResponse<DissolvedCompaniesSearch>> SearchDissolvedCompaniesAsync(SearchDissolvedCompaniesRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHouseSearchClient.SearchAsync<SearchDissolvedCompaniesRequest, DissolvedCompaniesSearch>(request, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<AdvancedCompanySearch>> AdvancedCompanySearchAsync(AdvancedCompanySearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseResponse<AdvancedCompanySearch>> AdvancedCompanySearchAsync(AdvancedCompanySearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHouseSearchClient.SearchAsync<AdvancedCompanySearchRequest, AdvancedCompanySearch>(request, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<CompanyProfile>> GetCompanyProfileAsync(string companyNumber, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseResponse<CompanyProfile>> GetCompanyProfileAsync(string companyNumber, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHouseCompanyProfileClient.GetCompanyProfileAsync(companyNumber, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<CompanyFilingHistory>> GetCompanyFilingHistoryAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseResponse<CompanyFilingHistory>> GetCompanyFilingHistoryAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHouseCompanyFilingHistoryClient.GetCompanyFilingHistoryAsync(companyNumber, startIndex, pageSize, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<FilingHistoryItem>> GetFilingHistoryByTransactionAsync(string companyNumber, string transactionId, CancellationToken cancellationToken = default)
+        public Task<CompaniesHouseResponse<FilingHistoryItem>> GetFilingHistoryByTransactionAsync(string companyNumber, string transactionId, CancellationToken cancellationToken = default)
         {
             return _companiesHouseCompanyFilingHistoryClient.GetFilingHistoryByTransactionAsync(companyNumber, transactionId, cancellationToken);
         }
 
         // Companies House defaults officer lists to 35 items, unlike several other paged endpoints.
-        public Task<CompaniesHouseClientResponse<Officers>> GetOfficersAsync(
+        public Task<CompaniesHouseResponse<Officers>> GetOfficersAsync(
             string companyNumber,
             int startIndex = 0,
             int pageSize = 35,
@@ -120,38 +120,38 @@ namespace CompaniesHouse
             return _companiesHouseOfficersClient.GetOfficersAsync(companyNumber, startIndex, pageSize, registerType, registerView, orderBy, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<CompanyInsolvencyInformation>> GetCompanyInsolvencyInformationAsync(string companyNumber, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseResponse<CompanyInsolvencyInformation>> GetCompanyInsolvencyInformationAsync(string companyNumber, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHouseCompanyInsolvencyInformationClient.GetCompanyInsolvencyInformationAsync(companyNumber, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<Appointments>> GetAppointmentsAsync(string officerId, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseResponse<Appointments>> GetAppointmentsAsync(string officerId, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHouseCompanyAppointmentsClient.GetAppointmentsAsync(officerId, startIndex, pageSize,
                 cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<PersonsWithSignificantControl>> GetPersonsWithSignificantControlAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<CompaniesHouseResponse<PersonsWithSignificantControl>> GetPersonsWithSignificantControlAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHousePersonsWithSignificantControlClient.GetPersonsWithSignificantControlAsync(companyNumber, startIndex, pageSize, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<Charges>> GetChargesListAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default)
+        public Task<CompaniesHouseResponse<Charges>> GetChargesListAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default)
         {
             return _companiesHouseChargesClient.GetChargesListAsync(companyNumber, startIndex, pageSize, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<Charge>> GetChargeByIdAsync(string companyNumber, string chargeId, CancellationToken cancellationToken = default)
+        public Task<CompaniesHouseResponse<Charge>> GetChargeByIdAsync(string companyNumber, string chargeId, CancellationToken cancellationToken = default)
         {
             return _companiesHouseChargesClient.GetChargeByIdAsync(companyNumber, chargeId, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<OfficeAddress>> GetRegisteredOfficeAddress(string companyNumber, CancellationToken cancellationToken = default)
+        public Task<CompaniesHouseResponse<OfficeAddress>> GetRegisteredOfficeAddress(string companyNumber, CancellationToken cancellationToken = default)
         {
             return _companiesHouseRegisteredOfficeAddressClient.GetRegisteredOfficeAddress(companyNumber, cancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<Officer>> GetOfficerByAppointmentIdAsync(string companyNumber, string appointmentId, CancellationToken cancellationToken = default)
+        public Task<CompaniesHouseResponse<Officer>> GetOfficerByAppointmentIdAsync(string companyNumber, string appointmentId, CancellationToken cancellationToken = default)
         {
             return _companiesHouseOfficerByAppointmentClient.GetOfficerByAppointmentIdAsync(companyNumber, appointmentId, cancellationToken);
         }

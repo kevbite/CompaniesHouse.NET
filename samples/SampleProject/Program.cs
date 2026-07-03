@@ -72,11 +72,11 @@ class Program
         DisplayCompanyProfile(profileResult);
     }
 
-    private static void DisplaySearchResults(CompaniesHouseClientResponse<AllSearch> result, string nameSearchedFor)
+    private static void DisplaySearchResults(CompaniesHouseResponse<AllSearch> result, string nameSearchedFor)
     {
         Console.WriteLine($"{Environment.NewLine}----------------------------------------------");
         Console.WriteLine($"Companies found when searching for '{nameSearchedFor}' :");
-        foreach (var item in result.Data!.Items.OfType<Company>())
+        foreach (var item in result.Data.Items.OfType<Company>())
         {
             // CompanyStatus is a string-backed value type - it never throws on an unrecognised
             // wire value, so we can always describe it, even for values added after this release.
@@ -98,26 +98,27 @@ class Program
         }
     }
 
-    private static void DisplayOfficers(CompaniesHouseClientResponse<CompaniesHouse.Response.Officers.Officers> result)
+    private static void DisplayOfficers(CompaniesHouseResponse<CompaniesHouse.Response.Officers.Officers> result)
     {
         Console.WriteLine($"{Environment.NewLine}----------------------------------------------");
         Console.WriteLine("Officers:");
-        foreach (var officer in result.Data?.Items ?? [])
+        foreach (var officer in result.Data.Items ?? [])
         {
             Console.WriteLine($"* {officer.Name}");
         }
     }
 
-    private static void DisplayCompanyProfile(CompaniesHouseClientResponse<CompaniesHouse.Response.CompanyProfile.CompanyProfile> result)
+    private static void DisplayCompanyProfile(CompaniesHouseResponse<CompaniesHouse.Response.CompanyProfile.CompanyProfile> result)
     {
         Console.WriteLine($"{Environment.NewLine}----------------------------------------------");
-        if (result.Data is null)
+        if (result is CompaniesHouseResponse<CompaniesHouse.Response.CompanyProfile.CompanyProfile>.Success success)
+        {
+            Console.WriteLine($"Company profile: {success.Data.CompanyName} - {DescribeCompanyStatus(success.Data.CompanyStatus)}");
+        }
+        else
         {
             Console.WriteLine($"No company profile found (HTTP {result.StatusCode}).");
-            return;
         }
-
-        Console.WriteLine($"Company profile: {result.Data.CompanyName} - {DescribeCompanyStatus(result.Data.CompanyStatus)}");
     }
 
     /// <summary>

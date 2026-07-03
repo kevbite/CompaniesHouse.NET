@@ -31,7 +31,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
             var size = 100;
             var results = new List<FilingHistoryItem>();
 
-            CompaniesHouseClientResponse<CompanyFilingHistory> result;
+            CompaniesHouseResponse<CompanyFilingHistory> result;
             do
             {
                 result = await _client.GetCompanyFilingHistoryAsync(companyNumber, page++ * size, size);

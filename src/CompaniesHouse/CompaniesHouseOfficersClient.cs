@@ -19,7 +19,7 @@ namespace CompaniesHouse
             _officersUriBuilder = officersUriBuilder;
         }
 
-        public async Task<CompaniesHouseClientResponse<Officers>> GetOfficersAsync(
+        public async Task<CompaniesHouseResponse<Officers>> GetOfficersAsync(
             string companyNumber,
             int startIndex,
             int pageSize,
@@ -32,7 +32,7 @@ namespace CompaniesHouse
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            return await response.ToCompaniesHouseClientResponseAsync<Officers>(cancellationToken).ConfigureAwait(false);
+            return await response.ToCompaniesHouseResponseAsync<Officers>(cancellationToken).ConfigureAwait(false);
         }
     }
 }

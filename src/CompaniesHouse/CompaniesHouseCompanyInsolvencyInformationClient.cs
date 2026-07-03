@@ -19,13 +19,13 @@ namespace CompaniesHouse
             _uriBuilder = uriBuilder;
         }
 
-        public async Task<CompaniesHouseClientResponse<CompanyInsolvencyInformation>> GetCompanyInsolvencyInformationAsync(string companyNumber, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<CompaniesHouseResponse<CompanyInsolvencyInformation>> GetCompanyInsolvencyInformationAsync(string companyNumber, CancellationToken cancellationToken = default(CancellationToken))
         {
             var requestUri = _uriBuilder.Build(companyNumber);
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            return await response.ToCompaniesHouseClientResponseAsync<CompanyInsolvencyInformation>(cancellationToken).ConfigureAwait(false);
+            return await response.ToCompaniesHouseResponseAsync<CompanyInsolvencyInformation>(cancellationToken).ConfigureAwait(false);
         }
     }
 }

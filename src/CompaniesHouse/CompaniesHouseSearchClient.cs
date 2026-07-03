@@ -18,7 +18,7 @@ namespace CompaniesHouse
             _searchUriBuilderFactory = searchUriBuilderFactory;
         }
 
-        public async Task<CompaniesHouseClientResponse<TReturn>> SearchAsync<TSearchRequest, TReturn>(TSearchRequest request,
+        public async Task<CompaniesHouseResponse<TReturn>> SearchAsync<TSearchRequest, TReturn>(TSearchRequest request,
             CancellationToken cancellationToken = default(CancellationToken))
         {
             var searchUriBuilder = _searchUriBuilderFactory.Create<TSearchRequest, TReturn>();
@@ -26,7 +26,7 @@ namespace CompaniesHouse
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            return await response.ToCompaniesHouseClientResponseAsync<TReturn>(cancellationToken).ConfigureAwait(false);
+            return await response.ToCompaniesHouseResponseAsync<TReturn>(cancellationToken).ConfigureAwait(false);
         }
     }
 }

@@ -6,6 +6,6 @@ namespace CompaniesHouse
 {
     public interface ICompaniesHouseRegisteredOfficeAddressClient
     {
-        Task<CompaniesHouseClientResponse<OfficeAddress>> GetRegisteredOfficeAddress(string companyNumber, CancellationToken cancellationToken = default);
+        Task<CompaniesHouseResponse<OfficeAddress>> GetRegisteredOfficeAddress(string companyNumber, CancellationToken cancellationToken = default);
     }
 }

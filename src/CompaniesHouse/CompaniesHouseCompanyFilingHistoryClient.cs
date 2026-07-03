@@ -19,22 +19,22 @@ namespace CompaniesHouse
             _companyFilingHistoryUriBuilder = companyFilingHistoryUriBuilder;
         }
 
-        public async Task<CompaniesHouseClientResponse<CompanyFilingHistory>> GetCompanyFilingHistoryAsync(string companyNumber, int startIndex, int pageSize, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<CompaniesHouseResponse<CompanyFilingHistory>> GetCompanyFilingHistoryAsync(string companyNumber, int startIndex, int pageSize, CancellationToken cancellationToken = default(CancellationToken))
         {
             var requestUri = _companyFilingHistoryUriBuilder.Build(companyNumber, startIndex, pageSize);
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            return await response.ToCompaniesHouseClientResponseAsync<CompanyFilingHistory>(cancellationToken).ConfigureAwait(false);
+            return await response.ToCompaniesHouseResponseAsync<CompanyFilingHistory>(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<CompaniesHouseClientResponse<FilingHistoryItem>> GetFilingHistoryByTransactionAsync(string companyNumber, string transactionId, CancellationToken cancellationToken = default)
+        public async Task<CompaniesHouseResponse<FilingHistoryItem>> GetFilingHistoryByTransactionAsync(string companyNumber, string transactionId, CancellationToken cancellationToken = default)
         {
             var requestUri = _companyFilingHistoryUriBuilder.Build(companyNumber, transactionId);
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            return await response.ToCompaniesHouseClientResponseAsync<FilingHistoryItem>(cancellationToken).ConfigureAwait(false);
+            return await response.ToCompaniesHouseResponseAsync<FilingHistoryItem>(cancellationToken).ConfigureAwait(false);
         }
     }
 }

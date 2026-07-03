@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -21,7 +21,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTests
     {
         private CompaniesHouseCompanyProfileClient _client;
 
-        private CompaniesHouseClientResponse<Response.CompanyProfile.CompanyProfile> _result;
+        private CompaniesHouseResponse<Response.CompanyProfile.CompanyProfile> _result;
         private ResourceBuilders.CompanyProfile _companyProfile;
 
         [Theory]
@@ -84,8 +84,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTests
             _result = await _client.GetCompanyProfileAsync("missing");
 
             _result.ShouldNotBeNull();
-            _result.Data.ShouldBeNull();
-            _result.IsSuccess.ShouldBeFalse();
+            _result.ShouldBeOfType<CompaniesHouseResponse<CompanyProfile>.NotFound>();
             _result.StatusCode.ShouldBe(404);
         }
 

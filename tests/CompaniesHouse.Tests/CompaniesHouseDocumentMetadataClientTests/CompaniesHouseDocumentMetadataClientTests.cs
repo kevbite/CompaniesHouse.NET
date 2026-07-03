@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using CompaniesHouse.Response.Document;
@@ -13,7 +13,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseDocumentMetadataClientTests
     {
         private const string DocumentId = "wibble";
         private DocumentMetadataTestCase _expected;
-        private CompaniesHouseClientResponse<DocumentMetadata> _result;
+        private CompaniesHouseResponse<DocumentMetadata> _result;
 
         public CompaniesHouseDocumentMetadataClientTests()
         {

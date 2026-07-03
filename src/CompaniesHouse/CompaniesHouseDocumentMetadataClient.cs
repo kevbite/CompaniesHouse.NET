@@ -1,4 +1,4 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using CompaniesHouse.Response.Document;
@@ -19,12 +19,12 @@ namespace CompaniesHouse
             _documentUriBuilder = documentUriBuilder;
         }
 
-        public async Task<CompaniesHouseClientResponse<DocumentMetadata>> GetDocumentMetadataAsync(string documentId, CancellationToken caneCancellationToken = default)
+        public async Task<CompaniesHouseResponse<DocumentMetadata>> GetDocumentMetadataAsync(string documentId, CancellationToken caneCancellationToken = default)
         {
             var requestUri = _documentUriBuilder.Build(documentId);
             var response = await _httpClient.GetAsync(requestUri, caneCancellationToken).ConfigureAwait(false);
 
-            return await response.ToCompaniesHouseClientResponseAsync<DocumentMetadata>(caneCancellationToken).ConfigureAwait(false);
+            return await response.ToCompaniesHouseResponseAsync<DocumentMetadata>(caneCancellationToken).ConfigureAwait(false);
         }
     }
 }

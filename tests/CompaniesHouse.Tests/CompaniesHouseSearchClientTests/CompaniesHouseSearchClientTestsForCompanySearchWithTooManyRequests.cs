@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CompaniesHouse.Request;
@@ -12,7 +12,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
 {
     public class CompaniesHouseSearchClientTestsForCompanySearchWithTooManyRequests : IAsyncLifetime
     {
-        private CompaniesHouseClientResponse<CompanySearch>? _response;
+        private CompaniesHouseResponse<CompanySearch>? _response;
 
         public async Task InitializeAsync()
         {
@@ -34,9 +34,8 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
         public void ThenUnsuccessfulResponseIsReturned()
         {
             _response.ShouldNotBeNull();
-            _response.IsSuccess.ShouldBeFalse();
+            _response.ShouldBeOfType<CompaniesHouseResponse<CompanySearch>.RateLimited>();
             _response.StatusCode.ShouldBe(429);
-            _response.Data.ShouldBeNull();
         }
     }
 }

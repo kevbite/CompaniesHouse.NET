@@ -7,7 +7,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.AppointmentsTests
     public abstract class AppointmentsTestBase : IAsyncLifetime
     {
         protected CompaniesHouseClient Client = null!;
-        protected CompaniesHouseClientResponse<Appointments> Result = null!;
+        protected CompaniesHouseResponse<Appointments> Result = null!;
 
         public async Task InitializeAsync()
         {

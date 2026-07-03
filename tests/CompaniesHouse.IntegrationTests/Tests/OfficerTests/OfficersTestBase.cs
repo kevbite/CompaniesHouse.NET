@@ -6,7 +6,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
     public abstract class OfficersTestBase<T> : IAsyncLifetime
     {
         protected CompaniesHouseClient Client = null!;
-        protected CompaniesHouseClientResponse<T> Result = null!;
+        protected CompaniesHouseResponse<T> Result = null!;
 
         public async Task InitializeAsync()
         {

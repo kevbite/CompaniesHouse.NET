@@ -19,20 +19,20 @@ namespace CompaniesHouse
             _chargesUriBuilder = chargesUriBuilder;
         }
 
-        public async Task<CompaniesHouseClientResponse<Charges>> GetChargesListAsync(string companyNumber, int startIndex, int pageSize, CancellationToken cancellationToken = default)
+        public async Task<CompaniesHouseResponse<Charges>> GetChargesListAsync(string companyNumber, int startIndex, int pageSize, CancellationToken cancellationToken = default)
         {
             var requestUri = _chargesUriBuilder.Build(companyNumber, startIndex, pageSize);
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            return await response.ToCompaniesHouseClientResponseAsync<Charges>(cancellationToken).ConfigureAwait(false);
+            return await response.ToCompaniesHouseResponseAsync<Charges>(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<CompaniesHouseClientResponse<Charge>> GetChargeByIdAsync(string companyNumber, string chargeId, CancellationToken cancellationToken = default)
+        public async Task<CompaniesHouseResponse<Charge>> GetChargeByIdAsync(string companyNumber, string chargeId, CancellationToken cancellationToken = default)
         {
             var requestUri = _chargesUriBuilder.Build(companyNumber, chargeId);
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            return await response.ToCompaniesHouseClientResponseAsync<Charge>(cancellationToken).ConfigureAwait(false);
+            return await response.ToCompaniesHouseResponseAsync<Charge>(cancellationToken).ConfigureAwait(false);
         }
     }
 }

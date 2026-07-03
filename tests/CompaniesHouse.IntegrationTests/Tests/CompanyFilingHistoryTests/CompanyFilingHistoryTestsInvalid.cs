@@ -10,7 +10,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
     {
         private const string InvalidCompanyNumber = "ABC00000";
 
-        private CompaniesHouseClientResponse<CompanyFilingHistory> _result = null!;
+        private CompaniesHouseResponse<CompanyFilingHistory> _result = null!;
 
         protected override async Task When()
         {

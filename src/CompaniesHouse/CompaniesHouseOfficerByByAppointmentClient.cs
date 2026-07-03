@@ -19,13 +19,13 @@ namespace CompaniesHouse
             _officersAppointmentUriBuilder = officersAppointmentUriBuilder;
         }
 
-        public async Task<CompaniesHouseClientResponse<Officer>> GetOfficerByAppointmentIdAsync(string companyNumber, string appointmentId, CancellationToken cancellationToken = default)
+        public async Task<CompaniesHouseResponse<Officer>> GetOfficerByAppointmentIdAsync(string companyNumber, string appointmentId, CancellationToken cancellationToken = default)
         {
             var requestUri = _officersAppointmentUriBuilder.Build(companyNumber, appointmentId);
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            return await response.ToCompaniesHouseClientResponseAsync<Officer>(cancellationToken).ConfigureAwait(false);
+            return await response.ToCompaniesHouseResponseAsync<Officer>(cancellationToken).ConfigureAwait(false);
         }
     }
 }

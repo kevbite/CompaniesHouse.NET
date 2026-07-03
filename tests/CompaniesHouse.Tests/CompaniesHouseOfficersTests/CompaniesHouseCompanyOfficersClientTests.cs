@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CompaniesHouse.Response.Officers;
@@ -15,7 +15,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseOfficersTests
     {
         private CompaniesHouseOfficersClient _client;
 
-        private CompaniesHouseClientResponse<Officers> _result;
+        private CompaniesHouseResponse<Officers> _result;
         private ResourceBuilders.Officers _officers;
 
         [Fact]

@@ -12,92 +12,123 @@
 
     public class HttpResponseMessageExtensionsTests
     {
+        [Theory]
+        [InlineData(200)]
+        [InlineData(201)]
+        [InlineData(204)]
+        public async Task GivenAnHttpResponse_WhenTheStatusCodeIs2xx_ThenReturnsSuccess(int statusCode)
+        {
+            var sut = new HttpResponseMessage((HttpStatusCode)statusCode)
+            {
+                Content = JsonContent.Create(new TestPayload { Value = "ok" })
+            };
+
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
+
+            var success = response.ShouldBeOfType<CompaniesHouseResponse<TestPayload>.Success>();
+            success.Data.ShouldNotBeNull();
+            success.Data.Value.ShouldBe("ok");
+            success.StatusCode.ShouldBe(statusCode);
+            success.Headers.ShouldBe(sut.Headers);
+        }
+
         [Fact]
-        public async Task GivenAnHttpResponse_WhenTheStatusCodeIsSuccess_ThenToCompaniesHouseClientResponseAsyncReturnsTheWrappedResponse()
+        public async Task GivenAnHttpResponse_WhenTheStatusCodeIs404_ThenReturnsNotFound()
         {
-            for (var statusCode = 200; statusCode < 299; statusCode++)
-            {
-                var sut = new HttpResponseMessage((HttpStatusCode)statusCode)
-                {
-                    Content = JsonContent.Create(new TestPayload { Value = "ok" })
-                };
+            var sut = new HttpResponseMessage(HttpStatusCode.NotFound) { ReasonPhrase = "Not Found" };
 
-                var response = await sut.ToCompaniesHouseClientResponseAsync<TestPayload>();
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
 
-                response.Data.ShouldNotBeNull();
-                response.Data.Value.ShouldBe("ok");
-                response.StatusCode.ShouldBe(statusCode);
-                response.IsSuccess.ShouldBeTrue();
-                response.Headers.ShouldBe(sut.Headers);
-            }
+            var notFound = response.ShouldBeOfType<CompaniesHouseResponse<TestPayload>.NotFound>();
+            notFound.StatusCode.ShouldBe(404);
+            notFound.ReasonPhrase.ShouldBe("Not Found");
+        }
+
+        [Fact]
+        public async Task GivenAnHttpResponse_WhenTheStatusCodeIs429_ThenReturnsRateLimited()
+        {
+            var sut = new HttpResponseMessage((HttpStatusCode)429) { ReasonPhrase = "Too Many Requests" };
+            sut.Headers.RetryAfter = new RetryConditionHeaderValue(TimeSpan.FromSeconds(300));
+
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
+
+            var rateLimited = response.ShouldBeOfType<CompaniesHouseResponse<TestPayload>.RateLimited>();
+            rateLimited.StatusCode.ShouldBe(429);
+            rateLimited.RetryAfter.ShouldBe(TimeSpan.FromSeconds(300));
+        }
+
+        [Fact]
+        public async Task GivenAnHttpResponse_WhenTheStatusCodeIs429WithNoRetryAfter_ThenReturnsRateLimitedWithNullRetryAfter()
+        {
+            var sut = new HttpResponseMessage((HttpStatusCode)429) { ReasonPhrase = "Too Many Requests" };
+
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
+
+            var rateLimited = response.ShouldBeOfType<CompaniesHouseResponse<TestPayload>.RateLimited>();
+            rateLimited.RetryAfter.ShouldBeNull();
         }
 
         [Theory]
-        [InlineData(410, "Gone", 0, null)]
-        [InlineData(429, "Too Many Requests", 300, null)]
-        public async Task GivenAnHttpResponse_WhenTheStatusCodeIsNotServerError_ThenToCompaniesHouseClientResponseAsyncReturnsMetadataWithoutData(
-            int statusCode,
-            string reasonPhrase,
-            int retryAfterSeconds,
-            string? retryAfterDate)
+        [InlineData(401)]
+        [InlineData(403)]
+        public async Task GivenAnHttpResponse_WhenTheStatusCodeIs401Or403_ThenReturnsUnauthorized(int statusCode)
         {
-            var sut = new HttpResponseMessage((HttpStatusCode)statusCode) { ReasonPhrase = reasonPhrase };
-            var retryAfterDateTimeOffset = DateTimeOffset.MinValue;
-            if (!string.IsNullOrWhiteSpace(retryAfterDate))
-            {
-                retryAfterDateTimeOffset = DateTimeOffset.Parse(retryAfterDate);
-            }
+            var sut = new HttpResponseMessage((HttpStatusCode)statusCode);
 
-            if (retryAfterSeconds >= 0 || !string.IsNullOrWhiteSpace(retryAfterDate))
-            {
-                sut.Headers.RetryAfter = string.IsNullOrWhiteSpace(retryAfterDate)
-                ? new RetryConditionHeaderValue(TimeSpan.FromSeconds(retryAfterSeconds))
-                : new RetryConditionHeaderValue(retryAfterDateTimeOffset);
-            }
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
 
-            var response = await sut.ToCompaniesHouseClientResponseAsync<TestPayload>();
-
-            response.Data.ShouldBeNull();
-            response.StatusCode.ShouldBe(statusCode);
-            response.ReasonPhrase.ShouldBe(reasonPhrase);
-            response.IsSuccess.ShouldBeFalse();
-            response.RetryAfter.ShouldBe(
-                string.IsNullOrWhiteSpace(retryAfterDate)
-                    ? TimeSpan.FromSeconds(retryAfterSeconds)
-                    : null);
+            var unauthorized = response.ShouldBeOfType<CompaniesHouseResponse<TestPayload>.Unauthorized>();
+            unauthorized.StatusCode.ShouldBe(statusCode);
         }
 
         [Theory]
-        [InlineData(503, "Service Unavailable", 0, null)]
-        [InlineData(503, "Service Unavailable", -1, "2015-10-08T12:34:56.000+1")]
-        [InlineData(503, "Service Unavailable", -1, null)]
-        public void GivenAnHttpResponse_WhenTheStatusCodeIsServerError_ThenEnsureNotServerErrorAsyncThrowsCompaniesHouseApiException(
-            int statusCode,
-            string reasonPhrase,
-            int retryAfterSeconds,
-            string? retryAfterDate)
+        [InlineData(500)]
+        [InlineData(503)]
+        public async Task GivenAnHttpResponse_WhenTheStatusCodeIs5xx_ThenReturnsServerError(int statusCode)
         {
-            var sut = new HttpResponseMessage((HttpStatusCode)statusCode) { ReasonPhrase = reasonPhrase };
-            var retryAfterDateTimeOffset = DateTimeOffset.MinValue;
-            if (!string.IsNullOrWhiteSpace(retryAfterDate))
-            {
-                retryAfterDateTimeOffset = DateTimeOffset.Parse(retryAfterDate);
-            }
+            var sut = new HttpResponseMessage((HttpStatusCode)statusCode) { ReasonPhrase = "Server Error" };
 
-            if (retryAfterSeconds >= 0 || !string.IsNullOrWhiteSpace(retryAfterDate))
-            {
-                sut.Headers.RetryAfter = string.IsNullOrWhiteSpace(retryAfterDate)
-                    ? new RetryConditionHeaderValue(TimeSpan.FromSeconds(retryAfterSeconds))
-                    : new RetryConditionHeaderValue(retryAfterDateTimeOffset);
-            }
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
 
-            var exception = Should.Throw<CompaniesHouseApiException>(() => sut.EnsureNotServerErrorAsync().GetAwaiter().GetResult());
-            exception.StatusCode.ShouldBe(statusCode);
-            exception.ReasonPhrase.ShouldBe(reasonPhrase);
-            exception.RetryAfter.ShouldBe(
-                string.IsNullOrWhiteSpace(retryAfterDate)
-                    ? retryAfterSeconds >= 0 ? TimeSpan.FromSeconds(retryAfterSeconds) : null
-                    : null);
+            var serverError = response.ShouldBeOfType<CompaniesHouseResponse<TestPayload>.ServerError>();
+            serverError.StatusCode.ShouldBe(statusCode);
+            serverError.RetryAfter.ShouldBeNull();
+        }
+
+        [Fact]
+        public async Task GivenAnHttpResponse_WhenThe5xxResponseHasRetryAfter_ThenServerErrorIncludesRetryAfter()
+        {
+            var sut = new HttpResponseMessage(HttpStatusCode.ServiceUnavailable);
+            sut.Headers.RetryAfter = new RetryConditionHeaderValue(TimeSpan.FromSeconds(60));
+
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
+
+            var serverError = response.ShouldBeOfType<CompaniesHouseResponse<TestPayload>.ServerError>();
+            serverError.RetryAfter.ShouldBe(TimeSpan.FromSeconds(60));
+        }
+
+        [Theory]
+        [InlineData(400)]
+        [InlineData(410)]
+        [InlineData(422)]
+        public async Task GivenAnHttpResponse_WhenTheStatusCodeIsOther4xx_ThenReturnsClientError(int statusCode)
+        {
+            var sut = new HttpResponseMessage((HttpStatusCode)statusCode);
+
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
+
+            var clientError = response.ShouldBeOfType<CompaniesHouseResponse<TestPayload>.ClientError>();
+            clientError.StatusCode.ShouldBe(statusCode);
+        }
+
+        [Fact]
+        public async Task GivenANonSuccessResponse_WhenAccessingData_ThenThrowsInvalidOperationException()
+        {
+            var sut = new HttpResponseMessage(HttpStatusCode.NotFound) { ReasonPhrase = "Not Found" };
+
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
+
+            Should.Throw<InvalidOperationException>(() => _ = response.Data);
         }
 
         private sealed class TestPayload
@@ -106,3 +137,4 @@
         }
     }
 }
+

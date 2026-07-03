@@ -7,7 +7,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyInsolvencyInformationTest
     public abstract class CompanyInsolvencyInformationTestBase : IAsyncLifetime
     {
         protected CompaniesHouseClient Client = null!;
-        protected CompaniesHouseClientResponse<CompanyInsolvencyInformation> Result = null!;
+        protected CompaniesHouseResponse<CompanyInsolvencyInformation> Result = null!;
 
         public async Task InitializeAsync()
         {

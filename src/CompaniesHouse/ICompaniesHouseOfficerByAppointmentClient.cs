@@ -6,6 +6,6 @@ namespace CompaniesHouse
 {
     internal interface ICompaniesHouseOfficerByAppointmentClient
     {
-        Task<CompaniesHouseClientResponse<Officer>> GetOfficerByAppointmentIdAsync(string companyNumber, string appointmentId, CancellationToken cancellationToken);
+        Task<CompaniesHouseResponse<Officer>> GetOfficerByAppointmentIdAsync(string companyNumber, string appointmentId, CancellationToken cancellationToken);
     }
 }

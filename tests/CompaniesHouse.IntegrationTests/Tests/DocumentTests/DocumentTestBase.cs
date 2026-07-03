@@ -6,7 +6,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
     public abstract class DocumentTestBase<T> : IAsyncLifetime
     {
         protected CompaniesHouseDocumentClient Client = null!;
-        protected CompaniesHouseClientResponse<T> Result = null!;
+        protected CompaniesHouseResponse<T> Result = null!;
 
         public async Task InitializeAsync()
         {

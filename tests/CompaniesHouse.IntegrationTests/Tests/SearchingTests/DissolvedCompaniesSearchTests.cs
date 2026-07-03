@@ -33,13 +33,10 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
         [IntegrationFact]
         public async Task ThenPreviousNameSearchReturnsMatchedPreviousCompanyName()
         {
-            CompaniesHouseClientResponse<Response.Search.DissolvedCompaniesSearch.DissolvedCompaniesSearch> result;
+            var result = await SearchPreviousNamesAsync();
 
-            try
-            {
-                result = await SearchPreviousNamesAsync();
-            }
-            catch (CompaniesHouseApiException exception) when (exception.StatusCode == 500)
+            // Retry once on 5xx server error
+            if (result is CompaniesHouseResponse<Response.Search.DissolvedCompaniesSearch.DissolvedCompaniesSearch>.ServerError)
             {
                 result = await SearchPreviousNamesAsync();
             }
@@ -63,7 +60,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             result.Data.Items.ShouldContain(x => !string.IsNullOrWhiteSpace(x.OrderedAlphaKeyWithId));
         }
 
-        private Task<CompaniesHouseClientResponse<Response.Search.DissolvedCompaniesSearch.DissolvedCompaniesSearch>> SearchPreviousNamesAsync() =>
+        private Task<CompaniesHouseResponse<Response.Search.DissolvedCompaniesSearch.DissolvedCompaniesSearch>> SearchPreviousNamesAsync() =>
             _client.SearchDissolvedCompaniesAsync(new SearchDissolvedCompaniesRequest
             {
                 Query = "radio rentals",

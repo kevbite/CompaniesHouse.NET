@@ -1,4 +1,4 @@
-﻿using AutoFixture;
+using AutoFixture;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response;
 using CompaniesHouse.Response.Search.CompanySearch;
@@ -12,7 +12,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
     {
         private CompaniesHouseSearchClient _client;
 
-        private CompaniesHouseClientResponse<CompanySearch> _result;
+        private CompaniesHouseResponse<CompanySearch> _result;
         private ResourceDetails _resourceDetails;
         private List<CompanyDetails> _expectedCompanies;
 

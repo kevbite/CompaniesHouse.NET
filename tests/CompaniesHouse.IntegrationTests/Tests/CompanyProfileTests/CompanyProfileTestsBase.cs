@@ -7,7 +7,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyProfileTests
     public abstract class CompanyProfileTestsBase : IAsyncLifetime
     {
         protected CompaniesHouseClient _client = null!;
-        protected CompaniesHouseClientResponse<CompanyProfile> _result = null!;
+        protected CompaniesHouseResponse<CompanyProfile> _result = null!;
 
         public async Task InitializeAsync()
         {

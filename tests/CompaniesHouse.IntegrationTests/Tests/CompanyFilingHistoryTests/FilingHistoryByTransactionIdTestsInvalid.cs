@@ -11,7 +11,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
         private const string InvalidCompanyNumber = "ABC00000";
         private const string InvalidTransactionId = "00000000";
 
-        private CompaniesHouseClientResponse<FilingHistoryItem> _result = null!;
+        private CompaniesHouseResponse<FilingHistoryItem> _result = null!;
 
         protected override async Task When()
         {

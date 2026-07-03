@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -12,7 +12,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseDocumentClientTests
 {
     public class CompaniesHouseDocumentClientTests : IAsyncLifetime
     {
-        private CompaniesHouseClientResponse<DocumentDownload> _result;
+        private CompaniesHouseResponse<DocumentDownload> _result;
         private const string ExpectedMediaType = "application/pdf";
         private const string ExpectedContent = "test pdf";
         private const string DocumentId = "wibble";
