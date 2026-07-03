@@ -57,6 +57,27 @@ jobs:
       if: ${{ env.PUBLISH_PACKAGE }}
       run: |
         dotnet nuget push ./artifacts/*.nupkg --source NuGet.org --api-key ${{ secrets.NUGET_API_KEY }}
+    - name: Generate release notes with NuGet links
+      if: ${{ env.PUBLISH_PACKAGE }}
+      id: release_notes
+      run: |
+        cat > release_notes.md << 'EOF'
+        ## NuGet Packages
+         
+        This release includes the following NuGet packages:
+         
+        - [CompaniesHouse](https://www.nuget.org/packages/CompaniesHouse/${{ env.VERSION }}) - Core .NET client for Companies House API
+        - [CompaniesHouse.Extensions.Microsoft.DependencyInjection](https://www.nuget.org/packages/CompaniesHouse.Extensions.Microsoft.DependencyInjection/${{ env.VERSION }}) - DI helpers for ASP.NET Core / generic-host apps
+         
+        Install via:
+        ```
+        dotnet add package CompaniesHouse
+        dotnet add package CompaniesHouse.Extensions.Microsoft.DependencyInjection
+        ```
+         
+        See the [README](https://github.com/kevbite/CompaniesHouse.NET#readme) for usage instructions.
+        EOF
+        echo "release_body=$(cat release_notes.md)" >> $GITHUB_OUTPUT
     - name: Create Release
       id: create_release
       if: ${{ env.PUBLISH_PACKAGE }}
@@ -66,7 +87,9 @@ jobs:
       with:
         tag_name: ${{ env.VERSION }}
         name: Release ${{ env.VERSION }}
-        body: |
-          Release ${{ env.VERSION }}
+        body_path: release_notes.md
+        files: |
+          ./artifacts/*.nupkg
+          ./artifacts/*.snupkg
         draft: false
         prerelease: false
