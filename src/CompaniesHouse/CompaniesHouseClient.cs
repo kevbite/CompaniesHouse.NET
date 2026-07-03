@@ -39,6 +39,7 @@ namespace CompaniesHouse
         private readonly ICompaniesHouseOfficerByAppointmentClient _companiesHouseOfficerByAppointmentClient;
         private readonly ICompaniesHouseRegistersClient _companiesHouseRegistersClient;
         private readonly ICompaniesHouseDisqualifiedOfficerDetailsClient _companiesHouseDisqualifiedOfficerDetailsClient;
+        private readonly ICompaniesHousePersonsWithSignificantControlDetailsClient _companiesHousePersonsWithSignificantControlDetailsClient;
         private readonly HttpClient _httpClient;
 
         public CompaniesHouseClient(HttpClient httpClient)
@@ -56,6 +57,7 @@ namespace CompaniesHouse
             _companiesHouseOfficerByAppointmentClient = new CompaniesHouseOfficerByByAppointmentClient(_httpClient, new OfficersAppointmentUriBuilder());
             _companiesHouseRegistersClient = new CompaniesHouseRegistersClient(_httpClient, new CompanyRegistersUriBuilder());
             _companiesHouseDisqualifiedOfficerDetailsClient = new CompaniesHouseDisqualifiedOfficerDetailsClient(_httpClient, new DisqualifiedOfficerUriBuilder());
+            _companiesHousePersonsWithSignificantControlDetailsClient = new CompaniesHousePersonsWithSignificantControlDetailsClient(_httpClient, new PersonsWithSignificantControlDetailsUriBuilder());
         }
 
         public CompaniesHouseClient(ICompaniesHouseSettings settings)
@@ -140,6 +142,56 @@ namespace CompaniesHouse
         public Task<CompaniesHouseResponse<PersonsWithSignificantControl>> GetPersonsWithSignificantControlAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _companiesHousePersonsWithSignificantControlClient.GetPersonsWithSignificantControlAsync(companyNumber, startIndex, pageSize, cancellationToken);
+        }
+
+        public Task<CompaniesHouseResponse<PersonWithSignificantControl>> GetIndividualPersonWithSignificantControlAsync(string companyNumber, string notificationId, CancellationToken cancellationToken = default)
+        {
+            return _companiesHousePersonsWithSignificantControlDetailsClient.GetIndividualPersonWithSignificantControlAsync(companyNumber, notificationId, cancellationToken);
+        }
+
+        public Task<CompaniesHouseResponse<PersonWithSignificantControl>> GetIndividualBeneficialOwnerAsync(string companyNumber, string notificationId, CancellationToken cancellationToken = default)
+        {
+            return _companiesHousePersonsWithSignificantControlDetailsClient.GetIndividualBeneficialOwnerAsync(companyNumber, notificationId, cancellationToken);
+        }
+
+        public Task<CompaniesHouseResponse<PersonWithSignificantControl>> GetCorporateEntityPersonWithSignificantControlAsync(string companyNumber, string notificationId, CancellationToken cancellationToken = default)
+        {
+            return _companiesHousePersonsWithSignificantControlDetailsClient.GetCorporateEntityPersonWithSignificantControlAsync(companyNumber, notificationId, cancellationToken);
+        }
+
+        public Task<CompaniesHouseResponse<PersonWithSignificantControl>> GetCorporateEntityBeneficialOwnerAsync(string companyNumber, string notificationId, CancellationToken cancellationToken = default)
+        {
+            return _companiesHousePersonsWithSignificantControlDetailsClient.GetCorporateEntityBeneficialOwnerAsync(companyNumber, notificationId, cancellationToken);
+        }
+
+        public Task<CompaniesHouseResponse<PersonWithSignificantControl>> GetLegalPersonPersonWithSignificantControlAsync(string companyNumber, string notificationId, CancellationToken cancellationToken = default)
+        {
+            return _companiesHousePersonsWithSignificantControlDetailsClient.GetLegalPersonPersonWithSignificantControlAsync(companyNumber, notificationId, cancellationToken);
+        }
+
+        public Task<CompaniesHouseResponse<PersonWithSignificantControl>> GetLegalPersonBeneficialOwnerAsync(string companyNumber, string notificationId, CancellationToken cancellationToken = default)
+        {
+            return _companiesHousePersonsWithSignificantControlDetailsClient.GetLegalPersonBeneficialOwnerAsync(companyNumber, notificationId, cancellationToken);
+        }
+
+        public Task<CompaniesHouseResponse<PersonsWithSignificantControlStatements>> GetPersonsWithSignificantControlStatementsAsync(string companyNumber, int startIndex = 0, int pageSize = 25, bool? registerView = null, CancellationToken cancellationToken = default)
+        {
+            return _companiesHousePersonsWithSignificantControlDetailsClient.GetPersonsWithSignificantControlStatementsAsync(companyNumber, startIndex, pageSize, registerView, cancellationToken);
+        }
+
+        public Task<CompaniesHouseResponse<PersonWithSignificantControlStatement>> GetPersonsWithSignificantControlStatementAsync(string companyNumber, string statementId, CancellationToken cancellationToken = default)
+        {
+            return _companiesHousePersonsWithSignificantControlDetailsClient.GetPersonsWithSignificantControlStatementAsync(companyNumber, statementId, cancellationToken);
+        }
+
+        public Task<CompaniesHouseResponse<SuperSecurePersonWithSignificantControl>> GetSuperSecurePersonWithSignificantControlAsync(string companyNumber, string superSecureId, CancellationToken cancellationToken = default)
+        {
+            return _companiesHousePersonsWithSignificantControlDetailsClient.GetSuperSecurePersonWithSignificantControlAsync(companyNumber, superSecureId, cancellationToken);
+        }
+
+        public Task<CompaniesHouseResponse<SuperSecurePersonWithSignificantControl>> GetSuperSecureBeneficialOwnerAsync(string companyNumber, string superSecureId, CancellationToken cancellationToken = default)
+        {
+            return _companiesHousePersonsWithSignificantControlDetailsClient.GetSuperSecureBeneficialOwnerAsync(companyNumber, superSecureId, cancellationToken);
         }
 
         public Task<CompaniesHouseResponse<Charges>> GetChargesListAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default)

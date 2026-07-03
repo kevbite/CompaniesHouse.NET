@@ -17,7 +17,8 @@
         ICompaniesHouseChargesClient,
         ICompaniesHouseRegisteredOfficeAddressClient,
         ICompaniesHouseRegistersClient,
-        ICompaniesHouseDisqualifiedOfficerDetailsClient
+        ICompaniesHouseDisqualifiedOfficerDetailsClient,
+        ICompaniesHousePersonsWithSignificantControlDetailsClient
     {
 
     }

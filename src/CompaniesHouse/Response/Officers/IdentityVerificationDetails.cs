@@ -17,6 +17,14 @@ namespace CompaniesHouse.Response.Officers
         [JsonConverter(typeof(OptionalDateJsonConverter))]
         public DateTime? AppointmentVerificationStartOn { get; set; }
 
+        [JsonPropertyName("appointment_verification_statement_date")]
+        [JsonConverter(typeof(OptionalDateJsonConverter))]
+        public DateTime? AppointmentVerificationStatementDate { get; set; }
+
+        [JsonPropertyName("appointment_verification_statement_due_on")]
+        [JsonConverter(typeof(OptionalDateJsonConverter))]
+        public DateTime? AppointmentVerificationStatementDueOn { get; set; }
+
         [JsonPropertyName("authorised_corporate_service_provider_name")]
         public string? AuthorisedCorporateServiceProviderName { get; set; }
 
