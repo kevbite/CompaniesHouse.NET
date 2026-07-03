@@ -5,9 +5,9 @@ namespace CompaniesHouse.Response.Officers
     public class OfficerFormerName
     {
         [JsonPropertyName("forenames")]
-        public string ForeNames { get; set; } = null!;
+        public string? ForeNames { get; set; }
 
         [JsonPropertyName("surname")]
-        public string Surname { get; set; } = null!;
+        public string? Surname { get; set; }
     }
 }

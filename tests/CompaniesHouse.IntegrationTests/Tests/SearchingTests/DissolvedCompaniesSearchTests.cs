@@ -27,7 +27,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             });
 
             result.Data.ShouldNotBeNull();
-            result.Data.Items.ShouldNotBeEmpty();
+            (result.Data.Items ?? []).ShouldNotBeEmpty();
         }
 
         [IntegrationFact]
@@ -42,8 +42,9 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             }
 
             result.Data.Kind.ShouldBe("search#previous-name-dissolved");
-            result.Data.TopHit.MatchedPreviousCompanyName.ShouldNotBeNull();
-            result.Data.TopHit.MatchedPreviousCompanyName.Name.ShouldContain("RADIO RENTALS");
+            result.Data.TopHit?.MatchedPreviousCompanyName.ShouldNotBeNull();
+            result.Data.TopHit?.MatchedPreviousCompanyName?.Name.ShouldNotBeNull();
+            result.Data.TopHit?.MatchedPreviousCompanyName?.Name!.ShouldContain("RADIO RENTALS");
         }
 
         [IntegrationFact]
@@ -57,7 +58,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             });
 
             result.Data.Kind.ShouldBe("search#alphabetical-dissolved");
-            result.Data.Items.ShouldContain(x => !string.IsNullOrWhiteSpace(x.OrderedAlphaKeyWithId));
+            (result.Data.Items ?? []).ShouldContain(x => !string.IsNullOrWhiteSpace(x.OrderedAlphaKeyWithId));
         }
 
         private Task<CompaniesHouseResponse<Response.Search.DissolvedCompaniesSearch.DissolvedCompaniesSearch>> SearchPreviousNamesAsync() =>

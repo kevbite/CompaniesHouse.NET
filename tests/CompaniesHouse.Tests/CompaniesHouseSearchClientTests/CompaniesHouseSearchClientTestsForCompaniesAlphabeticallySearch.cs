@@ -50,13 +50,14 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
                 new SearchCompaniesAlphabeticallyRequest { Query = "abc" });
 
             result.Data.Kind.ShouldBe("search#alphabetical-search");
-            result.Data.Items.Length.ShouldBe(1);
-            result.Data.TopHit.CompanyNumber.ShouldBe("01234567");
-            var company = result.Data.Items[0];
+            var items = result.Data.Items ?? [];
+            items.Length.ShouldBe(1);
+            result.Data.TopHit?.CompanyNumber.ShouldBe("01234567");
+            var company = items[0];
             company.CompanyName.ShouldBe("ABC LIMITED");
             company.CompanyStatus.ShouldBe(CompanyStatus.Active);
             company.CompanyType.ShouldBe(CompanyType.Ltd);
-            company.Links.CompanyProfile.ShouldBe("/company/01234567");
+            company.Links?.CompanyProfile.ShouldBe("/company/01234567");
             company.OrderedAlphaKeyWithId.ShouldBe("ABC LIMITED:01234567");
         }
     }

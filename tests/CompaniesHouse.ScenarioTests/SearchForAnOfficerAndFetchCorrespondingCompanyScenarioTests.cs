@@ -23,8 +23,9 @@ namespace CompaniesHouse.ScenarioTests
             var officers = officersSearch.Data.Officers ?? [];
 
             var foundOfficer = officers.Single(x => x.DateOfBirth?.Year == 1950 && x.DateOfBirth?.Month == 7);
+            foundOfficer.OfficerId.ShouldNotBeNullOrWhiteSpace();
 
-            var officerAppointments = await _client.GetAppointmentsAsync(foundOfficer.OfficerId);
+            var officerAppointments = await _client.GetAppointmentsAsync(foundOfficer.OfficerId!);
             var appointments = officerAppointments.Data.Items ?? [];
 
             var companyNumber = appointments

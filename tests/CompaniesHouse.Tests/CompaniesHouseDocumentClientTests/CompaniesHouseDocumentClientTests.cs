@@ -33,7 +33,8 @@ namespace CompaniesHouse.Tests.CompaniesHouseDocumentClientTests
         public async Task ThenDocumentContentIsCorrect()
         {
             using var memoryStream = new MemoryStream();
-            await _result.Data.Content.CopyToAsync(memoryStream);
+            _result.Data.Content.ShouldNotBeNull();
+            await _result.Data.Content!.CopyToAsync(memoryStream);
             memoryStream.Seek(0, SeekOrigin.Begin);
 
             new StreamReader(memoryStream).ReadToEnd().ShouldBe(ExpectedContent);

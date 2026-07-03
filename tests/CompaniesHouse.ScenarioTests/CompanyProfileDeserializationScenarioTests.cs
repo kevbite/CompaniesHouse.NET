@@ -19,8 +19,8 @@ namespace CompaniesHouse.ScenarioTests
             profile.Type.ShouldBe(CompanyType.Plc);
             profile.Jurisdiction.ShouldBe(Jurisdiction.EnglandWales);
             profile.HasSuperSecurePscs.ShouldBe(false);
-            profile.Links.Exemptions.ShouldBe("/company/00445790/exemptions");
-            profile.PreviousCompanyNames.Length.ShouldBe(2);
+            profile.Links?.Exemptions.ShouldBe("/company/00445790/exemptions");
+            profile.PreviousCompanyNames?.Length.ShouldBe(2);
             profile.SicCodes.ShouldBe(["47110"]);
         }
 
@@ -42,7 +42,7 @@ namespace CompaniesHouse.ScenarioTests
             profile.ForeignCompanyDetails.Accounts.AccountPeriodTo!.Month.ShouldBe(12);
             profile.ForeignCompanyDetails.Accounts.MustFileWithin!.Months.ShouldBe("12");
             profile.ForeignCompanyDetails.IsACreditFinancialInstitution.ShouldBe(true);
-            profile.Links.UkEstablishments.ShouldBe("/company/FC040879/uk-establishments");
+            profile.Links?.UkEstablishments.ShouldBe("/company/FC040879/uk-establishments");
         }
 
         [Fact]

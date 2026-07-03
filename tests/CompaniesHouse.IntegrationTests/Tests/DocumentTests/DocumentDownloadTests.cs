@@ -20,8 +20,9 @@ namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
         [IntegrationFact]
         public async Task ThenDocumentContentIsNotEmpty()
         {
+            _result.Data.Content.ShouldNotBeNull();
             using var memoryStream = new MemoryStream();
-            await _result.Data.Content.CopyToAsync(memoryStream);
+            await _result.Data.Content!.CopyToAsync(memoryStream);
 
             _result.Data.ContentLength.ShouldNotBeNull();
             _result.Data.ContentLength.Value.ShouldBe(memoryStream.Length);

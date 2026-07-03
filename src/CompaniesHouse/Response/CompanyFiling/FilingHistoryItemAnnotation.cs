@@ -8,7 +8,7 @@ namespace CompaniesHouse.Response.CompanyFiling
     public class FilingHistoryItemAnnotation : IDescriptable
     {
         [JsonPropertyName("annotation")]
-        public string Annotation { get; set; } = null!;
+        public string? Annotation { get; set; }
 
         [JsonPropertyName("date")]
         public DateTime? DateOfAnnotation { get; set; }

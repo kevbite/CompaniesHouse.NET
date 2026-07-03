@@ -19,11 +19,12 @@ namespace CompaniesHouse.ScenarioTests
             officers.Kind.ShouldBe("officer-list");
             officers.Links?.Self.ShouldBe("/company/00445790/officers");
             officers.TotalResults.ShouldBe(74);
-            officers.Items.Length.ShouldBe(2);
-            officers.Items[1].OfficerRole.ShouldBe(OfficerRole.Director);
-            officers.Items[1].PersonNumber.ShouldBe("248450070003");
-            officers.Items[1].OfficerId.ShouldBe("aqrS_F-2zIvSaMNtl1opqDV4-w0");
-            officers.Items[1].IdentityVerificationDetails?.AppointmentVerificationEndOn.ShouldBe(new DateTime(9999, 12, 31));
+            var items = officers.Items ?? [];
+            items.Length.ShouldBe(2);
+            items[1].OfficerRole.ShouldBe(OfficerRole.Director);
+            items[1].PersonNumber.ShouldBe("248450070003");
+            items[1].OfficerId.ShouldBe("aqrS_F-2zIvSaMNtl1opqDV4-w0");
+            items[1].IdentityVerificationDetails?.AppointmentVerificationEndOn.ShouldBe(new DateTime(9999, 12, 31));
         }
 
         [Fact]
@@ -46,11 +47,12 @@ namespace CompaniesHouse.ScenarioTests
             var officers = JsonSerializer.Deserialize<Officers>(CorporateOfficerListJson, CompaniesHouseJsonSerializerOptions.Default);
 
             officers.ShouldNotBeNull();
-            officers.Items.Length.ShouldBe(1);
-            officers.Items[0].OfficerRole.ShouldBe(OfficerRole.CorporateSecretary);
-            officers.Items[0].Identification.ShouldNotBeNull();
-            officers.Items[0].Identification!.IdentificationType.ShouldBe(IdentificationType.UkLimitedCompany);
-            officers.Items[0].Identification!.RegistrationNumber.ShouldBe("3849195");
+            var items = officers.Items ?? [];
+            items.Length.ShouldBe(1);
+            items[0].OfficerRole.ShouldBe(OfficerRole.CorporateSecretary);
+            items[0].Identification.ShouldNotBeNull();
+            items[0].Identification!.IdentificationType.ShouldBe(IdentificationType.UkLimitedCompany);
+            items[0].Identification!.RegistrationNumber.ShouldBe("3849195");
         }
 
         private const string OfficerListJson = """

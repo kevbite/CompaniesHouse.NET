@@ -27,7 +27,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             });
 
             result.Data.ShouldNotBeNull();
-            result.Data.Items.ShouldNotBeEmpty();
+            (result.Data.Items ?? []).ShouldNotBeEmpty();
         }
 
         [IntegrationFact]
@@ -40,7 +40,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             });
 
             result.Data.ShouldNotBeNull();
-            result.Data.Items.ShouldContain(x => x.CompanySubtype == CompanySubtype.CommunityInterestCompany);
+            (result.Data.Items ?? []).ShouldContain(x => x.CompanySubtype == CompanySubtype.CommunityInterestCompany);
         }
 
         [IntegrationFact]
@@ -55,8 +55,8 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             });
 
             result.Data.ShouldNotBeNull();
-            result.Data.Items.ShouldNotBeEmpty();
-            result.Data.Items.ShouldContain(x => x.SicCodes != null && x.SicCodes.Contains("62012"));
+            (result.Data.Items ?? []).ShouldNotBeEmpty();
+            (result.Data.Items ?? []).ShouldContain(x => x.SicCodes != null && x.SicCodes.Contains("62012"));
         }
     }
 }

@@ -74,14 +74,15 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
             result.Data.ETag.ShouldBe("etag-advanced");
             result.Data.Hits.ShouldBe(1);
             result.Data.Kind.ShouldBe("search#advanced-search");
-            var company = result.Data.Items[0];
+            var items = result.Data.Items ?? [];
+            var company = items[0];
             company.CompanyStatus.ShouldBe(CompanyStatus.Active);
             company.CompanySubtype.ShouldBe(CompanySubtype.CommunityInterestCompany);
             company.CompanyType.ShouldBe(CompanyType.Ltd);
-            company.Links.CompanyProfile.ShouldBe("/company/01234567");
+            company.Links?.CompanyProfile.ShouldBe("/company/01234567");
             company.RegisteredOfficeAddress?.Country.ShouldBe("England");
             company.SicCodes.ShouldBe(new[] { "62012", "62020" });
-            result.Data.TopHit.CompanyNumber.ShouldBe("01234567");
+            result.Data.TopHit?.CompanyNumber.ShouldBe("01234567");
         }
     }
 }

@@ -9,7 +9,7 @@ namespace CompaniesHouse.Response.CompanyProfile
     public class PreviousCompanyName
     {
         [JsonPropertyName("name")]
-        public string Name { get; set; } = null!;
+        public string? Name { get; set; }
 
         [JsonPropertyName("ceased_on")]
         public DateTime CeasedOn { get; set; }

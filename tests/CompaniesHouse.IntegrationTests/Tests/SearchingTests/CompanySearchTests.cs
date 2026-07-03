@@ -24,7 +24,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
         {
             var result = await _client.SearchCompanyAsync(new SearchCompanyRequest { Query = query, StartIndex = 0, ItemsPerPage = 100 });
 
-            result.Data.Companies.ShouldNotBeEmpty();
+            (result.Data.Companies ?? []).ShouldNotBeEmpty();
         }
 
         [IntegrationFact]
@@ -37,7 +37,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
                 ItemsPerPage = 20,
             });
 
-            var company = result.Data.Companies.Single(x => x.CompanyNumber == "FC040879");
+            var company = (result.Data.Companies ?? []).Single(x => x.CompanyNumber == "FC040879");
             result.Data.PageNumber.ShouldBe(1);
             company.AddressSnippet.ShouldBe("Absa Towers West, 15 Troye Street, Johannesburg, Gauteng 2000, South Africa");
             company.ExternalRegistrationNumber.ShouldBe("198600479406");
@@ -55,7 +55,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             });
 
             result.Data.ShouldNotBeNull();
-            result.Data.Companies.ShouldNotBeEmpty();
+            (result.Data.Companies ?? []).ShouldNotBeEmpty();
         }
     }
 }

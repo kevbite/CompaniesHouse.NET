@@ -26,7 +26,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             });
 
             result.Data.ShouldNotBeNull();
-            result.Data.Items.ShouldNotBeEmpty();
+            (result.Data.Items ?? []).ShouldNotBeEmpty();
         }
 
         [IntegrationFact]
@@ -42,12 +42,12 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             {
                 Query = "tesco",
                 Size = 5,
-                SearchAbove = firstPage.Data.Items[^1].OrderedAlphaKeyWithId,
+                SearchAbove = (firstPage.Data.Items ?? [])[^1].OrderedAlphaKeyWithId,
             });
 
             firstPage.Data.Kind.ShouldBe("search#alphabetical-search");
             secondPage.Data.ShouldNotBeNull();
-            secondPage.Data.Items.ShouldNotBeEmpty();
+            (secondPage.Data.Items ?? []).ShouldNotBeEmpty();
         }
     }
 }

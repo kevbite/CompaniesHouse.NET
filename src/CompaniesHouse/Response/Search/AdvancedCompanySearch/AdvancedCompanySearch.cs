@@ -5,18 +5,18 @@ namespace CompaniesHouse.Response.Search.AdvancedCompanySearch
     public class AdvancedCompanySearch
     {
         [JsonPropertyName("etag")]
-        public string ETag { get; set; } = null!;
+        public string? ETag { get; set; }
 
         [JsonPropertyName("hits")]
         public int? Hits { get; set; }
 
         [JsonPropertyName("items")]
-        public Company[] Items { get; set; } = null!;
+        public Company[]? Items { get; set; }
 
         [JsonPropertyName("kind")]
-        public string Kind { get; set; } = null!;
+        public string? Kind { get; set; }
 
         [JsonPropertyName("top_hit")]
-        public Company TopHit { get; set; } = null!;
+        public Company? TopHit { get; set; }
     }
 }

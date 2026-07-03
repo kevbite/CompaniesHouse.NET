@@ -82,7 +82,7 @@ class Program
         }
 
         Console.WriteLine($"Companies matching '{query}':");
-        foreach (var item in data.Items.OfType<Company>())
+        foreach (var item in (data.Items ?? []).OfType<Company>())
         {
             // CompanyStatus is a string-backed value type — it never throws on an
             // unrecognised wire value, so we can always describe it safely.
@@ -90,11 +90,11 @@ class Program
         }
 
         Console.WriteLine($"\nOfficers matching '{query}':");
-        foreach (var item in data.Items.OfType<Officer>())
+        foreach (var item in (data.Items ?? []).OfType<Officer>())
             Console.WriteLine($"  * {item.Title} — {item.Description}");
 
         Console.WriteLine($"\nDisqualified officers matching '{query}':");
-        foreach (var item in data.Items.OfType<DisqualifiedOfficer>())
+        foreach (var item in (data.Items ?? []).OfType<DisqualifiedOfficer>())
             Console.WriteLine($"  * {item.Title}");
     }
 
@@ -153,4 +153,3 @@ class Program
         _                                       => $"unknown status ({status.Value})",
     };
 }
-

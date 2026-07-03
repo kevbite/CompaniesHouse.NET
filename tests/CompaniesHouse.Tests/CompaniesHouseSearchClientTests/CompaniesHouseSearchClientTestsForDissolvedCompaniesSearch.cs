@@ -94,13 +94,14 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
             result.Data.ETag.ShouldBe("etag-1");
             result.Data.Hits.ShouldBe(2);
             result.Data.Kind.ShouldBe("search#dissolved");
-            var company = result.Data.Items[0];
+            var items = result.Data.Items ?? [];
+            var company = items[0];
             company.CompanyStatus.ShouldBe(CompanyStatus.Dissolved);
             company.DateOfCessation.ShouldBe(new DateTime(2023, 01, 20));
             company.MatchedPreviousCompanyName?.Name.ShouldBe("OLD ABC LIMITED");
             company.PreviousCompanyNames?[0].CompanyNumber.ShouldBe("01234567");
             company.RegisteredOfficeAddress?.Locality.ShouldBe("Cardiff");
-            result.Data.TopHit.OrderedAlphaKeyWithId.ShouldBe("ABC DISSOLVED LIMITED:01234567");
+            result.Data.TopHit?.OrderedAlphaKeyWithId.ShouldBe("ABC DISSOLVED LIMITED:01234567");
         }
     }
 }

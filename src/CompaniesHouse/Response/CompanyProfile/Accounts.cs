@@ -7,13 +7,13 @@ namespace CompaniesHouse.Response.CompanyProfile
     public class Accounts
     {
         [JsonPropertyName("accounting_reference_date")]
-        public AccountingReferenceDate AccountingReferenceDate { get; set; } = null!;
+        public AccountingReferenceDate? AccountingReferenceDate { get; set; }
 
         [JsonPropertyName("last_accounts")]
-        public LastAccounts LastAccounts { get; set; } = null!;
+        public LastAccounts? LastAccounts { get; set; }
 
         [JsonPropertyName("next_accounts")]
-        public NextAccounts NextAccounts { get; set; } = null!;
+        public NextAccounts? NextAccounts { get; set; }
 
         [JsonPropertyName("next_due")]
         [JsonConverter(typeof(OptionalDateJsonConverter))]

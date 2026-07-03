@@ -20,7 +20,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
         {
             var result = await _client.SearchDisqualifiedOfficerAsync(new SearchDisqualifiedOfficerRequest { Query = "Kevin" });
 
-            result.Data.DisqualifiedOfficers.ShouldNotBeEmpty();
+            (result.Data.DisqualifiedOfficers ?? []).ShouldNotBeEmpty();
         }
 
         [IntegrationFact]
@@ -29,7 +29,9 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             var result = await _client.SearchDisqualifiedOfficerAsync(new SearchDisqualifiedOfficerRequest { Query = "john", ItemsPerPage = 20 });
 
             result.Data.PageNumber.ShouldBe(1);
-            result.Data.DisqualifiedOfficers[0].DateOfBirth.Year.ShouldBeGreaterThan(1900);
+            var officers = result.Data.DisqualifiedOfficers ?? [];
+            officers.ShouldNotBeEmpty();
+            officers[0].DateOfBirth.Year.ShouldBeGreaterThan(1900);
         }
     }
 }

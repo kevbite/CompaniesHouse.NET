@@ -21,9 +21,10 @@ namespace CompaniesHouse.ScenarioTests
             payload.ShouldNotBeNull();
             payload.PageNumber.ShouldBe(1);
             payload.TotalResults.ShouldBe(10000);
-            payload.Items.Length.ShouldBe(3);
-            payload.Items[0].ShouldBeOfType<CompaniesHouse.Response.Search.CompanySearch.Company>();
-            payload.Items[2].ShouldBeOfType<CompaniesHouse.Response.Search.OfficerSearch.Officer>();
+            var allItems = payload.Items ?? [];
+            allItems.Length.ShouldBe(3);
+            allItems[0].ShouldBeOfType<CompaniesHouse.Response.Search.CompanySearch.Company>();
+            allItems[2].ShouldBeOfType<CompaniesHouse.Response.Search.OfficerSearch.Officer>();
         }
 
         [Fact]
@@ -33,11 +34,12 @@ namespace CompaniesHouse.ScenarioTests
 
             payload.ShouldNotBeNull();
             payload.PageNumber.ShouldBe(1);
-            payload.Companies.Length.ShouldBe(1);
-            payload.Companies[0].AddressSnippet.ShouldBe("Absa Towers West, 15 Troye Street, Johannesburg, Gauteng 2000, South Africa");
-            payload.Companies[0].ExternalRegistrationNumber.ShouldBe("198600479406");
-            payload.Companies[0].DescriptionIdentifier.ShouldBe(["first-uk-establishment-opened-on"]);
-            payload.Companies[0].Matches.Snippet.ShouldBeEmpty();
+            var companies = payload.Companies ?? [];
+            companies.Length.ShouldBe(1);
+            companies[0].AddressSnippet.ShouldBe("Absa Towers West, 15 Troye Street, Johannesburg, Gauteng 2000, South Africa");
+            companies[0].ExternalRegistrationNumber.ShouldBe("198600479406");
+            companies[0].DescriptionIdentifier.ShouldBe(["first-uk-establishment-opened-on"]);
+            companies[0].Matches?.Snippet.ShouldBeEmpty();
         }
 
         [Fact]
@@ -47,11 +49,12 @@ namespace CompaniesHouse.ScenarioTests
 
             payload.ShouldNotBeNull();
             payload.PageNumber.ShouldBe(1);
-            payload.Officers.Length.ShouldBe(3);
-            payload.Officers[0].DateOfBirth.ShouldNotBeNull();
-            payload.Officers[0].DateOfBirth.Month.ShouldBe(3);
-            payload.Officers[0].DateOfBirth.Year.ShouldBe(1947);
-            payload.Officers[2].DateOfBirth.ShouldBeNull();
+            var officers = payload.Officers ?? [];
+            officers.Length.ShouldBe(3);
+            officers[0].DateOfBirth.ShouldNotBeNull();
+            officers[0].DateOfBirth!.Month.ShouldBe(3);
+            officers[0].DateOfBirth!.Year.ShouldBe(1947);
+            officers[2].DateOfBirth.ShouldBeNull();
         }
 
         [Fact]
@@ -60,12 +63,13 @@ namespace CompaniesHouse.ScenarioTests
             var payload = JsonSerializer.Deserialize<AdvancedCompanySearch>(AdvancedCompanySearchJson, CompaniesHouseJsonSerializerOptions.Default);
 
             payload.ShouldNotBeNull();
-            payload.TopHit.CompanySubtype.ShouldBeNull();
-            payload.Items[0].RegisteredOfficeAddress.ShouldNotBeNull();
-            payload.Items[0].RegisteredOfficeAddress?.AddressLine1.ShouldBeNull();
-            payload.Items[0].SicCodes.ShouldBeNull();
-            payload.Items[1].CompanySubtype.ShouldBe(CompanySubtype.CommunityInterestCompany);
-            payload.Items[1].SicCodes.ShouldBe(["86900"]);
+            payload.TopHit?.CompanySubtype.ShouldBeNull();
+            var items = payload.Items ?? [];
+            items[0].RegisteredOfficeAddress.ShouldNotBeNull();
+            items[0].RegisteredOfficeAddress?.AddressLine1.ShouldBeNull();
+            items[0].SicCodes.ShouldBeNull();
+            items[1].CompanySubtype.ShouldBe(CompanySubtype.CommunityInterestCompany);
+            items[1].SicCodes.ShouldBe(["86900"]);
         }
 
         [Fact]
@@ -76,12 +80,12 @@ namespace CompaniesHouse.ScenarioTests
             payload.ShouldNotBeNull();
             payload.Kind.ShouldBe("search#previous-name-dissolved");
             payload.Hits.ShouldBe(932);
-            payload.TopHit.OrderedAlphaKeyWithId.ShouldBeNull();
-            payload.TopHit.MatchedPreviousCompanyName.ShouldNotBeNull();
-            payload.TopHit.MatchedPreviousCompanyName!.Name.ShouldBe("RADIO RENTALS VODAFONE LIMITED");
-            payload.TopHit.RegisteredOfficeAddress.ShouldBeNull();
-            payload.Items.Single().PreviousCompanyNames.ShouldNotBeNull();
-            payload.Items.Single().PreviousCompanyNames?.Length.ShouldBe(3);
+            payload.TopHit?.OrderedAlphaKeyWithId.ShouldBeNull();
+            payload.TopHit?.MatchedPreviousCompanyName.ShouldNotBeNull();
+            payload.TopHit?.MatchedPreviousCompanyName?.Name.ShouldBe("RADIO RENTALS VODAFONE LIMITED");
+            payload.TopHit?.RegisteredOfficeAddress.ShouldBeNull();
+            (payload.Items ?? []).Single().PreviousCompanyNames.ShouldNotBeNull();
+            (payload.Items ?? []).Single().PreviousCompanyNames?.Length.ShouldBe(3);
         }
 
         private const string SearchAllJson = """

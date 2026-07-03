@@ -5,12 +5,12 @@ namespace CompaniesHouse.Response.Search.CompaniesAlphabeticallySearch
     public class CompaniesAlphabeticallySearch
     {
         [JsonPropertyName("items")]
-        public Company[] Items { get; set; } = null!;
+        public Company[]? Items { get; set; }
 
         [JsonPropertyName("kind")]
-        public string Kind { get; set; } = null!;
+        public string? Kind { get; set; }
 
         [JsonPropertyName("top_hit")]
-        public Company TopHit { get; set; } = null!;
+        public Company? TopHit { get; set; }
     }
 }

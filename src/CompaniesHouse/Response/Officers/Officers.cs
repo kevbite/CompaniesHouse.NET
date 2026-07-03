@@ -14,7 +14,7 @@ namespace CompaniesHouse.Response.Officers
         public int? InactiveCount { get; set; }
 
         [JsonPropertyName("items")]
-        public Officer[] Items { get; set; } = null!;
+        public Officer[]? Items { get; set; }
 
         [JsonPropertyName("items_per_page")]
         public int? ItemsPerPage { get; set; }

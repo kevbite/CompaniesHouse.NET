@@ -59,9 +59,10 @@ namespace CompaniesHouse.Tests.CompaniesHouseOfficersTests
             result.Data.InactiveCount.ShouldBe(0);
             result.Data.Links?.Self.ShouldBe("/company/00445790/officers");
             result.Data.TotalResults.ShouldBe(74);
-            result.Data.Items.Length.ShouldBe(2);
+            var items = result.Data.Items ?? [];
+            items.Length.ShouldBe(2);
 
-            var officer = result.Data.Items[1];
+            var officer = items[1];
             officer.ETag.ShouldBe("5ad20f5a7c2d801107af20d5f413ab70bc0a3175");
             officer.PersonNumber.ShouldBe("248450070003");
             officer.IsPre1992Appointment.ShouldBe(false);
@@ -92,12 +93,13 @@ namespace CompaniesHouse.Tests.CompaniesHouseOfficersTests
             var result = await client.GetOfficersAsync("03610056", 0, 1);
 
             result.Data.ShouldNotBeNull();
-            result.Data.Items.Length.ShouldBe(1);
-            result.Data.Items[0].Identification.ShouldNotBeNull();
-            result.Data.Items[0].OfficerRole.ShouldBe(OfficerRole.CorporateSecretary);
-            result.Data.Items[0].Identification!.IdentificationType.ShouldBe(IdentificationType.UkLimitedCompany);
-            result.Data.Items[0].Identification!.RegistrationNumber.ShouldBe("3849195");
-            result.Data.Items[0].OfficerId.ShouldBe("YwIOmduyS6PW5axJgQQrsTGyRD0");
+            var items = result.Data.Items ?? [];
+            items.Length.ShouldBe(1);
+            items[0].Identification.ShouldNotBeNull();
+            items[0].OfficerRole.ShouldBe(OfficerRole.CorporateSecretary);
+            items[0].Identification!.IdentificationType.ShouldBe(IdentificationType.UkLimitedCompany);
+            items[0].Identification!.RegistrationNumber.ShouldBe("3849195");
+            items[0].OfficerId.ShouldBe("YwIOmduyS6PW5axJgQQrsTGyRD0");
         }
 
         private const string RealOfficerListJson = """

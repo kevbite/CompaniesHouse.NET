@@ -25,7 +25,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
         {
             var result = await _client.SearchAllAsync(new SearchAllRequest { Query = query });
 
-            result.Data.Items.ShouldNotBeEmpty();
+            (result.Data.Items ?? []).ShouldNotBeEmpty();
         }
 
         [IntegrationFact]
@@ -34,8 +34,8 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
             var result = await _client.SearchAllAsync(new SearchAllRequest { Query = "john", ItemsPerPage = 20 });
 
             result.Data.PageNumber.ShouldBe(1);
-            result.Data.Items.ShouldContain(x => x is Company);
-            result.Data.Items.ShouldContain(x => x is Officer);
+            (result.Data.Items ?? []).ShouldContain(x => x is Company);
+            (result.Data.Items ?? []).ShouldContain(x => x is Officer);
         }
 
         [IntegrationFact]
@@ -43,7 +43,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
         {
             var result = await _client.SearchAllAsync(new SearchAllRequest { Query = "absa uk permanent establishment", ItemsPerPage = 20 });
 
-            var company = result.Data.Items.OfType<Company>().Single(x => x.CompanyNumber == "FC040879");
+            var company = (result.Data.Items ?? []).OfType<Company>().Single(x => x.CompanyNumber == "FC040879");
             company.CompanyNumber.ShouldBe("FC040879");
             company.AddressSnippet.ShouldBe("Absa Towers West, 15 Troye Street, Johannesburg, Gauteng 2000, South Africa");
             company.ExternalRegistrationNumber.ShouldBe("198600479406");

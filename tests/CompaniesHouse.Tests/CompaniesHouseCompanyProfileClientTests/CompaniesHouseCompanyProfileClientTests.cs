@@ -67,7 +67,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyProfileClientTests
             _result.Data.Type.ShouldBe(CompanyType.Plc);
             _result.Data.Jurisdiction.ShouldBe(Jurisdiction.EnglandWales);
             _result.Data.HasSuperSecurePscs.ShouldBe(false);
-            _result.Data.Links.Exemptions.ShouldBe("/company/00445790/exemptions");
+            _result.Data.Links?.Exemptions.ShouldBe("/company/00445790/exemptions");
         }
 
         [Fact]

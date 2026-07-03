@@ -9,12 +9,12 @@ namespace CompaniesHouse.Response.Search.DissolvedCompaniesSearch
         public DateTime? CeasedOn { get; set; }
 
         [JsonPropertyName("company_number")]
-        public string CompanyNumber { get; set; } = null!;
+        public string? CompanyNumber { get; set; }
 
         [JsonPropertyName("effective_from")]
         public DateTime? EffectiveFrom { get; set; }
 
         [JsonPropertyName("name")]
-        public string Name { get; set; } = null!;
+        public string? Name { get; set; }
     }
 }

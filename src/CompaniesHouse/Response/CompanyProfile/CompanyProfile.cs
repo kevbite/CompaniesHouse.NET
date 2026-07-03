@@ -10,25 +10,25 @@ namespace CompaniesHouse.Response.CompanyProfile
         public CompanyType Type { get; set; }
 
         [JsonPropertyName("etag")]
-        public string ETag { get; set; } = null!;
+        public string? ETag { get; set; }
 
         [JsonPropertyName("accounts")]
-        public Accounts Accounts { get; set; } = null!;
+        public Accounts? Accounts { get; set; }
 
         [JsonPropertyName("annual_return")]
-        public AnnualReturn AnnualReturn { get; set; } = null!;
+        public AnnualReturn? AnnualReturn { get; set; }
 
         [JsonPropertyName("confirmation_statement")]
-        public ConfirmationStatement ConfirmationStatement { get; set; } = null!;
+        public ConfirmationStatement? ConfirmationStatement { get; set; }
 
         [JsonPropertyName("can_file")]
         public bool? CanFile { get; set; }
 
         [JsonPropertyName("company_name")]
-        public string CompanyName { get; set; } = null!;
+        public string? CompanyName { get; set; }
 
         [JsonPropertyName("company_number")]
-        public string CompanyNumber { get; set; } = null!;
+        public string? CompanyNumber { get; set; }
 
         [JsonPropertyName("company_status")]
         public CompanyStatus CompanyStatus { get; set; }
@@ -75,24 +75,24 @@ namespace CompaniesHouse.Response.CompanyProfile
         public DateTime? LastFullMembersListDate { get; set; }
 
         [JsonPropertyName("links")]
-        public CompanyProfileLinks Links { get; set; } = null!;
+        public CompanyProfileLinks? Links { get; set; }
 
         [JsonPropertyName("previous_company_names")]
-        public PreviousCompanyName[] PreviousCompanyNames { get; set; } = null!;
+        public PreviousCompanyName[]? PreviousCompanyNames { get; set; }
 
         [JsonPropertyName("registered_office_address")]
-        public Address RegisteredOfficeAddress { get; set; } = null!;
+        public Address? RegisteredOfficeAddress { get; set; }
 
         [JsonPropertyName("registered_office_is_in_dispute")]
         public bool? RegisteredOfficeIsInDispute { get; set; }
 
         [JsonPropertyName("sic_codes")]
-        public string[] SicCodes { get; set; } = null!;
+        public string[]? SicCodes { get; set; }
 
         [JsonPropertyName("undeliverable_registered_office_address")]
         public bool? UndeliverableRegisteredOfficeAddress { get; set; }
 
         [JsonPropertyName("branch_company_details")]
-        public BranchCompanyDetails BranchCompanyDetails { get; set; } = null!;
+        public BranchCompanyDetails? BranchCompanyDetails { get; set; }
     }
 }

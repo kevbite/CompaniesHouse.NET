@@ -34,7 +34,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyProfileTests
             result.Data.CompanyStatus.ShouldBe(CompanyStatus.Active);
             result.Data.Type.ShouldBe(CompanyType.Plc);
             result.Data.Links.ShouldNotBeNull();
-            result.Data.Links.Exemptions.ShouldNotBeNullOrWhiteSpace();
+            result.Data.Links?.Exemptions.ShouldNotBeNullOrWhiteSpace();
             result.Data.HasSuperSecurePscs.ShouldBe(false);
         }
 
@@ -53,7 +53,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyProfileTests
             result.Data.ForeignCompanyDetails.AccountingRequirement.TermsOfAccountPublication.ShouldBe(
                 TermsOfAccountPublication.AccountsPublicationDateSuppliedByCompany);
             result.Data.ForeignCompanyDetails.IsACreditFinancialInstitution.ShouldBe(true);
-            result.Data.Links.UkEstablishments.ShouldNotBeNullOrWhiteSpace();
+            result.Data.Links?.UkEstablishments.ShouldNotBeNullOrWhiteSpace();
         }
 
         [IntegrationFact]

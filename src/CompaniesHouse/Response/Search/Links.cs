@@ -5,6 +5,6 @@ namespace CompaniesHouse.Response.Search
     public class Links
     {
         [JsonPropertyName("self")]
-        public string Self { get; set; } = null!;
+        public string? Self { get; set; }
     }
 }

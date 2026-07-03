@@ -81,19 +81,20 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
         [Fact]
         public void ThenTheCompanyWithUnknownDateOfCessationIsReturned()
         {
+            var companies = _result.Data.Companies ?? [];
             var actual =
-                _result.Data.Companies.First(x => x.CompanyNumber == _companyWithUnknownDateOfCessation.CompanyNumber);
+                companies.First(x => x.CompanyNumber == _companyWithUnknownDateOfCessation.CompanyNumber);
 
             actual.CompanyNumber.ShouldBe(_companyWithUnknownDateOfCessation.CompanyNumber);
 
-            actual.Address.AddressLine1.ShouldBe(_companyWithUnknownDateOfCessation.AddressLine1);
-            actual.Address.AddressLine2.ShouldBe(_companyWithUnknownDateOfCessation.AddressLine2);
-            actual.Address.CareOf.ShouldBe(_companyWithUnknownDateOfCessation.CareOf);
-            actual.Address.Country.ShouldBe(_companyWithUnknownDateOfCessation.Country);
-            actual.Address.Locality.ShouldBe(_companyWithUnknownDateOfCessation.Locality);
-            actual.Address.PoBox.ShouldBe(_companyWithUnknownDateOfCessation.PoBox);
-            actual.Address.PostalCode.ShouldBe(_companyWithUnknownDateOfCessation.PostalCode);
-            actual.Address.Region.ShouldBe(_companyWithUnknownDateOfCessation.Region);
+            actual.Address?.AddressLine1.ShouldBe(_companyWithUnknownDateOfCessation.AddressLine1);
+            actual.Address?.AddressLine2.ShouldBe(_companyWithUnknownDateOfCessation.AddressLine2);
+            actual.Address?.CareOf.ShouldBe(_companyWithUnknownDateOfCessation.CareOf);
+            actual.Address?.Country.ShouldBe(_companyWithUnknownDateOfCessation.Country);
+            actual.Address?.Locality.ShouldBe(_companyWithUnknownDateOfCessation.Locality);
+            actual.Address?.PoBox.ShouldBe(_companyWithUnknownDateOfCessation.PoBox);
+            actual.Address?.PostalCode.ShouldBe(_companyWithUnknownDateOfCessation.PostalCode);
+            actual.Address?.Region.ShouldBe(_companyWithUnknownDateOfCessation.Region);
             actual.AddressSnippet.ShouldBe(_companyWithUnknownDateOfCessation.AddressSnippet);
 
             actual.CompanyStatus.ShouldBe(ExpectedCompanyStatus[_companyWithUnknownDateOfCessation.CompanyStatus]);
@@ -104,9 +105,9 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
             actual.DescriptionIdentifier.ShouldBe(["incorporated-on"]);
             actual.ExternalRegistrationNumber.ShouldBe(_companyWithUnknownDateOfCessation.ExternalRegistrationNumber);
             actual.Kind.ShouldBe(_companyWithUnknownDateOfCessation.Kind);
-            actual.Links.Self.ShouldBe(_companyWithUnknownDateOfCessation.LinksSelf);
-            actual.Matches.Snippet.ShouldBe(_companyWithUnknownDateOfCessation.MatchesSnippet);
-            actual.Matches.Title.ShouldBe(_companyWithUnknownDateOfCessation.MatchesTitle);
+            actual.Links?.Self.ShouldBe(_companyWithUnknownDateOfCessation.LinksSelf);
+            actual.Matches?.Snippet.ShouldBe(_companyWithUnknownDateOfCessation.MatchesSnippet);
+            actual.Matches?.Title.ShouldBe(_companyWithUnknownDateOfCessation.MatchesTitle);
             actual.Snippet.ShouldBe(_companyWithUnknownDateOfCessation.Snippet);
             actual.Title.ShouldBe(_companyWithUnknownDateOfCessation.Title);
         }
@@ -114,26 +115,27 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
         [Fact]
         public void ThenTheNumberOfReturnedCompaniesIsCorrect()
         {
-            _result.Data.Companies.Length.ShouldBe(13);
+            (_result.Data.Companies ?? []).Length.ShouldBe(13);
         }
 
         [Fact]
         public void ThenTheCompaniesAreCorrect()
         {
+            var companies = _result.Data.Companies ?? [];
             foreach (var companyDetails in _expectedCompanies)
             {
-                var actual = _result.Data.Companies.First(x => x.CompanyNumber == companyDetails.CompanyNumber);
+                var actual = companies.First(x => x.CompanyNumber == companyDetails.CompanyNumber);
 
                 actual.CompanyNumber.ShouldBe(companyDetails.CompanyNumber);
 
-                actual.Address.AddressLine1.ShouldBe(companyDetails.AddressLine1);
-                actual.Address.AddressLine2.ShouldBe(companyDetails.AddressLine2);
-                actual.Address.CareOf.ShouldBe(companyDetails.CareOf);
-                actual.Address.Country.ShouldBe(companyDetails.Country);
-                actual.Address.Locality.ShouldBe(companyDetails.Locality);
-                actual.Address.PoBox.ShouldBe(companyDetails.PoBox);
-                actual.Address.PostalCode.ShouldBe(companyDetails.PostalCode);
-                actual.Address.Region.ShouldBe(companyDetails.Region);
+                actual.Address?.AddressLine1.ShouldBe(companyDetails.AddressLine1);
+                actual.Address?.AddressLine2.ShouldBe(companyDetails.AddressLine2);
+                actual.Address?.CareOf.ShouldBe(companyDetails.CareOf);
+                actual.Address?.Country.ShouldBe(companyDetails.Country);
+                actual.Address?.Locality.ShouldBe(companyDetails.Locality);
+                actual.Address?.PoBox.ShouldBe(companyDetails.PoBox);
+                actual.Address?.PostalCode.ShouldBe(companyDetails.PostalCode);
+                actual.Address?.Region.ShouldBe(companyDetails.Region);
                 actual.AddressSnippet.ShouldBe(companyDetails.AddressSnippet);
 
                 actual.CompanyStatus.ShouldBe(ExpectedCompanyStatus[companyDetails.CompanyStatus ?? ""]);
@@ -144,9 +146,9 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
                 actual.DescriptionIdentifier.ShouldBe(["incorporated-on"]);
                 actual.ExternalRegistrationNumber.ShouldBe(companyDetails.ExternalRegistrationNumber);
                 actual.Kind.ShouldBe(companyDetails.Kind);
-                actual.Links.Self.ShouldBe(companyDetails.LinksSelf);
-                actual.Matches.Snippet.ShouldBe(companyDetails.MatchesSnippet);
-                actual.Matches.Title.ShouldBe(companyDetails.MatchesTitle);
+                actual.Links?.Self.ShouldBe(companyDetails.LinksSelf);
+                actual.Matches?.Snippet.ShouldBe(companyDetails.MatchesSnippet);
+                actual.Matches?.Title.ShouldBe(companyDetails.MatchesTitle);
                 actual.Snippet.ShouldBe(companyDetails.Snippet);
                 actual.Title.ShouldBe(companyDetails.Title);
             }

@@ -2,14 +2,14 @@ namespace CompaniesHouse.Response.Search.AllSearch
 {
     public class Item
     {
-        public Address address { get; set; } = null!;
-        public string address_snippet { get; set; } = null!;
-        public string description { get; set; } = null!;
-        public string[] description_identifier { get; set; } = null!;
-        public string kind { get; set; } = null!;
-        public Links links { get; set; } = null!;
-        public Matches matches { get; set; } = null!;
-        public string snippet { get; set; } = null!;
-        public string title { get; set; } = null!;
+        public Address? address { get; set; }
+        public string? address_snippet { get; set; }
+        public string? description { get; set; }
+        public string[]? description_identifier { get; set; }
+        public string? kind { get; set; }
+        public Links? links { get; set; }
+        public Matches? matches { get; set; }
+        public string? snippet { get; set; }
+        public string? title { get; set; }
     }
 }
