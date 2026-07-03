@@ -137,5 +137,18 @@ regression when working offline.
 - Enum design rationale: <https://kevsoft.net/2026/06/28/enums-in-api-contracts.html>
 - Issue tracker: <https://github.com/kevbite/CompaniesHouse.NET/issues>
 
+## Release process
+
+On push to `master` or `prerelease`, the CI workflow automatically:
+1. Builds and packs both NuGet packages.
+2. Validates package metadata (README presence, nuspec readme tag).
+3. Pushes packages to NuGet.org.
+4. **Creates a GitHub release** with:
+   - Direct links to each package on NuGet.org (`nuget.org/packages/{PackageId}/{Version}`)
+   - Copy-paste `dotnet add package` commands for both packages
+   - Downloadable `.nupkg` and `.snupkg` files as release assets
+
+**Maintainers:** you do not need to manually write release notes or link to NuGet. The workflow handles it automatically.
+
 ## Commits
 Commit in small amounts with a summary of what work we're building and not include the co-authorized by, however, do not push! Don't commit the .plans folder or the AGENTS.md
