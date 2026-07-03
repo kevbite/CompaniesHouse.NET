@@ -8,10 +8,10 @@ namespace CompaniesHouse.Response.Search.DissolvedCompaniesSearch
     public class Company
     {
         [JsonPropertyName("company_name")]
-        public string CompanyName { get; set; }
+        public string CompanyName { get; set; } = null!;
 
         [JsonPropertyName("company_number")]
-        public string CompanyNumber { get; set; }
+        public string CompanyNumber { get; set; } = null!;
 
         [JsonPropertyName("company_status")]
         public CompanyStatus CompanyStatus { get; set; }
@@ -24,7 +24,7 @@ namespace CompaniesHouse.Response.Search.DissolvedCompaniesSearch
         public DateTime? DateOfCreation { get; set; }
 
         [JsonPropertyName("kind")]
-        public string Kind { get; set; }
+        public string Kind { get; set; } = null!;
 
         [JsonPropertyName("matched_previous_company_name")]
         public PreviousCompanyName? MatchedPreviousCompanyName { get; set; }

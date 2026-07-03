@@ -8,9 +8,9 @@ namespace CompaniesHouse.Response.Search
     public abstract class SearchItem
     {
         [JsonPropertyName("kind")]
-        public string Kind { get; set; }
+        public string Kind { get; set; } = null!;
 
         [JsonPropertyName("links")]
-        public Links Links { get; set; }
+        public Links Links { get; set; } = null!;
     }
 }

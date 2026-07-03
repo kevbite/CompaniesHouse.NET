@@ -12,7 +12,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseDocumentClientTests
 {
     public class CompaniesHouseDocumentClientTests : IAsyncLifetime
     {
-        private CompaniesHouseResponse<DocumentDownload> _result;
+        private CompaniesHouseResponse<DocumentDownload> _result = null!;
         private const string ExpectedMediaType = "application/pdf";
         private const string ExpectedContent = "test pdf";
         private const string DocumentId = "wibble";

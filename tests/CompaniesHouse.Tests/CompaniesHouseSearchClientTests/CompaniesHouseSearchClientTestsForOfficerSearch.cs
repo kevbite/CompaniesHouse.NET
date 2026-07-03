@@ -15,9 +15,9 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
 {
     public class CompaniesHouseSearchClientTestsForOfficerSearch : IAsyncLifetime
     {
-        private CompaniesHouseSearchClient _client;
-        private CompaniesHouseResponse<OfficerSearch> _result;
-        private ResourceDetails _resourceDetails;
+        private CompaniesHouseSearchClient _client = null!;
+        private CompaniesHouseResponse<OfficerSearch> _result = null!;
+        private ResourceDetails _resourceDetails = null!;
         
         public async Task InitializeAsync()
         {

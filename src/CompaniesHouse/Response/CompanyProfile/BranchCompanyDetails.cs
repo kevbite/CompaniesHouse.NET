@@ -5,10 +5,10 @@ namespace CompaniesHouse.Response.CompanyProfile
     public class BranchCompanyDetails
     {
         [JsonPropertyName("business_activity")]
-        public string BusinessActivity { get; set; }
+        public string BusinessActivity { get; set; } = null!;
         [JsonPropertyName("parent_company_name")]
-        public string ParentCompanyName { get; set; }
+        public string ParentCompanyName { get; set; } = null!;
         [JsonPropertyName("parent_company_number")]
-        public string ParentCompanyNumber { get; set; }
+        public string ParentCompanyNumber { get; set; } = null!;
     }
 }

@@ -46,8 +46,8 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyInsolvencyInformationClientT
             result.Data.Status.ShouldBe([new InsolvencyStatus("in-administration"), new InsolvencyStatus("administrative-receiver")]);
             result.Data.Cases.ShouldNotBeNull();
             result.Data.Cases[0].Type.ShouldBe(InsolvencyCaseType.InAdministration);
-            result.Data.Cases[0].Dates.ShouldContain(x => x.Type == new CaseDateType("administration-started-on"));
-            result.Data.Cases[0].Practitioners.ShouldContain(x => x.Name == "Charles William Anthony Escott" && x.CeasedToActOn == new DateTime(2012, 06, 01));
+            (result.Data.Cases[0].Dates ?? []).ShouldContain(x => x.Type == new CaseDateType("administration-started-on"));
+            (result.Data.Cases[0].Practitioners ?? []).ShouldContain(x => x.Name == "Charles William Anthony Escott" && x.CeasedToActOn == new DateTime(2012, 06, 01));
         }
     }
 }

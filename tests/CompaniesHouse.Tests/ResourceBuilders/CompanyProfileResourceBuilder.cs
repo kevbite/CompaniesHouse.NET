@@ -32,7 +32,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
          ""due_on"" : ""{_companyProfile.Accounts.NextAccounts.DueOn:yyyy-MM-dd}"",
          ""period_end_on"" : ""{_companyProfile.Accounts.NextAccounts.PeriodEndOn:yyyy-MM-dd}"",
          ""period_start_on"" : ""{_companyProfile.Accounts.NextAccounts.PeriodStartOn:yyyy-MM-dd}"",
-         ""overdue"" : ""{_companyProfile.Accounts.NextAccounts.Overdue.ToString().ToLower()}""
+         ""overdue"" : ""{(_companyProfile.Accounts.NextAccounts?.Overdue ?? false).ToString().ToLower()}""
       }},
       ""next_due"" : ""{_companyProfile.Accounts.NextDue.ToString("yyyy-MM-dd")}"",
       ""next_made_up_to"" : ""{_companyProfile.Accounts.NextMadeUpTo.ToString("yyyy-MM-dd")}"",
@@ -58,7 +58,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
       ""last_made_up_to"" : ""{_companyProfile.ConfirmationStatement.LastMadeUpTo:yyyy-MM-dd}"",
       ""next_due"" : ""{_companyProfile.ConfirmationStatement.NextDue:yyyy-MM-dd}"",
       ""next_made_up_to"" : ""{_companyProfile.ConfirmationStatement.NextMadeUpTo:yyyy-MM-dd}"",
-      ""overdue"" : ""{_companyProfile.ConfirmationStatement.Overdue.ToString().ToLower()}""
+      ""overdue"" : ""{(_companyProfile.ConfirmationStatement?.Overdue ?? false).ToString().ToLower()}""
    }},
    ""date_of_creation"" : ""{_companyProfile.DateOfCreation.ToString("yyyy-MM-dd")}"",
    ""date_of_cessation"" : ""{_companyProfile.DateOfCessation.ToString("yyyy-MM-dd")}"",

@@ -29,11 +29,13 @@ namespace CompaniesHouse.IntegrationTests.Tests.ChargesTests
         public async Task ThenKnownChargeListIncludesObservedGeneratedValues()
         {
             var result = await _client.GetChargesListAsync("03977902");
+            var items = result.Data.Items ?? [];
 
             result.Data.UnfilteredCount.ShouldNotBeNull();
             result.Data.UnfilteredCount.Value.ShouldBeGreaterThan(0);
-            result.Data.Items[0].Status.Value.ShouldNotBeNullOrWhiteSpace();
-            result.Data.Items[0].Links?.Self.ShouldNotBeNullOrWhiteSpace();
+            items.ShouldNotBeEmpty();
+            items[0].Status.Value.ShouldNotBeNullOrWhiteSpace();
+            items[0].Links?.Self.ShouldNotBeNullOrWhiteSpace();
         }
     }
 }

@@ -10,10 +10,10 @@ namespace CompaniesHouse.Tests.ResourceBuilders
 
         public bool? ContainsNegativePledge { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
 
         public bool? FloatingChargeCoversAll { get; set; }
 
-        public string Type { get; set; }
+        public string Type { get; set; } = null!;
     }
 }

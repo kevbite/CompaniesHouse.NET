@@ -6,7 +6,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
     {
         public DateTime CeasedOn { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         public DateTime EffectiveFrom { get; set; }
     }

@@ -1,20 +1,20 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace CompaniesHouse.Tests.CompaniesHouseDocumentMetadataClientTests
 {
     public class DocumentMetadataTestCase
     {
-        public string CompanyNumber { get; set; }
-        public string Barcode { get; set; }
+        public string CompanyNumber { get; set; } = null!;
+        public string Barcode { get; set; } = null!;
         public DateTime SignificantDate { get; set; }
-        public string SignificantDateType { get; set; }
-        public string Category { get; set; }
+        public string SignificantDateType { get; set; } = null!;
+        public string Category { get; set; } = null!;
         public int Pages { get; set; }
         public DateTime CreatedAt { get; set; }
-        public string Etag { get; set; }
-        public Dictionary<string, ResourceContentLength> Resources { get; set; }
-        public Links Links { get; set; }
+        public string Etag { get; set; } = null!;
+        public Dictionary<string, ResourceContentLength> Resources { get; set; } = null!;
+        public Links Links { get; set; } = null!;
     }
 
     public class ResourceContentLength
@@ -24,7 +24,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseDocumentMetadataClientTests
 
     public class Links
     {
-        public string Self { get; set; }
-        public string Document { get; set; }
+        public string Self { get; set; } = null!;
+        public string Document { get; set; } = null!;
     }
 }

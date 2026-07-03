@@ -32,7 +32,7 @@ namespace CompaniesHouse
                     {
                         Content = await response.Content.ReadAsStreamAsync(cancellationToken),
                         ContentLength = response.Content.Headers.ContentLength,
-                        ContentType = response.Content.Headers.ContentType?.MediaType
+                        ContentType = response.Content.Headers.ContentType?.MediaType ?? string.Empty
                     },
                     statusCode,
                     reasonPhrase,

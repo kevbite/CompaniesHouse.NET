@@ -11,9 +11,9 @@ namespace CompaniesHouse.Tests.DelegatingHandlers
 {
     public class CompaniesHouseAuthorizationHandlerTests
     {
-        private CompaniesHouseAuthorizationHandler _handler;
-        private string _apiKey;
-        private HttpRequestMessage _actual;
+        private CompaniesHouseAuthorizationHandler _handler = null!;
+        private string _apiKey = null!;
+        private HttpRequestMessage _actual = null!;
 
         public CompaniesHouseAuthorizationHandlerTests()
         {
@@ -35,6 +35,7 @@ namespace CompaniesHouse.Tests.DelegatingHandlers
         [Fact]
         public void ThenAuthorizationHeaderIsCorrect()
         {
+            _actual.Headers.Authorization.ShouldNotBeNull();
             _actual.Headers.Authorization.Scheme.ShouldBe("Basic");
             _actual.Headers.Authorization.Parameter.ShouldBe("NDJjODE1NGUtOTgyZC00YTYyLTkxM2QtODlhYWZiMzIwZGJj");
         }

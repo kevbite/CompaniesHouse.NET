@@ -7,13 +7,13 @@ namespace CompaniesHouse.Response.Search.CompanySearch
     public class Company : SearchItem
     {
         [JsonPropertyName("address")]
-        public Address Address { get; set; }
+        public Address Address { get; set; } = null!;
 
         [JsonPropertyName("address_snippet")]
         public string? AddressSnippet { get; set; }
 
         [JsonPropertyName("company_number")]
-        public string CompanyNumber { get; set; }
+        public string CompanyNumber { get; set; } = null!;
 
         [JsonPropertyName("company_status")]
         public CompanyStatus CompanyStatus { get; set; }
@@ -29,21 +29,21 @@ namespace CompaniesHouse.Response.Search.CompanySearch
         public DateTime? DateOfCreation { get; set; }
 
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
 
         [JsonPropertyName("description_identifier")]
-        public string[] DescriptionIdentifier { get; set; }
+        public string[] DescriptionIdentifier { get; set; } = null!;
 
         [JsonPropertyName("external_registration_number")]
         public string? ExternalRegistrationNumber { get; set; }
 
         [JsonPropertyName("matches")]
-        public Matches Matches { get; set; }
+        public Matches Matches { get; set; } = null!;
 
         [JsonPropertyName("snippet")]
-        public string Snippet { get; set; }
+        public string Snippet { get; set; } = null!;
 
         [JsonPropertyName("title")]
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
     }
 }

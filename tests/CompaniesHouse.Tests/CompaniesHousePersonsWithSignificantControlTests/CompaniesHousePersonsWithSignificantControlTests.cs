@@ -13,10 +13,10 @@ namespace CompaniesHouse.Tests.CompaniesHousePersonsWithSignificantControlTests
 {
     public class CompaniesHousePersonsWithSignificantControlTests
     {
-        private CompaniesHousePersonsWithSignificantControlClient _client;
+        private CompaniesHousePersonsWithSignificantControlClient _client = null!;
 
-        private CompaniesHouseResponse<PersonsWithSignificantControl> _result;
-        private ResourceBuilders.PersonsWithSignificantControl _personsWithSignificantControl;
+        private CompaniesHouseResponse<PersonsWithSignificantControl> _result = null!;
+        private ResourceBuilders.PersonsWithSignificantControl _personsWithSignificantControl = null!;
 
         [Fact]
         public async Task GivenACompaniesHouseCompanyProfileClient_WhenGettingPersonsWithSignificantControl()
@@ -79,7 +79,7 @@ namespace CompaniesHouse.Tests.CompaniesHousePersonsWithSignificantControlTests
             result.Data.Items.ShouldNotBeNull();
             result.Data.Items[0].Kind.ShouldBe(new PersonWithSignificantControlKind("corporate-entity-person-with-significant-control"));
             result.Data.Items[0].Identification?.RegistrationNumber.ShouldBe("5786925");
-            result.Data.Items[0].NaturesOfControl.ShouldContain(new PersonWithSignificantControlNatureOfControl("right-to-appoint-and-remove-directors"));
+            (result.Data.Items[0].NaturesOfControl ?? []).ShouldContain(new PersonWithSignificantControlNatureOfControl("right-to-appoint-and-remove-directors"));
         }
     }
 }

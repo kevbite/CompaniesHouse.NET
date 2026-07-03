@@ -6,11 +6,11 @@ namespace CompaniesHouse.Tests.ResourceBuilders
     {
         public DateTime NextDue { get; set; }
 
-        public AccountingReferenceDate AccountingReferenceDate { get; set; }
+        public AccountingReferenceDate AccountingReferenceDate { get; set; } = null!;
 
-        public LastAccounts LastAccounts { get; set; }
+        public LastAccounts LastAccounts { get; set; } = null!;
 
-        public NextAccounts NextAccounts { get; set; }
+        public NextAccounts NextAccounts { get; set; } = null!;
 
         public DateTime NextMadeUpTo { get; set; }
 

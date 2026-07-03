@@ -1,4 +1,4 @@
-﻿namespace CompaniesHouse.Tests.ResourceBuilders.OfficerSearchResource
+namespace CompaniesHouse.Tests.ResourceBuilders.OfficerSearchResource
 {
     public class ResourceDetails
     {
@@ -10,8 +10,8 @@
 
         public int TotalResults { get; set; }
 
-        public string Kind { get; set; }
+        public string Kind { get; set; } = null!;
 
-        public Item[] Officers { get; set; }
+        public Item[] Officers { get; set; } = null!;
     }
 }

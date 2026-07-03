@@ -62,7 +62,7 @@ namespace CompaniesHouse.ScenarioTests
             payload.ShouldNotBeNull();
             payload.TopHit.CompanySubtype.ShouldBeNull();
             payload.Items[0].RegisteredOfficeAddress.ShouldNotBeNull();
-            payload.Items[0].RegisteredOfficeAddress.AddressLine1.ShouldBeNull();
+            payload.Items[0].RegisteredOfficeAddress?.AddressLine1.ShouldBeNull();
             payload.Items[0].SicCodes.ShouldBeNull();
             payload.Items[1].CompanySubtype.ShouldBe(CompanySubtype.CommunityInterestCompany);
             payload.Items[1].SicCodes.ShouldBe(["86900"]);
@@ -78,10 +78,10 @@ namespace CompaniesHouse.ScenarioTests
             payload.Hits.ShouldBe(932);
             payload.TopHit.OrderedAlphaKeyWithId.ShouldBeNull();
             payload.TopHit.MatchedPreviousCompanyName.ShouldNotBeNull();
-            payload.TopHit.MatchedPreviousCompanyName.Name.ShouldBe("RADIO RENTALS VODAFONE LIMITED");
+            payload.TopHit.MatchedPreviousCompanyName!.Name.ShouldBe("RADIO RENTALS VODAFONE LIMITED");
             payload.TopHit.RegisteredOfficeAddress.ShouldBeNull();
             payload.Items.Single().PreviousCompanyNames.ShouldNotBeNull();
-            payload.Items.Single().PreviousCompanyNames.Length.ShouldBe(3);
+            payload.Items.Single().PreviousCompanyNames?.Length.ShouldBe(3);
         }
 
         private const string SearchAllJson = """

@@ -28,9 +28,10 @@ namespace CompaniesHouse.Tests.CompaniesHouseChargesClientTests
             var result = await client.GetChargesListAsync("1", 0, 25);
 
             EquivalencyAssertionExtensions.ShouldBeEquivalentTo((object)result.Data, charges, "TransactionId", "UnfilteredCount");
-            foreach (var (actual, expected) in result.Data.Items.Zip(charges.Items))
+            foreach (var (actual, expected) in (result.Data.Items ?? []).Zip(charges.Items ?? []))
             {
-                actual.InsolvencyCases.Select(x => x.TransactionId).ShouldBe(expected.InsolvencyCases.Select(x => (long?)x.TransactionId));
+                (actual.InsolvencyCases ?? []).Select(x => x.TransactionId)
+                    .ShouldBe((expected.InsolvencyCases ?? []).Select(x => (long?)x.TransactionId));
             }
         }
 
@@ -49,7 +50,8 @@ namespace CompaniesHouse.Tests.CompaniesHouseChargesClientTests
             var result = await client.GetChargeByIdAsync("1", "1");
 
             EquivalencyAssertionExtensions.ShouldBeEquivalentTo((object)result.Data, charge, "TransactionId");
-            result.Data.InsolvencyCases.Select(x => x.TransactionId).ShouldBe(charge.InsolvencyCases.Select(x => (long?)x.TransactionId));
+            (result.Data.InsolvencyCases ?? []).Select(x => x.TransactionId)
+                .ShouldBe((charge.InsolvencyCases ?? []).Select(x => (long?)x.TransactionId));
         }
 
         public static IEnumerable<object[]> TestCases()

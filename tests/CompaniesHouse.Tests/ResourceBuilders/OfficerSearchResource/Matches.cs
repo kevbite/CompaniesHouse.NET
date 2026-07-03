@@ -1,11 +1,11 @@
-﻿namespace CompaniesHouse.Tests.ResourceBuilders.OfficerSearchResource
+namespace CompaniesHouse.Tests.ResourceBuilders.OfficerSearchResource
 {
     public class Matches
     {
-        public int[] Snippet { get; set; }
+        public int[] Snippet { get; set; } = null!;
 
-        public int[] Title { get; set; }
+        public int[] Title { get; set; } = null!;
 
-        public int[] AddressSnippet { get; set; }
+        public int[] AddressSnippet { get; set; } = null!;
     }
 }

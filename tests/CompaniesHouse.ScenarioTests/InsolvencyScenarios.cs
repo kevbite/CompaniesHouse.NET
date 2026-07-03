@@ -31,11 +31,13 @@ namespace CompaniesHouse.ScenarioTests
                 """;
 
             var value = JsonSerializer.Deserialize<CompanyInsolvencyInformation>(json, CompaniesHouseJsonSerializerOptions.Default);
+            var cases = value?.Cases ?? [];
 
             value.ShouldNotBeNull();
             value.Status.ShouldBe([new InsolvencyStatus("liquidation")]);
-            value.Cases[0].Type.ShouldBe(InsolvencyCaseType.CreditorsVoluntaryLiquidation);
-            value.Cases[0].Dates.ShouldContain(x => x.Type == new CaseDateType("liquidation-started-on") && x.Date == new DateTime(2013, 05, 29));
+            cases.ShouldNotBeEmpty();
+            cases[0].Type.ShouldBe(InsolvencyCaseType.CreditorsVoluntaryLiquidation);
+            (cases[0].Dates ?? []).ShouldContain(x => x.Type == new CaseDateType("liquidation-started-on") && x.Date == new DateTime(2013, 05, 29));
         }
     }
 }

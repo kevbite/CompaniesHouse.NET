@@ -49,8 +49,8 @@ namespace CompaniesHouse.ScenarioTests
             officers.Items.Length.ShouldBe(1);
             officers.Items[0].OfficerRole.ShouldBe(OfficerRole.CorporateSecretary);
             officers.Items[0].Identification.ShouldNotBeNull();
-            officers.Items[0].Identification.IdentificationType.ShouldBe(IdentificationType.UkLimitedCompany);
-            officers.Items[0].Identification.RegistrationNumber.ShouldBe("3849195");
+            officers.Items[0].Identification!.IdentificationType.ShouldBe(IdentificationType.UkLimitedCompany);
+            officers.Items[0].Identification!.RegistrationNumber.ShouldBe("3849195");
         }
 
         private const string OfficerListJson = """

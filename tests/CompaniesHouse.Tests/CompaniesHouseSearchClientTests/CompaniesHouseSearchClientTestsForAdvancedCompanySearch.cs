@@ -79,7 +79,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
             company.CompanySubtype.ShouldBe(CompanySubtype.CommunityInterestCompany);
             company.CompanyType.ShouldBe(CompanyType.Ltd);
             company.Links.CompanyProfile.ShouldBe("/company/01234567");
-            company.RegisteredOfficeAddress.Country.ShouldBe("England");
+            company.RegisteredOfficeAddress?.Country.ShouldBe("England");
             company.SicCodes.ShouldBe(new[] { "62012", "62020" });
             result.Data.TopHit.CompanyNumber.ShouldBe("01234567");
         }

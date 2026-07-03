@@ -25,9 +25,12 @@ namespace CompaniesHouse.IntegrationTests.Tests.PersonsWithSignificantControlTes
         [IntegrationFact]
         public void ThenObservedCountsAndKindsAreReturned()
         {
+            var items = _result.Data.Items ?? [];
+
             _result.Data.TotalResults.ShouldNotBeNull();
             _result.Data.TotalResults.Value.ShouldBeGreaterThan(0);
-            _result.Data.Items[0].Kind.Value.ShouldNotBeNullOrWhiteSpace();
+            items.ShouldNotBeEmpty();
+            items[0].Kind.Value.ShouldNotBeNullOrWhiteSpace();
         }
 
         private async Task WhenRetrievingAnCompanyPersonsWithSignificantControlForAnValidCompany()

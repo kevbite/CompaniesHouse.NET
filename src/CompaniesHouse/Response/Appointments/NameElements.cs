@@ -5,16 +5,16 @@ namespace CompaniesHouse.Response.Appointments
     public class NameElements
     {
         [JsonPropertyName("title")]
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
 
         [JsonPropertyName("forename")]
-        public string Forename { get; set; }
+        public string Forename { get; set; } = null!;
 
         [JsonPropertyName("surname")]
-        public string Surname { get; set; }
+        public string Surname { get; set; } = null!;
 
         [JsonPropertyName("other_forenames")]
-        public string OtherForenames { get; set; }
+        public string OtherForenames { get; set; } = null!;
 
     }
 }

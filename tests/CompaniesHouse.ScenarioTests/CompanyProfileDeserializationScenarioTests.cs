@@ -34,13 +34,13 @@ namespace CompaniesHouse.ScenarioTests
             profile.Type.ShouldBe(CompanyType.OverseaCompany);
             profile.ExternalRegistrationNumber.ShouldBe("198600479406");
             profile.ForeignCompanyDetails.ShouldNotBeNull();
-            profile.ForeignCompanyDetails.AccountingRequirement.ForeignAccountType.ShouldBe(
+            profile.ForeignCompanyDetails!.AccountingRequirement!.ForeignAccountType.ShouldBe(
                 ForeignAccountType.AccountingRequirementsOfOriginatingCountryApply);
-            profile.ForeignCompanyDetails.AccountingRequirement.TermsOfAccountPublication.ShouldBe(
+            profile.ForeignCompanyDetails.AccountingRequirement!.TermsOfAccountPublication.ShouldBe(
                 TermsOfAccountPublication.AccountsPublicationDateSuppliedByCompany);
-            profile.ForeignCompanyDetails.Accounts.AccountPeriodFrom.Day.ShouldBe(1);
-            profile.ForeignCompanyDetails.Accounts.AccountPeriodTo.Month.ShouldBe(12);
-            profile.ForeignCompanyDetails.Accounts.MustFileWithin.Months.ShouldBe("12");
+            profile.ForeignCompanyDetails.Accounts!.AccountPeriodFrom!.Day.ShouldBe(1);
+            profile.ForeignCompanyDetails.Accounts.AccountPeriodTo!.Month.ShouldBe(12);
+            profile.ForeignCompanyDetails.Accounts.MustFileWithin!.Months.ShouldBe("12");
             profile.ForeignCompanyDetails.IsACreditFinancialInstitution.ShouldBe(true);
             profile.Links.UkEstablishments.ShouldBe("/company/FC040879/uk-establishments");
         }

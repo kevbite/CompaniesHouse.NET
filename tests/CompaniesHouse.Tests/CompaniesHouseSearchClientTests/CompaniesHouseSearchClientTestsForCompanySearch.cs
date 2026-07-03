@@ -45,7 +45,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
                     .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
                 fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, "closed-on")
                     .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
-                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, () => (string)null)
+                fixture.Build<CompanyDetails>().With(x => x.CompanyStatus, () => null!)
                     .With(x => x.CompanyType, "private-unlimited").With(x => x.Kind, "searchresults#company").Create(),
             };
 

@@ -6,13 +6,13 @@ namespace CompaniesHouse.Response.Search.OfficerSearch
     public class OfficerSearch
     {
         [JsonPropertyName("items")]
-        public Officer[] Officers { get; set; }
+        public Officer[] Officers { get; set; } = null!;
 
         [JsonPropertyName("items_per_page")]
         public int ItemsPerPage { get; set; }
 
         [JsonPropertyName("kind")]
-        public string Kind { get; set; }
+        public string Kind { get; set; } = null!;
 
         [JsonPropertyName("page_number")]
         public int? PageNumber { get; set; }

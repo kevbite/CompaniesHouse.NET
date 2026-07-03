@@ -13,10 +13,10 @@ namespace CompaniesHouse.Tests.CompaniesHouseOfficersTests
 {
     public class CompaniesHouseCompanyOfficersClientTests
     {
-        private CompaniesHouseOfficersClient _client;
+        private CompaniesHouseOfficersClient _client = null!;
 
-        private CompaniesHouseResponse<Officers> _result;
-        private ResourceBuilders.Officers _officers;
+        private CompaniesHouseResponse<Officers> _result = null!;
+        private ResourceBuilders.Officers _officers = null!;
 
         [Fact]
         public async Task GivenACompaniesHouseCompanyProfileClient_WhenGettingACompanyProfile()
@@ -95,8 +95,8 @@ namespace CompaniesHouse.Tests.CompaniesHouseOfficersTests
             result.Data.Items.Length.ShouldBe(1);
             result.Data.Items[0].Identification.ShouldNotBeNull();
             result.Data.Items[0].OfficerRole.ShouldBe(OfficerRole.CorporateSecretary);
-            result.Data.Items[0].Identification.IdentificationType.ShouldBe(IdentificationType.UkLimitedCompany);
-            result.Data.Items[0].Identification.RegistrationNumber.ShouldBe("3849195");
+            result.Data.Items[0].Identification!.IdentificationType.ShouldBe(IdentificationType.UkLimitedCompany);
+            result.Data.Items[0].Identification!.RegistrationNumber.ShouldBe("3849195");
             result.Data.Items[0].OfficerId.ShouldBe("YwIOmduyS6PW5axJgQQrsTGyRD0");
         }
 

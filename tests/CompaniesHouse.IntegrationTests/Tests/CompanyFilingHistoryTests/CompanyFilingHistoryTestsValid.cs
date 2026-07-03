@@ -35,8 +35,9 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
             do
             {
                 result = await _client.GetCompanyFilingHistoryAsync(companyNumber, page++ * size, size);
-                results.AddRange(result.Data.Items);
-            } while (result.Data.Items.Any());
+                var items = result.Data.Items ?? [];
+                results.AddRange(items);
+            } while ((result.Data.Items ?? []).Any());
 
             results.ShouldNotBeEmpty();
         }

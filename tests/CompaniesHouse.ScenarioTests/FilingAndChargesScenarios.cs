@@ -64,11 +64,13 @@ namespace CompaniesHouse.ScenarioTests
                 """;
 
             var value = JsonSerializer.Deserialize<Charges>(json, CompaniesHouseJsonSerializerOptions.Default);
+            var items = value?.Items ?? [];
 
             value.ShouldNotBeNull();
             value.UnfilteredCount.ShouldBe(1);
-            value.Items[0].Status.ShouldBe(new ChargeStatus("outstanding"));
-            value.Items[0].Classification?.Type.ShouldBe(new ClassificationChargeType("charge-description"));
+            items.ShouldNotBeEmpty();
+            items[0].Status.ShouldBe(new ChargeStatus("outstanding"));
+            items[0].Classification?.Type.ShouldBe(new ClassificationChargeType("charge-description"));
         }
     }
 }

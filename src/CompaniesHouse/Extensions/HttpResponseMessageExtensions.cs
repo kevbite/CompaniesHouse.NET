@@ -25,7 +25,8 @@ public static class HttpResponseMessageExtensions
         return statusCode switch
         {
             >= 200 and < 300 => new CompaniesHouseResponse<T>.Success(
-                await response.Content.ReadFromJsonAsync<T>(CompaniesHouseJsonSerializerOptions.Default, cancellationToken).ConfigureAwait(false),
+                await response.Content.ReadFromJsonAsync<T>(CompaniesHouseJsonSerializerOptions.Default, cancellationToken).ConfigureAwait(false)
+                ?? throw new HttpRequestException("Response content was empty or could not be deserialized."),
                 statusCode,
                 reasonPhrase,
                 response.Headers),
@@ -48,4 +49,3 @@ public static class HttpResponseMessageExtensions
         };
     }
 }
-

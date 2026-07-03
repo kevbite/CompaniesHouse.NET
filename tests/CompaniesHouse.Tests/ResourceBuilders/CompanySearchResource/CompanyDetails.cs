@@ -4,48 +4,48 @@ namespace CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource
 {
     public class CompanyDetails
     {
-        public string CompanyStatus { get; set; }
+        public string CompanyStatus { get; set; } = null!;
 
-        public string AddressLine1 { get; set; }
+        public string AddressLine1 { get; set; } = null!;
 
-        public string AddressLine2 { get; set; }
+        public string AddressLine2 { get; set; } = null!;
 
-        public string CareOf { get; set; }
+        public string CareOf { get; set; } = null!;
 
-        public string Country { get; set; }
+        public string Country { get; set; } = null!;
 
-        public string Locality { get; set; }
+        public string Locality { get; set; } = null!;
 
-        public string PoBox { get; set; }
+        public string PoBox { get; set; } = null!;
 
-        public string Region { get; set; }
+        public string Region { get; set; } = null!;
 
-        public string PostalCode { get; set; }
+        public string PostalCode { get; set; } = null!;
 
-        public string CompanyNumber { get; set; }
+        public string CompanyNumber { get; set; } = null!;
 
-        public string CompanyType { get; set; }
+        public string CompanyType { get; set; } = null!;
 
-        public string AddressSnippet { get; set; }
+        public string AddressSnippet { get; set; } = null!;
 
         public DateTime DateOfCessation { get; set; }
 
         public DateTime DateOfCreation { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
 
-        public string ExternalRegistrationNumber { get; set; }
+        public string ExternalRegistrationNumber { get; set; } = null!;
 
-        public string Kind { get; set; }
+        public string Kind { get; set; } = null!;
 
-        public string LinksSelf { get; set; }
+        public string LinksSelf { get; set; } = null!;
 
-        public string Snippet { get; set; }
+        public string Snippet { get; set; } = null!;
 
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
 
-        public int[] MatchesSnippet { get; set; }
+        public int[] MatchesSnippet { get; set; } = null!;
 
-        public int[] MatchesTitle { get; set; }
+        public int[] MatchesTitle { get; set; } = null!;
     }
 }

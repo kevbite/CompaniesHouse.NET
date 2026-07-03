@@ -1,7 +1,7 @@
-﻿namespace CompaniesHouse.Tests.ResourceBuilders.OfficerSearchResource
+namespace CompaniesHouse.Tests.ResourceBuilders.OfficerSearchResource
 {
     public class Links
     {
-        public string Self { get; set; }
+        public string Self { get; set; } = null!;
     }
 }

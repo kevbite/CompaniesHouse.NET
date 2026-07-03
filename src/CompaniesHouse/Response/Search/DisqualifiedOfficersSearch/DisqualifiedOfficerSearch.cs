@@ -5,13 +5,13 @@ namespace CompaniesHouse.Response.Search.DisqualifiedOfficersSearch
     public class DisqualifiedOfficerSearch
     {
         [JsonPropertyName("items")]
-        public DisqualifiedOfficer[] DisqualifiedOfficers { get; set; }
+        public DisqualifiedOfficer[] DisqualifiedOfficers { get; set; } = null!;
 
         [JsonPropertyName("items_per_page")]
         public int ItemsPerPage { get; set; }
 
         [JsonPropertyName("kind")]
-        public string Kind { get; set; }
+        public string Kind { get; set; } = null!;
 
         [JsonPropertyName("page_number")]
         public int? PageNumber { get; set; }

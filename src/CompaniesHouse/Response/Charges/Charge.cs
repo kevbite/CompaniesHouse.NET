@@ -19,7 +19,7 @@ namespace CompaniesHouse.Response.Charges
         public int? ChargeNumber { get; set; }
 
         [JsonPropertyName("classification")]
-        public Classification Classification { get; set; }
+        public Classification Classification { get; set; } = null!;
 
         [JsonPropertyName("covering_instrument_date")]
         public DateTime? CoveringInstrumentDate { get; set; }

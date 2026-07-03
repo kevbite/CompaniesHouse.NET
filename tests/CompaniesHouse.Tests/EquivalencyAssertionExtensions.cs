@@ -29,7 +29,7 @@ namespace CompaniesHouse.Tests
             }
         }
 
-        private static void Compare(object actual, object expected, string path, string[] excluding, List<string> differences)
+        private static void Compare(object? actual, object? expected, string path, string[] excluding, List<string> differences)
         {
             if (ReferenceEquals(actual, expected))
             {
@@ -151,7 +151,7 @@ namespace CompaniesHouse.Tests
             }
         }
 
-        private static bool ValuesEqual(object actual, object expected)
+        private static bool ValuesEqual(object? actual, object? expected)
         {
             if (actual is Enum actualEnum && expected is string expectedString)
             {
@@ -166,18 +166,18 @@ namespace CompaniesHouse.Tests
             return Equals(actual, expected);
         }
 
-        private static string Describe(object value) => value?.ToString() ?? "null";
+        private static string Describe(object? value) => value?.ToString() ?? "null";
 
         private static string GetEnumMemberValue(Enum enumValue)
         {
             var type = enumValue.GetType();
             var info = type.GetField(enumValue.ToString());
-            var enumMember = (EnumMemberAttribute[])info?.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+            var enumMember = (EnumMemberAttribute[]?)info?.GetCustomAttributes(typeof(EnumMemberAttribute), false);
 
-            return enumMember is { Length: > 0 } ? enumMember[0].Value : enumValue.ToString();
+            return enumMember is { Length: > 0 } ? enumMember[0].Value ?? enumValue.ToString() : enumValue.ToString();
         }
 
-        private static bool TryGetStringBackedValue(object value, out string rawValue)
+        private static bool TryGetStringBackedValue(object? value, out string rawValue)
         {
             rawValue = string.Empty;
 

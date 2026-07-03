@@ -63,6 +63,7 @@ namespace CompaniesHouse.Tests.CompaniesHouseDocumentMetadataClientTests
 
             result.Data.ShouldNotBeNull();
             result.Data.Filename.ShouldBe("00445790_cs01_2026-07-01");
+            result.Data.Resources.ShouldNotBeNull();
             result.Data.Resources.ShouldContainKey("application/pdf");
             result.Data.Resources["application/pdf"].ContentLength.ShouldBe(82803);
         }

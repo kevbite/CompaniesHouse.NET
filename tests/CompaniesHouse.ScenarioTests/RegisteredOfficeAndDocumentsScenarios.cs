@@ -57,6 +57,7 @@ namespace CompaniesHouse.ScenarioTests
             value.CreatedAt.Value.Year.ShouldBe(2026);
             value.CreatedAt.Value.Month.ShouldBe(7);
             value.CreatedAt.Value.Day.ShouldBe(1);
+            value.Resources.ShouldNotBeNull();
             value.Resources["application/pdf"].ContentLength.ShouldBe(82803);
         }
     }

@@ -39,10 +39,12 @@ namespace CompaniesHouse.ScenarioTests
                 """;
 
             var value = JsonSerializer.Deserialize<Appointments>(json, CompaniesHouseJsonSerializerOptions.Default);
+            var items = value?.Items ?? [];
 
             value.ShouldNotBeNull();
             value.IsCorporateOfficer.ShouldBeTrue();
-            value.Items[0].Identification?.RegistrationNumber.ShouldBe("3849195");
+            items.ShouldNotBeEmpty();
+            items[0].Identification?.RegistrationNumber.ShouldBe("3849195");
         }
 
         [Fact]
@@ -71,11 +73,13 @@ namespace CompaniesHouse.ScenarioTests
                 """;
 
             var value = JsonSerializer.Deserialize<PersonsWithSignificantControl>(json, CompaniesHouseJsonSerializerOptions.Default);
+            var items = value?.Items ?? [];
 
             value.ShouldNotBeNull();
             value.TotalResults.ShouldBe(1);
-            value.Items[0].Kind.ShouldBe(new PersonWithSignificantControlKind("corporate-entity-person-with-significant-control"));
-            value.Items[0].NaturesOfControl.ShouldContain(new PersonWithSignificantControlNatureOfControl("right-to-appoint-and-remove-directors"));
+            items.ShouldNotBeEmpty();
+            items[0].Kind.ShouldBe(new PersonWithSignificantControlKind("corporate-entity-person-with-significant-control"));
+            (items[0].NaturesOfControl ?? []).ShouldContain(new PersonWithSignificantControlNatureOfControl("right-to-appoint-and-remove-directors"));
         }
     }
 }

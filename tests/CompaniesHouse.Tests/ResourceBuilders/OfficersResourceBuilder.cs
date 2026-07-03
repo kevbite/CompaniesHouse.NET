@@ -43,7 +43,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
                     ""links"" : {{
                         {selfProperty}
                         ""officer"" : {{
-                            ""appointments"" : ""{officer.Links.Officer.AppointmentsResource}""                                                               
+                            ""appointments"" : ""{officer.Links?.Officer?.AppointmentsResource}""                                                               
                             }}                    
                     }},
                     ""name"" : ""{officer.Name}"",

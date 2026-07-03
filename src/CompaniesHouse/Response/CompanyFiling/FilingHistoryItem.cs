@@ -12,7 +12,7 @@ namespace CompaniesHouse.Response.CompanyFiling
         public FilingCategory Category { get; set; }
 
         [JsonPropertyName("subcategory")]
-        public FilingSubcategory[] Subcategory { get; set; }
+        public FilingSubcategory[] Subcategory { get; set; } = null!;
 
         [JsonPropertyName("transaction_id")]
         public string? TransactionId { get; set; }
