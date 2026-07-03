@@ -17,7 +17,7 @@ Completed in this change:
 - `..\completed\09h-registers.md`
 - `..\completed\09i-disqualified-officers-detail.md`
 - `..\completed\09j-psc-detail-types.md`
+- `..\completed\09k-exemptions.md`
 
 Still outstanding:
-- `09k-exemptions.md`
 - `09l-uk-establishments.md`

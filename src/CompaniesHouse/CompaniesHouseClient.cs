@@ -8,6 +8,7 @@ using CompaniesHouse.Response.Charges;
 using CompaniesHouse.Response.CompanyFiling;
 using CompaniesHouse.Response.CompanyProfile;
 using CompaniesHouse.Response.DisqualifiedOfficers;
+using CompaniesHouse.Response.Exemptions;
 using CompaniesHouse.Response.Insolvency;
 using CompaniesHouse.Response.Officers;
 using CompaniesHouse.Response.PersonsWithSignificantControl;
@@ -40,6 +41,7 @@ namespace CompaniesHouse
         private readonly ICompaniesHouseRegistersClient _companiesHouseRegistersClient;
         private readonly ICompaniesHouseDisqualifiedOfficerDetailsClient _companiesHouseDisqualifiedOfficerDetailsClient;
         private readonly ICompaniesHousePersonsWithSignificantControlDetailsClient _companiesHousePersonsWithSignificantControlDetailsClient;
+        private readonly ICompaniesHouseExemptionsClient _companiesHouseExemptionsClient;
         private readonly HttpClient _httpClient;
 
         public CompaniesHouseClient(HttpClient httpClient)
@@ -58,6 +60,7 @@ namespace CompaniesHouse
             _companiesHouseRegistersClient = new CompaniesHouseRegistersClient(_httpClient, new CompanyRegistersUriBuilder());
             _companiesHouseDisqualifiedOfficerDetailsClient = new CompaniesHouseDisqualifiedOfficerDetailsClient(_httpClient, new DisqualifiedOfficerUriBuilder());
             _companiesHousePersonsWithSignificantControlDetailsClient = new CompaniesHousePersonsWithSignificantControlDetailsClient(_httpClient, new PersonsWithSignificantControlDetailsUriBuilder());
+            _companiesHouseExemptionsClient = new CompaniesHouseExemptionsClient(_httpClient, new CompanyExemptionsUriBuilder());
         }
 
         public CompaniesHouseClient(ICompaniesHouseSettings settings)
@@ -192,6 +195,11 @@ namespace CompaniesHouse
         public Task<CompaniesHouseResponse<SuperSecurePersonWithSignificantControl>> GetSuperSecureBeneficialOwnerAsync(string companyNumber, string superSecureId, CancellationToken cancellationToken = default)
         {
             return _companiesHousePersonsWithSignificantControlDetailsClient.GetSuperSecureBeneficialOwnerAsync(companyNumber, superSecureId, cancellationToken);
+        }
+
+        public Task<CompaniesHouseResponse<CompanyExemptions>> GetCompanyExemptionsAsync(string companyNumber, CancellationToken cancellationToken = default)
+        {
+            return _companiesHouseExemptionsClient.GetCompanyExemptionsAsync(companyNumber, cancellationToken);
         }
 
         public Task<CompaniesHouseResponse<Charges>> GetChargesListAsync(string companyNumber, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default)
