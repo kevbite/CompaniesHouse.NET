@@ -60,22 +60,22 @@ jobs:
     - name: Generate release notes with NuGet links
       if: ${{ env.PUBLISH_PACKAGE }}
       run: |
-        cat > release_notes.md <<EOF
-## NuGet Packages
-
-This release includes the following NuGet packages:
-
-- [CompaniesHouse](https://www.nuget.org/packages/CompaniesHouse/${{ env.VERSION }}) - Core .NET client for Companies House API
-- [CompaniesHouse.Extensions.Microsoft.DependencyInjection](https://www.nuget.org/packages/CompaniesHouse.Extensions.Microsoft.DependencyInjection/${{ env.VERSION }}) - DI helpers for ASP.NET Core / generic-host apps
-
-Install via:
-\`\`\`
-dotnet add package CompaniesHouse
-dotnet add package CompaniesHouse.Extensions.Microsoft.DependencyInjection
-\`\`\`
-
-See the [README](https://github.com/kevbite/CompaniesHouse.NET#readme) for usage instructions.
-EOF
+        printf '%s\n' \
+          '## NuGet Packages' \
+          '' \
+          'This release includes the following NuGet packages:' \
+          '' \
+          "- [CompaniesHouse](https://www.nuget.org/packages/CompaniesHouse/${{ env.VERSION }}) - Core .NET client for Companies House API" \
+          "- [CompaniesHouse.Extensions.Microsoft.DependencyInjection](https://www.nuget.org/packages/CompaniesHouse.Extensions.Microsoft.DependencyInjection/${{ env.VERSION }}) - DI helpers for ASP.NET Core / generic-host apps" \
+          '' \
+          'Install via:' \
+          '```' \
+          'dotnet add package CompaniesHouse' \
+          'dotnet add package CompaniesHouse.Extensions.Microsoft.DependencyInjection' \
+          '```' \
+          '' \
+          'See the [README](https://github.com/kevbite/CompaniesHouse.NET#readme) for usage instructions.' \
+          > release_notes.md
     - name: Create Release
       id: create_release
       if: ${{ env.PUBLISH_PACKAGE }}
