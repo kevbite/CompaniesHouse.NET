@@ -97,27 +97,58 @@ See the [README's enum section](README.md#enumvalue-type-handling) and the
 [design rationale](https://kevsoft.net/2026/06/28/enums-in-api-contracts.html)
 for more detail.
 
-## `CompaniesHouseClientResponse<T>` shape change
+## Response type: discriminated union
 
-**Before:** the response wrapper exposed only the deserialized body (shape
-varied by version; some versions returned `T` directly).
+**Before:** the response wrapper exposed only the deserialized body:
 
-**After:** every client method returns `CompaniesHouseClientResponse<T>`,
-which always carries transport metadata:
+```csharp
+var profile = await client.GetCompanyProfileAsync(companyNumber);
+// profile was the data itself, or null
+```
+
+**After:** every client method returns `CompaniesHouseResponse<T>` — a sealed
+type hierarchy. The concrete subtype tells you exactly what happened:
 
 ```diff
 - var profile = await client.GetCompanyProfileAsync(companyNumber);
-- // profile was the data itself, or null
+- if (profile == null)
+-     return; // 404 or some other error
+- Console.WriteLine(profile.CompanyName);
+
++ // Happy path: .Data throws InvalidOperationException on non-success
++ var company = (await client.GetCompanyProfileAsync(companyNumber)).Data;
++ Console.WriteLine(company.CompanyName);
+
++ // Or pattern-match for fine-grained handling
 + var result = await client.GetCompanyProfileAsync(companyNumber);
-+ var profile = result.Data;   // null for non-success responses
-+ result.StatusCode;           // now available
-+ result.RetryAfter;           // now available - see #181/#182
-+ result.IsSuccess;            // convenience check for 2xx
++ var message = result switch
++ {
++     CompaniesHouseResponse<CompanyProfile>.Success { Data: var c } => c.CompanyName,
++     CompaniesHouseResponse<CompanyProfile>.NotFound               => "not found",
++     CompaniesHouseResponse<CompanyProfile>.RateLimited { RetryAfter: var d } => $"retry after {d}",
++     CompaniesHouseResponse<CompanyProfile>.Unauthorized           => "check API key",
++     CompaniesHouseResponse<CompanyProfile>.ServerError { StatusCode: var s } => $"server error {s}",
++     _                                                             => $"HTTP {result.StatusCode}",
++ };
 ```
 
-Update any code that used the return value directly as the model to go
-through `.Data` instead, and consider using `.StatusCode`/`.IsSuccess` for
-error handling instead of catching exceptions or checking for `null` alone.
+All subtypes expose `StatusCode` and `ReasonPhrase`. `Success` additionally
+exposes the full `HttpResponseHeaders`. `RateLimited` and `ServerError` expose
+`RetryAfter` (resolves issues #181/#182). Transport-level failures
+(`HttpRequestException`) are not caught — they propagate as normal exceptions.
+
+`CompaniesHouseApiException` has been removed. If you were catching it for 5xx
+handling, switch to matching on `ServerError` instead:
+
+```diff
+- catch (CompaniesHouseApiException ex) when (ex.StatusCode == 503)
+- {
+-     await Task.Delay(ex.RetryAfter ?? TimeSpan.FromSeconds(30));
+- }
+
++ if (result is CompaniesHouseResponse<T>.ServerError { RetryAfter: var delay })
++     await Task.Delay(delay ?? TimeSpan.FromSeconds(30));
+```
 
 ## Default base URI change
 

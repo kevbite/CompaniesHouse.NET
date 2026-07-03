@@ -186,33 +186,30 @@ Console.WriteLine(company.CompanyName);
 
 ### Full branching
 
-Pattern-match when you need to handle specific outcomes:
+Use a switch expression when you need to handle specific outcomes:
 
 ```csharp
 var result = await client.GetCompanyProfileAsync(companyNumber);
 
-switch (result)
+var message = result switch
 {
-    case CompaniesHouseResponse<CompanyProfile>.Success { Data: var company }:
-        Console.WriteLine(company.CompanyName);
-        break;
+    CompaniesHouseResponse<CompanyProfile>.Success { Data: var company } =>
+        $"Found: {company.CompanyName}",
 
-    case CompaniesHouseResponse<CompanyProfile>.NotFound:
-        Console.WriteLine("Company not found.");
-        break;
+    CompaniesHouseResponse<CompanyProfile>.NotFound =>
+        "Company not found.",
 
-    case CompaniesHouseResponse<CompanyProfile>.RateLimited { RetryAfter: var delay }:
-        Console.WriteLine($"Rate limited. Retry after {delay}.");
-        break;
+    CompaniesHouseResponse<CompanyProfile>.RateLimited { RetryAfter: var delay } =>
+        $"Rate limited — retry after {delay}.",
 
-    case CompaniesHouseResponse<CompanyProfile>.Unauthorized:
-        Console.WriteLine("Check your API key.");
-        break;
+    CompaniesHouseResponse<CompanyProfile>.Unauthorized =>
+        "Check your API key.",
 
-    case CompaniesHouseResponse<CompanyProfile>.ServerError { RetryAfter: var delay, StatusCode: var code }:
-        Console.WriteLine($"Server error {code}. Retry after {delay}.");
-        break;
-}
+    CompaniesHouseResponse<CompanyProfile>.ServerError { StatusCode: var code, RetryAfter: var delay } =>
+        $"Server error {code} — retry after {delay}.",
+
+    _ => $"Unexpected response: {result.StatusCode}",
+};
 ```
 
 ## Usage

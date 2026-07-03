@@ -1,14 +1,13 @@
 using CompaniesHouse;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response;
+using CompaniesHouse.Response.CompanyProfile;
 using CompaniesHouse.Response.Search.AllSearch;
 using CompaniesHouse.Response.Search.CompanySearch;
 using CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
 using CompaniesHouse.Response.Search.OfficerSearch;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+using Officers = CompaniesHouse.Response.Officers.Officers;
 
 namespace SampleProject;
 
@@ -29,7 +28,6 @@ class Program
         const string nameToSearchFor = "Bigman";
 
         await RunWithDirectClientAsync(nameToSearchFor, companyNumber);
-
         await RunWithDependencyInjectionAsync(companyNumber);
     }
 
@@ -42,23 +40,22 @@ class Program
         var settings = new CompaniesHouseSettings(ApiKey);
         using var client = new CompaniesHouseClient(settings);
 
-        var request = new SearchAllRequest
+        var searchResult = await client.SearchAllAsync(new SearchAllRequest
         {
             Query = nameToSearchFor,
             StartIndex = 0,
             ItemsPerPage = 10
-        };
+        });
 
-        var searchResult = await client.SearchAllAsync(request);
         DisplaySearchResults(searchResult, nameToSearchFor);
 
-        var officers = await client.GetOfficersAsync(companyNumber);
-        DisplayOfficers(officers);
+        var officersResult = await client.GetOfficersAsync(companyNumber);
+        DisplayOfficers(officersResult, companyNumber);
     }
 
     /// <summary>
     /// The recommended way to use the client from an app with an <see cref="IServiceCollection"/>
-    /// (ASP.NET Core, worker services, etc.) - see the "CompaniesHouse.Extensions.Microsoft.DependencyInjection" package.
+    /// (ASP.NET Core, worker services, etc.).
     /// </summary>
     private static async Task RunWithDependencyInjectionAsync(string companyNumber)
     {
@@ -68,69 +65,92 @@ class Program
 
         var client = provider.GetRequiredService<ICompaniesHouseClient>();
 
-        var profileResult = await client.GetCompanyProfileAsync(companyNumber);
-        DisplayCompanyProfile(profileResult);
+        var result = await client.GetCompanyProfileAsync(companyNumber);
+        DisplayCompanyProfile(result, companyNumber);
     }
 
-    private static void DisplaySearchResults(CompaniesHouseResponse<AllSearch> result, string nameSearchedFor)
+    private static void DisplaySearchResults(CompaniesHouseResponse<AllSearch> result, string query)
     {
-        Console.WriteLine($"{Environment.NewLine}----------------------------------------------");
-        Console.WriteLine($"Companies found when searching for '{nameSearchedFor}' :");
-        foreach (var item in result.Data.Items.OfType<Company>())
+        Console.WriteLine($"\n----------------------------------------------");
+
+        // .Data throws InvalidOperationException on non-success — pattern-match
+        // when you need to handle error outcomes explicitly.
+        if (result is not CompaniesHouseResponse<AllSearch>.Success { Data: var data })
         {
-            // CompanyStatus is a string-backed value type - it never throws on an unrecognised
-            // wire value, so we can always describe it, even for values added after this release.
-            Console.WriteLine($"* {item.Title} - {item.Description} - {DescribeCompanyStatus(item.CompanyStatus)}");
+            Console.WriteLine($"Search failed (HTTP {result.StatusCode}).");
+            return;
         }
 
-        Console.WriteLine($"{Environment.NewLine}----------------------------------------------");
-        Console.WriteLine($"Officers found when searching for '{nameSearchedFor}' :");
-        foreach (var item in result.Data.Items.OfType<Officer>())
+        Console.WriteLine($"Companies matching '{query}':");
+        foreach (var item in data.Items.OfType<Company>())
         {
-            Console.WriteLine($"* {item.Title} - {item.Description}");
+            // CompanyStatus is a string-backed value type — it never throws on an
+            // unrecognised wire value, so we can always describe it safely.
+            Console.WriteLine($"  * {item.Title} — {DescribeCompanyStatus(item.CompanyStatus)}");
         }
 
-        Console.WriteLine($"{Environment.NewLine}----------------------------------------------");
-        Console.WriteLine($"Disqualified Officers found when searching for '{nameSearchedFor}' :");
-        foreach (var item in result.Data.Items.OfType<DisqualifiedOfficer>())
-        {
-            Console.WriteLine($"* {item.Title}");
-        }
+        Console.WriteLine($"\nOfficers matching '{query}':");
+        foreach (var item in data.Items.OfType<Officer>())
+            Console.WriteLine($"  * {item.Title} — {item.Description}");
+
+        Console.WriteLine($"\nDisqualified officers matching '{query}':");
+        foreach (var item in data.Items.OfType<DisqualifiedOfficer>())
+            Console.WriteLine($"  * {item.Title}");
     }
 
-    private static void DisplayOfficers(CompaniesHouseResponse<CompaniesHouse.Response.Officers.Officers> result)
+    private static void DisplayOfficers(CompaniesHouseResponse<Officers> result, string companyNumber)
     {
-        Console.WriteLine($"{Environment.NewLine}----------------------------------------------");
-        Console.WriteLine("Officers:");
-        foreach (var officer in result.Data.Items ?? [])
+        Console.WriteLine($"\n----------------------------------------------");
+        Console.WriteLine($"Officers for {companyNumber}:");
+
+        if (result is not CompaniesHouseResponse<Officers>.Success { Data: var data })
         {
-            Console.WriteLine($"* {officer.Name}");
+            Console.WriteLine($"  Could not retrieve officers (HTTP {result.StatusCode}).");
+            return;
         }
+
+        foreach (var officer in data.Items ?? [])
+            Console.WriteLine($"  * {officer.Name}");
     }
 
-    private static void DisplayCompanyProfile(CompaniesHouseResponse<CompaniesHouse.Response.CompanyProfile.CompanyProfile> result)
+    private static void DisplayCompanyProfile(CompaniesHouseResponse<CompanyProfile> result, string companyNumber)
     {
-        Console.WriteLine($"{Environment.NewLine}----------------------------------------------");
-        if (result is CompaniesHouseResponse<CompaniesHouse.Response.CompanyProfile.CompanyProfile>.Success success)
+        Console.WriteLine($"\n----------------------------------------------");
+
+        // Switch expression — the compiler guides you through every outcome.
+        var summary = result switch
         {
-            Console.WriteLine($"Company profile: {success.Data.CompanyName} - {DescribeCompanyStatus(success.Data.CompanyStatus)}");
-        }
-        else
-        {
-            Console.WriteLine($"No company profile found (HTTP {result.StatusCode}).");
-        }
+            CompaniesHouseResponse<CompanyProfile>.Success { Data: var company } =>
+                $"{company.CompanyName} — {DescribeCompanyStatus(company.CompanyStatus)}",
+
+            CompaniesHouseResponse<CompanyProfile>.NotFound =>
+                $"Company {companyNumber} not found.",
+
+            CompaniesHouseResponse<CompanyProfile>.RateLimited { RetryAfter: var delay } =>
+                $"Rate limited — retry after {delay}.",
+
+            CompaniesHouseResponse<CompanyProfile>.Unauthorized =>
+                "Unauthorized — check your API key.",
+
+            CompaniesHouseResponse<CompanyProfile>.ServerError { StatusCode: var code } =>
+                $"Server error {code} — try again later.",
+
+            _ => $"Unexpected response: {result.StatusCode}",
+        };
+
+        Console.WriteLine(summary);
     }
 
     /// <summary>
-    /// Demonstrates handling an unknown enum value gracefully: string-backed value types never
-    /// throw for a value Companies House hasn't announced yet, so unrecognised values fall back
-    /// to <see cref="CompanyStatus.Value"/> instead of crashing.
+    /// String-backed value types never throw for an unrecognised value, so this
+    /// switch can handle future Companies House statuses gracefully.
     /// </summary>
     private static string DescribeCompanyStatus(CompanyStatus status) => status switch
     {
-        _ when status == CompanyStatus.Active => "active",
+        _ when status == CompanyStatus.Active    => "active",
         _ when status == CompanyStatus.Dissolved => "dissolved",
-        _ when status.IsKnown => status.Description ?? status.Value,
-        _ => $"unknown status ({status.Value})",
+        _ when status.IsKnown                   => status.Description ?? status.Value,
+        _                                       => $"unknown status ({status.Value})",
     };
 }
+
