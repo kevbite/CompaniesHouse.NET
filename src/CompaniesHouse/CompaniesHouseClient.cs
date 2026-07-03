@@ -7,6 +7,7 @@ using CompaniesHouse.Response.Appointments;
 using CompaniesHouse.Response.Charges;
 using CompaniesHouse.Response.CompanyFiling;
 using CompaniesHouse.Response.CompanyProfile;
+using CompaniesHouse.Response.DisqualifiedOfficers;
 using CompaniesHouse.Response.Insolvency;
 using CompaniesHouse.Response.Officers;
 using CompaniesHouse.Response.PersonsWithSignificantControl;
@@ -37,6 +38,7 @@ namespace CompaniesHouse
         private readonly ICompaniesHouseRegisteredOfficeAddressClient _companiesHouseRegisteredOfficeAddressClient;
         private readonly ICompaniesHouseOfficerByAppointmentClient _companiesHouseOfficerByAppointmentClient;
         private readonly ICompaniesHouseRegistersClient _companiesHouseRegistersClient;
+        private readonly ICompaniesHouseDisqualifiedOfficerDetailsClient _companiesHouseDisqualifiedOfficerDetailsClient;
         private readonly HttpClient _httpClient;
 
         public CompaniesHouseClient(HttpClient httpClient)
@@ -53,6 +55,7 @@ namespace CompaniesHouse
             _companiesHouseRegisteredOfficeAddressClient = new CompaniesHouseRegisteredOfficeAddressClient(_httpClient, new RegisteredOfficeAddressUriBuilder());
             _companiesHouseOfficerByAppointmentClient = new CompaniesHouseOfficerByByAppointmentClient(_httpClient, new OfficersAppointmentUriBuilder());
             _companiesHouseRegistersClient = new CompaniesHouseRegistersClient(_httpClient, new CompanyRegistersUriBuilder());
+            _companiesHouseDisqualifiedOfficerDetailsClient = new CompaniesHouseDisqualifiedOfficerDetailsClient(_httpClient, new DisqualifiedOfficerUriBuilder());
         }
 
         public CompaniesHouseClient(ICompaniesHouseSettings settings)
@@ -162,6 +165,16 @@ namespace CompaniesHouse
         public Task<CompaniesHouseResponse<CompanyRegisters>> GetCompanyRegistersAsync(string companyNumber, CancellationToken cancellationToken = default)
         {
             return _companiesHouseRegistersClient.GetCompanyRegistersAsync(companyNumber, cancellationToken);
+        }
+
+        public Task<CompaniesHouseResponse<NaturalDisqualification>> GetNaturalDisqualificationAsync(string officerId, CancellationToken cancellationToken = default)
+        {
+            return _companiesHouseDisqualifiedOfficerDetailsClient.GetNaturalDisqualificationAsync(officerId, cancellationToken);
+        }
+
+        public Task<CompaniesHouseResponse<CorporateDisqualification>> GetCorporateDisqualificationAsync(string officerId, CancellationToken cancellationToken = default)
+        {
+            return _companiesHouseDisqualifiedOfficerDetailsClient.GetCorporateDisqualificationAsync(officerId, cancellationToken);
         }
 
         public void Dispose() => _httpClient.Dispose();

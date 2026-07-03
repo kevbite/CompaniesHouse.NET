@@ -15,9 +15,9 @@ Completed in this change:
 - `..\completed\09f-insolvency.md`
 - `..\completed\09g-documents.md`
 - `..\completed\09h-registers.md`
+- `..\completed\09i-disqualified-officers-detail.md`
 
 Still outstanding:
-- `09i-disqualified-officers-detail.md`
 - `09j-psc-detail-types.md`
 - `09k-exemptions.md`
 - `09l-uk-establishments.md`
