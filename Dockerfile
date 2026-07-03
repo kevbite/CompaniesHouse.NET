@@ -15,9 +15,11 @@ COPY ./LICENSE .
 
 COPY ./src/CompaniesHouse/*.csproj ./src/CompaniesHouse/
 COPY ./src/CompaniesHouse.Extensions.Microsoft.DependencyInjection/*.csproj ./src/CompaniesHouse.Extensions.Microsoft.DependencyInjection/
+COPY ./src/CompaniesHouse.SourceGenerator/*.csproj ./src/CompaniesHouse.SourceGenerator/
 COPY ./tests/CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests/*.csproj ./tests/CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests/
 COPY ./tests/CompaniesHouse.IntegrationTests/*.csproj ./tests/CompaniesHouse.IntegrationTests/
 COPY ./tests/CompaniesHouse.ScenarioTests/*.csproj ./tests/CompaniesHouse.ScenarioTests/
+COPY ./tests/CompaniesHouse.SourceGenerator.Tests/*.csproj ./tests/CompaniesHouse.SourceGenerator.Tests/
 COPY ./tests/CompaniesHouse.Tests/*.csproj ./tests/CompaniesHouse.Tests/
 COPY ./samples/SampleProject/*.csproj ./samples/SampleProject/
 RUN dotnet restore
