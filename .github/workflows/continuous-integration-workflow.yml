@@ -19,8 +19,10 @@ jobs:
       with:
         global-json-file: global.json
     - name: Docker Build NuGet packages
+      env:
+        COMPANIES_HOUSE_API_KEY: ${{ secrets.COMPANIES_HOUSE_API_KEY }}
       run: |
-        docker build --build-arg NUGET_PACKAGE_VERSION=${{ env.VERSION }} --build-arg COMPANIES_HOUSE_API_KEY=${{ secrets.COMPANIES_HOUSE_API_KEY }} -f ./Dockerfile --output ./ .
+        docker build --build-arg NUGET_PACKAGE_VERSION=${{ env.VERSION }} --secret id=companies_house_api_key,env=COMPANIES_HOUSE_API_KEY -f ./Dockerfile --output ./ .
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
