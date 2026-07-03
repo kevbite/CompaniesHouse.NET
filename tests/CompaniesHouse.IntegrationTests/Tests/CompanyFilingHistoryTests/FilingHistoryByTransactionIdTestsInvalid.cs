@@ -22,7 +22,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
         [IntegrationFact]
         public void ThenTheDataItemsAreNull()
         {
-            _result.Data.ShouldBeNull();
+            _result.ShouldBeOfType<CompaniesHouseResponse<FilingHistoryItem>.NotFound>();
         }
 
         private async Task WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany()

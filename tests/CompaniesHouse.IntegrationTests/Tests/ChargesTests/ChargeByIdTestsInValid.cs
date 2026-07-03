@@ -14,6 +14,6 @@ namespace CompaniesHouse.IntegrationTests.Tests.ChargesTests
         protected override async Task When() => Result = await Client.GetChargeByIdAsync(CompanyNumber, ChargeId);
 
         [IntegrationFact]
-        public void ThenChargesListIsNull() => Result.Data.ShouldBeNull();
+        public void ThenChargesListIsNull() => Result.ShouldBeOfType<CompaniesHouseResponse<Charge>.NotFound>();
     }
 }

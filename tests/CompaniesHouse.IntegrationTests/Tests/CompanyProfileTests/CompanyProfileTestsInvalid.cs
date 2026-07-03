@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using CompaniesHouse.Response.CompanyProfile;
 using Shouldly;
 using Xunit;
 
@@ -19,7 +20,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyProfileTests
         [IntegrationFact]
         public void ThenTheProfileIsNotReturned()
         {
-            _result.Data.ShouldBeNull();
+            _result.ShouldBeOfType<CompaniesHouseResponse<CompanyProfile>.NotFound>();
             _result.StatusCode.ShouldBe(404);
         }
 

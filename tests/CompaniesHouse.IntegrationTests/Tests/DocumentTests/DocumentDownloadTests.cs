@@ -41,6 +41,6 @@ namespace CompaniesHouse.IntegrationTests.Tests.DocumentTests
         private async Task DownloadingDocument() => _result = await Client.DownloadDocumentAsync(DocumentId);
 
         [IntegrationFact]
-        public void ThenDocumentDataIsNull() => _result.Data.ShouldBeNull();
+        public void ThenDocumentDataIsNull() => _result.ShouldBeOfType<CompaniesHouseResponse<DocumentDownload>.NotFound>();
     }
 }

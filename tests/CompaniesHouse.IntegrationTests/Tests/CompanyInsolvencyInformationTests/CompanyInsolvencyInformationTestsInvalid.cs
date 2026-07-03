@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using CompaniesHouse.Response.Insolvency;
 using Shouldly;
 using Xunit;
 
@@ -13,6 +14,6 @@ namespace CompaniesHouse.IntegrationTests.Tests.CompanyInsolvencyInformationTest
             Result = await Client.GetCompanyInsolvencyInformationAsync(InvalidCompanyNumber);
 
         [IntegrationFact]
-        public void ThenTheItemsAreNull() => Result.Data.ShouldBeNull();
+        public void ThenTheItemsAreNull() => Result.ShouldBeOfType<CompaniesHouseResponse<CompanyInsolvencyInformation>.NotFound>();
     }
 }

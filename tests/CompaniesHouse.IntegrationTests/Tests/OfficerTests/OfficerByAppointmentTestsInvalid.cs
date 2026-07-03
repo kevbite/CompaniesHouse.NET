@@ -15,6 +15,6 @@ namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
             Result = await Client.GetOfficerByAppointmentIdAsync(InvalidCompanyNumber, InvalidAppointmentId);
 
         [IntegrationFact]
-        public void ThenTheDataIsNull() => Result.Data.ShouldBeNull();
+        public void ThenTheDataIsNull() => Result.ShouldBeOfType<CompaniesHouseResponse<Officer>.NotFound>();
     }
 }

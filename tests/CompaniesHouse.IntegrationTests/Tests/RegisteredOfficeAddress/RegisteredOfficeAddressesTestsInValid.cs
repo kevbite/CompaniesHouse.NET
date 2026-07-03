@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using CompaniesHouse.Response.RegisteredOfficeAddress;
 using Shouldly;
 using Xunit;
 
@@ -12,6 +13,6 @@ namespace CompaniesHouse.IntegrationTests.Tests.RegisteredOfficeAddress
         protected override async Task When() => Result = await Client.GetRegisteredOfficeAddress(InvalidCompanyNumber);
         
         [IntegrationFact]
-        public void ThenRegisteredOfficeAddressIsNull() => Result.Data.ShouldBeNull();
+        public void ThenRegisteredOfficeAddressIsNull() => Result.ShouldBeOfType<CompaniesHouseResponse<OfficeAddress>.NotFound>();
     }
 }
