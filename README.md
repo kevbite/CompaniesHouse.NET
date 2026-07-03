@@ -306,6 +306,13 @@ enum value, lives in [`samples/SampleProject`](samples/SampleProject).
 See [AGENTS.md](AGENTS.md) for repository conventions, build/test commands and
 the design decisions behind the v-next rewrite.
 
+## Maintainer release notes
+
+NuGet publishing is driven by the CI Docker build, which produces the final
+`.nupkg` artifacts in `./artifacts`. Before push-to-NuGet, CI validates that
+each package contains `README.md` and has nuspec `<readme>README.md</readme>`
+metadata so NuGet.org renders the project README correctly.
+
 ## Running tests
 
 ```powershell

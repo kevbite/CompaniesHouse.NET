@@ -23,6 +23,31 @@ jobs:
         COMPANIES_HOUSE_API_KEY: ${{ secrets.COMPANIES_HOUSE_API_KEY }}
       run: |
         docker build --build-arg NUGET_PACKAGE_VERSION=${{ env.VERSION }} --secret id=companies_house_api_key,env=COMPANIES_HOUSE_API_KEY -f ./Dockerfile --output ./ .
+    - name: Validate NuGet package metadata
+      run: |
+        mapfile -t packages < <(find ./artifacts -maxdepth 1 -type f -name '*.nupkg' ! -name '*.snupkg' | sort)
+        if [ "${#packages[@]}" -eq 0 ]; then
+          echo "No .nupkg files were produced."
+          exit 1
+        fi
+
+        for package in "${packages[@]}"; do
+          if ! unzip -Z1 "$package" | grep -qx "README.md"; then
+            echo "README.md missing from package: $package"
+            exit 1
+          fi
+
+          nuspec_path="$(unzip -Z1 "$package" | grep -E '\.nuspec$' | head -n 1)"
+          if [ -z "$nuspec_path" ]; then
+            echo "No .nuspec file found in package: $package"
+            exit 1
+          fi
+
+          if ! unzip -p "$package" "$nuspec_path" | grep -q '<readme>README.md</readme>'; then
+            echo "NuSpec readme metadata missing from package: $package"
+            exit 1
+          fi
+        done
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
