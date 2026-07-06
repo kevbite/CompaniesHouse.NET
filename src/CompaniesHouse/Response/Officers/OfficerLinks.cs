@@ -1,10 +1,13 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Officers
 {
     public class OfficerLinks
     {
-        [JsonProperty(PropertyName = "officer")]
-        public OfficerAppointmentLink Officer { get; set; }
+        [JsonPropertyName("self")]
+        public string? Self { get; set; }
+
+        [JsonPropertyName("officer")]
+        public OfficerAppointmentLink? Officer { get; set; }
     }
 }

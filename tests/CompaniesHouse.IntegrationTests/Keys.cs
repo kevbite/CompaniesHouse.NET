@@ -4,17 +4,13 @@ namespace CompaniesHouse.IntegrationTests
 {
     public static class Keys
     {
-        public static string ApiKey
-        {
-            get
-            {
-                var key = Environment.GetEnvironmentVariable("COMPANIES_HOUSE_API_KEY");
-                if (string.IsNullOrEmpty(key))
-                {
-                    throw new InvalidOperationException("COMPANIES_HOUSE_API_KEY environment variable is not set.");
-                }
-                return key;
-            }
-        }
+        public static string ApiKey { get; } = Environment.GetEnvironmentVariable("COMPANIES_HOUSE_API_KEY")!;
+
+        /// <summary>
+        /// Same value as <see cref="ApiKey"/> without the null-forgiving suppression, for use by
+        /// <see cref="IntegrationFactAttribute"/>/<see cref="IntegrationTheoryAttribute"/> to decide
+        /// whether to skip a test cleanly when no key is configured.
+        /// </summary>
+        public static string? ApiKeyOrNull { get; } = Environment.GetEnvironmentVariable("COMPANIES_HOUSE_API_KEY");
     }
 }

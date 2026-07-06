@@ -1,20 +1,21 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using CompaniesHouse.Response.Appointments;
-using NUnit.Framework;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.AppointmentsTests
 {
-    public abstract class AppointmentsTestBase
+    public abstract class AppointmentsTestBase : IAsyncLifetime
     {
-        protected CompaniesHouseClient Client;
-        protected CompaniesHouseClientResponse<Appointments> Result;
+        protected CompaniesHouseClient Client = null!;
+        protected CompaniesHouseResponse<Appointments> Result = null!;
 
-        [SetUp]
-        public void Setup()
+        public async Task InitializeAsync()
         {
             GivenACompaniesHouseClient();
-            When();
+            await When();
         }
+
+        public Task DisposeAsync() => Task.CompletedTask;
 
         protected abstract Task When();
 

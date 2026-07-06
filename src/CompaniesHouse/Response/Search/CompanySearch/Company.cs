@@ -1,50 +1,49 @@
 using System;
 using CompaniesHouse.JsonConverters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Search.CompanySearch
 {
     public class Company : SearchItem
     {
-        [JsonProperty(PropertyName = "address")]
-        public Address Address { get; set; }
+        [JsonPropertyName("address")]
+        public Address Address { get; set; } = new();
 
-        [JsonProperty(PropertyName = "company_number")]
-        public string CompanyNumber { get; set; }
+        [JsonPropertyName("address_snippet")]
+        public string AddressSnippet { get; set; } = string.Empty;
 
-        [JsonProperty(PropertyName = "company_status")]
-        [JsonConverter(typeof(OptionalStringEnumConverter<CompanyStatus>), CompanyStatus.None)]
+        [JsonPropertyName("company_number")]
+        public string CompanyNumber { get; set; } = string.Empty;
+
+        [JsonPropertyName("company_status")]
         public CompanyStatus CompanyStatus { get; set; }
 
-        [JsonProperty(PropertyName = "company_type")]
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonPropertyName("company_type")]
         public CompanyType CompanyType { get; set; }
-        
-        [JsonProperty(PropertyName = "company_subtype")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public CompanySubType CompanySubType { get; set; }
-        
-        [JsonProperty(PropertyName = "date_of_cessation")]
+
+        [JsonPropertyName("date_of_cessation")]
         [JsonConverter(typeof(OptionalDateJsonConverter))]
         public DateTime? DateOfCessation { get; set; }
 
-        [JsonProperty(PropertyName = "date_of_creation")]
-        public DateTime? DateOfCreation { get; set; }
+        [JsonPropertyName("date_of_creation")]
+        public DateTime DateOfCreation { get; set; }
 
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        [JsonPropertyName("description")]
+        public string? Description { get; set; }
 
-        [JsonProperty(PropertyName = "description_identifier")]
-        public object[] DescriptionIdentifier { get; set; }
+        [JsonPropertyName("description_identifier")]
+        public string[]? DescriptionIdentifier { get; set; }
 
-        [JsonProperty(PropertyName = "matches")]
-        public Matches Matches { get; set; }
+        [JsonPropertyName("external_registration_number")]
+        public string? ExternalRegistrationNumber { get; set; }
 
-        [JsonProperty(PropertyName = "snippet")]
-        public string Snippet { get; set; }
+        [JsonPropertyName("matches")]
+        public Matches? Matches { get; set; }
 
-        [JsonProperty(PropertyName = "title")]
-        public string Title { get; set; }
+        [JsonPropertyName("snippet")]
+        public string? Snippet { get; set; }
+
+        [JsonPropertyName("title")]
+        public string Title { get; set; } = string.Empty;
     }
 }

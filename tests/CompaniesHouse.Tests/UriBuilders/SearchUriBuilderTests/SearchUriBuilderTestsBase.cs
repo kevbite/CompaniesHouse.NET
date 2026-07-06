@@ -1,14 +1,14 @@
 ﻿using System;
 using CompaniesHouse.Request;
 using CompaniesHouse.UriBuilders;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
 {
     public abstract partial class SearchUriBuilderTestsBase
     {
-        private QuerySearchUriBuilder<SearchCompanyRequest> _uriBuilder;
-        private Uri _actualUri;
+        private readonly SearchUriBuilder<SearchCompanyRequest> _uriBuilder;
         private readonly Uri _baseUri = new Uri("http://testing123.co.uk/bla1/bla2/");
 
         private string Query { get; } = Guid.NewGuid().ToString();
@@ -17,40 +17,32 @@ namespace CompaniesHouse.Tests.UriBuilders.SearchUriBuilderTests
 
         protected virtual int? StartIndex { get; } = null;
 
-        private string _path;
+        private readonly string _path;
 
-
-        [OneTimeSetUp]
-        public void GivenACompanySearchUriBuilder()
+        protected SearchUriBuilderTestsBase()
         {
             _path = "wat/wat/1";
-            _uriBuilder = new QuerySearchUriBuilder<SearchCompanyRequest>(_path);
+            _uriBuilder = new SearchUriBuilder<SearchCompanyRequest>(_path);
         }
 
-        [SetUp]
-        public void WhenBuildingUriWithCompanySearchRequest()
+        private Uri ActualUri => _uriBuilder.Build(new SearchCompanyRequest
         {
-            var request = new SearchCompanyRequest
-            {
-                Query = Query,
-                ItemsPerPage = ItemsPerPage,
-                StartIndex = StartIndex
-            };
+            Query = Query,
+            ItemsPerPage = ItemsPerPage,
+            StartIndex = StartIndex
+        });
 
-            _actualUri = _uriBuilder.Build(request);
-        }
-
-        [Test]
+        [Fact]
         public void ThenTheUriIsNotAbsolute()
         {
-            Assert.That(_actualUri.IsAbsoluteUri, Is.False);
+            ActualUri.IsAbsoluteUri.ShouldBeFalse();
         }
 
-        [Test]
+        [Fact]
         public void ThenTheUriPathIsCorrect()
         {
-            var uri = new Uri(_baseUri, _actualUri);
-            Assert.That(uri.AbsolutePath, Is.EqualTo($"/bla1/bla2/{_path}"));
+            var uri = new Uri(_baseUri, ActualUri);
+            uri.AbsolutePath.ShouldBe($"/bla1/bla2/{_path}");
         }
 
         public Thens Then => new Thens(this);

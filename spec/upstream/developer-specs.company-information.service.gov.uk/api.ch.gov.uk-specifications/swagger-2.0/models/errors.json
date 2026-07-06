@@ -1,0 +1,107 @@
+{
+    "definitions": {
+        "apiError": {
+            "title": "apiError",
+            "type": "object",
+            "required": [
+                "type",
+                "error"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "Type of error.",
+                    "enum": [
+                        "ch:validation",
+                        "ch:service"
+                    ],
+                    "readOnly": true
+                },
+                "error": {
+                    "type": "string",
+                    "description": "The enumerated error being returned. See github for valid <a href=\"https://github.com/companieshouse/api-enumerations/blob/develop/errors.yml\">error enumeration types</a>.",
+                    "readOnly": true
+                },
+                "location_type": {
+                    "type": "string",
+                    "description": "Describes the type of location returned so that it may be parsed appropriately.",
+                    "enum": [
+                        "json-path",
+                        "query-parameter"
+                    ],
+                    "readOnly": true
+                },
+                "location": {
+                    "type": "string",
+                    "description": "The location in the submitted request in which the error relates. This parameter is only provided when errors[].type is set to \"ch:validation\".",
+                    "readOnly": true
+                },
+                "error_values": {
+                    "type": "object",
+                    "description": "A collection of argument name and value pairs which, when substituted into the error string, provide the full description of the error. As many name/value pairs as necessary to complete the error description are returned. See <a href=\"\">example</a> above.",
+                    "additionalProperties": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "key / value string pair."
+                    },
+                    "readOnly": true
+                }
+            }
+        },
+        "apiErrors": {
+            "title": "apiErrors",
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "description": "List of errors.",
+                    "items": {
+                        "$ref": "errors.json#/definitions/apiError"
+                    },
+                    "readOnly": true
+                }
+
+            }
+        },
+        "validationStatus": {
+            "title": "validationStatus",
+            "type": "object",
+            "required": [
+                "is_valid"
+            ],
+            "allOf": [{
+                    "$ref": "errors.json#/definitions/apiErrors"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "is_valid": {
+                            "type": "boolean",
+                            "description": "Indicates whether the resource is valid in its current state. If `false` the resource is invalid and `ch:validation` errors will be included in the `errors` array.",
+                            "readOnly": true
+                        }
+                    }
+                }
+            ]
+
+        },
+        "companyValidation": {
+            "title": "companyValidation",
+            "type": "object",
+            "required": [
+                "eligibility_status_code"
+            ],
+            "allOf": [{
+                    "type": "object",
+                    "properties": {
+                        "eligibility_status_code": {
+                            "type": "string",
+                            "enum": ["INVALID_NO_REGISTERED_EMAIL_ADDRESS_EXISTS", "INVALID_COMPANY_STATUS", "INVALID_COMPANY_TYPE", "COMPANY_NOT_FOUND", "COMPANY_VALID_FOR_SERVICE"],
+                            "readOnly": true
+                        }
+                    }
+                }
+            ]
+
+        }
+    }
+}

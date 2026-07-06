@@ -19,21 +19,13 @@ namespace CompaniesHouse
             _officersAppointmentUriBuilder = officersAppointmentUriBuilder;
         }
 
-        public async Task<CompaniesHouseClientResponse<Officer>> GetOfficerByAppointmentIdAsync(string companyNumber, string appointmentId, CancellationToken cancellationToken = default)
+        public async Task<CompaniesHouseResponse<Officer>> GetOfficerByAppointmentIdAsync(string companyNumber, string appointmentId, CancellationToken cancellationToken = default)
         {
             var requestUri = _officersAppointmentUriBuilder.Build(companyNumber, appointmentId);
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            // Return a null profile on 404s, but raise exception for all other error codes
-            if (response.StatusCode != System.Net.HttpStatusCode.NotFound)
-                response.EnsureSuccessStatusCode2();
-
-            var result = response.IsSuccessStatusCode
-                ? await response.Content.ReadAsJsonAsync<Officer>().ConfigureAwait(false)
-                : null;
-
-            return new CompaniesHouseClientResponse<Officer>(result);
+            return await response.ToCompaniesHouseResponseAsync<Officer>(cancellationToken).ConfigureAwait(false);
         }
     }
 }

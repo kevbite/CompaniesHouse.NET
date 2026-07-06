@@ -1,36 +1,38 @@
-using System;
 using System.Threading.Tasks;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response.Search.OfficerSearch;
-using NUnit.Framework;
+using System.Linq;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
 {
-    [TestFixture]
     public class OfficersSearchTests
     {
-        private CompaniesHouseClient _client;
-        private CompaniesHouseClientResponse<OfficerSearch> _result;
-        
-        [OneTimeSetUp]
-        public void GivenACompaniesHouseClient()
-        {
-            var settings = new CompaniesHouseSettings(Keys.ApiKey);
+        private readonly CompaniesHouseClient _client;
 
-            _client = new CompaniesHouseClient(settings);
+        public OfficersSearchTests()
+        {
+            _client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
         }
 
-        [SetUp]
-        public async Task WhenSearchingForAOfficer()
+        [IntegrationFact]
+        public async Task ThenOfficersAreReturned()
         {
-            _result = await _client.SearchOfficerAsync(new SearchOfficerRequest() { Query = "Kevin" })
-                .ConfigureAwait(false);
+            var result = await _client.SearchOfficerAsync(new SearchOfficerRequest { Query = "Kevin" });
+
+            (result.Data.Officers ?? []).ShouldNotBeEmpty();
         }
 
-        [Test]
-        public void ThenOfficersAreReturned()
+        [IntegrationFact]
+        public async Task ThenLiveOfficerBirthMonthAndPagingMetadataAreReturned()
         {
-            Assert.That(_result.Data.Officers, Is.Not.Empty);
+            var result = await _client.SearchOfficerAsync(new SearchOfficerRequest { Query = "Alan Sugar", ItemsPerPage = 20 });
+
+            var officer = (result.Data.Officers ?? []).First(x => x.Title == "Lord Alan Michael SUGAR" && x.DateOfBirth?.Year == 1947);
+            result.Data.PageNumber.ShouldBe(1);
+            officer.DateOfBirth.ShouldNotBeNull();
+            officer.DateOfBirth.Month.ShouldBe(3);
         }
     }
 }

@@ -1,32 +1,33 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using CompaniesHouse.Response.Officers;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
 {
-    [TestFixture]
+    
     public class OfficersTestsValid : OfficersTestBase<Officers>
     {
         // Google UK company number, unlikely to go away soon
         private const string ValidCompanyNumber = "03977902";
 
-        [SetUp]
+        
         protected override async Task When()
         {
             await WhenRetrievingAnCompanyFilingHistoryForAValidCompany()
-                .ConfigureAwait(false);
+                ;
         }
 
-        [Test]
+        [IntegrationFact]
         public void ThenTheDataItemsAreNotEmpty()
         {
-            Assert.That(Result.Data.Items, Is.Not.Empty);
+            Result.Data.Items.ShouldNotBeEmpty();
         }
 
         private async Task WhenRetrievingAnCompanyFilingHistoryForAValidCompany()
         {
             Result = await Client.GetOfficersAsync(ValidCompanyNumber)
-                .ConfigureAwait(false);
+                ;
         }
     }
 }

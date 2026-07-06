@@ -1,50 +1,64 @@
-﻿using System;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
+using System;
+using System.Text.Json.Serialization;
+using CompaniesHouse.JsonConverters;
 
 namespace CompaniesHouse.Response.Officers
 {
     public class Officer
     {
-        [JsonProperty(PropertyName = "appointed_on")]
+        [JsonPropertyName("etag")]
+        public string? ETag { get; set; }
+
+        [JsonPropertyName("appointed_on")]
         public DateTime? AppointedOn { get; set; }
 
-        [JsonProperty(PropertyName = "resigned_on")]
+        [JsonPropertyName("appointed_before")]
+        [JsonConverter(typeof(OptionalDateJsonConverter))]
+        public DateTime? AppointedBefore { get; set; }
+
+        [JsonPropertyName("resigned_on")]
         public DateTime? ResignedOn { get; set; }
 
-        [JsonProperty(PropertyName = "date_of_birth")]
-        public OfficerDateOfBirth DateOfBirth { get; set; }
+        [JsonPropertyName("date_of_birth")]
+        public OfficerDateOfBirth? DateOfBirth { get; set; }
 
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = string.Empty;
 
-        [JsonProperty(PropertyName = "officer_role")]
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonPropertyName("officer_role")]
         public OfficerRole OfficerRole { get; set; }
 
-        [JsonProperty(PropertyName = "nationality")]
-        public string Nationality { get; set; }
+        [JsonPropertyName("nationality")]
+        public string? Nationality { get; set; }
 
-        [JsonProperty(PropertyName = "occupation")]
-        public string Occupation { get; set; }
+        [JsonPropertyName("occupation")]
+        public string? Occupation { get; set; }
 
-        [JsonProperty(PropertyName = "address")]
-        public Address Address { get; set; }
+        [JsonPropertyName("address")]
+        public Address? Address { get; set; }
 
-        [JsonProperty(PropertyName = "country_of_residence")]
-        public string CountryOfResidence { get; set; }
+        [JsonPropertyName("country_of_residence")]
+        public string? CountryOfResidence { get; set; }
 
-        [JsonProperty(PropertyName = "former_names")]
-        public OfficerFormerName[] FormerNames { get; set; }
+        [JsonPropertyName("former_names")]
+        public OfficerFormerName[]? FormerNames { get; set; }
 
-        [JsonProperty(PropertyName = "identification")]
-        public OfficerIdentification Identification { get; set; }
+        [JsonPropertyName("identification")]
+        public OfficerIdentification? Identification { get; set; }
 
-        [JsonProperty(PropertyName = "links")]
-        public OfficerLinks Links { get; set; }
+        [JsonPropertyName("links")]
+        public OfficerLinks Links { get; set; } = new();
 
-        [JsonProperty(PropertyName = "person_number")]
-        public string PersonNumber { get; set; }
+        [JsonPropertyName("person_number")]
+        public string? PersonNumber { get; set; }
+
+        [JsonPropertyName("is_pre_1992_appointment")]
+        public bool? IsPre1992Appointment { get; set; }
+
+        [JsonPropertyName("identity_verification_details")]
+        public IdentityVerificationDetails? IdentityVerificationDetails { get; set; }
+
+        [JsonIgnore]
+        public string? OfficerId => Links.Officer?.OfficerId;
     }
 }

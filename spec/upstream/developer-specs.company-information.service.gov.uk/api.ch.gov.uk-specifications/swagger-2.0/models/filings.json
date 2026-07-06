@@ -1,0 +1,48 @@
+{
+    "definitions": {
+        "filing": {
+            "title": "Filing",
+            "description": "Filing resource",
+            "required": [
+                "company_number",
+                "description_identifier",
+                "description",
+                "kind",
+                "description_values",
+                "data"
+            ],
+            "properties": {
+                "company_number": {
+                    "type": "string",
+                    "description": "The company registration / incorporation number of the company."
+                },
+                "description_identifier": {
+                    "type": "string",
+                    "description": "An array of enumeration types that make up the description."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of the filing."
+                },
+                "kind": {
+                    "type": "string",
+                    "description": "Type of filing."
+                },
+                "description_values": {
+                    "description": "Data required for the filing description.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "data": {
+                    "description": "Data for the filing.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

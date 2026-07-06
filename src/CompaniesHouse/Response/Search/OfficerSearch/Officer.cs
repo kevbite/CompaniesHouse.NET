@@ -1,39 +1,49 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Search.OfficerSearch
 {
     public class Officer : SearchItem
     {
-        [JsonProperty(PropertyName = "address")]
-        public Address Address { get; set; }
+        [JsonPropertyName("address")]
+        public Address Address { get; set; } = new();
 
-        [JsonProperty(PropertyName = "address_snippet")]
-        public string AddressSnippet { get; set; }
+        [JsonPropertyName("address_snippet")]
+        public string AddressSnippet { get; set; } = string.Empty;
 
-        [JsonProperty(PropertyName = "appointment_count")]
+        [JsonPropertyName("appointment_count")]
         public int AppointmentCount { get; set; }
 
-        [JsonProperty(PropertyName = "date_of_birth")]
-        public DateOfBirth DateOfBirth { get; set; }
+        [JsonPropertyName("date_of_birth")]
+        public DateOfBirth? DateOfBirth { get; set; }
 
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        [JsonPropertyName("description")]
+        public string Description { get; set; } = string.Empty;
 
-        [JsonProperty(PropertyName = "description_identifiers")]
-        public string[] DescriptionIdentifiers { get; set; }
+        [JsonPropertyName("description_identifiers")]
+        public string[]? DescriptionIdentifiers { get; set; }
 
-        [JsonProperty(PropertyName = "matches")]
-        public Match Matches { get; set; }
+        [JsonPropertyName("matches")]
+        public Match? Matches { get; set; }
 
-        [JsonProperty(PropertyName = "snippet")]
-        public string Snippet { get; set; }
+        [JsonPropertyName("snippet")]
+        public string? Snippet { get; set; }
 
-        [JsonProperty(PropertyName = "title")]
-        public string Title { get; set; }
+        [JsonPropertyName("title")]
+        public string Title { get; set; } = string.Empty;
 
-        public string OfficerId
+        public string? OfficerId
         {
-            get { return Links.Self.Split('/')[2]; }
+            get
+            {
+                var self = Links?.Self;
+                if (string.IsNullOrWhiteSpace(self))
+                {
+                    return null;
+                }
+
+                var parts = self.Split('/');
+                return parts.Length > 2 ? parts[2] : null;
+            }
         }
     }
 }

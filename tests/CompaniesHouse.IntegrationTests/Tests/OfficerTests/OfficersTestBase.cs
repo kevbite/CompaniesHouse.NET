@@ -1,19 +1,20 @@
-﻿using System.Threading.Tasks;
-using NUnit.Framework;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
 {
-    public abstract class OfficersTestBase<T>
+    public abstract class OfficersTestBase<T> : IAsyncLifetime
     {
-        protected CompaniesHouseClient Client;
-        protected CompaniesHouseClientResponse<T> Result;
+        protected CompaniesHouseClient Client = null!;
+        protected CompaniesHouseResponse<T> Result = null!;
 
-        [SetUp]
-        public void Setup()
+        public async Task InitializeAsync()
         {
             GivenACompaniesHouseClient();
-            When();
+            await When();
         }
+
+        public Task DisposeAsync() => Task.CompletedTask;
 
         protected abstract Task When();
 

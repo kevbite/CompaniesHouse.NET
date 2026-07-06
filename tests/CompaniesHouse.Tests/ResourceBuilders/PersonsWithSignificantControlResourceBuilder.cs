@@ -20,10 +20,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
                       ""items"" : [
                         {string.Join(",", _personsWithSignificantControl.Items.Select(GetPersonWithSignificantControlJsonBlock).ToArray())}
                       ],
-                      ""ceased_count"" : {_personsWithSignificantControl.CeasedCount},
-                      ""items_per_page"" : {_personsWithSignificantControl.ItemsPerPage},
-                      ""start_index"" : {_personsWithSignificantControl.StartIndex},
-                      ""total_results"" : {_personsWithSignificantControl.TotalResults}
+                      ""ceased_count"" : {_personsWithSignificantControl.CeasedCount}
                 }}";
         }
 

@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.CompanyProfile
 {
     public class AccountingReferenceDate
     {
-        [JsonProperty(PropertyName = "day")]
+        [JsonPropertyName("day")]
         public int Day { get; set; }
 
-        [JsonProperty(PropertyName = "month")]
+        [JsonPropertyName("month")]
         public int Month { get; set; }
     }
 }

@@ -1,18 +1,27 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using CompaniesHouse.Response.Charges;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.ChargesTests
 {
-    [TestFixture]
+
     public class ChargeByIdTestsValid : ChargesTestBase<Charge>
     {
-        private const string CompanyNumber = "00445790";
-        private const string ChargeId = "5QU1lSudRI2jTIfUv_AOVxfLxVE";
+        private const string CompanyNumber = "03977902";
+        private const string ChargeId = "4VMbVfCBWdzCW2fXOF5QTezbJ9g";
 
         protected override async Task When() => Result = await Client.GetChargeByIdAsync(CompanyNumber, ChargeId);
 
-        [Test]
-        public void ThenChargesListIsNull() => Assert.IsNotNull(Result.Data);
+        [IntegrationFact]
+        public void ThenChargesListIsNull() => Result.Data.ShouldNotBeNull();
+
+        [IntegrationFact]
+        public void ThenKnownObservedFieldsAreReturned()
+        {
+            Result.Data.Status.Value.ShouldNotBeNullOrWhiteSpace();
+            Result.Data.Classification?.Type.Value.ShouldNotBeNullOrWhiteSpace();
+            Result.Data.Links?.Self.ShouldBe($"/company/{CompanyNumber}/charges/{ChargeId}");
+        }
     }
 }

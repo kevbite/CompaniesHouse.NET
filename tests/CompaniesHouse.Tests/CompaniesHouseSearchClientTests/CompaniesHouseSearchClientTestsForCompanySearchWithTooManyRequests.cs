@@ -1,22 +1,20 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response.Search.CompanySearch;
 using CompaniesHouse.UriBuilders;
-using FluentAssertions;
 using Moq;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
 {
-    [TestFixture]
-    public class CompaniesHouseSearchClientTestsForCompanySearchWithTooManyRequests
+    public class CompaniesHouseSearchClientTestsForCompanySearchWithTooManyRequests : IAsyncLifetime
     {
-        private Exception _caughtException;
+        private CompaniesHouseResponse<CompanySearch>? _response;
 
-        [OneTimeSetUp]
-        public async Task GivenACompanyHouseSearchCompanyClient_WhenSearchingForACompanyAndApiReturnsTooManyRequests()
+        public async Task InitializeAsync()
         {
             var uri = new Uri("https://wibble.com/search/companies");
 
@@ -27,23 +25,17 @@ namespace CompaniesHouse.Tests.CompaniesHouseSearchClientTests
                 BaseAddress = new Uri("https://wibble.com/")
             }, new SearchUriBuilderFactory());
 
-            try
-            {
-                await client.SearchAsync<SearchCompanyRequest, CompanySearch>(new SearchCompanyRequest());
-            }
-            catch (Exception ex)
-            {
-                _caughtException = ex;
-            }
+            _response = await client.SearchAsync<SearchCompanyRequest, CompanySearch>(new SearchCompanyRequest());
         }
 
-        [Test]
-        public void ThenExceptionIsThrown()
+        public Task DisposeAsync() => Task.CompletedTask;
+
+        [Fact]
+        public void ThenUnsuccessfulResponseIsReturned()
         {
-            _caughtException.Should().BeOfType<HttpRequestException>();
-
-            _caughtException.As<HttpRequestException>().Message.Should().StartWith("Response status code does not indicate success: 429");
+            _response.ShouldNotBeNull();
+            _response.ShouldBeOfType<CompaniesHouseResponse<CompanySearch>.RateLimited>();
+            _response.StatusCode.ShouldBe(429);
         }
-
     }
 }

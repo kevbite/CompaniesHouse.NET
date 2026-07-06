@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
-namespace CompaniesHouse.Response.CompanyProfile;
-
-public class MustFileWithin
+namespace CompaniesHouse.Response.CompanyProfile
 {
-    [JsonProperty("months")]
-    public int? Months { get; set; }
+    public class MustFileWithin
+    {
+        [JsonPropertyName("months")]
+        public string? Months { get; set; }
+    }
 }

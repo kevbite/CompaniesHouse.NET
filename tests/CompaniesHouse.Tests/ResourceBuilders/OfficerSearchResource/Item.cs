@@ -1,27 +1,27 @@
-﻿namespace CompaniesHouse.Tests.ResourceBuilders.OfficerSearchResource
+namespace CompaniesHouse.Tests.ResourceBuilders.OfficerSearchResource
 {
     public class Item
     {
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
 
-        public string Snippet { get; set; }
+        public string Snippet { get; set; } = null!;
 
-        public DateOfBirth DateOfBirth { get; set; }
+        public DateOfBirth DateOfBirth { get; set; } = null!;
 
-        public string AddressSnippet { get; set; }
+        public string AddressSnippet { get; set; } = null!;
 
-        public Address Address { get; set; }
+        public Address Address { get; set; } = null!;
 
-        public string[] DescriptionIdentifiers { get; set; }
+        public string[] DescriptionIdentifiers { get; set; } = null!;
 
         public int AppointmentCount { get; set; }
 
-        public Links Links { get; set; }
+        public Links Links { get; set; } = null!;
 
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
 
-        public string Kind { get; set; }
+        public string Kind { get; set; } = null!;
 
-        public Matches Matches { get; set; }
+        public Matches Matches { get; set; } = null!;
     }
 }

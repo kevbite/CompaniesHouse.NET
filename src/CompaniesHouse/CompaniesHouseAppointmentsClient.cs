@@ -1,7 +1,8 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using CompaniesHouse.Response.Appointments;
+using CompaniesHouse.UriBuilders;
 
 namespace CompaniesHouse
 {
@@ -10,23 +11,21 @@ namespace CompaniesHouse
     public class CompaniesHouseAppointmentsClient : ICompaniesHouseAppointmentsClient
     {
         private readonly HttpClient _httpClient;
+        private readonly IAppointmentsUriBuilder _appointmentsUriBuilder;
 
-        public CompaniesHouseAppointmentsClient(HttpClient httpClient)
+        public CompaniesHouseAppointmentsClient(HttpClient httpClient, IAppointmentsUriBuilder appointmentsUriBuilder)
         {
             _httpClient = httpClient;
+            _appointmentsUriBuilder = appointmentsUriBuilder;
         }
 
-        public async Task<CompaniesHouseClientResponse<Appointments>> GetAppointmentsAsync(string officerId, int startIndex, int pageSize, CancellationToken cancellationToken)
+        public async Task<CompaniesHouseResponse<Appointments>> GetAppointmentsAsync(string officerId, int startIndex, int pageSize, CancellationToken cancellationToken)
         {
-            var requestUri = $"officers/{officerId}/appointments?items_per_page={pageSize}&start_index={startIndex}";
+            var requestUri = _appointmentsUriBuilder.Build(officerId, startIndex, pageSize);
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            response.EnsureSuccessStatusCode2();
-
-            var result = await response.Content.ReadAsJsonAsync<Appointments>().ConfigureAwait(false);
-
-            return new CompaniesHouseClientResponse<Appointments>(result);
+            return await response.ToCompaniesHouseResponseAsync<Appointments>(cancellationToken).ConfigureAwait(false);
         }
     }
 }

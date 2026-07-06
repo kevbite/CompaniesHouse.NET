@@ -1,9 +1,8 @@
-﻿using System.Text;
-using CompaniesHouse.Request;
+﻿using CompaniesHouse.Request;
 
 namespace CompaniesHouse.UriBuilders;
 
-public class SearchCompanyUriBuilder : QuerySearchUriBuilder<SearchCompanyRequest>
+public class SearchCompanyUriBuilder : SearchUriBuilder<SearchCompanyRequest>
 {
     public SearchCompanyUriBuilder(string path) : base(path)
     {
@@ -11,10 +10,13 @@ public class SearchCompanyUriBuilder : QuerySearchUriBuilder<SearchCompanyReques
 
     protected override string BuildQuery(SearchCompanyRequest request)
     {
-        var queryBuilder = new StringBuilder(base.BuildQuery(request));
+        var query = base.BuildQuery(request);
 
-        AppendParameterIfValid(queryBuilder, "restrictions", request.Restrictions, value => !string.IsNullOrWhiteSpace(value));
+        if (!string.IsNullOrWhiteSpace(request.Restrictions))
+        {
+            query += "&restrictions=" + Uri.EscapeDataString(request.Restrictions);
+        }
 
-        return queryBuilder.ToString();
+        return query;
     }
 }

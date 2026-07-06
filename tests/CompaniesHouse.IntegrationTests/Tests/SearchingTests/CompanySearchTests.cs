@@ -1,44 +1,61 @@
-﻿using System;
 using System.Threading.Tasks;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response.Search.CompanySearch;
-using NUnit.Framework;
+using System.Linq;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
 {
-    [TestFixture("brighouse computers")]
-    [TestFixture("British Gas")]
-    [TestFixture("Bay Horse")]
     public class CompanySearchTests
     {
-        private readonly string _query;
-        private CompaniesHouseClient _client;
-        private CompaniesHouseClientResponse<CompanySearch> _result;
+        private readonly CompaniesHouseClient _client;
 
-        public CompanySearchTests(string query)
+        public CompanySearchTests()
         {
-            _query = query;
+            _client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
         }
 
-        [OneTimeSetUp]
-        public void GivenACompaniesHouseClient()
+        [IntegrationTheory]
+        [InlineData("brighouse computers")]
+        [InlineData("British Gas")]
+        [InlineData("Bay Horse")]
+        public async Task ThenCompaniesAreReturned(string query)
         {
-            var settings = new CompaniesHouseSettings(Keys.ApiKey);
+            var result = await _client.SearchCompanyAsync(new SearchCompanyRequest { Query = query, StartIndex = 0, ItemsPerPage = 100 });
 
-            _client = new CompaniesHouseClient(settings);
+            (result.Data.Companies ?? []).ShouldNotBeEmpty();
         }
 
-        [SetUp]
-        public async Task WhenSearchingForACompany()
+        [IntegrationFact]
+        public async Task ThenForeignCompanyFieldsAreReturned()
         {
-            _result = await _client.SearchCompanyAsync(new SearchCompanyRequest() { Query = _query, StartIndex = 0, ItemsPerPage = 100 })
-                .ConfigureAwait(false);
+            var result = await _client.SearchCompanyAsync(new SearchCompanyRequest
+            {
+                Query = "absa uk permanent establishment",
+                StartIndex = 0,
+                ItemsPerPage = 20,
+            });
+
+            var company = (result.Data.Companies ?? []).Single(x => x.CompanyNumber == "FC040879");
+            result.Data.PageNumber.ShouldBe(1);
+            company.AddressSnippet.ShouldBe("Absa Towers West, 15 Troye Street, Johannesburg, Gauteng 2000, South Africa");
+            company.ExternalRegistrationNumber.ShouldBe("198600479406");
+            company.DescriptionIdentifier.ShouldBe(["first-uk-establishment-opened-on"]);
         }
 
-        [Test]
-        public void ThenCompaniesAreReturned()
+        [IntegrationFact]
+        public async Task ThenRestrictionsCanBeSentToTheLiveApi()
         {
-            Assert.That(_result.Data.Companies, Is.Not.Empty);
+            var result = await _client.SearchCompanyAsync(new SearchCompanyRequest
+            {
+                Query = "tesco",
+                Restrictions = "active-companies-only",
+                ItemsPerPage = 10,
+            });
+
+            result.Data.ShouldNotBeNull();
+            (result.Data.Companies ?? []).ShouldNotBeEmpty();
         }
     }
 }

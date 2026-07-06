@@ -1,0 +1,538 @@
+{
+    "listCompanyPSC": {
+        "get": {
+            "summary": "List the company persons with significant control",
+            "description": "List of all persons with significant control (not statements)",
+            "x-operationName": "list",
+            "parameters": [
+                {
+                    "name": "company_number",
+                    "in": "path",
+                    "description": "The company number of the persons with significant control list being requested.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "items_per_page",
+                    "in": "query",
+                    "description": "The number of persons with significant control to return per page.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "start_index",
+                    "in": "query",
+                    "description": "The offset into the entire result set that this page starts.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "register_view",
+                    "in": "query",
+                    "description": "Display register specific information. If register is held at Companies House and register_view is set to true, only PSCs which are active or were terminated during election period are shown. Accepted values are: -`true`  \n -`false`  \n Defaults to false.",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "tags": [
+                "personsWithSignificantControl"
+            ],
+            "responses": {
+                "200": {
+                    "description": "readCompanyProfile",
+                    "headers": {
+                        "ETag": {
+                            "description": "The ETag of the resource.",
+                            "type": "string"
+                        }
+                    },
+                    "schema": {
+                        "$ref": "pscModels.json#/definitions/list"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorised"
+                },
+                "404": {
+                    "description": "Resource not found"
+                }
+            }
+        }
+    },
+    "getIndividualPSC": {
+        "get": {
+            "summary": "Get the individual person with significant control notification",
+            "description": "Get details of the individual person with significant control notification",
+            "x-operationName": "get individual",
+            "parameters": [
+                {
+                    "name": "company_number",
+                    "in": "path",
+                    "description": "The company number of the person with significant control details being requested.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "notification_id",
+                    "in": "path",
+                    "description": "The notification id of the person with significant control notification being requested.",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "tags": [
+                "personsWithSignificantControl"
+            ],
+            "responses": {
+                "200": {
+                    "description": "IndividualPSC resource returned",
+                    "headers": {
+                        "ETag": {
+                            "description": "The ETag of the resource.",
+                            "type": "string"
+                        }
+                    },
+                    "schema": {
+                        "$ref": "pscModels.json#/definitions/individual"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorised"
+                },
+                "404": {
+                    "description": "Resource not found"
+                }
+            }
+        }
+    },
+    "getIndividualBO": {
+        "get": {
+            "summary": "Get the individual beneficial owner notification",
+            "description": "Get details of an individual beneficial owner notification",
+            "x-operationName": "get individual beneficial owner",
+            "parameters": [
+                {
+                    "name": "company_number",
+                    "in": "path",
+                    "description": "The company number of the individual beneficial owner details being requested.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "notification_id",
+                    "in": "path",
+                    "description": "The notification id of the individual beneficial owner notification being requested.",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "tags": [
+                "personsWithSignificantControl"
+            ],
+            "responses": {
+                "200": {
+                    "description": "IndividualBO resource returned",
+                    "headers": {
+                        "ETag": {
+                            "description": "The ETag of the resource.",
+                            "type": "string"
+                        }
+                    },
+                    "schema": {
+                        "$ref": "pscModels.json#/definitions/individualBeneficialOwner"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorised"
+                },
+                "404": {
+                    "description": "Resource not found"
+                }
+            }
+        }
+    },
+    "getCorporateEntityPSC": {
+        "get": {
+            "summary": "Get the corporate entity with significant control notification",
+            "description": "Get details of a corporate entity with significant control notification",
+            "x-operationName": "get corporate entities",
+            "parameters": [
+                {
+                    "name": "company_number",
+                    "in": "path",
+                    "description": "The company number of the corporate entity with significant control details being requested.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "notification_id",
+                    "in": "path",
+                    "description": "The notification id of the corporate entity with significant control notification being requested.",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "tags": [
+                "personsWithSignificantControl"
+            ],
+            "responses": {
+                "200": {
+                    "description": "CorporateEntityPSC resource returned",
+                    "headers": {
+                        "ETag": {
+                            "description": "The ETag of the resource.",
+                            "type": "string"
+                        }
+                    },
+                    "schema": {
+                        "$ref": "pscModels.json#/definitions/corporateEntity"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorised"
+                },
+                "404": {
+                    "description": "Resource not found"
+                }
+            }
+        }
+    },
+    "getCorporateEntityBO": {
+        "get": {
+            "summary": "Get the corporate entity beneficial owner notification",
+            "description": "Get details of the corporate entity beneficial owner notification",
+            "x-operationName": "get corporate entity beneficial owner",
+            "parameters": [
+                {
+                    "name": "company_number",
+                    "in": "path",
+                    "description": "The company number of the corporate entity beneficial owner details being requested.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "notification_id",
+                    "in": "path",
+                    "description": "The notification id of the corporate entity beneficial owner notification being requested.",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "tags": [
+                "personsWithSignificantControl"
+            ],
+            "responses": {
+                "200": {
+                    "description": "CorporateEntityBO resource returned",
+                    "headers": {
+                        "ETag": {
+                            "description": "The ETag of the resource.",
+                            "type": "string"
+                        }
+                    },
+                    "schema": {
+                        "$ref": "pscModels.json#/definitions/corporateEntityBeneficialOwner"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorised"
+                },
+                "404": {
+                    "description": "Resource not found"
+                }
+            }
+        }
+    },
+    "getLegalPersonPSC": {
+        "get": {
+            "summary": "Get the legal person with significant control notification",
+            "description": "Get details of the legal person with significant control notification",
+            "x-operationName": "get legal persons",
+            "parameters": [
+                {
+                    "name": "company_number",
+                    "in": "path",
+                    "description": "The company number of the legal person with significant control details being requested.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "notification_id",
+                    "in": "path",
+                    "description": "The notification id of the legal person with significant control notification being requested.",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "tags": [
+                "personsWithSignificantControl"
+            ],
+            "responses": {
+                "200": {
+                    "description": "LegalPersonPSC resource returned",
+                    "headers": {
+                        "ETag": {
+                            "description": "The ETag of the resource.",
+                            "type": "string"
+                        }
+                    },
+                    "schema": {
+                        "$ref": "pscModels.json#/definitions/legalPerson"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorised"
+                },
+                "404": {
+                    "description": "Resource not found"
+                }
+            }
+        }
+    },
+    "getLegalPersonBO": {
+        "get": {
+            "summary": "Get the legal person beneficial owner notification",
+            "description": "Get details of the legal person beneficial owner notification",
+            "x-operationName": "get legal person beneficial owner",
+            "parameters": [
+                {
+                    "name": "company_number",
+                    "in": "path",
+                    "description": "The company number of the legal person beneficial owner details being requested.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "notification_id",
+                    "in": "path",
+                    "description": "The notification id of the legal person beneficial owner notification being requested.",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "tags": [
+                "personsWithSignificantControl"
+            ],
+            "responses": {
+                "200": {
+                    "description": "LegalPersonBO resource returned",
+                    "headers": {
+                        "ETag": {
+                            "description": "The ETag of the resource.",
+                            "type": "string"
+                        }
+                    },
+                    "schema": {
+                        "$ref": "pscModels.json#/definitions/legalPersonBeneficialOwner"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorised"
+                },
+                "404": {
+                    "description": "Resource not found"
+                }
+            }
+        }
+    },
+    "listCompanyPSCStatements": {
+        "get": {
+            "summary": "List the company persons with significant control statements",
+            "description": "List of all persons with significant control statements",
+            "x-operationName": "list statements",
+            "parameters": [
+                {
+                    "name": "company_number",
+                    "in": "path",
+                    "description": "The company number of the persons with significant control statements list being requested.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "items_per_page",
+                    "in": "query",
+                    "description": "The id of the legal person with significant control details being requested.",
+                    "required": true,
+                    "type": "integer"
+                },
+                {
+                    "name": "start_index",
+                    "in": "query",
+                    "description": "The offset into the entire result set that this page starts.",
+                    "required": true,
+                    "type": "integer"
+                },
+                {
+                    "name": "register_view",
+                    "in": "query",
+                    "description": "Display register specific information. If register is held at Companies House and register_view is set to true, only statements which are active or were withdrawn during election period are shown. Accepted values are: -`true`  \n -`false`  \n Defaults to false.",
+                    "required": true,
+                    "type": "query"
+                }
+            ],
+            "tags": [
+                "personsWithSignificantControl"
+            ],
+            "responses": {
+                "200": {
+                    "description": "CompanyPSCStatements resource returned",
+                    "headers": {
+                        "ETag": {
+                            "description": "The ETag of the resource.",
+                            "type": "string"
+                        }
+                    },
+                    "schema": {
+                        "$ref": "pscModels.json#/definitions/statementList"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorised"
+                },
+                "404": {
+                    "description": "Resource not found"
+                }
+            }
+        }
+    },
+    "getPSCStatement": {
+        "get": {
+            "summary": "Get the person with significant control statement",
+            "description": "Get details of a person with significant control statement",
+            "x-operationName": "get statement",
+            "parameters": [
+                {
+                    "name": "company_number",
+                    "in": "path",
+                    "description": "The company number of the persons with significant control statements list being requested.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "statement_id",
+                    "in": "path",
+                    "description": "The id of the person with significant control statement details being requested.",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "tags": [
+                "personsWithSignificantControl"
+            ],
+            "responses": {
+                "200": {
+                    "description": "PSCStatement resource returned",
+                    "headers": {
+                        "ETag": {
+                            "description": "The ETag of the resource.",
+                            "type": "string"
+                        }
+                    },
+                    "schema": {
+                        "$ref": "pscModels.json#/definitions/statement"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorised"
+                },
+                "404": {
+                    "description": "Resource not found"
+                }
+            }
+        }
+    },
+    "getSuperSecurePSC": {
+        "get": {
+            "summary": "Get the super secure person with significant control",
+            "description": "Get details of a super secure person with significant control",
+            "x-operationName": "get super secure person",
+            "parameters": [
+                {
+                    "name": "company_number",
+                    "in": "path",
+                    "description": "The company number of the super secure person with significant control details being requested.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "super_secure_id",
+                    "in": "path",
+                    "description": "The id of the super secure person with significant control details being requested.",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "tags": [
+                "personsWithSignificantControl"
+            ],
+            "responses": {
+                "200": {
+                    "description": "SuperSecurePSC resource returned",
+                    "headers": {
+                        "ETag": {
+                            "description": "The ETag of the resource.",
+                            "type": "string"
+                        }
+                    },
+                    "schema": {
+                        "$ref": "pscModels.json#/definitions/superSecure"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorised"
+                },
+                "404": {
+                    "description": "Resource not found"
+                }
+            }
+        }
+    },
+    "getSuperSecureBO": {
+        "get": {
+            "summary": "Get the super secure beneficial owner",
+            "description": "Get details of a super secure beneficial owner",
+            "x-operationName": "get super secure beneficial owner",
+            "parameters": [
+                {
+                    "name": "company_number",
+                    "in": "path",
+                    "description": "The company number of the super secure beneficial owner details being requested.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "super_secure_id",
+                    "in": "path",
+                    "description": "The id of the super secure beneficial owner details being requested.",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "tags": [
+                "personsWithSignificantControl"
+            ],
+            "responses": {
+                "200": {
+                    "description": "SuperSecureBO resource returned",
+                    "headers": {
+                        "ETag": {
+                            "description": "The ETag of the resource.",
+                            "type": "string"
+                        }
+                    },
+                    "schema": {
+                        "$ref": "pscModels.json#/definitions/superSecureBeneficialOwner"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorised"
+                },
+                "404": {
+                    "description": "Resource not found"
+                }
+            }
+        }
+    }
+}
+
+

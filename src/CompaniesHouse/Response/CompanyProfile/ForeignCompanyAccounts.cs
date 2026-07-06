@@ -1,15 +1,16 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
-namespace CompaniesHouse.Response.CompanyProfile;
-
-public class ForeignCompanyAccounts
+namespace CompaniesHouse.Response.CompanyProfile
 {
-    [JsonProperty("account_period_from:")]
-    public ForeignCompanyPeriodFrom AccountPeriodFrom { get; set; }
+    public class ForeignCompanyAccounts
+    {
+        [JsonPropertyName("account_period_from")]
+        public AccountingReferenceDate? AccountPeriodFrom { get; set; }
 
-    [JsonProperty("account_period_to")]
-    public ForeignCompanyPeriodTo AccountPeriodTo { get; set; }
+        [JsonPropertyName("account_period_to")]
+        public AccountingReferenceDate? AccountPeriodTo { get; set; }
 
-    [JsonProperty("must_file_within")]
-    public MustFileWithin MustFileWithin { get; set; }
+        [JsonPropertyName("must_file_within")]
+        public MustFileWithin? MustFileWithin { get; set; }
+    }
 }

@@ -1,65 +1,140 @@
 ﻿namespace CompaniesHouse.Tests.Extensions
 {
     using System;
+    using System.Net.Http.Json;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
+    using System.Threading.Tasks;
     using CompaniesHouse.Extensions;
-    using NUnit.Framework;
+    using Shouldly;
+    using Xunit;
 
-    [TestFixture]
     public class HttpResponseMessageExtensionsTests
     {
-        [Test]
-        public void GivenAnHttpResponse_WhenTheStatusCodeIsSuccess_ThenEnsureSuccessStatusCode2ReturnsTheHttpResponse()
+        [Theory]
+        [InlineData(200)]
+        [InlineData(201)]
+        [InlineData(204)]
+        public async Task GivenAnHttpResponse_WhenTheStatusCodeIs2xx_ThenReturnsSuccess(int statusCode)
         {
-            for (var statusCode = 200; statusCode < 299; statusCode++)
+            var sut = new HttpResponseMessage((HttpStatusCode)statusCode)
             {
-                var sut = new HttpResponseMessage((HttpStatusCode)200);
-                var responseMessage = sut.EnsureSuccessStatusCode2();
-                Assert.AreEqual(responseMessage, sut);
-            }
+                Content = JsonContent.Create(new TestPayload { Value = "ok" })
+            };
+
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
+
+            var success = response.ShouldBeOfType<CompaniesHouseResponse<TestPayload>.Success>();
+            success.Data.ShouldNotBeNull();
+            success.Data.Value.ShouldBe("ok");
+            success.StatusCode.ShouldBe(statusCode);
+            success.Headers.ShouldBe(sut.Headers);
         }
 
-        [TestCase(410, "Gone", 0, null)]
-        [TestCase(429, "Too Many Requests", 300, null)]
-        [TestCase(503, "Service Unavailable", 0, "2015-10-08T12:34:56.000+1")]
-        [TestCase(503, "Service Unavailable", -1, null)]
-        public void GivenAnHttpResponse_WhenTheStatusCodeIsNotSuccess_ThenEnsureSuccessStatusCode2ThrowsHttpRequestExceptionWithData(
-            int statusCode,
-            string reasonPhrase,
-            int retryAfterSeconds,
-            string retryAfterDate)
+        [Fact]
+        public async Task GivenAnHttpResponse_WhenTheStatusCodeIs404_ThenReturnsNotFound()
         {
-            var sut = new HttpResponseMessage((HttpStatusCode)statusCode) { ReasonPhrase = reasonPhrase };
-            var retryAfterDateTimeOffset = DateTimeOffset.MinValue;
-            if (!string.IsNullOrWhiteSpace(retryAfterDate))
-            {
-                retryAfterDateTimeOffset = DateTimeOffset.Parse(retryAfterDate);
-            }
+            var sut = new HttpResponseMessage(HttpStatusCode.NotFound) { ReasonPhrase = "Not Found" };
 
-            if (retryAfterSeconds >= 0 || !string.IsNullOrWhiteSpace(retryAfterDate))
-            {
-                sut.Headers.RetryAfter = string.IsNullOrWhiteSpace(retryAfterDate)
-                ? new RetryConditionHeaderValue(TimeSpan.FromSeconds(retryAfterSeconds))
-                : new RetryConditionHeaderValue(retryAfterDateTimeOffset);
-            }
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
 
-            var exception = Assert.Throws<HttpRequestException>(() => sut.EnsureSuccessStatusCode2());
-            Assert.AreEqual(statusCode, exception.Data["StatusCode"]);
-            Assert.AreEqual(reasonPhrase, exception.Data["ReasonPhrase"]);
+            var notFound = response.ShouldBeOfType<CompaniesHouseResponse<TestPayload>.NotFound>();
+            notFound.StatusCode.ShouldBe(404);
+            notFound.ReasonPhrase.ShouldBe("Not Found");
+        }
 
-            if (retryAfterSeconds >= 0 || !string.IsNullOrWhiteSpace(retryAfterDate))
-            {
-                Assert.AreEqual(string.IsNullOrWhiteSpace(retryAfterDate)
-                        ? retryAfterSeconds.ToString()
-                        : retryAfterDateTimeOffset.ToString("R"),
-                    exception.Data["RetryAfter"]);
-            }
-            else
-            {
-                Assert.AreEqual(null, exception.Data["RetryAfter"]);
-            }
+        [Fact]
+        public async Task GivenAnHttpResponse_WhenTheStatusCodeIs429_ThenReturnsRateLimited()
+        {
+            var sut = new HttpResponseMessage((HttpStatusCode)429) { ReasonPhrase = "Too Many Requests" };
+            sut.Headers.RetryAfter = new RetryConditionHeaderValue(TimeSpan.FromSeconds(300));
+
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
+
+            var rateLimited = response.ShouldBeOfType<CompaniesHouseResponse<TestPayload>.RateLimited>();
+            rateLimited.StatusCode.ShouldBe(429);
+            rateLimited.RetryAfter.ShouldBe(TimeSpan.FromSeconds(300));
+        }
+
+        [Fact]
+        public async Task GivenAnHttpResponse_WhenTheStatusCodeIs429WithNoRetryAfter_ThenReturnsRateLimitedWithNullRetryAfter()
+        {
+            var sut = new HttpResponseMessage((HttpStatusCode)429) { ReasonPhrase = "Too Many Requests" };
+
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
+
+            var rateLimited = response.ShouldBeOfType<CompaniesHouseResponse<TestPayload>.RateLimited>();
+            rateLimited.RetryAfter.ShouldBeNull();
+        }
+
+        [Theory]
+        [InlineData(401)]
+        [InlineData(403)]
+        public async Task GivenAnHttpResponse_WhenTheStatusCodeIs401Or403_ThenReturnsUnauthorized(int statusCode)
+        {
+            var sut = new HttpResponseMessage((HttpStatusCode)statusCode);
+
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
+
+            var unauthorized = response.ShouldBeOfType<CompaniesHouseResponse<TestPayload>.Unauthorized>();
+            unauthorized.StatusCode.ShouldBe(statusCode);
+        }
+
+        [Theory]
+        [InlineData(500)]
+        [InlineData(503)]
+        public async Task GivenAnHttpResponse_WhenTheStatusCodeIs5xx_ThenReturnsServerError(int statusCode)
+        {
+            var sut = new HttpResponseMessage((HttpStatusCode)statusCode) { ReasonPhrase = "Server Error" };
+
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
+
+            var serverError = response.ShouldBeOfType<CompaniesHouseResponse<TestPayload>.ServerError>();
+            serverError.StatusCode.ShouldBe(statusCode);
+            serverError.RetryAfter.ShouldBeNull();
+        }
+
+        [Fact]
+        public async Task GivenAnHttpResponse_WhenThe5xxResponseHasRetryAfter_ThenServerErrorIncludesRetryAfter()
+        {
+            var sut = new HttpResponseMessage(HttpStatusCode.ServiceUnavailable);
+            sut.Headers.RetryAfter = new RetryConditionHeaderValue(TimeSpan.FromSeconds(60));
+
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
+
+            var serverError = response.ShouldBeOfType<CompaniesHouseResponse<TestPayload>.ServerError>();
+            serverError.RetryAfter.ShouldBe(TimeSpan.FromSeconds(60));
+        }
+
+        [Theory]
+        [InlineData(400)]
+        [InlineData(410)]
+        [InlineData(422)]
+        public async Task GivenAnHttpResponse_WhenTheStatusCodeIsOther4xx_ThenReturnsClientError(int statusCode)
+        {
+            var sut = new HttpResponseMessage((HttpStatusCode)statusCode);
+
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
+
+            var clientError = response.ShouldBeOfType<CompaniesHouseResponse<TestPayload>.ClientError>();
+            clientError.StatusCode.ShouldBe(statusCode);
+        }
+
+        [Fact]
+        public async Task GivenANonSuccessResponse_WhenAccessingData_ThenThrowsInvalidOperationException()
+        {
+            var sut = new HttpResponseMessage(HttpStatusCode.NotFound) { ReasonPhrase = "Not Found" };
+
+            var response = await sut.ToCompaniesHouseResponseAsync<TestPayload>();
+
+            Should.Throw<InvalidOperationException>(() => _ = response.Data);
+        }
+
+        private sealed class TestPayload
+        {
+            public string? Value { get; set; }
         }
     }
 }
+

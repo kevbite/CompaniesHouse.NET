@@ -2,12 +2,12 @@ namespace CompaniesHouse.Tests.CompaniesHouseCompanyFilingHistoryClientTests
 {
     public class CompaniesHouseCompanyFilingHistoryClientTestCase
     {
-        public string Category { get; set; }
+        public string Category { get; set; } = null!;
 
-        public string Subcategory { get; set; }
+        public string Subcategory { get; set; } = null!;
 
-        public string HistoryStatus { get; set; }
+        public string HistoryStatus { get; set; } = null!;
 
-        public string ResolutionCategory { get; set; }
+        public string ResolutionCategory { get; set; } = null!;
     }
 }

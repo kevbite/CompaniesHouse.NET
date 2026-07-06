@@ -1,28 +1,28 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Search.CompanySearch
 {
     public class CompanySearch
     {
-        [JsonProperty(PropertyName = "etag")]
-        public string ETag { get; set; }
+        [JsonPropertyName("etag")]
+        public string? ETag { get; set; }
 
-        [JsonProperty(PropertyName = "items")]
-        public Company[] Companies { get; set; }
+        [JsonPropertyName("items")]
+        public Company[]? Companies { get; set; }
 
-        [JsonProperty(PropertyName = "items_per_page")]
-        public int ItemsPerPage { get; set; }
+        [JsonPropertyName("items_per_page")]
+        public int? ItemsPerPage { get; set; }
 
-        [JsonProperty(PropertyName = "kind")]
-        public string Kind { get; set; }
+        [JsonPropertyName("kind")]
+        public string? Kind { get; set; }
 
-        [JsonProperty(PropertyName = "page_number")]
-        public int PageNumber { get; set; }
+        [JsonPropertyName("page_number")]
+        public int? PageNumber { get; set; }
 
-        [JsonProperty(PropertyName = "start_index")]
-        public int StartIndex { get; set; }
+        [JsonPropertyName("start_index")]
+        public int? StartIndex { get; set; }
 
-        [JsonProperty(PropertyName = "total_results")]
-        public int TotalResults { get; set; }
+        [JsonPropertyName("total_results")]
+        public int? TotalResults { get; set; }
     }
 }

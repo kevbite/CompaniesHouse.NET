@@ -1,0 +1,414 @@
+{
+  "get": {
+    "summary": "Persons with significant control Notification List",
+    "tags": [
+      "personsWithSignificantControlNotifications"
+    ],
+    "x-operationName": "list",
+    "description": "List of all notifications of a specific person with significant control",
+    "parameters": [
+      {
+        "name": "psc_id",
+        "in": "path",
+        "description": "The person with significant control id of the notification list being requested",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "filter",
+        "in": "query",
+        "description": "Use “active” to return only active notifications.",
+        "type": "string"
+      },
+      {
+        "name": "items_per_page",
+        "in": "query",
+        "description": "The number of notifications to return per page.",
+        "type": "integer"
+      },
+      {
+        "name": "start_index",
+        "in": "query",
+        "description": "The first row of data to retrieve, starting at 0. Use this parameter as a pagination mechanism along with the items_per_page parameter.",
+        "type": "integer"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "List the person with significant control notifications",
+        "schema": {
+          "$ref": "pscNotificationList.json#/definitions/notificationList"
+        }
+      },
+      "400": {
+        "description": "Bad request"
+      },
+      "401": {
+        "description": "Unauthorised"
+      }
+    }
+  },
+"definitions": {
+    "notificationList": {
+            "title": "notificationList",
+            "required": [
+                "active_count",
+                "ceased_count",
+                "inactive_count",
+                "items",
+                "items_per_page",
+                "links",
+                "name",
+                "start_index",
+                "total_results",
+                "kind"
+            ],
+            "properties": {
+                "active_count": {
+                    "type": "integer",
+                    "description": "The number of active persons with significant control notifications in this result set."
+                },
+                "ceased_count": {
+                    "type": "integer",
+                    "description": "The number of ceased persons with significant control notifications in this result set."
+                },
+                "date_of_birth": {
+                    "type": "object",
+                    "description": "The date of birth of the person with significant control.",
+                    "required": [
+                        "month",
+                        "year"
+                    ],
+                    "properties": {
+                        "month": {
+                            "type": "integer",
+                            "description": "The month of date of birth."
+                        },
+                        "year": {
+                            "type": "integer",
+                            "description": "The year of date of birth."
+                        }
+                    }
+                },
+                "inactive_count": {
+                    "type": "integer",
+                    "description": "The number of inactive persons with significant control notifications in this result set."
+                },
+                "items": {
+                    "type": "array",
+                    "description": "The list of person with significant control notifications.",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "address",
+                            "notified_to",
+                            "name",
+                            "etag",
+                            "natures_of_control",
+                            "notified_on",
+                            "links"
+                        ],
+                        "properties": {
+                            "address": {
+                                "type": "object",
+                                "description": "The service address of the person with significant control. If given, this address will be shown on the public record instead of the residential address.",
+                                "required": [
+                                    "address_line_1",
+                                    "postal_code",
+                                    "premises"
+                                ],
+                                "properties": {
+                                    "address_line_1": {
+                                        "type": "string",
+                                        "description": "The first line of the address."
+                                    },
+                                    "address_line_2": {
+                                        "type": "string",
+                                        "description": "The second line of the address."
+                                    },
+                                    "care_of": {
+                                        "type": "string",
+                                        "description": "Care of name."
+                                    },
+                                    "country": {
+                                        "type": "string",
+                                        "description": "The country. For example, UK."
+                                    },
+                                    "locality": {
+                                        "type": "string",
+                                        "description": "The locality. For example London."
+                                    },
+                                    "po_box": {
+                                        "type": "string",
+                                        "description": "The post-office box number."
+                                    },
+                                    "postal_code": {
+                                        "type": "string",
+                                        "description": "The postal code. For example CF14 3UZ."
+                                    },
+                                    "premises": {
+                                        "type": "string",
+                                        "description": "The property name or number."
+                                    },
+                                    "region": {
+                                        "type": "string",
+                                        "description": "The region. For example Surrey."
+                                    }
+                                }
+                            },
+                            "notified_to": {
+                                "type": "object",
+                                "description": "The company information of the notification.",
+                                "required": [
+                                    "company_number"
+                                ],
+                                "properties": {
+                                    "company_name": {
+                                        "type": "string",
+                                        "description":  "The name of the company the person with significant control is notified to."
+                                    },
+                                    "company_number": {
+                                        "type": "string",
+                                        "description": "The number of the company the person with significant control is notified to."
+                                    },
+                                    "company_status": {
+                                        "type": "string",
+                                        "description": "The status of the company the person with significant control is notified to."
+                                    }
+                                }
+                            },
+                            "ceased_on": {
+                                "type": "string",
+                                "format": "date",
+                                "description": "The date that Companies House was notified about the cessation of this person with significant control."
+                            },
+                            "country_of_residence": {
+                                "type": "string",
+                                "description": "The country of residence of the person with significant control."
+                            },
+                            "etag": {
+                                "type": "string",
+                                "description": "The ETag of the resource."
+                            },
+                            "identification": {
+                                "type": "object",
+                                "description": "Information related to the registration of either a `corporate-entity-person-with-significant-control` or a `corporate-entity-beneficial-owner`.",
+                                "required": [
+                                    "legal_authority",
+                                    "legal_form"
+                                ],
+                                "properties": {
+                                    "country_registered": {
+                                        "type": "string",
+                                        "description": "The country or state the corporate entity with significant control is registered in."
+                                    },
+                                    "legal_authority": {
+                                        "type": "string",
+                                        "description": "The legal authority supervising the corporate entity or legal person with significant control."
+                                    },
+                                    "legal_form": {
+                                        "type": "string",
+                                        "description": "The legal form of the corporate entity or legal person with significant control as defined by its country of registration."
+                                    },
+                                    "place_registered": {
+                                        "type": "string",
+                                        "description": "The place the corporate entity with significant control is registered."
+                                    },
+                                    "registration_number": {
+                                        "type": "string",
+                                        "description": "The registration number of the corporate entity with significant control."
+                                    }
+                                }
+                            },
+                            "identity_verification_details": {
+                                "type": "object",
+                                "description": "Information relating to the identity verification of the person with significant control.",
+                                "properties": {
+                                    "anti_money_laundering_supervisory_bodies": {
+                                        "type": "array",
+                                        "description": "The Anti-Money Laundering supervisory bodies that the authorised corporate service provider was registered with when verifying the person with significant control",
+                                        "items": { "type": "string" }
+                                    },
+                                    "appointment_verification_end_on": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "description": "The date on which the identity verification statement was removed for the notification."
+                                    },
+                                    "appointment_verification_start_on": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "description": "The date on which the identity verification statement was supplied for the notification."
+                                    },
+                                    "appointment_verification_statement_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "description": "The date from which an identity verification statement can be supplied for the notification."
+                                    },
+                                    "appointment_verification_statement_due_on": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "description": "The date by which an identity verification statement must be supplied for the notification."
+                                    },
+                                    "authorised_corporate_service_provider_name": {
+                                        "type": "string",
+                                        "description": "The name of the authorised corporate service provider that verified the identity of the person with significant control."
+                                    },
+                                    "identity_verified_on": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "description": "The date on which the authorised corporate service provider verified the identity of the person with significant control."
+                                    },
+                                    "preferred_name": {
+                                        "type": "string",
+                                        "description": "The name provided to the authorised corporate service provider by which the person with significant control prefers to be known."
+                                    }
+                                }
+                            },
+                            "is_sanctioned": {
+                                "type": "boolean",
+                                "description": "Flag indicating if the beneficial owner was declared as being sanctioned on the latest filing of the overseas entity."
+                            },
+                            "kind": {
+                                "type": "string",
+                                "description": "Possible values are: <ul><li>individual-person-with-significant-control</li><li>corporate-entity-person-with-significant-control</li><li>legal-person-with-significant-control</li><li>individual-beneficial-owner</li><li>corporate-entity-beneficial-owner</li><li>legal-person-beneficial-owner</li></ul>"
+                            },
+                            "links": {
+                                "type": "object",
+                                "description": "Links to other resources associated with this person with significant control notification resource.",
+                                "required": [
+                                    "company"
+                                ],
+                                "properties": {
+                                    "company": {
+                                        "type": "string",
+                                        "description": "Link to the company profile resource that this notification is associated with."
+                                    }
+                                }
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "Name of the person with significant control."
+                            },
+                            "name_elements": {
+                                "type": "object",
+                                "description": "A document encapsulating the separate elements of a person with significant control's name.",
+                                "required": [
+                                    "surname"
+                                ],
+                                "properties": {
+                                    "forename": {
+                                        "type": "string",
+                                        "description": "The forename of the person with significant control."
+                                    },
+                                    "middle_name": {
+                                        "type": "string",
+                                        "description": "The middle name of the person with significant control."
+                                    },
+                                    "surname": {
+                                        "type": "string",
+                                        "description": "The surname of the person with significant control."
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "description": "Title of the person with significant control."
+                                    }
+                                }
+                            },
+                            "nationality": {
+                                "type": "string",
+                                "description": "The nationality of the person with significant control."
+                            },
+                            "natures_of_control": {
+                                "type": "array",
+                                "description": "Indicates the nature of control the person with significant control holds. For enumeration descriptions see `description` [section in the enumeration mappings file](https://github.com/companieshouse/api-enumerations/blob/master/psc_descriptions.yml).",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "notified_on": {
+                                "type": "string",
+                                "format": "date",
+                                "description": "The date that Companies House was notified about this person with significant control."
+                            },
+                            "principal_office_address": {
+                                "type": "object",
+                                "description": "The principal/registered office address of a corporate-entity-beneficial-owner or legal-person-beneficial-owner of a registered-overseas-entity.",
+                                "properties": {
+                                    "address_line_1": {
+                                        "type": "string",
+                                        "description": "The first line of the address."
+                                    },
+                                    "address_line_2": {
+                                        "type": "string",
+                                        "description": "The second line of the address."
+                                    },
+                                    "care_of": {
+                                        "type": "string",
+                                        "description": "The care of name."
+                                    },
+                                    "country": {
+                                        "type": "string",
+                                        "description": "The country. For example, United Kingdom."
+                                    },
+                                    "locality": {
+                                        "type": "string",
+                                        "description": "The locality. For example London."
+                                    },
+                                    "po_box": {
+                                        "type": "string",
+                                        "description": "The post-office box number."
+                                    },
+                                    "postal_code": {
+                                        "type": "string",
+                                        "description": "The postal code. For example CF14 3UZ."
+                                    },
+                                    "premises": {
+                                        "type": "string",
+                                        "description": "The property name or number."
+                                    },
+                                    "region": {
+                                        "type": "string",
+                                        "description": "The region. For example Surrey."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "items_per_page": {
+                    "type": "integer",
+                    "description": "The number of persons with significant control notifications to return per page."
+                },
+                "kind": {
+                    "type": "string",
+                    "description": "Possible values are: <ul><li>personal-notification</li></ul>"
+                },
+                "links": {
+                    "type": "object",
+                    "description": "Links to other resources associated with this person with significant control notification resource.",
+                    "required": [
+                        "self"
+                    ],
+                    "properties": {
+                        "self": {
+                            "type": "string",
+                            "description": "Link to this person with significant control notification resource."
+                        }
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The person with significant control name."
+                },
+                "start_index": {
+                    "type": "integer",
+                    "description": "The first row of data to retrieve, starting at 0. Use this parameter as a pagination mechanism along with the items_per_page parameter."
+                },
+                "total_results": {
+                    "type": "integer",
+                    "description": "The total number of persons with significant control notifications in this result set."
+                }
+            }
+        }
+    }
+}

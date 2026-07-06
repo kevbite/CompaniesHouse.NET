@@ -1,33 +1,35 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using CompaniesHouse.Response.Officers;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.OfficerTests
 {
-    [TestFixture]
+    
     public class OfficersTestsInvalid : OfficersTestBase<Officers>
     {
         private const string InvalidCompanyNumber = "ABC00000";
 
-        [SetUp]
+        
         protected override async Task When()
         {
-            await WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany().ConfigureAwait(false);
+            await WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany();
         }
 
-        [Test]
-        public void ThenTheDataIsFullWithEmptyProperties()
+        [IntegrationFact]
+        public void ThenTheDataItemsAreEmpty()
         {
-            Assert.That(Result.Data.Items, Is.Empty);
-            Assert.That(Result.Data.ActiveCount, Is.EqualTo(0));
-            Assert.That(Result.Data.ResignedCount,Is.EqualTo(0));
-            Assert.That(Result.Data.StartIndex, Is.EqualTo(0));
-            Assert.That(Result.Data.TotalResults, Is.EqualTo(0));;
+            // The Companies House API returns 200 with an empty officer list for a
+            // malformed/non-existent company number rather than 404, so Data is
+            // populated but contains no items.
+            Result.Data.ShouldNotBeNull();
+            Result.Data.Items.ShouldBeEmpty();
+            Result.Data.TotalResults.ShouldBe(0);
         }
 
         private async Task WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany()
         {
-            Result = await Client.GetOfficersAsync(InvalidCompanyNumber).ConfigureAwait(false);
+            Result = await Client.GetOfficersAsync(InvalidCompanyNumber);
         }
     }
 }

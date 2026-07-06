@@ -1,35 +1,37 @@
 using System.Threading.Tasks;
 using CompaniesHouse.Request;
 using CompaniesHouse.Response.Search.DisqualifiedOfficersSearch;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
 {
-    [TestFixture]
     public class DisqualifiedOfficersSearchTests
     {
-        private CompaniesHouseClient _client;
-        private CompaniesHouseClientResponse<DisqualifiedOfficerSearch> _result;
-        
-        [OneTimeSetUp]
-        public void GivenACompaniesHouseClient()
-        {
-            var settings = new CompaniesHouseSettings(Keys.ApiKey);
+        private readonly CompaniesHouseClient _client;
 
-            _client = new CompaniesHouseClient(settings);
+        public DisqualifiedOfficersSearchTests()
+        {
+            _client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
         }
 
-        [SetUp]
-        public async Task WhenSearchingForADisqualifiedOfficers()
+        [IntegrationFact]
+        public async Task ThenDisqualifiedOfficersAreReturned()
         {
-            _result = await _client.SearchDisqualifiedOfficerAsync(new SearchDisqualifiedOfficerRequest() { Query = "Kevin" })
-                .ConfigureAwait(false);
+            var result = await _client.SearchDisqualifiedOfficerAsync(new SearchDisqualifiedOfficerRequest { Query = "Kevin" });
+
+            (result.Data.DisqualifiedOfficers ?? []).ShouldNotBeEmpty();
         }
 
-        [Test]
-        public void ThenDisqualifiedOfficersAreReturned()
+        [IntegrationFact]
+        public async Task ThenPagingMetadataAndDateOfBirthAreReturned()
         {
-            Assert.That(_result.Data.DisqualifiedOfficers, Is.Not.Empty);
+            var result = await _client.SearchDisqualifiedOfficerAsync(new SearchDisqualifiedOfficerRequest { Query = "john", ItemsPerPage = 20 });
+
+            result.Data.PageNumber.ShouldBe(1);
+            var officers = result.Data.DisqualifiedOfficers ?? [];
+            officers.ShouldNotBeEmpty();
+            officers[0].DateOfBirth.Year.ShouldBeGreaterThan(1900);
         }
     }
 }

@@ -1,0 +1,454 @@
+{
+    "get": {
+        "summary": "Company registers",
+        "tags": [
+            "registers"
+        ],
+        "description": "Get the company registers information",
+        "parameters": [
+            {
+                "name": "company_number",
+                "in": "path",
+                "description": "The company number of the register information to return.",
+                "required": true,
+                "type": "string"
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "readCompanyRegister",
+                "headers": {
+                    "ETag": {
+                        "description": "The ETag of the resource.",
+                        "type": "string"
+                    }
+                },
+                "schema": {
+                    "$ref": "companyRegisters.json#/definitions/companyRegister"
+                }
+            },
+            "401": {
+                "description": "Unauthorised"
+            }
+        }
+    },
+    "definitions": {
+        "companyRegister": {
+            "title": "companyRegister",
+            "type": "object",
+            "required": [
+                "links",
+                "company_number",
+                "kind",
+                "registers"
+            ],
+            "properties": {
+                "links": {
+                    "type": "object",
+                    "description": "A set of URLs related to the resource, including self.",
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/linksType"
+                    }
+                },
+                "company_number": {
+                    "type": "string",
+                    "description": "The number of the company."
+                },
+                "kind": {
+                    "enum": [
+                        "registers"
+                    ],
+                    "type": "string"
+                },
+                "registers": {
+                    "description": "company registers information.",
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/registers"
+                    }
+                },
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "registers": {
+            "title": "registers",
+            "description": "Registered company information",
+            "type": "object",
+            "required": [
+                "directors",
+                "secretaries",
+                "persons_with_significant_control",
+                "usual_residential_address",
+                "members"
+            ],
+            "properties": {
+                "directors": {
+                    "description": "List of registered company directors.",
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/registerListDirectors"
+                    }
+                },
+                "secretaries": {
+                    "description": "List of registered company secretaries.",
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/registerListSecretaries"
+                    }
+                },
+                "persons_with_significant_control": {
+                    "description": "List of registered company persons with significant control.",
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/registerListPersonsWithSignificantControl"
+                    }
+                },
+                "usual_residential_address": {
+                    "description": "List of register addresses.",
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/registerListUsualResidentialAddress"
+                    }
+                },
+                "llp_usual_residential_address": {
+                    "description": "List of register addresses.",
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/registerListLLPUsualResidentialAddress"
+                    }
+                },
+                "members": {
+                    "description": "List of registered company members..",
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/registerListMembers"
+                    }
+                },
+                "llp_members": {
+                    "description": "List of registered llp members.",
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/registerListLLPMembers"
+                    }
+                }
+            }
+        },
+        "registerListDirectors": {
+            "title": "registerListDirectors",
+            "required": [
+                "register_type",
+                "items"
+            ],
+            "properties": {
+                "register_type": {
+                    "description": "The register type.",
+                    "enum": [
+                        "directors"
+                    ],
+                    "type": "string"
+                },
+                "items": {
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/registeredItems"
+                    },
+                    "type": "array"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource.",
+                    "type": "object",
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/linksDirectorsRegister"
+                    }
+                }
+            }
+        },
+        "registerListSecretaries": {
+            "title": "registerListSecretaries",
+            "required": [
+                "register_type",
+                "items"
+            ],
+            "properties": {
+                "register_type": {
+                    "description": "The register type.",
+                    "enum": [
+                        "secretaries"
+                    ],
+                    "type": "string"
+                },
+                "items": {
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/registeredItems"
+                    },
+                    "type": "array"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource.",
+                    "type": "object",
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/linksSecretaryRegister"
+                    }
+                }
+            }
+        },
+        "registerListPersonsWithSignificantControl": {
+            "title": "registerListPersonsWithSignificantControl",
+            "required": [
+                "register_type",
+                "items"
+            ],
+            "properties": {
+                "register_type": {
+                    "description": "The register type.",
+                    "enum": [
+                        "persons-with-significant-control"
+                    ],
+                    "type": "string"
+                },
+                "items": {
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/registeredItems"
+                    },
+                    "type": "array"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource.",
+                    "type": "object",
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/linksPersonsWithSignificantControlRegister"
+                    }
+                }
+            }
+        },
+        "registerListUsualResidentialAddress": {
+            "title": "registerListUsualResidentialAddress",
+            "required": [
+                "register_type",
+                "items"
+            ],
+            "properties": {
+                "register_type": {
+                    "description": "The register type.",
+                    "enum": [
+                        "usual-residential-address"
+                    ],
+                    "type": "string"
+                },
+                "items": {
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/registeredItems"
+                    },
+                    "type": "array"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource.",
+                    "type": "object",
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/linksListUsualResidentialAddress"
+                    }
+                }
+            }
+        },
+        "registerListLLPUsualResidentialAddress": {
+            "title": "registerListLLPUsualResidentialAddress",
+            "properties": {
+                "register_type": {
+                    "description": "The register type.",
+                    "enum": [
+                        "llp-usual-residential-address"
+                    ],
+                    "type": "string"
+                },
+                "items": {
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/registeredItems"
+                    },
+                    "type": "array"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource.",
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/linksListLLPUsualResidentialAddress"
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "register_type",
+                "items"
+            ]
+        },
+        "registerListMembers": {
+            "title": "registerListMembers",
+            "required": [
+                "register_type",
+                "items"
+            ],
+            "properties": {
+                "register_type": {
+                    "description": "The register type.",
+                    "enum": [
+                        "members"
+                    ],
+                    "type": "string"
+                },
+                "items": {
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/registeredItems"
+                    },
+                    "type": "array"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource.",
+                    "type": "object",
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/linksListMembers"
+                    }
+                }
+            }
+        },
+        "registerListLLPMembers": {
+            "title": "registerListLLPMembers",
+            "properties": {
+                "register_type": {
+                    "description": "The register type.",
+                    "enum": [
+                        "llp_members"
+                    ],
+                    "type": "string"
+                },
+                "items": {
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/registeredItems"
+                    },
+                    "type": "array"
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource.",
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/linksListLLPMembers"
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "register_type",
+                "items"
+            ]
+        },
+        "registeredItems": {
+            "title": "registeredItems",
+            "required": [
+                "register_moved_to",
+                "moved_on",
+                "links"
+            ],
+            "properties": {
+                "moved_on": {
+                    "description": "The date registered on",
+                    "type": "string",
+                    "format": "date"
+                },
+                "register_moved_to": {
+                    "description": "Location of registration",
+                    "type": "string",
+                    "enum": [
+                        "public-register",
+                        "registered-office",
+                        "single-alternative-inspection-location",
+                        "unspecified-location"
+                    ]
+                },
+                "links": {
+                    "description": "A set of URLs related to the resource.",
+                    "items": {
+                        "$ref": "companyRegisters.json#/definitions/linksItems"
+                    },
+                    "type": "object"
+                }
+            }
+        },
+        "linksType": {
+            "title": "linksType",
+            "required": [
+                "self"
+            ],
+            "properties": {
+                "self": {
+                    "description": "The URL of the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "linksItems": {
+            "title": "linksItems",
+            "required": [
+                "filing"
+            ],
+            "properties": {
+                "filing": {
+                    "description": "The URL of the transaction for the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "linksDirectorsRegister": {
+            "title": "linksDirectorsRegister",
+            "properties": {
+                "directors_register": {
+                    "description": "The URL for the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "linksSecretaryRegister": {
+            "title": "linksSecretaryRegister",
+            "properties": {
+                "secretaries_register": {
+                    "description": "The URL for the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "linksPersonsWithSignificantControlRegister": {
+            "title": "linksPersonsWithSignificantControlRegister",
+            "properties": {
+                "persons_with_significant_control_register": {
+                    "description": "The URL for the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "linksListUsualResidentialAddress": {
+            "title": "linksListUsualResidentialAddress",
+            "properties": {
+                "usual_residential_address": {
+                    "description": "The URL for the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "linksListLLPUsualResidentialAddress": {
+            "title": "linksListLLPUsualResidentialAddress",
+            "properties": {
+                "llp_usual_residential_address": {
+                    "description": "The URL for the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "linksListMembers": {
+            "title": "linksListMembers",
+            "properties": {
+                "members": {
+                    "description": "The URL for the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "linksListLLPMembers": {
+            "title": "linksListLLPMembers",
+            "properties": {
+                "llp_members": {
+                    "description": "The URL for the resource.",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

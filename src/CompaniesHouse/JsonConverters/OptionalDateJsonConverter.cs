@@ -1,34 +1,43 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.JsonConverters
 {
-    public class OptionalDateJsonConverter : JsonConverter
+    /// <summary>
+    /// Handles Companies House dates that are sometimes returned as the literal string
+    /// "Unknown" instead of a date, or as a partial date. Applied per-property (not every
+    /// <c>DateTime?</c> needs this handling).
+    /// </summary>
+    public class OptionalDateJsonConverter : JsonConverter<DateTime?>
     {
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override DateTime? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if ( value is DateTime? ) {
-                if ( value != null ) {
-                    writer.WriteValue(((DateTime)value).ToString("yyyy-MM-dd"));
-                }
-            }
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.Value as string == "Unknown")
+            if (reader.TokenType == JsonTokenType.Null)
             {
                 return null;
             }
-            else
+
+            var raw = reader.GetString();
+
+            if (string.IsNullOrEmpty(raw) || raw == "Unknown")
             {
-                return serializer.Deserialize<DateTime?>(reader);
+                return null;
             }
+
+            return DateTime.Parse(raw);
         }
 
-        public override bool CanConvert(Type objectType)
+        public override void Write(Utf8JsonWriter writer, DateTime? value, JsonSerializerOptions options)
         {
-            return true;
+            if (value is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                writer.WriteStringValue(value.Value.ToString("yyyy-MM-dd"));
+            }
         }
     }
 }

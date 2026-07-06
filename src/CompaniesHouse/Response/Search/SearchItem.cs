@@ -1,16 +1,16 @@
-﻿using CompaniesHouse.JsonConverters;
+using CompaniesHouse.JsonConverters;
 using CompaniesHouse.Response.Search.CompanySearch;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Search
 {
     [JsonConverter(typeof(SearchItemConverter))]
     public abstract class SearchItem
     {
-        [JsonProperty(PropertyName = "kind")]
-        public string Kind { get; set; }
+        [JsonPropertyName("kind")]
+        public string? Kind { get; set; }
 
-        [JsonProperty(PropertyName = "links")]
-        public Links Links { get; set; }
+        [JsonPropertyName("links")]
+        public Links? Links { get; set; }
     }
 }

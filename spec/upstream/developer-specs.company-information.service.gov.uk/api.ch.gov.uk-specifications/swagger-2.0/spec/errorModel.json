@@ -1,0 +1,68 @@
+{
+    "definitions": {
+        "error": {
+            "title": "error",
+            "required": [
+                "errors"
+            ],
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "description": "A list of errors found",
+                    "items": {
+                        "$ref": "errorModel.json#/definitions/errorDetail"
+                    }
+                }
+            }
+        },
+        "errorDetail": {
+            "title": "errorDetail",
+            "required": [
+                "type",
+                "error"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "Type of error",
+                    "enum": [
+                        "ch:service",
+                        "ch:validation"
+                    ]
+                },
+                "location_type": {
+                    "type": "string",
+                    "description": "Describes the type of location returned so that it may be parsed appropriately",
+                    "enum": [
+                        "json-path",
+                        "query-parameter"
+                    ]
+                },
+                "location": {
+                    "type": "string",
+                    "description": "The location in the submitted request in which the error relates. This parameter is only provided when errors[].type is set to \"ch:validation\"."
+                },
+                "error": {
+                    "type": "string",
+                    "description": "The error being returned. See github for valid [enumeration types](https://github.com/companieshouse/api-enumerations/blob/develop/errors.yml)"
+                },
+                "error_values": {
+                    "type": "array",
+                    "description": "A collection of argument name and value pairs which, when substituted into the error string, provide the full description of the error. As many name/value pairs as necessary to complete the error description are returned. See <a href=\"\">example</a> above.",
+                    "items": {
+                        "$ref": "errorModel.json#/definitions/error_values"
+                    }
+                }
+            }
+        },
+        "error_values": {
+            "title": "error_values",
+            "properties": {
+                "<argument>": {
+                    "type": "string",
+                    "description": "The element name and value pair required to complete the error description, will repeat as necessary."
+                }
+            }
+        }
+    }
+}

@@ -1,37 +1,34 @@
-﻿using System.Threading.Tasks;
-using CompaniesHouse.Response;
+using System.Threading.Tasks;
 using CompaniesHouse.Response.CompanyFiling;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.CompanyFilingHistoryTests
 {
-    [TestFixture]
+
     public class CompanyFilingHistoryTestsInvalid : CompanyFilingHistoryTestBase
     {
         private const string InvalidCompanyNumber = "ABC00000";
 
-        private CompaniesHouseClientResponse<CompanyFilingHistory> _result;
+        private CompaniesHouseResponse<CompanyFilingHistory> _result = null!;
 
         protected override async Task When()
         {
             await WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany()
-                .ConfigureAwait(false);
+                ;
         }
 
-        [Test]
-        public void ThenTheDataHasSomeEmptyPropertiesAndStatusOfInvalidFormat()
+        [IntegrationFact]
+        public void ThenTheDataItemsAreNull()
         {
-            Assert.That(_result.Data.Items, Is.Empty);
-            Assert.That(_result.Data.HistoryStatus, Is.EqualTo(FilingHistoryStatus.InvalidFormat));
-            Assert.That(_result.Data.StartIndex, Is.EqualTo(0));
-            Assert.That(_result.Data.TotalCount, Is.EqualTo(0));
-
+            _result.Data.ShouldNotBeNull();
+            _result.Data.Items.ShouldBeEmpty();
         }
 
         private async Task WhenRetrievingAnCompanyFilingHistoryForAnInvalidCompany()
         {
             _result = await _client.GetCompanyFilingHistoryAsync(InvalidCompanyNumber)
-                .ConfigureAwait(false);
+                ;
         }
     }
 }

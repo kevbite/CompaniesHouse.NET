@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using CompaniesHouse.Response.Charges;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.ChargesTests
 {
-    [TestFixture]
+    
     public class ChargeByIdTestsInValid : ChargesTestBase<Charge>
     {
         private const string CompanyNumber = "00000000";
@@ -12,7 +13,7 @@ namespace CompaniesHouse.IntegrationTests.Tests.ChargesTests
 
         protected override async Task When() => Result = await Client.GetChargeByIdAsync(CompanyNumber, ChargeId);
 
-        [Test]
-        public void ThenChargesListIsNull() => Assert.Null(Result.Data);
+        [IntegrationFact]
+        public void ThenChargesListIsNull() => Result.ShouldBeOfType<CompaniesHouseResponse<Charge>.NotFound>();
     }
 }

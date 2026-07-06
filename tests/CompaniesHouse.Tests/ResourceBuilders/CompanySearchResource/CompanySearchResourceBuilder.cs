@@ -5,7 +5,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource
     public class CompanySearchResourceBuilder
     {
         private readonly List<string> _itemBlocks = new List<string>();
-        
+
         public string CreateResource(ResourceDetails companySearch)
         {
             var resource =
@@ -35,11 +35,11 @@ namespace CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource
 
         public CompanySearchResourceBuilder AddCompany(CompanyDetails companyDetails)
         {
-	        var companyStatusField = companyDetails.CompanyStatus == null
-		        ? "null"
-		        : "\"" + companyDetails.CompanyStatus + "\"";
+            var companyStatusField = companyDetails.CompanyStatus == null
+                ? "null"
+                : "\"" + companyDetails.CompanyStatus + "\"";
 
-			var itemBlock = 
+            var itemBlock =
                 $@" {{
          ""address"": {{
             ""address_line_1"" : ""{companyDetails.AddressLine1}"",
@@ -56,24 +56,29 @@ namespace CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource
          ""company_type"" : ""{companyDetails.CompanyType}"",
          ""date_of_cessation"" : ""{companyDetails.DateOfCessation.ToString("yyyy-MM-dd")}"",
          ""date_of_creation"" : ""{companyDetails.DateOfCreation.ToString("yyyy-MM-dd")}"",
+         ""external_registration_number"" : ""{companyDetails.ExternalRegistrationNumber}"",
+         ""address_snippet"" : ""{companyDetails.AddressSnippet}"",
          ""description"" : ""{companyDetails.Description}"",
          ""description_identifier"" : [
-            null
+            ""incorporated-on""
          ],
          ""kind"" : ""{companyDetails.Kind}"",
          ""links"" : {{
             ""self"" : ""{companyDetails.LinksSelf}""
          }},
          ""matches"" : {{
+            ""snippet"" : [
+               {string.Join(", ", companyDetails.MatchesSnippet)}
+            ],
             ""title"" : [
-               {string.Join(", ",companyDetails.MatchesTitle)}
+               {string.Join(", ", companyDetails.MatchesTitle)}
             ]
     }},
          ""snippet"" : ""{companyDetails.Snippet}"",
          ""title"" : ""{companyDetails.Title}""
       }}";
             _itemBlocks.Add(itemBlock);
-            
+
             return this;
         }
 
@@ -97,15 +102,20 @@ namespace CompaniesHouse.Tests.ResourceBuilders.CompanySearchResource
          ""company_type"" : ""{companyDetails.CompanyType}"",
          ""date_of_cessation"" : ""Unknown"",
          ""date_of_creation"" : ""{companyDetails.DateOfCreation.ToString("yyyy-MM-dd")}"",
+         ""external_registration_number"" : ""{companyDetails.ExternalRegistrationNumber}"",
+         ""address_snippet"" : ""{companyDetails.AddressSnippet}"",
          ""description"" : ""{companyDetails.Description}"",
          ""description_identifier"" : [
-            null
+            ""incorporated-on""
          ],
          ""kind"" : ""{companyDetails.Kind}"",
          ""links"" : {{
             ""self"" : ""{companyDetails.LinksSelf}""
          }},
          ""matches"" : {{
+            ""snippet"" : [
+               {string.Join(", ", companyDetails.MatchesSnippet)}
+            ],
             ""title"" : [
                {string.Join(", ", companyDetails.MatchesTitle)}
             ]

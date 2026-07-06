@@ -1,0 +1,48 @@
+name: Bump api-enumerations submodule
+
+on:
+  schedule:
+    # 03:00 UTC on the 1st of every month.
+    - cron: "0 3 1 * *"
+  workflow_dispatch: {}
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update api-enumerations submodule
+        id: update
+        run: |
+          cd external/api-enumerations
+          git fetch origin
+          before=$(git rev-parse HEAD)
+          git checkout origin/master
+          after=$(git rev-parse HEAD)
+          cd ../..
+          if [ "$before" = "$after" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create pull request
+        if: steps.update.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Bump api-enumerations submodule"
+          title: "Bump api-enumerations submodule"
+          body: |
+            Automated monthly update of the `external/api-enumerations` submodule
+            to the latest upstream `master` commit.
+
+            Review the upstream diff before merging — new/changed enum
+            descriptions will flow into the generated value types (plan `04`)
+            the next time the package is built and released.
+          branch: chore/bump-api-enumerations
+          delete-branch: true

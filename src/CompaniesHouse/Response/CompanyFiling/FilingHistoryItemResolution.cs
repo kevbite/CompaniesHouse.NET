@@ -1,40 +1,38 @@
-﻿using System;
+using System;
 using CompaniesHouse.Description;
 using CompaniesHouse.JsonConverters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.CompanyFiling
 {
     public class FilingHistoryItemResolution : IDescriptable
     {
-        [JsonProperty(PropertyName = "category")]
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonPropertyName("category")]
         public ResolutionCategory Category { get; set; }
 
-        [JsonProperty(PropertyName = "subcategory")]
-        [JsonConverter(typeof(StringArrayOrFieldEnumConverter))]
-        public FilingSubcategory[] Subcategory { get; set; }
+        [JsonPropertyName("subcategory")]
+        public FilingSubcategory[]? Subcategory { get; set; }
 
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        [JsonPropertyName("description")]
+        public string? Description { get; set; }
 
-        [JsonProperty(PropertyName = "document_id")]
-        public string DocumentId { get; set; }
+        [JsonPropertyName("document_id")]
+        public string? DocumentId { get; set; }
 
-        [JsonProperty(PropertyName = "receive_date")]
+        [JsonPropertyName("receive_date")]
         public DateTime? DateOfProcessing { get; set; }
 
-        [JsonProperty(PropertyName = "type")]
-        public string ResolutionType { get; set; }
+        [JsonPropertyName("type")]
+        public string? ResolutionType { get; set; }
 
-        [JsonProperty(PropertyName = "description_values")]
-        private JObject DescriptionValues { get; set; }
+        [JsonInclude]
+        [JsonPropertyName("description_values")]
+        private JsonElement? DescriptionValues { get; set; }
 
-        public string GetDescription(string format, string dateFormat = null)
+        public string GetDescription(string format)
         {
-            return DescriptionProvider.GetDescription(format, DescriptionValues, dateFormat);
+            return DescriptionProvider.GetDescription(format, DescriptionValues);
         }
     }
 }

@@ -1,10 +1,10 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.RegisteredOfficeAddress
 {
     public class Links
     {
-        [JsonProperty(PropertyName = "self")]
-        public string Self { get; set; }
+        [JsonPropertyName("self")]
+        public string? Self { get; set; }
     }
 }

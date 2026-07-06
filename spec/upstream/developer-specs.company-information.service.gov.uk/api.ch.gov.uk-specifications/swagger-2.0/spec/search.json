@@ -1,0 +1,986 @@
+{
+    "searchAll": {
+        "get": {
+            "summary": "Search All",
+            "description": "Search companies, officers and disqualified officers",
+            "x-operationName": "search all",
+            "tags": [
+                "search"
+            ],
+            "parameters": [
+                {
+                    "name": "q",
+                    "in": "query",
+                    "description": "The term being searched for.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "items_per_page",
+                    "in": "query",
+                    "description": "The number of search results to return per page.",
+                    "required": false,
+                    "type": "integer"
+                },
+                {
+                    "name": "start_index",
+                    "in": "query",
+                    "description": "The index of the first result item to return.",
+                    "required": false,
+                    "type": "integer"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Search all",
+                    "schema": {
+                        "$ref": "search.json#/definitions/Search"
+                    }
+                },
+                "401": {
+                    "description": "Not authorised"
+                }
+            }
+        }
+    },
+    "searchCompanies": {
+        "get": {
+            "summary": "Search companies",
+            "description": "Search company information",
+            "x-operationName": "search companies",
+            "tags": [
+                "search"
+            ],
+            "parameters": [
+                {
+                    "name": "q",
+                    "in": "query",
+                    "description": "The term being searched for.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "items_per_page",
+                    "in": "query",
+                    "description": "The number of search results to return per page.",
+                    "required": false,
+                    "type": "integer"
+                },
+                {
+                    "name": "start_index",
+                    "in": "query",
+                    "description": "The index of the first result item to return.",
+                    "required": false,
+                    "type": "integer"
+                },
+                {
+                    "name":"restrictions",
+                    "in":"query",
+                    "description": "Enumerable options to restrict search results. Space separate multiple restriction options to combine functionality. For a \"company name availability\" search use \"active-companies legally-equivalent-company-name\" together.",
+                    "required": false,
+                    "type":"string"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Search company",
+                    "schema": {
+                        "$ref": "search.json#/definitions/CompanySearch"
+                    }
+                },
+                "401": {
+                    "description": "Not authorised"
+                }
+            }
+        }
+    },
+    "searchOfficers": {
+        "get": {
+            "summary": "Search company officers",
+            "description": "Search for officer information",
+            "x-operationName": "search officers",
+            "tags": [
+                "search"
+            ],
+            "parameters": [
+                {
+                    "name": "q",
+                    "in": "query",
+                    "description": "The term being searched for.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "items_per_page",
+                    "in": "query",
+                    "description": "The number of search results to return per page.",
+                    "required": false,
+                    "type": "integer"
+                },
+                {
+                    "name": "start_index",
+                    "in": "query",
+                    "description": "The index of the first result item to return.",
+                    "required": false,
+                    "type": "integer"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Search officer",
+                    "schema": {
+                        "$ref": "search.json#/definitions/OfficerSearch"
+                    }
+                },
+                "401": {
+                    "description": "Not authorised"
+                }
+            }
+        }
+    },
+     "searchPersons-with-significant-control": {
+        "get": {
+            "summary": "Search company persons with significant control",
+            "description": "Search for persons with significant control information",
+            "x-operationName": "search persons with significant control",
+            "tags": [
+                "search"
+            ],
+            "parameters": [
+                {
+                    "name": "q",
+                    "in": "query",
+                    "description": "The term being searched for.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "items_per_page",
+                    "in": "query",
+                    "description": "The number of search results to return per page.",
+                    "required": false,
+                    "type": "integer"
+                },
+                {
+                    "name": "start_index",
+                    "in": "query",
+                    "description": "The index of the first result item to return.",
+                    "required": false,
+                    "type": "integer"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Search persons with significant control",
+                    "schema": {
+                        "$ref": "search.json#/definitions/PersonsWithSignificantControlSearch"
+                    }
+                },
+                "401": {
+                    "description": "Not authorised"
+                }
+            }
+        }
+    },
+    "searchDisqualified-officers": {
+        "get": {
+            "summary": "Search disqualified officers",
+            "description": "Search for disqualified officer information",
+            "x-operationName": "search disqualified officers",
+            "tags": [
+                "search"
+            ],
+            "parameters": [
+                {
+                    "name": "q",
+                    "in": "query",
+                    "description": "The term being searched for.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "items_per_page",
+                    "in": "query",
+                    "description": "The number of search results to return per page.",
+                    "required": false,
+                    "type": "integer"
+                },
+                {
+                    "name": "start_index",
+                    "in": "query",
+                    "description": "The index of the first result item to return.",
+                    "required": false,
+                    "type": "integer"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Search all",
+                    "schema": {
+                        "$ref": "search.json#/definitions/DisqualifiedOfficerSearch"
+                    }
+                },
+                "401": {
+                    "description": "Not authorised"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "CommonSearch": {
+            "properties": {
+                "total_results": {
+                    "type": "integer",
+                    "description": "The number of further search results available for the current search."
+                },
+                "start_index": {
+                    "type": "integer",
+                    "description": "The index into the entire result set that this result page starts."
+                },
+                "items_per_page": {
+                    "type": "integer",
+                    "description": "The number of search items returned per page."
+                },
+                "etag": {
+                    "type": "string",
+                    "description": "The ETag of the resource"
+                }
+            }
+        },
+        "CommonSearchItems": {
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "The title of the search result."
+                },
+                "address_snippet": {
+                    "type": "string",
+                    "description": "A single line address. This will be the address that matched within the indexed document or the primary address otherwise (as returned by the `address` member)."
+                },
+                "links": {
+                    "type": "object",
+                    "description": "The URL of the search result.",
+                    "items": {
+                        "$ref": "search.json#/definitions/LinksModel"
+                    }
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The result description."
+                },
+                "snippet": {
+                    "type": "string",
+                    "description": "Summary information for the result showing additional details that have matched."
+                },
+                "matches": {
+                    "type": "object",
+                    "description": "A list of members and arrays of character offset defining substrings that matched the search terms.",
+                    "items": {
+                        "$ref": "search.json#/definitions/MatchesModel"
+                    }
+                }
+            }
+        },
+        "CompanySearch": {
+            "title": "CompanySearch",
+            "allOf": [
+                {
+                    "$ref": "search.json#/definitions/CommonSearch"
+                }
+            ],
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "The type of search response returned.",
+                    "enum": [
+                        "search#companies"
+                    ]
+                },
+                "items": {
+                    "type": "array",
+                    "description": "The results of the completed search.",
+                    "items": {
+                        "$ref": "search.json#/definitions/CompanySearchItems"
+                    }
+                }
+            }
+        },
+        "Search": {
+            "title": "Search",
+            "allOf": [
+                {
+                    "$ref": "search.json#/definitions/CommonSearch"
+                }
+            ],
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "The type of search response returned.",
+                    "enum": [
+                        "search#all"
+                    ]
+                },
+                "items": {
+                    "type": "array",
+                    "description": "The results of the completed search. See `items.kind` for details of each specific result resource returned.,",
+                    "items": {
+                        "$ref": "search.json#/definitions/SearchItems"
+                    }
+                }
+            }
+        },
+        "CompanySearchItems": {
+            "title": "CompanySearchItems",
+            "allOf": [
+                {
+                    "$ref": "search.json#/definitions/CommonSearchItems"
+                }
+            ],
+            "required": [
+                "kind",
+                "title",
+                "address_snippet",
+                "links",
+                "company_number",
+                "date_of_creation",
+                "company_type",
+                "company_status",
+                "address"
+            ],
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "The type of search result.",
+                    "enum": [
+                        "searchresults#company"
+                    ]
+                },
+                "description_identifier": {
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "incorporated-on",
+                            "registered-on",
+                            "formed-on",
+                            "dissolved-on",
+                            "converted-closed-on",
+                            "closed-on",
+                            "closed",
+                            "first-uk-establishment-opened-on",
+                            "opened-on",
+                            "voluntary-arrangement",
+                            "receivership",
+                            "insolvency-proceedings",
+                            "liquidation",
+                            "administration",
+                            "registered",
+                            "removed"
+                        ]
+                    },
+                    "type": "array",
+                    "description": "An array of enumeration types that make up the search description. See search_descriptions_raw.yaml in api-enumerations"
+                },
+                "company_number": {
+                    "type": "string",
+                    "description": "The company registration / incorporation number of the company."
+                },
+                "date_of_creation": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date the company was created."
+                },
+                "date_of_cessation": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date the company ended."
+                },
+                "company_type": {
+                    "type": "string",
+                    "enum": [
+                        "private-unlimited",
+                        "ltd",
+                        "plc",
+                        "old-public-company",
+                        "private-limited-guarant-nsc-limited-exemption",
+                        "limited-partnership",
+                        "private-limited-guarant-nsc",
+                        "converted-or-closed",
+                        "private-unlimited-nsc",
+                        "private-limited-shares-section-30-exemption",
+                        "assurance-company",
+                        "oversea-company",
+                        "eeig",
+                        "icvc-securities",
+                        "icvc-warrant",
+                        "icvc-umbrella",
+                        "industrial-and-provident-society",
+                        "northern-ireland",
+                        "northern-ireland-other",
+                        "royal-charter",
+                        "investment-company-with-variable-capital",
+                        "unregistered-company",
+                        "llp",
+                        "other",
+                        "european-public-limited-liability-company-se",
+                        "registered-overseas-entity"
+                    ],
+                    "description": "The company type."
+                },
+                "company_status": {
+                    "type": "string",
+                    "enum": [
+                        "active",
+                        "dissolved",
+                        "liquidation",
+                        "receivership",
+                        "administration",
+                        "voluntary-arrangement",
+                        "converted-closed",
+                        "insolvency-proceedings",
+                        "registered",
+                        "removed"
+                    ],
+                    "description": "The company status."
+                },
+                "address": {
+                    "description": "The address of the company's registered office.",
+                    "type": "object",
+                    "items": {
+                        "$ref": "search.json#/definitions/registeredOfficeAddress"
+                    }
+                }
+            }
+        },
+        "SearchItems": {
+            "title": "SearchItems",
+            "allOf": [
+                {
+                    "$ref": "search.json#/definitions/CommonSearchItems"
+                }
+            ],
+            "required": [
+                "kind",
+                "title",
+                "address_snippet",
+                "links",
+                "address"
+            ],
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "The type of search result. Refer to the full resource descriptions [CompanySearch resource](api/docs/company/company_number/CompanySearch-resource.html)  [OfficerSearch resource] (api/docs/company/company_number/OfficerSearch-resource.html) and [DisqualifiedOfficerSearch resource](api/docs/company/company_number/DisqualifiedOfficerSearch-resource.html) for the full list of members returned.",
+                    "enum": [
+                        "searchresults#company",
+                        "searchresults#officer",
+                        "searchresults#persons-with-significant-control",
+                        "searchresults#disqualified-officer"
+                    ]
+                },
+                "description_identifier": {
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "incorporated-on",
+                            "registered-on",
+                            "formed-on",
+                            "dissolved-on",
+                            "converted-closed-on",
+                            "closed-on",
+                            "closed",
+                            "first-uk-establishment-opened-on",
+                            "opened-on",
+                            "voluntary-arrangement",
+                            "receivership",
+                            "insolvency-proceedings",
+                            "liquidation",
+                            "administration",
+                            "appointment-count",
+                            "born-on",
+                            "registered",
+                            "removed"
+                        ]
+                    },
+                    "type": "array",
+                    "description": "An array of enumeration types that make up the search description. See search_descriptions_raw.yaml in api-enumerations"
+                },
+                "address": {
+                    "description": "The address of the company's registered office.",
+                    "type": "object",
+                    "items": {
+                        "$ref": "search.json#/definitions/registeredOfficeAddress"
+                    }
+                }
+            }
+        },
+        "LinksModel": {
+            "title": "LinksModel",
+            "properties": {
+                "self": {
+                    "type": "string",
+                    "description": "The URL of the resource being returned by the search item."
+                }
+            }
+        },
+        "MatchesModel": {
+            "title": "MatchesModel",
+            "properties": {
+                "title": {
+                    "items": {
+                        "type": "integer"
+                    },
+                    "type": "array",
+                    "description": "An array of character offset into the `title` string. These always occur in pairs and define the start and end of substrings in the member `title` that matched the search terms. The first character of the string is index 1."
+                },
+                "snippet": {
+                    "items": {
+                        "type": "integer"
+                    },
+                    "type": "array",
+                    "description": "An array of character offset into the `snippet` string. These always occur in pairs and define the start and end of substrings in the member `snippet` that matched the search terms. The first character of the string is index 1."
+                },
+                "address_snippet": {
+                    "items": {
+                        "type": "integer"
+                    },
+                    "type": "array",
+                    "description": "An array of character offset into the `address_snippet` string. These always occur in pairs and define the start and end of substrings in the member `address_snippet` that matched the search terms."
+                }
+            }
+        },
+        "registeredOfficeAddress": {
+            "title": "registeredOfficeAddress",
+            "required": [
+                "address_line_1"
+            ],
+            "properties": {
+                "address_line_1": {
+                    "description": "The first line of the address.",
+                    "type": "string"
+                },
+                "address_line_2": {
+                    "description": "The second line of the address.",
+                    "type": "string"
+                },
+                "country": {
+                    "description": "The country.",
+                    "enum": [
+                        "Wales",
+                        "England",
+                        "Scotland",
+                        "Great Britain",
+                        "Not specified",
+                        "United Kingdom",
+                        "Northern Ireland"
+                    ],
+                    "type": "string"
+                },
+                "locality": {
+                    "description": "The locality e.g London.",
+                    "type": "string"
+                },
+                "po_box": {
+                    "description": "The post-office box number.",
+                    "type": "string"
+                },
+                "postal_code": {
+                    "description": "The postal code e.g CF14 3UZ.",
+                    "type": "string"
+                },
+                "care_of": {
+                    "description": "The care of name.",
+                    "type": "string"
+                },
+                "region": {
+                    "description": "The region e.g Surrey.",
+                    "type": "string"
+                }
+            }
+        },
+        "OfficerSearch": {
+            "title": "OfficerSearch",
+            "allOf": [
+                {
+                    "$ref": "search.json#/definitions/CommonSearch"
+                }
+            ],
+            "required": [
+                "kind"
+            ],
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "The type of response returned.",
+                    "enum": [
+                        "search#officers"
+                    ]
+                },
+                "items": {
+                    "type": "array",
+                    "description": "The results of the completed search.",
+                    "items": {
+                        "$ref": "search.json#/definitions/OfficerSearchItems"
+                    }
+                }
+            }
+        },
+        "OfficerDateOfBirth": {
+            "title": "OfficerDateOfBirth",
+            "required": [
+                "month",
+                "year"
+            ],
+            "properties": {
+                "month": {
+                    "description": "The month the officer was born in.",
+                    "type": "integer"
+                },
+                "year": {
+                    "description": "The year the officer was born in.",
+                    "type": "integer"
+                }
+            }
+        },
+        "OfficerSearchItems": {
+            "title": "OfficerSearchItems",
+            "allOf": [
+                {
+                    "$ref": "search.json#/definitions/CommonSearchItems"
+                }
+            ],
+            "required": [
+                "appointment_count",
+                "description",
+                "kind",
+                "title",
+                "address_snippet",
+                "address"
+            ],
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "Describes the type of result returned.",
+                    "enum": [
+                        "searchresults#officer"
+                    ]
+                },
+                "date_of_birth": {
+                    "description": "The officer date of birth details.",
+                    "items": {
+                        "$ref": "search.json#/definitions/OfficerDateOfBirth"
+                    }
+                },
+                "appointment_count": {
+                    "type": "integer",
+                    "description": "The total number of appointments the officer has."
+                },
+                "description_identifiers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "appointment-count",
+                            "born-on"
+                        ]
+                    },
+                    "description": "An array of enumeration types that make up the search description. See search_descriptions_raw.yaml in api-enumerations."
+                },
+                "address": {
+                    "type": "object",
+                    "description": "The service address of the officer.",
+                    "items": {
+                        "$ref": "search.json#/definitions/OfficerAddress"
+                    }
+                }
+            }
+        },
+        "OfficerAddress": {
+            "title": "OfficerAddress",
+            "properties": {
+                "address_line_1": {
+                    "description": "The first line of the address.",
+                    "type": "string"
+                },
+                "address_line_2": {
+                    "description": "The second line of the address.",
+                    "type": "string"
+                },
+                "care_of": {
+                    "description": "The care of name.",
+                    "type": "string"
+                },
+                "country": {
+                    "description": "The country. For example UK.",
+                    "type": "string"
+                },
+                "locality": {
+                    "description": "The locality. For example London.",
+                    "type": "string"
+                },
+                "po_box": {
+                    "description": "The post-office box number.",
+                    "type": "string"
+                },
+                "postal_code": {
+                    "description": "The postal code. For example CF14 3UZ.",
+                    "type": "string"
+                },
+                "premises": {
+                    "description": "The property name or number.",
+                    "type": "string"
+                },
+                "region": {
+                    "description": "The region. For example Surrey.",
+                    "type": "string"
+                }
+            }
+        },
+        "PersonsWithSignificantControlSearch": {
+            "title": "PersonswithsignificantcontrolSearch",
+            "allOf": [
+                {
+                    "$ref": "search.json#/definitions/CommonSearch"
+                }
+            ],
+            "required": [
+                "kind"
+            ],
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "The type of response returned.",
+                    "enum": [
+                        "search#persons-with-significant-control"
+                    ]
+                },
+                "items": {
+                    "type": "array",
+                    "description": "The results of the completed search.",
+                    "items": {
+                        "$ref": "search.json#/definitions/PersonsWithSignificantControlSearchItems"
+                    }
+                }
+            }
+        },
+        "PersonsWithSignificantControlDateOfBirth": {
+            "title": "PersonswithsignificantcontrolDateOfBirth",
+            "required": [
+                "month",
+                "year"
+            ],
+            "properties": {
+                "month": {
+                    "description": "The month the person with significant control was born in.",
+                    "type": "integer"
+                },
+                "year": {
+                    "description": "The year the person with significant control was born in.",
+                    "type": "integer"
+                }
+            }
+        },
+        "PersonsWithSignificantControlAddress": {
+            "title": "PersonswithsignificantcontrolAddress",
+            "properties": {
+                "address_line_1": {
+                    "description": "The first line of the address.",
+                    "type": "string"
+                },
+                "address_line_2": {
+                    "description": "The second line of the address.",
+                    "type": "string"
+                },
+                "care_of": {
+                    "description": "The care of name.",
+                    "type": "string"
+                },
+                "country": {
+                    "description": "The country. For example UK.",
+                    "type": "string"
+                },
+                "locality": {
+                    "description": "The locality. For example London.",
+                    "type": "string"
+                },
+                "po_box": {
+                    "description": "The post-office box number.",
+                    "type": "string"
+                },
+                "postal_code": {
+                    "description": "The postal code. For example CF14 3UZ.",
+                    "type": "string"
+                },
+                "premises": {
+                    "description": "The property name or number.",
+                    "type": "string"
+                },
+                "region": {
+                    "description": "The region. For example Surrey.",
+                    "type": "string"
+                }
+            }
+        },
+        "PersonsWithSignificantControlSearchItems": {
+            "title": "PersonswithsignificantcontrolSearchItems",
+            "allOf": [
+                {
+                    "$ref": "search.json#/definitions/CommonSearchItems"
+                }
+            ],
+            "required": [
+                "notification_count",
+                "description",
+                "kind",
+                "title",
+                "address_snippet",
+                "address"
+            ],
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "Describes the type of result returned.",
+                    "enum": [
+                        "searchresults#persons-with-significant-control"
+                    ]
+                },
+                "notification_count": {
+                    "type": "integer",
+                    "description": "The total number of notifications the person with significant control has."
+                },
+                "date_of_birth": {
+                    "description": "The person with significant control date of birth details.",
+                    "items": {
+                        "$ref": "search.json#/definitions/PersonsWithSignificantControlDateOfBirth"
+                    }
+                },
+                "description_identifiers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "notification-count",
+                            "born-on"
+                        ]
+                    },
+                    "description": "An array of enumeration types that make up the search description. See search_descriptions_raw.yaml in api-enumerations."
+                },
+                "address": {
+                    "type": "object",
+                    "description": "The service address of the person with significant control.",
+                    "items": {
+                        "$ref": "search.json#/definitions/PersonsWithSignificantControlAddress"
+                    }
+                }
+            }
+        },
+        "DisqualifiedOfficerSearch": {
+            "title": "DisqualifiedOfficerSearch",
+            "allOf": [
+                {
+                    "$ref": "search.json#/definitions/CommonSearch"
+                }
+            ],
+            "required": [
+                "kind",
+                "total_results",
+                "start_index",
+                "items_per_page"
+            ],
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "The type of response returned.",
+                    "enum": [
+                        "search#disqualified-officers"
+                    ]
+                },
+                "items": {
+                    "type": "array",
+                    "description": "The results of the completed search.",
+                    "items": {
+                        "$ref": "search.json#/definitions/DisqualifiedOfficerSearchItems"
+                    }
+                }
+            }
+        },
+        "DisqualifiedOfficerSearchItems": {
+            "title": "DisqualifiedOfficerSearchItems",
+            "allOf": [
+                {
+                    "$ref": "search.json#/definitions/CommonSearchItems"
+                }
+            ],
+            "required": [
+                "kind",
+                "title",
+                "description",
+                "address",
+                "address_snippet"
+            ],
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "Describes the type of result returned.",
+                    "enum": [
+                        "searchresults#disqualified-officer"
+                    ]
+                },
+                "date_of_birth": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The disqualified officer's date of birth."
+                },
+                "description_identifiers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "born-on"
+                        ]
+                    },
+                    "description": "An array of enumeration types that make up the search description. See search_descriptions_raw.yaml in api-enumerations."
+                },
+                "address": {
+                    "type": "object",
+                    "description": "The address of the disqualified officer as provided by the disqualifying authority.",
+                    "items": {
+                        "$ref": "search.json#/definitions/DisqualifiedOfficerAddress"
+                    }
+                }
+            }
+        },
+        "DisqualifiedOfficerAddress": {
+            "title": "DisqualifiedOfficerAddress",
+            "properties": {
+                "address_line_1": {
+                    "description": "The first line of the address.",
+                    "type": "string"
+                },
+                "address_line_2": {
+                    "description": "The second line of the address.",
+                    "type": "string"
+                },
+                "country": {
+                    "description": "The country. For example UK.",
+                    "type": "string"
+                },
+                "locality": {
+                    "description": "The locality. For example London.",
+                    "type": "string"
+                },
+                "postal_code": {
+                    "description": "The postal code. For example CF14 3UZ.",
+                    "type": "string"
+                },
+                "premises": {
+                    "description": "The property name or number.",
+                    "type": "string"
+                },
+                "region": {
+                    "description": "The region. For example Surrey.",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
+

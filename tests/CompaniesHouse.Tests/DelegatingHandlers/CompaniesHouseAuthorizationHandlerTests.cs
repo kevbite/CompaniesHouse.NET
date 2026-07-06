@@ -4,19 +4,18 @@ using System.Threading.Tasks;
 using CompaniesHouse.DelegatingHandlers;
 using Moq;
 using Moq.Protected;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.Tests.DelegatingHandlers
 {
-    [TestFixture]
     public class CompaniesHouseAuthorizationHandlerTests
     {
-        private CompaniesHouseAuthorizationHandler _handler;
-        private string _apiKey;
-        private HttpRequestMessage _actual;
+        private CompaniesHouseAuthorizationHandler _handler = null!;
+        private string _apiKey = null!;
+        private HttpRequestMessage _actual = null!;
 
-        [OneTimeSetUp]
-        public void GivenACompaniesHouseAuthorizationHandler()
+        public CompaniesHouseAuthorizationHandlerTests()
         {
             var innerHandler = new Mock<HttpMessageHandler>(MockBehavior.Strict);
             innerHandler.Protected()
@@ -29,20 +28,16 @@ namespace CompaniesHouse.Tests.DelegatingHandlers
             {
                 InnerHandler = innerHandler.Object
             };
-        }
-
-        [SetUp]
-        public void When()
-        {
             var client = new HttpClient(_handler);
-            client.GetAsync("http://liberislabs.com/");
+            client.GetAsync("http://liberislabs.com/").GetAwaiter().GetResult();
         }
 
-        [Test]
+        [Fact]
         public void ThenAuthorizationHeaderIsCorrect()
         {
-            Assert.That(_actual.Headers.Authorization.Scheme, Is.EqualTo("Basic"));
-            Assert.That(_actual.Headers.Authorization.Parameter, Is.EqualTo("NDJjODE1NGUtOTgyZC00YTYyLTkxM2QtODlhYWZiMzIwZGJj"));
+            _actual.Headers.Authorization.ShouldNotBeNull();
+            _actual.Headers.Authorization.Scheme.ShouldBe("Basic");
+            _actual.Headers.Authorization.Parameter.ShouldBe("NDJjODE1NGUtOTgyZC00YTYyLTkxM2QtODlhYWZiMzIwZGJj");
         }
         
     }

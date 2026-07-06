@@ -1,34 +1,28 @@
 ﻿using CompaniesHouse.JsonConverters;
-using Moq;
-using Newtonsoft.Json;
-using NUnit.Framework;
+using System;
+using System.Text;
+using System.Text.Json;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.Tests.JsonConverters.OptionalDateJsonConverterTests
 {
-    [TestFixture]
     public class OptionalDateJsonConverterTestsForUnknownValue
     {
-        private OptionalDateJsonConverter _convertor;
-        private object _result;
+        private readonly DateTime? _result;
 
-        [OneTimeSetUp]
-        public void GivenADateOfCessationJsonConverter()
+        public OptionalDateJsonConverterTestsForUnknownValue()
         {
-            _convertor = new OptionalDateJsonConverter();
+            var converter = new OptionalDateJsonConverter();
+            var reader = new Utf8JsonReader(Encoding.UTF8.GetBytes(@"""Unknown"""));
+            reader.Read();
+            _result = converter.Read(ref reader, typeof(DateTime?), CompaniesHouseJsonSerializerOptions.Default);
         }
 
-        [SetUp]
-        public void WhenReadingJsonWhenValueIsUnknown()
-        {
-            var jsonReader = new Mock<JsonReader>();
-            jsonReader.Setup(x => x.Value).Returns("Unknown");
-            _result = _convertor.ReadJson(jsonReader.Object, null, null, null);
-        }
-
-        [Test]
+        [Fact]
         public void ThenTheResultIsNull()
         {
-            Assert.That(_result, Is.Null);
+            _result.ShouldBeNull();
         }
     }
 }

@@ -26,12 +26,12 @@ namespace CompaniesHouse
             
         }
         
-        public Task<CompaniesHouseClientResponse<DocumentMetadata>> GetDocumentMetadataAsync(string documentId, CancellationToken caneCancellationToken = default)
+        public Task<CompaniesHouseResponse<DocumentMetadata>> GetDocumentMetadataAsync(string documentId, CancellationToken caneCancellationToken = default)
         {
             return _companiesHouseDocumentMetadataClient.GetDocumentMetadataAsync(documentId, caneCancellationToken);
         }
 
-        public Task<CompaniesHouseClientResponse<DocumentDownload>> DownloadDocumentAsync(string documentId, CancellationToken cancellationToken = default)
+        public Task<CompaniesHouseResponse<DocumentDownload>> DownloadDocumentAsync(string documentId, CancellationToken cancellationToken = default)
         {
             return _companiesHouseDocumentDownloadClient.DownloadDocumentAsync(documentId, cancellationToken);
         }

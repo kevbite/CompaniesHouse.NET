@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.PersonsWithSignificantControl
 {
     public class PersonWithSignificantControlLinks
     {
-        [JsonProperty(PropertyName = "self")]
-        public string Self { get; set; }
+        [JsonPropertyName("self")]
+        public string? Self { get; set; }
 
-        [JsonProperty(PropertyName = "statement")]
-        public string Statement { get; set; }
+        [JsonPropertyName("statement")]
+        public string? Statement { get; set; }
     }
 }

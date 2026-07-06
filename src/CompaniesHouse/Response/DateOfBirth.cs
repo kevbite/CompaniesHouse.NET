@@ -1,16 +1,16 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response
 {
     public class DateOfBirth
     {
-        [JsonProperty(PropertyName = "day")]
+        [JsonPropertyName("day")]
         public int? Day { get; set; }
 
-        [JsonProperty(PropertyName = "month")]
-        public int? Month { get; set; }
+        [JsonPropertyName("month")]
+        public int Month { get; set; }
 
-        [JsonProperty(PropertyName = "year")]
-        public int? Year { get; set; }
+        [JsonPropertyName("year")]
+        public int Year { get; set; }
     }
 }

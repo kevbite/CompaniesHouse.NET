@@ -32,7 +32,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
          ""due_on"" : ""{_companyProfile.Accounts.NextAccounts.DueOn:yyyy-MM-dd}"",
          ""period_end_on"" : ""{_companyProfile.Accounts.NextAccounts.PeriodEndOn:yyyy-MM-dd}"",
          ""period_start_on"" : ""{_companyProfile.Accounts.NextAccounts.PeriodStartOn:yyyy-MM-dd}"",
-         ""overdue"" : ""{_companyProfile.Accounts.NextAccounts.Overdue.ToString().ToLower()}""
+         ""overdue"" : ""{(_companyProfile.Accounts.NextAccounts?.Overdue ?? false).ToString().ToLower()}""
       }},
       ""next_due"" : ""{_companyProfile.Accounts.NextDue.ToString("yyyy-MM-dd")}"",
       ""next_made_up_to"" : ""{_companyProfile.Accounts.NextMadeUpTo.ToString("yyyy-MM-dd")}"",
@@ -58,7 +58,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
       ""last_made_up_to"" : ""{_companyProfile.ConfirmationStatement.LastMadeUpTo:yyyy-MM-dd}"",
       ""next_due"" : ""{_companyProfile.ConfirmationStatement.NextDue:yyyy-MM-dd}"",
       ""next_made_up_to"" : ""{_companyProfile.ConfirmationStatement.NextMadeUpTo:yyyy-MM-dd}"",
-      ""overdue"" : ""{_companyProfile.ConfirmationStatement.Overdue.ToString().ToLower()}""
+      ""overdue"" : ""{(_companyProfile.ConfirmationStatement?.Overdue ?? false).ToString().ToLower()}""
    }},
    ""date_of_creation"" : ""{_companyProfile.DateOfCreation.ToString("yyyy-MM-dd")}"",
    ""date_of_cessation"" : ""{_companyProfile.DateOfCessation.ToString("yyyy-MM-dd")}"",
@@ -105,35 +105,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
       {string.Join(",", _companyProfile.SicCodes.Select(x => $@"""{x}"""))}
    ],
    ""type"" : ""{_companyProfile.Type}"",
-   ""undeliverable_registered_office_address"" : {_companyProfile.UndeliverableRegisteredOfficeAddress.ToString().ToLower()},
-   ""foreign_company_details"" : {{
-        ""accounting_requirement"": {{
-            ""foreign_account_type"": ""{_companyProfile.ForeignCompanyDetails.AccountingRequirement.ForeignAccountType}"",
-            ""terms_of_account_publication"": ""{_companyProfile.ForeignCompanyDetails.AccountingRequirement.TermsOfAccountPublication}""
-        }},
-        ""accounts"": {{
-            ""account_period_from:"": {{
-                ""day"": ""{_companyProfile.ForeignCompanyDetails.Accounts.AccountPeriodFrom.Day}"",
-                ""month"": ""{_companyProfile.ForeignCompanyDetails.Accounts.AccountPeriodFrom.Month}""
-            }},
-            ""account_period_to"": {{
-                ""day"": ""{_companyProfile.ForeignCompanyDetails.Accounts.AccountPeriodTo.Day}"",
-                ""month"": ""{_companyProfile.ForeignCompanyDetails.Accounts.AccountPeriodTo.Month}""
-            }},
-            ""must_file_within"": {{
-                ""months"": ""{_companyProfile.ForeignCompanyDetails.Accounts.MustFileWithin.Months}"",
-            }}
-        }},
-        ""business_activity"": ""{_companyProfile.ForeignCompanyDetails.BusinessActivity}"",
-        ""company_type"": ""{_companyProfile.ForeignCompanyDetails.CompanyType}"",
-        ""governed_by"": ""{_companyProfile.ForeignCompanyDetails.GovernedBy}"",
-        ""is_a_credit_finance_institution"": {_companyProfile.ForeignCompanyDetails.IsACreditFinanceInstitution.ToString().ToLower()},
-        ""originating_registry"": {{
-            ""country"": ""{_companyProfile.ForeignCompanyDetails.OriginatingRegistry.Country}"",
-            ""name"": ""{_companyProfile.ForeignCompanyDetails.OriginatingRegistry.Name}""
-        }},
-        ""registration_number"": ""{_companyProfile.ForeignCompanyDetails.RegistrationNumber}""
-    }}
+   ""undeliverable_registered_office_address"" : {_companyProfile.UndeliverableRegisteredOfficeAddress.ToString().ToLower()}
 }}";
         }
 

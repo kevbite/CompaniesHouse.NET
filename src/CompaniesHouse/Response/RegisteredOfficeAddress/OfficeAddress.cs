@@ -1,42 +1,40 @@
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.RegisteredOfficeAddress
 {
     public class OfficeAddress
     {
-        [JsonProperty(PropertyName = "address_line_1")]
-        public string AddressLine1 { get; set; }
-        
-        [JsonProperty(PropertyName = "address_line_2")]
-        public string AddressLine2 { get; set; }
-        
-        [JsonProperty(PropertyName = "country")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public OfficeAddressCountry Country { get; set; }
-        
-        [JsonProperty(PropertyName = "etag")]
-        public string Etag { get; set; }
-        
-        [JsonProperty(PropertyName = "kind")]
-        public string Kind { get; set; }
-        
-        [JsonProperty(PropertyName = "links")]
-        public Links Links { get; set; }
-        
-        [JsonProperty(PropertyName = "locality")]
-        public string Locality { get; set; }
+        [JsonPropertyName("address_line_1")]
+        public string? AddressLine1 { get; set; }
 
-        [JsonProperty(PropertyName = "po_box")]
-        public string PoBox { get; set; }
-        
-        [JsonProperty(PropertyName = "postal_code")]
-        public string PostalCode { get; set; }
+        [JsonPropertyName("address_line_2")]
+        public string? AddressLine2 { get; set; }
 
-        [JsonProperty(PropertyName = "Premises")]
-        public string Premises { get; set; }
+        [JsonPropertyName("country")]
+        public string? Country { get; set; }
 
-        [JsonProperty(PropertyName = "region")]
-        public string Region { get; set; }
+        [JsonPropertyName("etag")]
+        public string? Etag { get; set; }
+
+        [JsonPropertyName("kind")]
+        public string? Kind { get; set; }
+
+        [JsonPropertyName("links")]
+        public Links? Links { get; set; }
+
+        [JsonPropertyName("locality")]
+        public string? Locality { get; set; }
+
+        [JsonPropertyName("po_box")]
+        public string? PoBox { get; set; }
+
+        [JsonPropertyName("postal_code")]
+        public string? PostalCode { get; set; }
+
+        [JsonPropertyName("premises")]
+        public string? Premises { get; set; }
+
+        [JsonPropertyName("region")]
+        public string? Region { get; set; }
     }
 }

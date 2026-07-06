@@ -1,22 +1,25 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Search.DisqualifiedOfficersSearch
 {
     public class DisqualifiedOfficerSearch
     {
-        [JsonProperty(PropertyName = "items")]
-        public DisqualifiedOfficer[] DisqualifiedOfficers { get; set; }
+        [JsonPropertyName("items")]
+        public DisqualifiedOfficer[]? DisqualifiedOfficers { get; set; }
 
-        [JsonProperty(PropertyName = "items_per_page")]
+        [JsonPropertyName("items_per_page")]
         public int ItemsPerPage { get; set; }
 
-        [JsonProperty(PropertyName = "kind")]
-        public string Kind { get; set; }
+        [JsonPropertyName("kind")]
+        public string Kind { get; set; } = string.Empty;
 
-        [JsonProperty(PropertyName = "start_index")]
+        [JsonPropertyName("page_number")]
+        public int? PageNumber { get; set; }
+
+        [JsonPropertyName("start_index")]
         public int StartIndex { get; set; }
 
-        [JsonProperty(PropertyName = "total_results")]
+        [JsonPropertyName("total_results")]
         public int TotalResults { get; set; }
     }
 }

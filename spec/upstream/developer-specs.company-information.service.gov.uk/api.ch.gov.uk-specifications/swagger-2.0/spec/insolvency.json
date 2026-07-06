@@ -1,0 +1,1316 @@
+{
+    "insolvencyCase": {
+        "get": {
+            "description": "Company insolvency information",
+            "tags": [
+                "insolvency"
+            ],
+            "parameters": [
+                {
+                    "name": "company_number",
+                    "in": "path",
+                    "description": "The company number of the basic information to return.",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Company insolvency resource returned",
+                    "schema": {
+                        "$ref": "insolvency.json#/definitions/companyInsolvency"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "404": {
+                    "description": "Resource not found"
+                }
+            }
+        }
+    },
+    "createInsolvency": {
+        "post": {
+            "summary": "Create an insolvency transaction resource",
+            "description": "Create an insolvency transaction resource",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "create insolvency resource",
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "transaction_id",
+                    "required": true,
+                    "description": "The transaction unique reference",
+                    "type": "string"
+                },
+                {
+                    "name": "request",
+                    "in": "body",
+                    "description": "The writable fields to create an insolvency data resource",
+                    "required": false,
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/insolvencyResourceWritable"
+                    }
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "201": {
+                    "description": "The insolvency data change resource was created.",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/createdInsolvencyResource"
+                    }
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "404": {
+                    "description": "Transaction not found"
+                },
+                "409": {
+                    "description": "Insolvency resource already exists."
+                }
+            }
+        }
+    },
+    "insolvencyTransactionsValidation": {
+        "get": {
+            "summary": "Validate insolvency transaction resource",
+            "description": "Validate insolvency transaction resource",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "validate insolvency resource",
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "transaction_id",
+                    "required": true,
+                    "description": "The transaction unique reference",
+                    "type": "string"
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "A validation status response was returned (note: this does not mean there were no validation errors)",
+                    "schema": {
+                        "$ref": "../models/errors.json#/definitions/validationStatus"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorized"
+                }
+            }
+        }
+    },
+    "practitioners": {
+        "get": {
+            "summary": "Get all practitioners",
+            "description": "Get all practitioner resources associated with a single insolvency transaction",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "get all practitioners",
+            "parameters": [{
+                "name": "transaction_id",
+                "in": "path",
+                "required": true,
+                "description": "The transaction that this insolvency case is applied to",
+                "type": "string"
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "An array of all practitioner resources associated with the insolvency case",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/allPractitioners"
+                    }
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "404": {
+                    "description": "Transaction not found"
+                }
+
+            }
+        },
+        "post": {
+            "summary": "Create a practitioner for this insolvency resource",
+            "description": "Create a practitioner for this insolvency resource",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "create practitioner",
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "transaction_id",
+                    "required": true,
+                    "description": "The transaction that this insolvency case is applied to",
+                    "type": "string"
+                },
+                {
+                    "name": "request",
+                    "in": "body",
+                    "description": "The writable fields to create practitioner resource",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/practitionerWritable"
+                    }
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "201": {
+                    "description": "Practitioner created",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/practitioner"
+                    }
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "403": {
+                    "description": "Forbidden"
+                }
+            }
+        }
+    },
+    "practitionerTransactions": {
+        "get": {
+            "summary": "Get the practitioner resource",
+            "description": "Get the practitioner resource",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "get practitioner",
+            "parameters": [{
+                "name": "transaction_id",
+                "in": "path",
+                "required": true,
+                "description": "The transaction that this insolvency case is applied to",
+                "type": "string"
+                },
+                {
+                    "name": "practitioner_id",
+                    "in": "path",
+                    "required": true,
+                    "description":  "The unique practitioner id",
+                    "type": "string"
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "The practitioner resource",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/practitioner"
+                    }
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "404": {
+                    "description": "Transaction not found"
+                }
+
+            }
+        },
+        "delete": {
+            "summary": "Delete the practitioner from this insolvency resource",
+            "description": "Delete the practitioner from this insolvency resource",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "delete practitioner",
+            "parameters": [{
+                "name": "transaction_id",
+                "in": "path",
+                "required": true,
+                "description": "The transaction that this insolvency case is applied to",
+                "type": "string"
+            },
+                {
+                    "name": "practitioner_id",
+                    "in": "path",
+                    "required": true,
+                    "description":  "The unique practitioner id",
+                    "type": "string"
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "The practitioner was deleted"
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "403": {
+                    "description": "Forbidden"
+                },
+                "404": {
+                    "description": "Transaction not found"
+                }
+
+            }
+        }
+    },
+    "appointmentTransactions": {
+        "post": {
+            "summary": "Appoint the practitioner",
+            "description": "Appoint the practitioner",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "create appointment",
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "transaction_id",
+                    "required": true,
+                    "description": "The transaction that this insolvency case is applied to",
+                    "type": "string"
+                },
+                {
+                    "name": "practitioner_id",
+                    "in": "path",
+                    "required": true,
+                    "description":  "The unique practitioner id",
+                    "type": "string"
+                },
+                {
+                    "name": "request",
+                    "in": "body",
+                    "required": true,
+                    "description": "Appointment details",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/appointment"
+                    }
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "201": {
+                    "description": "Practitioner appointed",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/practitionerAppointment"
+                    }
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "403": {
+                    "description": "Forbidden"
+                },
+                "404": {
+                    "description": "Transaction not found"
+                }
+            }
+        },
+        "get": {
+            "summary": "Get the appointment details",
+            "description": "Get the appointment details",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "get appointment",
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "transaction_id",
+                    "required": true,
+                    "description": "The transaction that this insolvency case is applied to",
+                    "type": "string"
+                },
+                {
+                    "name": "practitioner_id",
+                    "in": "path",
+                    "required": true,
+                    "description":  "The unique practitioner id",
+                    "type": "string"
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "The appointment details",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/practitionerAppointment"
+                    }
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "404": {
+                    "description": "Transaction not found"
+                }
+            }
+        },
+        "delete": {
+            "summary": "Delete the appointment resource",
+            "description": "Delete the appointment resource",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "delete appointment",
+            "parameters": [{
+                "name": "transaction_id",
+                "in": "path",
+                "required": true,
+                "description": "The transaction that this insolvency case is applied to",
+                "type": "string"
+            },
+                {
+                    "name": "practitioner_id",
+                    "in": "path",
+                    "required": true,
+                    "description":  "The unique practitioner id",
+                    "type": "string"
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "The appointment was deleted"
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "403": {
+                    "description": "Forbidden"
+                },
+                "404": {
+                    "description": "Transaction not found"
+                }
+
+            }
+        }
+    },
+    "createAttachment": {
+        "post": {
+            "summary": "Send a file attachment for the case",
+            "description": "Send a file attachment for the case",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "create attachment",
+            "parameters": [
+                {
+                    "name": "transaction_id",
+                    "in": "path",
+                    "description": "The transaction unique reference",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "request",
+                    "in": "body",
+                    "required": true,
+                    "description": "The attachment details",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/attachmentWriteable"
+                    }
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "201": {
+                    "description": "The file was accepted for processing",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/createdAttachment"
+                    }
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "403": {
+                    "description": "Forbidden"
+                },
+                "404": {
+                    "description": "Transaction not found"
+                }
+            }
+        }
+    },
+    "attachmentTransactions": {
+        "get": {
+            "summary": "Get information about the attachment that was submitted",
+            "description": "Get information about the attachment that was submitted",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "get attachment",
+            "parameters": [
+                {
+                    "name": "transaction_id",
+                    "in": "path",
+                    "description": "The transaction unique reference",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "attachment_id",
+                    "in": "path",
+                    "required": true,
+                    "description": "The unique attachment id",
+                    "type": "string"
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "the attachment resource",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/createdAttachment"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "404": {
+                    "description": "attachment not found"
+                }
+            }
+        },
+        "delete": {
+            "summary": "Delete an attachment from this transaction",
+            "description": "Delete an attachment from this transaction",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "delete attachment",
+            "parameters": [
+                {
+                    "name": "transaction_id",
+                    "in": "path",
+                    "description": "The transaction unique reference",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "attachment_id",
+                    "in": "path",
+                    "required": true,
+                    "description": "The unique attachment id",
+                    "type": "string"
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "The attachment was deleted"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "403": {
+                    "description": "Forbidden"
+                }
+            }
+        }
+    },
+    "createResolution": {
+        "post": {
+            "summary": "Send resolution details for this transaction",
+            "description": "Send resolution details for this transaction",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "create resolution",
+            "parameters": [
+                {
+                    "name": "transaction_id",
+                    "in": "path",
+                    "description": "The transaction unique reference",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "request",
+                    "in": "body",
+                    "required": true,
+                    "description": "The resolution details",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/resolutionResourceWriteable"
+                    }
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "201": {
+                    "description": "The resolution details was sent correctly",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/Resolution"
+                    }
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "403": {
+                    "description": "Forbidden"
+                },
+                "500": {
+                    "description": "attachment not found on transaction"
+                }
+            }
+        },
+        "get": {
+            "summary": "Get the resolution details",
+            "description": "Get the resolution details for the transaction",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "get resolution details",
+            "parameters": [
+                {
+                    "name": "transaction_id",
+                    "in": "path",
+                    "description": "The transaction unique reference",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "The resolution details",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/Resolution"
+                    }
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "404": {
+                    "description": "resolution not found on transaction"
+                }
+            }
+        },
+        "delete": {
+            "summary": "Delete the resolution date",
+            "description": "Delete the resolution date for the transaction",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "delete resolution",
+            "parameters": [
+                {
+                    "name": "transaction_id",
+                    "in": "path",
+                    "description": "The transaction unique reference",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "The resolution date was deleted"
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "403": {
+                    "description": "Forbidden"
+                },
+                "404": {
+                    "description": "Not found"
+                }
+            }
+        }
+    },
+    "downloadAttachment": {
+        "get": {
+            "summary": "Download the attachment",
+            "description": "Download an attachment",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "download attachment",
+            "parameters": [
+                {
+                    "name": "transaction_id",
+                    "in": "path",
+                    "description": "The transaction unique reference",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "attachment_id",
+                    "in": "path",
+                    "description": "The unique attachment id",
+                    "required": true,
+                    "type": "string"
+                }      
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "The file will begin to download",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/downloadedAttachment"
+                    }
+                },
+                "404": {
+                    "description": "attachment not found on transaction"
+                }
+            }
+        }
+
+    },
+    "statementOfAffairs": {
+        "post": {
+            "summary": "Send statement of affairs details for this transaction",
+            "description": "Create the statement of affairs for this transaction",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "create statement of affairs",
+            "parameters": [
+                {
+                    "name": "transaction_id",
+                    "in": "path",
+                    "description": "The transaction unique reference",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "request",
+                    "in":"body",
+                    "required":true,
+                    "description":"The statement of affairs date",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/statementOfAffairsWriteable"
+                    }
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "201": {
+                    "description": "The statement of affairs date was sent correctly",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/statementOfAffairs"
+                    }
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "403": {
+                    "description": "Forbidden"
+                },
+                "500": {
+                    "description": "attachment not found on transaction"
+                }
+            }
+        },
+        "get": {
+            "summary": "Get Statement of Affairs",
+            "description": "Get the statement of affairs details for the transaction",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "get statement of affairs",
+            "parameters": [
+                {
+                    "name": "transaction_id",
+                    "in": "path",
+                    "description": "The transaction unique reference",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "The statement of affairs details",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/statementOfAffairs"
+                    }
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "404": {
+                    "description": "The statement of affairs was not found"
+                }
+            }
+        },
+        "delete": {
+            "summary":"Delete the statement of affairs",
+            "description": "Delete the statement of affairs date for the transaction",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "delete statement of affairs",
+            "parameters": [
+                {
+                    "name": "transaction_id",
+                    "in": "path",
+                    "description": "The transaction unique reference",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "The statement of affairs date was deleted"
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "403": {
+                    "description": "Forbidden"
+                },
+                "404": {
+                    "description": "Not found"
+                }
+            }
+        }
+    },
+    "progressReport": {
+        "post": {
+            "summary": "Send progress report details for this transaction",
+            "description": "Create the progress report for this transaction",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "create progress report",
+            "parameters": [
+                {
+                    "name": "transaction_id",
+                    "in": "path",
+                    "description": "The transaction unique reference",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "request",
+                    "in": "body",
+                    "required": true,
+                    "description": "The progress report dates and attachment ID",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/progressReportWriteable"
+                    }
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "201": {
+                    "description": "Progress report resource created",
+                    "content": "application/json",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/progressReport"
+                    }
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "403": {
+                    "description": "Forbidden"
+                },
+                "500": {
+                    "description": "attachment not found on transaction"
+                }
+            }
+        },
+        "get": {
+            "summary": "Get Progress Report",
+            "description": "Get the progress report details for the transaction",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "get progress report",
+            "parameters": [
+                {
+                    "name": "transaction_id",
+                    "in": "path",
+                    "description": "The transaction unique reference",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "The progress report details",
+                    "schema": {
+                        "$ref": "../models/insolvency.json#/definitions/progressReport"
+                    }
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "404": {
+                    "description": "The progress report was not found"
+                }
+            }
+        },
+        "delete": {
+            "summary": "Delete the progress report",
+            "description": "Delete the progress report dates for the transaction",
+            "tags": [
+                "insolvencyApi"
+            ],
+            "x-operationName": "delete progress report",
+            "parameters": [
+                {
+                    "name": "transaction_id",
+                    "in": "path",
+                    "description": "The transaction unique reference",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "security": [
+                {
+                    "oauth2": [
+                        "https://identity.company-information.service.gov.uk/user/profile.read",
+                        "https://api.company-information.service.gov.uk/company/*/insolvency.write-full"
+                    ]
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "The progress report dates were deleted"
+                },
+                "400": {
+                    "description": "Bad request"
+                },
+                "401": {
+                    "description": "Unauthorized"
+                },
+                "403": {
+                    "description": "Forbidden"
+                },
+                "404": {
+                    "description": "Not found"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "companyInsolvency": {
+            "title": "companyInsolvency",
+            "required": [
+                "etag",
+                "cases"
+            ],
+            "properties": {
+                "etag": {
+                    "description": "The ETag of the resource.",
+                    "type": "string"
+                },
+                "cases": {
+                    "type": "array",
+                    "description": "List of insolvency cases.",
+                    "items": {
+                        "$ref": "insolvency.json#/definitions/case"
+                    }
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Company insolvency status details",
+                    "enum": [
+                        "administration-order",
+                        "administrative-receiver",
+                        "in-administration",
+                        "liquidation",
+                        "live-receiver-manager-on-at-least-one-charge",
+                        "receivership",
+                        "receiver-manager",
+                        "voluntary-arrangement",
+                        "voluntary-arrangement-receivership"
+                    ]
+                }
+            }
+        },
+        "case": {
+            "title": "case",
+            "required": [
+                "type",
+                "dates",
+                "practitioners"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "compulsory-liquidation",
+                        "creditors-voluntary-liquidation",
+                        "members-voluntary-liquidation",
+                        "in-administration",
+                        "corporate-voluntary-arrangement",
+                        "corporate-voluntary-arrangement-moratorium",
+                        "administration-order",
+                        "receiver-manager",
+                        "administrative-receiver",
+                        "receivership",
+                        "foreign-insolvency",
+                        "moratorium"
+                    ],
+                    "description": "The type of case.\n For enumeration descriptions see `insolvency_case_type` section in the [enumeration mappings] (https://github.com/companieshouse/api-enumerations/blob/master/constants.yml)."
+                },
+                "dates": {
+                    "type": "array",
+                    "description": "The dates specific to the case.",
+                    "items": {
+                        "$ref": "insolvency.json#/definitions/caseDates"
+                    }
+                },
+                "notes": {
+                    "type": "array",
+                    "description": "The dates specific to the case.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "practitioners": {
+                    "type": "array",
+                    "description": "The practitioners for the case.",
+                    "items": {
+                        "$ref": "insolvency.json#/definitions/practitioners"
+                    }
+                },
+                "links": {
+                    "type": "object",
+                    "description": "The practitioners for the case.",
+                    "items": {
+                        "$ref": "insolvency.json#/definitions/links"
+                    }
+                },
+                "number": {
+                    "type": "string",
+                    "description": "The case number."
+                }
+            }
+        },
+        "caseDates": {
+            "title": "caseDates",
+            "required": [
+                "type",
+                "date"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "Describes what date is represented by the associated `date` element.\n For enumeration descriptions see `insolvency_case_date_type` section in the [enumeration mappings] (https://github.com/companieshouse/api-enumerations/blob/master/constants.yml).",
+                    "enum": [
+                        "instrumented-on",
+                        "administration-started-on",
+                        "administration-discharged-on",
+                        "administration-ended-on",
+                        "concluded-winding-up-on",
+                        "petitioned-on",
+                        "ordered-to-wind-up-on",
+                        "due-to-be-dissolved-on",
+                        "case-end-on",
+                        "wound-up-on",
+                        "voluntary-arrangement-started-on",
+                        "voluntary-arrangement-ended-on",
+                        "moratorium-started-on",
+                        "moratorium-ended-on",
+                        "declaration-solvent-on"
+                    ]
+                },
+                "date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The case date, described by `date_type`."
+                }
+            }
+        },
+        "practitioners": {
+            "title": "practitioners",
+            "required": [
+                "name",
+                "address"
+            ],
+            "properties": {
+                "name": {
+                    "description": "The name of the practitioner.",
+                    "type": "string"
+                },
+                "address": {
+                    "type": "array",
+                    "description": "The practitioners' address.",
+                    "items": {
+                        "$ref": "insolvency.json#/definitions/practitionerAddress"
+                    }
+                },
+                "appointed_on": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date the practitioner was appointed on."
+                },
+                "ceased_to_act_on": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The date the practitioner ceased to act for the case."
+                },
+                "role": {
+                    "type": "string",
+                    "description": "The type of role.",
+                    "enum": [
+                        "final-liquidator",
+                        "receiver",
+                        "receiver-manager",
+                        "proposed-liquidator",
+                        "provisional-liquidator",
+                        "administrative-receiver",
+                        "practitioner",
+                        "interim-liquidator"
+                    ]
+                }
+            }
+        },
+        "practitionerAddress": {
+            "title": "practitionerAddress",
+            "required": [
+                "address_line_1"
+            ],
+            "properties": {
+                "address_line_1": {
+                    "type": "string",
+                    "description": "The first line of the address."
+                },
+                "address_line_2": {
+                    "type": "string",
+                    "description": "The second line of the address."
+                },
+                "locality": {
+                    "type": "string",
+                    "description": "The locality. For example London."
+                },
+                "region": {
+                    "type": "string",
+                    "description": "The region. For example Surrey."
+                },
+                "postal_code": {
+                    "type": "string",
+                    "description": "The postal code. For example CF14 3UZ."
+                },
+                "country": {
+                    "type": "string",
+                    "description": "The country."
+                }
+            }
+        },
+        "links": {
+            "title": "links",
+            "properties": {
+                "charge": {
+                    "type": "string",
+                    "description": "The link to the charge this case is lodged against."
+                }
+            }
+        }
+    }
+}
+
+
+

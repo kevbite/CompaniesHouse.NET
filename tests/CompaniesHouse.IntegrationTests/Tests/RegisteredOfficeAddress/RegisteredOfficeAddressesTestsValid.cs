@@ -1,16 +1,24 @@
 using System.Threading.Tasks;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.RegisteredOfficeAddress
 {
-    [TestFixture]
+
     public class RegisteredOfficeAddressesTestsValid : RegisteredOfficeAddressTestBase
     {
         private const string CompanyNumber = "03977902";
 
         protected override async Task When() => Result = await Client.GetRegisteredOfficeAddress(CompanyNumber);
-        
-        [Test]
-        public void ThenRegisteredOfficeAddressIsNotNull() => Assert.NotNull(Result.Data);
+
+        [IntegrationFact]
+        public void ThenRegisteredOfficeAddressIsNotNull() => Result.Data.ShouldNotBeNull();
+
+        [IntegrationFact]
+        public void ThenObservedFieldsAreReturned()
+        {
+            Result.Data.Country.ShouldBe("United Kingdom");
+            Result.Data.Links?.Self.ShouldBe("/company/03977902/registered-office-address");
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
             return $@"{{
     ""etag"" : ""{_charges.Etag}"",
     ""items"" : [
-        {string.Join(",", _charges.Items.Select(GetChargesJson))}
+        {string.Join(",", (_charges.Items ?? []).Select(GetChargesJson))}
     ],
    ""part_satisfied_count"" : {_charges.PartSatisfiedCount},
     ""satisfied_count"" : {_charges.SatisfiedCount},

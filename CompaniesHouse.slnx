@@ -1,0 +1,11 @@
+<Solution>
+  <Project Path="samples/SampleProject/SampleProject.csproj" />
+  <Project Path="src/CompaniesHouse.Extensions.Microsoft.DependencyInjection/CompaniesHouse.Extensions.Microsoft.DependencyInjection.csproj" />
+  <Project Path="src/CompaniesHouse.SourceGenerator/CompaniesHouse.SourceGenerator.csproj" />
+  <Project Path="src/CompaniesHouse/CompaniesHouse.csproj" />
+  <Project Path="tests/CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests/CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests.csproj" />
+  <Project Path="tests/CompaniesHouse.IntegrationTests/CompaniesHouse.IntegrationTests.csproj" />
+  <Project Path="tests/CompaniesHouse.ScenarioTests/CompaniesHouse.ScenarioTests.csproj" />
+  <Project Path="tests/CompaniesHouse.SourceGenerator.Tests/CompaniesHouse.SourceGenerator.Tests.csproj" />
+  <Project Path="tests/CompaniesHouse.Tests/CompaniesHouse.Tests.csproj" />
+</Solution>

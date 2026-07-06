@@ -1,42 +1,52 @@
-﻿using System.Threading.Tasks;
+using System.Linq;
+using System.Threading.Tasks;
 using CompaniesHouse.Request;
+using CompaniesHouse.Response.Search.CompanySearch;
+using CompaniesHouse.Response.Search.OfficerSearch;
 using CompaniesHouse.Response.Search.AllSearch;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.SearchingTests
 {
-    [TestFixture("British Gas")]
-    [TestFixture("Kevin")]
     public class AllSearchTests
     {
-        private readonly string _query;
-        private CompaniesHouseClient _client;
-        private CompaniesHouseClientResponse<AllSearch> _result;
+        private readonly CompaniesHouseClient _client;
 
-        public AllSearchTests(string query)
+        public AllSearchTests()
         {
-            _query = query;
+            _client = new CompaniesHouseClient(new CompaniesHouseSettings(Keys.ApiKey));
         }
 
-        [OneTimeSetUp]
-        public void GivenACompaniesHouseClient()
+        [IntegrationTheory]
+        [InlineData("British Gas")]
+        [InlineData("Kevin")]
+        public async Task ThenItemsAreReturned(string query)
         {
-            var settings = new CompaniesHouseSettings(Keys.ApiKey);
+            var result = await _client.SearchAllAsync(new SearchAllRequest { Query = query });
 
-            _client = new CompaniesHouseClient(settings);
+            (result.Data.Items ?? []).ShouldNotBeEmpty();
         }
 
-        [SetUp]
-        public async Task WhenSearching()
+        [IntegrationFact]
+        public async Task ThenPagingAndMixedItemTypesAreReturned()
         {
-            _result = await _client.SearchAllAsync(new SearchAllRequest() { Query = _query })
-                .ConfigureAwait(false);
+            var result = await _client.SearchAllAsync(new SearchAllRequest { Query = "john", ItemsPerPage = 20 });
+
+            result.Data.PageNumber.ShouldBe(1);
+            (result.Data.Items ?? []).ShouldContain(x => x is Company);
+            (result.Data.Items ?? []).ShouldContain(x => x is Officer);
         }
 
-        [Test]
-        public void ThenItemsAreReturned()
+        [IntegrationFact]
+        public async Task ThenCompanySpecificFieldsRoundTripFromSearchAll()
         {
-            Assert.That(_result.Data.Items, Is.Not.Empty);
+            var result = await _client.SearchAllAsync(new SearchAllRequest { Query = "absa uk permanent establishment", ItemsPerPage = 20 });
+
+            var company = (result.Data.Items ?? []).OfType<Company>().Single(x => x.CompanyNumber == "FC040879");
+            company.CompanyNumber.ShouldBe("FC040879");
+            company.AddressSnippet.ShouldBe("Absa Towers West, 15 Troye Street, Johannesburg, Gauteng 2000, South Africa");
+            company.ExternalRegistrationNumber.ShouldBe("198600479406");
         }
     }
 }

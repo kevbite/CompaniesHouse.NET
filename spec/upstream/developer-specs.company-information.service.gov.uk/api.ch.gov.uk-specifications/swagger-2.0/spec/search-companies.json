@@ -1,0 +1,688 @@
+{
+    "searchDissolved":{
+        "get":{
+          "summary":"Search for a dissolved company",
+          "description":"Search for a dissolved company",
+          "x-operationName": "search dissolved companies",
+          "tags": [
+              "search"
+          ],
+          "parameters":[
+            {
+              "name":"q",
+              "in":"query",
+              "description":"The company name being searched for",
+              "required":true,
+              "type":"string"
+            },
+            {
+              "name":"search_type",
+              "in":"query",
+              "description":"Determines type of search. Options are alphabetical, best-match, previous-name-dissolved",
+              "required":true,
+              "type":"string"
+            },
+            {
+              "name":"search_above",
+              "in":"query",
+              "description":"The ordered_alpha_key_with_id used for alphabetical paging",
+              "required":false,
+              "type":"string"
+            },
+            {
+              "name":"search_below",
+              "in":"query",
+              "description":"The ordered_alpha_key_with_id used for alphabetical paging",
+              "required":false,
+              "type":"string"
+            },
+            {
+              "name":"size",
+              "in":"query",
+              "description":"The maximum number of results matching the search term(s) to return with a range of 1 to 100",
+              "required":false,
+              "type":"string"
+            },
+            {
+              "name":"start_index",
+              "in":"query",
+              "description":"Used in best-match and previous-name-dissolved search-type",
+              "required":false,
+              "type":"string"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"A list of dissolved companies",
+              "schema":{
+                "$ref": "search-companies.json#/definitions/dissolvedCompanySearch"
+              }
+            },
+            "404":{
+              "description":"No companies found"
+            },
+            "422":{
+              "description":"Invalid size parameter, size must be greater than zero and not greater than 100"
+            }
+          }
+        }
+      },
+      "searchAlphabetic":{
+        "get":{
+          "summary":"Search for a company",
+          "description":"Search for a company",
+          "x-operationName": "search companies alphabetically",
+          "tags": [
+              "search"
+          ],
+          "parameters":[
+            {
+              "name":"q",
+              "in":"query",
+              "description":"The company name being searched for",
+              "required":true,
+              "type":"string"
+            },
+            {
+              "name":"search_above",
+              "in":"query",
+              "description":"The ordered_alpha_key_with_id used for paging",
+              "required":false,
+              "type":"string"
+            },
+            {
+              "name":"search_below",
+              "in":"query",
+              "description":"The ordered_alpha_key_with_id used for paging",
+              "required":false,
+              "type":"string"
+            },
+            {
+              "name":"size",
+              "in":"query",
+              "description":"The maximum number of results matching the search term(s) to return with a range of 1 to 100",
+              "required":false,
+              "type":"string"
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"A list of companies",
+              "schema":{
+                "$ref": "search-companies.json#/definitions/alphabeticalCompanySearch"
+              }
+            },
+            "404":{
+              "description":"No companies found"
+            },
+            "422":{
+              "description":"Invalid size parameter, size must be greater than zero and not greater than 100"
+            }
+          }
+        }
+    },
+    "searchAdvanced":{
+      "get":{
+        "summary":"Advanced search for a company",
+        "description":"Advanced search for a company",
+        "x-operationName": "advanced company search",
+        "tags": [
+            "search"
+        ],
+        "parameters":[
+          {
+            "name":"company_name_includes",
+            "in":"query",
+            "description":"The company name includes advanced search filter",
+            "required":false,
+            "type":"string"
+          },
+          {
+            "name":"company_name_excludes",
+            "in":"query",
+            "description":"The company name excludes advanced search filter",
+            "required":false,
+            "type":"string"
+          },
+          {
+            "name":"company_status",
+            "in":"query",
+            "description":"The company status advanced search filter. To search using multiple values, use a comma delimited list or multiple of the same key i.e. company_status=xxx&company_status=yyy",
+            "required":false,
+            "type":"list"
+          },
+          {
+            "name":"company_subtype",
+            "in":"query",
+            "description":"The company subtype advanced search filter. To search using multiple values, use a comma delimited list or multiple of the same key i.e. company_subtype=xxx&company_subtype=yyy",
+            "required":false,
+            "type":"string"
+          },
+          {
+            "name":"company_type",
+            "in":"query",
+            "description":"The company type advanced search filter. To search using multiple values, use a comma delimited list or multiple of the same key i.e. company_type=xxx&company_type=yyy",
+            "required":false,
+            "type":"list"
+          },
+          {
+            "name":"dissolved_from",
+            "in":"query",
+            "description":"The dissolved from date advanced search filter",
+            "required":false,
+            "type":"date"
+          },
+          {
+            "name":"dissolved_to",
+            "in":"query",
+            "description":"The dissolved to date advanced search filter",
+            "required":false,
+            "type":"date"
+          },
+          {
+            "name":"incorporated_from",
+            "in":"query",
+            "description":"The incorporated from date advanced search filter",
+            "required":false,
+            "type":"date"
+          },
+          {
+            "name":"incorporated_to",
+            "in":"query",
+            "description":"The incorporated to date advanced search filter",
+            "required":false,
+            "type":"date"
+          },
+          {
+            "name":"location",
+            "in":"query",
+            "description":"The location advanced search filter",
+            "required":false,
+            "type":"string"
+          },
+          {
+            "name":"sic_codes",
+            "in":"query",
+            "description":"The SIC codes advanced search filter. To search using multiple values, use a comma delimited list or multiple of the same key i.e. sic_codes=xxx&sic_codes=yyy",
+            "required":false,
+            "type":"list"
+          },
+          {
+            "name":"size",
+            "in":"query",
+            "description":"The maximum number of results matching the search term(s) to return with a range of 1 to 5000",
+            "required":false,
+            "type":"string"
+          },
+          {
+            "name":"start_index",
+            "in":"query",
+            "description":"The point at which results will start from i.e show search results from result 20 (used for paging)",
+            "required":false,
+            "type":"string"
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"A list of companies",
+            "schema":{
+              "$ref": "search-companies.json#/definitions/advancedCompanySearch"
+            }
+          },
+          "400":{
+            "description":"Bad request"
+          },
+          "404":{
+            "description":"No companies found"
+          }
+        }
+      }
+    },
+    "definitions":{
+        "dissolvedCompanySearch":{
+          "title":"List of dissolved companies",
+          "type":"object",
+          "allOf":[
+            {
+              "properties":{
+                "etag":{
+                  "type":"string"
+                },
+                "items":{
+                  "type":"array",
+                  "items":{
+                    "$ref": "search-companies.json#/definitions/dissolvedCompany"
+                  }
+                },
+                "kind":{
+                  "type":"string",
+                  "enum":[
+                    "search#alphabetical-dissolved",
+                    "search#dissolved",
+                    "search#previous-name-dissolved"
+                  ]
+                },
+                "top_hit":{
+                  "allOf":[
+                    {
+                      "$ref": "search-companies.json#/definitions/dissolved_top_hit"
+                    },
+                    {
+                      "description":"The best matching company in dissolved search results"
+                    }
+                  ]
+                },
+                "hits":{
+                    "type":"string",
+                    "description":"The number of hits returned on a best-match or previous-company-names search"
+                }
+              }
+            }
+          ]
+        },
+        "alphabeticalCompanySearch":{
+          "title":"List of companies",
+          "type":"object",
+          "allOf":[
+            {
+              "properties":{
+                "items":{
+                  "type":"array",
+                  "items":{
+                    "$ref": "search-companies.json#/definitions/alphabeticalCompany"
+                  }
+                },
+                "kind":{
+                  "type":"string",
+                  "enum":[
+                    "search#alphabetical-search",
+                    "search#enhanced-search"
+                  ]
+                },
+                "top_hit":{
+                  "allOf":[
+                    {
+                      "$ref": "search-companies.json#/definitions/alphabetical_top_hit"
+                    },
+                    {
+                      "description":"The best matching company in alphabetical search results"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "advancedCompanySearch":{
+          "title":"A list of companies",
+          "type":"object",
+          "required":[
+            "top_hit",
+            "items",
+            "kind",
+            "hits"
+          ],
+          "allOf":[
+            {
+              "properties":{
+                "etag":{
+                  "type":"string"
+                },
+                "items":{
+                  "type":"array",
+                  "items":{
+                    "$ref": "search-companies.json#/definitions/advancedCompany"
+                  }
+                },
+                "kind":{
+                  "type":"string",
+                  "enum":[
+                    "search#advanced-search"
+                  ]
+                },
+                "top_hit":{
+                  "allOf":[
+                    {
+                      "$ref": "search-companies.json#/definitions/advanced_top_hit"
+                    },
+                    {
+                      "description":"The best matching company in an advanced search results"
+                    }
+                  ]
+                },
+                "hits":{
+                    "type":"string",
+                    "description":"The number of matches found using advanced search"
+                }
+              }
+            }
+          ]
+        },
+        "dissolved_top_hit":{
+          "$ref": "search-companies.json#/definitions/dissolvedCompany"
+        },
+        "alphabetical_top_hit":{
+          "$ref": "search-companies.json#/definitions/alphabeticalCompany"
+        },
+        "advanced_top_hit":{
+          "$ref": "search-companies.json#/definitions/advancedCompany"
+        },
+        "dissolvedCompany":{
+          "title":"Dissolved company",
+          "required":[
+            "company_name",
+            "company_number",
+            "date_of_cessation",
+            "date_of_creation"
+          ],
+          "properties":{
+            "company_name":{
+              "type":"string",
+              "description":"The company name associated with the dissolved company"
+            },
+            "company_number":{
+              "type":"string",
+              "description":"The company number of the dissolved company"
+            },
+            "company_status":{
+              "type":"string",
+              "description":"The status of the company"
+            },
+            "ordered_alpha_key_with_id":{
+              "type":"string",
+              "description":"The alphakey with it's id associated with the dissolved company"
+            },
+            "kind":{
+              "type":"string",
+              "enum":[
+                "search-results#dissolved-company"
+              ],
+              "description":"The type of search result"
+            },
+            "date_of_cessation":{
+              "type":"string",
+              "format":"date",
+              "description":"The date that the company was dissolved"
+            },
+            "date_of_creation":{
+              "type":"string",
+              "format":"date",
+              "description":"The date that the company was incorporated"
+            },
+            "registered_office_address":{
+              "$ref": "search-companies.json#/definitions/dissolved_company_registered_office_address"
+            },
+            "previous_company_names":{
+              "type":"array",
+              "items":{
+                "$ref": "search-companies.json#/definitions/previous_company_name"
+              }
+            },
+            "matched_previous_company_name":{
+              "$ref": "search-companies.json#/definitions/previous_company_name"
+            }
+          }
+        },
+        "alphabeticalCompany":{
+          "title":"Alphabetical company",
+          "required":[
+            "company_name",
+            "company_number",
+            "company_status",
+            "company_type",
+            "links"
+          ],
+          "properties":{
+            "company_name":{
+              "type":"string",
+              "description":"The company name associated with the company"
+            },
+            "company_number":{
+              "type":"string",
+              "description":"The company number of the company"
+            },
+            "company_status":{
+              "type":"string",
+              "description":"The status of the company"
+            },
+            "ordered_alpha_key_with_id":{
+              "type":"string",
+              "description":"The alphakey with it's id associated with the company"
+            },
+            "kind":{
+              "type":"string",
+              "enum":[
+                "search-results#alphabetical-search"
+              ],
+              "description":"The type of search result"
+            },
+            "links":{
+              "type":"object",
+              "description":"The link to the company",
+              "properties":{
+                "company_profile":{
+                  "type":"string",
+                  "description":"The link to the company"
+                }
+              }
+            },
+            "company_type":{
+              "type":"string",
+              "description":"The type of company associated with the company"
+            }
+          }
+        },
+        "advanced_company_registered_office_address":{
+          "title":"Registered Office Address",
+          "description": "This will only appear if there are ROA details in the company record",
+          "properties":{
+            "address_line_1":{
+              "type":"string",
+              "description":"The first line of the address e.g Crown Way"
+            },
+            "address_line_2":{
+              "type":"string",
+              "description":"The second line of the address"
+            },
+            "locality":{
+              "type":"string",
+              "description":"The town associated to the ROA e.g Cardiff"
+            },
+            "postal_code":{
+              "type":"string",
+              "description":"The postal code e.g CF14 3UZ"
+            },
+            "region": {
+              "description": "The region e.g Surrey.",
+              "type": "string"
+            },
+            "country": {
+              "description": "The country.",
+              "enum": [
+                "Wales",
+                "England",
+                "Scotland",
+                "Great Britain",
+                "Not specified",
+                "United Kingdom",
+                "Northern Ireland"
+              ],
+              "type": "string"
+            }
+          }
+        },
+        "dissolved_company_registered_office_address":{
+          "title":"Registered Office Address",
+          "description": "This will only appear if there are ROA details in the company record",
+          "properties": {
+            "address_line_1": {
+              "type": "string",
+              "description": "The first line of the address e.g Crown Way"
+            },
+            "address_line_2": {
+              "type": "string",
+              "description": "The second line of the address"
+            },
+            "locality": {
+              "type": "string",
+              "description": "The town associated to the ROA e.g Cardiff"
+            },
+            "postal_code": {
+              "type": "string",
+              "description": "The postal code e.g CF14 3UZ"
+            }
+          }
+        },
+        "previous_company_name":{
+          "title":"Previous company name",
+          "properties":{
+            "company_number":{
+              "type":"string",
+              "description":"The company number of the dissolved company"
+            },
+            "ceased_on":{
+              "type":"string",
+              "format":"date",
+              "description":"The date that the company ceased being known under the company name"
+            },
+            "effective_from":{
+              "type":"string",
+              "format":"date",
+              "description":"The date that the company started being known under the company name"
+            },
+            "name":{
+              "type":"string",
+              "description":"The previous name of the company"
+            }
+          }
+        },
+        "advancedCompany":{
+          "title":"advancedCompany",
+            "required":[
+              "company_name",
+              "company_number",
+              "company_status",
+              "company_type",
+              "date_of_creation",
+              "kind"
+            ],
+            "properties":{
+              "company_name":{
+                "type":"string",
+                "description":"The company name associated with the company"
+              },
+              "company_number":{
+                "type":"string",
+                "description":"The company number of the company"
+              },
+              "company_status": {
+                "description": "The status of the company.  \n For enumeration descriptions see `company_status` section in the [enumeration mappings] (https://github.com/companieshouse/api-enumerations/blob/master/constants.yml)  ",
+                "type": "string",
+                "enum": [
+                  "active",
+                  "dissolved",
+                  "open",
+                  "closed",
+                  "converted-closed",
+                  "receivership",
+                  "administration",
+                  "liquidation",
+                  "insolvency-proceedings",
+                  "voluntary-arrangement",
+                  "registered",
+                  "removed"
+                ]
+             },
+              "company_type":{
+                "description": "The type of the company.  \n For enumeration descriptions see `company_type` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/constants.yml)    ",
+                "enum": [
+                    "private-unlimited",
+                    "ltd",
+                    "plc",
+                    "old-public-company",
+                    "private-limited-guarant-nsc-limited-exemption",
+                    "limited-partnership",
+                    "private-limited-guarant-nsc",
+                    "converted-or-closed",
+                    "private-unlimited-nsc",
+                    "private-limited-shares-section-30-exemption",
+                    "protected-cell-company",
+                    "assurance-company",
+                    "oversea-company",
+                    "eeig",
+                    "icvc-securities",
+                    "icvc-warrant",
+                    "icvc-umbrella",
+                    "registered-society-non-jurisdictional",
+                    "industrial-and-provident-society",
+                    "northern-ireland",
+                    "northern-ireland-other",
+                    "royal-charter",
+                    "investment-company-with-variable-capital",
+                    "unregistered-company",
+                    "llp",
+                    "other",
+                    "european-public-limited-liability-company-se",
+                    "uk-establishment",
+                    "scottish-partnership",
+                    "charitable-incorporated-organisation",
+                    "scottish-charitable-incorporated-organisation",
+                    "further-education-or-sixth-form-college-corporation",
+                    "registered-overseas-entity"
+                ],
+                "type": "string"
+              },
+              "company_subtype":{
+                "description": "The subtype of the company.  \n For enumeration descriptions see `company_subtype` section in the [enumeration mappings](https://github.com/companieshouse/api-enumerations/blob/master/constants.yml)",
+                "type":"string",
+                "enum":[
+                  "community-interest-company",
+                  "private-fund-limited-partnership"
+                ]
+              },
+              "kind":{
+                "type":"string",
+                "enum":[
+                  "search-results#company"
+                ],
+                "description":"The type of search result"
+              },
+              "links":{
+                "type":"object",
+                "description":"The link to the company",
+                "properties":{
+                  "company_profile":{
+                    "type":"string",
+                    "description":"The link to the company"
+                  }
+                }
+              },
+              "date_of_cessation":{
+                "type":"string",
+                "format":"date",
+                "description":"The date that the company was dissolved"
+              },
+              "date_of_creation":{
+                "type":"string",
+                "format":"date",
+                "description":"The date that the company was incorporated"
+              },
+              "registered_office_address":{
+                "$ref": "search-companies.json#/definitions/advanced_company_registered_office_address"
+              },
+              "sic_codes":{
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "description":"SIC codes for this company"
+              }
+            }
+          }
+      },
+      "schemes":[
+        "https",
+        "http"
+      ]
+    }
+

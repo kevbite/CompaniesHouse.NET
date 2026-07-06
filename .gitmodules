@@ -1,0 +1,3 @@
+[submodule "external/api-enumerations"]
+	path = external/api-enumerations
+	url = https://github.com/companieshouse/api-enumerations

@@ -19,38 +19,22 @@ namespace CompaniesHouse
             _companyFilingHistoryUriBuilder = companyFilingHistoryUriBuilder;
         }
 
-        public async Task<CompaniesHouseClientResponse<CompanyFilingHistory>> GetCompanyFilingHistoryAsync(string companyNumber, int startIndex, int pageSize, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<CompaniesHouseResponse<CompanyFilingHistory>> GetCompanyFilingHistoryAsync(string companyNumber, int startIndex, int pageSize, CancellationToken cancellationToken = default(CancellationToken))
         {
             var requestUri = _companyFilingHistoryUriBuilder.Build(companyNumber, startIndex, pageSize);
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            // Return a null profile on 404s, but raise exception for all other error codes
-            if (response.StatusCode != System.Net.HttpStatusCode.NotFound)
-                response.EnsureSuccessStatusCode2();
-
-            CompanyFilingHistory result = response.IsSuccessStatusCode
-                ? await response.Content.ReadAsJsonAsync<CompanyFilingHistory>().ConfigureAwait(false)
-                : null;
-
-            return new CompaniesHouseClientResponse<CompanyFilingHistory>(result);
+            return await response.ToCompaniesHouseResponseAsync<CompanyFilingHistory>(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<CompaniesHouseClientResponse<FilingHistoryItem>> GetFilingHistoryByTransactionAsync(string companyNumber, string transactionId, CancellationToken cancellationToken = default)
+        public async Task<CompaniesHouseResponse<FilingHistoryItem>> GetFilingHistoryByTransactionAsync(string companyNumber, string transactionId, CancellationToken cancellationToken = default)
         {
             var requestUri = _companyFilingHistoryUriBuilder.Build(companyNumber, transactionId);
 
             var response = await _httpClient.GetAsync(requestUri, cancellationToken).ConfigureAwait(false);
 
-            // Return a null profile on 404s, but raise exception for all other error codes
-            if (response.StatusCode != System.Net.HttpStatusCode.NotFound)
-                response.EnsureSuccessStatusCode2();
-
-            var result = response.IsSuccessStatusCode
-                ? await response.Content.ReadAsJsonAsync<FilingHistoryItem>().ConfigureAwait(false)
-                : null;
-
-            return new CompaniesHouseClientResponse<FilingHistoryItem>(result);
+            return await response.ToCompaniesHouseResponseAsync<FilingHistoryItem>(cancellationToken).ConfigureAwait(false);
         }
     }
 }

@@ -1,22 +1,21 @@
-﻿using System;
 using System.Threading.Tasks;
 using CompaniesHouse.Response.CompanyProfile;
-using NUnit.Framework;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.CompanyProfileTests
 {
-    [TestFixture]
-    public abstract class CompanyProfileTestsBase
+    public abstract class CompanyProfileTestsBase : IAsyncLifetime
     {
-        protected CompaniesHouseClient _client;
-        protected CompaniesHouseClientResponse<CompanyProfile> _result;
+        protected CompaniesHouseClient _client = null!;
+        protected CompaniesHouseResponse<CompanyProfile> _result = null!;
 
-        [SetUp]
-        public void Setup()
+        public async Task InitializeAsync()
         {
             GivenACompaniesHouseClient();
-            When();
+            await When();
         }
+
+        public Task DisposeAsync() => Task.CompletedTask;
 
         protected abstract Task When();
 

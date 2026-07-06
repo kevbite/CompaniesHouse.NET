@@ -6,13 +6,13 @@ namespace CompaniesHouse.Tests.ResourceBuilders
     {
         public DateTime? AcquiredOn { get; set; }
 
-        public string AssetsCeasedReleased { get; set; }
+        public string AssetsCeasedReleased { get; set; } = null!;
 
-        public string ChargeCode { get; set; }
+        public string ChargeCode { get; set; } = null!;
 
         public int? ChargeNumber { get; set; }
 
-        public Classification Classification { get; set; }
+        public Classification Classification { get; set; } = null!;
 
         public DateTime? CoveringInstrumentDate { get; set; }
 
@@ -20,30 +20,30 @@ namespace CompaniesHouse.Tests.ResourceBuilders
 
         public DateTime? DeliveredOn { get; set; }
 
-        public string Etag { get; set; }
+        public string Etag { get; set; } = null!;
 
-        public string Id { get; set; }
+        public string Id { get; set; } = null!;
 
-        public InsolvencyCase[] InsolvencyCases { get; set; }
+        public InsolvencyCase[] InsolvencyCases { get; set; } = null!;
 
-        public Links Links { get; set; }
+        public Links Links { get; set; } = null!;
 
         public bool? MoreThanFourPersonsEntitled { get; set; }
 
-        public Particular Particular { get; set; }
+        public Particular Particular { get; set; } = null!;
 
-        public PersonEntitled[] PersonsEntitled { get; set; }
+        public PersonEntitled[] PersonsEntitled { get; set; } = null!;
 
         public DateTime? ResolvedOn { get; set; }
 
         public DateTime? SatisfiedOn { get; set; }
 
-        public ScottishAlterations ScottishAlterations { get; set; }
+        public ScottishAlterations ScottishAlterations { get; set; } = null!;
 
-        public SecuredDetail SecuredDetail { get; set; }
+        public SecuredDetail SecuredDetail { get; set; } = null!;
 
-        public string Status { get; set; }
+        public string Status { get; set; } = null!;
 
-        public Transaction[] Transactions { get; set; }
+        public Transaction[] Transactions { get; set; } = null!;
     }
 }

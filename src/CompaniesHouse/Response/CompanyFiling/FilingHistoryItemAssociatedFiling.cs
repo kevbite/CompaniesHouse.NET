@@ -1,21 +1,23 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.CompanyFiling
 {
     public class FilingHistoryItemAssociatedFiling
     {
-        [JsonProperty(PropertyName = "type")]
-        public string FilingType { get; set; }
+        [JsonPropertyName("type")]
+        public string? FilingType { get; set; }
 
-        [JsonProperty(PropertyName = "date")]
+        [JsonPropertyName("date")]
         public DateTime? Date { get; set; }
 
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        [JsonPropertyName("description")]
+        public string? Description { get; set; }
 
-        [JsonProperty(PropertyName = "description_values")]
-        private Dictionary<string, dynamic> DescriptionValues { get; set; }
+        [JsonInclude]
+        [JsonPropertyName("description_values")]
+        private JsonElement? DescriptionValues { get; set; }
     }
 }

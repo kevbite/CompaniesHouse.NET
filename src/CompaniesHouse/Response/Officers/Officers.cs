@@ -1,22 +1,37 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Officers
 {
     public class Officers
     {
-        [JsonProperty(PropertyName = "active_count")]
-        public int? ActiveCount { get; set; }
+        [JsonPropertyName("etag")]
+        public string ETag { get; set; } = string.Empty;
 
-        [JsonProperty(PropertyName = "items")]
-        public Officer[] Items { get; set; }
+        [JsonPropertyName("active_count")]
+        public int ActiveCount { get; set; }
 
-        [JsonProperty(PropertyName = "resigned_count")]
-        public int? ResignedCount { get; set; }
-        
-        [JsonProperty(PropertyName = "total_results")]
+        [JsonPropertyName("inactive_count")]
+        public int? InactiveCount { get; set; }
+
+        [JsonPropertyName("items")]
+        public Officer[] Items { get; set; } = [];
+
+        [JsonPropertyName("items_per_page")]
+        public int ItemsPerPage { get; set; }
+
+        [JsonPropertyName("kind")]
+        public string Kind { get; set; } = string.Empty;
+
+        [JsonPropertyName("links")]
+        public OfficersListLinks Links { get; set; } = new();
+
+        [JsonPropertyName("resigned_count")]
+        public int ResignedCount { get; set; }
+
+        [JsonPropertyName("total_results")]
         public int TotalResults { get; set; }
-        
-        [JsonProperty(PropertyName = "start_index")]
+
+        [JsonPropertyName("start_index")]
         public int StartIndex { get; set; }
     }
 }

@@ -1,175 +1,330 @@
 # CompaniesHouse.NET
 
-A simple .NET client wrapper for CompaniesHouse API.
+A .NET client for the [Companies House Public Data API](https://developer-specs.company-information.service.gov.uk/companies-house-public-data-api/reference).
 
 [![install from nuget](http://img.shields.io/nuget/v/CompaniesHouse.svg?style=flat-square)](https://www.nuget.org/packages/CompaniesHouse)
 [![downloads](http://img.shields.io/nuget/dt/CompaniesHouse.svg?style=flat-square)](https://www.nuget.org/packages/CompaniesHouse)
-[![Build status](https://ci.appveyor.com/api/projects/status/6uv0pemfr07nf4bs/branch/master?svg=true)](https://ci.appveyor.com/project/kevbite/companieshouse-net/branch/master)
+[![Build status](https://github.com/kevbite/CompaniesHouse.NET/actions/workflows/continuous-integration-workflow.yml/badge.svg)](https://github.com/kevbite/CompaniesHouse.NET/actions/workflows/continuous-integration-workflow.yml)
 
-## Getting Started
+> **Upgrading from an earlier version?** This is a major, deliberately breaking
+> rewrite. See [MIGRATION.md](MIGRATION.md) for the full list of changes and
+> before/after snippets.
 
-CompaniesHouse.NET can be installed via the package manager console by executing the following commandlet:
+## Installation
+
+Two NuGet packages are published:
 
 ```powershell
-PM> Install-Package CompaniesHouse
+# The core client and all request/response models
+dotnet add package CompaniesHouse
+
+# Optional: DI helpers for ASP.NET Core / generic-host apps
+dotnet add package CompaniesHouse.Extensions.Microsoft.DependencyInjection
 ```
 
-Once we have the package installed, we can then create a `CompaniesHouseSettings` with an API key, which can be created via the [CompaniesHouse API website](https://developer.company-information.service.gov.uk/manage-applications).
+Both packages multi-target `net8.0`, `net9.0` and `net10.0`.
+
+## Getting an API key
+
+Register an application on the
+[Companies House developer hub](https://developer.company-information.service.gov.uk/)
+to get an API key for the public data API.
+
+## Getting started
+
+### Constructing the client directly
 
 ```csharp
+using CompaniesHouse;
+
 var settings = new CompaniesHouseSettings(apiKey);
+
+using var client = new CompaniesHouseClient(settings);
 ```
 
-We need to now create a `CompaniesHouseClient` - passing in the settings that we've just created.
+`CompaniesHouseClient` implements `IDisposable` - always dispose it (or wrap it
+in a `using` block) once you're done, since it owns an underlying `HttpClient`.
+
+You can also construct the client from your own `HttpClient` (useful in tests,
+or when you want full control over handlers/base address):
 
 ```csharp
-using(var client = new CompaniesHouseClient(settings))
+using var httpClient = new HttpClient { BaseAddress = CompaniesHouseUris.Default };
+httpClient.DefaultRequestHeaders.Authorization =
+    new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes($"{apiKey}:")));
+
+using var client = new CompaniesHouseClient(httpClient);
+```
+
+### Dependency injection
+
+Install `CompaniesHouse.Extensions.Microsoft.DependencyInjection` and register
+the client on your `IServiceCollection`. Several overloads are available,
+built on `IOptions<CompaniesHouseClientOptions>`:
+
+```csharp
+// Simplest - just an API key
+services.AddCompaniesHouseClient(apiKey);
+
+// A custom base URI (e.g. against a sandbox/test host)
+services.AddCompaniesHouseClient(new Uri("https://api.company-information.service.gov.uk/"), apiKey);
+
+// Full control via a delegate
+services.AddCompaniesHouseClient(options =>
 {
-    // Do some work...
-}
+    options.ApiKey = apiKey;
+    options.BaseUri = CompaniesHouseUris.Default;
+});
+
+// Bind from IConfiguration (defaults to the "CompaniesHouse" section)
+services.AddCompaniesHouseClient(configuration);
 ```
 
-This is the object we'll use going forward for any interaction to the CompaniesHouse API, but don't forget to call `Dispose` after you've finish (or wrap in a `using` block).
-
-### ASP.NET Core
-
-If you're using [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-5.0) you can configure the IoC container with one simple extention method call. But first you'll need to install the [CompaniesHouse.Extensions.Microsoft.DependencyInjection](https://www.nuget.org/packages/CompaniesHouse.Extensions.Microsoft.DependencyInjection/) NuGet package.
-
-```powershell
-PM> Install-Package CompaniesHouse.Extensions.Microsoft.DependencyInjection
-```
-
-Once installed, in your [Startup class](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/startup?view=aspnetcore-5.0) in the `ConfigureServices` method, call the `AddCompaniesHouseClient` method on the `services` object.
+Every overload also accepts an optional `configureHttpClientBuilder` delegate,
+letting you customise the underlying `IHttpClientBuilder` (e.g. to add Polly
+resilience handlers):
 
 ```csharp
-public void ConfigureServices(IServiceCollection services)
+services.AddCompaniesHouseClient(apiKey, builder => builder.AddStandardResilienceHandler());
+```
+
+Once registered, inject `ICompaniesHouseClient` - the main facade interface -
+into your dependencies:
+
+```csharp
+public class MyPageModel(ICompaniesHouseClient client) : PageModel
 {
     // ...
-    services.AddCompaniesHouseClient("Your API Key");
 }
 ```
 
-This will then register a range of interfaces in to the IoC container that can be injected in to any of your dependancies. A list of these can be found in the [ServiceCollectionExtensionsTests](https://github.com/kevbite/CompaniesHouse.NET/blob/master/src/CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests/ServiceCollectionExtensionsTests.cs#L17).
+Document endpoints (`GetDocumentMetadataAsync`/`DownloadDocumentAsync`) talk to
+a separate host and are registered independently via
+`AddCompaniesHouseDocumentClient`, with the same set of overloads.
 
-For example if we wanted to use the `ICompaniesHouseClient` which is the main facade interface, we could inject this in to our page model.
+### `IConfiguration` example
+
+```json
+{
+  "CompaniesHouse": {
+    "ApiKey": "your-api-key",
+    "BaseUri": "https://api.company-information.service.gov.uk/"
+  }
+}
+```
 
 ```csharp
-public class MyPageModel : PageModel
-{
-    private readonly ICompaniesHouseClient _client;
-
-    public Index2Model(ICompaniesHouseClient client)
-    {
-        _client = client;            
-    }
-}
+services.AddCompaniesHouseClient(builder.Configuration);
 ```
 
-Under the hood this is using [typed clients](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-5.0#typed-clients) for the `HttpClient` used by CompaniesHouse.NET and it's also possible to use this package with any dependency injection framework that implements `Microsoft.Extensions.DependencyInjection.Abstractions`.
+## Enum/value-type handling
+
+Every "enum" in the Companies House API (company status, officer role, charge
+type, etc.) is modelled as a **string-backed, readonly `record struct`**
+rather than a plain C# `enum`. This is deliberate: Companies House regularly
+adds new wire values, and a plain `enum` throws (or silently defaults) the
+moment it sees one it doesn't recognise. See the
+[design rationale](https://kevsoft.net/2026/06/28/enums-in-api-contracts.html)
+for the full background.
+
+```csharp
+CompanyStatus status = companyProfile.CompanyStatus;
+
+status.Value;       // the raw wire value, e.g. "active"
+status.HasValue;     // false only for the default/absent value
+status.IsKnown;      // true if this library recognises the value
+status.Description;  // a friendly description for known values, e.g. "Active"
+```
+
+Compare against the generated static members (`CompanyStatus.Active`,
+`CompanyStatus.Dissolved`, ...) rather than raw strings, and always keep a
+fallback arm for values you don't recognise yet:
+
+```csharp
+var description = status switch
+{
+    _ when status == CompanyStatus.Active => "is active",
+    _ when status == CompanyStatus.Dissolved => "is dissolved",
+    _ when status.IsKnown => status.Description,
+    _ => $"unrecognised status: {status.Value}", // never throws
+};
+```
+
+New values ship as a new minor version of the `CompaniesHouse` package (the
+value types are generated from the official
+[`api-enumerations`](https://github.com/companieshouse/api-enumerations) data)
+- you never need to hand-edit or wait on a code change to keep deserializing.
+
+## Reading responses
+
+Every client method returns a `CompaniesHouseResponse<T>` — a discriminated
+union whose concrete subtype tells you exactly what happened:
+
+| Subtype | When | Extra property |
+|---|---|---|
+| `Success` | 2xx | `Data` (non-null), `Headers` |
+| `NotFound` | 404 | — |
+| `RateLimited` | 429 | `RetryAfter` |
+| `Unauthorized` | 401/403 | — |
+| `ClientError` | other 4xx | — |
+| `ServerError` | 5xx | `RetryAfter` |
+
+All subtypes expose `StatusCode` and `ReasonPhrase`. Transport failures (network
+errors, DNS, timeout) propagate as `HttpRequestException` from the underlying
+`HttpClient`.
+
+### Simple happy path
+
+Call `.Data` directly — it returns the deserialized body on `Success` and throws
+`InvalidOperationException` for every other subtype, so you never silently get
+`null`:
+
+```csharp
+var company = (await client.GetCompanyProfileAsync(companyNumber)).Data;
+Console.WriteLine(company.CompanyName);
+```
+
+### Full branching
+
+Use a switch expression when you need to handle specific outcomes:
+
+```csharp
+var result = await client.GetCompanyProfileAsync(companyNumber);
+
+var message = result switch
+{
+    CompaniesHouseResponse<CompanyProfile>.Success { Data: var company } =>
+        $"Found: {company.CompanyName}",
+
+    CompaniesHouseResponse<CompanyProfile>.NotFound =>
+        "Company not found.",
+
+    CompaniesHouseResponse<CompanyProfile>.RateLimited { RetryAfter: var delay } =>
+        $"Rate limited — retry after {delay}.",
+
+    CompaniesHouseResponse<CompanyProfile>.Unauthorized =>
+        "Check your API key.",
+
+    CompaniesHouseResponse<CompanyProfile>.ServerError { StatusCode: var code, RetryAfter: var delay } =>
+        $"Server error {code} — retry after {delay}.",
+
+    _ => $"Unexpected response: {result.StatusCode}",
+};
+```
 
 ## Usage
 
 ### Searching for resources
 
-To search for a resource, we first need to create a `SearchRequest` with details of the search we require.
-
 ```csharp
-var request = new SearchRequest()
+var request = new SearchAllRequest
 {
     Query = "Jay2Base",
-    StartIndex = 10,
+    StartIndex = 0,
     ItemsPerPage = 10
 };
-```
 
-We can then pass the `SearchRequest` object in to the `SearchAllAsync` method and await on the task, this will then return all related resources.
-
-```csharp
 var result = await client.SearchAllAsync(request);
 
-foreach (var item in _result.Data.Items)
+foreach (var item in result.Data.Items)
 {
     // Do something...
 }
 ```
 
-If we need to be more precise on the resources we require, we can then pass the request object in to the required search method, either `SearchCompanyAsync` or `SearchOfficerAsync` or `SearchDisqualifiedOfficerAsync` and await on the task.
+For a specific resource type, use `SearchCompanyAsync`, `SearchOfficerAsync`,
+`SearchDisqualifiedOfficerAsync`, `SearchCompaniesAlphabeticallyAsync`,
+`SearchDissolvedCompaniesAsync` or `AdvancedCompanySearchAsync` with the
+matching request type.
 
 ```csharp
-var result1 = await client.SearchCompanyAsync(request);
-
-var result2 = await client.SearchOfficerAsync(request);
-
-var result3 = await client.SearchDisqualifiedOfficerAsync(request);
+var companies = await client.SearchCompanyAsync(new SearchCompanyRequest { Query = "Jay2Base" });
+var officers = await client.SearchOfficerAsync(new SearchOfficerRequest { Query = "Jay2Base" });
+var disqualified = await client.SearchDisqualifiedOfficerAsync(new SearchDisqualifiedOfficerRequest { Query = "Jay2Base" });
 ```
 
 ### Getting a company profile
-
-To get a company profile, we pass a company number in to the `GetCompanyProfileAsync` method and await on the task.
 
 ```csharp
 var result = await client.GetCompanyProfileAsync("10440441");
 ```
 
-If there was no match for that company number then `null` will be returned.
+`result` is a `NotFound` subtype if there was no match for that company number.
 
-### Getting company officer list
-
-To get a list of officers for a company, we pass a company number in to the `GetOfficersAsync` method and await on the task.
+### Getting the company officer list
 
 ```csharp
 var result = await client.GetOfficersAsync("03977902");
+
+// Optionally page the results
+var page = await client.GetOfficersAsync("03977902", startIndex: 10, pageSize: 10);
 ```
 
-We can also pass in some optional parameters of `startIndex` and `pageSize` which will allow us to page the results.
+A single officer appointment can be fetched directly:
 
 ```csharp
-var result = await client.GetOfficersAsync("03977902", 10, 10);
+var officer = await client.GetOfficerByAppointmentIdAsync("03977902", appointmentId);
 ```
 
-### Getting company filing history list
-
-To get a list of the filing history for a company, we can pass a company number to the `GetCompanyFilingHistoryAsync` method and await on the task.
+### Getting officer appointments
 
 ```csharp
-var result = await client.GetCompanyFilingHistoryAsync("10440441");
+var result = await client.GetAppointmentsAsync(officerId, startIndex: 0, pageSize: 25);
 ```
 
-We can also pass in some optional parameters of `startIndex` and `pageSize` which will allow us to page the results.
+### Getting the company filing history
 
 ```csharp
-var result = await client.GetCompanyFilingHistoryAsync("10440441", 10, 10);
+var result = await client.GetCompanyFilingHistoryAsync("10440441", startIndex: 0, pageSize: 25);
+
+var item = await client.GetFilingHistoryByTransactionAsync("10440441", transactionId);
 ```
 
 ### Getting company insolvency information
-
-To get the insolvency information for a company, we can pass a company number to the `GetCompanyInsolvencyInformationAsync` method and await on the task.
 
 ```csharp
 var result = await client.GetCompanyInsolvencyInformationAsync("10440441");
 ```
 
-If there was no insolvency information for the given company number then `null` will be returned.
+`result` is a `NotFound` subtype if there is no insolvency information for the company.
 
-### Getting document metadata information
-
-To get the metadata for a document, we can pass document id to the `GetDocumentMetadataAsync` method and await on the task.
+### Getting persons with significant control
 
 ```csharp
-var result = await client.GetDocumentMetadataAsync("FIxRR8teCKodjkBLRDHv2Cb8y0-nQ7T5G3BEXfWtOu4");
+var result = await client.GetPersonsWithSignificantControlAsync("10440441", startIndex: 0, pageSize: 25);
 ```
 
-If there was no document metadata for the given document id then `null` will be returned.
-
-### Downloading a document
-
-To download a document, we can pass document id to the `DownloadDocumentAsync` method and await on the task.
+### Getting charges
 
 ```csharp
-var result = await client.DownloadDocumentAsync("FIxRR8teCKodjkBLRDHv2Cb8y0-nQ7T5G3BEXfWtOu4");
+var charges = await client.GetChargesListAsync("10440441", startIndex: 0, pageSize: 25);
+
+var charge = await client.GetChargeByIdAsync("10440441", chargeId);
 ```
 
-If there was no document for the given document id then `null` will be returned.
+### Getting the registered office address
+
+```csharp
+var result = await client.GetRegisteredOfficeAddress("10440441");
+```
+
+### Getting document metadata and downloading a document
+
+```csharp
+var metadata = await client.GetDocumentMetadataAsync("FIxRR8teCKodjkBLRDHv2Cb8y0-nQ7T5G3BEXfWtOu4");
+
+var document = await client.DownloadDocumentAsync("FIxRR8teCKodjkBLRDHv2Cb8y0-nQ7T5G3BEXfWtOu4");
+```
+
+`metadata`/`document` is a `NotFound` subtype if there was no metadata/document for the given id.
+
+More endpoints land progressively - see `.plans/` for what's in flight.
+
+## Sample project
+
+A runnable end-to-end example, covering direct construction, DI registration,
+search, company profile, officers, and gracefully handling an unrecognised
+enum value, lives in [`samples/SampleProject`](samples/SampleProject).
 
 ## Contributing
 
@@ -177,9 +332,24 @@ If there was no document for the given document id then `null` will be returned.
 1. Hack!
 1. Pull Request
 
+See [AGENTS.md](AGENTS.md) for repository conventions, build/test commands and
+the design decisions behind the v-next rewrite.
 
-## Running Unit tests
+## Maintainer release notes
 
-In order for the integration tests to run, you need an API Key from  [CompaniesHouse API website](https://developer.companieshouse.gov.uk/developer/applications)
-Setup API Key in an environment variable called "api_key", and then run the tests.
+NuGet publishing is driven by the CI Docker build, which produces the final
+`.nupkg` artifacts in `./artifacts`. Before push-to-NuGet, CI validates that
+each package contains `README.md` and has nuspec `<readme>README.md</readme>`
+metadata so NuGet.org renders the project README correctly.
 
+## Running tests
+
+```powershell
+dotnet restore
+dotnet build -c Release
+dotnet test  -c Release
+```
+
+Integration tests hit the real Companies House API and need an API key in the
+`COMPANIES_HOUSE_API_KEY` environment variable - they're skipped/fail without
+one, which is expected when working offline.

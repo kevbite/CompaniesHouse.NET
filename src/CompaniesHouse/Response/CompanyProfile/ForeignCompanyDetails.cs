@@ -1,30 +1,31 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
-namespace CompaniesHouse.Response.CompanyProfile;
-
-public class ForeignCompanyDetails
+namespace CompaniesHouse.Response.CompanyProfile
 {
-    [JsonProperty("accounting_requirement")]
-    public AccountingRequirement AccountingRequirement { get; set; }
+    public class ForeignCompanyDetails
+    {
+        [JsonPropertyName("accounting_requirement")]
+        public ForeignCompanyAccountingRequirement? AccountingRequirement { get; set; }
 
-    [JsonProperty("accounts")]
-    public ForeignCompanyAccounts Accounts { get; set; }
+        [JsonPropertyName("accounts")]
+        public ForeignCompanyAccounts? Accounts { get; set; }
 
-    [JsonProperty("business_activity")]
-    public string BusinessActivity { get; set; }
+        [JsonPropertyName("business_activity")]
+        public string? BusinessActivity { get; set; }
 
-    [JsonProperty("company_type")]
-    public string CompanyType { get; set; }
+        [JsonPropertyName("governed_by")]
+        public string? GovernedBy { get; set; }
 
-    [JsonProperty("governed_by")]
-    public string GovernedBy { get; set; }
+        [JsonPropertyName("is_a_credit_financial_institution")]
+        public bool? IsACreditFinancialInstitution { get; set; }
 
-    [JsonProperty("is_a_credit_finance_institution")]
-    public bool? IsACreditFinanceInstitution { get; set; }
+        [JsonPropertyName("originating_registry")]
+        public ForeignCompanyOriginatingRegistry? OriginatingRegistry { get; set; }
 
-    [JsonProperty("originating_registry")]
-    public OriginatingRegistry OriginatingRegistry { get; set; }
+        [JsonPropertyName("registration_number")]
+        public string? RegistrationNumber { get; set; }
 
-    [JsonProperty("registration_number")]
-    public string RegistrationNumber { get; set; }
+        [JsonPropertyName("legal_form")]
+        public string? LegalForm { get; set; }
+    }
 }

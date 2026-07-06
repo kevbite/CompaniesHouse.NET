@@ -6,6 +6,6 @@ namespace CompaniesHouse
 {
     public interface ICompaniesHouseCompanyProfileClient
     {
-        Task<CompaniesHouseClientResponse<CompanyProfile>> GetCompanyProfileAsync(string companyNumber, CancellationToken cancellationToken = default(CancellationToken));
+        Task<CompaniesHouseResponse<CompanyProfile>> GetCompanyProfileAsync(string companyNumber, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

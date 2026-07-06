@@ -1,20 +1,20 @@
-﻿using CompaniesHouse.JsonConverters;
-using Newtonsoft.Json;
+using CompaniesHouse.JsonConverters;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.CompanyProfile
 {
     public class PreviousCompanyName
     {
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = string.Empty;
 
-        [JsonProperty(PropertyName = "ceased_on")]
+        [JsonPropertyName("ceased_on")]
         public DateTime CeasedOn { get; set; }
 
-        [JsonProperty(PropertyName = "effective_from")]
+        [JsonPropertyName("effective_from")]
         public DateTime EffectiveFrom { get; set; }
     }
 }

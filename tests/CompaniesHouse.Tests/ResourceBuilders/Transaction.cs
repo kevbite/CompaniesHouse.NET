@@ -6,11 +6,11 @@ namespace CompaniesHouse.Tests.ResourceBuilders
     {
         public DateTime? DeliveredOn { get; set; }
 
-        public string FilingType { get; set; }
+        public string FilingType { get; set; } = null!;
 
         public int? InsolvencyCaseNumber { get; set; }
 
-        public TransactionLinks Links { get; set; }
+        public TransactionLinks Links { get; set; } = null!;
 
         public int? TransactionId { get; set; }
     }

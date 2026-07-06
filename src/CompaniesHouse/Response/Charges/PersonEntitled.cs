@@ -1,10 +1,10 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Charges
 {
     public class PersonEntitled
     {
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonPropertyName("name")]
+        public string? Name { get; set; }
     }
 }

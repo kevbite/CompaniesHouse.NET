@@ -1,0 +1,126 @@
+{
+    "definitions": {
+        "registeredOfficeAddress": {
+            "title": "registeredOfficeAddress",
+            "type": "object",
+            "required": [
+                "premises",
+                "address_line_1",
+                "locality",
+                "country",
+                "accept_appropriate_office_address_statement",
+                "postal_code"
+            ],
+            "properties": {
+                "etag": {
+                    "type": "string",
+                    "description": "The ETag of the resource.",
+                    "readOnly": true
+                },
+                "kind": {
+                    "type": "string",
+                    "description": "The type of resource.",
+                    "enum": [
+                        "registered-office-address"
+                    ],
+                    "readOnly": true
+                },
+                "links": {
+                    "type": "object",
+                    "description": "Links to the related resources",
+                    "items": {
+                        "$ref": "genericModels.json#/definitions/selfLink"
+                    },
+                    "readOnly": true
+                },
+                "premises": {
+                    "type": "string",
+                    "description": "The property name or number."
+                },
+                "address_line_1": {
+                    "type": "string",
+                    "description": "The first line of the address."
+                },
+                "address_line_2": {
+                    "type": "string",
+                    "description": "The second line of the address."
+                },
+                "locality": {
+                    "type": "string",
+                    "description": "The locality e.g London."
+                },
+                "region": {
+                    "type": "string",
+                    "description": "The region e.g Surrey."
+                },
+                "postal_code": {
+                    "type": "string",
+                    "description": "The postal code e.g CF14 3UZ."
+                },
+                "country": {
+                    "type": "string",
+                    "description": "The country.",
+                    "enum": [
+                        "England",
+                        "Wales",
+                        "Scotland",
+                        "Northern Ireland",
+                        "Great Britain",
+                        "United Kingdom",
+                        "Not specified"
+                    ]
+                },
+                "accept_appropriate_office_address_statement": {
+                    "type": "boolean",
+                    "description": "Setting this to true confirms  that the new registered office address is an appropriate address as outlined in section 86(2) of the Companies Act 2006."
+                }
+            }
+        },
+        "registeredOfficeAddressChange": {
+            "title": "registeredOfficeAddressChange",
+            "type": "object",
+            "required": [
+                "reference_etag"
+            ],
+            "allOf": [{
+                    "$ref": "registeredOfficeAddress.json#/definitions/registeredOfficeAddress"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "reference_etag": {
+                            "type": "string",
+                            "description": "The latest etag read from the current ROA API resource (`/company/{company_number}/registered-office-address`) on the public register. If this reference etag does not match the current register the request will be rejected."
+                        },
+                        "links": {
+                            "type": "object",
+                            "description": "Links to the related resources",
+                            "items": {
+                                "$ref": "registeredOfficeAddress.json#/definitions/registeredOfficeAddressChangeLinks"
+                            },
+                            "readOnly": true
+                        }
+                    }
+                }
+            ]
+        },
+        "registeredOfficeAddressChangeLinks": {
+            "title": "registeredOfficeAddressChangeLinks",
+            "type": "object",
+            "allOf": [{
+                    "$ref": "genericModels.json#/definitions/selfLink"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "validation_status": {
+                            "type": "string",
+                            "description": "The URL of the validation status resource for the resource.",
+                            "readOnly": true
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

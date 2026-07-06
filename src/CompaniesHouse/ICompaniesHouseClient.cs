@@ -2,17 +2,25 @@
 {
     public interface ICompaniesHouseClient :
         ICompaniesHouseSearchCompanyClient,
-        ICompaniesHouseSearchCompanyAdvancedClient,
         ICompaniesHouseSearchOfficerClient,
         ICompaniesHouseSearchDisqualifiedOfficerClient,
         ICompaniesHouseSearchAllClient,
+        ICompaniesHouseSearchCompaniesAlphabeticallyClient,
+        ICompaniesHouseSearchDissolvedCompaniesClient,
+        ICompaniesHouseAdvancedCompanySearchClient,
         ICompaniesHouseCompanyProfileClient,
         ICompaniesHouseCompanyFilingHistoryClient,
         ICompaniesHouseOfficersClient,
         ICompaniesHouseCompanyInsolvencyInformationClient,
         ICompaniesHouseAppointmentsClient,
         ICompaniesHousePersonsWithSignificantControlClient,
-        ICompaniesHouseChargesClient
+        ICompaniesHouseChargesClient,
+        ICompaniesHouseRegisteredOfficeAddressClient,
+        ICompaniesHouseRegistersClient,
+        ICompaniesHouseDisqualifiedOfficerDetailsClient,
+        ICompaniesHousePersonsWithSignificantControlDetailsClient,
+        ICompaniesHouseExemptionsClient,
+        ICompaniesHouseUkEstablishmentsClient
     {
 
     }

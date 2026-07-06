@@ -1,16 +1,16 @@
-﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Search.OfficerSearch
 {
     public class Match
     {
-        [JsonProperty(PropertyName = "address_snippet")]
-        public int[] AddressSnippet { get; set; }
+        [JsonPropertyName("address_snippet")]
+        public int[]? AddressSnippet { get; set; }
 
-        [JsonProperty(PropertyName = "snippet")]
-        public int[] Snippet { get; set; }
+        [JsonPropertyName("snippet")]
+        public int[]? Snippet { get; set; }
 
-        [JsonProperty(PropertyName = "title")]
-        public int[] Title { get; set; }
+        [JsonPropertyName("title")]
+        public int[]? Title { get; set; }
     }
 }

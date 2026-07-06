@@ -1,16 +1,14 @@
 using System;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Insolvency
 {
     public class CaseDate
     {
-        [JsonProperty("date")]
-        public DateTime Date { get; set; }
+        [JsonPropertyName("date")]
+        public DateTime? Date { get; set; }
 
-        [JsonProperty("type")]
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonPropertyName("type")]
         public CaseDateType Type { get; set; }
     }
 }

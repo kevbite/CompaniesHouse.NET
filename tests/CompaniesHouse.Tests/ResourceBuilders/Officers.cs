@@ -4,7 +4,7 @@ namespace CompaniesHouse.Tests.ResourceBuilders
     {
         public int ActiveCount { get; set; }
 
-        public Officer[] Items { get; set; }
+        public Officer[] Items { get; set; } = null!;
 
         public int ResignedCount { get; set; }
         

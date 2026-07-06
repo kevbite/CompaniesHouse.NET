@@ -1,23 +1,23 @@
 using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace CompaniesHouse.Response.Insolvency
 {
     public class Practitioner
     {
-        [JsonProperty("address")]
-        public Address Address { get; set; }
+        [JsonPropertyName("address")]
+        public Address? Address { get; set; }
 
-        [JsonProperty("appointed_on")]
-        public DateTime AppointedOn { get; set; }
+        [JsonPropertyName("appointed_on")]
+        public DateTime? AppointedOn { get; set; }
 
-        [JsonProperty("ceased_to_act_on")]
-        public DateTime CeasedToActOn { get; set; }
+        [JsonPropertyName("ceased_to_act_on")]
+        public DateTime? CeasedToActOn { get; set; }
 
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonPropertyName("name")]
+        public string? Name { get; set; }
 
-        [JsonProperty("role")]
-        public string Role { get; set; }
+        [JsonPropertyName("role")]
+        public string? Role { get; set; }
     }
 }

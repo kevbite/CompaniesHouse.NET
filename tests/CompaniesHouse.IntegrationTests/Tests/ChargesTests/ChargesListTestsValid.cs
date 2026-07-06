@@ -1,29 +1,41 @@
 using System.Threading.Tasks;
-using CompaniesHouse.Response.Charges;
-using NUnit.Framework;
+using Shouldly;
+using Xunit;
 
 namespace CompaniesHouse.IntegrationTests.Tests.ChargesTests
 {
-    [TestFixtureSource(nameof(TestCases))]
-    public class ChargesListTestsValid : ChargesTestBase<Charges>
+    public class ChargesListTestsValid
     {
-        private readonly string _companyNumber;
+        private readonly CompaniesHouseClient _client;
 
-        public ChargesListTestsValid(string companyNumber) => _companyNumber = companyNumber;
-        protected override async Task When() => Result = await Client.GetChargesListAsync(_companyNumber);
-
-        [Test]
-        public void ThenChargesListIsNotEmpty() => Assert.IsNotEmpty(Result.Data.Items);
-
-        public static string[] TestCases()
+        public ChargesListTestsValid()
         {
-            return new[]
-            {
-                "03977902", // Google
-                "00445790", // Tesco
-                "00002065", // Lloyds Bank PLCo
-                "03487070"
-            };
-        } 
+            _client = new CompaniesHouseClient(new CompaniesHouseSettings(CompaniesHouseUris.Default, Keys.ApiKey));
+        }
+
+        [IntegrationTheory]
+        [InlineData("03977902")]
+        [InlineData("00445790")]
+        [InlineData("00002065")]
+        [InlineData("03487070")]
+        public async Task ThenChargesListIsNotEmpty(string companyNumber)
+        {
+            var result = await _client.GetChargesListAsync(companyNumber);
+
+            result.Data.Items.ShouldNotBeEmpty();
+        }
+
+        [IntegrationFact]
+        public async Task ThenKnownChargeListIncludesObservedGeneratedValues()
+        {
+            var result = await _client.GetChargesListAsync("03977902");
+            var items = result.Data.Items ?? [];
+
+            result.Data.UnfilteredCount.ShouldNotBeNull();
+            result.Data.UnfilteredCount.Value.ShouldBeGreaterThan(0);
+            items.ShouldNotBeEmpty();
+            items[0].Status.Value.ShouldNotBeNullOrWhiteSpace();
+            items[0].Links?.Self.ShouldNotBeNullOrWhiteSpace();
+        }
     }
 }
