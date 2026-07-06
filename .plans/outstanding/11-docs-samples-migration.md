@@ -1,6 +1,11 @@
 # 11 — Docs, samples & migration guide
 
-**Status:** outstanding
+**Status:** in progress - README, sample project and MIGRATION.md rewritten
+for the endpoints landed so far (search, company profile, officers,
+appointments, filing history, insolvency, PSC, charges, registered office
+address, documents). Still needs a pass once the remaining endpoints in
+`09h`-`09l` land (registers, disqualified officer detail, PSC detail types,
+exemptions, UK establishments), and a final cross-check near release.
 **Depends on:** endpoints as they land; finalise near release
 **Blocks:** the v-next release announcement
 
@@ -48,10 +53,13 @@ deliberately breaking.
 
 ## Tasks
 
-- [ ] Rewrite README for v-next (progressive, per-endpoint).
-- [ ] Update the sample project.
-- [ ] Write the migration guide with before/after snippets.
-- [ ] Fix stale badges/links/copyright.
+- [x] Rewrite README for v-next (progressive, per-endpoint) - done for all
+      endpoints landed so far; add a snippet for each of `09h`-`09l` as they land.
+- [x] Update the sample project (direct construction, DI, search, company
+      profile, officers, graceful unknown-enum handling).
+- [x] Write the migration guide with before/after snippets (`MIGRATION.md`).
+- [x] Fix stale badges/links (AppVeyor → GitHub Actions badge, developer
+      portal link, base URI). No stale copyright text was present in the README.
 - [ ] Cross-check AGENTS.md + plans are current at release.
 
 ## Acceptance criteria

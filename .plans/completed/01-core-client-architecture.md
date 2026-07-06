@@ -1,6 +1,6 @@
 # 01 — Core client architecture
 
-**Status:** outstanding
+**Status:** complete
 **Depends on:** `00-foundation`
 **Blocks:** all endpoint plans (`06`+)
 

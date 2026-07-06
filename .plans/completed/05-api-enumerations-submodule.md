@@ -1,6 +1,6 @@
 # 05 — api-enumerations submodule & local extras
 
-**Status:** outstanding
+**Status:** complete
 **Depends on:** `00-foundation` (CI submodule checkout)
 **Blocks:** `04-enum-source-generator` (provides its input)
 

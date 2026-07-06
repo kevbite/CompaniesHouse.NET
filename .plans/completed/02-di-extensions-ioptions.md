@@ -1,6 +1,6 @@
 # 02 — DI extensions with IOptions<>
 
-**Status:** outstanding
+**Status:** complete
 **Depends on:** `01-core-client-architecture`
 **Blocks:** nothing (parallel with endpoints)
 

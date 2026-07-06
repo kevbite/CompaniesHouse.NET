@@ -22,7 +22,7 @@ COPY ./tests/CompaniesHouse.ScenarioTests/*.csproj ./tests/CompaniesHouse.Scenar
 COPY ./tests/CompaniesHouse.SourceGenerator.Tests/*.csproj ./tests/CompaniesHouse.SourceGenerator.Tests/
 COPY ./tests/CompaniesHouse.Tests/*.csproj ./tests/CompaniesHouse.Tests/
 COPY ./samples/SampleProject/*.csproj ./samples/SampleProject/
-RUN dotnet restore
+RUN dotnet restore 
 
 FROM restore AS build
 ARG CONFIGURATION

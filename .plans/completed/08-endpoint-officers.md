@@ -1,6 +1,6 @@
 # 08 — Endpoint: Officers
 
-**Status:** outstanding
+**Status:** complete
 **Depends on:** `01-core`, `03-value-types`; do after `07-company-profile`
 **Blocks:** nothing
 
@@ -69,3 +69,44 @@ Paths (verify):
 
 - Issues #197/#198 (officer roles), #206/#207 (total_results),
   #221/#222 (person_number), #169/#171 (OfficerId), #165/#166 (get appointment).
+
+## Delivered
+
+- Rebuilt the officers wire enums onto the Roslyn-generated string-backed value
+  type pattern. `OfficerRole` now comes from the `officer_role` YAML group and
+  `OfficerIdentification.IdentificationType` now uses a generated
+  `IdentificationType` value type from the `identification_type` YAML group,
+  replacing the old hand-written enum/string model and preserving unknown future
+  wire values without deserialization failures.
+- Extended the officers response models to match the confirmed live schema:
+  list envelopes now include `etag`, `kind`, `links.self`, `inactive_count` and
+  `items_per_page`; officer/appointment items now include `etag`,
+  `person_number`, `is_pre_1992_appointment`, `identity_verification_details`,
+  `links.self`, and the live `appointed_before` field seen on historic
+  appointments. `total_results` remains a non-nullable `int`, matching repeated
+  real API responses.
+- Restored the `OfficerId` convenience on `Response.Officers.Officer` as a
+  computed, `[JsonIgnore]`d property derived from
+  `links.officer.appointments`, and hardened the shared parsing logic so missing
+  or malformed links return `null` rather than throwing.
+- Extended `GetOfficersAsync` and `OfficersUriBuilder` with the documented
+  optional query parameters `register_type`, `register_view` and `order_by`,
+  while keeping the established "only emit supplied optional parameters"
+  builder pattern. The officers endpoint default page size is now 35 instead of
+  25 to match Companies House's documented behaviour.
+- Added coverage across the stack: URI-builder tests for the new query
+  parameters; client/unit tests using captured live list + appointment payloads;
+  new value-type round-trip tests for `OfficerRole` and `IdentificationType`;
+  scenario deserialization tests for the confirmed Tesco and Informa samples;
+  and live integration assertions for `00445790` and `03610056`, including the
+  identity-verification and corporate-identification shapes.
+- Verified: `dotnet build CompaniesHouse.slnx -c Release` with 0 errors;
+  `dotnet test tests\CompaniesHouse.Tests\CompaniesHouse.Tests.csproj -c Release`
+  passing; `dotnet test tests\CompaniesHouse.ScenarioTests\CompaniesHouse.ScenarioTests.csproj -c Release`
+  passing; `dotnet test tests\CompaniesHouse.SourceGenerator.Tests\CompaniesHouse.SourceGenerator.Tests.csproj -c Release`
+  passing 28/28 after the enum-map additions; `dotnet test tests\CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests\CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests.csproj -c Release`
+  passing; whitespace formatting clean on all touched files via
+  `dotnet format whitespace --verify-no-changes`; the new officers integration
+  tests passing 3/3 against the real API; and repeated live
+  `CompaniesHouseClient.GetOfficersAsync` / `GetOfficerByAppointmentIdAsync`
+  calls deserializing the confirmed payloads without throwing.

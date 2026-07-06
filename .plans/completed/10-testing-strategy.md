@@ -1,6 +1,6 @@
 # 10 — Testing strategy
 
-**Status:** outstanding
+**Status:** complete
 **Depends on:** `00-foundation`; runs continuously alongside every plan
 **Blocks:** nothing (but gates "done" for each plan)
 
@@ -87,3 +87,45 @@ enable nullable.
 
 - Issues #177/#178/#195/#196 (remove Newtonsoft from tests), #180 (sandbox),
   #181/#182 (error metadata), plus all the endpoint-specific issues in `09`.
+
+## Delivered
+
+Most of this plan's tasks were already satisfied incrementally by plans
+`00`/`04`/`06`/`07`/`08`/`09a`-`09g` (xUnit + Shouldly test stack, nullable
+enabled, `net10.0`-targeted test projects, no `Newtonsoft.Json` anywhere in
+`tests/`, value-type unit tests with unknown-value coverage, real-payload
+scenario tests per endpoint). This pass closed the remaining gaps:
+
+- **Integration tests now skip cleanly without `COMPANIES_HOUSE_API_KEY`**
+  (previously they'd fail with auth/deserialization errors). Added
+  `IntegrationFactAttribute`/`IntegrationTheoryAttribute`
+  (`tests/CompaniesHouse.IntegrationTests/IntegrationFactAttribute.cs`,
+  `IntegrationTheoryAttribute.cs`) which set `Skip` at attribute-construction
+  time when `Keys.ApiKeyOrNull` is null/empty, and applied them to every
+  `[Fact]`/`[Theory]` across the whole `CompaniesHouse.IntegrationTests`
+  project. Verified: 73/73 pass with the key present, all tests skip cleanly
+  (0 failed) with the env var unset.
+- **Generator snapshot test** added
+  (`tests/CompaniesHouse.SourceGenerator.Tests/ValueTypeEmitterSnapshotTests.cs`)
+  - asserts the *entire* generated value-type + JSON-converter source text
+    for a representative enum group against a fixed expected string, on top
+    of the existing spot-check (`ShouldContain`) assertions in
+    `EnumValueTypeGeneratorTests`. No new snapshot-testing package dependency
+    was introduced (a plain Shouldly `ShouldBe` on the full source string is
+    sufficient and keeps the dependency footprint the same).
+- Confirmed already-satisfied items via direct inspection rather than
+  re-doing them: `Directory.Build.props` enables `Nullable`/`ImplicitUsings`
+  repo-wide; no `Newtonsoft` references anywhere under `tests/`; 429/`RetryAfter`
+  and non-2xx/server-error transport behaviour already has dedicated coverage
+  in `HttpResponseMessageExtensionsTests`; every endpoint shipped so far
+  (search, company profile, officers, and the plan `09a`-`09g` catalogue)
+  already carries URI-builder + scenario + integration coverage as part of
+  its own plan.
+
+Verification: `dotnet build CompaniesHouse.slnx -c Release` (0 errors),
+`CompaniesHouse.Tests` 458/458, `ScenarioTests` 20/20, `SourceGenerator.Tests`
+29/29, DI tests 6/6, `IntegrationTests` 73/73 with a key / all skip cleanly
+without one, `dotnet format --verify-no-changes` scoped to touched files
+(pre-existing unrelated whitespace issues on untouched lines in a handful of
+older integration test files were left as-is, consistent with not fixing
+unrelated pre-existing issues).

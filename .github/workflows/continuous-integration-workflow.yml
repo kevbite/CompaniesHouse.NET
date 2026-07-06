@@ -49,10 +49,14 @@ jobs:
           fi
         done
     - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v2
+      uses: dorny/test-reporter@v1
       if: always()
       with:
-        trx_files: TestResults/**/*.trx
+        name: Test Results
+        path: TestResults/**/*.trx
+        reporter: dotnet-trx
+        fail-on-error: true
+        fail-on-empty: true
     - name: NuGet.Org push
       if: ${{ env.PUBLISH_PACKAGE }}
       run: |

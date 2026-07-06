@@ -1,6 +1,6 @@
 # 04 — Enum source generator
 
-**Status:** outstanding
+**Status:** complete
 **Depends on:** `03-string-backed-value-types` (target shape), `05-submodule`
 (input data)
 **Blocks:** full model coverage

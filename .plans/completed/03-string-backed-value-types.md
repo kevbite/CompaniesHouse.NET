@@ -1,6 +1,6 @@
 # 03 — String-backed value types (replace all enums)
 
-**Status:** outstanding
+**Status:** complete
 **Depends on:** `01-core-client-architecture` (for STJ options)
 **Blocks:** every model with an "enum" field; pairs with `04` (generator)
 

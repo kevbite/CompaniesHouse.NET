@@ -1,6 +1,6 @@
 # 06 — Endpoint: Search (start here)
 
-**Status:** outstanding
+**Status:** complete
 **Depends on:** `01-core`, `03-value-types` (for status/type fields)
 **Blocks:** nothing; first endpoint to build
 
@@ -97,3 +97,44 @@ Reference docs:
 
 - Issues #203/#204/#208 (restrictions), #212 (numeric strings), #216/#220
   (advanced search), #185/#186 (new company statuses/types in search results).
+
+## Delivered
+
+- Fixed the long-standing `restrictions` query bug in
+  `SearchCompanyUriBuilder`: the parameter is now emitted only when a
+  non-empty value is supplied, it is URL-escaped consistently with the base `q`
+  handling, and `SearchCompanyRequest.Restrictions` is now nullable to reflect
+  the documented optional contract.
+- Added the three missing Search endpoints to `CompaniesHouseClient` and DI:
+  `SearchCompaniesAlphabeticallyAsync` (`GET /alphabetical-search/companies`),
+  `SearchDissolvedCompaniesAsync` (`GET /dissolved-search/companies`) and
+  `AdvancedCompanySearchAsync` (`GET /advanced-search/companies`), each with a
+  dedicated request model, URI builder, response envelope and item models wired
+  through the existing `CompaniesHouseSearchClient` / search-builder factory
+  pattern.
+- Modelled the new endpoint-specific query contracts from the live docs rather
+  than forcing them into the older `q/items_per_page/start_index` shape:
+  alphabetical search uses `search_above` / `search_below` / `size`,
+  dissolved search adds `search_type` plus its paging variants, and advanced
+  search emits only the supplied filters, formatting list filters as
+  comma-delimited query values and dates as `yyyy-MM-dd`.
+- Migrated `CompanyType` from the hand-written wire enum to the Roslyn
+  generator by adding `company_type` and `company_subtype` entries to
+  `enum-map.txt`, deleting the old `Response/CompanyType.cs`, and consuming the
+  generated string-backed `CompanyType` / `CompanySubtype` value types in
+  search/company-profile models and advanced-search filters. This keeps unknown
+  type/subtype values non-breaking in the same way `CompanyStatus` already is.
+- Added unit/integration coverage for the new surface: URI-builder tests for
+  the restrictions fix plus the new builders, search-client deserialization
+  tests for the 3 new endpoints, value-type round-trip tests for generated
+  `CompanyType` / `CompanySubtype`, DI resolution coverage for the new granular
+  interfaces, and new real-API integration tests for alphabetical, dissolved
+  and advanced company search.
+- Verified: full solution build (`CompaniesHouse.slnx`, Release) with 0 errors;
+  `CompaniesHouse.Tests` passing; `CompaniesHouse.ScenarioTests` passing;
+  `CompaniesHouse.SourceGenerator.Tests` 28/28 after adding a regression test
+  for multiple enum-map entries; `CompaniesHouse.Extensions.Microsoft.DependencyInjection.Tests`
+  passing; `dotnet format --verify-no-changes` clean on all touched files. The
+  full integration suite still has unrelated pre-existing failures in older
+  invalid-case tests, but the 3 new search integration tests pass when run
+  directly against a configured API key.
