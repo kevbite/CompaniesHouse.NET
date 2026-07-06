@@ -1,13 +1,33 @@
 name: Continuous Integration Workflow
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "NuGet package version (SemVer, e.g. 9.1.0-pre.1)"
+        required: true
+        type: string
+      publish_package:
+        description: "Publish packages and create a release"
+        required: true
+        default: true
+        type: boolean
+      prerelease:
+        description: "Mark the GitHub release as prerelease"
+        required: true
+        default: true
+        type: boolean
 
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      VERSION: ${{ github.ref == 'refs/heads/master' && format('8.0.{0}', github.run_number) || format('9.0.0-pre{0}', github.run_number) }}
-      PUBLISH_PACKAGE: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/prerelease' }}
+      VERSION: ${{ github.ref == 'refs/heads/master' && 'v9.0.0' || (github.event_name == 'workflow_dispatch' && format('v{0}', github.event.inputs.version) || format('v9.0.0-pre{0}', github.run_number)) }}
+      PACKAGE_VERSION: ${{ github.ref == 'refs/heads/master' && '9.0.0' || (github.event_name == 'workflow_dispatch' && github.event.inputs.version || format('9.0.0-pre{0}', github.run_number)) }}
+      PUBLISH_PACKAGE: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.publish_package == 'true') || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/prerelease' }}
+      IS_PRERELEASE: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.prerelease == 'true') || github.ref != 'refs/heads/master' }}
       DOCKER_BUILDKIT: 1
       BUILDKIT_PROGRESS: plain
     steps:
@@ -22,7 +42,7 @@ jobs:
       env:
         COMPANIES_HOUSE_API_KEY: ${{ secrets.COMPANIES_HOUSE_API_KEY }}
       run: |
-        docker build --build-arg NUGET_PACKAGE_VERSION=${{ env.VERSION }} --secret id=companies_house_api_key,env=COMPANIES_HOUSE_API_KEY -f ./Dockerfile --output ./ .
+        docker build --build-arg NUGET_PACKAGE_VERSION=${{ env.PACKAGE_VERSION }} --secret id=companies_house_api_key,env=COMPANIES_HOUSE_API_KEY -f ./Dockerfile --output ./ .
     - name: Validate NuGet package metadata
       run: |
         mapfile -t packages < <(find ./artifacts -maxdepth 1 -type f -name '*.nupkg' ! -name '*.snupkg' | sort)
@@ -60,7 +80,7 @@ jobs:
     - name: NuGet.Org push
       if: ${{ env.PUBLISH_PACKAGE }}
       run: |
-        dotnet nuget push ./artifacts/*.nupkg --source NuGet.org --api-key ${{ secrets.NUGET_API_KEY }}
+        dotnet nuget push ./artifacts/*.nupkg --source NuGet.org --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
     - name: Generate release notes with NuGet links
       if: ${{ env.PUBLISH_PACKAGE }}
       run: |
@@ -69,8 +89,8 @@ jobs:
           '' \
           'This release includes the following NuGet packages:' \
           '' \
-          "- [CompaniesHouse](https://www.nuget.org/packages/CompaniesHouse/${{ env.VERSION }}) - Core .NET client for Companies House API" \
-          "- [CompaniesHouse.Extensions.Microsoft.DependencyInjection](https://www.nuget.org/packages/CompaniesHouse.Extensions.Microsoft.DependencyInjection/${{ env.VERSION }}) - DI helpers for ASP.NET Core / generic-host apps" \
+          "- [CompaniesHouse](https://www.nuget.org/packages/CompaniesHouse/${{ env.PACKAGE_VERSION }}) - Core .NET client for Companies House API" \
+          "- [CompaniesHouse.Extensions.Microsoft.DependencyInjection](https://www.nuget.org/packages/CompaniesHouse.Extensions.Microsoft.DependencyInjection/${{ env.PACKAGE_VERSION }}) - DI helpers for ASP.NET Core / generic-host apps" \
           '' \
           'Install via:' \
           '```' \
@@ -94,4 +114,4 @@ jobs:
           ./artifacts/*.nupkg
           ./artifacts/*.snupkg
         draft: false
-        prerelease: false
+        prerelease: ${{ env.IS_PRERELEASE == 'true' }}
