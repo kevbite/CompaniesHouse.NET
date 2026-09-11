@@ -28,7 +28,7 @@ namespace CompaniesHouse.JsonConverters
                 "searchresults#company" => root.Deserialize<Company>(options)!,
                 "searchresults#officer" => root.Deserialize<Officer>(options)!,
                 "searchresults#disqualified-officer" => root.Deserialize<DisqualifiedOfficer>(options)!,
-                _ => throw new NotImplementedException($"Unknown search item kind \"{kind}\".")
+                _ => root.Deserialize<UnknownSearchItem>(options)!
             };
 
             return item;

@@ -28,6 +28,17 @@ namespace CompaniesHouse.ScenarioTests
         }
 
         [Fact]
+        public void SearchAllPayload_DeserializesUnknownKindAsGenericSearchItem()
+        {
+            var payload = JsonSerializer.Deserialize<AllSearch>(UnknownKindSearchAllJson, CompaniesHouseJsonSerializerOptions.Default);
+
+            payload.ShouldNotBeNull();
+            var item = (payload.Items ?? [])[0];
+            item.Kind.ShouldBe("searchresults#new-kind");
+            item.ShouldBeOfType<UnknownSearchItem>();
+        }
+
+        [Fact]
         public void CompanySearchPayload_DeserializesAddressSnippetAndExternalRegistrationNumber()
         {
             var payload = JsonSerializer.Deserialize<CompanySearch>(CompanySearchJson, CompaniesHouseJsonSerializerOptions.Default);
@@ -159,6 +170,24 @@ namespace CompaniesHouse.ScenarioTests
               "page_number": 1,
               "items_per_page": 5,
               "total_results": 10000,
+              "start_index": 0
+            }
+            """;
+
+        private const string UnknownKindSearchAllJson = """
+            {
+              "items": [
+                {
+                  "kind": "searchresults#new-kind",
+                  "title": "NEW TYPE ITEM",
+                  "description": "Fallback for an unknown search item kind",
+                  "links": { "self": "/search/unknown" }
+                }
+              ],
+              "kind": "search#all",
+              "page_number": 1,
+              "items_per_page": 1,
+              "total_results": 1,
               "start_index": 0
             }
             """;
