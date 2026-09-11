@@ -19,8 +19,11 @@ namespace CompaniesHouse.Response.PersonsWithSignificantControl
         [JsonPropertyName("items_per_page")]
         public int? ItemsPerPage { get; set; }
 
+        [JsonPropertyName("date_of_birth")]
+        public DateOfBirth? DateOfBirth { get; set; }
+
         [JsonPropertyName("kind")]
-        public string? Kind { get; set; }
+        public PersonWithSignificantControlNotificationKind Kind { get; set; }
 
         [JsonPropertyName("links")]
         public PersonWithSignificantControlNotificationsLinks? Links { get; set; }

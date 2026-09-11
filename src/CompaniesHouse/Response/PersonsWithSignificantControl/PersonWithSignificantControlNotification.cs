@@ -16,9 +16,6 @@ namespace CompaniesHouse.Response.PersonsWithSignificantControl
         [JsonPropertyName("country_of_residence")]
         public string? CountryOfResidence { get; set; }
 
-        [JsonPropertyName("date_of_birth")]
-        public DateOfBirth? DateOfBirth { get; set; }
-
         [JsonPropertyName("etag")]
         public string? ETag { get; set; }
 

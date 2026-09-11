@@ -11,6 +11,6 @@ namespace CompaniesHouse.Response.PersonsWithSignificantControl
         public string? CompanyNumber { get; set; }
 
         [JsonPropertyName("company_status")]
-        public string? CompanyStatus { get; set; }
+        public CompanyStatus CompanyStatus { get; set; }
     }
 }
