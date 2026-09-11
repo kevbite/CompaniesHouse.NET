@@ -3,6 +3,7 @@ using System.Text.Json;
 using CompaniesHouse.Response;
 using CompaniesHouse.Response.Search.AdvancedCompanySearch;
 using CompaniesHouse.Response.Search.AllSearch;
+using CompaniesHouse.Response.Search;
 using CompaniesHouse.Response.Search.CompanySearch;
 using CompaniesHouse.Response.Search.DissolvedCompaniesSearch;
 using CompaniesHouse.Response.Search.OfficerSearch;
