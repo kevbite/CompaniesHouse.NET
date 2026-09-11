@@ -54,9 +54,10 @@ namespace CompaniesHouse.Tests.CompaniesHousePersonsWithSignificantControlDetail
             var result = await client.GetNotificationsAsync("05124262", "abc", "active", 0, 25);
 
             result.Data.TotalResults.ShouldBe(1);
-            result.Data.Items.Length.ShouldBe(1);
-            result.Data.Items[0].Kind.ShouldBe(new PersonWithSignificantControlKind("individual-person-with-significant-control"));
-            result.Data.Items[0].NotifiedTo?.CompanyNumber.ShouldBe("05124262");
+            var items = result.Data.Items.ShouldNotBeNull();
+            items.Length.ShouldBe(1);
+            items[0].Kind.ShouldBe(new PersonWithSignificantControlKind("individual-person-with-significant-control"));
+            items[0].NotifiedTo?.CompanyNumber.ShouldBe("05124262");
           }
 
         [Fact]
