@@ -25,10 +25,6 @@
         <None Include="..\..\README.md" Pack="true" PackagePath="" />
     </ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
-    </ItemGroup>
-
     <!--
         Build-time-only source generator (plan 04): emits string-backed enum value
         types (plan 03) from the api-enumerations submodule + local extras (plan 05).
