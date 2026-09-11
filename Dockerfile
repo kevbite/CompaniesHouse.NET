@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 ARG CONFIGURATION="Release"
 ARG NUGET_PACKAGE_VERSION="1.0.0"
-FROM mcr.microsoft.com/dotnet/sdk:10.0.303 AS restore
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS restore
 
 ARG CONFIGURATION
 
