@@ -1,5 +1,6 @@
 using System;
 using System.Text.Json.Serialization;
+using CompaniesHouse.Response.Appointments;
 using CompaniesHouse.Response.Officers;
 
 namespace CompaniesHouse.Response.PersonsWithSignificantControl
