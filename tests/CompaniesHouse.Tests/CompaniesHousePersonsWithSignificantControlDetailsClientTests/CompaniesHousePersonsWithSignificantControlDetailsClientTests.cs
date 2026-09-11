@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using CompaniesHouse.Response;
 using CompaniesHouse.Response.PersonsWithSignificantControl;
 using CompaniesHouse.UriBuilders;
 using Moq;
@@ -58,6 +59,10 @@ namespace CompaniesHouse.Tests.CompaniesHousePersonsWithSignificantControlDetail
             items.Length.ShouldBe(1);
             items[0].Kind.ShouldBe(new PersonWithSignificantControlKind("individual-person-with-significant-control"));
             items[0].NotifiedTo?.CompanyNumber.ShouldBe("05124262");
+            items[0].NotifiedTo?.CompanyStatus.ShouldBe(new CompanyStatus("active"));
+            result.Data.Kind.ShouldBe(new PersonWithSignificantControlNotificationKind("personal-notification"));
+            result.Data.DateOfBirth?.Month.ShouldBe(7);
+            result.Data.DateOfBirth?.Year.ShouldBe(1979);
           }
 
         [Fact]
@@ -113,6 +118,7 @@ namespace CompaniesHouse.Tests.CompaniesHousePersonsWithSignificantControlDetail
         private const string StatementListJson = """
             {
               "items_per_page":25,
+              "date_of_birth":{"month":7,"year":1979},
               "items":[
                 {
                   "etag":"95ca7497819e5fbc1144b6a3ef09f477228f3f5f",
