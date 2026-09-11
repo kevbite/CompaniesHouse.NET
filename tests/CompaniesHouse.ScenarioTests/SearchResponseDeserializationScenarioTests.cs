@@ -6,6 +6,7 @@ using CompaniesHouse.Response.Search.AllSearch;
 using CompaniesHouse.Response.Search.CompanySearch;
 using CompaniesHouse.Response.Search.DissolvedCompaniesSearch;
 using CompaniesHouse.Response.Search.OfficerSearch;
+using CompaniesHouse.Response.Search;
 using Shouldly;
 using Xunit;
 
