@@ -16,7 +16,7 @@ namespace CompaniesHouse.ScenarioTests
             _client = new CompaniesHouseClient(settings);
         }
 
-        [Fact]
+        [ScenarioFact]
         public async Task RunScenario()
         {
             var officersSearch = await _client.SearchOfficerAsync(new SearchOfficerRequest() { Query = "Richard Branson" });
