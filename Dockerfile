@@ -33,6 +33,7 @@ COPY ./tests/ ./tests/
 COPY ./samples/ ./samples/
 COPY ./external/ ./external/
 COPY ./enumerations/ ./enumerations/
+COPY ./.git/ ./.git/
 RUN dotnet build --configuration $CONFIGURATION --no-restore
 
 FROM build AS test
