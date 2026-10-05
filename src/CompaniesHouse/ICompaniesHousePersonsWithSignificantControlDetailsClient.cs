@@ -18,6 +18,8 @@ namespace CompaniesHouse
 
         Task<CompaniesHouseResponse<PersonWithSignificantControl>> GetLegalPersonBeneficialOwnerAsync(string companyNumber, string notificationId, CancellationToken cancellationToken = default);
 
+        Task<CompaniesHouseResponse<PersonWithSignificantControlNotifications>> GetNotificationsAsync(string companyNumber, string pscId, string? filter = null, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default);
+
         Task<CompaniesHouseResponse<PersonsWithSignificantControlStatements>> GetPersonsWithSignificantControlStatementsAsync(string companyNumber, int startIndex = 0, int pageSize = 25, bool? registerView = null, CancellationToken cancellationToken = default);
 
         Task<CompaniesHouseResponse<PersonWithSignificantControlStatement>> GetPersonsWithSignificantControlStatementAsync(string companyNumber, string statementId, CancellationToken cancellationToken = default);

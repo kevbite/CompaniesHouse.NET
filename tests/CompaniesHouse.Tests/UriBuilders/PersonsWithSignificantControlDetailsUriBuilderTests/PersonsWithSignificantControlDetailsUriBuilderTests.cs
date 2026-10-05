@@ -52,6 +52,13 @@ namespace CompaniesHouse.Tests.UriBuilders.PersonsWithSignificantControlDetailsU
         }
 
         [Fact]
+        public void BuildNotifications_IncludesFilterAndPaging()
+        {
+            _builder.BuildNotifications("00/123", "a/b", "active", 25, 10)
+                .ShouldBe(new Uri("company/00%2F123/persons-with-significant-control/a%2Fb/notifications?filter=active&items_per_page=10&start_index=25", UriKind.Relative));
+        }
+
+        [Fact]
         public void BuildStatementsList_IncludesPagingAndOptionalRegisterView()
         {
             _builder.BuildStatementsList("00/123", 25, 10, true)

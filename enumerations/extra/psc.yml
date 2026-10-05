@@ -1,3 +1,6 @@
+person_with_significant_control_notification_kind:
+    'personal-notification': ''
+
 person_with_significant_control_kind:
     'corporate-entity-person-with-significant-control': ''
     'corporate-entity-beneficial-owner': ''

@@ -16,6 +16,8 @@ namespace CompaniesHouse.UriBuilders
 
         Uri BuildLegalPersonBeneficialOwner(string companyNumber, string notificationId);
 
+        Uri BuildNotifications(string companyNumber, string pscId, string? filter, int startIndex, int pageSize);
+
         Uri BuildStatementsList(string companyNumber, int startIndex, int pageSize, bool? registerView);
 
         Uri BuildStatement(string companyNumber, string statementId);

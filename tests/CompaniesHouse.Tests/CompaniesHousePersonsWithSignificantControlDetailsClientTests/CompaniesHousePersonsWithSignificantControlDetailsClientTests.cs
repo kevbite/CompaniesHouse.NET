@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using CompaniesHouse.Response;
 using CompaniesHouse.Response.PersonsWithSignificantControl;
 using CompaniesHouse.UriBuilders;
 using Moq;
@@ -43,6 +44,27 @@ namespace CompaniesHouse.Tests.CompaniesHousePersonsWithSignificantControlDetail
             result.Data.Items[0].Links.Self.ShouldBe("/company/05124262/persons-with-significant-control-statements/8xxEeFpu5Xmpf1ce1FmwM-sK8J8");
         }
 
+          [Fact]
+          public async Task GivenCapturedNotifications_WhenGettingNotifications_ThenEnvelopeAndItemsDeserialize()
+          {
+            var uri = new Uri("https://wibble.com/company/05124262/persons-with-significant-control/abc/notifications");
+            HttpMessageHandler handler = new StubHttpMessageHandler(uri, NotificationsJson);
+            var uriBuilder = CreateUriBuilder(uri);
+
+            var client = new CompaniesHousePersonsWithSignificantControlDetailsClient(new HttpClient(handler), uriBuilder.Object);
+            var result = await client.GetNotificationsAsync("05124262", "abc", "active", 0, 25);
+
+            result.Data.TotalResults.ShouldBe(1);
+            var items = result.Data.Items.ShouldNotBeNull();
+            items.Length.ShouldBe(1);
+            items[0].Kind.ShouldBe(new PersonWithSignificantControlKind("individual-person-with-significant-control"));
+            items[0].NotifiedTo?.CompanyNumber.ShouldBe("05124262");
+            items[0].NotifiedTo?.CompanyStatus.ShouldBe(new CompanyStatus("active"));
+            result.Data.Kind.ShouldBe(new PersonWithSignificantControlNotificationKind("personal-notification"));
+            result.Data.DateOfBirth?.Month.ShouldBe(7);
+            result.Data.DateOfBirth?.Year.ShouldBe(1979);
+          }
+
         [Fact]
         public async Task GivenCapturedSuperSecure_WhenGettingSuperSecurePsc_ThenObservedFieldsDeserialize()
         {
@@ -69,6 +91,7 @@ namespace CompaniesHouse.Tests.CompaniesHousePersonsWithSignificantControlDetail
             uriBuilder.Setup(x => x.BuildCorporateEntityBeneficialOwner(It.IsAny<string>(), It.IsAny<string>())).Returns(uri);
             uriBuilder.Setup(x => x.BuildLegalPerson(It.IsAny<string>(), It.IsAny<string>())).Returns(uri);
             uriBuilder.Setup(x => x.BuildLegalPersonBeneficialOwner(It.IsAny<string>(), It.IsAny<string>())).Returns(uri);
+            uriBuilder.Setup(x => x.BuildNotifications(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string?>(), It.IsAny<int>(), It.IsAny<int>())).Returns(uri);
             uriBuilder.Setup(x => x.BuildStatementsList(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<bool?>())).Returns(uri);
             uriBuilder.Setup(x => x.BuildStatement(It.IsAny<string>(), It.IsAny<string>())).Returns(uri);
             uriBuilder.Setup(x => x.BuildSuperSecure(It.IsAny<string>(), It.IsAny<string>())).Returns(uri);
@@ -95,6 +118,7 @@ namespace CompaniesHouse.Tests.CompaniesHousePersonsWithSignificantControlDetail
         private const string StatementListJson = """
             {
               "items_per_page":25,
+              "date_of_birth":{"month":7,"year":1979},
               "items":[
                 {
                   "etag":"95ca7497819e5fbc1144b6a3ef09f477228f3f5f",
@@ -125,6 +149,31 @@ namespace CompaniesHouse.Tests.CompaniesHousePersonsWithSignificantControlDetail
                 "appointment_verification_statement_due_on":"2026-09-01"
               },
               "links":{"self":"/company/1/persons-with-significant-control/super-secure/2"}
+            }
+            """;
+
+        private const string NotificationsJson = """
+            {
+              "active_count":1,
+              "ceased_count":0,
+              "inactive_count":0,
+              "items_per_page":25,
+              "items":[
+                {
+                  "etag":"abc",
+                  "kind":"individual-person-with-significant-control",
+                  "name":"Chris Brown",
+                  "notified_on":"2019-01-16",
+                  "natures_of_control":["ownership-of-shares-25-to-50-percent"],
+                  "notified_to":{"company_number":"05124262","company_name":"Example Ltd","company_status":"active"},
+                  "links":{"company":"/company/05124262"}
+                }
+              ],
+              "kind":"personal-notification",
+              "name":"Chris Brown",
+              "start_index":0,
+              "total_results":1,
+              "links":{"self":"/company/05124262/persons-with-significant-control/abc/notifications"}
             }
             """;
     }
