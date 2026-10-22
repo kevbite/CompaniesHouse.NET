@@ -30,6 +30,11 @@ Register an application on the
 [Companies House developer hub](https://developer.company-information.service.gov.uk/)
 to get an API key for the public data API.
 
+Choose a **live** application (test applications are for the sandbox) and create a key of type
+**API key**, not stream key. A [step-by-step walkthrough](https://registrum.co.uk/guides/how-to-get-a-companies-house-api-key)
+covers each screen, and [this checklist](https://registrum.co.uk/guides/companies-house-api-key-not-working)
+covers the usual causes of a 401.
+
 ## Getting started
 
 ### Constructing the client directly
