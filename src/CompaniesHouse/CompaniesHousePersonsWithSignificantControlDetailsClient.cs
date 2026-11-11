@@ -49,6 +49,11 @@ namespace CompaniesHouse
             return await GetAsync<PersonWithSignificantControl>(_uriBuilder.BuildLegalPersonBeneficialOwner(companyNumber, notificationId), cancellationToken).ConfigureAwait(false);
         }
 
+        public async Task<CompaniesHouseResponse<PersonWithSignificantControlNotifications>> GetNotificationsAsync(string companyNumber, string pscId, string? filter = null, int startIndex = 0, int pageSize = 25, CancellationToken cancellationToken = default)
+        {
+            return await GetAsync<PersonWithSignificantControlNotifications>(_uriBuilder.BuildNotifications(companyNumber, pscId, filter, startIndex, pageSize), cancellationToken).ConfigureAwait(false);
+        }
+
         public async Task<CompaniesHouseResponse<PersonsWithSignificantControlStatements>> GetPersonsWithSignificantControlStatementsAsync(string companyNumber, int startIndex = 0, int pageSize = 25, bool? registerView = null, CancellationToken cancellationToken = default)
         {
             return await GetAsync<PersonsWithSignificantControlStatements>(_uriBuilder.BuildStatementsList(companyNumber, startIndex, pageSize, registerView), cancellationToken).ConfigureAwait(false);

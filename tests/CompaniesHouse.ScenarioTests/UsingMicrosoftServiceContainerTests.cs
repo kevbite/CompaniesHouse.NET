@@ -8,7 +8,7 @@ namespace CompaniesHouse.ScenarioTests
 {
     public class SearchingCompaniesUsingMicrosoftServiceContainerTests
     {
-        [Fact]
+        [ScenarioFact]
         public async Task CanResolveCompaniesHouseClients()
         {
             var serviceCollection = new ServiceCollection();

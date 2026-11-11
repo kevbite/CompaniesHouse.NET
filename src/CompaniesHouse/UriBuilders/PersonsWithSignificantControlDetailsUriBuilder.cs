@@ -36,6 +36,21 @@ namespace CompaniesHouse.UriBuilders
             return Build(companyNumber, $"persons-with-significant-control/legal-person-beneficial-owner/{Uri.EscapeDataString(notificationId)}");
         }
 
+        public Uri BuildNotifications(string companyNumber, string pscId, string? filter, int startIndex, int pageSize)
+        {
+            var queryParts = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(filter))
+            {
+                queryParts.Add("filter=" + Uri.EscapeDataString(filter));
+            }
+
+            queryParts.Add("items_per_page=" + pageSize.ToString(CultureInfo.InvariantCulture));
+            queryParts.Add("start_index=" + startIndex.ToString(CultureInfo.InvariantCulture));
+
+            return Build(companyNumber, $"persons-with-significant-control/{Uri.EscapeDataString(pscId)}/notifications?{string.Join("&", queryParts)}");
+        }
+
         public Uri BuildStatementsList(string companyNumber, int startIndex, int pageSize, bool? registerView)
         {
             var queryParts = new List<string>
